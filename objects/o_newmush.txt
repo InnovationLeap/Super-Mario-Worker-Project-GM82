@@ -1,0 +1,7 @@
+sprite=s_bonusgrzyb
+visible=1
+solid=0
+persistent=0
+depth=1010
+parent=o_bonusmush
+mask=s_markerus_small

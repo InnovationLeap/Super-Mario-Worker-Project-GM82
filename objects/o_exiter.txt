@@ -1,0 +1,7 @@
+sprite=s_enemiesblock3
+visible=0
+solid=0
+persistent=0
+depth=8
+parent=
+mask=

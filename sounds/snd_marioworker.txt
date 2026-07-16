@@ -1,0 +1,8 @@
+extension=.wav
+exists=1
+source=marioworker.wav
+kind=0
+effects=4
+volume=1
+pan=0
+preload=1
