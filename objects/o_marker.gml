@@ -435,11 +435,7 @@ while teststep3=1 {if (place_meeting(x+steploop3,y,obj_wall) || place_meeting(x+
 
 
 // spadanie i skakanie
-if level_start_disable_jump_timer < 2 {
-  level_start_disable_jump_timer += 1;
-}
 
-if level_start_disable_jump_timer >= 2 {
 if global.rodzajmaria<>3 && global.rodzajmaria<>5 {
 if is_button_pressed('jump') && sekwencja=0 && (y<global.poziomwody || global.lava) && schylanie=0 && huadun=0 && !stuck
 {sekwencja=1; grawitacja=-(8+abs(szybkosc)/5); if global.sample=1 {fofo=sound_play(snd_jump);sound_volume(snd_jump,global.glosnosc)}};}
@@ -452,7 +448,6 @@ if is_button_pressed('jump') && y>=global.poziomwody && !global.lava && wciskacz
 if !global.lava && is_button_pressed('jump') && y>=global.poziomwody && !global.lava && wciskaczwodowy=0 && y<=global.poziomwody+32 && schylanie=0 && huadun=0 && global.rodzajmaria<>5 && !stuck
 {if global.sample=1 {fofo=sound_play(snd_plywak);sound_volume(snd_plywak,global.glosnosc)};sekwencja=1; grawitacja=-(6+abs(szybkosc)/5); wciskaczwodowy=1};
 if !is_button_pressed('jump') {wciskaczwodowy=0}
-}
 
 kuku+=1
 if is_button_pressed('jump') && kuku>1 && grawitacja<0 && (y<global.poziomwody || global.lava) && global.rodzajmaria<>5 && !stuck {grawitacja-=1.5; kuku=0};
