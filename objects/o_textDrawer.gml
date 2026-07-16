@@ -26,7 +26,7 @@ pointerReset = 0
 pointer = 1
 charCounter = 0
 
-xpos=128
+xpos=128+2
 ypos=464
 #define Draw_0
 /*"/*'/**//* YYD ACTION
