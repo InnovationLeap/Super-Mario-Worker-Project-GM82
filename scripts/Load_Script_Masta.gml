@@ -56,7 +56,7 @@ global.layerord=-1
 while !file_text_eof(script_file){
  file_text_readln(script_file)
  aa=file_text_read_string(script_file)
- if string_char_at(aa,0)='0'{
+ if string_char_at(aa,1)='0'{
   if real(string_copy(aa,2,2))!=20 && real(string_copy(aa,2,2))!=39 && real(string_copy(aa,2,2))!=35 && real(string_copy(aa,2,2))!=40 && real(string_copy(aa,2,2))!=41 && real(string_copy(aa,2,2))!=43 && real(string_copy(aa,2,2))!=17 && real(string_copy(aa,2,2))!=22 && real(string_copy(aa,2,2))!=37 {
    ae=instance_create(transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_edenemyblock)
    ae.coto=real(string_copy(aa,2,2))
@@ -189,7 +189,7 @@ if real(string_copy(aa,2,2))=37
     }
  }
  }
- if string_char_at(aa,0)='1'{
+ if string_char_at(aa,1)='1'{
   ae=instance_create(transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_edsceneriesblock)
   ae.coto=real(string_copy(aa,2,2))
   if global.objectoffset=0{//scenary位置补正相关
@@ -202,7 +202,7 @@ if real(string_copy(aa,2,2))=37
     ae.block_index=real(string_copy(aa,12,3))
   }
  }
- if string_char_at(aa,0)='2'{
+ if string_char_at(aa,1)='2'{
   ae=instance_create(transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_edmarkerblock)
   ae.coto=real(string_copy(aa,2,2))
   if global.objectoffset=0{//marks位置补正相关
@@ -262,11 +262,11 @@ if real(string_copy(aa,2,2))=37
     ae.camera_endY=transA(string_copy(aa,16,4));
   }
  }
- if string_char_at(aa,0)='3'{
+ if string_char_at(aa,1)='3'{
   ae=instance_create(transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_edbonusesblock)
   ae.coto=real(string_copy(aa,2,2))
  }
- if string_char_at(aa,0)='4'{
+ if string_char_at(aa,1)='4'{
  if real(string_copy(aa,18,1))!=1{
   ae=instance_create(transA(string_copy(aa,2,4)),transA(string_copy(aa,6,4)),o_edpassage)}
   else{ae=instance_create(transA(string_copy(aa,2,4)),transA(string_copy(aa,6,4))-32,o_edpassage)}

@@ -1,0 +1,1 @@
+return external_call(global.EC_ConvertFile, argument0)

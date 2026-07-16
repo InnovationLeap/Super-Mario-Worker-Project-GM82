@@ -1,10 +1,8 @@
 //Important: Change the version
-global.version=1712
+global.version=1713
 global.betanumber=0
-global.versiontext='v1.7.12'
+global.versiontext='v1.7.13-beta1'
 
-file_delete(working_directory+"\temp\bass.dll")
-file_delete(working_directory+"\temp\bass_fx.dll")
 global.musicfile=''
 global.musicfile2=''
 global.musicplay=0
@@ -49,6 +47,22 @@ file_text_readln(tempid)
 tempstr =file_text_read_string(tempid)
 global.maxtemp = real(string_digits(tempstr))
 file_text_close(tempid)
+// ASCII 临时目录（用于 gzip DLL 中文路径转义）
+if directory_create("C:\smwptemp\")
+    global.ascii_temp_path = "C:\smwptemp\";
+else
+{
+    directory_create("C:\Users\Public\smwptemp\");
+    global.ascii_temp_path = "C:\Users\Public\smwptemp\";
+}
+// cleanup old temp files from previous runs
+file_delete(working_directory+"\temp\bass.dll")
+file_delete(working_directory+"\temp\bass_fx.dll")
+file_delete(global.ascii_temp_path+"bass_tmp.smw")
+file_delete(global.ascii_temp_path+"bass_tmpx.smw")
+file_delete(global.ascii_temp_path+"bass_sav.smw")
+file_delete(global.ascii_temp_path+"bass_savx.smw")
+
 //读取设置
 ini_open('GameSettings.ini')
 global.objectoffset=ini_read_real('GameConfig','ObjOffset',0)
@@ -67,11 +81,17 @@ global.customMusic = ini_read_string('GameConfig','CustomMusicPackage','Example'
 global.initiallives = ini_read_real('GameConfig','InitialLives',4)
 ini_close()
 
+//EncodingConv init
+ec_init();
+
+//SMWGzip init
+gz_init();
+
 //Fox Writing init
 globalvar testfont;
 fw_init();
 fw_release_cache();
-fw_set_encoding("GB18030");
+fw_set_encoding("UTF-8");
 testfont = fw_add_font_from_file(".\Fonts\message.ttf", 14, false, false, true)
 fw_draw_set_font(testfont);
 fw_draw_set_halign(fa_left);
@@ -79,4 +99,5 @@ fw_draw_set_valign(fa_bottom);
 fw_enable_pixel_alignment(true);
 draw_set_color(c_white)
 fw_draw_set_line_spacing(4)
+
 //Fox Writing init end

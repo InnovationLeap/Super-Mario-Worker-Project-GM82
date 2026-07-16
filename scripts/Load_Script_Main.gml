@@ -24,8 +24,14 @@ with(o_edmarkerblock){instance_destroy()}
 with(o_edpassage){instance_destroy()}
 with(o_edsceneriesblock){instance_destroy()}
 global.script_kiler=global.script_kile
+if file_exists(filename_change_ext(global.script_kile,'.smwlx')){file_delete(filename_change_ext(global.script_kile,'.smwlx'))}
 GZ_DeCompressFile(global.script_kile,filename_change_ext(global.script_kile,'.smwlx'))
-global.script_kile=file_text_open_read(filename_change_ext(global.script_kile,'.smwlx'))
+
+// DLL 自动检测：若文件是 GB2312 则转为 UTF-8，已是 UTF-8 则不操作
+ec_convert_file(filename_change_ext(global.script_kiler,'.smwlx'))
+
+global.script_kile=file_text_open_read(filename_change_ext(global.script_kiler,'.smwlx'))
+
 global.warpnum=0
 room_set_width(room,real(file_text_read_string(global.script_kile)))
 file_text_readln(global.script_kile)

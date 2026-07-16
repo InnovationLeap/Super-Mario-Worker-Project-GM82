@@ -103,7 +103,7 @@ if jiami=1 {
     if origin = 1 {
         newfile2=file_copy(newfile,dupa)
     }
-    script_text_crypt(newfile,'');
+    script_text_crypt(newfile,1);
     file_rename(newfile,filename_change_ext(newfile,'.smwp'))
 
     if origin = 1 {

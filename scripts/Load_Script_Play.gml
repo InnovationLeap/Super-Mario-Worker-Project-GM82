@@ -1,12 +1,19 @@
+if file_exists(filename_change_ext(global.toload,'.smwlx')){file_delete(filename_change_ext(global.toload,'.smwlx'))}
 GZ_DeCompressFile(global.toload,filename_change_ext(global.toload,'.smwlx'))
 global.toload=filename_change_ext(global.toload,'.smwlx')
 global.toloader=global.toload
-global.toload=file_text_open_read(global.toload)
+
+ec_convert_file(global.toloader)
+
+global.toload=file_text_open_read(global.toloader)
+
 global.checkpoint=0//CP重置
 var v_ens, skript;
 var checka;
 checka=1
 skript=''
+if global.msgMap>0{ds_map_destroy(global.msgMap)}
+global.msgMap=ds_map_create()
 v_ens[01]=o_goomba;
 v_ens[02]=o_troopa;
 v_ens[03]=o_troopared;
@@ -117,7 +124,7 @@ s_depth = 999999; //景物深度管理
 while !file_text_eof(global.toload){
  file_text_readln(global.toload)
  aa=file_text_read_string(global.toload)
- if string_char_at(aa,0)='0'{
+ if string_char_at(aa,1)='0'{
   ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),v_ens[real(string_copy(aa,2,2))])
   if (real(string_copy(aa,2,2))=40||real(string_copy(aa,2,2))=41)&&transA(string_copy(aa,4,4))<transA(string_copy(aa,12,4)){
   skript=string_insert('('+string(ae)+').image_xscale=('+string(transA(string_copy(aa,12,4)))+'-'+string(transA(string_copy(aa,4,4)))+'+32)/32;('+string(ae)+').image_yscale=('+string(transA(string_copy(aa,16,4)))+'+32-'+string(transA(string_copy(aa,8,4)))+')/32;('+string(ae)+').type='+string(string_copy(aa,20,1))+';('+string(ae)+').fishdir=-1;',skript,string_length(skript)+1)
@@ -155,7 +162,7 @@ while !file_text_eof(global.toload){
   }
 }
 
- if string_char_at(aa,0)='1'{
+ if string_char_at(aa,1)='1'{
      s_coto = real(string_copy(aa,2,2));
      if s_coto<>42{
          ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_scenery)
@@ -168,7 +175,7 @@ while !file_text_eof(global.toload){
      }
      s_depth-=1; //根据景物摆放顺序手动管理图层关系
   }
-if string_char_at(aa,0)='2'{
+if string_char_at(aa,1)='2'{
   ai=real(string_copy(aa,2,2))
   if ai=17{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4))+32,transA(string_copy(aa,8,4))+32,o_exitar)}
   if ai=18{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),obj_wall)}
@@ -181,7 +188,7 @@ if string_char_at(aa,0)='2'{
   ds_list_add(global.autoscrolls,ae)}//恶劣强滚
   if ai=24{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_onlyU)}
   if ai=25{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_windas);skript=string_insert('('+string(ae)+').type='+string_copy(aa,12,3)+'+6*'+string_copy(aa,15,3)+';',skript,string_length(skript)+1)}
-  if ai=26{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_messageblock);skript=string_insert('('+string(ae)+').textMessage='+chr(34)+Message_Trans(string_copy(aa,12,string_length(aa)-11))+chr(34),skript,string_length(skript)+1)}
+  if ai=26{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_messageblock);_msg=string_copy(aa,12,9999);_msg=string_replace_all(_msg,"\#",chr(2));_msg=string_replace_all(_msg,"#",chr(13));_msg=string_replace_all(_msg,chr(2),"#");ds_map_add(global.msgMap,ae,_msg);skript=string_insert('('+string(ae)+').textMessage=ds_map_find_value(global.msgMap,'+string(ae)+')',skript,string_length(skript)+1)}
   if ai=27{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_switch);skript=string_insert('('+string(ae)+').color='+string_copy(aa,12,1)+';',skript,string_length(skript)+1)}
   if ai=28{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_yinyang);skript=string_insert('('+string(ae)+').color='+string_copy(aa,12,1)+';'+'('+string(ae)+').yin=1;',skript,string_length(skript)+1)}
   if ai=29{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_yinyang);skript=string_insert('('+string(ae)+').color='+string_copy(aa,12,1)+';'+'('+string(ae)+').yin=0;',skript,string_length(skript)+1)}
@@ -237,7 +244,7 @@ if string_char_at(aa,0)='2'{
 }
   if ai=34{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_region);skript=string_insert('('+string(ae)+').endx='+string(transA(string_copy(aa,12,4)))+';'+'('+string(ae)+').endy='+string(transA(string_copy(aa,16,4)))+';',skript,string_length(skript)+1)}
 }
- if string_char_at(aa,0)='3'{
+ if string_char_at(aa,1)='3'{
   ai=real(string_copy(aa,2,2))
   if ai>0 && ai<7{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_pointblock);skript=string_insert('('+string(ae)+').bonus='+string(ai)+';',skript,string_length(skript)+1)}
   if ai>6 && ai<13{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_pointblock2);skript=string_insert('('+string(ae)+').bonus='+string(ai-6)+';',skript,string_length(skript)+1)}
@@ -252,7 +259,7 @@ if string_char_at(aa,0)='2'{
   }
   skript=string_insert('('+string(ae)+').coto='+string(string_copy(aa,2,2))+';',skript,string_length(skript)+1)ae.coto=real(string_copy(aa,2,2))
  }
- if string_char_at(aa,0)='4'{
+ if string_char_at(aa,1)='4'{
  if real(string_copy(aa,18,1))!=1{
   ae=room_instance_add(Play_Room,transA(string_copy(aa,2,4)),transA(string_copy(aa,6,4)),o_exiter)}else
   {ae=room_instance_add(Play_Room,transA(string_copy(aa,2,4)),transA(string_copy(aa,6,4))-32,o_exiter)}

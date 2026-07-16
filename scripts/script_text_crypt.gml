@@ -94,55 +94,105 @@ Written January 6th 2010
 */
 
 //define all variables
-var crypt_file,crypt_read,crypt_keypos,crypt_gmid,crypt_i,crypt_key;
+var crypt_file,crypt_read,crypt_keypos,crypt_gmid,crypt_i,crypt_loops,crypt_key_len,crypt_tmp_path,crypt_tmp,crypt_src,crypt_cycle,crypt_t1,crypt_t2,crypt_xor,crypt_first_wrap,crypt_gp;
 
 if !file_exists(argument0) then return (-1);
 
-//define all variables.
 crypt_i=0;
 crypt_keypos=0;
-crypt_gmid='';
-crypt_key=""
+crypt_gmid='88888886';
 crypt_read=0
 crypt_file=0
+crypt_loops=floor(string_length(string(game_id))*5)
+crypt_key_len=0
+crypt_cycle=0
+
+if argument1 = 1
+{
+    crypt_key_len = get_crypt_key1()
+}
+if argument1 = 2
+{
+    crypt_key_len = get_crypt_key2()
+}
+// DBG: debug_log("DBG_key: len=" + string(crypt_key_len) + " val[0-4]=" + string(crypt_key_arr[0]) + "," + string(crypt_key_arr[1]) + "," + string(crypt_key_arr[2]) + "," + string(crypt_key_arr[3]) + "," + string(crypt_key_arr[4]))
 
 repeat (5)
 {
-    crypt_gmid=crypt_gmid + crypt_gmid;//repeat the game id 5 times for a long key.
+    crypt_gmid=crypt_gmid + crypt_gmid;
 };
 
-//Generate an long key using the game_id and the key given. done by XORing the key and the game_id.
-repeat(floor(string_length(string(game_id))*5 ))
+crypt_keypos=0
+crypt_cycle=0
+crypt_first_wrap=true
+
+crypt_tmp_path = global.ascii_temp_path + "xor_tmp.bin"
+crypt_tmp = file_bin_open(crypt_tmp_path, 1)
+crypt_src = file_bin_open(argument0, 0)
+
+// DBG: 检查 XOR 前源文件首字节
+// crypt_t1 = file_bin_read_byte(crypt_src)
+// crypt_t2 = file_bin_read_byte(crypt_src)
+// file_bin_seek(crypt_src,0)
+// debug_log("DBG_SRC_BEFORE: b0=" + string(crypt_t1) + " b1=" + string(crypt_t2))
+
+repeat(file_bin_size(crypt_src))
 {
+    // gp = 56 正常，cycle%8==0 时返回 54（与 C 工具已验证公式一致）
+    if (crypt_cycle > 0) && (crypt_cycle mod 8 == 0) then crypt_gp = 54 else crypt_gp = 56
+    crypt_xor = crypt_gp ^ (crypt_key_arr[crypt_keypos] - floor(crypt_cycle/3))
 
-    crypt_key=crypt_key + chr( ord(string_copy(crypt_gmid,crypt_i,2)) ^ (ord(string_char_at(argument1,crypt_keypos))-floor(crypt_i/3)) );//XOR the key and the game id
+    crypt_read = file_bin_read_byte(crypt_src)
+    file_bin_write_byte(crypt_tmp, crypt_read ^ crypt_xor)
 
-    crypt_i+=1;
+    // DBG: if crypt_cycle=0 && file_bin_position(crypt_src)=1
+    // {
+    //     debug_log("DBG_CYCLE0: crypt_xor=" + string(crypt_xor) + " key_arr[0]=" + string(crypt_key_arr[0]))
+    // }
 
-    crypt_keypos+=1;
+    // 推进计数器
+    crypt_cycle += 1
+    if crypt_cycle >= crypt_loops
+    {
+        crypt_cycle = 0
+        crypt_keypos = 0
+        if crypt_first_wrap
+        {
+            crypt_first_wrap = false
+            if crypt_key_wrap_val >= 0
+            {
+                crypt_key_arr[0] = crypt_key_wrap_val
+            }
+        }
+    }
+    else
+    {
+        crypt_keypos += 1
+        if crypt_keypos >= crypt_key_len then crypt_keypos = 0
+    }
+}
 
-    if crypt_keypos>string_length(argument1) then crypt_keypos=1;
+file_bin_close(crypt_src)
+file_bin_seek(crypt_tmp, 0)
 
-};
+// DBG: 读取 XOR 解密后 gzip 头字节 2-9
+// crypt_read = file_bin_read_byte(crypt_tmp)  // b0=0x1F magic (skip)
+// crypt_read = file_bin_read_byte(crypt_tmp)  // b1=0x8B magic (skip)
+// crypt_t1 = file_bin_read_byte(crypt_tmp)  // b2=compression method (should be 8)
+// crypt_t2 = file_bin_read_byte(crypt_tmp)  // b3=flags
+// crypt_i = file_bin_read_byte(crypt_tmp)  // b4=mtime
+// crypt_xor = file_bin_read_byte(crypt_tmp)  // b5=mtime
+// crypt_cycle = file_bin_read_byte(crypt_tmp)  // b6=mtime
+// crypt_keypos = file_bin_read_byte(crypt_tmp)  // b7=mtime
+// crypt_loops = file_bin_read_byte(crypt_tmp)  // b8=xflags
+// crypt_key_len = file_bin_read_byte(crypt_tmp)  // b9=OS
+// debug_log("DBG_HEADER: b2=" + string(crypt_t1) + " b3=" + string(crypt_t2) + " b4=" + string(crypt_i) + " b8=" + string(crypt_loops) + " b9=" + string(crypt_key_len))
 
-crypt_keypos=0;//make sure you are at the beginning of the key.
+file_bin_seek(crypt_tmp, 0)
+file_bin_close(crypt_tmp)
 
-crypt_file=file_bin_open(argument0,2);//open the file, using basic binary functions
+file_delete(argument0)
+file_copy(crypt_tmp_path, argument0)
+file_delete(crypt_tmp_path)
 
-file_bin_seek(crypt_file,0);//make sure you are at the start of the file
-
-//This is where you actually encrypt the file. Notice the actual encryption is only a few lines long.
-repeat(file_bin_size(crypt_file))
-{
-    crypt_read=file_bin_read_byte(crypt_file);//read the chosen byte. Doing so will also advance to the next byte.
-
-    file_bin_seek(crypt_file,file_bin_position(crypt_file)-1);//go to the byte before, returning to the byte that you just read.
-
-    file_bin_write_byte(crypt_file,crypt_read ^ ord(string_char_at(crypt_key,crypt_keypos)));//write the encrypted byte where a byte was previously.It will advance to the next byte
-    crypt_keypos+=1;//go to the next character in the key to encrypt with.
-    if crypt_keypos>string_length(crypt_key) then crypt_keypos=1;
-};
-
-file_bin_close(crypt_file);//close the binary file when finished.
-
-return (1);//returns 1 to confirm it worked.
+return (1);

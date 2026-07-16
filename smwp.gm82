@@ -2,14 +2,14 @@ gm82_version=5
 gameid=88888886
 
 info_author=Innovation Leap
-info_version=1.7.12
+info_version=1.7.13-beta1
 info_information=Super Mario Worker Project\r\nby Innovation Leap
 
 exe_company=Innovation Leap
 exe_product=Super Mario Worker Project
 exe_copyright=Nintendo/Buziol
 exe_description=Super Mario Worker Project
-exe_version=1.7.12.0
+exe_version=1.7.13.0
 
 has_backgrounds=1
 has_datafiles=0

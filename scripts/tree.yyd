@@ -21,6 +21,8 @@
 +background_show
 	|background_show
 +jiami
+	|get_crypt_key1
+	|get_crypt_key2
 	|script_text_crypt
 |Correct_Time
 |Directory_Get
@@ -76,6 +78,11 @@
 +GZ
 	|GZ_CompressFile
 	|GZ_DeCompressFile
+	|gz_init
+	|gz_check
+	|gz_decompress
+	|gz_compress
+	|gz_selftest
 +Other
 	|self_coto_check
 	|delete_coto_check
@@ -85,8 +92,14 @@
 	|draw_shell
 	|draw_spike
 	|basic_movement
+	|debug_log
 	|test_bound
 	|string_replace_char
++EncodingConv
+	|ec_init
+	|ec_convert
+	|ec_convert_file
+	|ec_is_cjk
 +FoxWriting
 	|fw_init
 	|fw_release_cache
@@ -114,5 +127,5 @@
 	|fw_draw_text_color
 	|fw_draw_text_ext_color
 	|fw_draw_text_transformed_color
-	|fw_draw_text_ext_transformed_color
+	|fw_set_view_size
 	|_NF_W_CreateArgs

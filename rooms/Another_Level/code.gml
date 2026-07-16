@@ -13,18 +13,47 @@ if global.lastlev=0{
 
 
      //复制一份当前文件
-    global.path = working_directory+"\temp\bass.dll"
+    global.path = global.ascii_temp_path+"bass_tmp.smw"
     file_copy(global.mfsfilename,global.path)
 
     //解密
-    if(global.jiami=1 &&global.loadingsav=false) {script_text_crypt(global.path,"")}
+    if(global.jiami=1 &&global.loadingsav=false) {script_text_crypt(global.path,1)}
     //存档文件专用解密
-    if(global.loadingsav=true){script_text_crypt(global.path,"")}
+    if(global.loadingsav=true){script_text_crypt(global.path,2)}
+
+    // DBG: 检查 XOR 解密后的 gzip 魔数
+    _tmp_f2 = file_bin_open(global.path,0)
+    _tmp_b1 = file_bin_read_byte(_tmp_f2)
+    _tmp_b2 = file_bin_read_byte(_tmp_f2)
+    file_bin_close(_tmp_f2)
+    // DBG: debug_log("DBG_gzip_header: b1=" + string(_tmp_b1) + " b2=" + string(_tmp_b2))
 
     //记录解压文件
-    global.mfsxname = working_directory+"\temp\bass_fx.dll"
+    global.mfsxname = global.ascii_temp_path+"bass_tmpx.smw"
     GZ_DeCompressFile(global.path,global.mfsxname)
     file_delete(global.path)
+
+    if !file_exists(global.mfsxname)
+    {
+        show_message("ERROR: Decompression failed for " + global.mfsfilename)
+        room_goto(welcome)
+    }
+
+    // DBG: 检查解压后文件
+    // debug_log("DBG_decompressed: exists=" + string(file_exists(global.mfsxname)) + " size=" + string(file_size(global.mfsxname)))
+    // _tmp_f3 = file_bin_open(global.mfsxname,0)
+    // _tmp_s1 = file_bin_read_byte(_tmp_f3)
+    // _tmp_s2 = file_bin_read_byte(_tmp_f3)
+    // file_bin_close(_tmp_f3)
+    // debug_log("DBG_raw_first_bytes: " + string(_tmp_s1) + "," + string(_tmp_s2))
+
+    // 将旧版 GB2312 文本转为 UTF-8
+    ec_convert_file(global.mfsxname)
+
+    _tmp_f = file_text_open_read(global.mfsxname)
+    _tmp_s = file_text_read_string(_tmp_f)
+    file_text_close(_tmp_f)
+    // debug_log("DBG_file: " + string_copy(_tmp_s, 1, 70) + "  first_line_len=" + string(string_length(_tmp_s)))
 
     global.toload=file_text_open_read(global.mfsxname)
 

@@ -1,15 +1,15 @@
 //此脚本用于生成存档文件
 
 //复制一份当前文件
-global.path = working_directory+"\temp\bass.dll"
+global.path = global.ascii_temp_path+"bass_tmp.smw"
 file_copy(global.mfsfilename,global.path)
 if(global.jiami=1) {
-if filename_ext(global.mfsfilename)='.mwsav' {script_text_crypt(global.path,'')}
-else{script_text_crypt(global.path,"")}
+if filename_ext(global.mfsfilename)='.mwsav' {script_text_crypt(global.path,2)}
+else{script_text_crypt(global.path,1)}
 }
 
 //记录已解压文件
-global.mfsxname = working_directory+"\temp\bass_fx.dll"
+global.mfsxname = global.ascii_temp_path+"bass_tmpx.smw"
 GZ_DeCompressFile(global.path,global.mfsxname)
 file_delete(global.path)
 global.toload=file_text_open_read(global.mfsxname)
@@ -44,8 +44,8 @@ while(levelcount<global.currentlevel){
 o_readsmwpfile.tosavepointer = o_readsmwpfile.toloadpointer; //指针指向当前关卡，准备把当前关卡开始的所有信息录入存档
 
 //生成两个临时文件
-tosavename = working_directory+"\temp\bass.dll"
-tosavename2 = working_directory+"\temp\bass_fx.dll"
+tosavename = global.ascii_temp_path+"bass_sav.smw"
+tosavename2 = global.ascii_temp_path+"bass_savx.smw"
 
 newsavename = filename_change_ext(global.mfsfilename,'.mwsav')
 tosavefile = file_text_open_write(tosavename)
@@ -89,6 +89,6 @@ file_text_close(tosavefile)
 //压缩与加密
 GZ_CompressFile(tosavename,tosavename2)
 file_delete(tosavename)
-script_text_crypt(tosavename2,'');
+    script_text_crypt(tosavename2,2);
 file_copy(tosavename2,newsavename)
 file_delete(tosavename2)

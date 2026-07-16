@@ -1020,6 +1020,7 @@ Directory_Get
 dll_declare
 dll_cleanup
 dll_setgmfocus
+debug_log
 browser_resize
 browser_visible
 browser_create
@@ -1080,6 +1081,8 @@ Load_Script_Prog
 transA
 transB
 background_show
+get_crypt_key1
+get_crypt_key2
 script_text_crypt
 
 
@@ -1148,5 +1151,16 @@ fw_draw_text_ext_transformed
 fw_draw_text_color
 fw_draw_text_ext_color
 fw_draw_text_transformed_color
-fw_draw_text_ext_transformed_color
+fw_set_view_size
+ec_init
+ec_convert
+ec_convert_file
+ec_is_cjk
+
+gz_init
+gz_check
+gz_decompress
+gz_compress
+gz_selftest
+
 _NF_W_CreateArgs

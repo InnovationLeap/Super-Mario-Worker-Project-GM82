@@ -1,0 +1,8 @@
+game_errors.log
+GameSettings.ini
+temp/TempSettings.ini
+Data/
+/cache
+FW_debug.log
+*.smwl
+debug_log.txt

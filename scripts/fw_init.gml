@@ -16,7 +16,7 @@ FontStyleUnderline  = 4;
 FontStyleStrikeout  = 8;
 */
 
-global.__NF_W_DLL = "FoxWriting.dll";
+global.__NF_W_DLL = "FoxWriting_GM82.dll";
 
 global.__NF_W_ED_Init = external_define(global.__NF_W_DLL, "FWInit", dll_stdcall, ty_real, 2, ty_real, ty_real);
 global.__NF_W_ED_ReleaseCache = external_define(global.__NF_W_DLL, "FWReleaseCache", dll_stdcall, ty_real, 0);
@@ -43,6 +43,8 @@ global.__NF_W_ED_SetVAlign = external_define(global.__NF_W_DLL, "FWSetVAlign", d
 
 global.__NF_W_ED_SetLineSpacing = external_define(global.__NF_W_DLL, "FWSetLineSpacing", dll_stdcall, ty_real, 1, ty_real);
 
+global.__NF_W_ED_SetViewSize = external_define(global.__NF_W_DLL, "FWSetViewSize", dll_stdcall, ty_real, 2, ty_real, ty_real);
+
 global.__NF_W_ED_DrawText = external_define(global.__NF_W_DLL, "FWDrawText", dll_stdcall, ty_real, 3, ty_real, ty_real, ty_string);
 global.__NF_W_ED_DrawTextExt = external_define(global.__NF_W_DLL, "FWDrawTextEx", dll_stdcall, ty_real, 3, ty_real, ty_real, ty_string);
 
@@ -55,11 +57,8 @@ global.__NF_W_ED_DrawTextColorExt = external_define(global.__NF_W_DLL, "FWDrawTe
 global.__NF_W_ED_DrawTextTransformedColor = external_define(global.__NF_W_DLL, "FWDrawTextTransformedColor", dll_stdcall, ty_real, 3, ty_real, ty_real, ty_string);
 global.__NF_W_ED_DrawTextTransformedColorExt = external_define(global.__NF_W_DLL, "FWDrawTextTransformedColorEx", dll_stdcall, ty_real, 3, ty_real, ty_real, ty_string);
 
-global.__NF_W_SYS_WorkingSprite = sprite_create_from_screen(0, 0, 1, 1, false, false, 0, 0);
-global.__NF_W_SYS_ArgumentList = ds_list_create();
-
-result = external_call(global.__NF_W_ED_Init, global.__NF_W_SYS_WorkingSprite, global.__NF_W_SYS_ArgumentList);
+result = external_call(global.__NF_W_ED_Init, 0, 0);
 
 if(!result){
-    show_error("FowWriting 初始化失败！", true);
+    show_error("FowWriting 初始化失败", true);
 }
