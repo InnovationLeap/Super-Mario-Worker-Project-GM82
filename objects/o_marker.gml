@@ -220,18 +220,18 @@ if place_meeting(x,y,o_exiter) && global.rodzajmaria<>5
     {
     tele=instance_place(x,y,o_exiter)
 //right
-    if tele.wejscie=0 && keyboard_check_direct(global.sterowanieprawo) && x>tele.x+48 && teleportacja=0 && prawdziwyczas<>0 {teleportacja=1; szybkosc=0; sekwencja=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)} }
+    if tele.wejscie=0 && is_button_pressed('right') && x>tele.x+48 && teleportacja=0 && prawdziwyczas<>0 {teleportacja=1; szybkosc=0; sekwencja=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)} }
 //left
-    if tele.wejscie=2 && keyboard_check_direct(global.sterowanielewo) && x<tele.x+16 && teleportacja=0 && prawdziwyczas<>0{teleportacja=3; szybkosc=0; sekwencja=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)} }
+    if tele.wejscie=2 && is_button_pressed('left') && x<tele.x+16 && teleportacja=0 && prawdziwyczas<>0{teleportacja=3; szybkosc=0; sekwencja=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)} }
 //up
     if global.rodzajmaria=0{
-    if tele.wejscie=1 && keyboard_check_direct(global.sterowaniegora) && y<tele.y+32 && teleportacja=0 && prawdziwyczas<>0{teleportacja=4; szybkosc=0; sekwencja=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)} }
+    if tele.wejscie=1 && is_button_pressed('up') && y<tele.y+32 && teleportacja=0 && prawdziwyczas<>0{teleportacja=4; szybkosc=0; sekwencja=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)} }
 }
     if global.rodzajmaria<>0{
-    if tele.wejscie=1 && keyboard_check_direct(global.sterowaniegora) && y<tele.y+64 && teleportacja=0 && prawdziwyczas<>0{teleportacja=4; szybkosc=0; sekwencja=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)} }
+    if tele.wejscie=1 && is_button_pressed('up') && y<tele.y+64 && teleportacja=0 && prawdziwyczas<>0{teleportacja=4; szybkosc=0; sekwencja=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)} }
 }
 //down
-    if tele.wejscie=3 && keyboard_check_direct(global.sterowaniedol) && y>tele.y+16 && teleportacja=0 && prawdziwyczas<>0{teleportacja=5; szybkosc=0; sekwencja=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)} }
+    if tele.wejscie=3 && is_button_pressed('down') && y>tele.y+16 && teleportacja=0 && prawdziwyczas<>0{teleportacja=5; szybkosc=0; sekwencja=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)} }
     }
 
 if teleportacja<>0 {
@@ -273,16 +273,16 @@ if fetor<>x {fetor2=fetor-x; fetor=x}
 
 if teleportacja=0 {
 if global.modifiedmov=1 {
-if keyboard_check_direct(global.sterowaniedol) && sekwencja=0 && schylanie=0 && !global.rodzajmaria=0 && huadun=0 { uabfx=x }
-if keyboard_check_direct(global.sterowaniedol) && sekwencja=0 && !global.rodzajmaria=0 && huadun=0 {schylanie=1 ; image_index=0 }
-if !keyboard_check_direct(global.sterowaniedol) && !global.rodzajmaria=0 && schylanie = 1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas))  { huadun = 1 }
-if !keyboard_check_direct(global.sterowaniedol) && !global.rodzajmaria=0 && schylanie = 1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas))  { huadun = 2 }
-if !keyboard_check_direct(global.sterowaniedol) && !global.rodzajmaria=0 {schylanie=0 ; image_index=1}
+if is_button_pressed('down') && sekwencja=0 && schylanie=0 && !global.rodzajmaria=0 && huadun=0 { uabfx=x }
+if is_button_pressed('down') && sekwencja=0 && !global.rodzajmaria=0 && huadun=0 {schylanie=1 ; image_index=0 }
+if !is_button_pressed('down') && !global.rodzajmaria=0 && schylanie = 1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas))  { huadun = 1 }
+if !is_button_pressed('down') && !global.rodzajmaria=0 && schylanie = 1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas))  { huadun = 2 }
+if !is_button_pressed('down') && !global.rodzajmaria=0 {schylanie=0 ; image_index=1}
 if global.rodzajmaria=0 {schylanie=0 ; image_index=0}
 } else {
-if keyboard_check_direct(global.sterowaniedol) && sekwencja=0 && !global.rodzajmaria=0 {schylanie=1}
-//if !keyboard_check_direct(global.sterowaniedol) && !global.rodzajmaria=0 && schylanie = 1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 }
-if !keyboard_check_direct(global.sterowaniedol) && !global.rodzajmaria=0 {schylanie=0}
+if is_button_pressed('down') && sekwencja=0 && !global.rodzajmaria=0 {schylanie=1}
+//if !is_button_pressed('down') && !global.rodzajmaria=0 && schylanie = 1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 }
+if !is_button_pressed('down') && !global.rodzajmaria=0 {schylanie=0}
 if global.rodzajmaria=0 {schylanie=0}
 }
 
@@ -309,11 +309,11 @@ if wpadldowody=0 && (y>=global.poziomwody && !global.lava) && global.rodzajmaria
 
 if (global.lava || y<global.poziomwody) && global.rodzajmaria<>5
 {
-if keyboard_check_direct(global.sterowanieprawo) && !keyboard_check_direct(global.sterowaniebieg) && szybkosc<3 && schylanie=0 && huadun=0 && !stuck  {szybkosc+=0.1-0.25*ice_effect}
-if keyboard_check_direct(global.sterowanielewo) && !keyboard_check_direct(global.sterowaniebieg) && szybkosc>-3 && schylanie=0 && huadun=0 && !stuck  {szybkosc-=0.1-0.25*ice_effect}
+if is_button_pressed('right') && !is_button_pressed('run') && szybkosc<3 && schylanie=0 && huadun=0 && !stuck  {szybkosc+=0.1-0.25*ice_effect}
+if is_button_pressed('left') && !is_button_pressed('run') && szybkosc>-3 && schylanie=0 && huadun=0 && !stuck  {szybkosc-=0.1-0.25*ice_effect}
 
-if keyboard_check_direct(global.sterowanieprawo) && keyboard_check_direct(global.sterowaniebieg) && schylanie=0 && huadun=0 && !stuck  {szybkosc+=0.3-ice_effect}
-if keyboard_check_direct(global.sterowanielewo) && keyboard_check_direct(global.sterowaniebieg) && schylanie=0 && huadun=0 && !stuck  {szybkosc-=0.3-ice_effect}
+if is_button_pressed('right') && is_button_pressed('run') && schylanie=0 && huadun=0 && !stuck  {szybkosc+=0.3-ice_effect}
+if is_button_pressed('left') && is_button_pressed('run') && schylanie=0 && huadun=0 && !stuck  {szybkosc-=0.3-ice_effect}
 
 if szybkosc>8 szybkosc=8
 if szybkosc<-8 szybkosc=-8
@@ -321,11 +321,11 @@ if szybkosc<-8 szybkosc=-8
 
 if !global.lava && y>=global.poziomwody && global.rodzajmaria<>5
 {
-if keyboard_check_direct(global.sterowanieprawo) && !keyboard_check_direct(global.sterowaniebieg) && szybkosc<1 && schylanie=0 && huadun=0 && ice_effect=0 && !stuck  {szybkosc+=0.05}
-if keyboard_check_direct(global.sterowanielewo) && !keyboard_check_direct(global.sterowaniebieg) && szybkosc>-1 && schylanie=0 && huadun=0 && ice_effect=0 && !stuck  {szybkosc-=0.05}
+if is_button_pressed('right') && !is_button_pressed('run') && szybkosc<1 && schylanie=0 && huadun=0 && ice_effect=0 && !stuck  {szybkosc+=0.05}
+if is_button_pressed('left') && !is_button_pressed('run') && szybkosc>-1 && schylanie=0 && huadun=0 && ice_effect=0 && !stuck  {szybkosc-=0.05}
 
-if keyboard_check_direct(global.sterowanieprawo) && keyboard_check_direct(global.sterowaniebieg) && schylanie=0 && huadun=0 && ice_effect=0 && !stuck  {szybkosc+=0.05}
-if keyboard_check_direct(global.sterowanielewo) && keyboard_check_direct(global.sterowaniebieg) && schylanie=0 && huadun=0 && ice_effect=0 && !stuck   {szybkosc-=0.05}
+if is_button_pressed('right') && is_button_pressed('run') && schylanie=0 && huadun=0 && ice_effect=0 && !stuck  {szybkosc+=0.05}
+if is_button_pressed('left') && is_button_pressed('run') && schylanie=0 && huadun=0 && ice_effect=0 && !stuck   {szybkosc-=0.05}
 
 if szybkosc>3 szybkosc=3
 if szybkosc<-3 szybkosc=-3
@@ -340,8 +340,8 @@ if global.aktywowanykuppa>=2 {
 
 if szybkosc>-0.04 && szybkosc<0.04 {szybkosc=0}
 
-if ((!keyboard_check_direct(global.sterowanieprawo) && !keyboard_check_direct(global.sterowanielewo)) || schylanie=1) && (y<global.poziomwody || global.lava) && !stuck {szybkosc=szybkosc/1.05}
-if ((!keyboard_check_direct(global.sterowanieprawo) && !keyboard_check_direct(global.sterowanielewo)) || schylanie=1) && (y>=global.poziomwody && !global.lava) && !stuck {szybkosc=szybkosc/1.03}
+if ((!is_button_pressed('right') && !is_button_pressed('left')) || schylanie=1) && (y<global.poziomwody || global.lava) && !stuck {szybkosc=szybkosc/1.05}
+if ((!is_button_pressed('right') && !is_button_pressed('left')) || schylanie=1) && (y>=global.poziomwody && !global.lava) && !stuck {szybkosc=szybkosc/1.03}
 
 //这里是横向碰撞判定，注意代码顺序调整
 
@@ -441,21 +441,21 @@ if level_start_disable_jump_timer < 2 {
 
 if level_start_disable_jump_timer >= 2 {
 if global.rodzajmaria<>3 && global.rodzajmaria<>5 {
-if keyboard_check_direct(global.sterowanieskok) && sekwencja=0 && (y<global.poziomwody || global.lava) && schylanie=0 && huadun=0 && !stuck
+if is_button_pressed('jump') && sekwencja=0 && (y<global.poziomwody || global.lava) && schylanie=0 && huadun=0 && !stuck
 {sekwencja=1; grawitacja=-(8+abs(szybkosc)/5); if global.sample=1 {fofo=sound_play(snd_jump);sound_volume(snd_jump,global.glosnosc)}};}
 if global.rodzajmaria=3 && global.rodzajmaria<>5 {
-if keyboard_check_direct(global.sterowanieskok) && sekwencja=0 && (y<global.poziomwody || global.lava) && schylanie=0 && huadun=0 && !stuck
+if is_button_pressed('jump') && sekwencja=0 && (y<global.poziomwody || global.lava) && schylanie=0 && huadun=0 && !stuck
 {sekwencja=1; grawitacja=-(9+abs(szybkosc)/5); if global.sample=1 {fofo=sound_play(snd_jump);sound_volume(snd_jump,global.glosnosc)}};}
 
-if keyboard_check_direct(global.sterowanieskok) && y>=global.poziomwody && !global.lava && wciskaczwodowy=0 && y>global.poziomwody+32 && schylanie=0 && huadun=0 && global.rodzajmaria<>5 && !stuck
+if is_button_pressed('jump') && y>=global.poziomwody && !global.lava && wciskaczwodowy=0 && y>global.poziomwody+32 && schylanie=0 && huadun=0 && global.rodzajmaria<>5 && !stuck
 {if global.sample=1 {fofo=sound_play(snd_plywak);sound_volume(snd_plywak,global.glosnosc)};plywakanim=0; sekwencja=1; grawitacja=-(4+abs(szybkosc)/10);  wciskaczwodowy=1};
-if !global.lava && keyboard_check_direct(global.sterowanieskok) && y>=global.poziomwody && !global.lava && wciskaczwodowy=0 && y<=global.poziomwody+32 && schylanie=0 && huadun=0 && global.rodzajmaria<>5 && !stuck
+if !global.lava && is_button_pressed('jump') && y>=global.poziomwody && !global.lava && wciskaczwodowy=0 && y<=global.poziomwody+32 && schylanie=0 && huadun=0 && global.rodzajmaria<>5 && !stuck
 {if global.sample=1 {fofo=sound_play(snd_plywak);sound_volume(snd_plywak,global.glosnosc)};sekwencja=1; grawitacja=-(6+abs(szybkosc)/5); wciskaczwodowy=1};
-if !keyboard_check_direct(global.sterowanieskok) {wciskaczwodowy=0}
+if !is_button_pressed('jump') {wciskaczwodowy=0}
 }
 
 kuku+=1
-if keyboard_check_direct(global.sterowanieskok) && kuku>1 && grawitacja<0 && (y<global.poziomwody || global.lava) && global.rodzajmaria<>5 && !stuck {grawitacja-=1.5; kuku=0};
+if is_button_pressed('jump') && kuku>1 && grawitacja<0 && (y<global.poziomwody || global.lava) && global.rodzajmaria<>5 && !stuck {grawitacja-=1.5; kuku=0};
 
 if sekwencja=0 &&  global.rodzajmaria<>5 && !place_meeting(x,y+1,obj_wall) && !place_meeting(x,y+1,o_pointblock) && !place_meeting(x,y+2,o_windas) {sekwencja=1}
 if global.modifiedmov=0 && sekwencja=1 && grawitacja<0 && global.rodzajmaria<>5 {y+=grawitacja+global.etapgravity/5; testujstepa=0}
@@ -672,13 +672,6 @@ y = round(y);
 
 }}
 
-// SMWP 1.7.12 修改直接按键检测后出现出水管前有任何跳跃输出都会导致出水管起跳的问题的补丁
-if (teleportacja == 2) {
-  sekwencja = 1;
-  if (keyboard_check_direct(global.sterowanieskok)) {
-    sekwencja = 0;
-  }
-}
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603

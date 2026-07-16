@@ -1164,3 +1164,4 @@ gz_compress
 gz_selftest
 
 _NF_W_CreateArgs
+is_button_pressed

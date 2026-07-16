@@ -129,3 +129,4 @@
 	|fw_draw_text_transformed_color
 	|fw_set_view_size
 	|_NF_W_CreateArgs
+	|is_button_pressed
