@@ -702,7 +702,6 @@ if costawia6=5 && mouse_check_button(mb_left) && kliknieto=0 && czywybieraniebac
     kliknieto=1
     global.etapkuppa=get_integer('Please enter value',global.etapkuppa)
     }
-message_button(s_guibutton)
 
 
 // NAGRYWANIE

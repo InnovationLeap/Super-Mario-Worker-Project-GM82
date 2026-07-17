@@ -5,7 +5,6 @@ var orig_file;
 
 aaa=0
 czup=0
-message_button(s_guibutton)
 
 while aaa=0{
     bbb=get_integer('Please type how many levels you want to put into this Scenario.',5)
