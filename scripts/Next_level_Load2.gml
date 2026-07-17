@@ -131,7 +131,10 @@ while !file_text_eof(global.toload) && aa!='New Level'{
   }
   if real(string_copy(aa,2,2))=20{
   skript=string_insert('('+string(ae)+').promien='+string(transA(string_copy(aa,12,3)))+';('+string(ae)+').kat='+string(string_copy(aa,15,3))+';('+string(ae)+').szybkosc='+string(string_copy(aa,18,3))+';('+string(ae)+').test2=2;',skript,string_length(skript)+1)
-  }
+  if string_length(aa)>=27{
+   skript=string_insert('('+string(ae)+').is_petal='+string(string_copy(aa,21,1))+';('+string(ae)+').max_promien='+string(transA(string_copy(aa,22,3)))+';('+string(ae)+').promien_szybkosc='+string(string_copy(aa,25,3))+';('+string(ae)+').petal_current='+string(transA(string_copy(aa,12,3)))+';',skript,string_length(skript)+1)
+   }
+   }
   if real(string_copy(aa,2,2))=35 && string_length(aa) > 11 {
   skript=string_insert('('+string(ae)+').height='+string_copy(aa,12,3)+';',skript,string_length(skript)+1)
   }

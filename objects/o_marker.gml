@@ -666,7 +666,6 @@ if (grawitacja = 0)
 y = round(y);
 
 }}
-
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603

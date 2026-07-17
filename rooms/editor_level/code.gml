@@ -58,6 +58,9 @@ global.combo1reset=0
 
 global.EDtest=0
 global.agspeed=1
+global.petal_spotlight=0
+global.petal_max_promien=200
+global.petal_promien_szybkosc=1
 
 global.etapnazwa='Level 1'
 global.etapautor=''

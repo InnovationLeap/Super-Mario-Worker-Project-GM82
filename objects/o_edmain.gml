@@ -3325,14 +3325,18 @@ if wlaczonaopcja=2
     }
 
     if costawia2b=0{
-        if mouse_wheel_up() && global.spike_type>0{//鼠标滚轮向上
-            global.spike_type-=1
-        }
-        if mouse_wheel_down() && global.spike_type<3{//鼠标滚轮向下
-            global.spike_type+=1
+        //鼠标在探照灯格子上时滚轮切换圆形/花瓣，不在格子上时切换 spike_type
+        if mouse_x>=view_xview[0]+206+64 && mouse_x<view_xview[0]+206+128 && mouse_y>=view_yview[0]+110+64*3 && mouse_y<view_yview[0]+174+64*3{
+            if mouse_wheel_up(){global.petal_spotlight=0}
+            if mouse_wheel_down(){global.petal_spotlight=1}
+        } else {
+            if mouse_wheel_up() && global.spike_type>0{global.spike_type-=1}
+            if mouse_wheel_down() && global.spike_type<3{global.spike_type+=1}
         }
         draw_sprite(s_piraniolebmask,global.spike_type,view_xview[0]+206+270,view_yview[0]+174+80)
         draw_sprite(s_kolecmask,global.spike_type,view_xview[0]+214+198,view_yview[0]+174+144)
+        //用贴图显示探照灯图标：第一帧默认圆形，第二帧花瓣
+        draw_sprite(s_rotomask,global.petal_spotlight,view_xview[0]+270,view_yview[0]+302)
     }
 
     if costawia2b=1{
@@ -3519,7 +3523,7 @@ if costawia2<>0 && (costawia2=20||costawia2=35||costawia2=39) && kliknieto=0 && 
     global.fotel=fofo.x
     global.fotel2=fofo.y
     fofo.coto=costawia2
-    if costawia2=20 {wiatrak=1} //探照灯
+    if costawia2=20 {wiatrak=1;fofo.is_petal=global.petal_spotlight;if global.petal_spotlight{fofo.rotomr[1]=global.petal_max_promien;fofo.rotors[1]=global.petal_promien_szybkosc}} //探照灯
     if costawia2=39 {wiatrak=3;global.goldcount=1}// 金飞龟——继承电光绕的优良传统
     if costawia2=35 {wiatrak=5} //可调跳乌龟
     }
@@ -3745,7 +3749,7 @@ if wiatrak>0
     {
 
     //电光绕摆放
-    if wiatrak=1 {draw_sprite(s_wiatrak,0,(floor(mouse_x/32))*32+16,(floor(mouse_y/32))*32+16);}//draw_text(fofo.x+4,fofo.y+4,global.agspeed)
+    if wiatrak=1 {draw_sprite(s_wiatrak,0,(floor(mouse_x/32))*32+16,(floor(mouse_y/32))*32+16)}
     if wiatrak=1 && mouse_check_button(mb_left) && kliknieto=0 && (global.fotel<>(floor(mouse_x/32))*32 || global.fotel2<>(floor(mouse_y/32))*32)
         {
         wiatrak=2;
@@ -3767,9 +3771,71 @@ if wiatrak>0
         if global.agspeed>360{global.agspeed=global.agspeed-360}
         fofo.additional3=global.agspeed
         }
+          if global.agspeed<0 {global.EDtest+=360+global.agspeed}
+          else{global.EDtest+=global.agspeed}
+          }
+    //花瓣探照灯：左键确认速度，进入最大半径设置
+    if wiatrak=2 && fofo.is_petal && mouse_check_button(mb_left) && kliknieto=0
+        {
+        wiatrak=10
+        global.petal_max_promien=fofo.rotomr[1]
+        global.petal_promien_szybkosc=fofo.rotors[1]
+        kliknieto=1
+        }
+    //花瓣探照灯：鼠标点击设置最大半径（网格吸附）
+    if wiatrak=10{
+        draw_sprite(s_wiatrak,0,floor(mouse_x/32)*32+16,floor(mouse_y/32)*32+16)
+        draw_set_color(c_red)
+        draw_line(fofo.x+16,fofo.y+16,floor(mouse_x/32)*32+16,floor(mouse_y/32)*32+16)
+        draw_set_alpha(0.3)
+        draw_circle(fofo.x+16,fofo.y+16,point_distance(fofo.x+16,fofo.y+16,floor(mouse_x/32)*32+16,floor(mouse_y/32)*32+16),0)
+        draw_set_alpha(1)
+        draw_set_font(cyferkimario)
+        draw_set_color(c_white)
+        draw_text(fofo.x,fofo.y-20,"max半径:"+string(point_distance(fofo.x+16,fofo.y+16,floor(mouse_x/32)*32+16,floor(mouse_y/32)*32+16)))
+           if mouse_check_button(mb_left) && kliknieto=0
+               {
+               fofo.rotomr[1]=point_distance(fofo.x+16,fofo.y+16,floor(mouse_x/32)*32+16,floor(mouse_y/32)*32+16)
+               global.petal_max_promien=fofo.rotomr[1]
+               fofo.petal_preview=fofo.rotor[1];if fofo.rotors[1]<0{fofo.petal_preview_dir=-1}else{fofo.petal_preview_dir=1};fofo.petal_dir_got_preview=0
+               fofo.trail_count=0
+               global.EDtest=0
+               wiatrak=11
+               kliknieto=1
+               }
+        if mouse_check_button(mb_right) {wiatrak=0;with(fofo)instance_destroy();}
+        }
+    //花瓣探照灯：鼠标滚轮设置半径变化速度
+     if wiatrak=11{
+         draw_set_font(cyferkimario)
+         draw_set_color(c_white)
+         draw_text(fofo.x,fofo.y-20,"半径变化速度:"+string(fofo.rotors[1]))
          if global.agspeed<0 {global.EDtest+=360+global.agspeed}
          else{global.EDtest+=global.agspeed}
-         }
+          if mouse_wheel_up() {
+             fofo.rotors[1]+=1
+              if fofo.rotors[1]>99{fofo.rotors[1]=99}
+             global.petal_promien_szybkosc=fofo.rotors[1]
+fofo.petal_preview=fofo.rotor[1];if fofo.rotors[1]<0{fofo.petal_preview_dir=-1}else{fofo.petal_preview_dir=1};fofo.petal_dir_got_preview=0
+              fofo.trail_count=0
+              global.EDtest=0
+              }
+          if mouse_wheel_down() {
+              fofo.rotors[1]-=1
+               if fofo.rotors[1]<-99{fofo.rotors[1]=-99}
+              global.petal_promien_szybkosc=fofo.rotors[1]
+              fofo.petal_preview=fofo.rotor[1];if fofo.rotors[1]<0{fofo.petal_preview_dir=-1}else{fofo.petal_preview_dir=1};fofo.petal_dir_got_preview=0
+             fofo.trail_count=0
+             global.EDtest=0
+             }
+        if mouse_check_button(mb_left) && kliknieto=0
+            {
+            fofo.test2=2
+            wiatrak=0
+            kliknieto=1
+            }
+        if mouse_check_button(mb_right) {wiatrak=0;with(fofo)instance_destroy();}
+        }
 //金飞龟分割线
     if wiatrak=3 {draw_sprite(s_troopagoldfly,0,(floor(mouse_x/32))*32+16,(floor(mouse_y/32))*32+16);}//draw_text(fofo.x+4,fofo.y+4,global.agspeed)
     if wiatrak=3 && mouse_check_button(mb_left) && kliknieto=0 && (global.fotel<>(floor(mouse_x/32))*32 || global.fotel2<>(floor(mouse_y/32))*32)

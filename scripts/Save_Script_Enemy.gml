@@ -81,15 +81,12 @@ if coto=20{    //如果是探照灯
         aa=string_insert(real_string_length(rotoa[i],3),aa,string_length(aa)+1)
         //速度
         aa=string_insert(real_string_length(rotos[i],3),aa,string_length(aa)+1)
-        /*ab=string(rotor[i])  //ab记录半径
-        repeat(3-string_length(ab)){ab=string_insert('0',ab,-1)}  //写0
-        aa=string_insert(ab,aa,string_length(aa)+1)  //ab写入aa
-        ab=string(rotoa[i]) //ab记录角度
-        repeat(3-string_length(ab)){ab=string_insert('0',ab,-1)}  //写0
-        aa=string_insert(ab,aa,string_length(aa)+1)  //ab写入aa
-        ab=string(rotos[i])  //ab记录速度
-        repeat(3-string_length(ab)){ab=string_insert('0',ab,-1)}  //写0
-        aa=string_insert(ab,aa,string_length(aa)+1)  //ab写入aa*/
+        //花瓣探照灯: is_petal(1) + max_radius(3) + radius_speed(3)
+        if is_petal {
+            aa=string_insert('1',aa,string_length(aa)+1)
+            aa=string_insert(real_string_length(rotomr[i],3),aa,string_length(aa)+1)
+            aa=string_insert(real_string_length(rotors[i],3),aa,string_length(aa)+1)
+        }
         global.ccccc+=1
         file_text_write_string(global.script_file,aa)
         file_text_writeln(global.script_file)    //aa写入文件并换行

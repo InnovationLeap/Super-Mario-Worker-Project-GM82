@@ -22,6 +22,14 @@ rotoord=1
 rotor[1]=32
 rotoa[1]=0
 rotos[1]=1
+is_petal=0
+rotomr[1]=200
+rotors[1]=1
+petal_preview=0
+petal_preview_dir=1
+petal_dir_got_preview=0
+trail_count=0
+trail_max=2000
 
 imweitiao=0
 drink=0
@@ -75,16 +83,34 @@ if coto=20{
     //rotoord表示重叠探照灯中的序号，越小，越在下方图层
     if rotoord<=1{
          rotostr=""
-         rotostr=rotostr+"edit:radius="+string(floor(rotor[1]))+";angle="+string(floor(rotoa[1]))+";speed="+string((rotos[1]))+"|"
-         rotostr=rotostr+"add a new roto-disc..."
-         draw_sprite(s_enemiesbank,coto-1,x+16,y+32)
-         draw_set_color(c_white)
-         draw_text(x+4,y+4,rotos[rotoord])
+          if is_petal{
+              rotostr=rotostr+"edit:radius="+string(floor(rotor[1]))+";angle="+string(floor(rotoa[1]))+";speed="+string((rotos[1]))+";max_radius="+string(rotomr[1])+";radius_speed="+string(rotors[1])+"|"
+              rotostr=rotostr+"add a new roto-disc..."
+              draw_sprite(s_enemiesbank,coto-1,x+16,y+32)
+              draw_set_font(cyferkimario)
+              draw_set_color(c_white)
+              draw_text(x+4,y+4,rotos[rotoord])
+              draw_set_color(c_red)
+              draw_circle(x+16,y+16,rotomr[rotoord],true)
+              draw_set_color(c_white)
+              draw_text(x+4,y+20,"mr:"+string(rotomr[rotoord])+" rs:"+string(rotors[rotoord]))
+          } else {
+              rotostr=rotostr+"edit:radius="+string(floor(rotor[1]))+";angle="+string(floor(rotoa[1]))+";speed="+string((rotos[1]))+"|"
+              rotostr=rotostr+"add a new roto-disc..."
+              draw_sprite(s_enemiesbank,coto-1,x+16,y+32)
+              draw_set_font(cyferkimario)
+              draw_set_color(c_white)
+              draw_text(x+4,y+4,rotos[rotoord])
+          }
     }
     else{
          var i,j,k;
          rotostr="";k=0
-         repeat(rotoord){k+=1;rotostr=rotostr+"edit no."+string(k)+":radius="+string(floor(rotor[k]))+";angle="+string(floor(rotoa[k]))+";speed="+string((rotos[k]))+"|"}
+         if is_petal{
+             repeat(rotoord){k+=1;rotostr=rotostr+"edit no."+string(k)+":radius="+string(floor(rotor[k]))+";angle="+string(floor(rotoa[k]))+";speed="+string((rotos[k]))+";max_radius="+string(rotomr[k])+";radius_speed="+string(rotors[k])+"|"}
+         } else {
+             repeat(rotoord){k+=1;rotostr=rotostr+"edit no."+string(k)+":radius="+string(floor(rotor[k]))+";angle="+string(floor(rotoa[k]))+";speed="+string((rotos[k]))+"|"}
+         }
          rotostr=rotostr+"add a new roto-disc...|delete a roto-disc..."
          draw_sprite(s_enemiesbank,coto-1,x+16,y+32)
          draw_set_color(c_white)
@@ -93,41 +119,62 @@ if coto=20{
          {for (j=1;j<=rotoord-1;j+=1)
          draw_sprite(s_wiatrak,0,x+16+rotor[j]*sin(degtorad(rotoa[j]+90)),y+16+rotor[j]*cos(degtorad(rotoa[j]+90)))
          }
-         i=1;{do{draw_circle(x+16,y+16,rotor[i],true);i+=1}until(i>=rotoord)}
+         i=1;{do{
+             draw_circle(x+16,y+16,rotor[i],true)
+              if is_petal{
+                  draw_set_alpha(0.3)
+                  draw_set_color(c_red)
+                  draw_circle(x+16,y+16,rotomr[i],true)
+                  draw_set_alpha(1)
+                  draw_set_color(c_white)
+              }
+         i+=1}until(i>=rotoord)}
          var k;{for(k=1;k<rotoord;k+=1)if rotos[k]!=rotos[k+1]{m=0}}
          if m=1{draw_text(x+4,y+4,rotos[rotoord])}
          draw_text(x+24,y+24,"X"+string(rotoord))
          if test2=2&& mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 &&keyboard_check(global.key_submenu)&& global.picking = false{
          var rotomenu;
          rotomenu=show_menu(rotostr,-1)
-         if rotomenu<rotoord&&rotomenu>=0{
-            var ratio,angle,agspeed;
-            ratio=get_integer('Set the radius.',rotor[rotomenu+1])
-            angle=get_integer('Set the angle.',rotoa[rotomenu+1])
-            agspeed=max(0,real(get_string('Set the speed.',string(rotos[rotomenu+1]))))
-            rotor[rotomenu+1]=floor(min(ratio,6000))
-            rotoa[rotomenu+1]=floor(min(angle,360))
-            rotos[rotomenu+1]=(min(agspeed,360))}
-         if rotomenu=rotoord{
-            rotoord+=1
-            var ratio,angle,agspeed;
-            ratio=get_integer('Set the radius of the new roto-disc.',32)
-            angle=get_integer('Set the angle of the new roto-disc.',0)
-            agspeed=max(0,real(get_string('Set the speed of the new roto-disc.','1')))
-            rotor[rotoord]=floor(min(ratio,6000))
-            rotoa[rotoord]=floor(min(angle,360))
-            rotos[rotoord]=(min(agspeed,360))
-         }
-         if rotomenu>rotoord{
-         var i,j;
-         j=get_integer('Set the number of the roto-disc you want to delete.(0 stands for not deleting)',0)
-         if j>0 && j <=rotoord{
-             for(i=1;i<=rotoord-1;i+=1){
-                 if i>=j{rotor[i]=rotor[i+1];rotoa[i]=rotoa[i+1];rotos[i]=rotos[i+1]}
+          if rotomenu<rotoord&&rotomenu>=0{
+             var ratio,angle,agspeed,agmr,agrs;
+             ratio=get_integer('Set the radius.',rotor[rotomenu+1])
+             angle=get_integer('Set the angle.',rotoa[rotomenu+1])
+             agspeed=max(0,real(get_string('Set the speed.',string(rotos[rotomenu+1]))))
+             rotor[rotomenu+1]=floor(min(ratio,6000))
+             rotoa[rotomenu+1]=floor(min(angle,360))
+             rotos[rotomenu+1]=(min(agspeed,360))
+             if is_petal{
+                 agmr=get_integer('Set the max radius.',rotomr[rotomenu+1])
+                 agrs=max(0,real(get_string('Set the radius speed.',string(rotors[rotomenu+1]))))
+                 rotomr[rotomenu+1]=floor(min(agmr,6000))
+                 rotors[rotomenu+1]=(min(agrs,360))
+             }}
+          if rotomenu=rotoord{
+             rotoord+=1
+             var ratio,angle,agspeed,agmr,agrs;
+             ratio=get_integer('Set the radius of the new roto-disc.',32)
+             angle=get_integer('Set the angle of the new roto-disc.',0)
+             agspeed=max(0,real(get_string('Set the speed of the new roto-disc.','1')))
+             rotor[rotoord]=floor(min(ratio,6000))
+             rotoa[rotoord]=floor(min(angle,360))
+             rotos[rotoord]=(min(agspeed,360))
+             if is_petal{
+                 agmr=get_integer('Set the max radius of the new roto-disc.',200)
+                 agrs=max(0,real(get_string('Set the radius speed of the new roto-disc.','1')))
+                 rotomr[rotoord]=floor(min(agmr,6000))
+                 rotors[rotoord]=(min(agrs,360))
              }
-             rotor[rotoord]=32;rotoa[rotoord]=0;rotos[rotoord]=1;rotoord-=1
-         }
-         }
+          }
+          if rotomenu>rotoord{
+          var i,j;
+          j=get_integer('Set the number of the roto-disc you want to delete.(0 stands for not deleting)',0)
+          if j>0 && j <=rotoord{
+              for(i=1;i<=rotoord-1;i+=1){
+                  if i>=j{rotor[i]=rotor[i+1];rotoa[i]=rotoa[i+1];rotos[i]=rotos[i+1];if is_petal{rotomr[i]=rotomr[i+1];rotors[i]=rotors[i+1]}}
+              }
+              rotor[rotoord]=32;rotoa[rotoord]=0;rotos[rotoord]=1;if is_petal{rotomr[rotoord]=200;rotors[rotoord]=1};rotoord-=1
+          }
+          }
          }
     }
 
@@ -136,55 +183,127 @@ if coto=20{
     if test2=2 && mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 && keyboard_check(global.key_submenu) && global.picking = false{
          var rotomenu;
          rotomenu=show_menu(rotostr,-1)
-         if rotomenu=0{
-           var ratio,angle,agspeed;
-            ratio=get_integer('Set the radius.',rotor[rotomenu+1])
-            angle=get_integer('Set the angle.',rotoa[rotomenu+1])
-            agspeed=max(0,real(get_string('Set the speed.',string(rotos[rotomenu+1]))))
-            rotor[rotomenu+1]=floor(min(ratio,6000))
-            rotoa[rotomenu+1]=floor(min(angle,360))
-            rotos[rotomenu+1]=(min(agspeed,360))
-         }
-         if rotomenu=1{
-            rotoord+=1
-            var ratio,angle,agspeed;
-            ratio=get_integer('Set the radius of the new roto-disc.',32)
-            angle=get_integer('Set the angle of the new roto-disc.',0)
-            agspeed=max(0,real(get_string('Set the speed of the new roto-disc.','1')))
-            rotor[rotoord]=floor(min(ratio,6000))
-            rotoa[rotoord]=floor(min(angle,360))
-            rotos[rotoord]=(min(agspeed,360))
-         }
-    }
+          if rotomenu=0{
+            var ratio,angle,agspeed,agmr,agrs;
+             ratio=get_integer('Set the radius.',rotor[rotomenu+1])
+             angle=get_integer('Set the angle.',rotoa[rotomenu+1])
+             agspeed=max(0,real(get_string('Set the speed.',string(rotos[rotomenu+1]))))
+             rotor[rotomenu+1]=floor(min(ratio,6000))
+             rotoa[rotomenu+1]=floor(min(angle,360))
+             rotos[rotomenu+1]=(min(agspeed,360))
+             if is_petal{
+                 agmr=get_integer('Set the max radius.',rotomr[rotomenu+1])
+                 agrs=max(0,real(get_string('Set the radius speed.',string(rotors[rotomenu+1]))))
+                 rotomr[rotomenu+1]=floor(min(agmr,6000))
+                 rotors[rotomenu+1]=(min(agrs,360))
+             }
+          }
+          if rotomenu=1{
+             rotoord+=1
+             var ratio,angle,agspeed,agmr,agrs;
+             ratio=get_integer('Set the radius of the new roto-disc.',32)
+             angle=get_integer('Set the angle of the new roto-disc.',0)
+             agspeed=max(0,real(get_string('Set the speed of the new roto-disc.','1')))
+             rotor[rotoord]=floor(min(ratio,6000))
+             rotoa[rotoord]=floor(min(angle,360))
+             rotos[rotoord]=(min(agspeed,360))
+             if is_petal{
+                 agmr=get_integer('Set the max radius of the new roto-disc.',200)
+                 agrs=max(0,real(get_string('Set the radius speed of the new roto-disc.','1')))
+                 rotomr[rotoord]=floor(min(agmr,6000))
+                 rotors[rotoord]=(min(agrs,360))
+             }
+          }
+     }
 
-    if test2=1{  //放置灯的阶段叫做test2=1（确定半径及初始角度）
-        rotos[rotoord]=global.agspeed
-        draw_set_color(c_white)
-        draw_circle(x+16,y+16,test3,1)
-        draw_set_font(cyferkimario)
-        if test3<rotor[rotoord] {test3+=1}
-        if test3>=rotor[rotoord] {test3=0}
-        draw_sprite(s_wiatrak,floor(testani) mod 26,x+16+rotor[rotoord]*sin(degtorad(rotoa[rotoord]+90+global.EDtest)),y+16+rotor[rotoord]*cos(degtorad(rotoa[rotoord]+90+global.EDtest)))
-        testani+=0.2
-        draw_circle(x+16,y+16,rotor[rotoord],true)
+     if test2=1{  //放置灯的阶段叫做test2=1（确定半径及初始角度）
+         rotos[rotoord]=global.agspeed
+         draw_set_font(cyferkimario)
+         if !(is_petal && o_edmain.wiatrak=11){
+             draw_set_color(c_white)
+             draw_circle(x+16,y+16,test3,1)
+             if test3<rotor[rotoord] {test3+=1}
+             if test3>=rotor[rotoord] {test3=0}
+         }
+          if is_petal && o_edmain.wiatrak=11{
+              if !petal_dir_got_preview {
+                  if rotors[rotoord]<0 {petal_preview_dir=-1}
+                  petal_dir_got_preview=1
+              }
+              petal_preview+=abs(rotors[rotoord])*petal_preview_dir
+              if petal_preview>rotomr[rotoord] {petal_preview=rotomr[rotoord]-(petal_preview-rotomr[rotoord]);petal_preview_dir=-1}
+              if petal_preview<0 {petal_preview=-petal_preview;petal_preview_dir=1}
+             var sx,sy;
+             sx=x+16+petal_preview*sin(degtorad(rotoa[rotoord]+90+global.EDtest))
+             sy=y+16+petal_preview*cos(degtorad(rotoa[rotoord]+90+global.EDtest))
+             if trail_count<trail_max{
+                 trail_x[trail_count]=sx
+                 trail_y[trail_count]=sy
+                 trail_count+=1
+             }
+               if trail_count>1{
+                   var ti;
+                   for(ti=0;ti<trail_count-1;ti+=1){
+                       draw_set_color(c_red)
+                       draw_line(trail_x[ti],trail_y[ti],trail_x[ti+1],trail_y[ti+1])
+                   }
+               }
+              draw_set_color(c_red)
+             draw_circle(x+16,y+16,petal_preview,true)
+             draw_sprite(s_wiatrak,floor(testani) mod 26,sx,sy)
+         } else {
+             if !(is_petal && o_edmain.wiatrak=10){
+                 draw_sprite(s_wiatrak,floor(testani) mod 26,x+16+rotor[rotoord]*sin(degtorad(rotoa[rotoord]+90+global.EDtest)),y+16+rotor[rotoord]*cos(degtorad(rotoa[rotoord]+90+global.EDtest)))
+             }
+         }
+         testani+=0.2
+         if !(is_petal && o_edmain.wiatrak=11){
+             draw_circle(x+16,y+16,rotor[rotoord],true)
+         }
+         if is_petal{
+             if !(o_edmain.wiatrak=11){
+                 draw_set_alpha(0.3)
+                 draw_set_color(c_red)
+                 draw_circle(x+16,y+16,rotomr[rotoord],true)
+                 draw_set_alpha(1)
+             }
+             draw_set_color(c_white)
+             draw_text(x+4,y+20,"mr:"+string(rotomr[rotoord])+" rs:"+string(rotors[rotoord]))
+         }
         if keyboard_check(global.key_submenu)&& global.picking = false{
-        var ratio,angle;
+        var ratio,angle,agmr,agrs;
         ratio=get_integer('Set the radius.',rotor[rotoord])
         angle=get_integer('Set the angle.',rotoa[rotoord])
         agspeed=max(0,real(get_string('Set the speed.',string(rotos[rotoord]))))
         rotor[rotoord]=floor(min(ratio,6000))
         rotoa[rotoord]=floor(min(angle,360))
         rotos[rotoord]=(min(agspeed,360))
+        if is_petal{
+            agmr=get_integer('Set the max radius.',rotomr[rotoord])
+            agrs=max(0,real(get_string('Set the radius speed.',string(rotors[rotoord]))))
+            rotomr[rotoord]=floor(min(agmr,6000))
+            rotors[rotoord]=(min(agrs,360))
+        }
         o_edmain.wiatrak=0
         test2=2
         o_edmain.kliknieto=1
         }
     }
 
-    if test2=2{
-         draw_set_color(c_white)
-         draw_circle(x+16,y+16,rotor[rotoord],true)
-         draw_sprite(s_wiatrak,0,x+16+rotor[rotoord]*sin(degtorad(rotoa[rotoord]+90)),y+16+rotor[rotoord]*cos(degtorad(rotoa[rotoord]+90)))
+     if test2=2{
+          draw_set_color(c_white)
+          draw_circle(x+16,y+16,rotor[rotoord],true)
+          if is_petal{
+              draw_set_alpha(0.3)
+              draw_set_alpha(0.3)
+              draw_set_color(c_red)
+              draw_circle(x+16,y+16,rotomr[rotoord],true)
+              draw_set_alpha(1)
+              draw_set_alpha(1)
+              draw_set_color(c_white)
+              draw_text(x+4,y+20,"mr:"+string(rotomr[rotoord])+" rs:"+string(rotors[rotoord]))
+          }
+          draw_sprite(s_wiatrak,0,x+16+rotor[rotoord]*sin(degtorad(rotoa[rotoord]+90)),y+16+rotor[rotoord]*cos(degtorad(rotoa[rotoord]+90)))
          draw_set_font(cyferkimario)
     }
 

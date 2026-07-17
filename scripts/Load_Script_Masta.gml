@@ -61,31 +61,41 @@ while !file_text_eof(script_file){
    ae=instance_create(transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_edenemyblock)
    ae.coto=real(string_copy(aa,2,2))
   }
-  if real(string_copy(aa,2,2))=20{
-   //(debug)show_message(string(transA(string_copy(aa,4,4)))+","+string(ds_list_find_index(rotox,transA(string_copy(aa,4,4))))+";"+string(transA(string_copy(aa,8,4)))+","+string(ds_list_find_index(rotoy,transA(string_copy(aa,8,4)))))
-   if ds_list_find_index(rotox,transA(string_copy(aa,4,4))*10000+transA(string_copy(aa,8,4)))!=-1{// = ds_list_find_index(rotoy,transA(string_copy(aa,8,4))) && ds_list_find_index(rotox,transA(string_copy(aa,4,4)))!=-1{
-    rototar=roto[ds_list_find_index(rotox,transA(string_copy(aa,4,4))*10000+transA(string_copy(aa,8,4)))]
-    //rototar.coto=20
-    rototar.rotoord+=1
-    rototar.rotor[rototar.rotoord]=transA(string_copy(aa,12,3))
-    rototar.rotoa[rototar.rotoord]=real(string_copy(aa,15,3))
-    rototar.rotos[rototar.rotoord]=real(string_copy(aa,18,3))
-    rototar.test2=2
+   if real(string_copy(aa,2,2))=20{
+    //(debug)show_message(string(transA(string_copy(aa,4,4)))+","+string(ds_list_find_index(rotox,transA(string_copy(aa,4,4))))+";"+string(transA(string_copy(aa,8,4)))+","+string(ds_list_find_index(rotoy,transA(string_copy(aa,8,4)))))
+    if ds_list_find_index(rotox,transA(string_copy(aa,4,4))*10000+transA(string_copy(aa,8,4)))!=-1{// = ds_list_find_index(rotoy,transA(string_copy(aa,8,4))) && ds_list_find_index(rotox,transA(string_copy(aa,4,4)))!=-1{
+     rototar=roto[ds_list_find_index(rotox,transA(string_copy(aa,4,4))*10000+transA(string_copy(aa,8,4)))]
+     //rototar.coto=20
+     rototar.rotoord+=1
+     rototar.rotor[rototar.rotoord]=transA(string_copy(aa,12,3))
+     rototar.rotoa[rototar.rotoord]=real(string_copy(aa,15,3))
+     rototar.rotos[rototar.rotoord]=real(string_copy(aa,18,3))
+     rototar.test2=2
+     if string_length(aa)>=27{
+         rototar.is_petal=real(string_copy(aa,21,1))
+         rototar.rotomr[rototar.rotoord]=transA(string_copy(aa,22,3))
+         rototar.rotors[rototar.rotoord]=real(string_copy(aa,25,3))
+     }
+    }
+    else{
+     rotonum+=1
+     ae=instance_create(transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_edenemyblock)
+     ae.coto=real(string_copy(aa,2,2))
+     ds_list_add(rotox,transA(string_copy(aa,4,4))*10000+transA(string_copy(aa,8,4)))
+     //ds_list_add(rotoy,transA(string_copy(aa,8,4)))
+     roto[rotonum]=ae
+     ae.rotoord=1
+     ae.rotor[ae.rotoord]=transA(string_copy(aa,12,3))
+     ae.rotoa[ae.rotoord]=real(string_copy(aa,15,3))
+     ae.rotos[ae.rotoord]=real(string_copy(aa,18,3))
+     ae.test2=2
+     if string_length(aa)>=27{
+         ae.is_petal=real(string_copy(aa,21,1))
+         ae.rotomr[ae.rotoord]=transA(string_copy(aa,22,3))
+         ae.rotors[ae.rotoord]=real(string_copy(aa,25,3))
+     }
+    }
    }
-   else{
-    rotonum+=1
-    ae=instance_create(transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_edenemyblock)
-    ae.coto=real(string_copy(aa,2,2))
-    ds_list_add(rotox,transA(string_copy(aa,4,4))*10000+transA(string_copy(aa,8,4)))
-    //ds_list_add(rotoy,transA(string_copy(aa,8,4)))
-    roto[rotonum]=ae
-    ae.rotoord=1
-    ae.rotor[ae.rotoord]=transA(string_copy(aa,12,3))
-    ae.rotoa[ae.rotoord]=real(string_copy(aa,15,3))
-    ae.rotos[ae.rotoord]=real(string_copy(aa,18,3))
-    ae.test2=2
-   }
-  }
   if real(string_copy(aa,2,2))=39{
    //(debug)show_message(string(transA(string_copy(aa,4,4)))+","+string(ds_list_find_index(rotox,transA(string_copy(aa,4,4))))+";"+string(transA(string_copy(aa,8,4)))+","+string(ds_list_find_index(rotoy,transA(string_copy(aa,8,4)))))
    if ds_list_find_index(rotox2,transA(string_copy(aa,4,4))*10000+transA(string_copy(aa,8,4)))!=-1{// = ds_list_find_index(rotoy,transA(string_copy(aa,8,4))) && ds_list_find_index(rotox,transA(string_copy(aa,4,4)))!=-1{
