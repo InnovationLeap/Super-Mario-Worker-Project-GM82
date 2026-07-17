@@ -146,6 +146,11 @@ globalvar fofobrightness;
 
 set_light_mode = false;
 set_light_icon_alpha = 0.5;
+
+// 视角缩放
+zoom_ratio = 1;
+ratio_level = 0;
+last_ratio_level = ratio_level;
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -247,8 +252,59 @@ if global.testout=1{    //自动回到测试前位置
     global.testout=0
 }
 
-view_xview[0]=scroolx-320
-view_yview[0]=scrooly-240
+// 视角缩放
+target_zooms[0] = 1;
+target_zooms[1] = 2;
+target_zooms[2] = 3;
+target_zooms[3] = 4;
+target_zooms[4] = 5;
+target_zooms[5] = 6;
+target_zooms[6] = 7;
+target_zooms[7] = 8;
+
+if wlaczony != 1 && wlaczonaopcja == 0 {
+    if (keyboard_check_pressed(189) || (keyboard_check(vk_control) && mouse_wheel_up())) && ratio_level < 7 {
+        next_zoom_ratio = target_zooms[ratio_level + 1];
+        next_view_wview = 640 * next_zoom_ratio;
+        next_view_hview = 480 * next_zoom_ratio;
+        if next_view_wview <= room_width && next_view_hview <= room_height {
+            ratio_level += 1;
+        }
+    } else if (keyboard_check_pressed(187) || (keyboard_check(vk_control) && mouse_wheel_down())) && ratio_level > 0 {
+        ratio_level -= 1;
+    }
+}
+
+if last_ratio_level != ratio_level {
+    var new_zoom, new_w, new_h;
+    last_ratio_level = ratio_level;
+    new_zoom = target_zooms[ratio_level];
+    new_w = 640 * new_zoom;
+    new_h = 480 * new_zoom;
+
+    if scroolx < new_w / 2 {
+        scroolx = round((new_w / 2) / 32) * 32;
+    } else if scroolx > room_width - new_w / 2 {
+        scroolx = ((room_width - new_w / 2) / 32) * 32;
+    }
+
+    if scrooly < new_h / 2 {
+        scrooly = round((new_h / 2) / 32) * 32 - 16;
+    } else if scrooly > room_height - new_h / 2 {
+        scrooly = ((room_height - new_h / 2) / 32) * 32 - 16;
+    }
+
+    sound_play(snd_zoom);
+    sound_volume(snd_zoom, global.glosnosc);
+}
+
+target_zoom = target_zooms[ratio_level];
+zoom_ratio += (target_zoom - zoom_ratio) * 0.4;
+
+view_wview[0] = 640 * zoom_ratio;
+view_hview[0] = 480 * zoom_ratio;
+view_xview[0] = round(min(room_width - 640 * zoom_ratio, max(0, scroolx - 320 * zoom_ratio)) / 32) * 32;
+view_yview[0] = round(min(room_height - 480 * zoom_ratio, max(0, scrooly - 240 * zoom_ratio)) / 32) * 32;
 if variable_global_exists('script_kile'){
 if real(global.script_kile)= 1
 {Load_Script_Masta();global.script_kile=-1}
@@ -287,7 +343,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if scroolx>320 && !keyboard_check(global.key_select){scroolx-=32}
+if scroolx>view_wview[0]/2 && !keyboard_check(global.key_select){scroolx-=32}
 #define Keyboard_38
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -295,7 +351,7 @@ action_id=603
 applies_to=self
 */
 
-if scrooly>240 && !keyboard_check(vk_shift) && !keyboard_check(global.key_select) {scrooly-=32}
+if scrooly>view_hview[0]/2 && !keyboard_check(vk_shift) && !keyboard_check(global.key_select) {scrooly-=32}
 #define Keyboard_39
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -303,7 +359,7 @@ action_id=603
 applies_to=self
 */
 
-if scroolx<room_width-320 && !keyboard_check(global.key_select) {scroolx+=32}
+if scroolx<room_width-view_wview[0]/2 && !keyboard_check(global.key_select) {scroolx+=32}
 #define Keyboard_40
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -311,14 +367,14 @@ action_id=603
 applies_to=self
 */
 
-if scrooly<room_height-240 && !keyboard_check(vk_shift) && !keyboard_check(global.key_select)  {scrooly+=32}
+if scrooly<room_height-view_hview[0]/2 && !keyboard_check(vk_shift) && !keyboard_check(global.key_select)  {scrooly+=32}
 #define Keyboard_65
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
 applies_to=self
 */
-if scroolx>320 && !keyboard_check(global.key_select){scroolx-=32}
+if scroolx>view_wview[0]/2 && !keyboard_check(global.key_select){scroolx-=32}
 #define Keyboard_68
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -326,7 +382,7 @@ action_id=603
 applies_to=self
 */
 
-if scroolx<room_width-320 && !keyboard_check(global.key_select) {scroolx+=32}
+if scroolx<room_width-view_wview[0]/2 && !keyboard_check(global.key_select) {scroolx+=32}
 #define Keyboard_83
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -334,7 +390,7 @@ action_id=603
 applies_to=self
 */
 
-if scrooly<room_height-240 && !keyboard_check(vk_shift) && !keyboard_check(global.key_select)  {scrooly+=32}
+if scrooly<room_height-view_hview[0]/2 && !keyboard_check(vk_shift) && !keyboard_check(global.key_select)  {scrooly+=32}
 #define Keyboard_87
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -342,7 +398,7 @@ action_id=603
 applies_to=self
 */
 
-if scrooly>240 && !keyboard_check(vk_shift) && !keyboard_check(global.key_select) {scrooly-=32}
+if scrooly>view_hview[0]/2 && !keyboard_check(vk_shift) && !keyboard_check(global.key_select) {scrooly-=32}
 #define Other_3
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -360,8 +416,10 @@ if instance_number(o_marker)>1 {instance_destroy()}
 
 
 
-if (global.lava){draw_sprite_ext(s_biglava,0,view_xview[0],global.poziomwody,1,1,0,c_white,0.4)}
-else{draw_sprite_ext(s_woda,0,view_xview[0],global.poziomwody,1,1,0,c_white,0.4)}
+for (i = 0; i < ceil(view_wview[0] / 640); i += 1) {
+    if (global.lava){draw_sprite_ext(s_biglava,0,view_xview[0]+i*640,global.poziomwody,1,1,0,c_white,0.4)}
+    else{draw_sprite_ext(s_woda,0,view_xview[0]+i*640,global.poziomwody,1,1,0,c_white,0.4)}
+}
 if keyboard_check(vk_add){global.poziomwody-=4}
 if keyboard_check(vk_subtract){global.poziomwody+=4}
 if keyboard_check(vk_shift) && keyboard_check(vk_up) {global.poziomwody-=4}
@@ -7231,7 +7289,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-wlaczony=wlaczony*-1
+if ratio_level == 0 { wlaczony = wlaczony * -1; }
 #define KeyPress_46
 /*"/*'/**//* YYD ACTION
 lib_id=1
