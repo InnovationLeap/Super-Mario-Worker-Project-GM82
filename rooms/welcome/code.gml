@@ -48,13 +48,8 @@ tempstr =file_text_read_string(tempid)
 global.maxtemp = real(string_digits(tempstr))
 file_text_close(tempid)
 // ASCII 临时目录（用于 gzip DLL 中文路径转义）
-if directory_create("C:\smwptemp\")
-    global.ascii_temp_path = "C:\smwptemp\";
-else
-{
-    directory_create("C:\Users\Public\smwptemp\");
-    global.ascii_temp_path = "C:\Users\Public\smwptemp\";
-}
+directory_create("C:\Users\Public\smwptemp\");
+global.ascii_temp_path = "C:\Users\Public\smwptemp\";
 // cleanup old temp files from previous runs
 file_delete(working_directory+"\temp\bass.dll")
 file_delete(working_directory+"\temp\bass_fx.dll")
