@@ -263,14 +263,14 @@ target_zooms[6] = 7;
 target_zooms[7] = 8;
 
 if wlaczony != 1 && wlaczonaopcja == 0 {
-    if (keyboard_check_pressed(189) || (keyboard_check(vk_control) && mouse_wheel_up())) && ratio_level < 7 {
+    if (keyboard_check_pressed(189) || (keyboard_check(vk_control) && mouse_wheel_down())) && ratio_level < 7 {
         next_zoom_ratio = target_zooms[ratio_level + 1];
         next_view_wview = 640 * next_zoom_ratio;
         next_view_hview = 480 * next_zoom_ratio;
         if next_view_wview <= room_width && next_view_hview <= room_height {
             ratio_level += 1;
         }
-    } else if (keyboard_check_pressed(187) || (keyboard_check(vk_control) && mouse_wheel_down())) && ratio_level > 0 {
+    } else if (keyboard_check_pressed(187) || (keyboard_check(vk_control) && mouse_wheel_up())) && ratio_level > 0 {
         ratio_level -= 1;
     }
 }
