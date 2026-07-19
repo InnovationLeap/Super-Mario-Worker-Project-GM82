@@ -74,6 +74,7 @@ global.key_select=ini_read_real('KeyConfig','accurate_move',ord('Z'))
 global.key_submenu=ini_read_real('KeyConfig','submenu',ord('Q'))
 global.customMusic = ini_read_string('GameConfig','CustomMusicPackage','Example')
 global.initiallives = ini_read_real('GameConfig','InitialLives',4)
+global.font_render = ini_read_real('GameConfig','2xFontRender',0)
 ini_close()
 
 //EncodingConv init
@@ -87,12 +88,14 @@ globalvar testfont;
 fw_init();
 fw_release_cache();
 fw_set_encoding("UTF-8");
-testfont = fw_add_font_from_file(".\Fonts\message.ttf", 14, false, false, true)
+testfont = fw_add_font_from_file(".\Fonts\message.ttf", 14.1, false, false, true)
 fw_draw_set_font(testfont);
 fw_draw_set_halign(fa_left);
 fw_draw_set_valign(fa_bottom);
 fw_enable_pixel_alignment(true);
 draw_set_color(c_white)
 fw_draw_set_line_spacing(4)
+
+fw_set_render_scale(1+global.font_render)
 
 //Fox Writing init end

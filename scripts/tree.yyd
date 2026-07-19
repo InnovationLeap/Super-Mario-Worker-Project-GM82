@@ -128,5 +128,6 @@
 	|fw_draw_text_ext_color
 	|fw_draw_text_transformed_color
 	|fw_set_view_size
+	|fw_set_render_scale
 	|_NF_W_CreateArgs
 	|is_button_pressed

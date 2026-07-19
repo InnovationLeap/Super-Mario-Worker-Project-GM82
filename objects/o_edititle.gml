@@ -6,6 +6,9 @@ applies_to=self
 */
 fw_release_cache(); //信息转字体缓存清理
 
+if !variable_global_exists('font_render') global.font_render = 0
+fw_set_render_scale(1+global.font_render)
+
 global.customMusicName = ''
 
 view_xview[0]=1280
@@ -420,6 +423,26 @@ if globaloption>0
             if mouse_check_button(mb_left){
                 global.initiallives=get_integer("Set initial lives while playing single level.",global.initiallives)
                 ini_write_real('GameConfig','InitialLives',global.initiallives)
+            }
+        }
+
+        //2x 字体渲染
+        draw_set_color(c_white)
+        draw_text(view_xview[0]+40,view_yview[0]+340,string_upper('2x Font Render'))
+        draw_set_halign(fa_right)
+        if global.font_render=1{draw_set_color(make_color_rgb(168,160,248));draw_text(view_xview[0]+405,view_yview[0]+340,string_upper('Yes'))}
+        if global.font_render=0{draw_text(view_xview[0]+405,view_yview[0]+340,string_upper('No'))}
+        draw_set_halign(fa_left)
+        draw_set_color(c_white)
+        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
+           mouse_y>view_yview[0]+330 && mouse_y<view_yview[0]+350&& kliknieto=0
+        {
+            draw_set_blend_mode(bm_add)
+            draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+330,1.4,0.8,0,c_white,0.2)
+            draw_set_blend_mode(bm_normal)
+            if mouse_check_button(mb_left){global.font_render=1-global.font_render;kliknieto=1;
+                ini_write_real('GameConfig','2xFontRender',global.font_render)
+                fw_set_render_scale(1+global.font_render)
             }
         }
 

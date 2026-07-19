@@ -1152,6 +1152,7 @@ fw_draw_text_color
 fw_draw_text_ext_color
 fw_draw_text_transformed_color
 fw_set_view_size
+fw_set_render_scale
 ec_init
 ec_convert
 ec_convert_file

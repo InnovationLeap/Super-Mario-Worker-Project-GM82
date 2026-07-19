@@ -45,6 +45,8 @@ global.__NF_W_ED_SetLineSpacing = external_define(global.__NF_W_DLL, "FWSetLineS
 
 global.__NF_W_ED_SetViewSize = external_define(global.__NF_W_DLL, "FWSetViewSize", dll_stdcall, ty_real, 2, ty_real, ty_real);
 
+global.__NF_W_ED_SetRenderScale = external_define(global.__NF_W_DLL, "FWSetRenderScale", dll_stdcall, ty_real, 1, ty_real);
+
 global.__NF_W_ED_DrawText = external_define(global.__NF_W_DLL, "FWDrawText", dll_stdcall, ty_real, 3, ty_real, ty_real, ty_string);
 global.__NF_W_ED_DrawTextExt = external_define(global.__NF_W_DLL, "FWDrawTextEx", dll_stdcall, ty_real, 3, ty_real, ty_real, ty_string);
 
