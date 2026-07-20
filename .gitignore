@@ -1,7 +1,7 @@
 GameSettings.ini
 temp/
 Data/
-/cache
+cache/
 *.log
 *.smwl
 *.smws
