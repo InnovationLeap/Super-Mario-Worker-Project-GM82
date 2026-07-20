@@ -1,8 +1,12 @@
-game_errors.log
 GameSettings.ini
-temp/TempSettings.ini
+temp/
 Data/
 /cache
-FW_debug.log
+*.log
 *.smwl
+*.smws
+*.smwp
 debug_log.txt
+/screenshot*
+bass.dll
+bass_fx.dll
