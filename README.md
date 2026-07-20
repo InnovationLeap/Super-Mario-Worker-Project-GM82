@@ -1,5 +1,7 @@
 # Super Mario Worker Project GM82 版
 
+> 语言 / Language: [English](README.en.md)
+
 本项目基于 SMWP v1.7.12f，将开发环境升级至 [GameMaker 8.2](https://gm82.cherry-treehouse.com/#Downloads)。
 
 ---
