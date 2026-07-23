@@ -131,3 +131,4 @@
 	|fw_set_render_scale
 	|_NF_W_CreateArgs
 	|is_button_pressed
+	|ed_hit

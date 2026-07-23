@@ -502,8 +502,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     costawia6=0
        //costawia6记录pref栏鼠标选中的项目（如关卡名，作者名等，不同的项目用不同的数字代表；相应的，costawia5记录bonus栏鼠标选中的项目，以此类推）
        //下面这一大段，分别实现pref窗口下各个项目被鼠标选中时"高亮"的效果，并且记录"选中状态"，为判断鼠标单击时发生什么事件做准备。
-  if wlaczonaopcja=6 && mouse_x>view_xview[0]+220 && mouse_x<view_xview[0]+350 &&
-    mouse_y>view_yview[0]+117 && mouse_y<view_yview[0]+134 && czywybieranieback=0
+  if wlaczonaopcja=6 && ed_hit(220, 117, 130, 17)&& czywybieranieback=0
     {
     draw_set_blend_mode(bm_add)
     draw_sprite_ext(s_prefsanim,0,view_xview[0]+220,view_yview[0]+117,1,1,0,c_white,0.2)
@@ -515,8 +514,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     =0
     costawia5=0
     }//关卡名栏
-  if wlaczonaopcja=6 && mouse_x>view_xview[0]+220 && mouse_x<view_xview[0]+350 &&
-    mouse_y>view_yview[0]+140 && mouse_y<view_yview[0]+157 && czywybieranieback=0
+  if wlaczonaopcja=6 && ed_hit(220, 140, 130, 17)&& czywybieranieback=0
     {
     draw_set_blend_mode(bm_add)
     draw_sprite_ext(s_prefsanim,0,view_xview[0]+220,view_yview[0]+140,1,1,0,c_white,0.2)
@@ -528,8 +526,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     costawia4=0
     costawia5=0
     }//关卡作者栏
-  if wlaczonaopcja=6 && mouse_x>view_xview[0]+220 && mouse_x<view_xview[0]+350 &&
-    mouse_y>view_yview[0]+186 && mouse_y<view_yview[0]+203 && czywybieranieback=0
+  if wlaczonaopcja=6 && ed_hit(220, 186, 130, 17)&& czywybieranieback=0
     {
     draw_set_blend_mode(bm_add)
     draw_sprite_ext(s_prefsanim,0,view_xview[0]+220,view_yview[0]+186,1,1,0,c_white,0.2)
@@ -541,8 +538,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     costawia4=0
     costawia5=0
     }//
-  if wlaczonaopcja=6 && mouse_x>view_xview[0]+220 && mouse_x<view_xview[0]+350 &&
-    mouse_y>view_yview[0]+209 && mouse_y<view_yview[0]+226 && czywybieranieback=0
+  if wlaczonaopcja=6 && ed_hit(220, 209, 130, 17)&& czywybieranieback=0
     {
     draw_set_blend_mode(bm_add)
     draw_sprite_ext(s_prefsanim,0,view_xview[0]+220,view_yview[0]+209,1,1,0,c_white,0.2)
@@ -554,8 +550,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     costawia4=0
     costawia5=0
     }
-  if wlaczonaopcja=6 && mouse_x>view_xview[0]+220 && mouse_x<view_xview[0]+350 &&
-    mouse_y>view_yview[0]+232 && mouse_y<view_yview[0]+248 && czywybieranieback=0
+  if wlaczonaopcja=6 && ed_hit(220, 232, 130, 16)&& czywybieranieback=0
     {
     draw_set_blend_mode(bm_add)
     draw_sprite_ext(s_prefsanim,0,view_xview[0]+220,view_yview[0]+232,1,1,0,c_white,0.2)
@@ -567,8 +562,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     costawia4=0
     costawia5=0
     }
-  if wlaczonaopcja=6 && mouse_x>view_xview[0]+220 && mouse_x<view_xview[0]+300-40 &&
-    mouse_y>view_yview[0]+278 && mouse_y<view_yview[0]+295 && czywybieranieback=0
+  if wlaczonaopcja=6 && ed_hit(220, 278, 40, 17)&& czywybieranieback=0
     {
     draw_set_blend_mode(bm_add)
     draw_sprite_ext(s_prefsanim,0,view_xview[0]+220-5,view_yview[0]+278,0.4,1,0,c_white,0.2)
@@ -580,8 +574,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     costawia4=0
     costawia5=0
     }
-  if wlaczonaopcja=6 && mouse_x>view_xview[0]+220 && mouse_x<view_xview[0]+300-40 &&
-    mouse_y>view_yview[0]+300 && mouse_y<view_yview[0]+317 && czywybieranieback=0
+  if wlaczonaopcja=6 && ed_hit(220, 300, 40, 17)&& czywybieranieback=0
     {
     draw_set_blend_mode(bm_add)
     draw_sprite_ext(s_prefsanim,0,view_xview[0]+220-12,view_yview[0]+300,0.5,1,0,c_white,0.2)
@@ -593,8 +586,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     costawia4=0
     costawia5=0
     }
-      if wlaczonaopcja=6 && mouse_x>view_xview[0]+220 && mouse_x<view_xview[0]+300-40 &&
-    mouse_y>view_yview[0]+322 && mouse_y<view_yview[0]+339 && czywybieranieback=0
+      if wlaczonaopcja=6 && ed_hit(220, 322, 40, 17)&& czywybieranieback=0
     {
     draw_set_blend_mode(bm_add)
     draw_sprite_ext(s_prefsanim,0,view_xview[0]+220-5,view_yview[0]+322,0.4,1,0,c_white,0.2)
@@ -607,8 +599,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     costawia5=0
     }
 
-  if wlaczonaopcja=6 && mouse_x>view_xview[0]+281 && mouse_x<view_xview[0]+402 &&
-    mouse_y>view_yview[0]+278 && mouse_y<view_yview[0]+295 && czywybieranieback=0
+  if wlaczonaopcja=6 && ed_hit(281, 278, 121, 17)&& czywybieranieback=0
     {
     draw_set_blend_mode(bm_add)
     draw_sprite_ext(s_prefsanim,0,view_xview[0]+275,view_yview[0]+278,1.2,1,0,c_white,0.2)
@@ -620,8 +611,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     costawia4=0
     costawia5=0
     }
-  if wlaczonaopcja=6 && mouse_x>view_xview[0]+281 && mouse_x<view_xview[0]+402 &&
-    mouse_y>view_yview[0]+300 && mouse_y<view_yview[0]+317 && czywybieranieback=0
+  if wlaczonaopcja=6 && ed_hit(281, 300, 121, 17)&& czywybieranieback=0
     {
     draw_set_blend_mode(bm_add)
     draw_sprite_ext(s_prefsanim,0,view_xview[0]+275,view_yview[0]+300,1,1,0,c_white,0.2)
@@ -634,8 +624,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     costawia5=0
     }
 
-  if wlaczonaopcja=6 && mouse_x>view_xview[0]+281 && mouse_x<view_xview[0]+432 &&
-    mouse_y>view_yview[0]+322 && mouse_y<view_yview[0]+339 && czywybieranieback=0
+  if wlaczonaopcja=6 && ed_hit(281, 322, 151, 17)&& czywybieranieback=0
     {
     draw_set_blend_mode(bm_add)
     draw_sprite_ext(s_prefsanim,0,view_xview[0]+275,view_yview[0]+322,1.3,1,0,c_white,0.2)
@@ -648,8 +637,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     costawia5=0
     }
 
-  if wlaczonaopcja=6 && mouse_x>view_xview[0]+220 && mouse_x<view_xview[0]+300-40 &&
-    mouse_y>view_yview[0]+346 && mouse_y<view_yview[0]+364 && czywybieranieback=0
+  if wlaczonaopcja=6 && ed_hit(220, 346, 40, 18)&& czywybieranieback=0
     {
     draw_set_blend_mode(bm_add)
     draw_sprite_ext(s_prefsanim,0,view_xview[0]+220-5,view_yview[0]+346,0.4,1,0,c_white,0.2)
@@ -770,11 +758,9 @@ if wlaczonaopcja=5//下面四行红字用于显示bonus栏的界面
     draw_sprite_ext(s_edbonuses,0,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)
     }
 // 第一行bonus
-    if wlaczonaopcja=5 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110 && mouse_y<view_yview[0]+174 && kliknieto=0
+    if wlaczonaopcja=5 && ed_hit(206, 110, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110,1,1,0,c_white,1)}
-    if wlaczonaopcja=5 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110 && mouse_y<view_yview[0]+174 && mouse_check_button(mb_left) && kliknieto=0
+    if wlaczonaopcja=5 && ed_hit(206, 110, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -790,11 +776,9 @@ if wlaczonaopcja=5//下面四行红字用于显示bonus栏的界面
     costawia6=0
     }//这里解释一下上面提到的几个变量。kliknieto用来记录鼠标是否已经点选，=0表示没有，=1表示有，用来避免按住左键连点的情况（？）；samplewyboru1用来控制点击时产生的音效，ustawiony不是很明白是什么。）
 //第二行bonus
-    if wlaczonaopcja=5 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64 && mouse_y<view_yview[0]+174+64 && kliknieto=0
+    if wlaczonaopcja=5 && ed_hit(206, 110+64, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64,1,1,0,c_white,1)}
-    if wlaczonaopcja=5 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64 && mouse_y<view_yview[0]+174+64 && mouse_check_button(mb_left) && kliknieto=0
+    if wlaczonaopcja=5 && ed_hit(206, 110+64, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -809,11 +793,9 @@ if wlaczonaopcja=5//下面四行红字用于显示bonus栏的界面
     autopair=0 //怨念残留喝了
     costawia6=0
     }
-    if wlaczonaopcja=5 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64*2 && mouse_y<view_yview[0]+174+64*2 && kliknieto=0
+    if wlaczonaopcja=5 && ed_hit(206, 110+64*2, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64*2,1,1,0,c_white,1)}
-    if wlaczonaopcja=5 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64*2 && mouse_y<view_yview[0]+174+64*2 && mouse_check_button(mb_left) && kliknieto=0
+    if wlaczonaopcja=5 && ed_hit(206, 110+64*2, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -829,11 +811,9 @@ if wlaczonaopcja=5//下面四行红字用于显示bonus栏的界面
     costawia6=0
     }
 
-    if wlaczonaopcja=5 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64*3 && mouse_y<view_yview[0]+174+64*3 && kliknieto=0
+    if wlaczonaopcja=5 && ed_hit(206, 110+64*3, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64*3,1,1,0,c_white,1)}
-    if wlaczonaopcja=5 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64*3 && mouse_y<view_yview[0]+174+64*3 && mouse_check_button(mb_left) && kliknieto=0
+    if wlaczonaopcja=5 && ed_hit(206, 110+64*3, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -903,11 +883,9 @@ if wlaczonaopcja=3
 
     }
 
-if wlaczonaopcja=3 && costawia3b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110 && mouse_y<view_yview[0]+174 && kliknieto=0
+if wlaczonaopcja=3 && costawia3b=0 && ed_hit(206, 110, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110,1,1,0,c_white,1)}
-if wlaczonaopcja=3 && costawia3b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110 && mouse_y<view_yview[0]+174 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=3 && costawia3b=0 && ed_hit(206, 110, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -922,11 +900,9 @@ if wlaczonaopcja=3 && costawia3b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_
     costawia6=0
     costawia4=0
     }
-if wlaczonaopcja=3 && costawia3b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64 && mouse_y<view_yview[0]+174+64 && kliknieto=0
+if wlaczonaopcja=3 && costawia3b=0 && ed_hit(206, 110+64, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64,1,1,0,c_white,1)}
-if wlaczonaopcja=3 && costawia3b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64 && mouse_y<view_yview[0]+174+64 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=3 && costawia3b=0 && ed_hit(206, 110+64, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -941,11 +917,9 @@ if wlaczonaopcja=3 && costawia3b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_
     costawia5=0
     costawia6=0
     }
-if wlaczonaopcja=3 && costawia3b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64+64 && mouse_y<view_yview[0]+174+64+64 && kliknieto=0
+if wlaczonaopcja=3 && costawia3b=0 && ed_hit(206, 110+64+64, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64+64,1,1,0,c_white,1)}
-if wlaczonaopcja=3 && costawia3b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64+64 && mouse_y<view_yview[0]+174+64+64 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=3 && costawia3b=0 && ed_hit(206, 110+64+64, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -960,11 +934,9 @@ if wlaczonaopcja=3 && costawia3b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_
     costawia5=0
     costawia6=0
     }
- if wlaczonaopcja=3 && costawia3b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64+64+64 && mouse_y<view_yview[0]+174+64+64+64 && kliknieto=0
+ if wlaczonaopcja=3 && costawia3b=0 && ed_hit(206, 110+64+64+64, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64+64+64,1,1,0,c_white,1)}
-if wlaczonaopcja=3 && costawia3b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64+64+64 && mouse_y<view_yview[0]+174+64+64+64 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=3 && costawia3b=0 && ed_hit(206, 110+64+64+64, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -981,11 +953,9 @@ if wlaczonaopcja=3 && costawia3b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_
     }
 
 
-    if wlaczonaopcja=3 && costawia3b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110 && mouse_y<view_yview[0]+174 && kliknieto=0
+    if wlaczonaopcja=3 && costawia3b=1 && ed_hit(206, 110, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110,1,1,0,c_white,1)}
-if wlaczonaopcja=3 && costawia3b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110 && mouse_y<view_yview[0]+174 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=3 && costawia3b=1 && ed_hit(206, 110, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
       {
     delayus=0
     kliknieto=1
@@ -1001,11 +971,9 @@ if wlaczonaopcja=3 && costawia3b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_
     costawia6=0
     }
 
-    if wlaczonaopcja=3 && costawia3b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64 && mouse_y<view_yview[0]+174+64 && kliknieto=0
+    if wlaczonaopcja=3 && costawia3b=1 && ed_hit(206, 110+64, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64,1,1,0,c_white,1)}
-if wlaczonaopcja=3 && costawia3b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64 && mouse_y<view_yview[0]+174+64 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=3 && costawia3b=1 && ed_hit(206, 110+64, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
       {
     delayus=0
     kliknieto=1
@@ -1020,11 +988,9 @@ if wlaczonaopcja=3 && costawia3b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_
     costawia5=0
     costawia6=0
     }
-    if wlaczonaopcja=3 && costawia3b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64+64 && mouse_y<view_yview[0]+174+64+64 && kliknieto=0
+    if wlaczonaopcja=3 && costawia3b=1 && ed_hit(206, 110+64+64, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64+64,1,1,0,c_white,1)}
-if wlaczonaopcja=3 && costawia3b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64+64 && mouse_y<view_yview[0]+174+64+64 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=3 && costawia3b=1 && ed_hit(206, 110+64+64, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
       {
     delayus=0
     kliknieto=1
@@ -1203,11 +1169,9 @@ if wlaczonaopcja=4
 
 //注意下面costawia记录的是该物品从左往右数的序号而不是物品号码，我刚才弄错了……比如终点是在2号位，不是17号）这段是第一行
 
-if wlaczonaopcja=4 && o_edmain.costawia4b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110 && mouse_y<view_yview[0]+174 && kliknieto=0
+if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110,1,1,0,c_white,1)}
-if wlaczonaopcja=4 && o_edmain.costawia4b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110 && mouse_y<view_yview[0]+174 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -1223,11 +1187,9 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && mouse_x>view_xview[0]+206 && mous
         costawia6=0
     }
     //第二行
-if wlaczonaopcja=4 && o_edmain.costawia4b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64 && mouse_y<view_yview[0]+174+64 && kliknieto=0
+if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64,1,1,0,c_white,1)}
-if wlaczonaopcja=4 && o_edmain.costawia4b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64 && mouse_y<view_yview[0]+174+64 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -1245,11 +1207,9 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && mouse_x>view_xview[0]+206 && mous
     }
 
     //第三行
-if wlaczonaopcja=4 && o_edmain.costawia4b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590-64 &&
-    mouse_y>view_yview[0]+110+64*2 && mouse_y<view_yview[0]+174+64*2 && kliknieto=0
+if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*2, 320, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64*2,1,1,0,c_white,1)}
-if wlaczonaopcja=4 && o_edmain.costawia4b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590-64 &&
-    mouse_y>view_yview[0]+110+64*2 && mouse_y<view_yview[0]+174+64*2 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*2, 320, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -1266,11 +1226,9 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && mouse_x>view_xview[0]+206 && mous
     }
 
     //第四行
-if wlaczonaopcja=4 && o_edmain.costawia4b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64*3 && mouse_y<view_yview[0]+174+64*3 && kliknieto=0
+if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64*3,1,1,0,c_white,1)}
-if wlaczonaopcja=4 && o_edmain.costawia4b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64*3 && mouse_y<view_yview[0]+174+64*3 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -2022,11 +1980,9 @@ if wlaczonaopcja=1
 
     //第一页
     /*if blockpage=-1{
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128 && mouse_y<view_yview[0]+160 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128 && mouse_y<view_yview[0]+160 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2039,12 +1995,10 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32 && mouse_y<view_yview[0]+160+32 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32,1,1,0,c_white,1)}
 
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32 && mouse_y<view_yview[0]+160+32 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2057,11 +2011,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
     costawia6=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*2 && mouse_y<view_yview[0]+160+32*2 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*2, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*2,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*2 && mouse_y<view_yview[0]+160+32*2 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*2, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2074,11 +2026,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*3 && mouse_y<view_yview[0]+160+32*3 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*3, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*3,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*3 && mouse_y<view_yview[0]+160+32*3 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*3, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2091,11 +2041,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0
     }
-    if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-mouse_y>view_yview[0]+128+32*4 && mouse_y<view_yview[0]+160+32*4 && kliknieto=0
+    if wlaczonaopcja=1 && ed_hit(206, 128+32*4, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*4,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*4 && mouse_y<view_yview[0]+160+32*4 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*4, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2108,11 +2056,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*5 && mouse_y<view_yview[0]+160+32*5 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*5, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*5,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*5 && mouse_y<view_yview[0]+160+32*5 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*5, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2125,11 +2071,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*6 && mouse_y<view_yview[0]+160+32*6 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*6,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*6 && mouse_y<view_yview[0]+160+32*6 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2144,11 +2088,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     }}*/
     //第二页
     if blockpage=-1{
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128 && mouse_y<view_yview[0]+160 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128 && mouse_y<view_yview[0]+160 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2161,12 +2103,10 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32 && mouse_y<view_yview[0]+160+32 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32,1,1,0,c_white,1)}
 
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32 && mouse_y<view_yview[0]+160+32 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2179,11 +2119,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
     costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*2 && mouse_y<view_yview[0]+160+32*2 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*2, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*2,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*2 && mouse_y<view_yview[0]+160+32*2 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*2, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2196,11 +2134,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*3 && mouse_y<view_yview[0]+160+32*3 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*3, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*3,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*3 && mouse_y<view_yview[0]+160+32*3 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*3, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2213,11 +2149,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0;autopair=0
     }
-    if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-mouse_y>view_yview[0]+128+32*4 && mouse_y<view_yview[0]+160+32*4 && kliknieto=0
+    if wlaczonaopcja=1 && ed_hit(206, 128+32*4, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*4,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*4 && mouse_y<view_yview[0]+160+32*4 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*4, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2230,11 +2164,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*5 && mouse_y<view_yview[0]+160+32*5 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*5, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*5,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*5 && mouse_y<view_yview[0]+160+32*5 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*5, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2247,11 +2179,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*6 && mouse_y<view_yview[0]+160+32*6 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*6,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*6 && mouse_y<view_yview[0]+160+32*6 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2266,11 +2196,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     }}
 //第三页
     if blockpage=0{
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128 && mouse_y<view_yview[0]+160 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128 && mouse_y<view_yview[0]+160 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2283,12 +2211,10 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32 && mouse_y<view_yview[0]+160+32 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32,1,1,0,c_white,1)}
 
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32 && mouse_y<view_yview[0]+160+32 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2301,11 +2227,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
     costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*2 && mouse_y<view_yview[0]+160+32*2 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*2, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*2,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*2 && mouse_y<view_yview[0]+160+32*2 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*2, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2318,11 +2242,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*3 && mouse_y<view_yview[0]+160+32*3 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*3, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*3,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*3 && mouse_y<view_yview[0]+160+32*3 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*3, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2335,11 +2257,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0;autopair=0
     }
-    if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-mouse_y>view_yview[0]+128+32*4 && mouse_y<view_yview[0]+160+32*4 && kliknieto=0
+    if wlaczonaopcja=1 && ed_hit(206, 128+32*4, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*4,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*4 && mouse_y<view_yview[0]+160+32*4 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*4, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2352,11 +2272,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*5 && mouse_y<view_yview[0]+160+32*5 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*5, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*5,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*5 && mouse_y<view_yview[0]+160+32*5 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*5, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2369,11 +2287,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0;autopair=0
             costawia6=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*6 && mouse_y<view_yview[0]+160+32*6 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*6,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*6 && mouse_y<view_yview[0]+160+32*6 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2389,11 +2305,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
 
 //第四页
     if blockpage=1{
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128 && mouse_y<view_yview[0]+160 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128 && mouse_y<view_yview[0]+160 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2406,12 +2320,10 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32 && mouse_y<view_yview[0]+160+32 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32,1,1,0,c_white,1)}
 
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32 && mouse_y<view_yview[0]+160+32 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2424,11 +2336,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
     costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*2 && mouse_y<view_yview[0]+160+32*2 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*2, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*2,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*2 && mouse_y<view_yview[0]+160+32*2 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*2, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2441,11 +2351,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*3 && mouse_y<view_yview[0]+160+32*3 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*3, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*3,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*3 && mouse_y<view_yview[0]+160+32*3 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*3, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2458,11 +2366,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0;autopair=0
     }
-    if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-        mouse_y>view_yview[0]+128+32*4 && mouse_y<view_yview[0]+160+32*4 && kliknieto=0
+    if wlaczonaopcja=1 && ed_hit(206, 128+32*4, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*4,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*4 && mouse_y<view_yview[0]+160+32*4 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*4, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2475,11 +2381,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0
             costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*5 && mouse_y<view_yview[0]+160+32*5 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*5, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*5,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*5 && mouse_y<view_yview[0]+160+32*5 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*5, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2492,11 +2396,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     costawia5=0;autopair=0
             costawia6=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*6 && mouse_y<view_yview[0]+160+32*6 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*6,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128+32*6 && mouse_y<view_yview[0]+160+32*6 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2514,14 +2416,11 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
     if blockpage=2{
 
     //限制鼠标位置，不能点击空白区
-    if (mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 && mouse_y>view_yview[0]+128 && mouse_y<view_yview[0]+128+192)
-    || (mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+206+128 && mouse_y>view_yview[0]+128+192 && mouse_y<view_yview[0]+128+192+32) {
+    if (ed_hit(206, 128, 384, 192))|| (ed_hit(206, 128+192, 128, 32)){
 
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+128 && mouse_y<view_yview[0]+160 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
-    mouse_y>view_yview[0]+128 && mouse_y<view_yview[0]+160 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2534,12 +2433,10 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
     costawia5=0
             costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
-    mouse_y>view_yview[0]+128+32 && mouse_y<view_yview[0]+160+32 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32,1,1,0,c_white,1)}
 
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
-    mouse_y>view_yview[0]+128+32 && mouse_y<view_yview[0]+160+32 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2552,11 +2449,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
     costawia5=0
     costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
-    mouse_y>view_yview[0]+128+32*2 && mouse_y<view_yview[0]+160+32*2 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*2, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*2,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
-    mouse_y>view_yview[0]+128+32*2 && mouse_y<view_yview[0]+160+32*2 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*2, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2569,11 +2464,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
     costawia5=0
             costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
-    mouse_y>view_yview[0]+128+32*3 && mouse_y<view_yview[0]+160+32*3 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*3, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*3,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
-    mouse_y>view_yview[0]+128+32*3 && mouse_y<view_yview[0]+160+32*3 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*3, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2586,11 +2479,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
     costawia5=0
             costawia6=0;autopair=0
     }
-    if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
-        mouse_y>view_yview[0]+128+32*4 && mouse_y<view_yview[0]+160+32*4 && kliknieto=0
+    if wlaczonaopcja=1 && ed_hit(206, 128+32*4, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*4,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
-    mouse_y>view_yview[0]+128+32*4 && mouse_y<view_yview[0]+160+32*4 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*4, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2603,11 +2494,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
     costawia5=0
             costawia6=0;autopair=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
-    mouse_y>view_yview[0]+128+32*5 && mouse_y<view_yview[0]+160+32*5 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*5, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*5,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
-    mouse_y>view_yview[0]+128+32*5 && mouse_y<view_yview[0]+160+32*5 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*5, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -2620,11 +2509,9 @@ if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
     costawia5=0;autopair=0
             costawia6=0
     }
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
-    mouse_y>view_yview[0]+128+32*6 && mouse_y<view_yview[0]+160+32*6 && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& kliknieto=0
     {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*6,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590  &&
-    mouse_y>view_yview[0]+128+32*6 && mouse_y<view_yview[0]+160+32*6 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
     {
     kliknieto=1
     sampelwyboru1=1//smp
@@ -3408,11 +3295,9 @@ if wlaczonaopcja=2
     }
     }
 
-if wlaczonaopcja=2 && costawia2b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110 && mouse_y<view_yview[0]+174 && kliknieto=0
+if wlaczonaopcja=2 && costawia2b=0 && ed_hit(206, 110, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110,1,1,0,c_white,1)}
-if wlaczonaopcja=2 &&costawia2b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110 && mouse_y<view_yview[0]+174 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=2 &&costawia2b=0 && ed_hit(206, 110, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -3427,11 +3312,9 @@ if wlaczonaopcja=2 &&costawia2b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_x
     costawia5=0
             costawia6=0
     }
-if wlaczonaopcja=2 && costawia2b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64 && mouse_y<view_yview[0]+174+64 && kliknieto=0
+if wlaczonaopcja=2 && costawia2b=0 && ed_hit(206, 110+64, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64,1,1,0,c_white,1)}
-if wlaczonaopcja=2 && costawia2b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64 && mouse_y<view_yview[0]+174+64 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=2 && costawia2b=0 && ed_hit(206, 110+64, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -3446,11 +3329,9 @@ if wlaczonaopcja=2 && costawia2b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_
     costawia5=0
             costawia6=0
     }
-if wlaczonaopcja=2 && costawia2b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64*2 && mouse_y<view_yview[0]+174+64*2 && kliknieto=0
+if wlaczonaopcja=2 && costawia2b=0 && ed_hit(206, 110+64*2, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64*2,1,1,0,c_white,1)}
-if wlaczonaopcja=2 && costawia2b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64*2 && mouse_y<view_yview[0]+174+64*2 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=2 && costawia2b=0 && ed_hit(206, 110+64*2, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -3465,11 +3346,9 @@ if wlaczonaopcja=2 && costawia2b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_
     costawia5=0
             costawia6=0
     }
-if wlaczonaopcja=2 && costawia2b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64*3 && mouse_y<view_yview[0]+174+64*3 && kliknieto=0
+if wlaczonaopcja=2 && costawia2b=0 && ed_hit(206, 110+64*3, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64*3,1,1,0,c_white,1)}
-if wlaczonaopcja=2 && costawia2b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64*3 && mouse_y<view_yview[0]+174+64*3 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=2 && costawia2b=0 && ed_hit(206, 110+64*3, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -3484,11 +3363,9 @@ if wlaczonaopcja=2 && costawia2b=0 && mouse_x>view_xview[0]+206 && mouse_x<view_
     costawia5=0
             costawia6=0
     }
-if wlaczonaopcja=2 && costawia2b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110 && mouse_y<view_yview[0]+174 && kliknieto=0
+if wlaczonaopcja=2 && costawia2b=1 && ed_hit(206, 110, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110,1,1,0,c_white,1)}
-if wlaczonaopcja=2 &&costawia2b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110 && mouse_y<view_yview[0]+174 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=2 &&costawia2b=1 && ed_hit(206, 110, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -3504,11 +3381,9 @@ if wlaczonaopcja=2 &&costawia2b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_x
             costawia6=0
     }
 
-if wlaczonaopcja=2 && costawia2b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64 && mouse_y<view_yview[0]+174+64 && kliknieto=0
+if wlaczonaopcja=2 && costawia2b=1 && ed_hit(206, 110+64, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64,1,1,0,c_white,1)}
-if wlaczonaopcja=2 &&costawia2b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64 && mouse_y<view_yview[0]+174+64 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=2 &&costawia2b=1 && ed_hit(206, 110+64, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -3524,11 +3399,9 @@ if wlaczonaopcja=2 &&costawia2b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_x
             costawia6=0
     }
 
-if wlaczonaopcja=2 && costawia2b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64*2 && mouse_y<view_yview[0]+174+64*2 && kliknieto=0
+if wlaczonaopcja=2 && costawia2b=1 && ed_hit(206, 110+64*2, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64*2,1,1,0,c_white,1)}
-if wlaczonaopcja=2 &&costawia2b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64*2 && mouse_y<view_yview[0]+174+64*2 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=2 &&costawia2b=1 && ed_hit(206, 110+64*2, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -3544,11 +3417,9 @@ if wlaczonaopcja=2 &&costawia2b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_x
             costawia6=0
     }
 
-if wlaczonaopcja=2 && costawia2b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64*3 && mouse_y<view_yview[0]+174+64*3 && kliknieto=0
+if wlaczonaopcja=2 && costawia2b=1 && ed_hit(206, 110+64*3, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64*3,1,1,0,c_white,1)}
-if wlaczonaopcja=2 &&costawia2b=1 && mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+110+64*3 && mouse_y<view_yview[0]+174+64*3 && mouse_check_button(mb_left) && kliknieto=0
+if wlaczonaopcja=2 &&costawia2b=1 && ed_hit(206, 110+64*3, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -4100,9 +3971,7 @@ if costawia5<>0
 menujesie=0
 if wlaczony=1 && costawia4b=0 && wiatrak=0
     {
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+160 &&
-    mouse_y>view_yview[0]+97 && mouse_y<view_yview[0]+140
-        {
+    if ed_hit(40, 97, 120, 43){
         efekt+=10
         draw_set_blend_mode(bm_subtract)
         draw_sprite_ext(s_edcursormask,0,view_xview[0]+155+10*sin(degtorad(efekt)),view_yview[0]+120,1,1,0,c_white,1)
@@ -4112,9 +3981,7 @@ if wlaczony=1 && costawia4b=0 && wiatrak=0
         menujesie=1
         }
 
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+160 &&
-    mouse_y>view_yview[0]+97+60 && mouse_y<view_yview[0]+140+60
-        {
+    if ed_hit(40, 97+60, 120, 43){
         efekt+=10
         draw_set_blend_mode(bm_subtract)
         draw_sprite_ext(s_edcursormask,0,view_xview[0]+155+10*sin(degtorad(efekt)),view_yview[0]+120+60,1,1,0,c_white,1)
@@ -4123,9 +3990,7 @@ if wlaczony=1 && costawia4b=0 && wiatrak=0
         opcja=2
         menujesie=1
         }
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+160 &&
-    mouse_y>view_yview[0]+97+60+60 && mouse_y<view_yview[0]+140+60+60
-        {
+    if ed_hit(40, 97+60+60, 120, 43){
         efekt+=10
         draw_set_blend_mode(bm_subtract)
         draw_sprite_ext(s_edcursormask,0,view_xview[0]+155+10*sin(degtorad(efekt)),view_yview[0]+120+60+60,1,1,0,c_white,1)
@@ -4134,9 +3999,7 @@ if wlaczony=1 && costawia4b=0 && wiatrak=0
         opcja=3
         menujesie=1
         }
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+160 &&
-    mouse_y>view_yview[0]+97+60+60+60 && mouse_y<view_yview[0]+140+60+60+60
-        {
+    if ed_hit(40, 97+60+60+60, 120, 43){
         efekt+=10
         draw_set_blend_mode(bm_subtract)
         draw_sprite_ext(s_edcursormask,0,view_xview[0]+155+10*sin(degtorad(efekt)),view_yview[0]+120+60+60+60,1,1,0,c_white,1)
@@ -4145,9 +4008,7 @@ if wlaczony=1 && costawia4b=0 && wiatrak=0
         opcja=4
         menujesie=1
         }
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+160 &&
-    mouse_y>view_yview[0]+97+60+60+60+60 && mouse_y<view_yview[0]+140+60+60+60+60
-        {
+    if ed_hit(40, 97+60+60+60+60, 120, 43){
         efekt+=10
         draw_set_blend_mode(bm_subtract)
         draw_sprite_ext(s_edcursormask,0,view_xview[0]+155+10*sin(degtorad(efekt)),view_yview[0]+120+60+60+60+60,1,1,0,c_white,1)
@@ -4156,9 +4017,7 @@ if wlaczony=1 && costawia4b=0 && wiatrak=0
         opcja=5
         menujesie=1
         }
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+160 &&
-    mouse_y>view_yview[0]+97+60+60+60+60+60 && mouse_y<view_yview[0]+140+60+60+60+60+60
-        {
+    if ed_hit(40, 97+60+60+60+60+60, 120, 43){
         efekt+=10
         draw_set_blend_mode(bm_subtract)
         draw_sprite_ext(s_edcursormask,0,view_xview[0]+155+10*sin(degtorad(efekt)),view_yview[0]+120+60+60+60+60+60,1,1,0,c_white,1)
@@ -4210,9 +4069,7 @@ if czywybieranieback=1 && czywybieranieback<100
     }
     }
     //天气按钮
-    if mouse_x>view_xview[0]+462 && mouse_x<view_xview[0]+522 &&
-    mouse_y>view_yview[0]+420 && mouse_y<view_yview[0]+450
-    && o_edmain.backgroundpage<>100 && setting_mode <> 4
+    if ed_hit(462, 420, 60, 30)&& o_edmain.backgroundpage<>100 && setting_mode <> 4
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+462,view_yview[0]+420,0.6,1.3,0,c_white,0.2)
@@ -4226,36 +4083,28 @@ if czywybieranieback=1 && czywybieranieback<100
 
     //背景选择
     if o_edmain.backgroundpage=0{
-    if mouse_x>view_xview[0]+27 && mouse_x<view_xview[0]+166 &&
-    mouse_y>view_yview[0]+32 && mouse_y<view_yview[0]+135
-        {
+    if ed_hit(27, 32, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=1  //plainsky
         }
 
-        if mouse_x>view_xview[0]+27+139+3 && mouse_x<view_xview[0]+166+139+3 &&
-        mouse_y>view_yview[0]+32 && mouse_y<view_yview[0]+135
-        {
+        if ed_hit(27+139+3, 32, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=11  //bluesky
         }
 
-        if mouse_x>view_xview[0]+27+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3 &&
-        mouse_y>view_yview[0]+32 && mouse_y<view_yview[0]+135
-        {
+        if ed_hit(27+139+3+139+3, 32, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=3  //grassland
         }
 
-    if mouse_x>view_xview[0]+27+139+3+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3+139+3 &&
-        mouse_y>view_yview[0]+32 && mouse_y<view_yview[0]+135
-        {
+    if ed_hit(27+139+3+139+3+139+3, 32, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
@@ -4263,36 +4112,28 @@ if czywybieranieback=1 && czywybieranieback<100
         }
 
     //
-    if mouse_x>view_xview[0]+27 && mouse_x<view_xview[0]+166 &&
-    mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16
-        {
+    if ed_hit(27, 32+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=5  //cave
         }
 
-    if mouse_x>view_xview[0]+27+139+3 && mouse_x<view_xview[0]+166+139+3 &&
-        mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16
-        {
+    if ed_hit(27+139+3, 32+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=2  //plainsky+cave
         }
 
-    if mouse_x>view_xview[0]+27+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3 &&
-        mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16
-        {
+    if ed_hit(27+139+3+139+3, 32+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=7  //underwater
         }
 
-    if mouse_x>view_xview[0]+27+139+3+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3+139+3 &&
-        mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16
-        {
+    if ed_hit(27+139+3+139+3+139+3, 32+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
@@ -4300,36 +4141,28 @@ if czywybieranieback=1 && czywybieranieback<100
         }
 
     //
-    if mouse_x>view_xview[0]+27 && mouse_x<view_xview[0]+166 &&
-    mouse_y>view_yview[0]+32+102+16+102+16 && mouse_y<view_yview[0]+135+102+16+102+16
-        {
+    if ed_hit(27, 32+102+16+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=12  //night
         }
 
-    if mouse_x>view_xview[0]+27+139+3 && mouse_x<view_xview[0]+166+139+3 &&
-        mouse_y>view_yview[0]+32+102+16+102+16 && mouse_y<view_yview[0]+135+102+16+102+16
-        {
+    if ed_hit(27+139+3, 32+102+16+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=13  //night+cave
         }
 
-    if mouse_x>view_xview[0]+27+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3 &&
-        mouse_y>view_yview[0]+32+102+16+102+16 && mouse_y<view_yview[0]+135+102+16+102+16
-        {
+    if ed_hit(27+139+3+139+3, 32+102+16+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=22  //castle
         }
 
-    if mouse_x>view_xview[0]+27+139+3+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3+139+3 &&
-        mouse_y>view_yview[0]+32+102+16+102+16 && mouse_y<view_yview[0]+135+102+16+102+16
-        {
+    if ed_hit(27+139+3+139+3+139+3, 32+102+16+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
@@ -4339,36 +4172,28 @@ if czywybieranieback=1 && czywybieranieback<100
 
 
     if o_edmain.backgroundpage=1{
-    if mouse_x>view_xview[0]+27 && mouse_x<view_xview[0]+166 &&
-    mouse_y>view_yview[0]+32 && mouse_y<view_yview[0]+135
-        {
+    if ed_hit(27, 32, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=6  //cliff
         }
 
-        if mouse_x>view_xview[0]+27+139+3 && mouse_x<view_xview[0]+166+139+3 &&
-        mouse_y>view_yview[0]+32 && mouse_y<view_yview[0]+135
-        {
+        if ed_hit(27+139+3, 32, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=23  //big clouds
         }
 
-        if mouse_x>view_xview[0]+27+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3 &&
-        mouse_y>view_yview[0]+32 && mouse_y<view_yview[0]+135
-        {
+        if ed_hit(27+139+3+139+3, 32, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=19  //forest
         }
 
-    if mouse_x>view_xview[0]+27+139+3+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3+139+3 &&
-        mouse_y>view_yview[0]+32 && mouse_y<view_yview[0]+135
-        {
+    if ed_hit(27+139+3+139+3+139+3, 32, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
@@ -4377,36 +4202,28 @@ if czywybieranieback=1 && czywybieranieback<100
 
      //
 
-       if mouse_x>view_xview[0]+27 && mouse_x<view_xview[0]+166 &&
-       mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16
-       {
+       if ed_hit(27, 32+102+16, 139, 103){
        draw_set_blend_mode(bm_add)
        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
        draw_set_blend_mode(bm_normal)
        backselect=16  //desert
         }
 
-        if mouse_x>view_xview[0]+27+139+3 && mouse_x<view_xview[0]+166+139+3 &&
-        mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16
-        {
+        if ed_hit(27+139+3, 32+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
        backselect=21  //desert ruin
         }
 
-    if mouse_x>view_xview[0]+27+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3 &&
-        mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16
-        {
+    if ed_hit(27+139+3+139+3, 32+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=24 //snow new
         }
 
-    if mouse_x>view_xview[0]+27+139+3+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3+139+3 &&
-        mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16
-        {
+    if ed_hit(27+139+3+139+3+139+3, 32+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
@@ -4415,36 +4232,28 @@ if czywybieranieback=1 && czywybieranieback<100
 
     //
 
-    if mouse_x>view_xview[0]+27 && mouse_x<view_xview[0]+166 &&
-    mouse_y>view_yview[0]+32+102+16+102+16 && mouse_y<view_yview[0]+135+102+16+102+16
-        {
+    if ed_hit(27, 32+102+16+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=15   //dusk
         }
 
-    if mouse_x>view_xview[0]+27+139+3 && mouse_x<view_xview[0]+166+139+3 &&
-        mouse_y>view_yview[0]+32+102+16+102+16 && mouse_y<view_yview[0]+135+102+16+102+16
-        {
+    if ed_hit(27+139+3, 32+102+16+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=17   //dark
         }
 
-    if mouse_x>view_xview[0]+27+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3 &&
-        mouse_y>view_yview[0]+32+102+16+102+16 && mouse_y<view_yview[0]+135+102+16+102+16
-        {
+    if ed_hit(27+139+3+139+3, 32+102+16+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=18   //volcano
         }
 
-    if mouse_x>view_xview[0]+27+139+3+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3+139+3 &&
-        mouse_y>view_yview[0]+32+102+16+102+16 && mouse_y<view_yview[0]+135+102+16+102+16
-        {
+    if ed_hit(27+139+3+139+3+139+3, 32+102+16+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
@@ -4453,36 +4262,28 @@ if czywybieranieback=1 && czywybieranieback<100
 
      }
      if o_edmain.backgroundpage=2{
-    if mouse_x>view_xview[0]+27 && mouse_x<view_xview[0]+166 &&
-    mouse_y>view_yview[0]+32 && mouse_y<view_yview[0]+135
-        {
+    if ed_hit(27, 32, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=10
         }
 
-        if mouse_x>view_xview[0]+27+139+3 && mouse_x<view_xview[0]+166+139+3 &&
-        mouse_y>view_yview[0]+32 && mouse_y<view_yview[0]+135
-        {
+        if ed_hit(27+139+3, 32, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=14
         }
 
-        if mouse_x>view_xview[0]+27+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3 &&
-        mouse_y>view_yview[0]+32 && mouse_y<view_yview[0]+135
-        {
+        if ed_hit(27+139+3+139+3, 32, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=27
         }
 
-    if mouse_x>view_xview[0]+27+139+3+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3+139+3 &&
-        mouse_y>view_yview[0]+32 && mouse_y<view_yview[0]+135
-        {
+    if ed_hit(27+139+3+139+3+139+3, 32, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
@@ -4491,36 +4292,28 @@ if czywybieranieback=1 && czywybieranieback<100
 
      //
 
-       if mouse_x>view_xview[0]+27 && mouse_x<view_xview[0]+166 &&
-       mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16
-       {
+       if ed_hit(27, 32+102+16, 139, 103){
        draw_set_blend_mode(bm_add)
        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
        draw_set_blend_mode(bm_normal)
        backselect=29
         }
 
-       if mouse_x>view_xview[0]+27+139+3 && mouse_x<view_xview[0]+166+139+3 &&
-       mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16
-       {
+       if ed_hit(27+139+3, 32+102+16, 139, 103){
        draw_set_blend_mode(bm_add)
        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
        draw_set_blend_mode(bm_normal)
        backselect=30
         }
 
-       if mouse_x>view_xview[0]+27+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3 &&
-       mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16
-       {
+       if ed_hit(27+139+3+139+3, 32+102+16, 139, 103){
        draw_set_blend_mode(bm_add)
        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
        draw_set_blend_mode(bm_normal)
        backselect=31
         }
 
-       if mouse_x>view_xview[0]+27+139+3+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3+139+3 &&
-       mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16
-       {
+       if ed_hit(27+139+3+139+3+139+3, 32+102+16, 139, 103){
        draw_set_blend_mode(bm_add)
        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
        draw_set_blend_mode(bm_normal)
@@ -4528,27 +4321,21 @@ if czywybieranieback=1 && czywybieranieback<100
         }
 
         /*
-        if mouse_x>view_xview[0]+27+139+3 && mouse_x<view_xview[0]+166+139+3 &&
-        mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16
-        {
+        if ed_hit(27+139+3, 32+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
        backselect=1
         }
 
-    if mouse_x>view_xview[0]+27+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3 &&
-        mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16
-        {
+    if ed_hit(27+139+3+139+3, 32+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=1
         }
 
-    if mouse_x>view_xview[0]+27+139+3+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3+139+3 &&
-        mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16
-        {
+    if ed_hit(27+139+3+139+3+139+3, 32+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
@@ -4557,36 +4344,28 @@ if czywybieranieback=1 && czywybieranieback<100
 
     //
 
-    if mouse_x>view_xview[0]+27 && mouse_x<view_xview[0]+166 &&
-    mouse_y>view_yview[0]+32+102+16+102+16 && mouse_y<view_yview[0]+135+102+16+102+16
-        {
+    if ed_hit(27, 32+102+16+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=1
         }
 
-    if mouse_x>view_xview[0]+27+139+3 && mouse_x<view_xview[0]+166+139+3 &&
-        mouse_y>view_yview[0]+32+102+16+102+16 && mouse_y<view_yview[0]+135+102+16+102+16
-        {
+    if ed_hit(27+139+3, 32+102+16+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=1
         }
 
-    if mouse_x>view_xview[0]+27+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3 &&
-        mouse_y>view_yview[0]+32+102+16+102+16 && mouse_y<view_yview[0]+135+102+16+102+16
-        {
+    if ed_hit(27+139+3+139+3, 32+102+16+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         backselect=1
         }
 
-    if mouse_x>view_xview[0]+27+139+3+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3+139+3 &&
-        mouse_y>view_yview[0]+32+102+16+102+16 && mouse_y<view_yview[0]+135+102+16+102+16
-        {
+    if ed_hit(27+139+3+139+3+139+3, 32+102+16+102+16, 139, 103){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
@@ -4610,8 +4389,7 @@ if czywybieranieback=1 && czywybieranieback<100
     }
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+90 && mouse_y<view_yview[0]+110&& kliknieto=0
+    if ed_hit(40, 90, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+90,1.4,0.8,0,c_white,0.2)
@@ -4634,8 +4412,7 @@ if czywybieranieback=1 && czywybieranieback<100
     }
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+120 && mouse_y<view_yview[0]+140&& kliknieto=0
+    if ed_hit(40, 120, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+120,1.4,0.8,0,c_white,0.2)
@@ -4658,8 +4435,7 @@ if czywybieranieback=1 && czywybieranieback<100
     }
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+150 && mouse_y<view_yview[0]+170&& kliknieto=0
+    if ed_hit(40, 150, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+150,1.4,0.8,0,c_white,0.2)
@@ -4682,8 +4458,7 @@ if czywybieranieback=1 && czywybieranieback<100
     }
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+180 && mouse_y<view_yview[0]+200&& kliknieto=0
+    if ed_hit(40, 180, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+180,1.4,0.8,0,c_white,0.2)
@@ -4706,8 +4481,7 @@ if czywybieranieback=1 && czywybieranieback<100
     }
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+210 && mouse_y<view_yview[0]+230&& kliknieto=0
+    if ed_hit(40, 210, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+210,1.4,0.8,0,c_white,0.2)
@@ -4730,8 +4504,7 @@ if czywybieranieback=1 && czywybieranieback<100
     }
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+420 && mouse_y<view_yview[0]+440&& kliknieto=0
+    if ed_hit(40, 420, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+420,1.4,0.8,0,c_white,0.2)
@@ -4754,8 +4527,7 @@ if czywybieranieback=1 && czywybieranieback<100
     }
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+450 && mouse_y<view_yview[0]+470&& kliknieto=0
+    if ed_hit(40, 450, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+450,1.4,0.8,0,c_white,0.2)
@@ -4771,9 +4543,7 @@ if czywybieranieback=1 && czywybieranieback<100
     //天气设置界面结束
     }
     //从天气页按BACK按钮退回到背景选择主页面
-    if mouse_x>view_xview[0]+561 && mouse_x<view_xview[0]+621 &&
-        mouse_y>view_yview[0]+427 && mouse_y<view_yview[0]+457
-    && o_edmain.backgroundpage=100
+    if ed_hit(561, 427, 60, 30)&& o_edmain.backgroundpage=100
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+561,view_yview[0]+427,0.5,1.3,0,c_white,0.2)
@@ -4800,9 +4570,7 @@ if czywybieranieback=1 && czywybieranieback<100
     }
 
     //按选择背景主页面BACK按钮退出
-    if mouse_x>view_xview[0]+530 && mouse_x<view_xview[0]+590 && o_edmain.backgroundpage<>100 && wahaha = 0 &&
-        mouse_y>view_yview[0]+420 && mouse_y<view_yview[0]+450
-    {
+    if ed_hit(530, 420, 60, 30) && o_edmain.backgroundpage<>100 && wahaha = 0{
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+530,view_yview[0]+420,0.5,1.3,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
@@ -4810,8 +4578,7 @@ if czywybieranieback=1 && czywybieranieback<100
     } else { quitbgpselect=0 }
 
     if mouse_check_button(mb_left) && o_edmain.backgroundpage<>100 && wahaha = 0 &&
-    mouse_x>view_xview[0]+530 && mouse_x<view_xview[0]+590 &&
-    mouse_y>view_yview[0]+420 && mouse_y<view_yview[0]+450 &&
+    ed_hit(530, 420, 60, 30)&&
     quitbgpselect=1
         {if(setting_mode>0){setting_mode-=1}
         czywybieranieback=0;backselect=0;quitbgpselect=0}
@@ -4839,9 +4606,7 @@ if czywybieranieback=100
     draw_sprite(s_edscenario2,bgmpage,view_xview[0],view_yview[0])
 
     for(ii=0;ii<8;ii+=1){
-        if mouse_x>view_xview[0]+460 && mouse_x<view_xview[0]+610 &&
-        mouse_y>view_yview[0]+114+35*ii && mouse_y<view_yview[0]+114+35*ii+16
-        {
+        if ed_hit(460, 114+35*ii, 150, (114+35*ii+16)-(114+35*ii)){
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+460,view_yview[0]+114+35*ii,1.3,0.8,0,c_white,0.2)
             draw_set_blend_mode(bm_normal)
@@ -4849,9 +4614,7 @@ if czywybieranieback=100
         }
     }
     /*for(ii=4;ii<8;ii+=1){
-        if mouse_x>view_xview[0]+460 && mouse_x<view_xview[0]+610 &&
-        mouse_y>view_yview[0]+116+35*ii+ && mouse_y<view_yview[0]+116+35*ii+12
-        {
+        if ed_hit(460, 116+35*ii+, 150, (116+35*ii+12)-(116+35*ii+)){
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+460,view_yview[0]+116+34*ii,1.3,0.8,0,c_white,0.2)
             draw_set_blend_mode(bm_normal)
@@ -4863,241 +4626,183 @@ if czywybieranieback=100
     muzior=0
     muzioj=0
     if bgmpage=0{
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77 && mouse_y<view_yview[0]+89
-        {
+    if ed_hit(35, 77, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=1
         }
 
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8 && mouse_y<view_yview[0]+89+12+8
-        {
+    if ed_hit(35, 77+12+8, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=2
         }
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7 && mouse_y<view_yview[0]+89+12+8+12+7
-        {
+    if ed_hit(35, 77+12+8+12+7, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=3
         }
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7 && mouse_y<view_yview[0]+89+12+8+12+7+12+7
-        {
+    if ed_hit(35, 77+12+8+12+7+12+7, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=4
         }
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3
-        {
+    if ed_hit(35, 77+12+8+12+7+12+7+12+3, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=5
         }
         //
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3
-        {
+    if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=27
         }
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5
-        {
+    if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=13
         }
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8
-        {
+    if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=6
         }
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8
-        {
+    if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=7
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=8
         }
         //
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=9
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=10
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=11
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=12
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=23
         }
         //
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=14
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=15
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=16
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=17
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=18
         }
         //
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6+12+6 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6+12+6
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6+12+6, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=19
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6+12+6+12+6 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6+12+6+12+6
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6+12+6+12+6, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=24
         }
         //
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77 && mouse_y<view_yview[0]+89
-        {
+    if ed_hit(240, 77, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=22
         }
 
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8 && mouse_y<view_yview[0]+89+12+8
-        {
+    if ed_hit(240, 77+12+8, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=20
         }
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7 && mouse_y<view_yview[0]+89+12+8+12+7
-        {
+    if ed_hit(240, 77+12+8+12+7, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=26
         }
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7 && mouse_y<view_yview[0]+89+12+8+12+7+12+7
-        {
+    if ed_hit(240, 77+12+8+12+7+12+7, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7+12+7,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=25
         }
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3
-        {
+    if ed_hit(240, 77+12+8+12+7+12+7+12+3, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7+12+7+12+5,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=28
         }
         //
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3
-        {
+    if ed_hit(240, 77+12+8+12+7+12+7+12+3+12+3, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=21
         }
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+3 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+3
-        {
+    if ed_hit(240, 77+12+8+12+7+12+7+12+3+12+3+12+3, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+5,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
@@ -5105,305 +4810,231 @@ if czywybieranieback=100
         }
      }
     if bgmpage=1{
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77 && mouse_y<view_yview[0]+89
-        {
+    if ed_hit(35, 77, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=41
         }
 
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8 && mouse_y<view_yview[0]+89+12+8
-        {
+    if ed_hit(35, 77+12+8, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=42
         }
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7 && mouse_y<view_yview[0]+89+12+8+12+7
-        {
+    if ed_hit(35, 77+12+8+12+7, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=43
         }
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7 && mouse_y<view_yview[0]+89+12+8+12+7+12+7
-        {
+    if ed_hit(35, 77+12+8+12+7+12+7, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=44
         }
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3
-        {
+    if ed_hit(35, 77+12+8+12+7+12+7+12+3, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=45
         }
         //
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3
-        {
+    if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=46
         }
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5
-        {
+    if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=47
         }
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8
-        {
+    if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=48
         }
-    if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8
-        {
+    if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=49
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=50
         }
         //
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=51
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=52
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=53
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=58
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=54
         }
         //
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=55
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=56
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=57
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=76
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=59
         }
         //
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6+12+6 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6+12+6
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6+12+6, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=60
         }
-   if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6+12+6+12+6 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6+12+6+12+6
-        {
+   if ed_hit(35, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5+12+5+12+5+12+5+4+12+6+12+6+12+6+12+6, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=61
         }
         //
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77 && mouse_y<view_yview[0]+89
-        {
+    if ed_hit(240, 77, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=62
         }
 
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8 && mouse_y<view_yview[0]+89+12+8
-        {
+    if ed_hit(240, 77+12+8, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=63
         }
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7 && mouse_y<view_yview[0]+89+12+8+12+7
-        {
+    if ed_hit(240, 77+12+8+12+7, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=64
         }
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7 && mouse_y<view_yview[0]+89+12+8+12+7+12+7
-        {
+    if ed_hit(240, 77+12+8+12+7+12+7, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7+12+7,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=65
         }
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3
-        {
+    if ed_hit(240, 77+12+8+12+7+12+7+12+3, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7+12+7+12+5,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=66
         }
         //
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3
-        {
+    if ed_hit(240, 77+12+8+12+7+12+7+12+3+12+3, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=67
         }
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+3 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+3
-        {
+    if ed_hit(240, 77+12+8+12+7+12+7+12+3+12+3+12+3, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+5,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=68
         }
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+3+12+3 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+3+12+5
-        {
+    if ed_hit(240, 77+12+8+12+7+12+7+12+3+12+3+12+3+12+3, 150, 14){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+5+12+8,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=69
         }
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+3+12+3+12+5 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+3+12+5+12+8
-        {
+    if ed_hit(240, 77+12+8+12+7+12+7+12+3+12+3+12+3+12+3+12+5, 150, 17){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+5+12+8+12+5,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=70
         }
-    if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+3+12+3+12+5+12+8 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+3+12+5+12+8+12+8
-        {
+    if ed_hit(240, 77+12+8+12+7+12+7+12+3+12+3+12+3+12+3+12+5+12+8, 150, 17){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+5+12+8+12+5+12+8,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=71
         }
-   if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8
-        {
+   if ed_hit(240, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=73
         }
-   if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2
-        {
+   if ed_hit(240, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=74
         }
-   if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5
-        {
+   if ed_hit(240, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=75
         }
-   if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5
-        {
+   if ed_hit(240, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+5,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
         muzioj=72
         }
-   if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-        mouse_y>view_yview[0]+77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5 && mouse_y<view_yview[0]+89+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5
-        {
+   if ed_hit(240, 77+12+8+12+7+12+7+12+3+12+3+12+5+12+8+12+8+12+8+12+8+12+2+12+5+12+5+12+5, 150, 12){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+12+4+12+7+12+7+12+5+12+5+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6+12+6,1.3,0.8,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
@@ -5412,17 +5043,13 @@ if czywybieranieback=100
         }
    if bgmpage=2{
         for(iii=0;iii<22;iii+=1){
-            if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-            mouse_y>view_yview[0]+77+18*iii && mouse_y<view_yview[0]+89+18*iii
-            {
+            if ed_hit(35, 77+18*iii, 150, (89+18*iii)-(77+18*iii)){
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+18*iii,1.3,0.8,0,c_white,0.2)
             draw_set_blend_mode(bm_normal)
             muzioj=iii+101+(bgmpage-2)*44
             }
-            if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-            mouse_y>view_yview[0]+77+18*iii && mouse_y<view_yview[0]+89+18*iii
-            {
+            if ed_hit(240, 77+18*iii, 150, (89+18*iii)-(77+18*iii)){
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+18*iii,1.3,0.8,0,c_white,0.2)
             draw_set_blend_mode(bm_normal)
@@ -5433,17 +5060,13 @@ if czywybieranieback=100
    /*sms2*/
    if bgmpage=3{
         for(iii=0;iii<20;iii+=1){
-            if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-            mouse_y>view_yview[0]+77+18*iii && mouse_y<view_yview[0]+89+18*iii
-            {
+            if ed_hit(35, 77+18*iii, 150, (89+18*iii)-(77+18*iii)){
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+18*iii,1.3,0.8,0,c_white,0.2)
             draw_set_blend_mode(bm_normal)
             muzioj=iii+101+(bgmpage-2)*44
             }
-            /*if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-            mouse_y>view_yview[0]+77+18*iii && mouse_y<view_yview[0]+89+18*iii
-            {
+            /*if ed_hit(240, 77+18*iii, 150, (89+18*iii)-(77+18*iii)){
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+18*iii,1.3,0.8,0,c_white,0.2)
             draw_set_blend_mode(bm_normal)
@@ -5454,17 +5077,13 @@ if czywybieranieback=100
    /*softendo*/
       if bgmpage=4{
         for(iii=0;iii<22;iii+=1){
-            if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-            mouse_y>view_yview[0]+77+18*iii && mouse_y<view_yview[0]+89+18*iii
-            {
+            if ed_hit(35, 77+18*iii, 150, (89+18*iii)-(77+18*iii)){
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+18*iii,1.3,0.8,0,c_white,0.2)
             draw_set_blend_mode(bm_normal)
             muzioj=iii+173
             }
-            if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-            mouse_y>view_yview[0]+77+18*iii && mouse_y<view_yview[0]+89+18*iii
-            {
+            if ed_hit(240, 77+18*iii, 150, (89+18*iii)-(77+18*iii)){
                 if(iii<2){
                 draw_set_blend_mode(bm_add)
                 draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+18*iii,1.3,0.8,0,c_white,0.2)
@@ -5478,9 +5097,7 @@ if czywybieranieback=100
     /*smwp orignal*/
     if bgmpage=5{
         for(iii=0;iii<13;iii+=1){
-            if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-            mouse_y>view_yview[0]+77+18*iii && mouse_y<view_yview[0]+89+18*iii
-            {
+            if ed_hit(35, 77+18*iii, 150, (89+18*iii)-(77+18*iii)){
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+18*iii,1.3,0.8,0,c_white,0.2)
             draw_set_blend_mode(bm_normal)
@@ -5492,17 +5109,13 @@ if czywybieranieback=100
    /*boss*/
       if bgmpage=6{
         for(iii=0;iii<21;iii+=1){
-            if mouse_x>view_xview[0]+35 && mouse_x<view_xview[0]+185 &&
-            mouse_y>view_yview[0]+77+18*iii && mouse_y<view_yview[0]+89+18*iii
-            {
+            if ed_hit(35, 77+18*iii, 150, (89+18*iii)-(77+18*iii)){
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+35,view_yview[0]+77+18*iii,1.3,0.8,0,c_white,0.2)
             draw_set_blend_mode(bm_normal)
             muzioj=iii+201
             }
-            /*if mouse_x>view_xview[0]+240 && mouse_x<view_xview[0]+390 &&
-            mouse_y>view_yview[0]+77+18*iii && mouse_y<view_yview[0]+89+18*iii
-            {
+            /*if ed_hit(240, 77+18*iii, 150, (89+18*iii)-(77+18*iii)){
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+240,view_yview[0]+77+18*iii,1.3,0.8,0,c_white,0.2)
             draw_set_blend_mode(bm_normal)
@@ -5523,25 +5136,19 @@ if czywybieranieback=100
         draw_text(view_xview[0] + 80, view_yview[0] + 400, 'PREV')
         draw_text(view_xview[0] + 160, view_yview[0] + 400, 'NEXT')
         draw_text(view_xview[0] + 240, view_yview[0] + 400, 'REFRESH')
-        if mouse_x>view_xview[0]+70 && mouse_x<view_xview[0]+70+60&&
-           mouse_y>view_yview[0]+390&& mouse_y<view_yview[0]+420
-        {
+        if ed_hit(70, 390, 60, 30){
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+70,view_yview[0]+390,0.4,0.8,0,c_white,0.2)
             draw_set_blend_mode(bm_normal)
             if mouse_check_button_pressed(mb_left) && listscroll>0 {listscroll-=10;}
         }
-        if mouse_x>view_xview[0]+150 && mouse_x<view_xview[0]+150+50 &&
-           mouse_y>view_yview[0]+390&& mouse_y<view_yview[0]+420
-        {
+        if ed_hit(150, 390, 50, 30){
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+150,view_yview[0]+390,0.4,0.8,0,c_white,0.2)
             draw_set_blend_mode(bm_normal)
             if mouse_check_button_pressed(mb_left) && listscroll < global.customMusicTotal - 10 {listscroll+=10;}
         }
-        if mouse_x>view_xview[0]+230 && mouse_x<view_xview[0]+230+70 &&
-           mouse_y>view_yview[0]+390 && mouse_y<view_yview[0]+420
-        {
+        if ed_hit(230, 390, 70, 30){
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+230,view_yview[0]+390,0.6,0.8,0,c_white,0.2)
             draw_set_blend_mode(bm_normal)
@@ -5561,9 +5168,7 @@ if czywybieranieback=100
         if i+listscroll<=global.customMusicTotal{
             draw_text(view_xview[0] + 20, view_yview[0] + 60+ 30 * i, string(i+listscroll))
             draw_text(view_xview[0] + 50, view_yview[0] + 60+ 30 * i, string_upper(global.customMusicFile[i+listscroll]))
-            if mouse_x>view_xview[0]+20 && mouse_x<view_xview[0]+360 &&
-            mouse_y>view_yview[0]+50+30*i && mouse_y<view_yview[0]+70+30*i
-            {
+            if ed_hit(20, 50+30*i, 340, (70+30*i)-(50+30*i)){
                 draw_set_blend_mode(bm_add)
                 draw_sprite_ext(s_prefsanim,0,view_xview[0]+20,view_yview[0]+50+30*i,2,0.8,0,c_white,0.2)
                 draw_set_blend_mode(bm_normal)
@@ -5574,9 +5179,7 @@ if czywybieranieback=100
     }
 
     //no music
-    if mouse_x>view_xview[0]+462 && mouse_x<view_xview[0]+522 &&
-        mouse_y>view_yview[0]+420 && mouse_y<view_yview[0]+450
-    {
+    if ed_hit(462, 420, 60, 30){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+462,view_yview[0]+420,0.6,1.3,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
@@ -5584,9 +5187,7 @@ if czywybieranieback=100
     }
 
       //quitselect
-    if mouse_x>view_xview[0]+550 && mouse_x<view_xview[0]+610 &&
-        mouse_y>view_yview[0]+420 && mouse_y<view_yview[0]+450
-    {
+    if ed_hit(550, 420, 60, 30){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+550,view_yview[0]+420,0.5,1.3,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
@@ -5763,8 +5364,7 @@ if czywybieranieback=1000
     if global.modifiedmov=0{draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+100,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+90 && mouse_y<view_yview[0]+110&& kliknieto=0
+    if ed_hit(40, 90, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+90,1.4,0.8,0,c_white,0.2)
@@ -5779,8 +5379,7 @@ if czywybieranieback=1000
     if global.layerord=0{draw_text(view_xview[0]+405,view_yview[0]+130,string_upper('Classic'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+120 && mouse_y<view_yview[0]+140&& kliknieto=0
+    if ed_hit(40, 120, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+120,1.4,0.8,0,c_white,0.2)
@@ -5794,8 +5393,7 @@ if czywybieranieback=1000
     if global.rotodisclay=0{draw_text(view_xview[0]+405,view_yview[0]+160,string_upper('Below the Blocks'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+150 && mouse_y<view_yview[0]+170&& kliknieto=0
+    if ed_hit(40, 150, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+150,1.4,0.8,0,c_white,0.2)
@@ -5808,8 +5406,7 @@ if czywybieranieback=1000
     draw_text(view_xview[0]+405,view_yview[0]+190,string(global.poziomwody)+string_upper(' px'))
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+180 && mouse_y<view_yview[0]+200&& kliknieto=0
+    if ed_hit(40, 180, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+180,1.4,0.8,0,c_white,0.2)
@@ -5823,8 +5420,7 @@ if czywybieranieback=1000
     if global.lava=0{draw_set_color(make_color_rgb(168,160,248));draw_text(view_xview[0]+405,view_yview[0]+220,string_upper('water'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+210 && mouse_y<view_yview[0]+230&& kliknieto=0
+    if ed_hit(40, 210, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+210,1.4,0.8,0,c_white,0.2)
@@ -5838,8 +5434,7 @@ if czywybieranieback=1000
     if global.auto=0{draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+250,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+240 && mouse_y<view_yview[0]+260&& kliknieto=0
+    if ed_hit(40, 240, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+240,1.4,0.8,0,c_white,0.2)
@@ -5854,8 +5449,7 @@ if czywybieranieback=1000
     draw_text(view_xview[0]+180,view_yview[0]+280,string(global.firstbound)+string_upper(' px'))
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+180 &&
-       mouse_y>view_yview[0]+270 && mouse_y<view_yview[0]+290&& kliknieto=0
+    if ed_hit(40, 270, 140, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+270,1.4,0.8,0,c_white,0.2)
@@ -5868,8 +5462,7 @@ if czywybieranieback=1000
     draw_text(view_xview[0]+404,view_yview[0]+280,string(global.secondbound)+string_upper(' px'))
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+264 && mouse_x<view_xview[0]+404 &&
-       mouse_y>view_yview[0]+270 && mouse_y<view_yview[0]+290&& kliknieto=0
+    if ed_hit(264, 270, 140, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+264,view_yview[0]+270,1.4,0.8,0,c_white,0.2)
@@ -5882,8 +5475,7 @@ if czywybieranieback=1000
     draw_text(view_xview[0]+180,view_yview[0]+310,string(global.water_velocity)+string_upper(' unit'))
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+180 &&
-       mouse_y>view_yview[0]+300 && mouse_y<view_yview[0]+320&& kliknieto=0
+    if ed_hit(40, 300, 140, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+300,1.4,0.8,0,c_white,0.2)
@@ -5896,8 +5488,7 @@ if czywybieranieback=1000
     draw_text(view_xview[0]+404,view_yview[0]+310,string(global.water_delay)+string_upper(' unit'))
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+264 && mouse_x<view_xview[0]+404 &&
-       mouse_y>view_yview[0]+300 && mouse_y<view_yview[0]+320 && kliknieto=0
+    if ed_hit(264, 300, 140, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+264,view_yview[0]+300,1.4,0.8,0,c_white,0.2)
@@ -5914,8 +5505,7 @@ if czywybieranieback=1000
     if global.advswitch=0{draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+340,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+330 && mouse_y<view_yview[0]+350&& kliknieto=0
+    if ed_hit(40, 330, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+330,1.4,0.8,0,c_white,0.2)
@@ -5930,8 +5520,7 @@ if czywybieranieback=1000
     if global.fast_retry=0{draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+370,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+360 && mouse_y<view_yview[0]+380&& kliknieto=0
+    if ed_hit(40, 360, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+360,1.4,0.8,0,c_white,0.2)
@@ -5946,8 +5535,7 @@ if czywybieranieback=1000
     if global.MFbeet=0{draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+400,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+390 && mouse_y<view_yview[0]+410&& kliknieto=0
+    if ed_hit(40, 390, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+390,1.4,0.8,0,c_white,0.2)
@@ -5962,8 +5550,7 @@ if czywybieranieback=1000
     if global.celeste=0{draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+430,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+420 && mouse_y<view_yview[0]+440&& kliknieto=0
+    if ed_hit(40, 420, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+420,1.4,0.8,0,c_white,0.2)
@@ -5978,8 +5565,7 @@ if czywybieranieback=1000
     if global.pipeout=0{draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+460,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+450 && mouse_y<view_yview[0]+470&& kliknieto=0
+    if ed_hit(40, 450, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+450,1.4,0.8,0,c_white,0.2)
@@ -5999,8 +5585,7 @@ if czywybieranieback=1000
     if global.fastpass=0{draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+100,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+90 && mouse_y<view_yview[0]+110&& kliknieto=0
+    if ed_hit(40, 90, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+90,1.4,0.8,0,c_white,0.2)
@@ -6015,8 +5600,7 @@ if czywybieranieback=1000
     if global.huddisplay=1{draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+130,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+120 && mouse_y<view_yview[0]+140&& kliknieto=0
+    if ed_hit(40, 120, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+120,1.4,0.8,0,c_white,0.2)
@@ -6027,8 +5611,7 @@ if czywybieranieback=1000
 
     //照明额外设置
     draw_text(view_xview[0]+40,view_yview[0]+160,string_upper('Settings for special luminous objects'))
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+150 && mouse_y<view_yview[0]+170&& kliknieto=0
+    if ed_hit(40, 150, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+150,1.4,0.8,0,c_white,0.2)
@@ -6043,8 +5626,7 @@ if czywybieranieback=1000
     if global.stunblock=0{draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+190,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+180 && mouse_y<view_yview[0]+200&& kliknieto=0
+    if ed_hit(40, 180, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+180,1.4,0.8,0,c_white,0.2)
@@ -6070,8 +5652,7 @@ if czywybieranieback=1000
     if string_copy(global.lightobject,59,1) = '0' {draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+100,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+90 && mouse_y<view_yview[0]+110&& kliknieto=0
+    if ed_hit(40, 90, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+90,1.4,0.8,0,c_white,0.2)
@@ -6093,8 +5674,7 @@ if czywybieranieback=1000
     if string_copy(global.lightobject,60,1) = '0' {draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+130,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+120 && mouse_y<view_yview[0]+140&& kliknieto=0
+    if ed_hit(40, 120, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+120,1.4,0.8,0,c_white,0.2)
@@ -6116,8 +5696,7 @@ if czywybieranieback=1000
     if string_copy(global.lightobject,61,1) = '0' {draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+160,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+150 && mouse_y<view_yview[0]+160&& kliknieto=0
+    if ed_hit(40, 150, 190, 10)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+150,1.4,0.8,0,c_white,0.2)
@@ -6139,8 +5718,7 @@ if czywybieranieback=1000
     if string_copy(global.lightobject,62,1) = '0' {draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+190,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+180 && mouse_y<view_yview[0]+200&& kliknieto=0
+    if ed_hit(40, 180, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+180,1.4,0.8,0,c_white,0.2)
@@ -6162,8 +5740,7 @@ if czywybieranieback=1000
     if string_copy(global.lightobject,63,1) = '0' {draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+220,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+210 && mouse_y<view_yview[0]+230&& kliknieto=0
+    if ed_hit(40, 210, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+210,1.4,0.8,0,c_white,0.2)
@@ -6185,8 +5762,7 @@ if czywybieranieback=1000
     if string_copy(global.lightobject,64,1) = '0' {draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+250,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+240 && mouse_y<view_yview[0]+260&& kliknieto=0
+    if ed_hit(40, 240, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+240,1.4,0.8,0,c_white,0.2)
@@ -6208,8 +5784,7 @@ if czywybieranieback=1000
     if string_copy(global.lightobject,65,1) = '0' {draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+280,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+270 && mouse_y<view_yview[0]+290&& kliknieto=0
+    if ed_hit(40, 270, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+270,1.4,0.8,0,c_white,0.2)
@@ -6231,8 +5806,7 @@ if czywybieranieback=1000
     if string_copy(global.lightobject,66,1) = '0' {draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+310,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+300 && mouse_y<view_yview[0]+320&& kliknieto=0
+    if ed_hit(40, 300, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+300,1.4,0.8,0,c_white,0.2)
@@ -6254,8 +5828,7 @@ if czywybieranieback=1000
     if string_copy(global.lightobject,67,1) = '0' {draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+340,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+330 && mouse_y<view_yview[0]+350&& kliknieto=0
+    if ed_hit(40, 330, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+330,1.4,0.8,0,c_white,0.2)
@@ -6277,8 +5850,7 @@ if czywybieranieback=1000
     if string_copy(global.lightobject,68,1) = '0' {draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+370,string_upper('no'))}
     draw_set_halign(fa_left)
     draw_set_color(c_white)
-    if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-       mouse_y>view_yview[0]+360 && mouse_y<view_yview[0]+380&& kliknieto=0
+    if ed_hit(40, 360, 190, 20)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+360,1.4,0.8,0,c_white,0.2)
@@ -6297,8 +5869,7 @@ if czywybieranieback=1000
     }
 
     //退出（照明额外设置）
-    if mouse_x>view_xview[0]+561 && mouse_x<view_xview[0]+621 &&
-        mouse_y>view_yview[0]+427 && mouse_y<view_yview[0]+457 && o_edmain.additionalpage>=100
+    if ed_hit(561, 427, 60, 30)&& o_edmain.additionalpage>=100
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+561,view_yview[0]+427,0.5,1.3,0,c_white,0.2)
@@ -6307,8 +5878,7 @@ if czywybieranieback=1000
     }
 
     //退出（主页面）
-    if mouse_x>view_xview[0]+561 && mouse_x<view_xview[0]+621 &&
-        mouse_y>view_yview[0]+427 && mouse_y<view_yview[0]+457 && o_edmain.additionalpage<100 && wahaha=0
+    if ed_hit(561, 427, 60, 30)&& o_edmain.additionalpage<100 && wahaha=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+561,view_yview[0]+427,0.5,1.3,0,c_white,0.2)
@@ -6670,38 +6240,32 @@ if set_light_mode {
         if wlaczonaopcja = 4 {
 
             // o_marker
-            if mouse_x>view_xview[0]+206+ 64 * 3 && mouse_x<view_xview[0]+206+ 64 * (3 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 0 && mouse_y<view_yview[0]+110+ 64 * (0 + 1) {
+            if ed_hit(206+ 64 * 3, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
                 if string_copy(global.lightobject, 1, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 1, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 1, '0'); } }
 
             // o_ice
-            if mouse_x>view_xview[0]+206+ 64 * 0 && mouse_x<view_xview[0]+206+ 64 * (0 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 0, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 2, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 2, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 2, '0'); } }
 
             // o_windas
-            if mouse_x>view_xview[0]+206+ 64 * 0 && mouse_x<view_xview[0]+206+ 64 * (5 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 3 && mouse_y<view_yview[0]+110+ 64 * (3 + 1) {
+            if ed_hit(206+ 64 * 0, 110+ 64 * 3, 384, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 3, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 3, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 3, '0'); } }
 
             // 部分可顶砖块（这里是信息砖、开关砖、水位砖，Bonus 处还有问号砖）
-            if(mouse_x>view_xview[0]+206+ 64 * 2 && mouse_x<view_xview[0]+206+ 64 * (3 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 1 && mouse_y<view_yview[0]+110+ 64 * (1 + 1)) ||
-              (mouse_x>view_xview[0]+206+ 64 * 2 && mouse_x<view_xview[0]+206+ 64 * (2 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1)) {
+            if(ed_hit(206+ 64 * 2, 110+ 64 * 1, 128, (110+ 64 * (1 + 1)-(110+ 64 * 1))))||
+              (ed_hit(206+ 64 * 2, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2)))){
                 if string_copy(global.lightobject, 10, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 10, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 10, '0'); } }
 
             // 开关砖阴阳部分另占一位
-            if(mouse_x>view_xview[0]+206+ 64 * 4 && mouse_x<view_xview[0]+206+ 64 * (5 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 1 && mouse_y<view_yview[0]+110+ 64 * (1 + 1)) {
+            if(ed_hit(206+ 64 * 4, 110+ 64 * 1, 128, (110+ 64 * (1 + 1)-(110+ 64 * 1)))){
                 if string_copy(global.lightobject, 69, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 69, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 69, '0'); } }
@@ -6711,29 +6275,25 @@ if set_light_mode {
         if wlaczonaopcja = 3 && costawia3b = 0 {
 
             // Night Tree
-            if mouse_x>view_xview[0]+206+ 64 * 5 && mouse_x<view_xview[0]+206+ 64 * (5 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 0 && mouse_y<view_yview[0]+110+ 64 * (0 + 1) {
+            if ed_hit(206+ 64 * 5, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
                 if string_copy(global.lightobject, 4, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 4, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 4, '0'); } }
 
             // Big Night Tree
-            if mouse_x>view_xview[0]+206+ 64 * 5 && mouse_x<view_xview[0]+206+ 64 * (5 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 1 && mouse_y<view_yview[0]+110+ 64 * (1 + 1) {
+            if ed_hit(206+ 64 * 5, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
                 if string_copy(global.lightobject, 5, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 5, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 5, '0'); } }
 
             // Bright Light
-            if mouse_x>view_xview[0]+206+ 64 * 4 && mouse_x<view_xview[0]+206+ 64 * (4 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 4, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 6, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 6, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 6, '0'); } }
 
             // Potrait
-            if mouse_x>view_xview[0]+206+ 64 * 5 && mouse_x<view_xview[0]+206+ 64 * (5 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 3 && mouse_y<view_yview[0]+110+ 64 * (3 + 1) {
+            if ed_hit(206+ 64 * 5, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 7, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 7, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 7, '0'); } }
@@ -6744,15 +6304,13 @@ if set_light_mode {
         if wlaczonaopcja = 3 && costawia3b = 1 {
 
             // Lava Fall
-            if mouse_x>view_xview[0]+206+ 64 * 4 && mouse_x<view_xview[0]+206+ 64 * (4 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 1 && mouse_y<view_yview[0]+110+ 64 * (1 + 1) {
+            if ed_hit(206+ 64 * 4, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
                 if string_copy(global.lightobject, 8, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 8, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 8, '0'); } }
 
             // Roto-disc Center
-            if mouse_x>view_xview[0]+206+ 64 * 1 && mouse_x<view_xview[0]+206+ 64 * (1 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 1, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 9, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 9, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 9, '0'); } }
@@ -6763,66 +6321,56 @@ if set_light_mode {
         if wlaczonaopcja = 5 {
 
             // 问号砖
-            if(mouse_x>view_xview[0]+206+ 64 * 0 && mouse_x<view_xview[0]+206+ 64 * (5 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 0 && mouse_y<view_yview[0]+110+ 64 * (0 + 1)) ||
-              (mouse_x>view_xview[0]+206+ 64 * 0 && mouse_x<view_xview[0]+206+ 64 * (0 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 3 && mouse_y<view_yview[0]+110+ 64 * (3 + 1)) {
+            if(ed_hit(206+ 64 * 0, 110+ 64 * 0, 384, (110+ 64 * (0 + 1)-(110+ 64 * 0))))||
+              (ed_hit(206+ 64 * 0, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3)))){
                 if string_copy(global.lightobject, 10, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 10, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 10, '0'); } }
 
             // 红蘑菇
-            if mouse_x>view_xview[0]+206+ 64 * 0 && mouse_x<view_xview[0]+206+ 64 * (0 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 0, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 11, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 11, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 11, '0'); } }
 
             // 火力花
-            if mouse_x>view_xview[0]+206+ 64 * 1 && mouse_x<view_xview[0]+206+ 64 * (1 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 1, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 12, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 12, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 12, '0'); } }
 
             // 甜菜
-            if mouse_x>view_xview[0]+206+ 64 * 2 && mouse_x<view_xview[0]+206+ 64 * (2 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 2, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 13, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 13, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 13, '0'); } }
 
             // 绿果
-            if mouse_x>view_xview[0]+206+ 64 * 3 && mouse_x<view_xview[0]+206+ 64 * (3 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 3, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 14, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 14, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 14, '0'); } }
 
             // 无敌星
-            if mouse_x>view_xview[0]+206+ 64 * 4 && mouse_x<view_xview[0]+206+ 64 * (4 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 4, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 15, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 15, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 15, '0'); } }
 
             // 绿蘑菇
-            if mouse_x>view_xview[0]+206+ 64 * 5 && mouse_x<view_xview[0]+206+ 64 * (5 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 5, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 16, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 16, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 16, '0'); } }
 
             // 普通可碎砖、金砖
-            if mouse_x>view_xview[0]+206+ 64 * 2 && mouse_x<view_xview[0]+206+ 64 * (3 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 3 && mouse_y<view_yview[0]+110+ 64 * (3 + 1) {
+            if ed_hit(206+ 64 * 2, 110+ 64 * 3, 128, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 17, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 17, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 17, '0'); } }
 
             // 金币
-            if mouse_x>view_xview[0]+206+ 64 * 5 && mouse_x<view_xview[0]+206+ 64 * (5 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 3 && mouse_y<view_yview[0]+110+ 64 * (3 + 1) {
+            if ed_hit(206+ 64 * 5, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 18, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 18, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 18, '0'); } }
@@ -6833,157 +6381,134 @@ if set_light_mode {
         if wlaczonaopcja = 2 && o_edmain.costawia2b = 0 {
 
             // 板栗仔
-            if mouse_x>view_xview[0]+206+ 64 * 0 && mouse_x<view_xview[0]+206+ 64 * (0 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 0 && mouse_y<view_yview[0]+110+ 64 * (0 + 1) {
+            if ed_hit(206+ 64 * 0, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
                 if string_copy(global.lightobject, 19, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 19, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 19, '0'); } }
 
             // 绿乌龟
-            if mouse_x>view_xview[0]+206+ 64 * 1 && mouse_x<view_xview[0]+206+ 64 * (1 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 0 && mouse_y<view_yview[0]+110+ 64 * (0 + 1) {
+            if ed_hit(206+ 64 * 1, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
                 if string_copy(global.lightobject, 20, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 20, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 20, '0'); } }
 
             // 红乌龟
-            if mouse_x>view_xview[0]+206+ 64 * 2 && mouse_x<view_xview[0]+206+ 64 * (2+ 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 0 && mouse_y<view_yview[0]+110+ 64 * (0 + 1) {
+            if ed_hit(206+ 64 * 2, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
                 if string_copy(global.lightobject, 21, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 21, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 21, '0'); } }
 
             // 绿飞龟
-            if mouse_x>view_xview[0]+206+ 64 * 3 && mouse_x<view_xview[0]+206+ 64 * (3 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 0 && mouse_y<view_yview[0]+110+ 64 * (0 + 1) {
+            if ed_hit(206+ 64 * 3, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
                 if string_copy(global.lightobject, 22, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 22, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 22, '0'); } }
 
             // 红刺猬
-            if mouse_x>view_xview[0]+206+ 64 * 4 && mouse_x<view_xview[0]+206+ 64 * (4 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 0 && mouse_y<view_yview[0]+110+ 64 * (0 + 1) {
+            if ed_hit(206+ 64 * 4, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
                 if string_copy(global.lightobject, 23, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 23, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 23, '0'); } }
 
             // 水管绿色食人花
-            if(mouse_x>view_xview[0]+206+ 64 * 5 && mouse_x<view_xview[0]+206+ 64 * (5 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 0 && mouse_y<view_yview[0]+110+ 64 * (0 + 1)) ||
-              (mouse_x>view_xview[0]+206+ 64 * 0 && mouse_x<view_xview[0]+206+ 64 * (0 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 1 && mouse_y<view_yview[0]+110+ 64 * (1 + 1)) {
+            if(ed_hit(206+ 64 * 5, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))))||
+              (ed_hit(206+ 64 * 0, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1)))){
                 if string_copy(global.lightobject, 24, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 24, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 24, '0'); } }
 
             // 水管红色食人花
-            if mouse_x>view_xview[0]+206+ 64 * 1 && mouse_x<view_xview[0]+206+ 64 * (2 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 1 && mouse_y<view_yview[0]+110+ 64 * (1 + 1) {
+            if ed_hit(206+ 64 * 1, 110+ 64 * 1, 128, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
                 if string_copy(global.lightobject, 25, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 25, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 25, '0'); } }
 
             // 红刺猬云
-            if mouse_x>view_xview[0]+206+ 64 * 3 && mouse_x<view_xview[0]+206+ 64 * (3 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 1 && mouse_y<view_yview[0]+110+ 64 * (1 + 1) {
+            if ed_hit(206+ 64 * 3, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
                 if string_copy(global.lightobject, 26, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 26, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 26, '0'); } }
 
             // 炮台
-            if mouse_x>view_xview[0]+206+ 64 * 4 && mouse_x<view_xview[0]+206+ 64 * (4 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 1 && mouse_y<view_yview[0]+110+ 64 * (1+ 1) {
+            if ed_hit(206+ 64 * 4, 110+ 64 * 1, 64, (110+ 64 * (1+ 1)-(110+ 64 * 1))){
                 if string_copy(global.lightobject, 27, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 27, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 27, '0'); } }
 
             // 红鱼
-            if mouse_x>view_xview[0]+206+ 64 * 5 && mouse_x<view_xview[0]+206+ 64 * (5 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 1 && mouse_y<view_yview[0]+110+ 64 * (1 + 1) {
+            if ed_hit(206+ 64 * 5, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
                 if string_copy(global.lightobject, 28, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 28, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 28, '0'); } }
 
             // 绿鱼
-            if mouse_x>view_xview[0]+206+ 64 * 0 && mouse_x<view_xview[0]+206+ 64 * (0 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 0, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 29, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 29, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 29, '0'); } }
 
             // 蓝鱼
-            if mouse_x>view_xview[0]+206+ 64 * 1 && mouse_x<view_xview[0]+206+ 64 * (1+ 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 1, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 30, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 30, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 30, '0'); } }
 
             // 黄刺鱼
-            if mouse_x>view_xview[0]+206+ 64 * 2 && mouse_x<view_xview[0]+206+ 64 * (2 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 2, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 31, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 31, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 31, '0'); } }
 
             // 毒蘑菇
-            if mouse_x>view_xview[0]+206+ 64 * 3 && mouse_x<view_xview[0]+206+ 64 * (3 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 3, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 32, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 32, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 32, '0'); } }
 
             // 扎地食人花
-            if mouse_x>view_xview[0]+206+ 64 * 4 && mouse_x<view_xview[0]+206+ 64 * (4 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 4, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 33, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 33, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 33, '0'); } }
 
             // 岩浆
-            if mouse_x>view_xview[0]+206+ 64 * 5 && mouse_x<view_xview[0]+206+ 64 * (5 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 5, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 34, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 34, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 34, '0'); } }
 
             // 锤子龟
-            if mouse_x>view_xview[0]+206+ 64 * 0 && mouse_x<view_xview[0]+206+ 64 * (0 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 3 && mouse_y<view_yview[0]+110+ 64 * (3 + 1) {
+            if ed_hit(206+ 64 * 0, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 35, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 35, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 35, '0'); } }
 
             // 探照灯
-            if mouse_x>view_xview[0]+206+ 64 * 1 && mouse_x<view_xview[0]+206+ 64 * (1 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 3 && mouse_y<view_yview[0]+110+ 64 * (3 + 1) {
+            if ed_hit(206+ 64 * 1, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 36, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 36, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 36, '0'); } }
 
             // 火球
-            if mouse_x>view_xview[0]+206+ 64 * 2 && mouse_x<view_xview[0]+206+ 64 * (2 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 3 && mouse_y<view_yview[0]+110+ 64 * (3 + 1) {
+            if ed_hit(206+ 64 * 2, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 37, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 37, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 37, '0'); } }
 
             // 地刺（MW样式）
-            if mouse_x>view_xview[0]+206+ 64 * 3 && mouse_x<view_xview[0]+206+ 64 * (3 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 3 && mouse_y<view_yview[0]+110+ 64 * (3 + 1) {
+            if ed_hit(206+ 64 * 3, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 38, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 38, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 38, '0'); } }
 
             // 石盾
-            if mouse_x>view_xview[0]+206+ 64 * 4 && mouse_x<view_xview[0]+206+ 64 * (4 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 3 && mouse_y<view_yview[0]+110+ 64 * (3 + 1) {
+            if ed_hit(206+ 64 * 4, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 39, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 39, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 39, '0'); } }
 
             // 库巴
-            if mouse_x>view_xview[0]+206+ 64 * 5 && mouse_x<view_xview[0]+206+ 64 * (5 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 3 && mouse_y<view_yview[0]+110+ 64 * (3 + 1) {
+            if ed_hit(206+ 64 * 5, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 40, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 40, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 40, '0'); } }
@@ -6994,136 +6519,116 @@ if set_light_mode {
         if wlaczonaopcja = 2 && o_edmain.costawia2b = 1 {
 
             // 灰刺猬
-            if mouse_x>view_xview[0]+206+ 64 * 0 && mouse_x<view_xview[0]+206+ 64 * (0 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 0 && mouse_y<view_yview[0]+110+ 64 * (0 + 1) {
+            if ed_hit(206+ 64 * 0, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
                 if string_copy(global.lightobject, 41, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 41, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 41, '0'); } }
 
             // 炮台（追踪）
-            if(mouse_x>view_xview[0]+206+ 64 * 1 && mouse_x<view_xview[0]+206+ 64 * (1 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 0 && mouse_y<view_yview[0]+110+ 64 * (0 + 1)) ||
-              (mouse_x>view_xview[0]+206+ 64 * 5 && mouse_x<view_xview[0]+206+ 64 * (5 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 0 && mouse_y<view_yview[0]+110+ 64 * (0 + 1)) {
+            if(ed_hit(206+ 64 * 1, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))))||
+              (ed_hit(206+ 64 * 5, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0)))){
                 if string_copy(global.lightobject, 42, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 42, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 42, '0'); } }
 
             // 火球龟
-            if mouse_x>view_xview[0]+206+ 64 * 2 && mouse_x<view_xview[0]+206+ 64 * (2 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 0 && mouse_y<view_yview[0]+110+ 64 * (0 + 1) {
+            if ed_hit(206+ 64 * 2, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
                 if string_copy(global.lightobject, 43, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 43, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 43, '0'); } }
 
             // 岩浆底部
-            if mouse_x>view_xview[0]+206+ 64 * 3 && mouse_x<view_xview[0]+206+ 64 * (3 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 0 && mouse_y<view_yview[0]+110+ 64 * (0 + 1) {
+            if ed_hit(206+ 64 * 3, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
                 if string_copy(global.lightobject, 44, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 44, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 44, '0'); } }
 
             // 炮台（倒）
-            if mouse_x>view_xview[0]+206+ 64 * 4 && mouse_x<view_xview[0]+206+ 64 * (4 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 0 && mouse_y<view_yview[0]+110+ 64 * (0 + 1) {
+            if ed_hit(206+ 64 * 4, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
                 if string_copy(global.lightobject, 27, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 27, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 27, '0'); } }
 
             // 布布鬼
-            if mouse_x>view_xview[0]+206+ 64 * 0 && mouse_x<view_xview[0]+206+ 64 * (0 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 1 && mouse_y<view_yview[0]+110+ 64 * (1 + 1) {
+            if ed_hit(206+ 64 * 0, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
                 if string_copy(global.lightobject, 45, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 45, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 45, '0'); } }
 
             // 硬壳龟
-            if mouse_x>view_xview[0]+206+ 64 * 1 && mouse_x<view_xview[0]+206+ 64 * (1 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 1 && mouse_y<view_yview[0]+110+ 64 * (1 + 1) {
+            if ed_hit(206+ 64 * 1, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
                 if string_copy(global.lightobject, 46, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 46, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 46, '0'); } }
 
             // 红飞龟
-            if mouse_x>view_xview[0]+206+ 64 * 2 && mouse_x<view_xview[0]+206+ 64 * (2 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 1 && mouse_y<view_yview[0]+110+ 64 * (1 + 1) {
+            if ed_hit(206+ 64 * 2, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
                 if string_copy(global.lightobject, 47, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 47, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 47, '0'); } }
 
             // 蓝乌龟
-            if mouse_x>view_xview[0]+206+ 64 * 3 && mouse_x<view_xview[0]+206+ 64 * (3 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 1 && mouse_y<view_yview[0]+110+ 64 * (1 + 1) {
+            if ed_hit(206+ 64 * 3, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
                 if string_copy(global.lightobject, 48, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 48, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 48, '0'); } }
 
             // 蓝飞龟
-            if mouse_x>view_xview[0]+206+ 64 * 4 && mouse_x<view_xview[0]+206+ 64 * (4 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 1 && mouse_y<view_yview[0]+110+ 64 * (1 + 1) {
+            if ed_hit(206+ 64 * 4, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
                 if string_copy(global.lightobject, 49, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 49, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 49, '0'); } }
 
             // 电珊瑚
-            if mouse_x>view_xview[0]+206+ 64 * 5 && mouse_x<view_xview[0]+206+ 64 * (5 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 1 && mouse_y<view_yview[0]+110+ 64 * (1 + 1) {
+            if ed_hit(206+ 64 * 5, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
                 if string_copy(global.lightobject, 50, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 50, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 50, '0'); } }
 
             // 地刺（MF样式）
-            if mouse_x>view_xview[0]+206+ 64 * 0 && mouse_x<view_xview[0]+206+ 64 * (0 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 0, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 51, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 51, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 51, '0'); } }
 
             // 金乌龟
-            if mouse_x>view_xview[0]+206+ 64 * 1 && mouse_x<view_xview[0]+206+ 64 * (1 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 1, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 52, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 52, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 52, '0'); } }
 
             // 金飞龟
-            if mouse_x>view_xview[0]+206+ 64 * 2 && mouse_x<view_xview[0]+206+ 64 * (2 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 2, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 53, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 53, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 53, '0'); } }
 
             // 静止探照灯
-            if mouse_x>view_xview[0]+206+ 64 * 5 && mouse_x<view_xview[0]+206+ 64 * (5 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 2 && mouse_y<view_yview[0]+110+ 64 * (2 + 1) {
+            if ed_hit(206+ 64 * 5, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 54, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 54, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 54, '0'); } }
 
             // 龟壳
-            if mouse_x>view_xview[0]+206+ 64 * 0 && mouse_x<view_xview[0]+206+ 64 * (0 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 3 && mouse_y<view_yview[0]+110+ 64 * (3 + 1) {
+            if ed_hit(206+ 64 * 0, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 55, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 55, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 55, '0'); } }
 
             // 水管蓝色食人花
-            if mouse_x>view_xview[0]+206+ 64 * 1 && mouse_x<view_xview[0]+206+ 64 * (2 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 3 && mouse_y<view_yview[0]+110+ 64 * (3 + 1) {
+            if ed_hit(206+ 64 * 1, 110+ 64 * 3, 128, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 56, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 56, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 56, '0'); } }
 
             // 水管灰色食人花
-            if mouse_x>view_xview[0]+206+ 64 * 3 && mouse_x<view_xview[0]+206+ 64 * (4 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 3 && mouse_y<view_yview[0]+110+ 64 * (3 + 1) {
+            if ed_hit(206+ 64 * 3, 110+ 64 * 3, 128, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 57, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 57, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 57, '0'); } }
 
             // 灰刺猬云
-            if mouse_x>view_xview[0]+206+ 64 * 5 && mouse_x<view_xview[0]+206+ 64 * (5 + 1) &&
-               mouse_y>view_yview[0]+110+ 64 * 3 && mouse_y<view_yview[0]+110+ 64 * (3 + 1) {
+            if ed_hit(206+ 64 * 5, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 58, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 58, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 58, '0'); } }

@@ -244,8 +244,7 @@ if globaloption>0
     //页面
     if globaloption=1{draw_set_color(c_yellow)}else{draw_set_color(c_white)}
     draw_text(view_xview[0]+450,view_yview[0]+150,string_upper('Game Config'))
-    if mouse_x>view_xview[0]+450 && mouse_x<view_xview[0]+600 &&
-        mouse_y>view_yview[0]+130 && mouse_y<view_yview[0]+160&& kliknieto=0
+    if ed_hit(450, 130, 150, 30)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+450,view_yview[0]+140,1.4,0.8,0,c_white,0.2)
@@ -256,8 +255,7 @@ if globaloption>0
     }
     if globaloption=2{draw_set_color(c_yellow)}else{draw_set_color(c_white)}
     draw_text(view_xview[0]+450,view_yview[0]+200,string_upper('Keyboard Config'))
-    if mouse_x>view_xview[0]+450 && mouse_x<view_xview[0]+600 &&
-        mouse_y>view_yview[0]+180 && mouse_y<view_yview[0]+210&& kliknieto=0
+    if ed_hit(450, 180, 150, 30)&& kliknieto=0
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+450,view_yview[0]+190,1.4,0.8,0,c_white,0.2)
@@ -268,8 +266,7 @@ if globaloption>0
     }
     if globaloption=3{draw_set_color(c_yellow)}else{draw_set_color(c_white)}
     draw_text(view_xview[0]+450,view_yview[0]+250,string_upper('Staff Roll'))
-    if mouse_x>view_xview[0]+450 && mouse_x<view_xview[0]+600 &&
-        mouse_y>view_yview[0]+230 && mouse_y<view_yview[0]+260&& kliknieto=0 &&globaloption!=3
+    if ed_hit(450, 230, 150, 30)&& kliknieto=0 &&globaloption!=3
     {
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+450,view_yview[0]+240,1.4,0.8,0,c_white,0.2)
@@ -291,8 +288,7 @@ if globaloption>0
         draw_text(view_xview[0]+405,view_yview[0]+100,string(global.maxtemp))
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-           mouse_y>view_yview[0]+90 && mouse_y<view_yview[0]+110&& kliknieto=0
+        if ed_hit(40, 90, 190, 20)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+90,1.4,0.8,0,c_white,0.2)
@@ -308,8 +304,7 @@ if globaloption>0
         if global.objectoffset=1{draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+130,string_upper('no'))}
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-           mouse_y>view_yview[0]+120 && mouse_y<view_yview[0]+140&& kliknieto=0
+        if ed_hit(40, 120, 190, 20)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+120,1.4,0.8,0,c_white,0.2)
@@ -325,8 +320,7 @@ if globaloption>0
         if global.displaymode=0{draw_text(view_xview[0]+405,view_yview[0]+160,string_upper('Window Screen'))}
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-           mouse_y>view_yview[0]+150 && mouse_y<view_yview[0]+170&& kliknieto=0
+        if ed_hit(40, 150, 190, 20)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+150,1.4,0.8,0,c_white,0.2)
@@ -343,8 +337,7 @@ if globaloption>0
         if global.smoothmode=-1{draw_text(view_xview[0]+405,view_yview[0]+190,string_upper('No'))}
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-           mouse_y>view_yview[0]+180 && mouse_y<view_yview[0]+200&& kliknieto=0
+        if ed_hit(40, 180, 190, 20)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+180,1.4,0.8,0,c_white,0.2)
@@ -360,8 +353,7 @@ if globaloption>0
         if global.levelsmooth=-1{draw_text(view_xview[0]+405,view_yview[0]+220,string_upper('No'))}
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-           mouse_y>view_yview[0]+210 && mouse_y<view_yview[0]+230&& kliknieto=0
+        if ed_hit(40, 210, 190, 20)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+210,1.4,0.8,0,c_white,0.2)
@@ -377,8 +369,7 @@ if globaloption>0
         if global.assist=0{draw_text(view_xview[0]+405,view_yview[0]+250,string_upper('No'))}
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-           mouse_y>view_yview[0]+240 && mouse_y<view_yview[0]+260&& kliknieto=0
+        if ed_hit(40, 240, 190, 20)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+240,1.4,0.8,0,c_white,0.2)
@@ -394,8 +385,7 @@ if globaloption>0
         draw_text(view_xview[0]+405,view_yview[0]+280,string_upper(global.customMusic))
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-           mouse_y>view_yview[0]+270 && mouse_y<view_yview[0]+290&& kliknieto=0
+        if ed_hit(40, 270, 190, 20)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+270,1.4,0.8,0,c_white,0.2)
@@ -414,8 +404,7 @@ if globaloption>0
         draw_text(view_xview[0]+405,view_yview[0]+310,string(global.initiallives))
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-           mouse_y>view_yview[0]+300 && mouse_y<view_yview[0]+320&& kliknieto=0
+        if ed_hit(40, 300, 190, 20)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+300,1.4,0.8,0,c_white,0.2)
@@ -434,8 +423,7 @@ if globaloption>0
         if global.font_render=0{draw_text(view_xview[0]+405,view_yview[0]+340,string_upper('No'))}
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-           mouse_y>view_yview[0]+330 && mouse_y<view_yview[0]+350&& kliknieto=0
+        if ed_hit(40, 330, 190, 20)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+330,1.4,0.8,0,c_white,0.2)
@@ -456,8 +444,7 @@ if globaloption>0
         draw_text(view_xview[0]+405,view_yview[0]+100,string_upper(keyshow1))
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-           mouse_y>view_yview[0]+90 && mouse_y<view_yview[0]+110&& kliknieto=0
+        if ed_hit(40, 90, 190, 20)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+90,1.4,0.8,0,c_white,0.2)
@@ -479,8 +466,7 @@ if globaloption>0
         draw_text(view_xview[0]+405,view_yview[0]+130,string_upper(keyshow2))
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-           mouse_y>view_yview[0]+120 && mouse_y<view_yview[0]+140&& kliknieto=0
+        if ed_hit(40, 120, 190, 20)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+120,1.4,0.8,0,c_white,0.2)
@@ -502,8 +488,7 @@ if globaloption>0
         draw_text(view_xview[0]+405,view_yview[0]+160,string_upper(keyshow3))
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-           mouse_y>view_yview[0]+150 && mouse_y<view_yview[0]+170&& kliknieto=0
+        if ed_hit(40, 150, 190, 20)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+150,1.4,0.8,0,c_white,0.2)
@@ -525,8 +510,7 @@ if globaloption>0
         draw_text(view_xview[0]+405,view_yview[0]+190,string_upper(keyshow4))
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-           mouse_y>view_yview[0]+180 && mouse_y<view_yview[0]+200&& kliknieto=0
+        if ed_hit(40, 180, 190, 20)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+180,1.4,0.8,0,c_white,0.2)
@@ -548,8 +532,7 @@ if globaloption>0
         draw_text(view_xview[0]+405,view_yview[0]+220,string_upper(keyshow5))
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+230 &&
-           mouse_y>view_yview[0]+210 && mouse_y<view_yview[0]+240&& kliknieto=0
+        if ed_hit(40, 210, 190, 30)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+210,1.4,0.8,0,c_white,0.2)
@@ -571,8 +554,7 @@ if globaloption>0
         draw_text(view_xview[0]+405,view_yview[0]+250,string_upper(keyshow6))
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+260 &&
-           mouse_y>view_yview[0]+240 && mouse_y<view_yview[0]+270&& kliknieto=0
+        if ed_hit(40, 240, 220, 30)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+240,1.4,0.8,0,c_white,0.2)
@@ -594,8 +576,7 @@ if globaloption>0
         draw_text(view_xview[0]+405,view_yview[0]+280,string_upper(keyshow10))
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+260 &&
-           mouse_y>view_yview[0]+270 && mouse_y<view_yview[0]+300&& kliknieto=0
+        if ed_hit(40, 270, 220, 30)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+270,1.4,0.8,0,c_white,0.2)
@@ -623,8 +604,7 @@ if globaloption>0
         draw_text(view_xview[0]+405,view_yview[0]+340,string_upper(keyshow7))
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+260 &&
-           mouse_y>view_yview[0]+330 && mouse_y<view_yview[0]+350&& kliknieto=0
+        if ed_hit(40, 330, 220, 20)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+330,1.4,0.8,0,c_white,0.2)
@@ -647,8 +627,7 @@ if globaloption>0
         draw_text(view_xview[0]+405,view_yview[0]+370,string_upper(keyshow8))
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+260 &&
-           mouse_y>view_yview[0]+360 && mouse_y<view_yview[0]+380&& kliknieto=0
+        if ed_hit(40, 360, 220, 20)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+360,1.4,0.8,0,c_white,0.2)
@@ -671,8 +650,7 @@ if globaloption>0
         draw_text(view_xview[0]+405,view_yview[0]+400,string_upper(keyshow9))
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if mouse_x>view_xview[0]+40 && mouse_x<view_xview[0]+260 &&
-           mouse_y>view_yview[0]+390 && mouse_y<view_yview[0]+410&& kliknieto=0
+        if ed_hit(40, 390, 220, 20)&& kliknieto=0
         {
             draw_set_blend_mode(bm_add)
             draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+390,1.4,0.8,0,c_white,0.2)
@@ -710,9 +688,7 @@ if globaloption>0
         //draw_text(view_xview[0]+40,view_yview[0]+140,string_upper('contact @longzongkuiyan.'))
     }
     //退出
-    if mouse_x>view_xview[0]+561 && mouse_x<view_xview[0]+621 &&
-        mouse_y>view_yview[0]+427 && mouse_y<view_yview[0]+457
-    {
+    if ed_hit(561, 427, 60, 30){
         draw_set_blend_mode(bm_add)
         draw_sprite_ext(s_prefsanim,0,view_xview[0]+561,view_yview[0]+427,0.5,1.3,0,c_white,0.2)
         draw_set_blend_mode(bm_normal)
