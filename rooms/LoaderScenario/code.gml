@@ -68,9 +68,15 @@ global.lastlev=0
 global.jiami=0
 global.toload=''
 
+// 检测密钥是否存在：若密钥脚本缺失则只支持 .smws/.mfs，不显示 .smwp
+get_crypt_key1();
 //select a file to load
 while global.toload=''{
-    global.toload=get_open_filename('All Supported Formats (.smws;.smwp;.mfs)|*.smws;*.smwp;*.mfs|Super Mario Worker Scenario (.smws)|*.smws|Protected Mario Worker Scenario (.smwp)|*.smwp|Mario Worker Scenario(.mfs)|*.mfs','')
+    if crypt_key_arr[0] != 0 {
+        global.toload=get_open_filename('All Supported Formats (.smws;.smwp;.mfs)|*.smws;*.smwp;*.mfs|Super Mario Worker Scenario (.smws)|*.smws|Protected Mario Worker Scenario (.smwp)|*.smwp|Mario Worker Scenario(.mfs)|*.mfs','')
+    } else {
+        global.toload=get_open_filename('All Supported Formats (.smws;.mfs)|*.smws;*.mfs|Super Mario Worker Scenario (.smws)|*.smws|Mario Worker Scenario(.mfs)|*.mfs','')
+    }
     if global.toload=''{
         global.czup=show_question('Do you want to stop loading a scenario?');global.toload=''
         if global.czup=1{global.zamenowane=1;global.toload='cipas';room_goto(title)}

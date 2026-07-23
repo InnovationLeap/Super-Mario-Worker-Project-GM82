@@ -1,7 +1,7 @@
 var aaa, bbb, ccc, ddd, eee, fff, frr, tor, czup, dupa, jiami, bgm, mmm;
 
 //这个变量是新加的，用于保存一份未加密的.smws文件
-var orig_file;
+var orig_file, key_exists;
 
 aaa=0
 czup=0
@@ -40,7 +40,14 @@ if bgm=1 {
     mmm=get_string('Enter the name of your custom music package. The package should be a folder placed along with your scenario file',global.customMusic)
 }
 
-jiami=show_question('Do you want your scenario to be encrypted?');
+// 检测密钥是否存在：未初始化变量为 0 时，若密钥脚本缺失则 crypt_key_arr[0] = 0
+get_crypt_key1();
+key_exists = (crypt_key_arr[0] != 0);
+if key_exists {
+    jiami=show_question('Do you want your scenario to be encrypted?');
+} else {
+    jiami=0;
+}
 fff=''
 
 while fff=''{
