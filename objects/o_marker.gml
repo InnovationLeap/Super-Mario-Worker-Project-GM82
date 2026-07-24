@@ -1906,6 +1906,7 @@ if global.aktywowanykuppa=3//好了开始激动人心的滚屏环节了
     }else{
     nextscroll=firstscroll;
     }
+    if instance_number(o_skuszak)=0{
     // 橙色强滚：镜头X跟随玩家，Y由穿过xcenter的垂线约束（玩家Y不参与计算）
     if firstscroll.is_orange=1{
         if nextscroll!=firstscroll{
@@ -1921,11 +1922,11 @@ if global.aktywowanykuppa=3//好了开始激动人心的滚屏环节了
                 osc_dy=firstscroll.y-osc_prev.y
             }
         }
-        // 垂线：dx*(cx-xcenter)+dy*(cy-ycenter)=0，代入cx=玩家x解出cy
+        // 垂线：dx*(cx-xcenter)+dy*(cy-ycenter)=0，代入cx=实际镜头中心X解出cy
         if osc_dx!=0 and osc_dy!=0{
-            // 一般斜向：X跟玩家，Y= ycenter-dx*(x-xcenter)/dy
+            // 一般斜向：X跟玩家，Y= ycenter-dx*(实际镜头中心X-xcenter)/dy
             view_xview=min(max(0,x-320),room_width-640)
-            view_yview=min(max(0,ycenter-((x-xcenter)*osc_dx)/osc_dy-240),room_height-480)
+            view_yview=min(max(0,ycenter-((view_xview+320-xcenter)*osc_dx)/osc_dy-240),room_height-480)
         }else if osc_dy==0{
             // 纯水平：X锁在xcenter，Y跟玩家
             view_xview=min(max(xcenter-320,0),room_width-640)
@@ -1938,6 +1939,7 @@ if global.aktywowanykuppa=3//好了开始激动人心的滚屏环节了
     }else{
         view_xview=min(max(xcenter-320,0),room_width-640)
         view_yview=min(max(ycenter-240,0),room_height-480)
+    }
     }
 }
 
