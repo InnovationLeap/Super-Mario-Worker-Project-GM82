@@ -136,8 +136,9 @@ case 23:
     lastscroll=ds_list_find_value(global.autoscrolls,autoscrollnum-1)//上一个恶劣强滚
     draw_text(x,y,autoscrollnum)
     draw_text(x+32,y+32,scrollspeed)
-    if is_orange=1{draw_set_color(c_orange)}else{draw_set_color(c_green)}
-    if (lastscroll != 0){draw_line(lastscroll.x+16,lastscroll.y+16,x+16,y+16)}
+    if (lastscroll != 0){
+        if lastscroll.is_orange=1{draw_set_color(c_orange)}else{draw_set_color(c_green)}
+        draw_line(lastscroll.x+16,lastscroll.y+16,x+16,y+16)}
     if (mouse_x>=x && mouse_x<x+32 && mouse_y>=y && mouse_y<y+32)||scrolledge=1{
         if is_orange=1{draw_set_color(c_orange)}else{draw_set_color(c_green)}
         draw_rectangle(x+16-320,y+16-240,x+16+320,y+16+240,true)
