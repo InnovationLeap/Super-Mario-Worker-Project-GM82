@@ -193,6 +193,8 @@ spring_settled_y=0
 prev_osc_dx=0
 prev_osc_dy=0
 prev_aktywowanykuppa=0
+spring_timer_x=0
+spring_timer_y=0
 //附加参数，记得最后去掉
 //global.MFbeet=1
 vvvv=mm_get_volume(global.musicplay)
@@ -1953,6 +1955,8 @@ if global.aktywowanykuppa=3//好了开始激动人心的滚屏环节了
         if prev_aktywowanykuppa!=2 && prev_aktywowanykuppa!=3{
             spring_settled_x=1
             spring_settled_y=1
+            spring_timer_x=0
+            spring_timer_y=0
             prev_osc_dx=osc_dx
             prev_osc_dy=osc_dy
         }
@@ -1960,14 +1964,19 @@ if global.aktywowanykuppa=3//好了开始激动人心的滚屏环节了
         if osc_dx!=prev_osc_dx or osc_dy!=prev_osc_dy{
             spring_settled_x=0
             spring_settled_y=0
+            spring_timer_x=0
+            spring_timer_y=0
             prev_osc_dx=osc_dx
             prev_osc_dy=osc_dy
         }
+        // 两阶段追击：前warmup帧阻尼弹簧（平滑启动），之后匀速强追（不惧运动目标）
+        var warmup_frames;
+        warmup_frames=15
         var k_safe,k_emergency,margin;
         k_safe=0.02
         k_emergency=0.20
         margin=80
-        var screen_x,screen_y,danger_x,danger_y,k,d,target;
+        var screen_x,screen_y,danger_x,danger_y,k,d,target,diff;
         screen_x=x-view_xview
         screen_y=y-view_yview
         danger_x=0
@@ -1977,15 +1986,30 @@ if global.aktywowanykuppa=3//好了开始激动人心的滚屏环节了
         if screen_y<margin{danger_y=1-screen_y/margin}
         if screen_y>480-margin{danger_y=max(danger_y,(screen_y-(480-margin))/margin)}
         if osc_dx!=0 and osc_dy!=0{
-            // 一般斜向：X自由（弹簧→收束后直接跟），Y由垂线约束
+            // 一般斜向：X自由（阻尼→匀速），Y由垂线约束
             if spring_settled_x=0{
+                spring_timer_x+=1
                 target=clamp(x-320,0,room_width-640)
-                k=k_safe+(k_emergency-k_safe)*danger_x
-                d=2*sqrt(k)
-                spring_vx+=k*(target-view_xview)-d*spring_vx
-                view_xview+=spring_vx
-                if abs(target-view_xview)<1 && abs(spring_vx)<1{
-                    view_xview=target;spring_vx=0;spring_settled_x=1
+                diff=target-view_xview
+                if spring_timer_x>=60{
+                    view_xview=target;spring_vx=0;spring_settled_x=1;spring_timer_x=0
+                }else if spring_timer_x<warmup_frames{
+                    k=k_safe+(k_emergency-k_safe)*danger_x
+                    d=2*sqrt(k)
+                    spring_vx+=k*diff-d*spring_vx
+                    view_xview+=spring_vx
+                    if abs(diff)<1 && abs(spring_vx)<1{
+                        view_xview=target;spring_vx=0;spring_settled_x=1;spring_timer_x=0
+                    }
+                }else{
+                    // 匀速追击：距离比例+20px下限，确保比玩家任何运动都快
+                    k=max(abs(diff)*0.15,20)
+                    if abs(diff)<=k{
+                        view_xview=target;spring_vx=0;spring_settled_x=1;spring_timer_x=0
+                    }else{
+                        view_xview+=sign(diff)*k
+                        spring_vx=sign(diff)*k
+                    }
                 }
             }else{
                 view_xview=clamp(x-320,0,room_width-640)
@@ -1993,31 +2017,59 @@ if global.aktywowanykuppa=3//好了开始激动人心的滚屏环节了
             view_yview=clamp(ycenter-((view_xview+320-xcenter)*osc_dx)/osc_dy-240,0,room_height-480)
             spring_vy=0
         }else if osc_dy==0{
-            // 纯水平：X锁定，Y自由（弹簧→收束后直接跟）
+            // 纯水平：X锁定，Y自由（阻尼→匀速）
             view_xview=clamp(xcenter-320,0,room_width-640)
             spring_vx=0
             if spring_settled_y=0{
+                spring_timer_y+=1
                 target=clamp(y-240,0,room_height-480)
-                k=k_safe+(k_emergency-k_safe)*danger_y
-                d=2*sqrt(k)
-                spring_vy+=k*(target-view_yview)-d*spring_vy
-                view_yview+=spring_vy
-                if abs(target-view_yview)<1 && abs(spring_vy)<1{
-                    view_yview=target;spring_vy=0;spring_settled_y=1
+                diff=target-view_yview
+                if spring_timer_y>=60{
+                    view_yview=target;spring_vy=0;spring_settled_y=1;spring_timer_y=0
+                }else if spring_timer_y<warmup_frames{
+                    k=k_safe+(k_emergency-k_safe)*danger_y
+                    d=2*sqrt(k)
+                    spring_vy+=k*diff-d*spring_vy
+                    view_yview+=spring_vy
+                    if abs(diff)<1 && abs(spring_vy)<1{
+                        view_yview=target;spring_vy=0;spring_settled_y=1;spring_timer_y=0
+                    }
+                }else{
+                    k=max(abs(diff)*0.15,20)
+                    if abs(diff)<=k{
+                        view_yview=target;spring_vy=0;spring_settled_y=1;spring_timer_y=0
+                    }else{
+                        view_yview+=sign(diff)*k
+                        spring_vy=sign(diff)*k
+                    }
                 }
             }else{
                 view_yview=clamp(y-240,0,room_height-480)
             }
         }else{
-            // 纯垂直(dx==0)：X自由（弹簧→收束后直接跟），Y锁定
+            // 纯垂直(dx==0)：X自由（阻尼→匀速），Y锁定
             if spring_settled_x=0{
+                spring_timer_x+=1
                 target=clamp(x-320,0,room_width-640)
-                k=k_safe+(k_emergency-k_safe)*danger_x
-                d=2*sqrt(k)
-                spring_vx+=k*(target-view_xview)-d*spring_vx
-                view_xview+=spring_vx
-                if abs(target-view_xview)<1 && abs(spring_vx)<1{
-                    view_xview=target;spring_vx=0;spring_settled_x=1
+                diff=target-view_xview
+                if spring_timer_x>=60{
+                    view_xview=target;spring_vx=0;spring_settled_x=1;spring_timer_x=0
+                }else if spring_timer_x<warmup_frames{
+                    k=k_safe+(k_emergency-k_safe)*danger_x
+                    d=2*sqrt(k)
+                    spring_vx+=k*diff-d*spring_vx
+                    view_xview+=spring_vx
+                    if abs(diff)<1 && abs(spring_vx)<1{
+                        view_xview=target;spring_vx=0;spring_settled_x=1;spring_timer_x=0
+                    }
+                }else{
+                    k=max(abs(diff)*0.15,20)
+                    if abs(diff)<=k{
+                        view_xview=target;spring_vx=0;spring_settled_x=1;spring_timer_x=0
+                    }else{
+                        view_xview+=sign(diff)*k
+                        spring_vx=sign(diff)*k
+                    }
                 }
             }else{
                 view_xview=clamp(x-320,0,room_width-640)
