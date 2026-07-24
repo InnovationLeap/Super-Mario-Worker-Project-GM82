@@ -558,3 +558,4 @@ s_setlight
 s_thwompdetector
 s_lightlava
 s_rotomask
+s_autoscrollmask

@@ -106,6 +106,7 @@
 	|sprite179
 	|s_setlight
 	|s_rotomask
+	|s_autoscrollmask
 +s_fonts
 	|s_edfonts
 	|txt_mariofonts
