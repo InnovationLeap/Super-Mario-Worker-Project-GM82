@@ -186,6 +186,12 @@ inedit=0
 stuck=0
 sound_text=0
 orange_recover=0
+spring_vx=0
+spring_vy=0
+spring_settled_x=0
+spring_settled_y=0
+prev_osc_dx=0
+prev_osc_dy=0
 //附加参数，记得最后去掉
 //global.MFbeet=1
 vvvv=mm_get_volume(global.musicplay)
@@ -1941,20 +1947,78 @@ if global.aktywowanykuppa=3//好了开始激动人心的滚屏环节了
                 osc_dy=firstscroll.y-osc_prev.y
             }
         }
-        // 垂线：dx*(cx-xcenter)+dy*(cy-ycenter)=0，代入cx=实际镜头中心X解出cy
-        if osc_dx!=0 and osc_dy!=0{
-            // 一般斜向：X跟玩家，Y= ycenter-dx*(实际镜头中心X-xcenter)/dy
-            view_xview=min(max(0,x-320),room_width-640)
-            view_yview=min(max(0,ycenter-((view_xview+320-xcenter)*osc_dx)/osc_dy-240),room_height-480)
-        }else if osc_dy==0{
-            // 纯水平：X锁在xcenter，Y跟玩家
-            view_xview=min(max(xcenter-320,0),room_width-640)
-            view_yview=min(max(0,y-240),room_height-480)
-        }else{
-            // 纯垂直(dx==0)：X跟玩家，Y锁在ycenter
-            view_xview=min(max(0,x-320),room_width-640)
-            view_yview=min(max(ycenter-240,0),room_height-480)
+        // 自适应阻尼弹簧过渡：仅用于初次追上玩家，收束后切回直接跟随
+        // 检测滚屏方向是否改变 → 重置收束状态
+        if osc_dx!=prev_osc_dx or osc_dy!=prev_osc_dy{
+            spring_settled_x=0
+            spring_settled_y=0
+            prev_osc_dx=osc_dx
+            prev_osc_dy=osc_dy
         }
+        var k_safe,k_emergency,margin;
+        k_safe=0.02
+        k_emergency=0.20
+        margin=80
+        var screen_x,screen_y,danger_x,danger_y,k,d,target;
+        screen_x=x-view_xview
+        screen_y=y-view_yview
+        danger_x=0
+        danger_y=0
+        if screen_x<margin{danger_x=1-screen_x/margin}
+        if screen_x>640-margin{danger_x=max(danger_x,(screen_x-(640-margin))/margin)}
+        if screen_y<margin{danger_y=1-screen_y/margin}
+        if screen_y>480-margin{danger_y=max(danger_y,(screen_y-(480-margin))/margin)}
+        if osc_dx!=0 and osc_dy!=0{
+            // 一般斜向：X自由（弹簧→收束后直接跟），Y由垂线约束
+            if spring_settled_x=0{
+                target=clamp(x-320,0,room_width-640)
+                k=k_safe+(k_emergency-k_safe)*danger_x
+                d=2*sqrt(k)
+                spring_vx+=k*(target-view_xview)-d*spring_vx
+                view_xview+=spring_vx
+                if abs(target-view_xview)<1 && abs(spring_vx)<1{
+                    view_xview=target;spring_vx=0;spring_settled_x=1
+                }
+            }else{
+                view_xview=clamp(x-320,0,room_width-640)
+            }
+            view_yview=clamp(ycenter-((view_xview+320-xcenter)*osc_dx)/osc_dy-240,0,room_height-480)
+            spring_vy=0
+        }else if osc_dy==0{
+            // 纯水平：X锁定，Y自由（弹簧→收束后直接跟）
+            view_xview=clamp(xcenter-320,0,room_width-640)
+            spring_vx=0
+            if spring_settled_y=0{
+                target=clamp(y-240,0,room_height-480)
+                k=k_safe+(k_emergency-k_safe)*danger_y
+                d=2*sqrt(k)
+                spring_vy+=k*(target-view_yview)-d*spring_vy
+                view_yview+=spring_vy
+                if abs(target-view_yview)<1 && abs(spring_vy)<1{
+                    view_yview=target;spring_vy=0;spring_settled_y=1
+                }
+            }else{
+                view_yview=clamp(y-240,0,room_height-480)
+            }
+        }else{
+            // 纯垂直(dx==0)：X自由（弹簧→收束后直接跟），Y锁定
+            if spring_settled_x=0{
+                target=clamp(x-320,0,room_width-640)
+                k=k_safe+(k_emergency-k_safe)*danger_x
+                d=2*sqrt(k)
+                spring_vx+=k*(target-view_xview)-d*spring_vx
+                view_xview+=spring_vx
+                if abs(target-view_xview)<1 && abs(spring_vx)<1{
+                    view_xview=target;spring_vx=0;spring_settled_x=1
+                }
+            }else{
+                view_xview=clamp(x-320,0,room_width-640)
+            }
+            view_yview=clamp(ycenter-240,0,room_height-480)
+            spring_vy=0
+        }
+        view_xview=clamp(view_xview,0,room_width-640)
+        view_yview=clamp(view_yview,0,room_height-480)
     }else{
         view_xview=min(max(xcenter-320,0),room_width-640)
         view_yview=min(max(ycenter-240,0),room_height-480)
