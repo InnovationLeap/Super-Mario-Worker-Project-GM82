@@ -1,6 +1,6 @@
 # Super Mario Worker Project - Changelog
 
-## v1.7.13-beta1
+## v1.7.13-beta1 (2026-07-25)
 ### Core Improvements
 - Upgraded game engine to Game Maker 8.2.
 - Updated FoxWriting DLL, completely fixing the issue where SMWP could not launch on some new Intel hardware.
