@@ -46,6 +46,7 @@ var aa,ab;
 
     if argument0='2' && coto=23{//强滚存储速度
     aa=string_insert(real_string_length(scrollspeed*100,3),aa,string_length(aa)+1)
+    aa=string_insert(string(is_orange),aa,string_length(aa)+1)
     }
     if argument0='2' && coto=25{//新桥存储性状和样式
     aa=string_insert(real_string_length(type,3),aa,string_length(aa)+1)

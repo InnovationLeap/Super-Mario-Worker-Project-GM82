@@ -40,6 +40,7 @@ global.warpnum=0 //水管配对的编号
 ds_list_destroy(global.autoscrolls)
 global.autoscrolls=ds_list_create()//强滚列表
 global.platformanime=0//悬浮桥默认样式
+global.scrollorange=0//橙色强滚默认样式
 rotonum=0
 rotonum2=0
 rotox=ds_list_create()
@@ -223,6 +224,9 @@ if real(string_copy(aa,2,2))=37
   if real(string_copy(aa,2,2))=23{
     ds_list_add(global.autoscrolls,ae)
     ae.scrollspeed=real(transA(string_copy(aa,12,3)))/100
+    ae.is_orange=0
+    if string_length(aa)>=15{ae.is_orange=real(string_copy(aa,15,1))}
+    global.scrollorange=ae.is_orange
   }
    //新桥
   if real(string_copy(aa,2,2))=25{

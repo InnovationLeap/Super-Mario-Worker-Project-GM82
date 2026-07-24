@@ -1906,8 +1906,39 @@ if global.aktywowanykuppa=3//好了开始激动人心的滚屏环节了
     }else{
     nextscroll=firstscroll;
     }
-    view_xview=min(max(xcenter-320,0),room_width-640)
-    view_yview=min(max(ycenter-240,0),room_height-480)
+    // 橙色强滚：镜头X跟随玩家，Y由穿过xcenter的垂线约束（玩家Y不参与计算）
+    if firstscroll.is_orange=1{
+        if nextscroll!=firstscroll{
+            osc_dx=nextscroll.x-firstscroll.x
+            osc_dy=nextscroll.y-firstscroll.y
+        }else{
+            // 末尾节点：方向 = 上一→当前，控件不动但镜头继续锁此方向
+            osc_dx=0;osc_dy=0
+            osc_idx=ds_list_find_index(global.autoscrolls,firstscroll)
+            if osc_idx>0{
+                osc_prev=ds_list_find_value(global.autoscrolls,osc_idx-1)
+                osc_dx=firstscroll.x-osc_prev.x
+                osc_dy=firstscroll.y-osc_prev.y
+            }
+        }
+        // 垂线：dx*(cx-xcenter)+dy*(cy-ycenter)=0，代入cx=玩家x解出cy
+        if osc_dx!=0 and osc_dy!=0{
+            // 一般斜向：X跟玩家，Y= ycenter-dx*(x-xcenter)/dy
+            view_xview=min(max(0,x-320),room_width-640)
+            view_yview=min(max(0,ycenter-((x-xcenter)*osc_dx)/osc_dy-240),room_height-480)
+        }else if osc_dy==0{
+            // 纯水平：X锁在xcenter，Y跟玩家
+            view_xview=min(max(xcenter-320,0),room_width-640)
+            view_yview=min(max(0,y-240),room_height-480)
+        }else{
+            // 纯垂直(dx==0)：X跟玩家，Y锁在ycenter
+            view_xview=min(max(0,x-320),room_width-640)
+            view_yview=min(max(ycenter-240,0),room_height-480)
+        }
+    }else{
+        view_xview=min(max(xcenter-320,0),room_width-640)
+        view_yview=min(max(ycenter-240,0),room_height-480)
+    }
 }
 
 if (global.aktywowanykuppa=2 && global.rodzajmaria<>5){//位置矫正1

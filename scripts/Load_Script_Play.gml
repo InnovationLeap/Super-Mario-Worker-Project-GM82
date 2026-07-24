@@ -188,6 +188,7 @@ if string_char_at(aa,1)='2'{
   if ai=21{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_windas);skript=string_insert('('+string(ae)+').type='+string(17)+';',skript,string_length(skript)+1)}
   if ai=22{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),obj_waall)}
   if ai=23{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_scroll);skript=string_insert('('+string(ae)+').scrollspeed='+string(transA(string_copy(aa,12,3)))+'/100;',skript,string_length(skript)+1);
+  if string_length(aa)>=15{skript=string_insert('('+string(ae)+').is_orange='+string_copy(aa,15,1)+';',skript,string_length(skript)+1)}
   ds_list_add(global.autoscrolls,ae)}//恶劣强滚
   if ai=24{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_onlyU)}
   if ai=25{ae=room_instance_add(Play_Room,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_windas);skript=string_insert('('+string(ae)+').type='+string_copy(aa,12,3)+'+6*'+string_copy(aa,15,3)+';',skript,string_length(skript)+1)}

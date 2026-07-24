@@ -1126,6 +1126,8 @@ if wlaczonaopcja=4
     //水位砖预览
     if(global.water_change_type<2){draw_sprite(s_waterchangemasks,global.water_change_type+2*global.lava,view_xview[0]+224+128,view_yview[0]+128+128)}
     else{draw_sprite(s_waterchangemasks,4,view_xview[0]+224+128,view_yview[0]+128+128)}
+    //强滚预览
+    draw_sprite(s_autoscrollmask,global.scrollorange,view_xview[0]+206,view_yview[0]+110+64)
     //遮罩绘制
     draw_sprite_ext(s_edmarkersmask,0,view_xview[0]+400+31,view_yview[0]+240+207,1,1,0,c_white,1)
     //滚轮切换样式设计
@@ -1154,6 +1156,13 @@ if wlaczonaopcja=4
     }
     if mouse_wheel_down() && global.water_change_type<2 && mouse_y>view_yview[0]+128+128-16 && mouse_y<view_yview[0]+128+128+48{//鼠标滚轮向下
         if(mouse_x>view_xview[0]+334)global.water_change_type+=1
+    }
+    // 强滚滚轮切换
+    if mouse_wheel_up() && mouse_y>view_yview[0]+128+64-16 && mouse_y<view_yview[0]+128+64+48{
+        if(mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+206+64){global.scrollorange=0}
+    }
+    if mouse_wheel_down() && mouse_y>view_yview[0]+128+64-16 && mouse_y<view_yview[0]+128+64+48{
+        if(mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+206+64){global.scrollorange=1}
     }
     /*if abs(view_xview[0]+256-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 {draw_sprite_ext(s_left,0,view_xview[0]+256,view_yview[0]+384,1,1,0,c_yellow,1)}else{draw_sprite_ext(s_left,0,view_xview[0]+256,view_yview[0]+384,1,1,0,c_white,1)}
     if abs(view_xview[0]+512-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 {draw_sprite_ext(s_right,0,view_xview[0]+512,view_yview[0]+384,1,1,0,c_yellow,1)} else {draw_sprite_ext(s_right,0,view_xview[0]+512,view_yview[0]+384,1,1,0,c_white,1)}
@@ -1312,18 +1321,23 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         }
     if costawia4=7 && costawia4b=0 && kliknieto=0 /*&& mouse_x>0 &&  mouse_y>0*/ && wiatrak=0
     && menujesie=0 && wlaczonaopcja=0
-    {draw_sprite_ext(s_scrollcenter,0,floor((mouse_x-16)/32)*32+16,floor((mouse_y)/32)*32,1,1,0,c_white,0.2);
-    draw_set_color(c_green);
+    {draw_sprite_ext(s_scrollcenter,global.scrollorange,floor((mouse_x-16)/32)*32+16,floor((mouse_y)/32)*32,1,1,0,c_white,0.2);
+    if global.scrollorange=1{draw_set_color(c_orange)}else{draw_set_color(c_green)};
     draw_rectangle(floor((mouse_x-16)/32+1)*32-320,floor((mouse_y)/32)*32+16-240,floor((mouse_x-16)/32+1)*32+320,floor((mouse_y)/32)*32+16+240,true)
     draw_rectangle(floor((mouse_x-16)/32+1)*32-319,floor((mouse_y)/32)*32+16-239,floor((mouse_x-16)/32+1)*32+319,floor((mouse_y)/32)*32+16+239,true)
     draw_rectangle(floor((mouse_x-16)/32+1)*32-321,floor((mouse_y)/32)*32+16-241,floor((mouse_x-16)/32+1)*32+321,floor((mouse_y)/32)*32+16+241,true)
-    draw_set_color(c_white);}
+    draw_set_color(c_white);
+    // 滚轮切换橙/白类型：上滑白，下滑橙
+    if mouse_wheel_up(){global.scrollorange=0}
+    if mouse_wheel_down(){global.scrollorange=1}
+    }
     if costawia4=7 &&costawia4b=0 && kliknieto=0 && mouse_check_button(mb_left) /*&& mouse_x>0 &&  mouse_y>0*/ && wiatrak=0
     && menujesie=0 && wlaczonaopcja=0 && global.picking = false
     {
         kliknieto=1
         fofo=instance_create(floor((mouse_x-16)/32)*32+16,floor((mouse_y)/32)*32,o_edmarkerblock)
         fofo.coto=23//喝了强滚中心
+        fofo.is_orange=global.scrollorange
         autopair=0 //怨念残留喝了
         ds_list_add(global.autoscrolls,fofo)
         if ds_list_size(global.autoscrolls)=1{

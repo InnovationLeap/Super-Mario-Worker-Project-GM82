@@ -36,6 +36,8 @@ water_endY=0
 
 end_mark = 0
 
+is_orange=0
+
 //img_determine=0
 
 //失败的步事件
@@ -128,28 +130,41 @@ case 23:
     draw_set_color(c_white)
     /*if scrollspeed>3{scrollspeed=3}
     if scrollspeed<1{scrollspeed=1}*/
-    draw_sprite_ext(s_scrollcenter,0,x,y,1,1,0,c_white,0.4)
+    draw_sprite_ext(s_scrollcenter,is_orange,x,y,1,1,0,c_white,0.4)
     draw_set_font(cyferkimario)
     autoscrollnum=ds_list_find_index(global.autoscrolls,id)//编号
     lastscroll=ds_list_find_value(global.autoscrolls,autoscrollnum-1)//上一个恶劣强滚
     draw_text(x,y,autoscrollnum)
     draw_text(x+32,y+32,scrollspeed)
-    draw_set_color(c_green);
+    if is_orange=1{draw_set_color(c_orange)}else{draw_set_color(c_green)}
     if (lastscroll != 0){draw_line(lastscroll.x+16,lastscroll.y+16,x+16,y+16)}
     if (mouse_x>=x && mouse_x<x+32 && mouse_y>=y && mouse_y<y+32)||scrolledge=1{
+        if is_orange=1{draw_set_color(c_orange)}else{draw_set_color(c_green)}
         draw_rectangle(x+16-320,y+16-240,x+16+320,y+16+240,true)
         draw_rectangle(x+16-319,y+16-239,x+16+319,y+16+239,true)
         draw_rectangle(x+16-321,y+16-241,x+16+321,y+16+241,true)}
     draw_set_color(c_white)
     depth=-999
 
+    // 鼠标滚轮切换橙/白类型：上滑白，下滑橙
+    if mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 && global.picking=false{
+        if mouse_wheel_up(){is_orange=0}
+        if mouse_wheel_down(){is_orange=1}
+    }
+
     if mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 && keyboard_check(global.key_submenu) && global.picking=false
     {
-        var sspeed;
-        sspeed=get_integer('Set the scroll speed (unit: 0.01 pixel). Max=6000',scrollspeed*100)
-        sspeed=max(0,sspeed)
-        sspeed=min(sspeed,6000)
-        scrollspeed=sspeed/100
+        var sspeed, menustr, scrollmenu;
+        if is_orange=0{menustr='Set the scroll speed (unit: 0.01 pixel). Max=6000|Switch to orange scroll'}
+        else{menustr='Set the scroll speed (unit: 0.01 pixel). Max=6000|Switch to white scroll'}
+        scrollmenu=show_menu(menustr,-1)
+        if scrollmenu=0{
+            sspeed=get_integer('Set the scroll speed (unit: 0.01 pixel). Max=6000',scrollspeed*100)
+            sspeed=max(0,sspeed)
+            sspeed=min(sspeed,6000)
+            scrollspeed=sspeed/100
+        }
+        if scrollmenu=1{is_orange=1-is_orange}
     }
     /*picking start*/
     if mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 && keyboard_check_pressed(global.key_pick) && o_edmain.costawia4 = 7 && global.picking = false
