@@ -1138,10 +1138,10 @@ if wlaczonaopcja=4
         global.platformanime+=1
     }
 
-    if mouse_wheel_up() && global.yinyangcolor>0 && mouse_y>view_yview[0]+128+64-16 && mouse_y<view_yview[0]+128+64+48{//鼠标滚轮向上
+    if mouse_wheel_up() && global.yinyangcolor>0 && mouse_y>view_yview[0]+128+64-16 && mouse_y<view_yview[0]+128+64+48 && mouse_x>view_xview[0]+224+64*3 && mouse_x<view_xview[0]+224+64*5+64{//鼠标滚轮向上
         global.yinyangcolor-=1
     }
-    if mouse_wheel_down() && global.yinyangcolor<7 && mouse_y>view_yview[0]+128+64-16 && mouse_y<view_yview[0]+128+64+48{//鼠标滚轮向下
+    if mouse_wheel_down() && global.yinyangcolor<7 && mouse_y>view_yview[0]+128+64-16 && mouse_y<view_yview[0]+128+64+48 && mouse_x>view_xview[0]+224+64*3 && mouse_x<view_xview[0]+224+64*5+64{//鼠标滚轮向下
         global.yinyangcolor+=1
     }
 
