@@ -192,6 +192,7 @@ spring_settled_x=0
 spring_settled_y=0
 prev_osc_dx=0
 prev_osc_dy=0
+prev_aktywowanykuppa=0
 //附加参数，记得最后去掉
 //global.MFbeet=1
 vvvv=mm_get_volume(global.musicplay)
@@ -1948,6 +1949,13 @@ if global.aktywowanykuppa=3//好了开始激动人心的滚屏环节了
             }
         }
         // 自适应阻尼弹簧过渡：仅用于初次追上玩家，收束后切回直接跟随
+        // 非滚屏状态下进入的首个橙色节点 → 不应用阻尼，直接跟踪
+        if prev_aktywowanykuppa!=2 && prev_aktywowanykuppa!=3{
+            spring_settled_x=1
+            spring_settled_y=1
+            prev_osc_dx=osc_dx
+            prev_osc_dy=osc_dy
+        }
         // 检测滚屏方向是否改变 → 重置收束状态
         if osc_dx!=prev_osc_dx or osc_dy!=prev_osc_dy{
             spring_settled_x=0
@@ -2046,6 +2054,7 @@ if (global.aktywowanykuppa=3 && global.rodzajmaria<>5){//位置矫正2
     if teledelay>=31{global.aktywowanykuppa=0}
 }
 
+prev_aktywowanykuppa=global.aktywowanykuppa
 }
 
 if global.aktywowanykuppa=4{ //道中库巴战结束后的滚屏修正过程
