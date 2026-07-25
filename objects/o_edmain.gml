@@ -124,6 +124,8 @@ cyferkimario=font_add_sprite(txt_mariofonts,ord('!'),1,0)
 
 draw_set_halign(fa_left)
 
+ed_cp_index=-1 //PageUp/PageDown定位起点/CP的索引
+
 listscroll = 0 //自定义音乐翻页变量
 
 /*
@@ -7124,3 +7126,115 @@ if global.musicon=1{
             if global.local_muzyka>=627{mm_play_ext(global.customMusicDirectory+global.customMusic+'\'+global.customMusicFile[global.local_muzyka-626],0)}
 
            } else { mm_stop_all_ext() }
+#define KeyPress_33
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+var i, a, total, pass, idx, temp, need_swap;
+if wlaczonaopcja=0{
+    total=0
+    
+    // 收集所有起点(coto=19)和CP(coto=20)
+    for (i=0; i<instance_number(o_edmarkerblock); i+=1){
+        a=instance_find(o_edmarkerblock,i)
+        if a.coto=19 || a.coto=20{
+            marker_info[total,0]=a.x
+            marker_info[total,1]=a.y
+            marker_info[total,2]=a.coto
+            total+=1
+        }
+    }
+    
+    if total=0 {exit}
+    
+    // 冒泡排序：起点优先，同类型按x再按y排序
+    for (pass=0; pass<total; pass+=1){
+        for (idx=0; idx<total-1; idx+=1){
+            need_swap=0
+            if marker_info[idx,2]=20 && marker_info[idx+1,2]=19 {need_swap=1}
+            if marker_info[idx,2]=marker_info[idx+1,2]{
+                if marker_info[idx,0]>marker_info[idx+1,0] {need_swap=1}
+                if marker_info[idx,0]=marker_info[idx+1,0] && marker_info[idx,1]>marker_info[idx+1,1] {need_swap=1}
+            }
+            if need_swap=1{
+                temp=marker_info[idx,0]
+                marker_info[idx,0]=marker_info[idx+1,0]
+                marker_info[idx+1,0]=temp
+                temp=marker_info[idx,1]
+                marker_info[idx,1]=marker_info[idx+1,1]
+                marker_info[idx+1,1]=temp
+                temp=marker_info[idx,2]
+                marker_info[idx,2]=marker_info[idx+1,2]
+                marker_info[idx+1,2]=temp
+            }
+        }
+    }
+    
+    // 更新索引 (PageUp: 上一个)
+    if ed_cp_index<0 || ed_cp_index>=total {ed_cp_index=0}
+    ed_cp_index-=1
+    if ed_cp_index<0 {ed_cp_index=total-1}
+    
+    // 移动视口到目标位置
+    // scroolx初始320(32倍数), scrooly初始240(32n+16)，须保持各自对齐
+    scroolx=marker_info[ed_cp_index,0]
+    scrooly=marker_info[ed_cp_index,1]+16
+}
+#define KeyPress_34
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+var k, b, cnt, ps, dx, tp, swp;
+if wlaczonaopcja=0{
+    cnt=0
+    
+    // 收集所有起点(coto=19)和CP(coto=20)
+    for (k=0; k<instance_number(o_edmarkerblock); k+=1){
+        b=instance_find(o_edmarkerblock,k)
+        if b.coto=19 || b.coto=20{
+            cpinfo[cnt,0]=b.x
+            cpinfo[cnt,1]=b.y
+            cpinfo[cnt,2]=b.coto
+            cnt+=1
+        }
+    }
+    
+    if cnt=0 {exit}
+    
+    // 冒泡排序：起点优先，同类型按x再按y排序
+    for (ps=0; ps<cnt; ps+=1){
+        for (dx=0; dx<cnt-1; dx+=1){
+            swp=0
+            if cpinfo[dx,2]=20 && cpinfo[dx+1,2]=19 {swp=1}
+            if cpinfo[dx,2]=cpinfo[dx+1,2]{
+                if cpinfo[dx,0]>cpinfo[dx+1,0] {swp=1}
+                if cpinfo[dx,0]=cpinfo[dx+1,0] && cpinfo[dx,1]>cpinfo[dx+1,1] {swp=1}
+            }
+            if swp=1{
+                tp=cpinfo[dx,0]
+                cpinfo[dx,0]=cpinfo[dx+1,0]
+                cpinfo[dx+1,0]=tp
+                tp=cpinfo[dx,1]
+                cpinfo[dx,1]=cpinfo[dx+1,1]
+                cpinfo[dx+1,1]=tp
+                tp=cpinfo[dx,2]
+                cpinfo[dx,2]=cpinfo[dx+1,2]
+                cpinfo[dx+1,2]=tp
+            }
+        }
+    }
+    
+    // 更新索引 (PageDown: 下一个)
+    if ed_cp_index<0 || ed_cp_index>=cnt {ed_cp_index=0}
+    ed_cp_index+=1
+    if ed_cp_index>=cnt {ed_cp_index=0}
+    
+    // 移动视口到目标位置
+    // scroolx初始320(32倍数), scrooly初始240(32n+16)，须保持各自对齐
+    scroolx=cpinfo[ed_cp_index,0]
+    scrooly=cpinfo[ed_cp_index,1]+16
+}
