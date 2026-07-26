@@ -30,6 +30,7 @@ global.light_obj_list = ds_list_create();
 //if !!sound_isplaying(INL){
 //room_goto_next()}
 instance_create(0,0,o_welcome)
+instance_create(0,0,o_screenshot)
 room_caption='Super Mario Worker Project '+global.versiontext
 global.autoscrolls = ds_list_create();
 if !file_exists(working_directory+'\temp\TempSettings.ini'){
@@ -132,8 +133,8 @@ global.font_render = ini_read_real('GameConfig','2xFontRender',0)
 
 ini_close()
 // 找到下一个可用的截图编号
-global.screenshot_count=0
-while (file_exists(working_directory+'\screen_shot_'+string(global.screenshot_count)+'.bmp')){
+global.screenshot_count=100
+while (file_exists(working_directory+'\screenshot'+string(global.screenshot_count)+'.png')){
     global.screenshot_count+=1
 }
 

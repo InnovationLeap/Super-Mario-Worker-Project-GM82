@@ -185,18 +185,6 @@ if global.bgp=2 && !keyboard_check_pressed(global.key_bgpanel) {global.bgp=0}
 if keyboard_check_pressed(global.key_bgpanel) && global.bgp=0 {global.bgp=3}
 if global.bgp=3 && !keyboard_check_pressed(global.key_bgpanel) {global.bgp=1}
 
-// F9 截图
-if keyboard_check_pressed(global.key_f9){
-    var sshot_fname;
-    sshot_fname = working_directory + '\screen_shot_' + string(global.screenshot_count) + '.bmp'
-    while (file_exists(sshot_fname)){
-        global.screenshot_count += 1
-        sshot_fname = working_directory + '\screen_shot_' + string(global.screenshot_count) + '.bmp'
-    }
-    screen_save(sshot_fname)
-    global.screenshot_count += 1
-}
-
 // F11 平滑模式切换（仅编辑器内有效，平滑模式原本是测试功能）
 if keyboard_check_pressed(global.key_f11){
     global.smoothmode = -global.smoothmode
