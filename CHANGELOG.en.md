@@ -57,7 +57,7 @@
 - Fixed a bug where the level clear sound effect would play after returning to the title screen and waiting for a while.
 - Fixed a bug where, if the level music was set to No Music, the Starman music would never stop once it started playing.
 - Fixed an issue where Scene Controllers would override the invincibility music before the Starman state expired.
-### Other
+### Miscellaneous
 - Updated INNOVATION LEAP Logo animation.
 - Updated main menu links: Home now points to the SMWP official website, Help points to SMWP's MF Wiki page, and Upload Download now links to `download.marioforever.net`.
 - Removed Softendo logo from the Title Screen.
@@ -81,7 +81,7 @@
 - Fixed a bug that cause multiple coins, bonuses or scenary to be placed at the same position.
 - Fixed a bug where moving shells could cause 1UP score cycling by hitting Spiny Eggs.
 - Fixed an inconsistency between the white pipe tileset and the Solid White Pipe.
-### Other
+### Miscellaneous
 - Added version number to the window title.
 - Removed the update checker. The game now directly shows the INNOVATION LEAP Logo and enters the title screen upon launch.
 
@@ -126,7 +126,7 @@
 - Fixed an issue where Imitators were displayed on top of Blocks in the editor.
 - Fixed a bug in v1.7.7 where switching from Block mode to Imitator mode prevents Accurate Move.
 - Fixed a bug where Auto Fluid did not work when the initial water level was equal to the Auto Fluid's first target height (T1).
-### Other
+### Miscellaneous
 - Added an update check feature and restored the loading screen. (Update checker can be disabled in the settings.)
 
 ## v1.7.7 (2021-05-03)
@@ -151,7 +151,7 @@
 - Fixed pitch distortion issues with `ktkm38.dll` BGM playback.
 - Fixed overly dark appearance of Dark Clouds in the editor.
 - Fixed a bug where a Roto-disc located at coordinates (0, 0) would disappear.
-### Other
+### Miscellaneous
 - Updated INNOVATION LEAP logo.
 
 ## v1.7.6 (2020-07-27)
@@ -346,7 +346,7 @@
 - Fixed an issue where Blue Flying Cheep Cheeps could be defeated by fireballs or beetroots. (2019-02-14)
 - Fixed an issue where overlapping the starting position and Green Mushroom would incorrectly grant an extra life upon respawning at a Check Point. (2019-02-16)
 - Fixed an issue where Roto-Disc paths and numbers appeared red under certain conditions. (2019-02-17)
-### Other
+### Miscellaneous
 - Added an Options page to the title screen, allowing adjustment of the maximum number of temporary files. (2019-02-13)
 - Added an option "Object Offset Correct," defaulting to "No." When enabled, the editor displays objects exactly as they appear in-game. (2019-02-13)
 - Added configurable key bindings. (2019-02-13)
@@ -378,7 +378,7 @@
 - Fixed an issue in Camera Mode where Mario would fall vertically without control or be carried away by moving platforms. (2018-08-26)
 - Fixed an issue where fireballs could pass upward through solids. (2018-08-27)
 - Fixed several wall-clipping issues while Modified Movement is enabled. (2018-08-27)
-### Other
+### Miscellaneous
 - Replaced SXMS with MaizeMusic. (2018-08-27)
 
 ## v1.5.0 (2018-08-19)
@@ -428,7 +428,7 @@
 - Fixed clipping at sealer solids. (2018-08-18)
 - Fixed an issue with Bill Blasters firing range. (2018-08-18)
 - Fixed an issue where Yellow Paratroopas ignored time-stop effects when passing a level. (2018-08-18)
-### Other
+### Miscellaneous
 - Added a new music pack Super Mario Series and updated the music selection screen. (2018-08-15)
 
 ## v1.4.5 (2018-07-13)
@@ -452,7 +452,7 @@
 ### In Game
 - Rewrote the `.smws` file loading mechanism and modified the encryption method for `.smwp` files. (This version is NOT compatible with `.smwp` files from v1.4.0, vice versa.) (2018-03-18)
 - Added an experimental feature: Smooth Mode for gameplay. Press `F11` during gameplay to toggle. (2018-03-18)
-### Other
+### Miscellaneous
 - Added a temporary folder for automatic file backups. Each time a level is saved, including instant test saves triggered by `F3` / `F4`, a backup file named `temp_xxx.smwl` is automatically created in this folder. (2018-03-18)
 
 ## v1.4.0 (2018-02-28)
@@ -523,7 +523,7 @@
 - Fixed an issue where water level didn't follow when panning levels with `F7`. (2018-02-27)
 - Fixed an issue where Red Koopa could walk into solids when falling too close to them. (2018-02-27)
 - Fixed hidden ?-block collision issue with Buzzy Beetle shell. (2018-02-27)
-### Other
+### Miscellaneous
 - Rewrote background rendering code. (2018-02-01)
 - Consolidated all background music into the `Data` folder. (2018-02-01)
 
@@ -571,7 +571,7 @@
 - Fixed leftover Passage data in game. (2017-08-05)
 - Fixed a bug where clicking Cancel in the file selector after pressing Load in the editor caused all objects to disappear. (2017-08-05)
 - Fixed issue where background #10 appeared as background #1 in the editor. (2017-08-05)
-### Other
+### Miscellaneous
 - Treated uninitialized variables as value 0. (2017-08-02)
 - Redesigned the loading screen. (2017-08-04)
 
@@ -714,7 +714,7 @@
 - Restored original sky background and blue brick graphics. (2016-07-02)
 - Adjusted the plus and minus symbols in the in-game font. (2016-07-07)
 - Expanded Bowser's HP bar to 20 segments. (2016-07-07)
-### Other
+### Miscellaneous
 - Changed window title to `Super Mario Worker Project`. (2016-07-07)
 
 ## v0.2.2 (2016-07-02)
@@ -752,7 +752,7 @@
 - Fixed graphic issue with coin bricks. (2016-06-22)
 - Fixed the image issue with Thwomp smiling. (2016-06-22)
 - Fixed issue where touching the goal after death still triggered level clear. (2016-06-27)
-### Other
+### Miscellaneous
 - Added error log autosaving when the game occurs errors. (2015-12-30)
 - Removed the original Mario Worker loading screen and replaced it with the INNOVATION LEAP logo. (2016-06-27)
 
@@ -797,6 +797,6 @@
 - Fixed afterimage effect remaining after death during Starman state. (2015-07-17)
 - Fixed occasional issue where upward moving platforms could not be stepped on. (2015-07-17)
 - Fixed level name reverting to `Level1` when loading a saved level. (2015-07-18)
-### Other
+### Miscellaneous
 - Changed homepage link on loading screen to `www.baidu.com`. (2015-07-18)
 - Replaced loading screen music with `ktkm35`. (2015-07-18)
