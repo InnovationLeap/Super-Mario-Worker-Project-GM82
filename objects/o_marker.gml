@@ -2457,7 +2457,7 @@ if global.coins>99 {global.coins=0; global.zycia+=1;if global.sample=1 {fofo=sou
 if prawdziwyczas=0 && global.przeszedllevel=0 {global.rodzajmaria=0; oberwal=1 ; shield=0} //时间归零死亡
 
 
-if keyboard_check_pressed(vk_f2){
+if keyboard_check_pressed(global.key_f2){
     global.beep=1-global.beep
     sound_text = 1
 }
@@ -2470,7 +2470,7 @@ if sound_text>0{
 
 if sound_text>60 {sound_text=0}
 
-if keyboard_check_pressed(vk_f11) && global.smooth_allowed{
+if keyboard_check_pressed(global.key_f11) && global.smooth_allowed{
     global.newsmooth=1-global.newsmooth
     smooth_text = 1
 }
@@ -2485,7 +2485,7 @@ if smooth_text>60 {smooth_text=0}
 
 var line_spacing;
 line_spacing = 24;
-if keyboard_check(vk_f1){
+if keyboard_check(global.key_f1){
     room_caption = '[Level Author]: ' + global.etapautor + ' (' + string(global.gameversion) + ')'
     draw_text(view_xview[0]+32,view_yview[0]+464 - line_spacing * 6, 'MODIFIED MOVEMENT: ' + yes_no(global.modifiedmov))
     draw_text(view_xview[0]+32,view_yview[0]+464 - line_spacing * 5, 'ADVANCED SWITCH: ' + yes_no(global.advswitch))

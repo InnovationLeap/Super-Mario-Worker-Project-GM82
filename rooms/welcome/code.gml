@@ -72,10 +72,70 @@ global.restartlevelkey=ini_read_real('KeyConfig','restartlevel',ord('Q'))
 global.key_pick=ini_read_real('KeyConfig','pick',ord('E'))
 global.key_select=ini_read_real('KeyConfig','accurate_move',ord('Z'))
 global.key_submenu=ini_read_real('KeyConfig','submenu',ord('Q'))
+
+// 编辑器画布滚动键（独立于游戏移动键）
+global.key_ed_up=ini_read_real('KeyConfig','ed_up',vk_up)
+global.key_ed_down=ini_read_real('KeyConfig','ed_down',vk_down)
+global.key_ed_left=ini_read_real('KeyConfig','ed_left',vk_left)
+global.key_ed_right=ini_read_real('KeyConfig','ed_right',vk_right)
+
+// 编辑器缩放键
+global.key_zoomin=ini_read_real('KeyConfig','zoomin',189)
+global.key_zoomout=ini_read_real('KeyConfig','zoomout',187)
+
+// 编辑器功能键
+global.key_musictoggle=ini_read_real('KeyConfig','musictoggle',vk_f8)
+global.key_autopair=ini_read_real('KeyConfig','autopair',vk_f12)
+global.key_bgpanel=ini_read_real('KeyConfig','bgpanel',vk_f6)
+global.key_ed_cancel=ini_read_real('KeyConfig','ed_cancel',vk_escape)
+
+// 编辑器画布滚动键 第二绑定（默认 WASD）
+global.key_ed_up_2=ini_read_real('KeyConfig','ed_up_2',ord('W'))
+global.key_ed_down_2=ini_read_real('KeyConfig','ed_down_2',ord('S'))
+global.key_ed_left_2=ini_read_real('KeyConfig','ed_left_2',ord('A'))
+global.key_ed_right_2=ini_read_real('KeyConfig','ed_right_2',ord('D'))
+
+// F 键（F6/F8/F12 已被上面的全局变量映射）
+global.key_f1=ini_read_real('KeyConfig','f1',vk_f1)
+global.key_f2=ini_read_real('KeyConfig','f2',vk_f2)
+global.key_f3=ini_read_real('KeyConfig','f3',vk_f3)
+global.key_f4=ini_read_real('KeyConfig','f4',vk_f4)
+global.key_f5=ini_read_real('KeyConfig','f5',vk_f5)
+global.key_f7=ini_read_real('KeyConfig','f7',vk_f7)
+global.key_f9=ini_read_real('KeyConfig','f9',vk_f9)
+global.key_f10=ini_read_real('KeyConfig','f10',vk_f10)
+global.key_f11=ini_read_real('KeyConfig','f11',vk_f11)
+
+// 编辑器保存/读取（Ctrl 组合键的字母部分）
+global.key_ed_save=ini_read_real('KeyConfig','ed_save',ord('S'))
+global.key_ed_load=ini_read_real('KeyConfig','ed_load',ord('L'))
+
+// 编辑器水位调节键
+global.key_waterup=ini_read_real('KeyConfig','waterup',vk_add)
+global.key_waterdown=ini_read_real('KeyConfig','waterdown',vk_subtract)
+
+// 编辑器精确移动方向键
+global.key_acc_up=ini_read_real('KeyConfig','acc_up',vk_up)
+global.key_acc_down=ini_read_real('KeyConfig','acc_down',vk_down)
+global.key_acc_left=ini_read_real('KeyConfig','acc_left',vk_left)
+global.key_acc_right=ini_read_real('KeyConfig','acc_right',vk_right)
+
+// 编辑器精确移动大步键
+global.key_acc_bigup=ini_read_real('KeyConfig','acc_bigup',ord('R'))
+global.key_acc_bigdown=ini_read_real('KeyConfig','acc_bigdown',ord('F'))
+global.key_acc_bigleft=ini_read_real('KeyConfig','acc_bigleft',ord('D'))
+global.key_acc_bigright=ini_read_real('KeyConfig','acc_bigright',ord('G'))
+
 global.customMusic = ini_read_string('GameConfig','CustomMusicPackage','Example')
 global.initiallives = ini_read_real('GameConfig','InitialLives',4)
 global.font_render = ini_read_real('GameConfig','2xFontRender',0)
+
 ini_close()
+// 找到下一个可用的截图编号
+global.screenshot_count=0
+while (file_exists(working_directory+'\screen_shot_'+string(global.screenshot_count)+'.bmp')){
+    global.screenshot_count+=1
+}
 
 //EncodingConv init
 ec_init();

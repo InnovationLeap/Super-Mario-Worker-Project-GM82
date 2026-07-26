@@ -160,16 +160,16 @@ action_id=603
 applies_to=self
 */
 global.muzyka=real(global.muzyka)
-if keyboard_check_pressed(vk_f8) && global.musicon=1 {SXMS_C_Stop();global.musicon=2}
-if keyboard_check_pressed(vk_f8) && global.musicon=0 {global.musicon=3}
-if global.musicon=2 && !keyboard_check_pressed(vk_f8) {global.musicon=0}
-if global.musicon=3 && !keyboard_check_pressed(vk_f8) {global.musicon=1}
+if keyboard_check_pressed(global.key_musictoggle) && global.musicon=1 {SXMS_C_Stop();global.musicon=2}
+if keyboard_check_pressed(global.key_musictoggle) && global.musicon=0 {global.musicon=3}
+if global.musicon=2 && !keyboard_check_pressed(global.key_musictoggle) {global.musicon=0}
+if global.musicon=3 && !keyboard_check_pressed(global.key_musictoggle) {global.musicon=1}
 
 global.autopair=real(global.autopair)
-if keyboard_check_pressed(vk_f12) && global.autopair=1 {global.autopair=2}
-if keyboard_check_pressed(vk_f12) && global.autopair=0 {global.autopair=3}
-if global.autopair=2 && !keyboard_check_pressed(vk_f12) {global.autopair=0}
-if global.autopair=3 && !keyboard_check_pressed(vk_f12) {global.autopair=1}
+if keyboard_check_pressed(global.key_autopair) && global.autopair=1 {global.autopair=2}
+if keyboard_check_pressed(global.key_autopair) && global.autopair=0 {global.autopair=3}
+if global.autopair=2 && !keyboard_check_pressed(global.key_autopair) {global.autopair=0}
+if global.autopair=3 && !keyboard_check_pressed(global.key_autopair) {global.autopair=1}
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
@@ -180,10 +180,27 @@ if global.paralax<>view_xview[0]+320 {global.paralax2=view_xview[0]+320-global.p
 
 
 
-if keyboard_check_pressed(vk_f6) && global.bgp=1 {global.bgp=2}
-if global.bgp=2 && !keyboard_check_pressed(vk_f6) {global.bgp=0}
-if keyboard_check_pressed(vk_f6) && global.bgp=0 {global.bgp=3}
-if global.bgp=3 && !keyboard_check_pressed(vk_f6) {global.bgp=1}
+if keyboard_check_pressed(global.key_bgpanel) && global.bgp=1 {global.bgp=2}
+if global.bgp=2 && !keyboard_check_pressed(global.key_bgpanel) {global.bgp=0}
+if keyboard_check_pressed(global.key_bgpanel) && global.bgp=0 {global.bgp=3}
+if global.bgp=3 && !keyboard_check_pressed(global.key_bgpanel) {global.bgp=1}
+
+// F9 截图
+if keyboard_check_pressed(global.key_f9){
+    var sshot_fname;
+    sshot_fname = working_directory + '\screen_shot_' + string(global.screenshot_count) + '.bmp'
+    while (file_exists(sshot_fname)){
+        global.screenshot_count += 1
+        sshot_fname = working_directory + '\screen_shot_' + string(global.screenshot_count) + '.bmp'
+    }
+    screen_save(sshot_fname)
+    global.screenshot_count += 1
+}
+
+// F11 平滑模式切换（仅编辑器内有效，平滑模式原本是测试功能）
+if keyboard_check_pressed(global.key_f11){
+    global.smoothmode = -global.smoothmode
+}
 
 
 if global.bgp=1 {
@@ -265,14 +282,14 @@ target_zooms[6] = 7;
 target_zooms[7] = 8;
 
 if wlaczony != 1 && wlaczonaopcja == 0 {
-    if (keyboard_check_pressed(189) || (keyboard_check(vk_control) && mouse_wheel_down())) && ratio_level < 7 {
+    if (keyboard_check_pressed(global.key_zoomin) || (keyboard_check(vk_control) && mouse_wheel_down())) && ratio_level < 7 {
         next_zoom_ratio = target_zooms[ratio_level + 1];
         next_view_wview = 640 * next_zoom_ratio;
         next_view_hview = 480 * next_zoom_ratio;
         if next_view_wview <= room_width && next_view_hview <= room_height {
             ratio_level += 1;
         }
-    } else if (keyboard_check_pressed(187) || (keyboard_check(vk_control) && mouse_wheel_up())) && ratio_level > 0 {
+    } else if (keyboard_check_pressed(global.key_zoomout) || (keyboard_check(vk_control) && mouse_wheel_up())) && ratio_level > 0 {
         ratio_level -= 1;
     }
 }
@@ -339,6 +356,15 @@ if costawia3 <> 42 && change_alpha = 1{
     with(o_edsceneriesblock){if(coto=42)image_alpha = 0.3}
     change_alpha = 0
 }
+
+// 可配置编辑器画布滚动键（Step 检测）- 支持双绑定
+if wlaczony != 1 && wlaczonaopcja == 0 && !keyboard_check(global.key_select){
+    if (keyboard_check(global.key_ed_left) || keyboard_check(global.key_ed_left_2)) && scroolx>view_wview[0]/2 {scroolx-=32}
+    if (keyboard_check(global.key_ed_right) || keyboard_check(global.key_ed_right_2)) && scroolx<room_width-view_wview[0]/2 {scroolx+=32}
+    if (keyboard_check(global.key_ed_up) || keyboard_check(global.key_ed_up_2)) && scrooly>view_hview[0]/2 && !keyboard_check(vk_shift) {scrooly-=32}
+    if (keyboard_check(global.key_ed_down) || keyboard_check(global.key_ed_down_2)) && scrooly<room_height-view_hview[0]/2 && !keyboard_check(vk_shift) {scrooly+=32}
+}
+
 #define Keyboard_37
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -422,10 +448,10 @@ for (i = 0; i < ceil(view_wview[0] / 640); i += 1) {
     if (global.lava){draw_sprite_ext(s_biglava,0,view_xview[0]+i*640,global.poziomwody,1,1,0,c_white,0.4)}
     else{draw_sprite_ext(s_woda,0,view_xview[0]+i*640,global.poziomwody,1,1,0,c_white,0.4)}
 }
-if keyboard_check(vk_add){global.poziomwody-=4}
-if keyboard_check(vk_subtract){global.poziomwody+=4}
-if keyboard_check(vk_shift) && keyboard_check(vk_up) {global.poziomwody-=4}
-if keyboard_check(vk_shift) && keyboard_check(vk_down) {global.poziomwody+=4}
+if keyboard_check(global.key_waterup){global.poziomwody-=4}
+if keyboard_check(global.key_waterdown){global.poziomwody+=4}
+if keyboard_check(vk_shift) && keyboard_check(global.key_ed_up) {global.poziomwody-=4}
+if keyboard_check(vk_shift) && keyboard_check(global.key_ed_down) {global.poziomwody+=4}
 /*
 // initializacja
 
@@ -1692,7 +1718,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         draw_sprite_ext(s_help5,0,view_xview[0]+400,view_yview[0]+460,1,1,0,c_white,1)
 
         costawia4c+=0.05
-        if !keyboard_check(ord('Z')) {draw_sprite_ext(s_enemiesblock3,0,(floor(mouse_x/32))*32,(floor(mouse_y/32))*32,1,1,0,c_white,sin(costawia4c)+0.5)}//用余弦变化实现放置exit前exit块渐隐渐显的效果
+        if !keyboard_check(global.key_select) {draw_sprite_ext(s_enemiesblock3,0,(floor(mouse_x/32))*32,(floor(mouse_y/32))*32,1,1,0,c_white,sin(costawia4c)+0.5)}//用余弦变化实现放置exit前exit块渐隐渐显的效果
         }
     //stawianie exita
     if costawia4b=2 && costawia4=1 && kliknieto=0 && mouse_check_button(mb_left) /*&& mouse_x>0 &&  mouse_y>0*/ && wiatrak=0
@@ -1962,7 +1988,7 @@ if wlaczonaopcja=1
     {
     draw_set_color(c_white)
     draw_set_font(cyferkimario)
-    if keyboard_check_pressed(vk_escape) {wlaczonaopcja=0}
+    if keyboard_check_pressed(global.key_ed_cancel) {wlaczonaopcja=0}
     //换页
     draw_set_blend_mode(bm_subtract)
     draw_sprite_ext(s_edblocksmask,0,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)
@@ -5911,7 +5937,7 @@ if czywybieranieback=1000
 
 
 // Ctrl+S 保存
-if keyboard_check(vk_control) && keyboard_check(ord('S')) &&
+if keyboard_check(vk_control) && keyboard_check(global.key_ed_save) &&
 setting_mode = 0 && wiatrak = 0
 {
     Save_Script_Main()
@@ -5919,7 +5945,7 @@ setting_mode = 0 && wiatrak = 0
 }
 
 // Ctrl+L 读取
-if keyboard_check(vk_control) && keyboard_check(ord('L')) &&
+if keyboard_check(vk_control) && keyboard_check(global.key_ed_load) &&
 setting_mode = 0 && wiatrak = 0
 {
     var warning; warning=show_question('Do you REALLY want to load a level WITHOUT the current level saved???')

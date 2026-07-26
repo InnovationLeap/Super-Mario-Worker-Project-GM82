@@ -64,28 +64,28 @@ if lockon=2{
     visible=1;
     x = target.x
     y = target.y
-    if keyboard_check(vk_up) || keyboard_check(vk_down) || keyboard_check(vk_left) || keyboard_check(vk_right)
+    if keyboard_check(global.key_acc_up) || keyboard_check(global.key_acc_down) || keyboard_check(global.key_acc_left) || keyboard_check(global.key_acc_right)
     {drink+=1}
 
 
     if drink<=10{
-        if keyboard_check_pressed(vk_up){target.y-=1;y-=1;with(target){if(coto=32)water_endY-=1;if(coto=34)camera_endY-=1;if(coto=40 || coto=41)fishendY-=1;}}
-        if keyboard_check_pressed(vk_down){target.y+=1;y+=1;with(target){if(coto=32)water_endY+=1;if(coto=34)camera_endY+=1;if(coto=40 || coto=41)fishendY+=1;}}
-        if keyboard_check_pressed(vk_left){target.x-=1;x-=1;with(target){if(coto=32)water_endX-=1;if(coto=34)camera_endX-=1;if(coto=40 || coto=41)fishendX-=1;}}
-        if keyboard_check_pressed(vk_right){target.x+=1;x+=1;with(target){if(coto=32)water_endX+=1;if(coto=34)camera_endX+=1;if(coto=40 || coto=41)fishendX+=1;}}
-        if keyboard_check_pressed(ord('R')){target.y-=16;y-=16;with(target){if(coto=32)water_endY-=16;if(coto=34)camera_endY-=16;if(coto=40 || coto=41)fishendY-=16;}}
-        if keyboard_check_pressed(ord('F')){target.y+=16;y+=16;with(target){if(coto=32)water_endY+=16;if(coto=34)camera_endY+=16;if(coto=40 || coto=41)fishendY+=16;}}
-        if keyboard_check_pressed(ord('D')){target.x-=16;x-=16;with(target){if(coto=32)water_endX-=16;if(coto=34)camera_endX-=16;if(coto=40 || coto=41)fishendX-=16;}}
-        if keyboard_check_pressed(ord('G')){target.x+=16;x+=16;with(target){if(coto=32)water_endX+=16;if(coto=34)camera_endX+=16;if(coto=40 || coto=41)fishendX+=16;}}
+        if keyboard_check_pressed(global.key_acc_up){target.y-=1;y-=1;with(target){if(coto=32)water_endY-=1;if(coto=34)camera_endY-=1;if(coto=40 || coto=41)fishendY-=1;}}
+        if keyboard_check_pressed(global.key_acc_down){target.y+=1;y+=1;with(target){if(coto=32)water_endY+=1;if(coto=34)camera_endY+=1;if(coto=40 || coto=41)fishendY+=1;}}
+        if keyboard_check_pressed(global.key_acc_left){target.x-=1;x-=1;with(target){if(coto=32)water_endX-=1;if(coto=34)camera_endX-=1;if(coto=40 || coto=41)fishendX-=1;}}
+        if keyboard_check_pressed(global.key_acc_right){target.x+=1;x+=1;with(target){if(coto=32)water_endX+=1;if(coto=34)camera_endX+=1;if(coto=40 || coto=41)fishendX+=1;}}
+        if keyboard_check_pressed(global.key_acc_bigup){target.y-=16;y-=16;with(target){if(coto=32)water_endY-=16;if(coto=34)camera_endY-=16;if(coto=40 || coto=41)fishendY-=16;}}
+        if keyboard_check_pressed(global.key_acc_bigdown){target.y+=16;y+=16;with(target){if(coto=32)water_endY+=16;if(coto=34)camera_endY+=16;if(coto=40 || coto=41)fishendY+=16;}}
+        if keyboard_check_pressed(global.key_acc_bigleft){target.x-=16;x-=16;with(target){if(coto=32)water_endX-=16;if(coto=34)camera_endX-=16;if(coto=40 || coto=41)fishendX-=16;}}
+        if keyboard_check_pressed(global.key_acc_bigright){target.x+=16;x+=16;with(target){if(coto=32)water_endX+=16;if(coto=34)camera_endX+=16;if(coto=40 || coto=41)fishendX+=16;}}
     }
     if drink>10{
-        if keyboard_check(vk_up){target.y-=1;y-=1;with(target){if(coto=32)water_endY-=1;if(coto=34)camera_endY-=1;if(coto=40 || coto=41)fishendY-=1;}}
-        if keyboard_check(vk_down){target.y+=1;y+=1;with(target){if(coto=32)water_endY+=1;if(coto=34)camera_endY+=1;if(coto=40 || coto=41)fishendY+=1;}}
-        if keyboard_check(vk_left){target.x-=1;x-=1;with(target){if(coto=32)water_endX-=1;if(coto=34)camera_endX-=1;if(coto=40 || coto=41)fishendX-=1;}}
-        if keyboard_check(vk_right){target.x+=1;x+=1;with(target){if(coto=32)water_endX+=1;if(coto=34)camera_endX+=1;if(coto=40 || coto=41)fishendX+=1;}}
+        if keyboard_check(global.key_acc_up){target.y-=1;y-=1;with(target){if(coto=32)water_endY-=1;if(coto=34)camera_endY-=1;if(coto=40 || coto=41)fishendY-=1;}}
+        if keyboard_check(global.key_acc_down){target.y+=1;y+=1;with(target){if(coto=32)water_endY+=1;if(coto=34)camera_endY+=1;if(coto=40 || coto=41)fishendY+=1;}}
+        if keyboard_check(global.key_acc_left){target.x-=1;x-=1;with(target){if(coto=32)water_endX-=1;if(coto=34)camera_endX-=1;if(coto=40 || coto=41)fishendX-=1;}}
+        if keyboard_check(global.key_acc_right){target.x+=1;x+=1;with(target){if(coto=32)water_endX+=1;if(coto=34)camera_endX+=1;if(coto=40 || coto=41)fishendX+=1;}}
     }
 
-    if !keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboard_check(vk_left) && !keyboard_check(vk_right)
+    if !keyboard_check(global.key_acc_up) && !keyboard_check(global.key_acc_down) && !keyboard_check(global.key_acc_left) && !keyboard_check(global.key_acc_right)
     {drink=0}
 }
 
@@ -93,25 +93,25 @@ if lockon=3{
     visible=1;
     x = target.exitx
     y = target.exity
-    if keyboard_check(vk_up) || keyboard_check(vk_down) || keyboard_check(vk_left) || keyboard_check(vk_right)
+    if keyboard_check(global.key_acc_up) || keyboard_check(global.key_acc_down) || keyboard_check(global.key_acc_left) || keyboard_check(global.key_acc_right)
     {drink+=1}
     if drink<=10{
-        if keyboard_check_pressed(vk_up){target.exity-=1;y-=1;}
-        if keyboard_check_pressed(vk_down){target.exity+=1;y+=1;}
-        if keyboard_check_pressed(vk_left){target.exitx-=1;x-=1;}
-        if keyboard_check_pressed(vk_right){target.exitx+=1;x+=1;}
-        if keyboard_check_pressed(ord('R')){target.exity-=16;y-=16;}
-        if keyboard_check_pressed(ord('F')){target.exity+=16;y+=16;}
-        if keyboard_check_pressed(ord('D')){target.exitx-=16;x-=16;}
-        if keyboard_check_pressed(ord('G')){target.exitx+=16;x+=16;}
+        if keyboard_check_pressed(global.key_acc_up){target.exity-=1;y-=1;}
+        if keyboard_check_pressed(global.key_acc_down){target.exity+=1;y+=1;}
+        if keyboard_check_pressed(global.key_acc_left){target.exitx-=1;x-=1;}
+        if keyboard_check_pressed(global.key_acc_right){target.exitx+=1;x+=1;}
+        if keyboard_check_pressed(global.key_acc_bigup){target.exity-=16;y-=16;}
+        if keyboard_check_pressed(global.key_acc_bigdown){target.exity+=16;y+=16;}
+        if keyboard_check_pressed(global.key_acc_bigleft){target.exitx-=16;x-=16;}
+        if keyboard_check_pressed(global.key_acc_bigright){target.exitx+=16;x+=16;}
     }
     if drink>10{
-        if keyboard_check(vk_up){target.exity-=1;y-=1;}
-        if keyboard_check(vk_down){target.exity+=1;y+=1;}
-        if keyboard_check(vk_left){target.exitx-=1;x-=1;}
-        if keyboard_check(vk_right){target.exitx+=1;x+=1;}
+        if keyboard_check(global.key_acc_up){target.exity-=1;y-=1;}
+        if keyboard_check(global.key_acc_down){target.exity+=1;y+=1;}
+        if keyboard_check(global.key_acc_left){target.exitx-=1;x-=1;}
+        if keyboard_check(global.key_acc_right){target.exitx+=1;x+=1;}
     }
-    if !keyboard_check(vk_up) && !keyboard_check(vk_down) && !keyboard_check(vk_left) && !keyboard_check(vk_right)
+    if !keyboard_check(global.key_acc_up) && !keyboard_check(global.key_acc_down) && !keyboard_check(global.key_acc_left) && !keyboard_check(global.key_acc_right)
     {drink=0}
 }
 
