@@ -12,6 +12,61 @@
 - 跨对象访问变量使用 `objectName.variableName` 语法（例如 `o_edmain.arrayetapu[x, y] = val`）。
 - 在 GM8 中，`with(x) { ... }` 块里调用脚本时，脚本中的 `self` 会变成 `x`。从普通代码（非 with）调用脚本时，`self` 保留为调用者的实例。
 - `ds_exists` 是 GMS 1.x/2.x 的函数，GM8 不支持。GM8 替代方案：用 `variable_global_exists("varname")` 检查全局变量是否已定义。
+- **不支持十六进制字面量**（`0xEF`、`0x80` 等）。必须使用十进制数（`239`、`128` 等）。
+- **不支持 `trim()` 函数**。需手动实现：逐字符检查首尾空白（空格 `32`、制表符 `9`、CR `13`、LF `10`），用 `string_copy` 裁剪。
+- **多行 `if` 条件中 `&&` 跨行续写可能导致解析错误**。改为嵌套 `if` 结构逐层判断，避免在同一 `if` 条件内跨行。
+
+## GM8.2 编码注意事项
+
+> 本项目基于 GM8.2（非 GM8.0），**内部使用 UTF-8 编码**。GM8.0 使用 GBK/GB2312，两者在编码行为上有重大差异。
+
+### 字符串编码模型
+
+- **GM8.2 字符串内部为 UTF-8**。`string_length('中文')` 返回 `2`（字符数），而非 GM8.0 下的 `4`（字节数）。每个中文字符算 1 个字符。
+- **`ord()` 返回 UTF-8 首字节**，不是 Unicode 码点。例如 `ord('中')` = `228`（`0xE4`，即 UTF-8 编码 `E4 B8 AD` 的首字节），而非 Unicode 码点 `20013`。
+- **文件路径在 GM8.2 中是 UTF-8**。`file_exists`、`directory_create`、`screen_save` 等函数均可接受 UTF-8 中文路径。
+
+### `chr()` 的严重限制
+
+- **`chr(n)` 对 `n > 127` 返回值不可靠**。在 GM8.2 的 UTF-8 环境下，`chr(214)` 返回 `'?'`（`ord=63`），而非原始字节 `214`。
+- **禁止用 `file_bin_read_byte()` + `chr()` 组合来"存储原始字节"**。非 ASCII 字节会被破坏为 `?`（63），导致数据完全不可用。
+  ```gml
+  // ❌ 错误：非 ASCII 字节会被 chr() 破坏
+  while (_i < file_bin_size(_fid)){
+      _bs += chr(file_bin_read_byte(_fid))
+      _i += 1
+  }
+  ```
+- 如需处理二进制/原始字节数据，应使用外部 DLL（如 `EncodingConv.dll`）直接对文件进行操作，而非在 GML 层逐字节中转。
+
+### 文本文件 I/O
+
+- **`file_text_read_string()` / `file_text_write_string()` 原生支持 UTF-8**。读取 UTF-8 编码的文本文件无需额外转码。
+  ```gml
+  // ✓ 正确：直接读取 UTF-8 文本文件
+  _fid = file_text_open_read(working_directory + '\config.ini')
+  while (!file_text_eof(_fid)){
+      _line = file_text_read_string(_fid)
+      file_text_readln(_fid)
+      // 处理 _line ...
+  }
+  file_text_close(_fid)
+  ```
+- **`ini_read_string()` 使用 Windows ANSI API（`GetPrivateProfileString`）**，不原生支持 UTF-8。若 `GameSettings.ini` 保存为 UTF-8（如 VS Code 默认），中文值会被读取为乱码。
+- **读取 UTF-8 INI 中中文值的正解**：用 `file_text_open_read()` + `file_text_read_string()` 逐行读取并匹配键名，提取的值即为 UTF-8 字符串，可直接使用。
+
+### EncodingConv.dll
+
+项目自带 `EncodingConv.dll`，提供编码转换能力（已通过 `ec_init()` 在欢迎房间初始化）：
+
+| 脚本 | 功能 | 调用方式 |
+|------|------|---------|
+| `ec_convert(str, from, to)` | 字符串编码转换 | `ec_convert(str, 'UTF-8', 'GB2312')` |
+| `ec_convert_file(path)` | 文件级 GB2312→UTF-8 转换 | `ec_convert_file(filepath)` |
+| `ec_is_cjk(char)` | 判断字符是否为 CJK 宽体字 | `ec_is_cjk(nextChar)` |
+
+- `ec_convert_file` 用于将旧版 GB2312 关卡文件转为 UTF-8，以兼容 GM8.2 的 `file_text_read_string`。
+- `ec_convert` 用于内存中字符串编码互转（典型场景：UTF-8 ↔ GB2312）。
 
 ## 项目规则
 
