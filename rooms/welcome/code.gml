@@ -131,10 +131,51 @@ global.customMusic = ini_read_string('GameConfig','CustomMusicPackage','Example'
 global.initiallives = ini_read_real('GameConfig','InitialLives',4)
 global.font_render = ini_read_real('GameConfig','2xFontRender',0)
 
+// 截图保存路径（GM8.2 UTF-8 环境，file_text 直接读取中文路径）
+var _ss_path, _ss_default, _ss_line, _ss_fid;
+var _ss_ti, _ss_ch;
+_ss_default = working_directory
+_ss_path = ''
+
+if (file_exists(_ss_default + '\GameSettings.ini')){
+    _ss_fid = file_text_open_read(_ss_default + '\GameSettings.ini')
+    while (!file_text_eof(_ss_fid)){
+        _ss_line = file_text_read_string(_ss_fid)
+        file_text_readln(_ss_fid)
+        if (string_pos('ScreenshotPath=', _ss_line) == 1){
+            _ss_path = string_copy(_ss_line, string_length('ScreenshotPath=') + 1, string_length(_ss_line))
+            // 手动 trim 首尾空白
+            _ss_ti = 1
+            while (_ss_ti <= string_length(_ss_path)){
+                _ss_ch = ord(string_char_at(_ss_path, _ss_ti))
+                if (_ss_ch != 32 && _ss_ch != 9 && _ss_ch != 13 && _ss_ch != 10){ break }
+                _ss_ti += 1
+            }
+            _ss_path = string_copy(_ss_path, _ss_ti, string_length(_ss_path))
+            _ss_ti = string_length(_ss_path)
+            while (_ss_ti >= 1){
+                _ss_ch = ord(string_char_at(_ss_path, _ss_ti))
+                if (_ss_ch != 32 && _ss_ch != 9 && _ss_ch != 13 && _ss_ch != 10){ break }
+                _ss_ti -= 1
+            }
+            _ss_path = string_copy(_ss_path, 1, _ss_ti)
+            break
+        }
+    }
+    file_text_close(_ss_fid)
+}
+
+// 配置缺失 → 默认值
+if (_ss_path == ''){
+    _ss_path = _ss_default
+    ini_write_string('GameConfig', 'ScreenshotPath', _ss_default)
+}
+global.screenshot_path = _ss_path
+
 ini_close()
 // 找到下一个可用的截图编号
 global.screenshot_count=100
-while (file_exists(working_directory+'\screenshot'+string(global.screenshot_count)+'.png')){
+while (file_exists(global.screenshot_path+'\screenshot'+string(global.screenshot_count)+'.png')){
     global.screenshot_count+=1
 }
 
