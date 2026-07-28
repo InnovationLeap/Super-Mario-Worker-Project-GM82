@@ -9,9 +9,12 @@ image_speed=0
 image_xscale=1
 
 // Rising phase
+// Grid-aligned rise: total displacement = 128px = 4*32 grid cells
+// Formula: D = g*k*(k-1)/2, with k = -v0/g (integer frames to exact stop)
+// v0=-8, g=8/33 → k=33, D=128=4*32
 leaf_faza=0
-leaf_speedY=-7
-leaf_gravity=0.2
+leaf_speedY=-8
+leaf_gravity=8/33
 
 // Falling flutter
 leaf_originX=0
