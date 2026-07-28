@@ -480,11 +480,16 @@ if is_button_pressed('jump') && kuku>1 && grawitacja<0 && (y<global.poziomwody |
 
 // Raccoon flight takeoff (P-Meter full + press jump in air)
 // keyboard_check_pressed: must press jump fresh, not just hold it
+// Raccoon flight: takeoff (first press) and mid-air boost (subsequent presses)
+// Both give upward lift, but only first press initializes the flight timer
 if global.rodzajmaria=6 && raccoon_fly_allowed=1 && grawitacja>0 && keyboard_check_pressed(global.sterowanieskok) && y<global.poziomwody && sekwencja=1 && schylanie=0 && !stuck {
     grawitacja=-9
-    raccoon_flew=1
-    raccoon_fly_timer=0
-    p_meter_run_timer=0
+    if raccoon_flew=0 {
+        raccoon_flew=1
+        raccoon_fly_timer=0
+        p_meter_run_timer=0
+    }
+    if global.sample=1 {fofo=sound_play(snd_spin);sound_volume(snd_spin,global.glosnosc)}
 }
 
 // Flight timer: count up while flying, end flight when time expires or landing
@@ -580,6 +585,7 @@ if global.rodzajmaria = 6 && skusil = 0 {
     if grawitacja > 0 && keyboard_check_pressed(global.sterowanieskok) && !raccoon_fall && y < global.poziomwody && sekwencja = 1 && raccoon_fly_allowed = 0 {
         raccoon_fall = 1
         raccoon_fall_timer = 0
+        if global.sample=1 {fofo=sound_play(snd_spin);sound_volume(snd_spin,global.glosnosc)}
     }
 
     if raccoon_fall = 1 {
@@ -1420,6 +1426,7 @@ if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_goomba) && !place_
         lolo.rodzajzabicia=1;//这里是记录是普通的踩还是无敌星，估计主要是为了计分之类
         sekwencja=1;
         grawitacja=-8-lolo.odpych
+        if raccoon_flew=1 {raccoon_fly_timer=0}
         global.combo1+=1
         global.combo1reset=0
         //muszlowanie=0
@@ -1442,6 +1449,7 @@ if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_troopashell2) && !place_m
         lolo.rodzajzabicia=1;
         sekwencja=1;
         grawitacja=-8-lolo.odpych
+        if raccoon_flew=1 {raccoon_fly_timer=0}
         global.combo1+=1
         global.combo1reset=0
         //muszlowanie=0
@@ -1466,7 +1474,7 @@ if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell2) /* &
         if lolo.hurt_delay=0 && lolo.rodzajzabicia=0{
         if x<lolo.x {lolo.kierunek=1;lolo.rodzajzabicia=1}
         if x>=lolo.x {lolo.kierunek=-1;lolo.rodzajzabicia=1}//这里实现的是踢龟壳（所以为什么要以踩为判定基础……）
-        if sekwencja=1 {grawitacja=-8}
+        if sekwencja=1 {grawitacja=-8; if raccoon_flew=1 {raccoon_fly_timer=0}}
         if global.sample=1 {fofo=sound_play(snd_rozdeptanie);sound_volume(snd_rozdeptanie,global.glosnosc)} //sampel
         }
     }
@@ -1481,6 +1489,7 @@ if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell)
         lolo.rodzajzabicia=1;//这里是记录是普通的踩还是无敌星，估计主要是为了计分之类
         sekwencja=1;
         grawitacja=-8-lolo.odpych
+        if raccoon_flew=1 {raccoon_fly_timer=0}
         global.combo1+=1
         global.combo1reset=0
         //muszlowanie=0
@@ -1508,6 +1517,7 @@ if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_goomba) && !place_
         if nabijanie>6 {nabijanie=0}
         sekwencja=1;
         grawitacja=-8-lolo.odpych
+        if raccoon_flew=1 {raccoon_fly_timer=0}
         global.combo1+=1
         global.combo1reset=0
         if global.sample=1 {fofo=sound_play(snd_rozdeptanie);sound_volume(snd_rozdeptanie,global.glosnosc)} //sampel
@@ -1528,6 +1538,7 @@ if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_kuppa)
         if nabijanie>6 {nabijanie=0}
         sekwencja=1;
         grawitacja=-8-lolo.odpych
+        if raccoon_flew=1 {raccoon_fly_timer=0}
         global.combo1+=1
         global.combo1reset=0
         if global.sample=1 {fofo=sound_play(snd_rozdeptanie);sound_volume(snd_rozdeptanie,global.glosnosc)} //sampel
@@ -1557,6 +1568,7 @@ if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_kuppa) /* && muszl
         lolo.rodzajzabicia=1;
         sekwencja=1;
         grawitacja=-8//-lolo.odpych
+        if raccoon_flew=1 {raccoon_fly_timer=0}
         global.combo1+=1
         global.combo1reset=0
         //muszlowanie=0
@@ -2568,6 +2580,8 @@ if warning2=1{
         global.escowanie=1;
         file_text_close(global.toload);
         file_delete(global.toloader);
+        if global.sample=1 {sound_stop(snd_pmeter); sound_stop(snd_spin)}
+        p_meter_sfx_playing=0
         room_goto(title);
         mm_stop_all_ext()
     }
@@ -2669,6 +2683,8 @@ if warning2=1{
         global.escowanie=1;
         file_text_close(global.toload);
         file_delete(global.toloader);
+        if global.sample=1 {sound_stop(snd_pmeter); sound_stop(snd_spin)}
+        p_meter_sfx_playing=0
         room_goto(title);
         mm_stop_all_ext()
     }
