@@ -150,7 +150,7 @@ if real(string_copy(aa,2,2))=43
 {
   ae=instance_create(transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_edenemyblock)
   ae.coto=real(string_copy(aa,2,2))
-  ae.shell_type=real(string_copy(aa,12,1))
+  ae.shell_type=real(string_copy(aa,12,string_length(aa)-11))
 }
 if real(string_copy(aa,2,2))=17
 {

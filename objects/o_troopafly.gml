@@ -67,6 +67,7 @@ image_index+=0.1
 // uppercut i zwykla smierc
 //if place_meeting(x,y,o_uppercut) {energia-=3; rodzajzabicia=0}
 if rodzajzabicia=1 {instance_destroy(); instance_create(x,y,o_troopa);instance_create(x,y,o_punkciornik)}
+if rodzajzabicia=7 {instance_destroy(); lolo=instance_create(x,y-1,o_troopashell2); lolo.tail_kicked=1; lolo.is_flipped=1; lolo.grawitacja=-11; lolo.kierunek=kierunek; instance_create(x,y,o_punkciornik)}
 if rodzajzabicia=3 || rodzajzabicia=4 || rodzajzabicia=5 {instance_destroy(); instance_create(x,y,o_troopadead); lolo=instance_create(x,y,o_punkciornik); lolo.image_index=0;if global.sample=1 {fofo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}}
 if rodzajzabicia=2 {instance_destroy(); instance_create(x,y,o_troopadead);}
 

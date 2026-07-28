@@ -4,6 +4,7 @@ if global.lastlev=1{/*file_text_close(global.toload);file_delete(global.toloader
 if global.loadingsav=0{global.checkpoint=0}
 var v_ens, skript;
 var checka;
+var _st;
 checka=1
 skript=''
 if global.msgMap>0{ds_map_destroy(global.msgMap)}
@@ -141,9 +142,12 @@ while o_readsmwpfile.toloadpointer!=o_readsmwpfile.toloadend && aa!='New Level'{
   skript=string_insert('('+string(ae)+').height='+string_copy(aa,12,3)+';',skript,string_length(skript)+1)
   }
   if real(string_copy(aa,2,2))=43 && string_length(aa) > 11 {
-      if(real(string_copy(aa,12,1))<8){skript=string_insert('('+string(ae)+').czerwona='+string(floor(real(string_copy(aa,12,1))/2))+';'+'('+string(ae)+').offset=1;',skript,string_length(skript)+1)}
+      var _st; _st = real(string_copy(aa,12,string_length(aa)-11));
+      if(_st<8){skript=string_insert('('+string(ae)+').czerwona='+string(floor(_st/2))+';'+'('+string(ae)+').offset=1;',skript,string_length(skript)+1)}
+      else if(_st=10){skript=string_insert('('+string(ae)+').czerwona=4;'+'('+string(ae)+').offset=1;',skript,string_length(skript)+1)}
+      else if(_st=11){skript=string_insert('('+string(ae)+').czerwona=4;'+'('+string(ae)+').offset=1;'+'('+string(ae)+').rodzajzabicia=1;'+'('+string(ae)+').single=1;',skript,string_length(skript)+1)}
       else{skript=string_insert('('+string(ae)+').hardshell=1;'+'('+string(ae)+').offset=1;',skript,string_length(skript)+1)}
-      if(floor(real(string_copy(aa,12,1))/2)<>real(string_copy(aa,12,1))/2){
+      if(_st<10 && floor(_st/2)<>_st/2){
           skript=string_insert('('+string(ae)+').rodzajzabicia=1;'+'('+string(ae)+').single=1;',skript,string_length(skript)+1)
       }
   }

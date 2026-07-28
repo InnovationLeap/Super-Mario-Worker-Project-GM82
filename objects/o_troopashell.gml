@@ -22,6 +22,7 @@ czerwona=0
 hurt_delay=10
 fangsi=0
 single=0
+is_flipped=0
 
 // 发光位置微调
 light_x = 0;
@@ -48,10 +49,13 @@ if aktywowany=0
     }
 
 if global.pauza=0 && global.etappokonany=0 {
+// is_flipped drives image_yscale (upside-down state)
+if is_flipped=1{image_yscale=-1}else{image_yscale=1}
 if hurt_delay>0{hurt_delay-=1}
 if aktywowany=1{
 // spadanie
 if czerwona=1 {sprite_index=s_trooparedshell}
+if czerwona=4 {sprite_index=s_spinyshell; image_index=1; hardshell=1; dasini=1}
 /*
 basic_movement(5,0.4,0,0);
 
@@ -91,12 +95,23 @@ image_index+=0.4
 }
 
 // uppercut i zwykla smierc
+// tail attack: flip + kick moving shell (no destroy, just modify state)
+if rodzajzabicia=7{
+    is_flipped = 1
+    grawitacja = -11
+    hurt_delay = 10
+    sekwencja = 1
+    if x < o_marker.x { kierunek = -1 }
+    else { kierunek = 1 }
+    rodzajzabicia = 0
+}
+
 if hardshell=0 {
 
 //if place_meeting(x,y,o_uppercut) {energia-=3; rodzajzabicia=0}
-if rodzajzabicia=6 {instance_destroy(); lolox=instance_create(x,y,o_troopashell2); lolox.kierunek=kierunek; lolox.czerwona=czerwona; if czerwona=1 {lolox.sprite_index=s_trooparedshell}  ; if czerwona=2 {lolox.sprite_index=s_troopablueshell} ;if czerwona=3 {lolox.sprite_index=s_troopashellgold}}
+if rodzajzabicia=6 {instance_destroy(); lolox=instance_create(x,y,o_troopashell2); lolox.kierunek=kierunek; lolox.czerwona=czerwona; lolox.is_flipped=is_flipped; if czerwona=1 {lolox.sprite_index=s_trooparedshell}  ; if czerwona=2 {lolox.sprite_index=s_troopablueshell} ;if czerwona=3 {lolox.sprite_index=s_troopashellgold}}
 if rodzajzabicia=2 {instance_destroy(); lolo=instance_create(x,y,o_troopadead); lolo.czerwona=czerwona; if czerwona=1 {lolo.sprite_index=s_trooparedshell} ; if czerwona=2 {lolo.sprite_index=s_troopablueshell} ;if czerwona=3 {lolo.sprite_index=s_troopashellgold}}
-if rodzajzabicia=1 {instance_destroy(); lolox=instance_create(x,y,o_troopashell2); lolo=instance_create(x,y,o_punkciornik); lolox.kierunek=kierunek; lolox.czerwona=czerwona; if czerwona=1 {lolox.sprite_index=s_trooparedshell}  ; if czerwona=2 {lolox.sprite_index=s_troopablueshell} ;if czerwona=3 {lolox.sprite_index=s_troopashellgold}}
+if rodzajzabicia=1 {instance_destroy(); lolox=instance_create(x,y,o_troopashell2); lolo=instance_create(x,y,o_punkciornik); lolox.kierunek=kierunek; lolox.czerwona=czerwona; lolox.is_flipped=is_flipped; if czerwona=1 {lolox.sprite_index=s_trooparedshell}  ; if czerwona=2 {lolox.sprite_index=s_troopablueshell} ;if czerwona=3 {lolox.sprite_index=s_troopashellgold}}
 if rodzajzabicia=3 || rodzajzabicia=4 || rodzajzabicia=5 {instance_destroy(); lolox=instance_create(x,y,o_troopadead); lolo=instance_create(x,y,o_punkciornik); lolox.czerwona=czerwona; if czerwona=1 {lolox.sprite_index=s_trooparedshell}  ; if czerwona=2 {lolox.sprite_index=s_troopablueshell};if czerwona=3 {lolox.sprite_index=s_troopashellgold};if global.sample=1 {fofo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}}
 
 }
@@ -110,7 +125,8 @@ lolo.sprite_index=s_buzzyshell;
 lolo.kierunek=kierunek;
 lolo.dasini=1
 lolo.hardshell=1
-//lolo.energia=23333333333
+lolo.is_flipped=is_flipped;
+lolo.czerwona=czerwona;
 instance_create(x,y,o_punkciornik)}
 
 if rodzajzabicia=6 {
@@ -120,13 +136,14 @@ lolo.sprite_index=s_buzzyshell;
 lolo.kierunek=kierunek;
 lolo.dasini=1
 lolo.hardshell=1
-//lolo.energia=23333333333
+lolo.is_flipped=is_flipped;
+lolo.czerwona=czerwona;
 }
 
 if rodzajzabicia=5 {
 instance_destroy();
 fofo=instance_create(x,y,o_troopadead);
-fofo.sprite_index=s_buzzyshell
+if czerwona=4 {fofo.sprite_index=s_spinyshelldead} else {fofo.sprite_index=s_buzzyshell}
 lolo=instance_create(x,y,o_punkciornik);
 lolo.image_index=0;
 if global.sample=1 {fofo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}}//顶
@@ -134,7 +151,7 @@ if global.sample=1 {fofo=sound_play(snd_kick);sound_volume(snd_kick,global.glosn
 if rodzajzabicia=2 {
 instance_destroy();
 lolo=instance_create(x,y,o_troopadead);
-lolo.sprite_index=s_buzzyshell}
+if czerwona=4 {lolo.sprite_index=s_spinyshelldead} else {lolo.sprite_index=s_buzzyshell}}
 
 }
 
@@ -242,7 +259,8 @@ if place_meeting(x, y, o_piraniablue) || place_meeting(x, y, o_piraniablueshot)
         fofo = instance_create(x, y, o_troopadead);
         fofo.czerwona = czerwona;
         fofo.hardshell = hardshell;
-        if fofo.hardshell = 1 {fofo.sprite_index = s_buzzyshell;}
+        if czerwona=4 {fofo.sprite_index = s_spinyshelldead;}
+        else if fofo.hardshell = 1 {fofo.sprite_index = s_buzzyshell;}
         else {
         if czerwona=1 {fofo.sprite_index=s_trooparedshell} ; if czerwona=2 {fofo.sprite_index=s_troopablueshell} ;if czerwona=3 {fofo.sprite_index=s_troopashellgold}
         }

@@ -59,6 +59,7 @@ basic_movement(1,0.1,0,1);
 }
 // uppercut i zwykla smierc
 //if energia<0 && rodzajzabicia=1 {instance_destroy(); instance_create(x,y,o_kolcozwierzdead); instance_create(x,y,o_punkciornik)}
+if rodzajzabicia=7 {instance_destroy(); lolo=instance_create(x,y-1,o_troopashell2); lolo.czerwona=4; lolo.tail_kicked=1; lolo.is_flipped=1; lolo.grawitacja=-11; lolo.kierunek=kierunek; instance_create(x,y,o_punkciornik)}
 if rodzajzabicia=3 || rodzajzabicia=4 || rodzajzabicia=5 {instance_destroy(); instance_create(x,y,o_kolcozwierzdead); lolo=instance_create(x,y,o_punkciornik); lolo.image_index=0;if global.sample=1 {fofo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}}
 if rodzajzabicia=2 {instance_destroy(); instance_create(x,y,o_kolcozwierzdead);}
 

@@ -198,6 +198,8 @@
 		|sprite363
 		|s_buzzyshell
 		|s_buzzybeetle
+		|s_spinyshell
+		|s_spinyshelldead
 		|s_boo
 		|s_flyfisharea
 		|s_swimfisharea

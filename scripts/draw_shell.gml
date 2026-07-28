@@ -10,6 +10,8 @@ switch(argument0){
     case 7: draw_sprite(s_troopashellgold,1,x+16,y+16);break;
     case 8: draw_sprite(s_buzzyshell,0,x+16,y+16);break;
     case 9: draw_sprite(s_buzzyshell,1,x+16,y+16);break;
+    case 10: draw_sprite(s_spinyshell,0,x+16,y+16);break;
+    case 11: draw_sprite(s_spinyshell,1,x+16,y+16);break;
 }
 }
 else{
@@ -24,6 +26,8 @@ switch(argument0){
     case 7: draw_sprite_ext(s_troopashellgold,1,floor((mouse_x)/32)*32+16,floor((mouse_y)/32)*32+16,1,1,0,c_white,0.5);break;
     case 8: draw_sprite_ext(s_buzzyshell,0,floor((mouse_x)/32)*32+16,floor((mouse_y)/32)*32+16,1,1,0,c_white,0.5);break;
     case 9: draw_sprite_ext(s_buzzyshell,1,floor((mouse_x)/32)*32+16,floor((mouse_y)/32)*32+16,1,1,0,c_white,0.5);break;
+    case 10: draw_sprite_ext(s_spinyshell,0,floor((mouse_x)/32)*32+16,floor((mouse_y)/32)*32+16,1,1,0,c_white,0.5);break;
+    case 11: draw_sprite_ext(s_spinyshell,1,floor((mouse_x)/32)*32+16,floor((mouse_y)/32)*32+16,1,1,0,c_white,0.5);break;
 }
 
 }

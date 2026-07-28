@@ -73,6 +73,18 @@ lolo.dasini=1
 //lolo.energia=23333333333
 instance_create(x,y,o_punkciornik)}
 
+if rodzajzabicia=7 {
+instance_destroy();
+lolo=instance_create(x,y-0.5,o_troopashell2);
+lolo.sprite_index=s_buzzyshell;
+lolo.hardshell=1
+lolo.kierunek=kierunek;
+lolo.dasini=1
+lolo.tail_kicked=1
+lolo.is_flipped=1
+lolo.grawitacja=-11
+instance_create(x,y,o_punkciornik)}
+
 if rodzajzabicia=5 {
 instance_destroy();
 fofo=instance_create(x,y,o_troopadead);

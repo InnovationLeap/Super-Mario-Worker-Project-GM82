@@ -3345,11 +3345,12 @@ if wlaczonaopcja=2
         if mouse_wheel_up() && global.shell_type>0{//鼠标滚轮向上
             global.shell_type-=1
         }
-        if mouse_wheel_down() && global.shell_type<sprite_get_number(s_shellmask)-1{//鼠标滚轮向下
+        if mouse_wheel_down() && global.shell_type<11{//鼠标滚轮向下
             global.shell_type+=1
         }
         draw_sprite(s_mfcmask,global.spike_type,view_xview[0]+206+13,view_yview[0]+172+82)
-        draw_sprite(s_shellmask,global.shell_type,view_xview[0]+206+13,view_yview[0]+174+144)
+        if global.shell_type<10{draw_sprite(s_shellmask,global.shell_type,view_xview[0]+206+13,view_yview[0]+174+144)}
+        else{draw_sprite(s_spinyshell,global.shell_type-10,view_xview[0]+206+13,view_yview[0]+174+144)}
     }
     }
 
@@ -3643,7 +3644,7 @@ if costawia2=43 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mou
     if mouse_wheel_up() && global.shell_type>0{//鼠标滚轮向上
         global.shell_type-=1
     }
-    if mouse_wheel_down() && global.shell_type<sprite_get_number(s_shellmask)-1{//鼠标滚轮向下
+    if mouse_wheel_down() && global.shell_type<11{//鼠标滚轮向下
         global.shell_type+=1
     }
     draw_shell(global.shell_type,1);

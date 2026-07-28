@@ -1472,10 +1472,24 @@ if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell2) /* &
     {
     lolo=instance_place(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell2)
         if lolo.hurt_delay=0 && lolo.rodzajzabicia=0{
+        // spiny shell: kick only on the safe (non-spike) side
+        var _canKick; _canKick = 1;
+        if lolo.czerwona=4{
+            if lolo.is_flipped=0{
+                // spikes on top: player above (y < shell.y) → hurt
+                if y < lolo.y { _canKick = 0; }
+            } else {
+                // spikes on bottom: player below (y >= shell.y) → hurt
+                if y >= lolo.y { _canKick = 0; }
+            }
+            if _canKick=0 && oberwal=0 && shield=0 { oberwal=1 }
+        }
+        if _canKick=1{
         if x<lolo.x {lolo.kierunek=1;lolo.rodzajzabicia=1}
         if x>=lolo.x {lolo.kierunek=-1;lolo.rodzajzabicia=1}//这里实现的是踢龟壳（所以为什么要以踩为判定基础……）
         if sekwencja=1 {grawitacja=-8; if raccoon_flew=1 {raccoon_fly_timer=0}}
         if global.sample=1 {fofo=sound_play(snd_rozdeptanie);sound_volume(snd_rozdeptanie,global.glosnosc)} //sampel
+        }
         }
     }
 
@@ -1483,19 +1497,29 @@ if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell2) /* &
 if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell)
     {
     lolo=instance_place(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell)
-    if lolo.rodzajzabicia=0 && grawitacja>0 && y<lolo.y && lolo.hurt_delay=0
+    // spiny shell (czerwona=4): 移动刺壳 - 碰到即受伤，不可踩停
+    var _stopAbove, _hurtSide;
+    _stopAbove = (y<lolo.y);   // normal: above = safe stop
+    _hurtSide = (y>=lolo.y);   // normal: below/side = hurt
+    if lolo.czerwona=4{
+        if lolo.is_flipped=0{
+            // 刺向上：移动刺壳不可踩停，接触即受伤
+            _stopAbove = 0;
+            _hurtSide = 1;
+        }
+        // is_flipped=1: 倒立刺壳，和普通龟壳无异（保持默认）
+    }
+    if lolo.rodzajzabicia=0 && grawitacja>0 && _stopAbove && lolo.hurt_delay=0
         {
-        //lolo.energia-=233333333333333333333; 恶劣变量
-        lolo.rodzajzabicia=1;//这里是记录是普通的踩还是无敌星，估计主要是为了计分之类
+        lolo.rodzajzabicia=1;
         sekwencja=1;
         grawitacja=-8-lolo.odpych
         if raccoon_flew=1 {raccoon_fly_timer=0}
         global.combo1+=1
         global.combo1reset=0
-        //muszlowanie=0
-        if global.sample=1 {fofo=sound_play(snd_rozdeptanie);sound_volume(snd_rozdeptanie,global.glosnosc)} //sampel
+        if global.sample=1 {fofo=sound_play(snd_rozdeptanie);sound_volume(snd_rozdeptanie,global.glosnosc)}
         }
-    if lolo.hurt_delay=0 && oberwal=0 && y>=lolo.y && shield=0  {oberwal=1}
+    if lolo.hurt_delay=0 && oberwal=0 && _hurtSide && shield=0  {oberwal=1}
     }
 }
 

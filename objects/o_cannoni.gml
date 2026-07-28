@@ -40,6 +40,7 @@ if kierunek=1 {x+=3; image_xscale=1}
 
 // uppercut i zwykla smierc攻击判定
 if rodzajzabicia=1 {instance_destroy(); instance_create(x,y,o_cannonidead); instance_create(x,y,o_punkciornik)}
+if rodzajzabicia=3 || rodzajzabicia=4 || rodzajzabicia=5 {instance_destroy(); instance_create(x,y,o_cannonidead); lolo=instance_create(x,y,o_punkciornik); lolo.image_index=0;if global.sample=1 {fofo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}}
 if rodzajzabicia=2 {instance_destroy(); instance_create(x,y,o_cannonidead);}
 
 

@@ -19,6 +19,8 @@ hurt_delay=10
 setonce=0
 offset=0
 single=0
+tail_kicked=0
+is_flipped=0
 
 // 发光位置微调
 light_x = 0;
@@ -31,7 +33,8 @@ action_id=603
 applies_to=self
 */
 if !setonce{
-    if hardshell=1{sprite_index=s_buzzyshell;dasini=1}
+    if czerwona=4{sprite_index=s_spinyshell;hardshell=1;dasini=1}
+    else if hardshell=1{sprite_index=s_buzzyshell;dasini=1}
     else{
         switch(czerwona){
         case 0: sprite_index=s_troopashell;break;
@@ -50,6 +53,8 @@ applies_to=self
 */
 //静止龟壳
 if global.pauza=0 && global.etappokonany=0 {
+// is_flipped drives image_yscale (upside-down state)
+if is_flipped=1{image_yscale=-1}else{image_yscale=1}
 if hurt_delay>0{hurt_delay-=1}
 if aktywowany=0
     {
@@ -59,7 +64,30 @@ if aktywowany=0
         }
     }
 if aktywowany=1{
-
+// tail attack: kicked shell physics
+if tail_kicked=1{
+    // horizontal movement (speed 1.1)
+    if kierunek=1{
+        if !place_meeting(x+1.1,y,obj_wall) && !place_meeting(x+1.1,y,o_pointblock){x+=1.1}
+        else {kierunek=-1}
+    }
+    else{
+        if !place_meeting(x-1.1,y,obj_wall) && !place_meeting(x-1.1,y,o_pointblock){x-=1.1}
+        else {kierunek=1}
+    }
+    // gravity
+    grawitacja+=0.5; y+=grawitacja
+    // landing: stop kick, revert to normal static shell
+    if grawitacja>0{
+        if place_meeting(x,y+1,obj_halfground) || place_meeting(x,y+1,obj_wall) || place_meeting(x,y+1,o_pointblock){
+            grawitacja=0; tail_kicked=0
+            while place_meeting(x,y,obj_halfground) || place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock){y-=1}
+        }
+    }
+    // static shell: no animation even when kicked
+}
+else{
+// normal static shell physics
 if sekwencja=0{
     if !place_meeting(x,y+1,o_pointblock){
     if !place_meeting(x,y+1,obj_halfground){
@@ -87,13 +115,14 @@ while sekwencja=2{
 }
 
 }
+}
 
 // uppercut i zwykla smierc
 if hardshell=0 {
 //if place_meeting(x,y,o_uppercut) {energia-=3; rodzajzabicia=0}
-if rodzajzabicia=6 {fofo=instance_create(x,y,o_troopashell); fofo.kierunek=kierunek; fofo.czerwona=czerwona; if czerwona=1 {fofo.sprite_index=s_trooparedshell}; if czerwona=2 {fofo.sprite_index=s_troopablueshell};  if czerwona=3 {fofo.sprite_index=s_troopashellgold} ;instance_destroy();}
+if rodzajzabicia=6 {fofo=instance_create(x,y,o_troopashell); fofo.kierunek=kierunek; fofo.czerwona=czerwona; fofo.is_flipped=is_flipped; if czerwona=1 {fofo.sprite_index=s_trooparedshell}; if czerwona=2 {fofo.sprite_index=s_troopablueshell};  if czerwona=3 {fofo.sprite_index=s_troopashellgold} ;instance_destroy();}
 if rodzajzabicia=2 {lolo=instance_create(x,y,o_troopadead);lolo.czerwona=czerwona; if czerwona=1 {lolo.sprite_index=s_trooparedshell} ; if czerwona=2 {lolo.sprite_index=s_troopablueshell} ; if czerwona=3 {lolo.sprite_index=s_troopashellgold} ;instance_destroy();}
-if rodzajzabicia=1 {fofo=instance_create(x,y,o_troopashell); fofo.kierunek=kierunek; fofo.czerwona=czerwona;fofo.single=single if czerwona=1 {fofo.sprite_index=s_trooparedshell}; if czerwona=2 {fofo.sprite_index=s_troopablueshell};  if czerwona=3 {fofo.sprite_index=s_troopashellgold} ;instance_destroy();}
+if rodzajzabicia=1 {fofo=instance_create(x,y,o_troopashell); fofo.kierunek=kierunek; fofo.czerwona=czerwona;fofo.single=single; fofo.is_flipped=is_flipped; if czerwona=1 {fofo.sprite_index=s_trooparedshell}; if czerwona=2 {fofo.sprite_index=s_troopablueshell};  if czerwona=3 {fofo.sprite_index=s_troopashellgold} ;instance_destroy();}
 if rodzajzabicia=3 || rodzajzabicia=4 || rodzajzabicia=5
     {
     instance_destroy();
@@ -112,10 +141,11 @@ if rodzajzabicia=1 {
     lolo=instance_create(x,y,o_troopashell);
     lolo.hardshell=1
     lolo.dasini=1
-    //lolo.energia=23333333333
     lolo.sprite_index=s_buzzyshell;
     lolo.kierunek=kierunek;
     lolo.single = single;
+    lolo.is_flipped=is_flipped;
+    lolo.czerwona=czerwona;
     /*instance_create(x,y,o_punkciornik)*/
 }
 
@@ -124,15 +154,16 @@ if rodzajzabicia=6 {
     lolo=instance_create(x,y,o_troopashell);
     lolo.hardshell=1
     lolo.dasini=1
-    //lolo.energia=23333333333
     lolo.sprite_index=s_buzzyshell;
     lolo.kierunek=kierunek;
+    lolo.is_flipped=is_flipped;
+    lolo.czerwona=czerwona;
 }
 
 if rodzajzabicia=5 {
     instance_destroy();
     fofo=instance_create(x,y,o_troopadead);
-    fofo.sprite_index=s_buzzyshell
+    if czerwona=4 {fofo.sprite_index=s_spinyshelldead} else {fofo.sprite_index=s_buzzyshell}
     lolo=instance_create(x,y,o_punkciornik);
     lolo.image_index=0;
     if global.sample=1 {
@@ -143,7 +174,7 @@ if rodzajzabicia=5 {
 if rodzajzabicia=2 {
     instance_destroy();
     lolo=instance_create(x,y,o_troopadead);
-    lolo.sprite_index=s_buzzyshell}//龟壳
+    if czerwona=4 {lolo.sprite_index=s_spinyshelldead} else {lolo.sprite_index=s_buzzyshell}}//龟壳
 }
 
 
