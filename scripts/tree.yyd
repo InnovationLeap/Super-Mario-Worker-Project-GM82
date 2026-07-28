@@ -95,6 +95,7 @@
 	|debug_log
 	|test_bound
 	|string_replace_char
+	|raccoon_tail_hit_check
 +EncodingConv
 	|ec_init
 	|ec_convert

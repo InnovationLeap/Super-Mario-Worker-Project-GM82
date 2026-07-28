@@ -63,6 +63,7 @@ autopaircheck=0
 backgroundpage=0
 blockpage=-1
 bgmpage=0
+bonus_page=0 // raccoon leaf page (0=standard, 1=leaf items)
 
 arrayetapu=0
 //initializuj=0
@@ -352,7 +353,6 @@ if wlaczony != 1 && wlaczonaopcja == 0 && !keyboard_check(global.key_select){
     if (keyboard_check(global.key_ed_up) || keyboard_check(global.key_ed_up_2)) && scrooly>view_hview[0]/2 && !keyboard_check(vk_shift) {scrooly-=32}
     if (keyboard_check(global.key_ed_down) || keyboard_check(global.key_ed_down_2)) && scrooly<room_height-view_hview[0]/2 && !keyboard_check(vk_shift) {scrooly+=32}
 }
-
 #define Keyboard_37
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -772,11 +772,20 @@ if wlaczonaopcja=5//下面四行红字用于显示bonus栏的界面
     draw_sprite_ext(s_edenemiesmask,0,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)
     draw_set_blend_mode(bm_normal)
     draw_sprite_ext(s_edbonuses,0,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)
+    // Bonus page arrows (like scenery does)
+    if abs(view_xview[0]+256-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 {draw_sprite_ext(s_left,0,view_xview[0]+256,view_yview[0]+384,1,1,0,c_yellow,1)}else{draw_sprite_ext(s_left,0,view_xview[0]+256,view_yview[0]+384,1,1,0,c_white,1)}
+    if abs(view_xview[0]+512-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 {draw_sprite_ext(s_right,0,view_xview[0]+512,view_yview[0]+384,1,1,0,c_yellow,1)} else {draw_sprite_ext(s_right,0,view_xview[0]+512,view_yview[0]+384,1,1,0,c_white,1)}
+    if abs(view_xview[0]+256-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 && mouse_check_button(mb_left) {
+        if o_edmain.bonus_page=1{o_edmain.bonus_page=0}
+    }
+    if abs(view_xview[0]+512-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 && mouse_check_button(mb_left) {
+        if o_edmain.bonus_page=0{o_edmain.bonus_page=1}
+    }
     }
 // 第一行bonus
-    if wlaczonaopcja=5 && ed_hit(206, 110, 384, 64)&& kliknieto=0
+    if wlaczonaopcja=5 && bonus_page=0 && ed_hit(206, 110, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110,1,1,0,c_white,1)}
-    if wlaczonaopcja=5 && ed_hit(206, 110, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
+    if wlaczonaopcja=5 && bonus_page=0 && ed_hit(206, 110, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -792,9 +801,9 @@ if wlaczonaopcja=5//下面四行红字用于显示bonus栏的界面
     costawia6=0
     }//这里解释一下上面提到的几个变量。kliknieto用来记录鼠标是否已经点选，=0表示没有，=1表示有，用来避免按住左键连点的情况（？）；samplewyboru1用来控制点击时产生的音效，ustawiony不是很明白是什么。）
 //第二行bonus
-    if wlaczonaopcja=5 && ed_hit(206, 110+64, 384, 64)&& kliknieto=0
+    if wlaczonaopcja=5 && bonus_page=0 && ed_hit(206, 110+64, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64,1,1,0,c_white,1)}
-    if wlaczonaopcja=5 && ed_hit(206, 110+64, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
+    if wlaczonaopcja=5 && bonus_page=0 && ed_hit(206, 110+64, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -809,9 +818,9 @@ if wlaczonaopcja=5//下面四行红字用于显示bonus栏的界面
     autopair=0 //怨念残留喝了
     costawia6=0
     }
-    if wlaczonaopcja=5 && ed_hit(206, 110+64*2, 384, 64)&& kliknieto=0
+    if wlaczonaopcja=5 && bonus_page=0 && ed_hit(206, 110+64*2, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64*2,1,1,0,c_white,1)}
-    if wlaczonaopcja=5 && ed_hit(206, 110+64*2, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
+    if wlaczonaopcja=5 && bonus_page=0 && ed_hit(206, 110+64*2, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -827,9 +836,9 @@ if wlaczonaopcja=5//下面四行红字用于显示bonus栏的界面
     costawia6=0
     }
 
-    if wlaczonaopcja=5 && ed_hit(206, 110+64*3, 384, 64)&& kliknieto=0
+    if wlaczonaopcja=5 && bonus_page=0 && ed_hit(206, 110+64*3, 384, 64)&& kliknieto=0
     {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64*3,1,1,0,c_white,1)}
-    if wlaczonaopcja=5 && ed_hit(206, 110+64*3, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
+    if wlaczonaopcja=5 && bonus_page=0 && ed_hit(206, 110+64*3, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
     {
     delayus=0
     kliknieto=1
@@ -842,6 +851,25 @@ if wlaczonaopcja=5//下面四行红字用于显示bonus栏的界面
     costawia4=0
     costawia5=floor(1+(mouse_x-(view_xview[0]+206))/64)+6+6
     autopair=0 //怨念残留喝了
+    costawia6=0
+    }
+
+// Bonus page 1: Raccoon Leaf items (问号砖叶子 / 隐藏问号砖叶子 / 叶子)
+    if wlaczonaopcja=5 && bonus_page=1 && ed_hit(206, 110, 384, 64)&& kliknieto=0
+    {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110,1,1,0,c_white,1)}
+    if wlaczonaopcja=5 && bonus_page=1 && ed_hit(206, 110, 384, 64)&& mouse_check_button(mb_left) && kliknieto=0
+    {
+    delayus=0
+    kliknieto=1
+    sampelwyboru1=1//smp
+    wlaczonaopcja=0;
+    ustawiony=0
+    costawia=0
+    costawia2=0
+    costawia3=0
+    costawia4=0
+    costawia5=floor(1+(mouse_x-(view_xview[0]+206))/64)+24 // coto 25=问号砖叶子, 26=隐藏问号砖叶子, 27=叶子
+    autopair=0
     costawia6=0
     }
 
@@ -6824,6 +6852,118 @@ action_id=603
 applies_to=self
 */
 if ratio_level == 0 { wlaczony = wlaczony * -1; }
+#define KeyPress_33
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+var i, a, total, pass, idx, temp, need_swap;
+if wlaczonaopcja=0{
+    total=0
+
+    // 收集所有起点(coto=19)和CP(coto=20)
+    for (i=0; i<instance_number(o_edmarkerblock); i+=1){
+        a=instance_find(o_edmarkerblock,i)
+        if a.coto=19 || a.coto=20{
+            marker_info[total,0]=a.x
+            marker_info[total,1]=a.y
+            marker_info[total,2]=a.coto
+            total+=1
+        }
+    }
+
+    if total=0 {exit}
+
+    // 冒泡排序：起点优先，同类型按x再按y排序
+    for (pass=0; pass<total; pass+=1){
+        for (idx=0; idx<total-1; idx+=1){
+            need_swap=0
+            if marker_info[idx,2]=20 && marker_info[idx+1,2]=19 {need_swap=1}
+            if marker_info[idx,2]=marker_info[idx+1,2]{
+                if marker_info[idx,0]>marker_info[idx+1,0] {need_swap=1}
+                if marker_info[idx,0]=marker_info[idx+1,0] && marker_info[idx,1]>marker_info[idx+1,1] {need_swap=1}
+            }
+            if need_swap=1{
+                temp=marker_info[idx,0]
+                marker_info[idx,0]=marker_info[idx+1,0]
+                marker_info[idx+1,0]=temp
+                temp=marker_info[idx,1]
+                marker_info[idx,1]=marker_info[idx+1,1]
+                marker_info[idx+1,1]=temp
+                temp=marker_info[idx,2]
+                marker_info[idx,2]=marker_info[idx+1,2]
+                marker_info[idx+1,2]=temp
+            }
+        }
+    }
+
+    // 更新索引 (PageUp: 上一个)
+    if ed_cp_index<0 || ed_cp_index>=total {ed_cp_index=0}
+    ed_cp_index-=1
+    if ed_cp_index<0 {ed_cp_index=total-1}
+
+    // 移动视口到目标位置
+    // scroolx初始320(32倍数), scrooly初始240(32n+16)，须保持各自对齐
+    scroolx=marker_info[ed_cp_index,0]
+    scrooly=marker_info[ed_cp_index,1]+16
+}
+#define KeyPress_34
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+var k, b, cnt, ps, dx, tp, swp;
+if wlaczonaopcja=0{
+    cnt=0
+
+    // 收集所有起点(coto=19)和CP(coto=20)
+    for (k=0; k<instance_number(o_edmarkerblock); k+=1){
+        b=instance_find(o_edmarkerblock,k)
+        if b.coto=19 || b.coto=20{
+            cpinfo[cnt,0]=b.x
+            cpinfo[cnt,1]=b.y
+            cpinfo[cnt,2]=b.coto
+            cnt+=1
+        }
+    }
+
+    if cnt=0 {exit}
+
+    // 冒泡排序：起点优先，同类型按x再按y排序
+    for (ps=0; ps<cnt; ps+=1){
+        for (dx=0; dx<cnt-1; dx+=1){
+            swp=0
+            if cpinfo[dx,2]=20 && cpinfo[dx+1,2]=19 {swp=1}
+            if cpinfo[dx,2]=cpinfo[dx+1,2]{
+                if cpinfo[dx,0]>cpinfo[dx+1,0] {swp=1}
+                if cpinfo[dx,0]=cpinfo[dx+1,0] && cpinfo[dx,1]>cpinfo[dx+1,1] {swp=1}
+            }
+            if swp=1{
+                tp=cpinfo[dx,0]
+                cpinfo[dx,0]=cpinfo[dx+1,0]
+                cpinfo[dx+1,0]=tp
+                tp=cpinfo[dx,1]
+                cpinfo[dx,1]=cpinfo[dx+1,1]
+                cpinfo[dx+1,1]=tp
+                tp=cpinfo[dx,2]
+                cpinfo[dx,2]=cpinfo[dx+1,2]
+                cpinfo[dx+1,2]=tp
+            }
+        }
+    }
+
+    // 更新索引 (PageDown: 下一个)
+    if ed_cp_index<0 || ed_cp_index>=cnt {ed_cp_index=0}
+    ed_cp_index+=1
+    if ed_cp_index>=cnt {ed_cp_index=0}
+
+    // 移动视口到目标位置
+    // scroolx初始320(32倍数), scrooly初始240(32n+16)，须保持各自对齐
+    scroolx=cpinfo[ed_cp_index,0]
+    scrooly=cpinfo[ed_cp_index,1]+16
+}
 #define KeyPress_46
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -7140,115 +7280,3 @@ if global.musicon=1{
             if global.local_muzyka>=627{mm_play_ext(global.customMusicDirectory+global.customMusic+'\'+global.customMusicFile[global.local_muzyka-626],0)}
 
            } else { mm_stop_all_ext() }
-#define KeyPress_33
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-var i, a, total, pass, idx, temp, need_swap;
-if wlaczonaopcja=0{
-    total=0
-    
-    // 收集所有起点(coto=19)和CP(coto=20)
-    for (i=0; i<instance_number(o_edmarkerblock); i+=1){
-        a=instance_find(o_edmarkerblock,i)
-        if a.coto=19 || a.coto=20{
-            marker_info[total,0]=a.x
-            marker_info[total,1]=a.y
-            marker_info[total,2]=a.coto
-            total+=1
-        }
-    }
-    
-    if total=0 {exit}
-    
-    // 冒泡排序：起点优先，同类型按x再按y排序
-    for (pass=0; pass<total; pass+=1){
-        for (idx=0; idx<total-1; idx+=1){
-            need_swap=0
-            if marker_info[idx,2]=20 && marker_info[idx+1,2]=19 {need_swap=1}
-            if marker_info[idx,2]=marker_info[idx+1,2]{
-                if marker_info[idx,0]>marker_info[idx+1,0] {need_swap=1}
-                if marker_info[idx,0]=marker_info[idx+1,0] && marker_info[idx,1]>marker_info[idx+1,1] {need_swap=1}
-            }
-            if need_swap=1{
-                temp=marker_info[idx,0]
-                marker_info[idx,0]=marker_info[idx+1,0]
-                marker_info[idx+1,0]=temp
-                temp=marker_info[idx,1]
-                marker_info[idx,1]=marker_info[idx+1,1]
-                marker_info[idx+1,1]=temp
-                temp=marker_info[idx,2]
-                marker_info[idx,2]=marker_info[idx+1,2]
-                marker_info[idx+1,2]=temp
-            }
-        }
-    }
-    
-    // 更新索引 (PageUp: 上一个)
-    if ed_cp_index<0 || ed_cp_index>=total {ed_cp_index=0}
-    ed_cp_index-=1
-    if ed_cp_index<0 {ed_cp_index=total-1}
-    
-    // 移动视口到目标位置
-    // scroolx初始320(32倍数), scrooly初始240(32n+16)，须保持各自对齐
-    scroolx=marker_info[ed_cp_index,0]
-    scrooly=marker_info[ed_cp_index,1]+16
-}
-#define KeyPress_34
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-var k, b, cnt, ps, dx, tp, swp;
-if wlaczonaopcja=0{
-    cnt=0
-    
-    // 收集所有起点(coto=19)和CP(coto=20)
-    for (k=0; k<instance_number(o_edmarkerblock); k+=1){
-        b=instance_find(o_edmarkerblock,k)
-        if b.coto=19 || b.coto=20{
-            cpinfo[cnt,0]=b.x
-            cpinfo[cnt,1]=b.y
-            cpinfo[cnt,2]=b.coto
-            cnt+=1
-        }
-    }
-    
-    if cnt=0 {exit}
-    
-    // 冒泡排序：起点优先，同类型按x再按y排序
-    for (ps=0; ps<cnt; ps+=1){
-        for (dx=0; dx<cnt-1; dx+=1){
-            swp=0
-            if cpinfo[dx,2]=20 && cpinfo[dx+1,2]=19 {swp=1}
-            if cpinfo[dx,2]=cpinfo[dx+1,2]{
-                if cpinfo[dx,0]>cpinfo[dx+1,0] {swp=1}
-                if cpinfo[dx,0]=cpinfo[dx+1,0] && cpinfo[dx,1]>cpinfo[dx+1,1] {swp=1}
-            }
-            if swp=1{
-                tp=cpinfo[dx,0]
-                cpinfo[dx,0]=cpinfo[dx+1,0]
-                cpinfo[dx+1,0]=tp
-                tp=cpinfo[dx,1]
-                cpinfo[dx,1]=cpinfo[dx+1,1]
-                cpinfo[dx+1,1]=tp
-                tp=cpinfo[dx,2]
-                cpinfo[dx,2]=cpinfo[dx+1,2]
-                cpinfo[dx+1,2]=tp
-            }
-        }
-    }
-    
-    // 更新索引 (PageDown: 下一个)
-    if ed_cp_index<0 || ed_cp_index>=cnt {ed_cp_index=0}
-    ed_cp_index+=1
-    if ed_cp_index>=cnt {ed_cp_index=0}
-    
-    // 移动视口到目标位置
-    // scroolx初始320(32倍数), scrooly初始240(32n+16)，须保持各自对齐
-    scroolx=cpinfo[ed_cp_index,0]
-    scrooly=cpinfo[ed_cp_index,1]+16
-}

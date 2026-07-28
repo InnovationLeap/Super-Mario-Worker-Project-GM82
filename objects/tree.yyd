@@ -35,6 +35,7 @@
 		|o_bonus1up
 		|o_new1up
 		|o_bonusburak
+		|o_bonusraccoon
 		|o_bonusdead
 		|o_bonusflower
 		|o_bonuslui
@@ -155,6 +156,7 @@
 		|o_smoke
 	+o_others
 		|o_burax
+		|o_raccoon_tail
 		|o_fireball
 		|o_fireexplode
 		|o_scenery

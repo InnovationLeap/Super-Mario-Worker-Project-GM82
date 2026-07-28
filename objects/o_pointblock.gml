@@ -146,6 +146,12 @@ if podbity=1 && bonus<>20 && bonus<100
 
     if bonus=4 {instance_create(x,y,o_bonusstar);instance_create(x,y-32,o_uppercut);bonus=-1000}
 
+    if bonus=7 && global.rodzajmaria<>0 {instance_create(x+16,y,o_bonusraccoon);instance_create(x,y-32,o_uppercut);bonus=-1000}
+    if bonus=7 && global.rodzajmaria=0 {instance_create(x,y,o_bonusmush);instance_create(x,y-32,o_uppercut);bonus=-1000}
+
+    if bonus=8 && global.rodzajmaria<>0 {instance_create(x+16,y,o_bonusraccoon);instance_create(x,y-32,o_uppercut);bonus=-1000}
+    if bonus=8 && global.rodzajmaria=0 {instance_create(x,y,o_bonusmush);instance_create(x,y-32,o_uppercut);bonus=-1000}
+
     if sekwencja<10 {draw_sprite_ext(s_pointblock2,stefan,x+16,y+16-sekwencja*2,1,1,0,c_white,1); sekwencja+=1; kierunek+=lewoprawo}
     if sekwencja>=10 && sekwencja<20 {draw_sprite_ext(s_pointblock2,stefan,x+16,y+16-40+sekwencja*2,1,1,0,c_white,1); sekwencja+=1; kierunek-=lewoprawo}
     if sekwencja=20 draw_sprite(s_pointblock2,stefan,x+16,y+16)
@@ -160,3 +166,4 @@ if bonus=103 {instance_create(x,y,o_bonusburak);instance_destroy()}
 if bonus=104 {instance_create(x,y,o_bonuslui);instance_destroy()}
 if bonus=105 {instance_create(x,y,o_bonusstar);instance_destroy()}
 if bonus=106 {instance_create(x,y,o_new1up);instance_destroy()}
+if bonus=107 {instance_create(x+16,y+16,o_bonusraccoon);instance_destroy()}

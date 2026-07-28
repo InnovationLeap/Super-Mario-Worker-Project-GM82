@@ -559,3 +559,16 @@ s_thwompdetector
 s_lightlava
 s_rotomask
 s_autoscrollmask
+s_pmeterbar
+s_pmeter_active
+s_raccoon_tail
+s_raccoonmarioidle
+s_raccoonmariorun
+s_raccoonmariojump
+s_raccoonmariocrouch
+s_raccoonmarioshoot
+s_raccoonmarioswim
+s_raccoonmariowalk
+s_raccoonmariofall
+s_raccoonmariofly
+s_bonusleaf

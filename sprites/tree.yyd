@@ -240,6 +240,8 @@
 		|s_corala
 		|s_coralb
 		|s_coralc
+		|s_pmeterbar
+		|s_pmeter_active
 		|s_littlewoda
 		|s_rotocenter
 	+s_bonus
@@ -257,6 +259,7 @@
 		|s_pointblock3
 		|s_pointblock4
 		|sprite364
+		|s_bonusleaf
 	+s_weather
 		|s_rain
 		|s_raindrop
@@ -296,6 +299,16 @@
 	|s_smallmariorun
 	|s_smallmarioswim
 	|sprite1
+	|s_raccoon_tail
+	|s_raccoonmarioidle
+	|s_raccoonmariorun
+	|s_raccoonmariojump
+	|s_raccoonmariocrouch
+	|s_raccoonmarioshoot
+	|s_raccoonmarioswim
+	|s_raccoonmariowalk
+	|s_raccoonmariofall
+	|s_raccoonmariofly
 	+s_luigi
 		|s_bigluigicrouch
 		|s_bigluigijump

@@ -62,6 +62,22 @@ animkind=0 // przy zdobywaniu bonusow animacja mario musi wiedziec z jakiego w j
 bugort=0 // zmienna sprawdzajaca czy gracz stojacy w niewidzialnym punkcie chce go podbic
 endscoring=0 // Czyli ile punktow dostane za przejscie etapu
 
+// Raccoon Mario variables
+rodzajmaria_is_raccoon=0
+p_meter=0
+p_meter_max=50
+raccoon_fly_allowed=0
+raccoon_fly_timer=0
+raccoon_fly_time=212
+raccoon_flew=0
+raccoon_fall=0
+raccoon_fall_timer=0
+raccoon_fall_time=12
+p_meter_run_timer=0
+p_meter_run_time=35
+raccoon_fly_speed=-8
+p_meter_sfx_playing=0
+
 fetor=0
 fetor2=0
 
@@ -462,8 +478,139 @@ if !is_button_pressed('jump') {wciskaczwodowy=0}
 kuku+=1
 if is_button_pressed('jump') && kuku>1 && grawitacja<0 && (y<global.poziomwody || global.lava) && global.rodzajmaria<>5 && !stuck {grawitacja-=1.5; kuku=0};
 
+// Raccoon flight takeoff (P-Meter full + press jump in air)
+// keyboard_check_pressed: must press jump fresh, not just hold it
+if global.rodzajmaria=6 && raccoon_fly_allowed=1 && grawitacja>0 && keyboard_check_pressed(global.sterowanieskok) && y<global.poziomwody && sekwencja=1 && schylanie=0 && !stuck {
+    grawitacja=-9
+    raccoon_flew=1
+    raccoon_fly_timer=0
+    p_meter_run_timer=0
+}
+
+// Flight timer: count up while flying, end flight when time expires or landing
+if raccoon_flew=1 {
+    raccoon_fly_timer+=1
+    if raccoon_fly_timer>raccoon_fly_time || sekwencja=0 {
+        raccoon_flew=0
+        raccoon_fly_timer=0
+        raccoon_fly_allowed=0
+        p_meter=0
+    }
+}
+
 if sekwencja=0 &&  global.rodzajmaria<>5 && !place_meeting(x,y+1,obj_wall) && !place_meeting(x,y+1,o_pointblock) && !place_meeting(x,y+2,o_windas) {sekwencja=1}
 if global.modifiedmov=0 && sekwencja=1 && grawitacja<0 && global.rodzajmaria<>5 {y+=grawitacja+global.etapgravity/5; testujstepa=0}
+
+// Raccoon Mario sync flag
+rodzajmaria_is_raccoon = (global.rodzajmaria = 6)
+
+// P-Meter logic (Raccoon Mario)
+if global.rodzajmaria = 6 && skusil = 0 {
+    var _on_ground;
+    _on_ground = (sekwencja = 0)
+
+    // Disallow flight if P-Meter is not full
+    if raccoon_fly_allowed = 1 && p_meter < p_meter_max {
+        raccoon_fly_allowed = 0
+    }
+
+    // P-Meter charging: running on ground, not in water, not against a wall, not at screen edge
+    if abs(szybkosc) > 6 && !place_meeting(x,y,o_lava) && y < global.poziomwody && _on_ground {
+        var _at_edge, _against_wall, _nextx;
+        _at_edge = (x <= view_xview + 16 || x >= view_xview + 624)
+        // Check if running into a solid wall (obj_wall covers obj_waall/obj_halfwall via parent inheritance)
+        _nextx = x + sign(szybkosc) * 2
+        _against_wall = (place_meeting(_nextx, y, obj_wall) || place_meeting(_nextx, y, o_pointblock))
+        if !_at_edge && !_against_wall {
+            p_meter = min(p_meter + 1, p_meter_max)
+            p_meter_run_timer += 1
+        } else {
+            // Running against wall or screen edge: decay like stopped
+            if raccoon_fly_allowed = 0 {
+                p_meter = max(p_meter - 1, 0)
+                p_meter_run_timer = 0
+            }
+        }
+    } else {
+        if raccoon_fly_allowed = 0 {
+            p_meter = max(p_meter - 1, 0)
+            p_meter_run_timer = 0
+        }
+    }
+
+    // In water: reset P-Meter
+    if y >= global.poziomwody || place_meeting(x,y,o_lava) {
+        p_meter = 0
+        raccoon_fly_allowed = 0
+    }
+
+    // P-Meter full => allow flight
+    if p_meter >= p_meter_max {
+        raccoon_fly_allowed = 1
+    }
+
+    // Flight time extension: land while running with full P-Meter
+    if raccoon_fly_allowed = 1 {
+        if abs(szybkosc) > 6 && _on_ground {
+            p_meter_run_timer += 1
+            if !raccoon_flew {
+                raccoon_fly_timer = 0
+            }
+        }
+    }
+
+    // P-Meter sound effect (loop while P-meter full / flight ready - SMWP2 behavior)
+    if raccoon_fly_allowed = 1 {
+        if p_meter_sfx_playing = 0 {
+            p_meter_sfx_playing = 1
+            if global.sample=1 {sound_loop(snd_pmeter); sound_volume(snd_pmeter, global.glosnosc)}
+        }
+    } else {
+        if p_meter_sfx_playing = 1 {
+            p_meter_sfx_playing = 0
+            if global.sample=1 {sound_stop(snd_pmeter)}
+        }
+    }
+}
+
+// Raccoon flight and fall logic
+if global.rodzajmaria = 6 && skusil = 0 {
+    // Slow fall (raccoon parachute descent)
+    // keyboard_check_pressed: must press jump fresh, not just hold it
+    if grawitacja > 0 && keyboard_check_pressed(global.sterowanieskok) && !raccoon_fall && y < global.poziomwody && sekwencja = 1 && raccoon_fly_allowed = 0 {
+        raccoon_fall = 1
+        raccoon_fall_timer = 0
+    }
+
+    if raccoon_fall = 1 {
+        if grawitacja > 0 && y < global.poziomwody {
+            grawitacja = min(grawitacja, 2)
+            raccoon_fall_timer += 1
+            if raccoon_fall_timer > raccoon_fall_time || grawitacja <= 0 {
+                raccoon_fall = 0
+                raccoon_fall_timer = 0
+            }
+        } else {
+            raccoon_fall = 0
+            raccoon_fall_timer = 0
+        }
+    }
+    if !is_button_pressed('jump') || sekwencja = 0 {
+        raccoon_fall = 0
+        raccoon_fall_timer = 0
+    }
+}
+if global.rodzajmaria <> 6 {
+    raccoon_fall = 0
+    raccoon_fly_allowed = 0
+    raccoon_flew = 0
+    raccoon_fly_timer = 0
+    p_meter = 0
+    if p_meter_sfx_playing=1 {
+        p_meter_sfx_playing=0
+        if global.sample=1 {sound_stop(snd_pmeter)}
+    }
+}
 
 // Bugort - tlumaczenie w Create Actions
 // who can tell me wtf is this
@@ -748,6 +895,16 @@ if global.skin = 0 {
     global.beetroot_character_swim = s_burakmarioswim
     global.beetroot_character_crouch = s_burakmariocrouch
     global.beetroot_character_shoot = s_burakmarioshot
+
+    global.raccoon_character_idle = s_raccoonmarioidle
+    global.raccoon_character_run = s_raccoonmariorun
+    global.raccoon_character_jump = s_raccoonmariojump
+    global.raccoon_character_crouch = s_raccoonmariocrouch
+    global.raccoon_character_shoot = s_raccoonmarioshoot
+    global.raccoon_character_swim = s_raccoonmarioswim
+    global.raccoon_character_walk = s_raccoonmariowalk
+    global.raccoon_character_fall = s_raccoonmariofall
+    global.raccoon_character_fly = s_raccoonmariofly
 }
 
 //WEEGEE皮肤
@@ -781,6 +938,17 @@ if global.skin = 1 {
     global.beetroot_character_swim = s_burakluigiswim
     global.beetroot_character_crouch = s_burakluigicrouch
     global.beetroot_character_shoot = s_burakluigishot
+
+    // Luigi uses same raccoon sprites as Mario for now (no Luigi raccoon skin yet)
+    global.raccoon_character_idle = s_raccoonmarioidle
+    global.raccoon_character_run = s_raccoonmariorun
+    global.raccoon_character_jump = s_raccoonmariojump
+    global.raccoon_character_crouch = s_raccoonmariocrouch
+    global.raccoon_character_shoot = s_raccoonmarioshoot
+    global.raccoon_character_swim = s_raccoonmarioswim
+    global.raccoon_character_walk = s_raccoonmariowalk
+    global.raccoon_character_fall = s_raccoonmariofall
+    global.raccoon_character_fly = s_raccoonmariofly
 }
 
 
@@ -793,7 +961,8 @@ if keyboard_check(ord('2')){if global.modifiedmov=1 && global.rodzajmaria=0 && (
 if keyboard_check(ord('3')){if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 2 };global.rodzajmaria=2;gwiazdka=0;shield=0} //花身
 if keyboard_check(ord('4')){if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 2 };global.rodzajmaria=4;gwiazdka=0;shield=0} //绿果（为啥甜菜在绿果后面……）
 if keyboard_check(ord('5')){if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 2 };global.rodzajmaria=3;gwiazdka=0;shield=0} //甜菜
-if keyboard_check(ord('6')){global.rodzajmaria=maria
+if keyboard_check(ord('6')){if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 2 };global.rodzajmaria=6;gwiazdka=0;shield=0}
+if keyboard_check(ord('7')){global.rodzajmaria=maria
 gwiazdka=500
     animator2.visible=1
  }
@@ -1068,6 +1237,74 @@ if kierunek=1 && strzelil>0 {animator.sprite_index=global.beetroot_character_sho
 if strzelil>3 {strzelil=0}
 }}
 
+// RACCOON MARIO
+if global.rodzajmaria=6 {
+if y<global.poziomwody || global.lava
+{
+
+if szybkosc<0 {kierunek=1}
+if szybkosc>0 {kierunek=0}
+
+if szybkosc=0 && sekwencja=0 && kierunek=0 && strzelil=0 {animator.sprite_index=global.raccoon_character_idle; animator.image_index=0; animator.image_xscale=1;animkind=0}
+if szybkosc=0 && sekwencja=0 && kierunek=1 && strzelil=0 {animator.sprite_index=global.raccoon_character_idle; animator.image_index=0; animator.image_xscale=-1;animkind=0}
+
+if szybkosc>0 && kierunek=0 && sekwencja=0 && strzelil=0 {animator.sprite_index=global.raccoon_character_walk; animator.image_index+=szybkosc/10; animator.image_xscale=1;animkind=0}
+if szybkosc<0 && kierunek=1 && sekwencja=0 && strzelil=0 {animator.sprite_index=global.raccoon_character_walk; animator.image_index+=szybkosc/10; animator.image_xscale=-1;animkind=0}
+
+// When P-Meter is full and running, use run animation
+if abs(szybkosc)>6 && raccoon_fly_allowed=1 && sekwencja=0 && strzelil=0 && kierunek=0 {animator.sprite_index=global.raccoon_character_run; animator.image_index+=szybkosc/10; animator.image_xscale=1;animkind=0}
+if abs(szybkosc)>6 && raccoon_fly_allowed=1 && sekwencja=0 && strzelil=0 && kierunek=1 {animator.sprite_index=global.raccoon_character_run; animator.image_index+=szybkosc/10; animator.image_xscale=-1;animkind=0}
+
+// Jump animation
+if kierunek=0 && grawitacja<>0 && raccoon_fall=0 && raccoon_fly_allowed=0 && strzelil=0 {animator.sprite_index=global.raccoon_character_jump; animator.image_xscale=1;animkind=1}
+if kierunek=1 && grawitacja<>0 && raccoon_fall=0 && raccoon_fly_allowed=0 && strzelil=0 {animator.sprite_index=global.raccoon_character_jump; animator.image_xscale=-1;animkind=1}
+
+// Fall / parachute animation
+if kierunek=0 && raccoon_fall=1 && strzelil=0 {animator.sprite_index=global.raccoon_character_fall; animator.image_index+=0.2; animator.image_xscale=1;animkind=1}
+if kierunek=1 && raccoon_fall=1 && strzelil=0 {animator.sprite_index=global.raccoon_character_fall; animator.image_index+=0.2; animator.image_xscale=-1;animkind=1}
+
+// Fly animation (when actively flying upwards)
+if kierunek=0 && raccoon_fly_allowed=1 && grawitacja<0 && strzelil=0 {animator.sprite_index=global.raccoon_character_fly; animator.image_index+=0.25; animator.image_xscale=1;animkind=1}
+if kierunek=1 && raccoon_fly_allowed=1 && grawitacja<0 && strzelil=0 {animator.sprite_index=global.raccoon_character_fly; animator.image_index+=0.25; animator.image_xscale=-1;animkind=1}
+
+// Crouch
+if schylanie=1 && kierunek=0 {animator.sprite_index=global.raccoon_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
+if schylanie=1 && kierunek=1 {animator.sprite_index=global.raccoon_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
+if !schylanie=1 {image_index=1}
+
+// Shooting (tail whip) animation — high priority, works in air and on ground
+if schylanie=1 {strzelil=0}
+if kierunek=0 && strzelil>0 {animator.sprite_index=global.raccoon_character_shoot; animator.image_index+=0.5; animator.image_xscale=1; strzelil+=1;animkind=0}
+if kierunek=1 && strzelil>0 {animator.sprite_index=global.raccoon_character_shoot; animator.image_index+=0.5; animator.image_xscale=-1; strzelil+=1;animkind=0}
+if strzelil>8 {strzelil=0; animator.image_index=0}
+}
+
+if y>=global.poziomwody && !global.lava
+{
+
+if szybkosc<0 {kierunek=1}
+if szybkosc>0 {kierunek=0}
+
+if szybkosc=0 && sekwencja=0 && kierunek=0 {animator.sprite_index=global.raccoon_character_idle; animator.image_index=0; animator.image_xscale=1;animkind=0}
+if szybkosc=0 && sekwencja=0 && kierunek=1 {animator.sprite_index=global.raccoon_character_idle; animator.image_index=0; animator.image_xscale=-1;animkind=0}
+
+if szybkosc>0 && kierunek=0 && sekwencja=0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index+=szybkosc/20; animator.image_xscale=1;animkind=0}
+if szybkosc<0 && kierunek=1 && sekwencja=0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index+=szybkosc/20; animator.image_xscale=-1;animkind=0}
+
+if kierunek=0 && grawitacja<>0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index=plywakanim; animator.image_xscale=1;animkind=2}
+if kierunek=1 && grawitacja<>0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index=plywakanim; animator.image_xscale=-1;animkind=2}
+if plywakanim<9 {plywakanim+=0.2}
+
+if schylanie=1 && kierunek=0 {animator.sprite_index=global.raccoon_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
+if schylanie=1 && kierunek=1 {animator.sprite_index=global.raccoon_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
+if !schylanie=1 {image_index=1}
+
+strzelil=0
+
+if global.efekty>5 {lolo=instance_create(x,y,o_marioeffektor); lolo.sprite_index=animator.sprite_index; lolo.image_index=animator.image_index; lolo.image_speed=0;lolo.image_xscale=animator.image_xscale}
+
+}}
+
 } // koniec global.pauza
 
 
@@ -1322,6 +1559,32 @@ if instance_number(o_burax)<2
     }
 if !keyboard_check(global.sterowaniebieg) {strzelil2=0}
 
+}
+
+// Raccoon tail attack
+if global.pauza=0 && global.rodzajmaria=6 && skusil=0 && global.etappokonany=0 && teleportacja=0 && schylanie=0 {
+    if !instance_exists(o_raccoon_tail)
+    {
+        if kierunek=1 && keyboard_check(global.sterowaniebieg) && strzelil2=0 {
+            strzelil2=1;
+            lolo=instance_create(x,y-11,o_raccoon_tail);
+            lolo.kierunek=1;
+            lolo.timer=0;
+            strzelil=1;
+            animator.image_index=0;
+            if global.sample=1 {fofo=sound_play(snd_spin);sound_volume(snd_spin,global.glosnosc)}
+        }
+        if kierunek=0 && keyboard_check(global.sterowaniebieg) && strzelil2=0 {
+            strzelil2=1;
+            lolo=instance_create(x,y-11,o_raccoon_tail);
+            lolo.kierunek=0;
+            lolo.timer=0;
+            strzelil=1;
+            animator.image_index=0;
+            if global.sample=1 {fofo=sound_play(snd_spin);sound_volume(snd_spin,global.glosnosc)}
+        }
+    }
+if !keyboard_check(global.sterowaniebieg) {strzelil2=0}
 }
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -1608,6 +1871,43 @@ if place_meeting(x,y,o_bonusburak) && global.rodzajmaria<>4 && global.rodzajmari
     if animkind=0 {animator.sprite_index=global.beetroot_character_run}
     if animkind=1 {animator.sprite_index=global.beetroot_character_jump}
     if animkind=2 {animator.sprite_index=global.beetroot_character_swim}
+    }
+
+// ------------------------------------------------------------------------------------------------------
+// ZDOBYWANIE RACCOON (small pickup, already raccoon, other state)
+if place_meeting(x,y,o_bonusraccoon) && global.rodzajmaria=0 && global.rodzajmaria<>5 && checkpointdetect=1
+    {
+    bonus=instance_place(x,y,o_bonusraccoon)
+    with(bonus){instance_destroy()}
+    global.rodzajmaria=1
+    if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) { huadun = 1 };if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) { huadun = 2 }    global.pauza=1
+    if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
+
+    if animkind=0 {animator.sprite_index=global.big_character_run}
+    if animkind=1 {animator.sprite_index=global.big_character_jump}
+    if animkind=2 {animator.sprite_index=global.big_character_swim}
+    }
+
+if place_meeting(x,y,o_bonusraccoon) && global.rodzajmaria=6 && global.rodzajmaria<>5 && checkpointdetect=1
+    {
+    bonus=instance_place(x,y,o_bonusraccoon)
+    if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
+    lolo=instance_create(bonus.x,bonus.y,o_punkciornik3)
+    lolo.image_index=3
+    with(bonus){instance_destroy()}
+    }
+
+if place_meeting(x,y,o_bonusraccoon) && global.rodzajmaria<>6 && global.rodzajmaria<>0 && global.rodzajmaria<>5 && checkpointdetect=1
+    {
+    bonus=instance_place(x,y,o_bonusraccoon)
+    with(bonus){instance_destroy()}
+    global.rodzajmaria=6
+    global.pauza=1
+    if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
+
+    if animkind=0 {animator.sprite_index=global.raccoon_character_idle}
+    if animkind=1 {animator.sprite_index=global.raccoon_character_jump}
+    if animkind=2 {animator.sprite_index=global.raccoon_character_swim}
     }
 
 
@@ -2344,6 +2644,25 @@ draw_set_color(c_white)
 
 if global.huddisplay=0 || global.gameversion <= 1711
 {
+// P-Meter HUD drawing for Raccoon Mario
+if global.rodzajmaria = 6 && global.pauza = 0 {
+    var _pmx, _pmy;
+    _pmx = view_xview[0] + 24
+    _pmy = view_yview[0] + 456
+    // Draw P-Meter progress bar (7 frames, frame 0=empty, frame 6=full)
+    var _fill;
+    _fill = floor((p_meter / p_meter_max) * 6)
+    draw_sprite(s_pmeterbar, _fill, _pmx, _pmy)
+    // Draw P indicator with flash when P-Meter is full
+    if raccoon_fly_allowed = 1 {
+        var _flash;
+        _flash = (global.step mod 30 < 15)
+        draw_sprite(s_pmeter_active, _flash, _pmx + 96, _pmy + 2)
+    } else {
+        draw_sprite(s_pmeter_active, 0, _pmx + 96, _pmy + 2)
+    }
+}
+
 if global.godmode=0 && !global.levelsmooth=1 {draw_text(view_xview[0]+40,view_yview[0]+20,string(global.character_name)+string(global.zycia)) }//zycia是生命数
 if global.godmode=1 && !global.levelsmooth=1 {draw_text(view_xview[0]+40,view_yview[0]+20,'GOD   '+string(global.zycia))}
 if global.godmode=0 && global.levelsmooth=1 {draw_text(view_xview[0]+40,view_yview[0]+20,'SMOOTH '+string(global.zycia))}

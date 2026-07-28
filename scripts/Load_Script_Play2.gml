@@ -258,6 +258,9 @@ if string_char_at(aa,1)='2'{
    case(16):ae=room_instance_add(Play_Room2,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_pointblockpodbijacz);break;
    case(17):ae=room_instance_add(Play_Room2,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_pointblock2);skript=string_insert('('+string(ae)+').bonus=7;',skript,string_length(skript)+1);break;
    case(18):ae=room_instance_add(Play_Room2,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_point);break;
+   case(25):ae=room_instance_add(Play_Room2,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_pointblock);skript=string_insert('('+string(ae)+').bonus=7;',skript,string_length(skript)+1);break;
+   case(26):ae=room_instance_add(Play_Room2,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_pointblock2);skript=string_insert('('+string(ae)+').bonus=8;',skript,string_length(skript)+1);break;
+   case(27):ae=room_instance_add(Play_Room2,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_pointblock);skript=string_insert('('+string(ae)+').bonus=107;',skript,string_length(skript)+1);break;
   }
   skript=string_insert('('+string(ae)+').coto='+string(string_copy(aa,2,2))+';',skript,string_length(skript)+1)ae.coto=real(string_copy(aa,2,2))
  }
