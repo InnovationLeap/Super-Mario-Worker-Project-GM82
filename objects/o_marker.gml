@@ -1364,6 +1364,47 @@ applies_to=self
 if global.pauza=0 && skusil=0 && global.etappokonany=0 && teleportacja=0 {
 // rozdeptywanie wrogow
 
+// Raccoon tail hit check runs first: mark enemies before stomp so tail takes priority
+// Must calculate tail position from CURRENT frame player data (not stale tail.x/y)
+// because o_raccoon_tail Step runs AFTER o_marker Step, leaving position 1 frame behind
+if instance_exists(o_raccoon_tail) {
+    var _tdir, _tsweepX, _ttimer, _ttailX, _ttailY;
+    _tdir = 1
+    if o_raccoon_tail.kierunek = 1 { _tdir = -1 }
+
+    _ttimer = o_raccoon_tail.timer
+    if _ttimer <= 2 { _tsweepX = 0 }
+    else {
+        if _ttimer <= 4 { _tsweepX = (_ttimer - 2) / 2 * 20 * _tdir }
+        else {
+            if _ttimer <= 7 { _tsweepX = (20 - (_ttimer - 4) / 3 * 40) * _tdir }
+            else { _tsweepX = (-20 + (_ttimer - 7) / 5 * 20) * _tdir }
+        }
+    }
+
+    // Tail X: player center + sweep (SMWP2: tail.Position = Vector2.Zero)
+    _ttailX = x + _tsweepX
+    // Tail Y: align tail bbox_bottom (origin_y=12+11=23) with player bbox_bottom (origin_y=65)
+    _ttailY = y - 11
+
+    // Falling offset (SMWP2: offset down by fall speed in open air)
+    if grawitacja > 0 {
+        var _tcheckY;
+        _tcheckY = y + grawitacja + 1
+        if !place_meeting(x, _tcheckY, obj_wall) && !place_meeting(x, _tcheckY, o_pointblock) && !place_meeting(x, _tcheckY, o_windas) {
+            _ttailY = y - 11 + grawitacja
+        }
+    }
+
+    // Apply calculated position so raccoon_tail_hit_check sees correct self.x/self.y
+    o_raccoon_tail.x = _ttailX
+    o_raccoon_tail.y = _ttailY
+
+    with(o_raccoon_tail) {
+        raccoon_tail_hit_check()
+    }
+}
+
 if global.rodzajmaria<>5 {
 
 //gwiazdka记录是否为无敌星状态
@@ -1373,7 +1414,7 @@ if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_goomba) && !place_
     {
     lolo=instance_place(x,y+max(0,grawitacja+global.etapgravity/5),o_goomba)
     if lolo.killer=0 && lolo.license <> 1 && lolo.hurt_delay=0{
-        if grawitacja>0 && y<lolo.y
+        if lolo.rodzajzabicia=0 && grawitacja>0 && y<lolo.y
         {
         //lolo.energia-=233333333333333333333; 恶劣变量
         lolo.rodzajzabicia=1;//这里是记录是普通的踩还是无敌星，估计主要是为了计分之类
@@ -1395,7 +1436,7 @@ if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_troopashell2) && !place_m
     {
     lolo=instance_place(x,y,o_goomba)
     if lolo.killer=0 && lolo.license = 1 {
-    if grawitacja>0 && y<lolo.y
+    if lolo.rodzajzabicia=0 && grawitacja>0 && y<lolo.y
         {
        // lolo.energia-=233333333333333333333;
         lolo.rodzajzabicia=1;
@@ -1422,7 +1463,7 @@ if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_troopashell2) && !place_m
 if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell2) /* && muszlowanie>10*/ && skusil=0//这个是静止龟壳
     {
     lolo=instance_place(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell2)
-        if lolo.hurt_delay=0{
+        if lolo.hurt_delay=0 && lolo.rodzajzabicia=0{
         if x<lolo.x {lolo.kierunek=1;lolo.rodzajzabicia=1}
         if x>=lolo.x {lolo.kierunek=-1;lolo.rodzajzabicia=1}//这里实现的是踢龟壳（所以为什么要以踩为判定基础……）
         if sekwencja=1 {grawitacja=-8}
@@ -1434,7 +1475,7 @@ if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell2) /* &
 if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell)
     {
     lolo=instance_place(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell)
-    if grawitacja>0 && y<lolo.y && lolo.hurt_delay=0
+    if lolo.rodzajzabicia=0 && grawitacja>0 && y<lolo.y && lolo.hurt_delay=0
         {
         //lolo.energia-=233333333333333333333; 恶劣变量
         lolo.rodzajzabicia=1;//这里是记录是普通的踩还是无敌星，估计主要是为了计分之类
@@ -1457,7 +1498,7 @@ if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_goomba) && !place_
     {
     lolo=instance_place(x,y+max(0,grawitacja+global.etapgravity/5),o_goomba)
     if lolo.dabusi=0 && lolo.killer=0 && lolo.license <> 1 {
-    if grawitacja>0 && y<lolo.y
+    if lolo.rodzajzabicia=0 && grawitacja>0 && y<lolo.y
         {
        // lolo.energia-=233333333333333333333333333333
         lolo.rodzajzabicia=2//这个是无敌星
@@ -1477,7 +1518,7 @@ if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_kuppa)
     {
     lolo=instance_place(x,y,o_goomba)
     if lolo.dabusi=0 && lolo.killer=0 && lolo.license = 1 {
-    if grawitacja>0 && y<lolo.y
+    if lolo.rodzajzabicia=0 && grawitacja>0 && y<lolo.y
         {
       //  lolo.energia-=233333333333333333333333333333
         lolo.rodzajzabicia=2
@@ -1496,7 +1537,7 @@ if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_kuppa)
     if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_kuppa)
     {
     lolo=instance_place(x,y,o_goomba)
-    if lolo.dabusi=0 {//lolo.energia-=233333333333333333333333333333 啊，这个dabusi变量是我以前加的，防止敌人被星死，以及龟壳撞死
+    if lolo.dabusi=0 && lolo.rodzajzabicia=0 {//lolo.energia-=233333333333333333333333333333 啊，这个dabusi变量是我以前加的，防止敌人被星死，以及龟壳撞死
     lolo.rodzajzabicia=2
     nabijanie+=1
     fofo=instance_create(x,y,o_punkciornik2)
@@ -1510,7 +1551,7 @@ if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_kuppa) /* && muszl
     {
     lolo=instance_place(x,y+max(0,grawitacja+global.etapgravity/5),o_kuppa)
     if lolo.killer=0 {
-    if grawitacja>0 && y<lolo.y-40 && lolo.oberw<=0
+    if lolo.rodzajzabicia=0 && grawitacja>0 && y<lolo.y-40 && lolo.oberw<=0
         {
         lolo.energia-=114514; //踩一次必然扣HP，但子弹攻击要看库巴的koopa_strength来判断
         lolo.rodzajzabicia=1;
