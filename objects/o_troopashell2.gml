@@ -33,7 +33,7 @@ action_id=603
 applies_to=self
 */
 if !setonce{
-    if czerwona=4{sprite_index=s_spinyshell;hardshell=1;dasini=1}
+    if czerwona=4{sprite_index=s_spinyshell;hardshell=0;dasini=1}
     else if hardshell=1{sprite_index=s_buzzyshell;dasini=1}
     else{
         switch(czerwona){
@@ -77,6 +77,10 @@ if tail_kicked=1{
     }
     // gravity
     grawitacja+=0.5; y+=grawitacja
+    // ceiling: if moving up and inside a block, push down out of it
+    if grawitacja<0{
+        while place_meeting(x,y,obj_halfground) || place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock) || place_meeting(x,y,obj_waall) || place_meeting(x,y,o_breakblock) || place_meeting(x,y,o_pointblock2) || place_meeting(x,y,obj_static) {y+=1; grawitacja=0}
+    }
     // landing: stop kick, revert to normal static shell
     if grawitacja>0{
         if place_meeting(x,y+1,obj_halfground) || place_meeting(x,y+1,obj_wall) || place_meeting(x,y+1,o_pointblock){
@@ -100,6 +104,10 @@ if sekwencja=0{
 
 if sekwencja=1 {
     grawitacja+=0.5; y+=grawitacja
+    // ceiling: if moving up and inside a block, push down out of it
+    if grawitacja<0{
+        while place_meeting(x,y,obj_halfground) || place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock) || place_meeting(x,y,obj_waall) || place_meeting(x,y,o_breakblock) || place_meeting(x,y,o_pointblock2) || place_meeting(x,y,obj_static) {y+=1; grawitacja=0}
+    }
     if !place_meeting(x,y,o_uppercut){
     if (place_meeting(x,y+1,obj_halfground) || place_meeting(x,y+1,obj_wall) || place_meeting(x,y+1,o_pointblock)){
         grawitacja=0; sekwencja=2;
@@ -120,9 +128,9 @@ while sekwencja=2{
 // uppercut i zwykla smierc
 if hardshell=0 {
 //if place_meeting(x,y,o_uppercut) {energia-=3; rodzajzabicia=0}
-if rodzajzabicia=6 {fofo=instance_create(x,y,o_troopashell); fofo.kierunek=kierunek; fofo.czerwona=czerwona; fofo.is_flipped=is_flipped; if czerwona=1 {fofo.sprite_index=s_trooparedshell}; if czerwona=2 {fofo.sprite_index=s_troopablueshell};  if czerwona=3 {fofo.sprite_index=s_troopashellgold} ;instance_destroy();}
-if rodzajzabicia=2 {lolo=instance_create(x,y,o_troopadead);lolo.czerwona=czerwona; if czerwona=1 {lolo.sprite_index=s_trooparedshell} ; if czerwona=2 {lolo.sprite_index=s_troopablueshell} ; if czerwona=3 {lolo.sprite_index=s_troopashellgold} ;instance_destroy();}
-if rodzajzabicia=1 {fofo=instance_create(x,y,o_troopashell); fofo.kierunek=kierunek; fofo.czerwona=czerwona;fofo.single=single; fofo.is_flipped=is_flipped; if czerwona=1 {fofo.sprite_index=s_trooparedshell}; if czerwona=2 {fofo.sprite_index=s_troopablueshell};  if czerwona=3 {fofo.sprite_index=s_troopashellgold} ;instance_destroy();}
+if rodzajzabicia=6 {fofo=instance_create(x,y,o_troopashell); fofo.kierunek=kierunek; fofo.czerwona=czerwona; fofo.is_flipped=is_flipped; if czerwona=1 {fofo.sprite_index=s_trooparedshell}; if czerwona=2 {fofo.sprite_index=s_troopablueshell}; if czerwona=3 {fofo.sprite_index=s_troopashellgold}; if czerwona=4 {fofo.sprite_index=s_spinyshell};instance_destroy();}
+if rodzajzabicia=2 {lolo=instance_create(x,y,o_troopadead);lolo.czerwona=czerwona; if czerwona=1 {lolo.sprite_index=s_trooparedshell} ; if czerwona=2 {lolo.sprite_index=s_troopablueshell} ; if czerwona=3 {lolo.sprite_index=s_troopashellgold} ; if czerwona=4 {lolo.sprite_index=s_spinyshelldead};instance_destroy();}
+if rodzajzabicia=1 {fofo=instance_create(x,y,o_troopashell); fofo.kierunek=kierunek; fofo.czerwona=czerwona;fofo.single=single; fofo.is_flipped=is_flipped; if czerwona=1 {fofo.sprite_index=s_trooparedshell}; if czerwona=2 {fofo.sprite_index=s_troopablueshell}; if czerwona=3 {fofo.sprite_index=s_troopashellgold}; if czerwona=4 {fofo.sprite_index=s_spinyshell};instance_destroy();}
 if rodzajzabicia=3 || rodzajzabicia=4 || rodzajzabicia=5
     {
     instance_destroy();

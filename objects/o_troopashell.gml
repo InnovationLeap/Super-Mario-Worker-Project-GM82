@@ -55,7 +55,9 @@ if hurt_delay>0{hurt_delay-=1}
 if aktywowany=1{
 // spadanie
 if czerwona=1 {sprite_index=s_trooparedshell}
-if czerwona=4 {sprite_index=s_spinyshell; image_index=1; hardshell=1; dasini=1}
+if czerwona=4 {
+if sprite_index != s_spinyshell {sprite_index = s_spinyshell; image_index = 1}
+hardshell=0; dasini=1}
 /*
 basic_movement(5,0.4,0,0);
 
@@ -70,8 +72,13 @@ if place_meeting(x-5,y,o_pointblockpodbijacz)&& kierunek<0 {lolo=instance_place(
 
 if sekwencja=0 && !place_meeting(x,y+1,obj_halfground) && !place_meeting(x,y+1,obj_wall) && !place_meeting(x,y+1,o_pointblock) {sekwencja=1}
 if sekwencja=1 {grawitacja+=0.5; y+=grawitacja}
+// ceiling: if moving up and inside a block, push down out of it
+if grawitacja<0{
+    while place_meeting(x,y,obj_halfground) || place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock) || place_meeting(x,y,obj_waall) || place_meeting(x,y,o_breakblock) || place_meeting(x,y,o_pointblock2) || place_meeting(x,y,obj_static) {y+=1; grawitacja=0}
+}
 if sekwencja=1 && (place_meeting(x,y+1,obj_halfground) || place_meeting(x,y+1,obj_wall) || place_meeting(x,y+1,o_pointblock)) {grawitacja=0; sekwencja=2;}
-while sekwencja=2 && (place_meeting(x,y,obj_halfground) ||place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {y-=1 if (!place_meeting(x,y,obj_halfground) && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock)) {sekwencja=0}}
+while sekwencja=2 && (place_meeting(x,y,obj_halfground) ||place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {y-=1}
+if (!place_meeting(x,y,obj_halfground) && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock)) {sekwencja=0}
 
 if hardshell=1 {
 if place_meeting(x+5,y,o_pointblock) && kierunek>0 {lolo=instance_place(x+5,y,o_pointblock);lolo.podbity=1;if lolo.bonus=20{lolo.shaben=1;lolo.aplikacja=10};fangsi=1;kierunek=kierunek*-1}
@@ -109,10 +116,10 @@ if rodzajzabicia=7{
 if hardshell=0 {
 
 //if place_meeting(x,y,o_uppercut) {energia-=3; rodzajzabicia=0}
-if rodzajzabicia=6 {instance_destroy(); lolox=instance_create(x,y,o_troopashell2); lolox.kierunek=kierunek; lolox.czerwona=czerwona; lolox.is_flipped=is_flipped; if czerwona=1 {lolox.sprite_index=s_trooparedshell}  ; if czerwona=2 {lolox.sprite_index=s_troopablueshell} ;if czerwona=3 {lolox.sprite_index=s_troopashellgold}}
-if rodzajzabicia=2 {instance_destroy(); lolo=instance_create(x,y,o_troopadead); lolo.czerwona=czerwona; if czerwona=1 {lolo.sprite_index=s_trooparedshell} ; if czerwona=2 {lolo.sprite_index=s_troopablueshell} ;if czerwona=3 {lolo.sprite_index=s_troopashellgold}}
-if rodzajzabicia=1 {instance_destroy(); lolox=instance_create(x,y,o_troopashell2); lolo=instance_create(x,y,o_punkciornik); lolox.kierunek=kierunek; lolox.czerwona=czerwona; lolox.is_flipped=is_flipped; if czerwona=1 {lolox.sprite_index=s_trooparedshell}  ; if czerwona=2 {lolox.sprite_index=s_troopablueshell} ;if czerwona=3 {lolox.sprite_index=s_troopashellgold}}
-if rodzajzabicia=3 || rodzajzabicia=4 || rodzajzabicia=5 {instance_destroy(); lolox=instance_create(x,y,o_troopadead); lolo=instance_create(x,y,o_punkciornik); lolox.czerwona=czerwona; if czerwona=1 {lolox.sprite_index=s_trooparedshell}  ; if czerwona=2 {lolox.sprite_index=s_troopablueshell};if czerwona=3 {lolox.sprite_index=s_troopashellgold};if global.sample=1 {fofo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}}
+if rodzajzabicia=6 {instance_destroy(); lolox=instance_create(x,y,o_troopashell2); lolox.kierunek=kierunek; lolox.czerwona=czerwona; lolox.is_flipped=is_flipped; if czerwona=1 {lolox.sprite_index=s_trooparedshell}  ; if czerwona=2 {lolox.sprite_index=s_troopablueshell} ;if czerwona=3 {lolox.sprite_index=s_troopashellgold} ;if czerwona=4 {lolox.sprite_index=s_spinyshell}}
+if rodzajzabicia=2 {instance_destroy(); lolo=instance_create(x,y,o_troopadead); lolo.czerwona=czerwona; if czerwona=1 {lolo.sprite_index=s_trooparedshell} ; if czerwona=2 {lolo.sprite_index=s_troopablueshell} ;if czerwona=3 {lolo.sprite_index=s_troopashellgold} ;if czerwona=4 {lolo.sprite_index=s_spinyshelldead}}
+if rodzajzabicia=1 {instance_destroy(); lolox=instance_create(x,y,o_troopashell2); lolo=instance_create(x,y,o_punkciornik); lolox.kierunek=kierunek; lolox.czerwona=czerwona; lolox.is_flipped=is_flipped; if czerwona=1 {lolox.sprite_index=s_trooparedshell}  ; if czerwona=2 {lolox.sprite_index=s_troopablueshell} ;if czerwona=3 {lolox.sprite_index=s_troopashellgold} ;if czerwona=4 {lolox.sprite_index=s_spinyshell}}
+if rodzajzabicia=3 || rodzajzabicia=4 || rodzajzabicia=5 {instance_destroy(); lolox=instance_create(x,y,o_troopadead); lolo=instance_create(x,y,o_punkciornik); lolox.czerwona=czerwona; if czerwona=1 {lolox.sprite_index=s_trooparedshell}  ; if czerwona=2 {lolox.sprite_index=s_troopablueshell};if czerwona=3 {lolox.sprite_index=s_troopashellgold};if czerwona=4 {lolox.sprite_index=s_spinyshelldead};if global.sample=1 {fofo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}}
 
 }
 else {
@@ -170,8 +177,14 @@ if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_troopashell) && !place_me
     fofo.image_index=nabijanie-1
     if nabijanie>6 {nabijanie=0}
 }
-if lolo.dasini <> 0 && lolo.noshellkick=0
-    { rodzajzabicia=2 ;fofo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}
+if lolo.dasini <> 0 && lolo.noshellkick=0 {
+    // normal shell hitting static spiny shell: kill the static spiny, not self
+    if lolo.object_index == o_troopashell2 && lolo.czerwona == 4 {
+        lolo.rodzajzabicia = 2
+        fofo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)
+    }
+    else { rodzajzabicia=2 ;fofo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}
+}
 
 }
 

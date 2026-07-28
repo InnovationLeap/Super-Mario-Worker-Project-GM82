@@ -43,8 +43,13 @@ if (!global.newsmooth){
 // spadanie
 if sekwencja=0 && !place_meeting(x,y+1,obj_halfground) && !place_meeting(x,y+1,obj_wall) && !place_meeting(x,y+1,o_pointblock) {sekwencja=1}
 if sekwencja=1 {grawitacja+=0.5; y+=grawitacja}
-if sekwencja=1 && (place_meeting(x,y+1,obj_halfground) || place_meeting(x,y+1,obj_wall) || place_meeting(x,y+1,o_pointblock)) && !place_meeting(x,y,o_uppercut) {grawitacja=0; sekwencja=2;}
-while sekwencja=2 && (place_meeting(x,y+1,obj_halfground) || place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {y-=1}
+// ceiling check (after gravity, at y-1, blue-koopa style)
+if grawitacja<0 && (place_meeting(x,y-1,obj_wall)||place_meeting(x,y-1,obj_static)||place_meeting(x,y-1,o_pointblock)||place_meeting(x,y-1,o_pointblock2)||place_meeting(x,y-1,o_breakblock)){
+    grawitacja=0
+    while place_meeting(x,y,obj_wall)||place_meeting(x,y,obj_static)||place_meeting(x,y,o_pointblock)||place_meeting(x,y,o_pointblock2)||place_meeting(x,y,o_breakblock) {y+=1}
+}
+if sekwencja=1 && grawitacja>=0 && (place_meeting(x,y+1,obj_halfground) || place_meeting(x,y+1,obj_wall) || place_meeting(x,y+1,o_pointblock)) && !place_meeting(x,y,o_uppercut) {grawitacja=0; sekwencja=2;}
+while sekwencja=2 && (place_meeting(x,y+1,obj_halfground) || place_meeting(x,y+1,obj_wall) || place_meeting(x,y+1,o_pointblock)) {y-=1}
 if (!place_meeting(x,y+1,obj_halfground) && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock)) {sekwencja=0}
 
 // chodzenie
@@ -55,7 +60,49 @@ if place_meeting(x-1,y,obj_wall)|| place_meeting(x-1,y,o_pointblock) {kierunek=1
 image_index+=0.1
 }
 else{
-basic_movement(1,0.1,0,1);
+// inline basic_movement with blue-koopa style ceiling protection
+if sekwencja=0{
+    if !place_meeting(x,y+1,o_pointblock){
+    if !place_meeting(x,y+1,obj_halfground){
+    if !place_meeting(x,y+1,obj_wall){
+    sekwencja=1;
+    }
+    }
+    }
+}
+if sekwencja=1 {
+    grawitacja+=0.5; y+=grawitacja
+    // ceiling check (after gravity, at y-1 = one pixel above new position)
+    if grawitacja<0 && (place_meeting(x,y-1,obj_wall)||place_meeting(x,y-1,obj_static)||place_meeting(x,y-1,o_pointblock)||place_meeting(x,y-1,o_pointblock2)||place_meeting(x,y-1,o_breakblock)){
+        grawitacja=0
+        while place_meeting(x,y,obj_wall)||place_meeting(x,y,obj_static)||place_meeting(x,y,o_pointblock)||place_meeting(x,y,o_pointblock2)||place_meeting(x,y,o_breakblock) {y+=1}
+    }
+    if !place_meeting(x,y,o_uppercut){
+    if (place_meeting(x,y+1,obj_halfground) || place_meeting(x,y+1,obj_wall) || place_meeting(x,y+1,o_pointblock)){
+        grawitacja=0; sekwencja=2;
+    }
+    }
+}
+while sekwencja=2{
+    if (place_meeting(x,y,obj_halfground) || place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)){
+        y-=1;
+    }
+    else{sekwencja=0;}
+}
+// walking (mirrors basic_movement with argument3=1 for flip)
+if kierunek=1{
+    if (place_meeting(x+1,y,obj_wall)|| place_meeting(x+1,y,o_pointblock)) {kierunek=-1;x-=1;image_xscale=-1}
+    else{
+        x+=1;
+    }
+}
+else{
+    if (place_meeting(x-1,y,obj_wall)|| place_meeting(x-1,y,o_pointblock)) {kierunek=1;x+=1;image_xscale=1}
+    else{
+        x-=1;
+    }
+}
+image_index+=0.1
 }
 }
 // uppercut i zwykla smierc
