@@ -2686,7 +2686,8 @@ draw_set_color(c_white)
 if global.huddisplay=0 || global.gameversion <= 1711
 {
 // P-Meter HUD drawing for Raccoon Mario
-if global.rodzajmaria = 6 && global.pauza = 0 {
+// Draw immediately when raccoon state is active (regardless of pause/animation)
+if global.rodzajmaria = 6 {
     var _pmx, _pmy;
     _pmx = view_xview[0] + 24
     _pmy = view_yview[0] + 456
@@ -2695,13 +2696,36 @@ if global.rodzajmaria = 6 && global.pauza = 0 {
     _fill = floor((p_meter / p_meter_max) * 6)
     draw_sprite(s_pmeterbar, _fill, _pmx, _pmy)
     // Draw P indicator with flash when P-Meter is full
+    // Use current_time (ms) for alternating flash: 250ms on, 250ms off
     if raccoon_fly_allowed = 1 {
         var _flash;
-        _flash = (global.step mod 30 < 15)
+        _flash = (current_time mod 500 < 250)
         draw_sprite(s_pmeter_active, _flash, _pmx + 96, _pmy + 2)
     } else {
         draw_sprite(s_pmeter_active, 0, _pmx + 96, _pmy + 2)
     }
+}
+
+// --- Debug: Raccoon flight timers ---
+if debug_mode = 1 && global.rodzajmaria = 6 {
+    var _dx, _dy, _dh;
+    _dx = view_xview[0] + 24
+    _dy = view_yview[0] + 320
+    _dh = 16
+    draw_set_color(c_white)
+    draw_text(_dx, _dy, "P-METER: " + string(p_meter) + "/" + string(p_meter_max))
+    _dy += _dh
+    draw_text(_dx, _dy, "FLY ALLOWED: " + string(raccoon_fly_allowed))
+    _dy += _dh
+    draw_text(_dx, _dy, "FLEW: " + string(raccoon_flew) + "  TIMER: " + string(raccoon_fly_timer) + "/" + string(raccoon_fly_time))
+    _dy += _dh
+    draw_text(_dx, _dy, "FALL: " + string(raccoon_fall) + "  TIMER: " + string(raccoon_fall_timer) + "/" + string(raccoon_fall_time))
+    _dy += _dh
+    draw_text(_dx, _dy, "RUN TIMER: " + string(p_meter_run_timer) + "/" + string(p_meter_run_time))
+    _dy += _dh
+    draw_text(_dx, _dy, "SEQ: " + string(sekwencja) + "  GRAV: " + string(grawitacja))
+    _dy += _dh
+    draw_text(_dx, _dy, "SKUSIL: " + string(skusil) + "  SCHYLANIE: " + string(schylanie))
 }
 
 if global.godmode=0 && !global.levelsmooth=1 {draw_text(view_xview[0]+40,view_yview[0]+20,string(global.character_name)+string(global.zycia)) }//zycia是生命数
