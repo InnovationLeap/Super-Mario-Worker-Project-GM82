@@ -51,6 +51,7 @@ if place_meeting(_tx, _ty, o_goomba) {
         global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -64,6 +65,7 @@ if place_meeting(_tx, _ty, o_troopa) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -76,6 +78,7 @@ if place_meeting(_tx, _ty, o_troopared) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -88,6 +91,7 @@ if place_meeting(_tx, _ty, o_troopafly) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -100,6 +104,7 @@ if place_meeting(_tx, _ty, o_troopaflyred) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -112,6 +117,7 @@ if place_meeting(_tx, _ty, o_troopablue) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -124,6 +130,7 @@ if place_meeting(_tx, _ty, o_troopabluefly) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -136,6 +143,7 @@ if place_meeting(_tx, _ty, o_troopagold) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -149,6 +157,7 @@ if place_meeting(_tx, _ty, o_buzzybeetle) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -161,6 +170,7 @@ if place_meeting(_tx, _ty, o_kolcozwierz) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -173,6 +183,7 @@ if place_meeting(_tx, _ty, o_hammerbros) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -185,6 +196,7 @@ if place_meeting(_tx, _ty, o_boo) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -197,6 +209,7 @@ if place_meeting(_tx, _ty, o_shyguy) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -209,6 +222,7 @@ if place_meeting(_tx, _ty, o_fahlee) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -221,6 +235,7 @@ if place_meeting(_tx, _ty, o_firesister) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -233,6 +248,7 @@ if place_meeting(_tx, _ty, o_lakitu) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -245,6 +261,7 @@ if place_meeting(_tx, _ty, o_fakitu) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -257,6 +274,7 @@ if place_meeting(_tx, _ty, o_enemyfire) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }
@@ -269,6 +287,7 @@ if place_meeting(_tx, _ty, o_wiatrak) {
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }
+        fofo = instance_create(_tx, _ty, o_kickeffect)
     }
     exit
 }

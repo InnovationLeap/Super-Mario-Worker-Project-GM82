@@ -341,8 +341,8 @@ if string_copy(aa,0,11)='lightobject'{
   else {global.lightobject=string_copy(aa,13,68)}
 }
 */
-if string_copy(aa,0,11)='lightobject'{global.lightobject=string_copy(aa,13,69)};
-while (string_length(global.lightobject)<69) {global.lightobject=global.lightobject+'0'}
+if string_copy(aa,0,11)='lightobject'{global.lightobject=string_copy(aa,13,70)};
+while (string_length(global.lightobject)<70) {global.lightobject=global.lightobject+'0'}
 
 if string_copy(aa,0,11)='stunblock=1'{global.stunblock=1}
 if string_copy(aa,0,11)='stunblock=0'{global.stunblock=0}

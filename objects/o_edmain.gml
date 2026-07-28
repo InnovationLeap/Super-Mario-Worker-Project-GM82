@@ -771,15 +771,15 @@ if wlaczonaopcja=5//下面四行红字用于显示bonus栏的界面
     draw_set_blend_mode(bm_subtract)
     draw_sprite_ext(s_edenemiesmask,0,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)
     draw_set_blend_mode(bm_normal)
-    draw_sprite_ext(s_edbonuses,0,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)
+    draw_sprite_ext(s_edbonuses,o_edmain.bonus_page,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)
     // Bonus page arrows (like scenery does)
     if abs(view_xview[0]+256-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 {draw_sprite_ext(s_left,0,view_xview[0]+256,view_yview[0]+384,1,1,0,c_yellow,1)}else{draw_sprite_ext(s_left,0,view_xview[0]+256,view_yview[0]+384,1,1,0,c_white,1)}
     if abs(view_xview[0]+512-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 {draw_sprite_ext(s_right,0,view_xview[0]+512,view_yview[0]+384,1,1,0,c_yellow,1)} else {draw_sprite_ext(s_right,0,view_xview[0]+512,view_yview[0]+384,1,1,0,c_white,1)}
-    if abs(view_xview[0]+256-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 && mouse_check_button(mb_left) {
-        if o_edmain.bonus_page=1{o_edmain.bonus_page=0}
+    if abs(view_xview[0]+256-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 && mouse_check_button(mb_left) && kliknieto=0 {
+        if o_edmain.bonus_page=1{o_edmain.bonus_page=0; kliknieto=1}
     }
-    if abs(view_xview[0]+512-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 && mouse_check_button(mb_left) {
-        if o_edmain.bonus_page=0{o_edmain.bonus_page=1}
+    if abs(view_xview[0]+512-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 && mouse_check_button(mb_left) && kliknieto=0 {
+        if o_edmain.bonus_page=0{o_edmain.bonus_page=1; kliknieto=1}
     }
     }
 // 第一行bonus
@@ -6054,8 +6054,8 @@ if set_light_mode {
 
     }
 
-    // Bonus
-    if wlaczonaopcja = 5 {
+    // Bonus (第一页)
+    if wlaczonaopcja = 5 && o_edmain.bonus_page = 0 {
 
         // 问号砖
         if (string_copy(global.lightobject, 10, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
@@ -6099,6 +6099,19 @@ if set_light_mode {
         // 金币
         if (string_copy(global.lightobject, 18, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
         draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 5, view_yview[0]+110+ 64 * 3, 1, 1, 0, c_white, set_light_icon_alpha);
+
+    }
+
+    // Bonus 第二页 (叶子道具)
+    if wlaczonaopcja = 5 && o_edmain.bonus_page = 1 {
+
+        // 问号砖叶子 - 和普通问号砖共用 bit 10
+        if (string_copy(global.lightobject, 10, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
+        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 0, view_yview[0]+110+ 64 * 0, 1, 1, 0, c_white, set_light_icon_alpha);
+
+        // 叶子
+        if (string_copy(global.lightobject, 70, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
+        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 2, view_yview[0]+110+ 64 * 0, 1, 1, 0, c_white, set_light_icon_alpha);
 
     }
 
@@ -6375,8 +6388,8 @@ if set_light_mode {
 
         }
 
-        // Bonus
-        if wlaczonaopcja = 5 {
+        // Bonus (第一页)
+        if wlaczonaopcja = 5 && o_edmain.bonus_page = 0 {
 
             // 问号砖
             if(ed_hit(206+ 64 * 0, 110+ 64 * 0, 384, (110+ 64 * (0 + 1)-(110+ 64 * 0))))||
@@ -6432,6 +6445,23 @@ if set_light_mode {
                 if string_copy(global.lightobject, 18, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 18, '1'); } else
                 { global.lightobject = string_replace_char(global.lightobject, 18, '0'); } }
+
+        }
+
+        // Bonus 第二页 (叶子道具)
+        if wlaczonaopcja = 5 && o_edmain.bonus_page = 1 {
+
+            // 问号砖叶子 - 和普通问号砖共用 bit 10
+            if ed_hit(206+ 64 * 0, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
+                if string_copy(global.lightobject, 10, 1) = '0'
+                { global.lightobject = string_replace_char(global.lightobject, 10, '1'); } else
+                { global.lightobject = string_replace_char(global.lightobject, 10, '0'); } }
+
+            // 叶子
+            if ed_hit(206+ 64 * 2, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
+                if string_copy(global.lightobject, 70, 1) = '0'
+                { global.lightobject = string_replace_char(global.lightobject, 70, '1'); } else
+                { global.lightobject = string_replace_char(global.lightobject, 70, '0'); } }
 
         }
 
