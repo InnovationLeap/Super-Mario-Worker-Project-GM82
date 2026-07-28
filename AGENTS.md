@@ -68,6 +68,24 @@
 - `ec_convert_file` 用于将旧版 GB2312 关卡文件转为 UTF-8，以兼容 GM8.2 的 `file_text_read_string`。
 - `ec_convert` 用于内存中字符串编码互转（典型场景：UTF-8 ↔ GB2312）。
 
+### 精灵 PNG 图片格式
+
+- **GM8.2 不支持 8-bit Indexed（调色板/Palette）PNG 格式**。如果精灵帧图的 PNG 为 Indexed/P 模式（常见于从 SMWP2 或其他项目复制的素材），加载时会报错 `couldn't understand format Eight/Indexed for image`。
+- **精灵 PNG 必须使用 RGBA（32-bit）或 RGB（24-bit）格式**。现有精灵（如 `s_buzzyshell`）均使用 RGBA 格式。
+- 转换方式：用 Python PIL 将 Indexed PNG 转为 RGBA：
+  ```python
+  from PIL import Image
+  img = Image.open('input.png')
+  img_rgba = img.convert('RGBA')
+  img_rgba.save('output.png')
+  ```
+- 检查现有精灵格式以确认目标：
+  ```python
+  from PIL import Image
+  img = Image.open('sprites/s_buzzyshell/0.png')
+  print(img.mode)  # 应输出 'RGBA'
+  ```
+
 ## 项目规则
 
 - 调试输出**必须使用项目自带的 `debug_log("message")` 脚本**，禁止直接调用 `show_message`。`debug_log` 仅在全局变量 `debug_mode=1` 时弹出消息框并追加日志到 `debug_log.txt`。
