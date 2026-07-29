@@ -204,7 +204,7 @@ if sekwencja=1
 if mouse_x>860 && mouse_x<1024 && mouse_y>280 && mouse_y<455
     {
     window_set_cursor(cr_handpoint)
-    if mouse_button=mb_left{room_goto_next();browser_destroy();window_set_cursor(cr_default);draw_set_halign(fa_left)}
+    if mouse_button=mb_left{room_goto_next();window_set_cursor(cr_default);draw_set_halign(fa_left)}
     }
 
     draw_set_font(cyferkimario2)

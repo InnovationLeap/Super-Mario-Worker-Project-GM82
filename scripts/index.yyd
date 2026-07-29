@@ -1017,48 +1017,8 @@ Directory_Get
 
 
 
-dll_declare
-dll_cleanup
-dll_setgmfocus
 debug_log
-browser_resize
-browser_visible
-browser_create
-browser_destroy
-browser_silentmode
 
-addressbar_config
-addressbar_visible
-addressbar_create
-addressbar_destroy
-addressbar_invoke
-addressbar_move
-go_back
-go_forward
-go_to
-go_home
-go_refresh
-go_stop
-print_pagesetup
-print_page
-print_margins
-print_preview
-print_setup
-action_find
-action_search
-action_options
-action_saveas
-action_clearcache
-action_clearhistory
-action_properties
-action_viewsource
-action_savefile
-dc_config1
-dc_config2
-dc_config3
-offline_is
-offline_set_off
-offline_set_on
 
 
 
