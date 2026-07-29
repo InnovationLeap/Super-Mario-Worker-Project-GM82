@@ -437,6 +437,24 @@ if globaloption>0
             }
         }
 
+        //保存时压缩文件
+        draw_set_color(c_white)
+        draw_text(view_xview[0]+40,view_yview[0]+370,string_upper('Compress file when saving'))
+        draw_set_halign(fa_right)
+        if global.compress_save=1{draw_set_color(make_color_rgb(168,160,248));draw_text(view_xview[0]+405,view_yview[0]+370,string_upper('Yes'))}
+        if global.compress_save=0{draw_text(view_xview[0]+405,view_yview[0]+370,string_upper('No'))}
+        draw_set_halign(fa_left)
+        draw_set_color(c_white)
+        if ed_hit(40, 360, 190, 20)&& kliknieto=0
+        {
+            draw_set_blend_mode(bm_add)
+            draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+360,1.4,0.8,0,c_white,0.2)
+            draw_set_blend_mode(bm_normal)
+            if mouse_check_button(mb_left){global.compress_save=1-global.compress_save;kliknieto=1;
+                ini_write_real('GameConfig','CompressSave',global.compress_save)
+            }
+        }
+
     }
     //第二页 - 键盘设置
     if globaloption=2{

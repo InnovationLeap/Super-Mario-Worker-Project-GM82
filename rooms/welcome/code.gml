@@ -130,6 +130,7 @@ global.key_acc_bigright=ini_read_real('KeyConfig','acc_bigright',ord('G'))
 global.customMusic = ini_read_string('GameConfig','CustomMusicPackage','Example')
 global.initiallives = ini_read_real('GameConfig','InitialLives',4)
 global.font_render = ini_read_real('GameConfig','2xFontRender',0)
+global.compress_save = ini_read_real('GameConfig','CompressSave',1)
 
 // 截图保存路径（GM8.2 UTF-8 环境，file_text 直接读取中文路径）
 var _ss_path, _ss_default, _ss_line, _ss_fid;

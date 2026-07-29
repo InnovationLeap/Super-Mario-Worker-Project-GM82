@@ -125,8 +125,14 @@ if global.saving=0{
 else{
     global.tosave = filename_change_ext(global.fundel,'.mfl')
 }
-GZ_CompressFile(global.fundel,global.tosave);  //gzip压缩成mfl文件
-file_delete(global.fundel)  //删除mflx文件
+if global.compress_save=1{
+    GZ_CompressFile(global.fundel,global.tosave);  //gzip压缩成mfl文件
+    file_delete(global.fundel)  //删除mflx文件
+}
+else{
+    file_copy(global.fundel,global.tosave);  //跳过压缩，直接保存明文
+    file_delete(global.fundel)  //删除mflx文件
+}
 if global.donottemp !=1{
     global.tempnumber+=1;
     tempwarning = 0
