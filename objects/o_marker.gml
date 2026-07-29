@@ -484,6 +484,7 @@ if is_button_pressed('jump') && kuku>1 && grawitacja<0 && (y<global.poziomwody |
 // Both give upward lift, but only first press initializes the flight timer
 if global.rodzajmaria=6 && raccoon_fly_allowed=1 && grawitacja>0 && keyboard_check_pressed(global.sterowanieskok) && y<global.poziomwody && sekwencja=1 && schylanie=0 && !stuck {
     grawitacja=-9
+    szybkosc = max(-4, min(szybkosc, 4))
     if raccoon_flew=0 {
         raccoon_flew=1
         raccoon_fly_timer=0
@@ -585,6 +586,7 @@ if global.rodzajmaria = 6 && skusil = 0 {
     if grawitacja > 0 && keyboard_check_pressed(global.sterowanieskok) && !raccoon_fall && y < global.poziomwody && sekwencja = 1 && raccoon_fly_allowed = 0 {
         raccoon_fall = 1
         raccoon_fall_timer = 0
+        szybkosc = max(-4, min(szybkosc, 4))
         if global.sample=1 {fofo=sound_play(snd_spin);sound_volume(snd_spin,global.glosnosc)}
     }
 
