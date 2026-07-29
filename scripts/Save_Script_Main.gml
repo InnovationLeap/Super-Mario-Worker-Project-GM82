@@ -114,6 +114,8 @@ file_text_write_string(global.script_file,"brightness="+string(global.brightness
 file_text_writeln(global.script_file)
 file_text_write_string(global.script_file,"lightobject="+string(global.lightobject))
 file_text_writeln(global.script_file)
+file_text_write_string(global.script_file,"topdeath="+string(global.topdeath))
+file_text_writeln(global.script_file)
 file_text_write_string(global.script_file,"stunblock="+string(global.stunblock))
 file_text_writeln(global.script_file)
 file_text_write_string(global.script_file,"version="+string(global.version))

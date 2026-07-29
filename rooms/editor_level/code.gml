@@ -13,6 +13,7 @@ global.lava=0
 global.auto=0
 global.advswitch=0
 global.fast_retry=0
+global.topdeath=0
 global.firstbound=0
 global.secondbound=-64
 global.velocity=1

@@ -14,6 +14,7 @@ global.water_velocity=1
 global.water_delay=0
 global.advswitch=0
 global.fast_retry=0
+global.topdeath=0
 global.MFbeet=0
 global.celeste=1
 global.pipeout=0

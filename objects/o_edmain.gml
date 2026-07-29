@@ -5694,6 +5694,21 @@ if czywybieranieback=1000
         if mouse_check_button(mb_left){global.stunblock=1-global.stunblock;kliknieto=1}
     }
 
+    //橙色强滚向下时上方出界死亡
+    draw_text(view_xview[0]+40,view_yview[0]+220,string_upper('Top Death (Downward Scroll)'))
+    draw_set_halign(fa_right)
+    if global.topdeath=1{draw_set_color(make_color_rgb(168,160,248));draw_text(view_xview[0]+405,view_yview[0]+220,string_upper('yes'))}
+    if global.topdeath=0{draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+220,string_upper('no'))}
+    draw_set_halign(fa_left)
+    draw_set_color(c_white)
+    if ed_hit(40, 210, 190, 20)&& kliknieto=0
+    {
+        draw_set_blend_mode(bm_add)
+        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+210,1.4,0.8,0,c_white,0.2)
+        draw_set_blend_mode(bm_normal)
+        if mouse_check_button(mb_left){global.topdeath=1-global.topdeath;kliknieto=1}
+    }
+
 
     //第二页结束
     }

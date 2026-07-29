@@ -2480,6 +2480,15 @@ if (global.aktywowanykuppa=3 && global.rodzajmaria<>5){//位置矫正2
         if x<view_xview[0]-16 && teleportacja=0 {oberwal=1 ; shield=0 ; global.rodzajmaria=0}}
     if instance_number(o_skuszak)=0 {if x>=view_xview[0]+640 && !(place_meeting(x-3,y,obj_wall) || place_meeting(x-3,y,o_pointblock)) {x+=cos(point_direction(xcenter,ycenter,nextscroll.x+16,nextscroll.y+16)/360*2*pi)*firstscroll.scrollspeed}
         if x>view_xview[0]+656 && teleportacja=0 {oberwal=1 ; shield=0 ; global.rodzajmaria=0}}
+    //强滚向下分量：上面出界死亡（到最后一个节点 nextscroll==firstscroll 时停止；镜头触底 view_yview==room_height-480 时也停止）
+    // 橙→osc_dy>0；绿→nextscroll.y>firstscroll.y
+    if global.topdeath=1 && nextscroll!=firstscroll && view_yview[0] < room_height - 480{
+        if (firstscroll.is_orange=1 && osc_dy>0) || (firstscroll.is_orange=0 && nextscroll.y>firstscroll.y){
+            if y<view_yview[0]-16 && teleportacja=0{
+                oberwal=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white
+            }
+        }
+    }
     if x>view_xview[0]+624 && !(place_meeting(x-3,y,obj_wall) || place_meeting(x-3,y,o_pointblock)){x=view_xview[0]+624;}
     if x<view_xview[0]+16 && !(place_meeting(x+3,y,obj_wall) || place_meeting(x+3,y,o_pointblock)){x=view_xview[0]+16;}
     if teledelay>=31{global.aktywowanykuppa=0}

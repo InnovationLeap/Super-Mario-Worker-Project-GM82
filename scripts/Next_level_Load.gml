@@ -328,6 +328,8 @@ if string_copy(aa,0,10)='brightness'{global.brightness=real(string_copy(aa,12,1)
 if string_copy(aa,0,11)='lightobject'{global.lightobject=string_copy(aa,13,70)}
 while (string_length(global.lightobject)<70) {global.lightobject=global.lightobject+'0'}
 
+if string_copy(aa,0,10)='topdeath=1'{global.topdeath=1}
+if string_copy(aa,0,10)='topdeath=0'{global.topdeath=0}
 if string_copy(aa,0,11)='stunblock=1'{global.stunblock=1}
 if string_copy(aa,0,11)='stunblock=0'{global.stunblock=0}
 }
