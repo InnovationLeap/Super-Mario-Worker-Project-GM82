@@ -7,6 +7,7 @@ applies_to=self
 
 fw_release_cache(); //信息转字体缓存清理
 blocks_palette_data();
+background_palette_data();
 
 
 /*test = transB(12005)
@@ -4141,297 +4142,26 @@ if czywybieranieback=1 && czywybieranieback<100
     //变量wahaha用于检测鼠标是否已经点击，松开后恢复
     if wahaha = 1 && !mouse_check_button(mb_left) {wahaha=0}
 
-    //背景选择
-    if o_edmain.backgroundpage=0{
-    if ed_hit(27, 32, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=1  //plainsky
+    //背景选择（数据驱动，数据定义见 background_palette_data）
+    var _bgp, _bgr, _bgc, _bgx, _bgy, _bgidx, _bgval;
+    _bgp = o_edmain.backgroundpage;
+    if _bgp = 0 || _bgp = 1 || _bgp = 2 {
+        for (_bgr = 0; _bgr < 3; _bgr += 1) {
+            for (_bgc = 0; _bgc < 4; _bgc += 1) {
+                _bgidx = _bgr * 4 + _bgc;
+                _bgval = global.background_palette[_bgp, _bgidx];
+                if _bgval > 0 {
+                    _bgx = 27 + _bgc * 142;  // 139 + 3 列间距
+                    _bgy = 32 + _bgr * 118;  // 102 + 16 行间距
+                    if ed_hit(_bgx, _bgy, 139, 103) {
+                        draw_set_blend_mode(bm_add)
+                        draw_sprite_ext(s_prefsanim, 0, view_xview[0] + _bgx, view_yview[0] + _bgy + 32, 1.2, 4, 0, c_white, 0.2)
+                        draw_set_blend_mode(bm_normal)
+                        backselect = _bgval;
+                    }
+                }
+            }
         }
-
-        if ed_hit(27+139+3, 32, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=11  //bluesky
-        }
-
-        if ed_hit(27+139+3+139+3, 32, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=3  //grassland
-        }
-
-    if ed_hit(27+139+3+139+3+139+3, 32, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=4  //grassland paralax
-        }
-
-    //
-    if ed_hit(27, 32+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=5  //cave
-        }
-
-    if ed_hit(27+139+3, 32+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=2  //plainsky+cave
-        }
-
-    if ed_hit(27+139+3+139+3, 32+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=7  //underwater
-        }
-
-    if ed_hit(27+139+3+139+3+139+3, 32+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=8  //underwater paralax
-        }
-
-    //
-    if ed_hit(27, 32+102+16+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=12  //night
-        }
-
-    if ed_hit(27+139+3, 32+102+16+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=13  //night+cave
-        }
-
-    if ed_hit(27+139+3+139+3, 32+102+16+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=22  //castle
-        }
-
-    if ed_hit(27+139+3+139+3+139+3, 32+102+16+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=9  //castle paralax
-        }
-    }
-
-
-    if o_edmain.backgroundpage=1{
-    if ed_hit(27, 32, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=6  //cliff
-        }
-
-        if ed_hit(27+139+3, 32, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=23  //big clouds
-        }
-
-        if ed_hit(27+139+3+139+3, 32, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=19  //forest
-        }
-
-    if ed_hit(27+139+3+139+3+139+3, 32, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=26  //Goomba Party
-        }
-
-     //
-
-       if ed_hit(27, 32+102+16, 139, 103){
-       draw_set_blend_mode(bm_add)
-       draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
-       draw_set_blend_mode(bm_normal)
-       backselect=16  //desert
-        }
-
-        if ed_hit(27+139+3, 32+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-       backselect=21  //desert ruin
-        }
-
-    if ed_hit(27+139+3+139+3, 32+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=24 //snow new
-        }
-
-    if ed_hit(27+139+3+139+3+139+3, 32+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=20  //snow old
-        }
-
-    //
-
-    if ed_hit(27, 32+102+16+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=15   //dusk
-        }
-
-    if ed_hit(27+139+3, 32+102+16+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=17   //dark
-        }
-
-    if ed_hit(27+139+3+139+3, 32+102+16+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=18   //volcano
-        }
-
-    if ed_hit(27+139+3+139+3+139+3, 32+102+16+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=25   //lava castle
-        }
-
-     }
-     if o_edmain.backgroundpage=2{
-    if ed_hit(27, 32, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=10
-        }
-
-        if ed_hit(27+139+3, 32, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=14
-        }
-
-        if ed_hit(27+139+3+139+3, 32, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=27
-        }
-
-    if ed_hit(27+139+3+139+3+139+3, 32, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=28
-        }
-
-     //
-
-       if ed_hit(27, 32+102+16, 139, 103){
-       draw_set_blend_mode(bm_add)
-       draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
-       draw_set_blend_mode(bm_normal)
-       backselect=29
-        }
-
-       if ed_hit(27+139+3, 32+102+16, 139, 103){
-       draw_set_blend_mode(bm_add)
-       draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
-       draw_set_blend_mode(bm_normal)
-       backselect=30
-        }
-
-       if ed_hit(27+139+3+139+3, 32+102+16, 139, 103){
-       draw_set_blend_mode(bm_add)
-       draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
-       draw_set_blend_mode(bm_normal)
-       backselect=31
-        }
-
-       if ed_hit(27+139+3+139+3+139+3, 32+102+16, 139, 103){
-       draw_set_blend_mode(bm_add)
-       draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
-       draw_set_blend_mode(bm_normal)
-       backselect=32
-        }
-
-        /*
-        if ed_hit(27+139+3, 32+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-       backselect=1
-        }
-
-    if ed_hit(27+139+3+139+3, 32+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=1
-        }
-
-    if ed_hit(27+139+3+139+3+139+3, 32+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=1
-        }
-
-    //
-
-    if ed_hit(27, 32+102+16+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=1
-        }
-
-    if ed_hit(27+139+3, 32+102+16+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3 ,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=1
-        }
-
-    if ed_hit(27+139+3+139+3, 32+102+16+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=1
-        }
-
-    if ed_hit(27+139+3+139+3+139+3, 32+102+16+102+16, 139, 103){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+27+139+3+139+3+139+3,view_yview[0]+32+102+16+102+16+32,1.2,4,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
-        backselect=1
-        }
-    */
     }
 
     //天气设置界面

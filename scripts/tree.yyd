@@ -56,6 +56,7 @@
 	|string_replace_char
 	|raccoon_tail_hit_check
 	|blocks_palette_data
+	|background_palette_data
 +EncodingConv
 	|ec_init
 	|ec_convert

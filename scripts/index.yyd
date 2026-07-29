@@ -1129,3 +1129,4 @@ is_button_pressed
 ed_hit
 raccoon_tail_hit_check
 blocks_palette_data
+background_palette_data
