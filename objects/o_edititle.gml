@@ -866,6 +866,19 @@ if globaloption>0
             ini_write_real('KeyConfig','f11',global.key_f11)
             keydetect=0
         }
+        // -- 编辑器暂停/删除 (keydetect 46-47) --
+        if keydetect=46{keyshow46='press a key...'}else{keyshow46=setkey[global.key_ed_pause]}
+        if keydetect=46 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+            global.key_ed_pause=keyboard_lastkey
+            ini_write_real('KeyConfig','ed_pause',global.key_ed_pause)
+            keydetect=0
+        }
+        if keydetect=47{keyshow47='press a key...'}else{keyshow47=setkey[global.key_ed_delete]}
+        if keydetect=47 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+            global.key_ed_delete=keyboard_lastkey
+            ini_write_real('KeyConfig','ed_delete',global.key_ed_delete)
+            keydetect=0
+        }
 
         //========== PAGE 1: God Mode 数字键 (1~0) ==========
         if keyboard_page=1{
@@ -1246,6 +1259,32 @@ if globaloption>0
                 draw_set_blend_mode(bm_normal);
                 if mouse_check_button(mb_left){keydetect=24;keydetect2=1}
             }
+
+            // 46: Ed Panel
+            draw_set_color(c_white)
+            draw_text(view_xview[0]+40,view_yview[0]+305,string_upper('Edit Panel'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+305,string_upper(keyshow46))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 295, 220, 20)&& kliknieto=0{
+                draw_set_blend_mode(bm_add);
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+295,1.4,0.8,0,c_white,0.2);
+                draw_set_blend_mode(bm_normal);
+                if mouse_check_button(mb_left){keydetect=46;keydetect2=1}
+            }
+
+            // 47: Ed Delete (删除模式)
+            draw_set_color(c_white)
+            draw_text(view_xview[0]+40,view_yview[0]+330,string_upper('Delete Mode'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+330,string_upper(keyshow47))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 320, 220, 20)&& kliknieto=0{
+                draw_set_blend_mode(bm_add);
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+320,1.4,0.8,0,c_white,0.2);
+                draw_set_blend_mode(bm_normal);
+                if mouse_check_button(mb_left){keydetect=47;keydetect2=1}
+            }
         }
 
         //========== PAGE 4: 编辑器画布滚动 (8键) ==========
@@ -1403,7 +1442,7 @@ if globaloption>0
 
             // 15: Zoom In
             draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+125,string_upper('Zoom In'))
+            draw_text(view_xview[0]+40,view_yview[0]+125,string_upper('Zoom In (Ctrl+)'))
             draw_set_halign(fa_right)
             draw_text(view_xview[0]+405,view_yview[0]+125,string_upper(keyshow15))
             draw_set_halign(fa_left)
@@ -1416,7 +1455,7 @@ if globaloption>0
 
             // 16: Zoom Out
             draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+150,string_upper('Zoom Out'))
+            draw_text(view_xview[0]+40,view_yview[0]+150,string_upper('Zoom Out (Ctrl+)'))
             draw_set_halign(fa_right)
             draw_text(view_xview[0]+405,view_yview[0]+150,string_upper(keyshow16))
             draw_set_halign(fa_left)
@@ -1477,9 +1516,9 @@ if globaloption>0
                 if mouse_check_button(mb_left){keydetect=37;keydetect2=1}
             }
 
-            // F2 (Beep SFX)
+            // F2 (Switch Sound)
             draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+150,string_upper('Beep SFX'))
+            draw_text(view_xview[0]+40,view_yview[0]+150,string_upper('Switch Sound'))
             draw_set_halign(fa_right)
             draw_text(view_xview[0]+405,view_yview[0]+150,string_upper(keyshow38))
             draw_set_halign(fa_left)

@@ -89,6 +89,10 @@ global.key_musictoggle=ini_read_real('KeyConfig','musictoggle',vk_f8)
 global.key_autopair=ini_read_real('KeyConfig','autopair',vk_f12)
 global.key_bgpanel=ini_read_real('KeyConfig','bgpanel',vk_f6)
 global.key_ed_cancel=ini_read_real('KeyConfig','ed_cancel',vk_escape)
+// 编辑器暂停键（空格 / 切换关卡滚动）
+global.key_ed_pause=ini_read_real('KeyConfig','ed_pause',vk_space)
+// 编辑器删除模式键（Delete）
+global.key_ed_delete=ini_read_real('KeyConfig','ed_delete',vk_delete)
 
 // 编辑器画布滚动键 第二绑定（默认 WASD）
 global.key_ed_up_2=ini_read_real('KeyConfig','ed_up_2',ord('W'))

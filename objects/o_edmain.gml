@@ -164,10 +164,87 @@ action_id=603
 applies_to=self
 */
 global.muzyka=real(global.muzyka)
+// 音乐开关：按下时切换状态机，停止时立即 SXMS_C_Stop，恢复时在状态机完成时播放
 if keyboard_check_pressed(global.key_musictoggle) && global.musicon=1 {SXMS_C_Stop();global.musicon=2}
 if keyboard_check_pressed(global.key_musictoggle) && global.musicon=0 {global.musicon=3}
-if global.musicon=2 && !keyboard_check_pressed(global.key_musictoggle) {global.musicon=0}
-if global.musicon=3 && !keyboard_check_pressed(global.key_musictoggle) {global.musicon=1}
+if global.musicon=2 && !keyboard_check_pressed(global.key_musictoggle) {global.musicon=0;mm_stop_all_ext()}
+if global.musicon=3 && !keyboard_check_pressed(global.key_musictoggle) {
+    global.musicon=1
+    if global.local_muzyka=1 {mm_play_ext('.\Data\MW\ktkm1.dll',0); }
+    if global.local_muzyka=2 {mm_play_ext('.\Data\MW\ktkm5.dll',0); }
+    if global.local_muzyka=3 {mm_play_ext('.\Data\MW\ktkm6.dll',0); }
+    if global.local_muzyka=4 {mm_play_ext('.\Data\MW\ktkm7.dll',0); }
+    if global.local_muzyka=5 {mm_play_ext('.\Data\MW\ktkm9.dll',0); }
+    if global.local_muzyka=6 {mm_play_ext('.\Data\MW\ktkm10.dll',0); }
+    if global.local_muzyka=7 {mm_play_ext('.\Data\MW\ktkm12.dll',0); }
+    if global.local_muzyka=8 {mm_play_ext('.\Data\MW\ktkm13.dll',0); }
+    if global.local_muzyka=9 {mm_play_ext('.\Data\MW\ktkm14.dll',0); }
+    if global.local_muzyka=10 {mm_play_ext('.\Data\MW\ktkm15.mp3',0); }
+    if global.local_muzyka=11 {mm_play_ext('.\Data\MW\ktkm16.dll',0); }
+    if global.local_muzyka=12 {mm_play_ext('.\Data\MW\ktkm17.dll',0); }
+    if global.local_muzyka=13 {mm_play_ext('.\Data\MW\ktkm18.mp3',0); }
+    if global.local_muzyka=14 {mm_play_ext('.\Data\MW\ktkm21.dll',0); }
+    if global.local_muzyka=15 {mm_play_ext('.\Data\MW\ktkm22.dll',0); }
+    if global.local_muzyka=16 {mm_play_ext('.\Data\MW\ktkm23.dll',0); }
+    if global.local_muzyka=17 {mm_play_ext('.\Data\MW\ktkm24.dll',0); }
+    if global.local_muzyka=18 {mm_play_ext('.\Data\MW\ktkm25.dll',0); }
+    if global.local_muzyka=19 {mm_play_ext('.\Data\MW\ktkm26.dll',0); }
+    if global.local_muzyka=20 {mm_play_ext('.\Data\MW\ktkm28.dll',0); }
+    if global.local_muzyka=21 {mm_play_ext('.\Data\MW\ktkm36.dll',0); }
+    if global.local_muzyka=22 {mm_play_ext('.\Data\MW\ktkm38.dll',0); }
+    if global.local_muzyka=23 {mm_play_ext('.\Data\MW\ktkm20.dll',0); }
+    if global.local_muzyka=24 {mm_play_ext('.\Data\MW\ktkm27.dll',0); }
+    if global.local_muzyka=25 {mm_play_ext('.\Data\MW\ktkm37.dll',0); }
+    if global.local_muzyka=26 {mm_play_ext('.\Data\MW\ktkm29.dll',0); }
+    if global.local_muzyka=27 {mm_play_ext('.\Data\MW\ktkm35.dll',0); }
+    if global.local_muzyka=28 {mm_play_ext('.\Data\MW\ktkm120.dll',0); }
+    if global.local_muzyka=29 {mm_play_ext('.\Data\MW\ktkm19.dll',0); }
+    if global.local_muzyka=41 {mm_play_ext('.\Data\MFR\ktkm0.dll',0); }
+    if global.local_muzyka=42 {mm_play_ext('.\Data\MFR\ktkm50.mp3',0); }
+    if global.local_muzyka=43 {mm_play_ext('.\Data\MFR\ktkm51.mp3',0); }
+    if global.local_muzyka=44 {mm_play_ext('.\Data\MFR\ktkm52.mp3',0); }
+    if global.local_muzyka=45 {mm_play_ext('.\Data\MFR\ktkm53.mp3',0); }
+    if global.local_muzyka=46 {mm_play_ext('.\Data\MFR\ktkm55.mp3',0); }
+    if global.local_muzyka=47 {mm_play_ext('.\Data\MFR\ktkm56.mp3',0); }
+    if global.local_muzyka=48 {mm_play_ext('.\Data\MFR\ktkm41.dll',0); }
+    if global.local_muzyka=49 {mm_play_ext('.\Data\MFR\ktkm93.mp3',0); }
+    if global.local_muzyka=50 {mm_play_ext('.\Data\MFR\ktkm94.mp3',0); }
+    if global.local_muzyka=51 {mm_play_ext('.\Data\MFR\ktkm100.mp3',0); }
+    if global.local_muzyka=52 {mm_play_ext('.\Data\MFR\ktkm101.mp3',0); }
+    if global.local_muzyka=53 {mm_play_ext('.\Data\MFR\ktkm103.mp3',0); }
+    if global.local_muzyka=54 {mm_play_ext('.\Data\MFR\ktkm121.mp3',0); }
+    if global.local_muzyka=55 {mm_play_ext('.\Data\MFR\ktkm122.mp3',0); }
+    if global.local_muzyka=56 {mm_play_ext('.\Data\MFR\ktkm123.mp3',0); }
+    if global.local_muzyka=57 {mm_play_ext('.\Data\MFR\ktkm124.mp3',0); }
+    if global.local_muzyka=58 {mm_play_ext('.\Data\MFR\ktkm129.mp3',0); }
+    if global.local_muzyka=59 {mm_play_ext('.\Data\MFR\ktkm130.mp3',0); }
+    if global.local_muzyka=60 {mm_play_ext('.\Data\MFR\ktkm131.mp3',0); }
+    if global.local_muzyka=61 {mm_play_ext('.\Data\MFR\ktkm132.mp3',0); }
+    if global.local_muzyka=62 {mm_play_ext('.\Data\MFR\ktkm133.mp3',0); }
+    if global.local_muzyka=63 {mm_play_ext('.\Data\MFR\ktkm134.mp3',0); }
+    if global.local_muzyka=64 {mm_play_ext('.\Data\MFR\ktkm135.mp3',0); }
+    if global.local_muzyka=65 {mm_play_ext('.\Data\MFR\ktkm210.mp3',0); }
+    if global.local_muzyka=66 {mm_play_ext('.\Data\MFR\ktkm211.mp3',0); }
+    if global.local_muzyka=67 {mm_play_ext('.\Data\MFR\ktkm212.mp3',0); }
+    if global.local_muzyka=68 {mm_play_ext('.\Data\MFR\ktkm213.mp3',0); }
+    if global.local_muzyka=69 {mm_play_ext('.\Data\MFR\ktkm214.mp3',0); }
+    if global.local_muzyka=70 {mm_play_ext('.\Data\MFR\ktkm215.mp3',0); }
+    if global.local_muzyka=71 {mm_play_ext('.\Data\MFR\ktkm2121.mp3',0); }
+    if global.local_muzyka=72 {mm_play_ext('.\Data\MFR\ktkm88.dll',0); }
+    if global.local_muzyka=73 {mm_play_ext('.\Data\MFR\ktkm39.dll',0); }
+    if global.local_muzyka=74 {mm_play_ext('.\Data\MFR\ktkm40.dll',0); }
+    if global.local_muzyka=75 {mm_play_ext('.\Data\MFR\ktkm42.mp3',0); }
+    if global.local_muzyka=76 {mm_play_ext('.\Data\MFR\ktkm125.mp3',0); }
+    if global.local_muzyka=77 {mm_play_ext('.\Data\MFR\ktkm90.mp3',0); }
+    if global.local_muzyka=78 {mm_play_ext('.\Data\MFR\ktkm666.mp3',0); }
+    if global.local_muzyka>=101&&global.local_muzyka<=144 {mm_play_ext('.\Data\SMS\sms'+string(global.local_muzyka-100)+'.ogg',0); }
+    if global.local_muzyka>=145&&global.local_muzyka<=172 {mm_play_ext('.\Data\SMS2\sms'+string(global.local_muzyka-100)+'.ogg',0); }
+    if global.local_muzyka>=173&&global.local_muzyka<=200 {mm_play_ext('.\Data\Softendo\std'+string(global.local_muzyka-172)+'.ogg',0); }
+    if global.local_muzyka>=201&&global.local_muzyka<=204 {mm_play_ext('.\Data\Boss\boss'+string(global.local_muzyka-200)+'.dll',0); }
+    if global.local_muzyka>=205&&global.local_muzyka<=230 {mm_play_ext('.\Data\Boss\boss'+string(global.local_muzyka-200)+'.ogg',0); }
+    if global.local_muzyka>=301&&global.local_muzyka<=400 {mm_play_ext('.\Data\OM\om'+string(global.local_muzyka-300)+'.ogg',0);}
+    if global.local_muzyka>=627{mm_play_ext(global.customMusicDirectory+global.customMusic+'\'+global.customMusicFile[global.local_muzyka-626],0)}
+}
 
 global.autopair=real(global.autopair)
 if keyboard_check_pressed(global.key_autopair) && global.autopair=1 {global.autopair=2}
@@ -273,7 +350,7 @@ target_zooms[5] = 6;
 target_zooms[6] = 7;
 target_zooms[7] = 8;
 
-if wlaczony != 1 && wlaczonaopcja == 0 {
+if wlaczony == 1 && wlaczonaopcja == 0 {
     if (keyboard_check_pressed(global.key_zoomin) || (keyboard_check(vk_control) && mouse_wheel_down())) && ratio_level < 7 {
         next_zoom_ratio = target_zooms[ratio_level + 1];
         next_view_wview = 640 * next_zoom_ratio;
@@ -350,7 +427,7 @@ if costawia3 <> 42 && change_alpha = 1{
 }
 
 // 可配置编辑器画布滚动键（Step 检测）- 支持双绑定
-if wlaczony != 1 && wlaczonaopcja == 0 && !keyboard_check(global.key_select){
+if wlaczony == 1 && wlaczonaopcja == 0 && !keyboard_check(global.key_select){
     if (keyboard_check(global.key_ed_left) || keyboard_check(global.key_ed_left_2)) && scroolx>view_wview[0]/2 {scroolx-=32}
     if (keyboard_check(global.key_ed_right) || keyboard_check(global.key_ed_right_2)) && scroolx<room_width-view_wview[0]/2 {scroolx+=32}
     if (keyboard_check(global.key_ed_up) || keyboard_check(global.key_ed_up_2)) && scrooly>view_hview[0]/2 && !keyboard_check(vk_shift) {scrooly-=32}
@@ -358,7 +435,7 @@ if wlaczony != 1 && wlaczonaopcja == 0 && !keyboard_check(global.key_select){
 }
 
 // 编辑器：PgUp/PgDn 跳转到上/下一个 Check Point（相机居中到该 CP）
-if wlaczony != 1 && wlaczonaopcja == 0 {
+if wlaczony == 1 && wlaczonaopcja == 0 {
     if keyboard_check_pressed(global.edkey_cp_prev) || keyboard_check_pressed(global.edkey_cp_next) {
         var _camx, _camy, _bestpos, _bestx, _besty, _pos, _found;
         _camx = scroolx
@@ -387,68 +464,179 @@ if wlaczony != 1 && wlaczonaopcja == 0 {
         }
     }
 }
-#define Keyboard_37
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-if scroolx>view_wview[0]/2 && !keyboard_check(global.key_select){scroolx-=32}
-#define Keyboard_38
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
 
-if scrooly>view_hview[0]/2 && !keyboard_check(vk_shift) && !keyboard_check(global.key_select) {scrooly-=32}
-#define Keyboard_39
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
+// ESC 键：退出 / 关闭子菜单
+if keyboard_check_pressed(global.key_ed_cancel){
+    if wlaczonaopcja=0{
+        _ed_esc_warn=show_question('Do you REALLY want to quit WITHOUT the current level saved???')
+        if _ed_esc_warn=1{
+            room_goto(title)
+            with(o_edwallsdrawer){instance_destroy()}
+            with(o_edbonusesblock){instance_destroy()}
+            with(o_edbrowser){instance_destroy()}
+            with(o_edenemyblock){instance_destroy()}
+            with(o_edmarkerblock){instance_destroy()}
+            with(o_edpassage){instance_destroy()}
+            with(o_edsceneriesblock){instance_destroy()}
+            SXMS_C_Stop()
+            global.autosavename=''
+        }
+    }
+    if wlaczonaopcja>1 && czywybieranieback!=1 && czywybieranieback!=100{
+        wlaczonaopcja=0
+    }
+    if czywybieranieback=1{
+        czywybieranieback=0
+    }
+    if czywybieranieback=100{
+        czywybieranieback=0
+        SXMS_C_Stop()
+    }
+}
 
-if scroolx<room_width-view_wview[0]/2 && !keyboard_check(global.key_select) {scroolx+=32}
-#define Keyboard_40
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
+// 空格：暂停/恢复关卡滚动
+if wlaczonaopcja == 0 && ratio_level == 0 && keyboard_check_pressed(global.key_ed_pause){
+    wlaczony = -wlaczony
+}
 
-if scrooly<room_height-view_hview[0]/2 && !keyboard_check(vk_shift) && !keyboard_check(global.key_select)  {scrooly+=32}
-#define Keyboard_65
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-if scroolx>view_wview[0]/2 && !keyboard_check(global.key_select){scroolx-=32}
-#define Keyboard_68
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
+// Delete：删除模式切换
+if wlaczonaopcja == 0 {
+    if keyboard_check_pressed(global.key_ed_delete){
+        if global.deletemode=1{
+            _ed_del_q=show_question('Would you like to turn OFF delete mode? ')
+        }
+        else{
+            _ed_del_q=show_question('Would you like to turn ON delete mode? ')
+        }
+        if _ed_del_q=1{
+            global.deletemode = -global.deletemode
+        }
+    }
+}
 
-if scroolx<room_width-view_wview[0]/2 && !keyboard_check(global.key_select) {scroolx+=32}
-#define Keyboard_83
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-
-if scrooly<room_height-view_hview[0]/2 && !keyboard_check(vk_shift) && !keyboard_check(global.key_select)  {scrooly+=32}
-#define Keyboard_87
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-
-if scrooly>view_hview[0]/2 && !keyboard_check(vk_shift) && !keyboard_check(global.key_select) {scrooly-=32}
+// F3/F4/F5/F7/F10 编辑器功能键
+if wlaczony == 1 && wlaczonaopcja == 0 {
+    // F3: 测试关卡
+    if keyboard_check_pressed(global.key_f3){
+        global.autosavename1=global.autosavename
+        global.autosavename=working_directory+"\temp.smwl"
+        create=file_text_open_write(global.autosavename)
+        file_text_write_string(create," ")
+        file_text_close(create)
+        Save_Script_Main()
+        global.testmode=1
+        global.xviewtemp = scroolx
+        global.yviewtemp = scrooly
+        with(o_edwallsdrawer){instance_destroy()}
+        with(o_edbonusesblock){instance_destroy()}
+        with(o_edbrowser){instance_destroy()}
+        with(o_edenemyblock){instance_destroy()}
+        with(o_edmarkerblock){instance_destroy()}
+        with(o_edpassage){instance_destroy()}
+        with(o_edsceneriesblock){instance_destroy()}
+        room_goto(Loader)
+    }
+    // F4: God Mode 测试
+    if keyboard_check_pressed(global.key_f4){
+        global.autosavename1=global.autosavename
+        global.testmode=1
+        global.autosavename=working_directory+"\temp.smwl"
+        create=file_text_open_write(global.autosavename)
+        file_text_write_string(create," ")
+        file_text_close(create)
+        Save_Script_Main()
+        global.godmode=1
+        global.xviewtemp = scroolx
+        global.yviewtemp = scrooly
+        with(o_edwallsdrawer){instance_destroy()}
+        with(o_edbonusesblock){instance_destroy()}
+        with(o_edbrowser){instance_destroy()}
+        with(o_edenemyblock){instance_destroy()}
+        with(o_edmarkerblock){instance_destroy()}
+        with(o_edpassage){instance_destroy()}
+        with(o_edsceneriesblock){instance_destroy()}
+        room_goto(Loader)
+    }
+    // F5: 实心块显示切换（松开触发）
+    if keyboard_check_released(global.key_f5){
+        show_solid = 1-show_solid
+    }
+    // F7: 关卡尺寸调整
+    if keyboard_check_pressed(global.key_f7){
+        view_xview[0]=0
+        view_yview[0]=0
+        _edfv_q=show_question('Do you REALLY want to RESIZE of your level???')
+        if _edfv_q=1 {
+            _edfv_dupiks=get_integer('Set the size of level. X in tiles - min 20, max 1920',floor(room_width/32))
+            _edfv_dupigrek=get_integer('Y in tiles - min 15, max 1920',floor(room_height/32))
+            x_trans = get_integer('Move x (in tiles) of (0,0) to:',0)
+            y_trans = get_integer('Move y (in tiles) of (0,0) to:',0)
+            x_new = min(max(_edfv_dupiks,20),1920)
+            y_new = min(max(_edfv_dupigrek,15),1920)
+            if room_width+x_trans*32>x_new*32 || room_height+y_trans*32>y_new*32 || x_trans*32<0 || y_trans*32<0 {
+                _edfv_q=show_question('Some blocks may be out of the new border, which will be DELETED. Do you want to continue?')
+            }
+            if _edfv_q=1 {
+                sizechange=1
+                with(o_edwallsdrawer){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32}
+                with(o_edbonusesblock){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32}
+                with(o_edbrowser){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32}
+                with(o_edenemyblock){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32
+                    if(coto=40||coto=41){fishendX+=o_edmain.x_trans*32;fishendY+=o_edmain.y_trans*32}
+                }
+                with(o_edmarkerblock){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32
+                    if(coto=32){target = max(target+o_edmain.y_trans*32,-64);if(type=2){water_endX+=o_edmain.x_trans*32;water_endY+=o_edmain.y_trans*32}}
+                    if(coto=33){if(height>-64)height = max(height+o_edmain.y_trans*32,-63)}
+                    if(coto=34){camera_endX+=o_edmain.x_trans*32;camera_endY+=o_edmain.y_trans*32}
+                }
+                with(o_edpassage){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32;exitx+=o_edmain.x_trans*32;exity+=o_edmain.y_trans*32}
+                with(o_edsceneriesblock){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32}
+                for( i=0;i<x_new;i+=1 ){
+                    for( j=0;j<y_new;j+=1 ){
+                        global.arrayetapu2[i,j]=0
+                    }
+                }
+                for ( i=max(0,x_trans) ; i<min(x_new,floor(room_width/32)+x_trans) ; i+=1 ) {
+                    for( j=max(0,y_trans) ; j<min(y_new,floor(room_height/32)+y_trans) ; j+=1 ){
+                        global.arrayetapu2[i,j]=arrayetapu[i-x_trans,j-y_trans]
+                    }
+                }
+                global.poziomwody+=y_trans*32
+                if global.auto{
+                    global.firstbound = max(global.firstbound+y_trans*32,-64)
+                    if(global.secondbound>-64)global.secondbound = max(global.secondbound+y_trans*32,-63)
+                }
+                room_set_width(room,x_new*32)
+                room_set_height(room,y_new*32)
+                global.autosavename1=global.autosavename
+                global.autosavename=working_directory+".\temp\TempChangeSize.smwl"
+                create=file_text_open_write(global.autosavename)
+                file_text_write_string(create," ")
+                file_text_close(create)
+                global.lvlwidth=x_new*32
+                global.lvlheight=y_new*32
+                global.donottemp=1
+                Save_Script_Main()
+                with(o_edwallsdrawer){instance_destroy()}
+                with(o_edbonusesblock){instance_destroy()}
+                with(o_edbrowser){instance_destroy()}
+                with(o_edenemyblock){instance_destroy()}
+                with(o_edmarkerblock){instance_destroy()}
+                with(o_edpassage){instance_destroy()}
+                with(o_edsceneriesblock){instance_destroy()}
+                room_restart()
+                Load_Script_Main()
+                file_delete(global.autosavename)
+                global.autosavename = global.autosavename1
+            }
+        }
+    }
+    // F10: 水位高度
+    if keyboard_check_pressed(global.key_f10){
+        _edfv_w=get_integer('Set the height of the water',floor((global.poziomwody+16)/32))
+        global.poziomwody=floor(_edfv_w*32-16)
+    }
+}
 #define Other_3
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -5989,463 +6177,3 @@ draw_set_font(cyferkimario)
 draw_set_color(c_white)
 draw_text(view_xview[0]+245,view_yview[0]+16,'INVISIBLE SOLID')
 }
-#define KeyPress_27
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-if wlaczonaopcja=0{
-    var warning2; warning2=show_question('Do you REALLY want to quit WITHOUT the current level saved???')
-    if warning2=1 {room_goto(title)
-    with(o_edwallsdrawer){instance_destroy()}//抽风什么的都给劳资去死
-    with(o_edbonusesblock){instance_destroy()}
-    with(o_edbrowser){instance_destroy()}
-    with(o_edenemyblock){instance_destroy()}
-    with(o_edmarkerblock){instance_destroy()}
-    with(o_edpassage){instance_destroy()}
-    with(o_edsceneriesblock){instance_destroy()}
-    SXMS_C_Stop();global.autosavename=''}
-    if warning2=0 {exit}}
-if wlaczonaopcja>1 && czywybieranieback!=1 && czywybieranieback!=100{
-    wlaczonaopcja=0}
-if czywybieranieback=1{
-    czywybieranieback=0}
-if czywybieranieback=100{
-    czywybieranieback=0
-    SXMS_C_Stop()}
-#define KeyPress_32
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-if ratio_level == 0 { wlaczony = wlaczony * -1; }
-#define KeyPress_33
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-var i, a, total, pass, idx, temp, need_swap;
-if wlaczonaopcja=0{
-    total=0
-
-    // 收集所有起点(coto=19)和CP(coto=20)
-    for (i=0; i<instance_number(o_edmarkerblock); i+=1){
-        a=instance_find(o_edmarkerblock,i)
-        if a.coto=19 || a.coto=20{
-            marker_info[total,0]=a.x
-            marker_info[total,1]=a.y
-            marker_info[total,2]=a.coto
-            total+=1
-        }
-    }
-
-    if total=0 {exit}
-
-    // 冒泡排序：起点优先，同类型按x再按y排序
-    for (pass=0; pass<total; pass+=1){
-        for (idx=0; idx<total-1; idx+=1){
-            need_swap=0
-            if marker_info[idx,2]=20 && marker_info[idx+1,2]=19 {need_swap=1}
-            if marker_info[idx,2]=marker_info[idx+1,2]{
-                if marker_info[idx,0]>marker_info[idx+1,0] {need_swap=1}
-                if marker_info[idx,0]=marker_info[idx+1,0] && marker_info[idx,1]>marker_info[idx+1,1] {need_swap=1}
-            }
-            if need_swap=1{
-                temp=marker_info[idx,0]
-                marker_info[idx,0]=marker_info[idx+1,0]
-                marker_info[idx+1,0]=temp
-                temp=marker_info[idx,1]
-                marker_info[idx,1]=marker_info[idx+1,1]
-                marker_info[idx+1,1]=temp
-                temp=marker_info[idx,2]
-                marker_info[idx,2]=marker_info[idx+1,2]
-                marker_info[idx+1,2]=temp
-            }
-        }
-    }
-
-    // 更新索引 (PageUp: 上一个)
-    if ed_cp_index<0 || ed_cp_index>=total {ed_cp_index=0}
-    ed_cp_index-=1
-    if ed_cp_index<0 {ed_cp_index=total-1}
-
-    // 移动视口到目标位置
-    // scroolx初始320(32倍数), scrooly初始240(32n+16)，须保持各自对齐
-    scroolx=marker_info[ed_cp_index,0]
-    scrooly=marker_info[ed_cp_index,1]+16
-}
-#define KeyPress_34
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-var k, b, cnt, ps, dx, tp, swp;
-if wlaczonaopcja=0{
-    cnt=0
-
-    // 收集所有起点(coto=19)和CP(coto=20)
-    for (k=0; k<instance_number(o_edmarkerblock); k+=1){
-        b=instance_find(o_edmarkerblock,k)
-        if b.coto=19 || b.coto=20{
-            cpinfo[cnt,0]=b.x
-            cpinfo[cnt,1]=b.y
-            cpinfo[cnt,2]=b.coto
-            cnt+=1
-        }
-    }
-
-    if cnt=0 {exit}
-
-    // 冒泡排序：起点优先，同类型按x再按y排序
-    for (ps=0; ps<cnt; ps+=1){
-        for (dx=0; dx<cnt-1; dx+=1){
-            swp=0
-            if cpinfo[dx,2]=20 && cpinfo[dx+1,2]=19 {swp=1}
-            if cpinfo[dx,2]=cpinfo[dx+1,2]{
-                if cpinfo[dx,0]>cpinfo[dx+1,0] {swp=1}
-                if cpinfo[dx,0]=cpinfo[dx+1,0] && cpinfo[dx,1]>cpinfo[dx+1,1] {swp=1}
-            }
-            if swp=1{
-                tp=cpinfo[dx,0]
-                cpinfo[dx,0]=cpinfo[dx+1,0]
-                cpinfo[dx+1,0]=tp
-                tp=cpinfo[dx,1]
-                cpinfo[dx,1]=cpinfo[dx+1,1]
-                cpinfo[dx+1,1]=tp
-                tp=cpinfo[dx,2]
-                cpinfo[dx,2]=cpinfo[dx+1,2]
-                cpinfo[dx+1,2]=tp
-            }
-        }
-    }
-
-    // 更新索引 (PageDown: 下一个)
-    if ed_cp_index<0 || ed_cp_index>=cnt {ed_cp_index=0}
-    ed_cp_index+=1
-    if ed_cp_index>=cnt {ed_cp_index=0}
-
-    // 移动视口到目标位置
-    // scroolx初始320(32倍数), scrooly初始240(32n+16)，须保持各自对齐
-    scroolx=cpinfo[ed_cp_index,0]
-    scrooly=cpinfo[ed_cp_index,1]+16
-}
-#define KeyPress_46
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-if global.deletemode=1{
-  question=show_question('Would you like to turn OFF delete mode? ')
-}
-else{
-  question=show_question('Would you like to turn ON delete mode? ')
-}
-if question=0 {exit}
-if question=1 {
-  global.deletemode = global.deletemode*(-1)
-}
-#define KeyPress_68
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=605
-invert=0
-arg0=WCZYTYWANIE SCENARIUSZA -> Skopiuj ca硑 kod je渓i chcesz go w innym miejscu!!!!!
-*/
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-//global.scenariofile=''
-//while global.scenariofile=''{
-//global.scenariofile=get_open_filename('Mario Forever Scenario (.mfs)|*.mfs','Please Select Scenario To Load.mfs')}
-//room_goto(Another_Level)
-#define KeyPress_73
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-/*
-with(o_edwallsdrawer){x+=32;y+=32}
-with(o_edbonusesblock){x+=32;y+=32}
-with(o_edbrowser){x+=32;y+=32}
-with(o_edenemyblock){x+=32;y+=32}
-with(o_edmarkerblock){x+=32;y+=32}
-with(o_edpassage){x+=32;y+=32;exitx+=32;exity+=32}
-with(o_edsceneriesblock){x+=32;y+=32}
-*/
-#define KeyPress_114
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-var ques;
-//ques=show_question('Do you REALLY want to test a level WITHOUT the current level saved???')
-//if ques=1 {
-global.autosavename1=global.autosavename
-//global.autosavename_record = global.autosavename
-global.autosavename=working_directory+"\temp.smwl"
-create=file_text_open_write(global.autosavename)//create a file if file does not exist
-file_text_write_string(create," ")
-file_text_close(create)
-Save_Script_Main();
-global.testmode=1;
-
-//记录测试前位置
-global.xviewtemp = scroolx;
-global.yviewtemp = scrooly;
-
-with(o_edwallsdrawer){instance_destroy()}//抽风什么的都给劳资去死
-with(o_edbonusesblock){instance_destroy()}
-with(o_edbrowser){instance_destroy()}
-with(o_edenemyblock){instance_destroy()}
-with(o_edmarkerblock){instance_destroy()}
-with(o_edpassage){instance_destroy()}
-with(o_edsceneriesblock){instance_destroy()}
-room_goto(Loader)
-//}
-//if ques=0 {exit}
-#define KeyPress_115
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-var ques;
-//ques=show_question('Do you REALLY want to test a level in GodMode WITHOUT the current level saved???')
-//if ques=1 {
-global.autosavename1=global.autosavename
-//global.autosavename_record = global.autosavename
-global.testmode=1;
-global.autosavename=working_directory+"\temp.smwl";
-create=file_text_open_write(global.autosavename)//create a file if file does not exist
-file_text_write_string(create," ")
-file_text_close(create)
-Save_Script_Main();
-global.godmode=1
-
-//记录测试前位置
-global.xviewtemp = scroolx;
-global.yviewtemp = scrooly;
-
-//}
-if global.godmode=1{
-with(o_edwallsdrawer){instance_destroy()}//抽风什么的都给劳资去死
-with(o_edbonusesblock){instance_destroy()}
-with(o_edbrowser){instance_destroy()}
-with(o_edenemyblock){instance_destroy()}
-with(o_edmarkerblock){instance_destroy()}
-with(o_edpassage){instance_destroy()}
-with(o_edsceneriesblock){instance_destroy()}
-room_goto(Loader)}
-//if ques=0 {exit}
-#define KeyPress_118
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-
-
-view_xview[0]=0
-view_yview[0]=0
-var dupiks, dupigrek, question;
-question=show_question('Do you REALLY want to RESIZE of your level???')
-if question=0 {exit}
-if question=1 {
-dupiks=get_integer('Set the size of level. X in tiles - min 20, max 1920',floor(room_width/32));
-dupigrek=get_integer('Y in tiles - min 15, max 1920',floor(room_height/32))
-}
-x_trans = get_integer('Move x (in tiles) of (0,0) to:',0)
-y_trans = get_integer('Move y (in tiles) of (0,0) to:',0)
-x_new = min(max(dupiks,20),1920)
-y_new = min(max(dupigrek,15),1920)
-if room_width+x_trans*32>x_new*32 || room_height+y_trans*32>y_new*32 || x_trans*32<0 || y_trans*32<0 {
-question=show_question('Some blocks may be out of the new border, which will be DELETED. Do you want to continue?')}
-if question=0 {exit}
-if question=1 {
-sizechange=1
-with(o_edwallsdrawer){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32}
-with(o_edbonusesblock){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32}
-with(o_edbrowser){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32}
-with(o_edenemyblock){
-x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32
-if(coto=40||coto=41){fishendX+=o_edmain.x_trans*32;fishendY+=o_edmain.y_trans*32}
-}
-with(o_edmarkerblock){
-x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32
-if(coto=32){target = max(target+o_edmain.y_trans*32,-64);if(type=2){water_endX+=o_edmain.x_trans*32;water_endY+=o_edmain.y_trans*32}}
-if(coto=33){if(height>-64)height = max(height+o_edmain.y_trans*32,-63)}
-if(coto=34){camera_endX+=o_edmain.x_trans*32;camera_endY+=o_edmain.y_trans*32}
-}
-with(o_edpassage){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32;exitx+=o_edmain.x_trans*32;exity+=o_edmain.y_trans*32}
-with(o_edsceneriesblock){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32}
-
-for( i=0;i<x_new;i+=1 ){
-    for( j=0;j<y_new;j+=1 ){
-        global.arrayetapu2[i,j]=0
-    }
-}
-
-for ( i=max(0,x_trans) ; i<min(x_new,floor(room_width/32)+x_trans) ; i+=1 ) {
-    for( j=max(0,y_trans) ; j<min(y_new,floor(room_height/32)+y_trans) ; j+=1 ){
-    global.arrayetapu2[i,j]=arrayetapu[i-x_trans,j-y_trans]
-    }
-}
-
-global.poziomwody+=y_trans*32
-if global.auto{
-    global.firstbound = max(global.firstbound+y_trans*32,-64);
-    if(global.secondbound>-64)global.secondbound = max(global.secondbound+y_trans*32,-63);
-}
-
-room_set_width(room,x_new*32)
-room_set_height(room,y_new*32)
-
-global.autosavename1=global.autosavename
-global.autosavename=working_directory+".\temp\TempChangeSize.smwl"
-create=file_text_open_write(global.autosavename)//create a file if file does not exist
-file_text_write_string(create," ")
-file_text_close(create)
-
-global.lvlwidth=x_new*32
-global.lvlheight=y_new*32
-global.donottemp=1
-Save_Script_Main();
-
-with(o_edwallsdrawer){instance_destroy()}//抽风什么的都给劳资去死
-with(o_edbonusesblock){instance_destroy()}
-with(o_edbrowser){instance_destroy()}
-with(o_edenemyblock){instance_destroy()}
-with(o_edmarkerblock){instance_destroy()}
-with(o_edpassage){instance_destroy()}
-with(o_edsceneriesblock){instance_destroy()}
-
-room_restart()
-Load_Script_Main()
-file_delete(global.autosavename)
-global.autosavename = global.autosavename1
-}
-#define KeyPress_121
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-var a;
-a=get_integer('Set the height of the water',floor((global.poziomwody+16)/32));
-global.poziomwody=floor(a*32-16);
-#define KeyPress_122
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-if global.smoothmode=1{
-  question=show_question('Would you like to turn OFF smooth mode? ')
-}
-else{
-  question=show_question('Would you like to turn ON smooth mode? ')
-}
-if question=0 {exit}
-if question=1 {
-  if(global.smoothmode){instance_activate_all()}
-  global.smoothmode = global.smoothmode*(-1)
-}
-#define KeyRelease_116
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-show_solid = 1-show_solid
-#define KeyRelease_119
-/*"/*'/**//* YYD ACTION
-lib_id=1
-action_id=603
-applies_to=self
-*/
-if global.musicon=1{
-            if global.local_muzyka=1 {mm_play_ext('.\Data\MW\ktkm1.dll',0); }
-            if global.local_muzyka=2 {mm_play_ext('.\Data\MW\ktkm5.dll',0); }
-            if global.local_muzyka=3 {mm_play_ext('.\Data\MW\ktkm6.dll',0); }
-            if global.local_muzyka=4 {mm_play_ext('.\Data\MW\ktkm7.dll',0); }
-            if global.local_muzyka=5 {mm_play_ext('.\Data\MW\ktkm9.dll',0); }
-            if global.local_muzyka=6 {mm_play_ext('.\Data\MW\ktkm10.dll',0); }
-            if global.local_muzyka=7 {mm_play_ext('.\Data\MW\ktkm12.dll',0); }
-            if global.local_muzyka=8 {mm_play_ext('.\Data\MW\ktkm13.dll',0); }
-            if global.local_muzyka=9 {mm_play_ext('.\Data\MW\ktkm14.dll',0); }
-            if global.local_muzyka=10 {mm_play_ext('.\Data\MW\ktkm15.mp3',0); }
-            if global.local_muzyka=11 {mm_play_ext('.\Data\MW\ktkm16.dll',0); }
-            if global.local_muzyka=12 {mm_play_ext('.\Data\MW\ktkm17.dll',0); }
-            if global.local_muzyka=13 {mm_play_ext('.\Data\MW\ktkm18.mp3',0); }
-            if global.local_muzyka=14 {mm_play_ext('.\Data\MW\ktkm21.dll',0); }
-            if global.local_muzyka=15 {mm_play_ext('.\Data\MW\ktkm22.dll',0); }
-            if global.local_muzyka=16 {mm_play_ext('.\Data\MW\ktkm23.dll',0); }
-            if global.local_muzyka=17 {mm_play_ext('.\Data\MW\ktkm24.dll',0); }
-            if global.local_muzyka=18 {mm_play_ext('.\Data\MW\ktkm25.dll',0); }
-            if global.local_muzyka=19 {mm_play_ext('.\Data\MW\ktkm26.dll',0); }
-            if global.local_muzyka=20 {mm_play_ext('.\Data\MW\ktkm28.dll',0); }
-            if global.local_muzyka=21 {mm_play_ext('.\Data\MW\ktkm36.dll',0); }
-            if global.local_muzyka=22 {mm_play_ext('.\Data\MW\ktkm38.dll',0); }
-            if global.local_muzyka=23 {mm_play_ext('.\Data\MW\ktkm20.dll',0); }
-            if global.local_muzyka=24 {mm_play_ext('.\Data\MW\ktkm27.dll',0); }
-            if global.local_muzyka=25 {mm_play_ext('.\Data\MW\ktkm37.dll',0); }
-            if global.local_muzyka=26 {mm_play_ext('.\Data\MW\ktkm29.dll',0); }
-            if global.local_muzyka=27 {mm_play_ext('.\Data\MW\ktkm35.dll',0); }
-            if global.local_muzyka=28 {mm_play_ext('.\Data\MW\ktkm120.dll',0); }
-            if global.local_muzyka=29 {mm_play_ext('.\Data\MW\ktkm19.dll',0); }
-            if global.local_muzyka=41 {mm_play_ext('.\Data\MFR\ktkm0.dll',0); }
-            if global.local_muzyka=42 {mm_play_ext('.\Data\MFR\ktkm50.mp3',0); }
-            if global.local_muzyka=43 {mm_play_ext('.\Data\MFR\ktkm51.mp3',0); }
-            if global.local_muzyka=44 {mm_play_ext('.\Data\MFR\ktkm52.mp3',0); }
-            if global.local_muzyka=45 {mm_play_ext('.\Data\MFR\ktkm53.mp3',0); }
-            if global.local_muzyka=46 {mm_play_ext('.\Data\MFR\ktkm55.mp3',0); }
-            if global.local_muzyka=47 {mm_play_ext('.\Data\MFR\ktkm56.mp3',0); }
-            if global.local_muzyka=48 {mm_play_ext('.\Data\MFR\ktkm41.dll',0); }
-            if global.local_muzyka=49 {mm_play_ext('.\Data\MFR\ktkm93.mp3',0); }
-            if global.local_muzyka=50 {mm_play_ext('.\Data\MFR\ktkm94.mp3',0); }
-            if global.local_muzyka=51 {mm_play_ext('.\Data\MFR\ktkm100.mp3',0); }
-            if global.local_muzyka=52 {mm_play_ext('.\Data\MFR\ktkm101.mp3',0); }
-            if global.local_muzyka=53 {mm_play_ext('.\Data\MFR\ktkm103.mp3',0); }
-            if global.local_muzyka=54 {mm_play_ext('.\Data\MFR\ktkm121.mp3',0); }
-            if global.local_muzyka=55 {mm_play_ext('.\Data\MFR\ktkm122.mp3',0); }
-            if global.local_muzyka=56 {mm_play_ext('.\Data\MFR\ktkm123.mp3',0); }
-            if global.local_muzyka=57 {mm_play_ext('.\Data\MFR\ktkm124.mp3',0); }
-            if global.local_muzyka=58 {mm_play_ext('.\Data\MFR\ktkm129.mp3',0); }
-            if global.local_muzyka=59 {mm_play_ext('.\Data\MFR\ktkm130.mp3',0); }
-            if global.local_muzyka=60 {mm_play_ext('.\Data\MFR\ktkm131.mp3',0); }
-            if global.local_muzyka=61 {mm_play_ext('.\Data\MFR\ktkm132.mp3',0); }
-            if global.local_muzyka=62 {mm_play_ext('.\Data\MFR\ktkm133.mp3',0); }
-            if global.local_muzyka=63 {mm_play_ext('.\Data\MFR\ktkm134.mp3',0); }
-            if global.local_muzyka=64 {mm_play_ext('.\Data\MFR\ktkm135.mp3',0); }
-            if global.local_muzyka=65 {mm_play_ext('.\Data\MFR\ktkm210.mp3',0); }
-            if global.local_muzyka=66 {mm_play_ext('.\Data\MFR\ktkm211.mp3',0); }
-            if global.local_muzyka=67 {mm_play_ext('.\Data\MFR\ktkm212.mp3',0); }
-            if global.local_muzyka=68 {mm_play_ext('.\Data\MFR\ktkm213.mp3',0); }
-            if global.local_muzyka=69 {mm_play_ext('.\Data\MFR\ktkm214.mp3',0); }
-            if global.local_muzyka=70 {mm_play_ext('.\Data\MFR\ktkm215.mp3',0); }
-            if global.local_muzyka=71 {mm_play_ext('.\Data\MFR\ktkm2121.mp3',0); }
-            if global.local_muzyka=72 {mm_play_ext('.\Data\MFR\ktkm88.dll',0); }
-            if global.local_muzyka=73 {mm_play_ext('.\Data\MFR\ktkm39.dll',0); }
-            if global.local_muzyka=74 {mm_play_ext('.\Data\MFR\ktkm40.dll',0); }
-            if global.local_muzyka=75 {mm_play_ext('.\Data\MFR\ktkm42.mp3',0); }
-            if global.local_muzyka=76 {mm_play_ext('.\Data\MFR\ktkm125.mp3',0); }
-            if global.local_muzyka=77 {mm_play_ext('.\Data\MFR\ktkm90.mp3',0); }
-            if global.local_muzyka=78 {mm_play_ext('.\Data\MFR\ktkm666.mp3',0); }
-            if global.local_muzyka>=101&&global.local_muzyka<=144 {mm_play_ext('.\Data\SMS\sms'+string(global.local_muzyka-100)+'.ogg',0); }
-            if global.local_muzyka>=145&&global.local_muzyka<=172 {mm_play_ext('.\Data\SMS2\sms'+string(global.local_muzyka-100)+'.ogg',0); }
-            if global.local_muzyka>=173&&global.local_muzyka<=200 {mm_play_ext('.\Data\Softendo\std'+string(global.local_muzyka-172)+'.ogg',0); }
-            if global.local_muzyka>=201&&global.local_muzyka<=204 {mm_play_ext('.\Data\Boss\boss'+string(global.local_muzyka-200)+'.dll',0); }
-            if global.local_muzyka>=205&&global.local_muzyka<=230 {mm_play_ext('.\Data\Boss\boss'+string(global.local_muzyka-200)+'.ogg',0); }
-            if global.local_muzyka>=301&&global.local_muzyka<=400 {mm_play_ext('.\Data\OM\om'+string(global.local_muzyka-300)+'.ogg',0);}
-            if global.local_muzyka>=627{mm_play_ext(global.customMusicDirectory+global.customMusic+'\'+global.customMusicFile[global.local_muzyka-626],0)}
-
-           } else { mm_stop_all_ext() }
