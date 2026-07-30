@@ -350,7 +350,7 @@ target_zooms[5] = 6;
 target_zooms[6] = 7;
 target_zooms[7] = 8;
 
-if wlaczony == 1 && wlaczonaopcja == 0 {
+if wlaczonaopcja == 0 {
     if (keyboard_check_pressed(global.key_zoomin) || (keyboard_check(vk_control) && mouse_wheel_down())) && ratio_level < 7 {
         next_zoom_ratio = target_zooms[ratio_level + 1];
         next_view_wview = 640 * next_zoom_ratio;
@@ -427,7 +427,7 @@ if costawia3 <> 42 && change_alpha = 1{
 }
 
 // 可配置编辑器画布滚动键（Step 检测）- 支持双绑定
-if wlaczony == 1 && wlaczonaopcja == 0 && !keyboard_check(global.key_select){
+if wlaczonaopcja == 0 && !keyboard_check(global.key_select){
     if (keyboard_check(global.key_ed_left) || keyboard_check(global.key_ed_left_2)) && scroolx>view_wview[0]/2 {scroolx-=32}
     if (keyboard_check(global.key_ed_right) || keyboard_check(global.key_ed_right_2)) && scroolx<room_width-view_wview[0]/2 {scroolx+=32}
     if (keyboard_check(global.key_ed_up) || keyboard_check(global.key_ed_up_2)) && scrooly>view_hview[0]/2 && !keyboard_check(vk_shift) {scrooly-=32}
@@ -435,32 +435,45 @@ if wlaczony == 1 && wlaczonaopcja == 0 && !keyboard_check(global.key_select){
 }
 
 // 编辑器：PgUp/PgDn 跳转到上/下一个 Check Point（相机居中到该 CP）
-if wlaczony == 1 && wlaczonaopcja == 0 {
+if wlaczonaopcja == 0 {
     if keyboard_check_pressed(global.edkey_cp_prev) || keyboard_check_pressed(global.edkey_cp_next) {
-        var _camx, _camy, _bestpos, _bestx, _besty, _pos, _found;
-        _camx = scroolx
-        _camy = scrooly
-        _bestpos = -1
-        _bestx = _camx
-        _besty = _camy
-        _found = 0
-        with (o_checkpoint) {
-            _pos = y * 100000 + x
-            if (keyboard_check_pressed(global.edkey_cp_prev)) {
-                // 找位于相机中心"之前"且最接近的那个
-                if (_pos < _camy * 100000 + _camx) {
-                    if (_bestpos < 0 || _pos > _bestpos) { _bestpos = _pos; _bestx = x; _besty = y; _found = 1 }
-                }
-            } else {
-                // 找位于相机中心"之后"且最接近的那个
-                if (_pos > _camy * 100000 + _camx) {
-                    if (_bestpos < 0 || _pos < _bestpos) { _bestpos = _pos; _bestx = x; _besty = y; _found = 1 }
-                }
+        _i = 0
+        _total = 0
+        for (_i = 0; _i < instance_number(o_edmarkerblock); _i += 1) {
+            _a = instance_find(o_edmarkerblock, _i)
+            if _a.coto == 19 || _a.coto == 20 {
+                cpinfo[_total, 0] = _a.x
+                cpinfo[_total, 1] = _a.y
+                cpinfo[_total, 2] = _a.coto
+                _total += 1
             }
         }
-        if (_found) {
-            scroolx = _bestx + 16
-            scrooly = _besty + 32
+        if _total > 0 {
+            for (_pass = 0; _pass < _total; _pass += 1) {
+                for (_idx = 0; _idx < _total - 1; _idx += 1) {
+                    _swap = 0
+                    if cpinfo[_idx, 2] == 20 && cpinfo[_idx + 1, 2] == 19 {_swap = 1}
+                    if cpinfo[_idx, 2] == cpinfo[_idx + 1, 2] {
+                        if cpinfo[_idx, 0] > cpinfo[_idx + 1, 0] {_swap = 1}
+                        if cpinfo[_idx, 0] == cpinfo[_idx + 1, 0] && cpinfo[_idx, 1] > cpinfo[_idx + 1, 1] {_swap = 1}
+                    }
+                    if _swap == 1 {
+                        _temp = cpinfo[_idx, 0]; cpinfo[_idx, 0] = cpinfo[_idx + 1, 0]; cpinfo[_idx + 1, 0] = _temp
+                        _temp = cpinfo[_idx, 1]; cpinfo[_idx, 1] = cpinfo[_idx + 1, 1]; cpinfo[_idx + 1, 1] = _temp
+                        _temp = cpinfo[_idx, 2]; cpinfo[_idx, 2] = cpinfo[_idx + 1, 2]; cpinfo[_idx + 1, 2] = _temp
+                    }
+                }
+            }
+            if ed_cp_index < 0 || ed_cp_index >= _total {ed_cp_index = 0}
+            if keyboard_check_pressed(global.edkey_cp_prev) {
+                ed_cp_index -= 1
+                if ed_cp_index < 0 {ed_cp_index = _total - 1}
+            } else {
+                ed_cp_index += 1
+                if ed_cp_index >= _total {ed_cp_index = 0}
+            }
+            scroolx = cpinfo[ed_cp_index, 0]
+            scrooly = cpinfo[ed_cp_index, 1] + 16
         }
     }
 }
@@ -515,7 +528,7 @@ if wlaczonaopcja == 0 {
 }
 
 // F3/F4/F5/F7/F10 编辑器功能键
-if wlaczony == 1 && wlaczonaopcja == 0 {
+if wlaczonaopcja == 0 {
     // F3: 测试关卡
     if keyboard_check_pressed(global.key_f3){
         global.autosavename1=global.autosavename
