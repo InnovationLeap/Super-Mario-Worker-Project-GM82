@@ -16,12 +16,6 @@ action_id=603
 applies_to=self
 */
 var _mi, _entry, _pipe, _timer, _msg;
-if (keyboard_check_pressed(vk_f11)) {
-    if (variable_global_exists("debug_msg_list") == false) {
-        global.debug_msg_list = ds_list_create();
-    }
-    ds_list_add(global.debug_msg_list, "180|测试: F11 于 " + string(current_time));
-}
 if (variable_global_exists("debug_msg_list")) {
     _mi = 0;
     while (_mi < ds_list_size(global.debug_msg_list)) {
