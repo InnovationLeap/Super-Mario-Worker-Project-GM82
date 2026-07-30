@@ -137,8 +137,10 @@ if rodzajzabicia=3 || rodzajzabicia=4 || rodzajzabicia=5
     koko=instance_create(x,y,o_troopadead);
     koko.czerwona=czerwona
     koko.kierunek=kierunek
+    if czerwona=1 {koko.sprite_index=s_trooparedshell}; if czerwona=2 {koko.sprite_index=s_troopablueshell}; if czerwona=3 {koko.sprite_index=s_troopashellgold}; if czerwona=4 {koko.sprite_index=s_spinyshelldead}
     lolo=instance_create(x,y,o_punkciornik);
     lolo.image_index=0
+    if global.sample=1 {fofo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}
     }
 }
 else {
