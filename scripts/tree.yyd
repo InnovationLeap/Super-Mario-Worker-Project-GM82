@@ -58,6 +58,8 @@
 	|blocks_palette_data
 	|background_palette_data
 	|bgm_palette_data
+	|draw_light_icon
+	|toggle_light_icon
 +EncodingConv
 	|ec_init
 	|ec_convert

@@ -5420,94 +5420,72 @@ if set_light_mode {
     if wlaczonaopcja = 2 && o_edmain.costawia2b = 0 {
 
         // 板栗仔
-        if (string_copy(global.lightobject, 19, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 0, view_yview[0]+110+ 64 * 0, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(0, 0, 19);
 
         // 绿乌龟
-        if (string_copy(global.lightobject, 20, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 1, view_yview[0]+110+ 64 * 0, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(1, 0, 20);
 
         // 红乌龟
-        if (string_copy(global.lightobject, 21, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 2, view_yview[0]+110+ 64 * 0, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(2, 0, 21);
 
         // 绿飞龟
-        if (string_copy(global.lightobject, 22, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 3, view_yview[0]+110+ 64 * 0, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(3, 0, 22);
 
         // 红刺猬
-        if (string_copy(global.lightobject, 23, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 4, view_yview[0]+110+ 64 * 0, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(4, 0, 23);
 
         // 水管绿色食人花
-        if (string_copy(global.lightobject, 24, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 5, view_yview[0]+110+ 64 * 0, 1, 1, 0, c_white, set_light_icon_alpha);
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 0, view_yview[0]+110+ 64 * 1, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(5, 0, 24);
+        draw_light_icon(0, 1, 24);
 
         // 水管红色食人花
-        if (string_copy(global.lightobject, 25, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 1, view_yview[0]+110+ 64 * 1, 1, 1, 0, c_white, set_light_icon_alpha);
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 2, view_yview[0]+110+ 64 * 1, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(1, 1, 25);
+        draw_light_icon(2, 1, 25);
 
         // 红刺猬云
-        if (string_copy(global.lightobject, 26, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 3, view_yview[0]+110+ 64 * 1, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(3, 1, 26);
 
         // 炮台
-        if (string_copy(global.lightobject, 27, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 4, view_yview[0]+110+ 64 * 1, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(4, 1, 27);
 
         // 红鱼
-        if (string_copy(global.lightobject, 28, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 5, view_yview[0]+110+ 64 * 1, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(5, 1, 28);
 
         // 绿鱼
-        if (string_copy(global.lightobject, 29, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 0, view_yview[0]+110+ 64 * 2, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(0, 2, 29);
 
         // 蓝鱼
-        if (string_copy(global.lightobject, 30, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 1, view_yview[0]+110+ 64 * 2, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(1, 2, 30);
 
         // 黄刺鱼
-        if (string_copy(global.lightobject, 31, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 2, view_yview[0]+110+ 64 * 2, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(2, 2, 31);
 
         // 毒蘑菇
-        if (string_copy(global.lightobject, 32, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 3, view_yview[0]+110+ 64 * 2, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(3, 2, 32);
 
         // 扎地食人花
-        if (string_copy(global.lightobject, 33, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 4, view_yview[0]+110+ 64 * 2, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(4, 2, 33);
 
         // 岩浆
-        if (string_copy(global.lightobject, 34, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 5, view_yview[0]+110+ 64 * 2, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(5, 2, 34);
 
         // 锤子龟
-        if (string_copy(global.lightobject, 35, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 0, view_yview[0]+110+ 64 * 3, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(0, 3, 35);
 
         // 探照灯
-        if (string_copy(global.lightobject, 36, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 1, view_yview[0]+110+ 64 * 3, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(1, 3, 36);
 
         // 火球
-        if (string_copy(global.lightobject, 37, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 2, view_yview[0]+110+ 64 * 3, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(2, 3, 37);
 
         // 地刺（MW样式）
-        if (string_copy(global.lightobject, 38, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 3, view_yview[0]+110+ 64 * 3, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(3, 3, 38);
 
         // 石盾
-        if (string_copy(global.lightobject, 39, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 4, view_yview[0]+110+ 64 * 3, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(4, 3, 39);
 
         // 库巴
-        if (string_copy(global.lightobject, 40, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 5, view_yview[0]+110+ 64 * 3, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(5, 3, 40);
 
     }
 
@@ -5515,86 +5493,66 @@ if set_light_mode {
     if wlaczonaopcja = 2 && o_edmain.costawia2b = 1 {
 
         // 灰刺猬
-        if (string_copy(global.lightobject, 41, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 0, view_yview[0]+110+ 64 * 0, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(0, 0, 41);
 
         // 炮台（追踪）
-        if (string_copy(global.lightobject, 42, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 1, view_yview[0]+110+ 64 * 0, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(1, 0, 42);
 
         // 火球龟
-        if (string_copy(global.lightobject, 43, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 2, view_yview[0]+110+ 64 * 0, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(2, 0, 43);
 
         // 岩浆底部
-        if (string_copy(global.lightobject, 44, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 3, view_yview[0]+110+ 64 * 0, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(3, 0, 44);
 
         // 炮台（倒）
-        if (string_copy(global.lightobject, 27, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 4, view_yview[0]+110+ 64 * 0, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(4, 0, 27);
 
-         // 炮台（追踪，倒）
-        if (string_copy(global.lightobject, 42, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 5, view_yview[0]+110+ 64 * 0, 1, 1, 0, c_white, set_light_icon_alpha);
+        // 炮台（追踪，倒）
+        draw_light_icon(5, 0, 42);
 
         // 布布鬼
-        if (string_copy(global.lightobject, 45, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 0, view_yview[0]+110+ 64 * 1, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(0, 1, 45);
 
         // 硬壳龟
-        if (string_copy(global.lightobject, 46, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 1, view_yview[0]+110+ 64 * 1, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(1, 1, 46);
 
         // 红飞龟
-        if (string_copy(global.lightobject, 47, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 2, view_yview[0]+110+ 64 * 1, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(2, 1, 47);
 
         // 蓝乌龟
-        if (string_copy(global.lightobject, 48, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 3, view_yview[0]+110+ 64 * 1, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(3, 1, 48);
 
         // 蓝飞龟
-        if (string_copy(global.lightobject, 49, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 4, view_yview[0]+110+ 64 * 1, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(4, 1, 49);
 
         // 电珊瑚
-        if (string_copy(global.lightobject, 50, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 5, view_yview[0]+110+ 64 * 1, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(5, 1, 50);
 
         // 地刺（MF样式）
-        if (string_copy(global.lightobject, 51, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 0, view_yview[0]+110+ 64 * 2, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(0, 2, 51);
 
         // 金乌龟
-        if (string_copy(global.lightobject, 52, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 1, view_yview[0]+110+ 64 * 2, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(1, 2, 52);
 
         // 金飞龟
-        if (string_copy(global.lightobject, 53, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 2, view_yview[0]+110+ 64 * 2, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(2, 2, 53);
 
         // 静止探照灯
-        if (string_copy(global.lightobject, 54, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 5, view_yview[0]+110+ 64 * 2, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(5, 2, 54);
 
         // 龟壳
-        if (string_copy(global.lightobject, 55, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 0, view_yview[0]+110+ 64 * 3, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(0, 3, 55);
 
         // 水管蓝色食人花
-        if (string_copy(global.lightobject, 56, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 1, view_yview[0]+110+ 64 * 3, 1, 1, 0, c_white, set_light_icon_alpha);
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 2, view_yview[0]+110+ 64 * 3, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(1, 3, 56);
+        draw_light_icon(2, 3, 56);
 
         // 水管灰色食人花
-        if (string_copy(global.lightobject, 57, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 3, view_yview[0]+110+ 64 * 3, 1, 1, 0, c_white, set_light_icon_alpha);
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 4, view_yview[0]+110+ 64 * 3, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(3, 3, 57);
+        draw_light_icon(4, 3, 57);
 
         // 灰刺猬云
-        if (string_copy(global.lightobject, 58, 1) = '1') { set_light_icon_alpha = 1; } else { set_light_icon_alpha = 0.3; }
-        draw_sprite_ext(s_setlight, 0, view_xview[0]+206+ 64 * 5, view_yview[0]+110+ 64 * 3, 1, 1, 0, c_white, set_light_icon_alpha);
+        draw_light_icon(5, 3, 58);
 
     }
 
@@ -5770,137 +5728,72 @@ if set_light_mode {
         if wlaczonaopcja = 2 && o_edmain.costawia2b = 0 {
 
             // 板栗仔
-            if ed_hit(206+ 64 * 0, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
-                if string_copy(global.lightobject, 19, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 19, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 19, '0'); } }
+            toggle_light_icon(0, 0, 19);
 
             // 绿乌龟
-            if ed_hit(206+ 64 * 1, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
-                if string_copy(global.lightobject, 20, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 20, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 20, '0'); } }
+            toggle_light_icon(1, 0, 20);
 
             // 红乌龟
-            if ed_hit(206+ 64 * 2, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
-                if string_copy(global.lightobject, 21, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 21, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 21, '0'); } }
+            toggle_light_icon(2, 0, 21);
 
             // 绿飞龟
-            if ed_hit(206+ 64 * 3, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
-                if string_copy(global.lightobject, 22, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 22, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 22, '0'); } }
+            toggle_light_icon(3, 0, 22);
 
             // 红刺猬
-            if ed_hit(206+ 64 * 4, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
-                if string_copy(global.lightobject, 23, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 23, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 23, '0'); } }
+            toggle_light_icon(4, 0, 23);
 
             // 水管绿色食人花
-            if(ed_hit(206+ 64 * 5, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))))||
-              (ed_hit(206+ 64 * 0, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1)))){
-                if string_copy(global.lightobject, 24, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 24, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 24, '0'); } }
+            toggle_light_icon(5, 0, 24);
+            toggle_light_icon(0, 1, 24);
 
             // 水管红色食人花
-            if ed_hit(206+ 64 * 1, 110+ 64 * 1, 128, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
-                if string_copy(global.lightobject, 25, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 25, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 25, '0'); } }
+            toggle_light_icon(1, 1, 25);
+            toggle_light_icon(2, 1, 25);
 
             // 红刺猬云
-            if ed_hit(206+ 64 * 3, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
-                if string_copy(global.lightobject, 26, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 26, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 26, '0'); } }
+            toggle_light_icon(3, 1, 26);
 
             // 炮台
-            if ed_hit(206+ 64 * 4, 110+ 64 * 1, 64, (110+ 64 * (1+ 1)-(110+ 64 * 1))){
-                if string_copy(global.lightobject, 27, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 27, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 27, '0'); } }
+            toggle_light_icon(4, 1, 27);
 
             // 红鱼
-            if ed_hit(206+ 64 * 5, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
-                if string_copy(global.lightobject, 28, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 28, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 28, '0'); } }
+            toggle_light_icon(5, 1, 28);
 
             // 绿鱼
-            if ed_hit(206+ 64 * 0, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
-                if string_copy(global.lightobject, 29, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 29, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 29, '0'); } }
+            toggle_light_icon(0, 2, 29);
 
             // 蓝鱼
-            if ed_hit(206+ 64 * 1, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
-                if string_copy(global.lightobject, 30, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 30, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 30, '0'); } }
+            toggle_light_icon(1, 2, 30);
 
             // 黄刺鱼
-            if ed_hit(206+ 64 * 2, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
-                if string_copy(global.lightobject, 31, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 31, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 31, '0'); } }
+            toggle_light_icon(2, 2, 31);
 
             // 毒蘑菇
-            if ed_hit(206+ 64 * 3, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
-                if string_copy(global.lightobject, 32, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 32, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 32, '0'); } }
+            toggle_light_icon(3, 2, 32);
 
             // 扎地食人花
-            if ed_hit(206+ 64 * 4, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
-                if string_copy(global.lightobject, 33, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 33, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 33, '0'); } }
+            toggle_light_icon(4, 2, 33);
 
             // 岩浆
-            if ed_hit(206+ 64 * 5, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
-                if string_copy(global.lightobject, 34, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 34, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 34, '0'); } }
+            toggle_light_icon(5, 2, 34);
 
             // 锤子龟
-            if ed_hit(206+ 64 * 0, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
-                if string_copy(global.lightobject, 35, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 35, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 35, '0'); } }
+            toggle_light_icon(0, 3, 35);
 
             // 探照灯
-            if ed_hit(206+ 64 * 1, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
-                if string_copy(global.lightobject, 36, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 36, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 36, '0'); } }
+            toggle_light_icon(1, 3, 36);
 
             // 火球
-            if ed_hit(206+ 64 * 2, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
-                if string_copy(global.lightobject, 37, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 37, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 37, '0'); } }
+            toggle_light_icon(2, 3, 37);
 
             // 地刺（MW样式）
-            if ed_hit(206+ 64 * 3, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
-                if string_copy(global.lightobject, 38, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 38, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 38, '0'); } }
+            toggle_light_icon(3, 3, 38);
 
             // 石盾
-            if ed_hit(206+ 64 * 4, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
-                if string_copy(global.lightobject, 39, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 39, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 39, '0'); } }
+            toggle_light_icon(4, 3, 39);
 
             // 库巴
-            if ed_hit(206+ 64 * 5, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
-                if string_copy(global.lightobject, 40, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 40, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 40, '0'); } }
+            toggle_light_icon(5, 3, 40);
 
         }
 
@@ -5908,119 +5801,64 @@ if set_light_mode {
         if wlaczonaopcja = 2 && o_edmain.costawia2b = 1 {
 
             // 灰刺猬
-            if ed_hit(206+ 64 * 0, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
-                if string_copy(global.lightobject, 41, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 41, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 41, '0'); } }
+            toggle_light_icon(0, 0, 41);
 
             // 炮台（追踪）
-            if(ed_hit(206+ 64 * 1, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))))||
-              (ed_hit(206+ 64 * 5, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0)))){
-                if string_copy(global.lightobject, 42, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 42, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 42, '0'); } }
+            toggle_light_icon(1, 0, 42);
+            toggle_light_icon(5, 0, 42);
 
             // 火球龟
-            if ed_hit(206+ 64 * 2, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
-                if string_copy(global.lightobject, 43, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 43, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 43, '0'); } }
+            toggle_light_icon(2, 0, 43);
 
             // 岩浆底部
-            if ed_hit(206+ 64 * 3, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
-                if string_copy(global.lightobject, 44, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 44, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 44, '0'); } }
+            toggle_light_icon(3, 0, 44);
 
             // 炮台（倒）
-            if ed_hit(206+ 64 * 4, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
-                if string_copy(global.lightobject, 27, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 27, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 27, '0'); } }
+            toggle_light_icon(4, 0, 27);
 
             // 布布鬼
-            if ed_hit(206+ 64 * 0, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
-                if string_copy(global.lightobject, 45, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 45, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 45, '0'); } }
+            toggle_light_icon(0, 1, 45);
 
             // 硬壳龟
-            if ed_hit(206+ 64 * 1, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
-                if string_copy(global.lightobject, 46, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 46, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 46, '0'); } }
+            toggle_light_icon(1, 1, 46);
 
             // 红飞龟
-            if ed_hit(206+ 64 * 2, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
-                if string_copy(global.lightobject, 47, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 47, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 47, '0'); } }
+            toggle_light_icon(2, 1, 47);
 
             // 蓝乌龟
-            if ed_hit(206+ 64 * 3, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
-                if string_copy(global.lightobject, 48, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 48, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 48, '0'); } }
+            toggle_light_icon(3, 1, 48);
 
             // 蓝飞龟
-            if ed_hit(206+ 64 * 4, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
-                if string_copy(global.lightobject, 49, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 49, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 49, '0'); } }
+            toggle_light_icon(4, 1, 49);
 
             // 电珊瑚
-            if ed_hit(206+ 64 * 5, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
-                if string_copy(global.lightobject, 50, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 50, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 50, '0'); } }
+            toggle_light_icon(5, 1, 50);
 
             // 地刺（MF样式）
-            if ed_hit(206+ 64 * 0, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
-                if string_copy(global.lightobject, 51, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 51, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 51, '0'); } }
+            toggle_light_icon(0, 2, 51);
 
             // 金乌龟
-            if ed_hit(206+ 64 * 1, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
-                if string_copy(global.lightobject, 52, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 52, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 52, '0'); } }
+            toggle_light_icon(1, 2, 52);
 
             // 金飞龟
-            if ed_hit(206+ 64 * 2, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
-                if string_copy(global.lightobject, 53, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 53, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 53, '0'); } }
+            toggle_light_icon(2, 2, 53);
 
             // 静止探照灯
-            if ed_hit(206+ 64 * 5, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
-                if string_copy(global.lightobject, 54, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 54, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 54, '0'); } }
+            toggle_light_icon(5, 2, 54);
 
             // 龟壳
-            if ed_hit(206+ 64 * 0, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
-                if string_copy(global.lightobject, 55, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 55, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 55, '0'); } }
+            toggle_light_icon(0, 3, 55);
 
             // 水管蓝色食人花
-            if ed_hit(206+ 64 * 1, 110+ 64 * 3, 128, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
-                if string_copy(global.lightobject, 56, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 56, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 56, '0'); } }
+            toggle_light_icon(1, 3, 56);
+            toggle_light_icon(2, 3, 56);
 
             // 水管灰色食人花
-            if ed_hit(206+ 64 * 3, 110+ 64 * 3, 128, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
-                if string_copy(global.lightobject, 57, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 57, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 57, '0'); } }
+            toggle_light_icon(3, 3, 57);
+            toggle_light_icon(4, 3, 57);
 
             // 灰刺猬云
-            if ed_hit(206+ 64 * 5, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
-                if string_copy(global.lightobject, 58, 1) = '0'
-                { global.lightobject = string_replace_char(global.lightobject, 58, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 58, '0'); } }
+            toggle_light_icon(5, 3, 58);
 
         }
     }
