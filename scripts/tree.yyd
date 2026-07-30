@@ -43,6 +43,7 @@
 	|gz_compress
 	|gz_selftest
 +Other
+	|draw_prefs_highlight
 	|self_coto_check
 	|delete_coto_check
 	|transC

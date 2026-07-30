@@ -742,9 +742,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
        //下面这一大段，分别实现pref窗口下各个项目被鼠标选中时"高亮"的效果，并且记录"选中状态"，为判断鼠标单击时发生什么事件做准备。
   if wlaczonaopcja=6 && ed_hit(220, 117, 130, 17)&& czywybieranieback=0
     {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_prefsanim,0,view_xview[0]+220,view_yview[0]+117,1,1,0,c_white,0.2)
-    draw_set_blend_mode(bm_normal)
+    draw_prefs_highlight(view_xview[0]+220, view_yview[0]+117, 1, 1, 0.2);
     costawia6=1
     costawia=0
     costawia2=0
@@ -754,9 +752,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     }//关卡名栏
   if wlaczonaopcja=6 && ed_hit(220, 140, 130, 17)&& czywybieranieback=0
     {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_prefsanim,0,view_xview[0]+220,view_yview[0]+140,1,1,0,c_white,0.2)
-    draw_set_blend_mode(bm_normal)
+    draw_prefs_highlight(view_xview[0]+220, view_yview[0]+140, 1, 1, 0.2);
     costawia6=2
     costawia=0
     costawia2=0
@@ -766,9 +762,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     }//关卡作者栏
   if wlaczonaopcja=6 && ed_hit(220, 186, 130, 17)&& czywybieranieback=0
     {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_prefsanim,0,view_xview[0]+220,view_yview[0]+186,1,1,0,c_white,0.2)
-    draw_set_blend_mode(bm_normal)
+    draw_prefs_highlight(view_xview[0]+220, view_yview[0]+186, 1, 1, 0.2);
     costawia6=3
         costawia=0
     costawia2=0
@@ -778,9 +772,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     }//
   if wlaczonaopcja=6 && ed_hit(220, 209, 130, 17)&& czywybieranieback=0
     {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_prefsanim,0,view_xview[0]+220,view_yview[0]+209,1,1,0,c_white,0.2)
-    draw_set_blend_mode(bm_normal)
+    draw_prefs_highlight(view_xview[0]+220, view_yview[0]+209, 1, 1, 0.2);
     costawia6=4
     costawia=0
     costawia2=0
@@ -790,9 +782,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     }
   if wlaczonaopcja=6 && ed_hit(220, 232, 130, 16)&& czywybieranieback=0
     {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_prefsanim,0,view_xview[0]+220,view_yview[0]+232,1,1,0,c_white,0.2)
-    draw_set_blend_mode(bm_normal)
+    draw_prefs_highlight(view_xview[0]+220, view_yview[0]+232, 1, 1, 0.2);
     costawia6=5
         costawia=0
     costawia2=0
@@ -802,9 +792,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     }
   if wlaczonaopcja=6 && ed_hit(220, 278, 40, 17)&& czywybieranieback=0
     {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_prefsanim,0,view_xview[0]+220-5,view_yview[0]+278,0.4,1,0,c_white,0.2)
-    draw_set_blend_mode(bm_normal)
+    draw_prefs_highlight(view_xview[0]+220-5, view_yview[0]+278, 0.4, 1, 0.2);
     costawia6=6
         costawia=0
     costawia2=0
@@ -814,9 +802,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     }
   if wlaczonaopcja=6 && ed_hit(220, 300, 40, 17)&& czywybieranieback=0
     {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_prefsanim,0,view_xview[0]+220-12,view_yview[0]+300,0.5,1,0,c_white,0.2)
-    draw_set_blend_mode(bm_normal)
+    draw_prefs_highlight(view_xview[0]+220-12, view_yview[0]+300, 0.5, 1, 0.2);
     costawia6=7
         costawia=0
     costawia2=0
@@ -826,9 +812,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     }
       if wlaczonaopcja=6 && ed_hit(220, 322, 40, 17)&& czywybieranieback=0
     {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_prefsanim,0,view_xview[0]+220-5,view_yview[0]+322,0.4,1,0,c_white,0.2)
-    draw_set_blend_mode(bm_normal)
+    draw_prefs_highlight(view_xview[0]+220-5, view_yview[0]+322, 0.4, 1, 0.2);
     costawia6=13
         costawia=0
     costawia2=0
@@ -839,9 +823,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
 
   if wlaczonaopcja=6 && ed_hit(281, 278, 121, 17)&& czywybieranieback=0
     {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_prefsanim,0,view_xview[0]+275,view_yview[0]+278,1.2,1,0,c_white,0.2)
-    draw_set_blend_mode(bm_normal)
+    draw_prefs_highlight(view_xview[0]+275, view_yview[0]+278, 1.2, 1, 0.2);
     costawia6=9
         costawia=0
     costawia2=0
@@ -851,9 +833,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     }
   if wlaczonaopcja=6 && ed_hit(281, 300, 121, 17)&& czywybieranieback=0
     {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_prefsanim,0,view_xview[0]+275,view_yview[0]+300,1,1,0,c_white,0.2)
-    draw_set_blend_mode(bm_normal)
+    draw_prefs_highlight(view_xview[0]+275, view_yview[0]+300, 1, 1, 0.2);
     costawia6=10
         costawia=0
     costawia2=0
@@ -864,9 +844,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
 
   if wlaczonaopcja=6 && ed_hit(281, 322, 151, 17)&& czywybieranieback=0
     {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_prefsanim,0,view_xview[0]+275,view_yview[0]+322,1.3,1,0,c_white,0.2)
-    draw_set_blend_mode(bm_normal)
+    draw_prefs_highlight(view_xview[0]+275, view_yview[0]+322, 1.3, 1, 0.2);
     costawia6=11
         costawia=0
     costawia2=0
@@ -877,9 +855,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
 
   if wlaczonaopcja=6 && ed_hit(220, 346, 40, 18)&& czywybieranieback=0
     {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_prefsanim,0,view_xview[0]+220-5,view_yview[0]+346,0.4,1,0,c_white,0.2)
-    draw_set_blend_mode(bm_normal)
+    draw_prefs_highlight(view_xview[0]+220-5, view_yview[0]+346, 0.4, 1, 0.2);
     costawia6=8
         costawia=0
     costawia2=0
@@ -4352,9 +4328,7 @@ if czywybieranieback=1 && czywybieranieback<100
     //天气按钮
     if ed_hit(462, 420, 60, 30)&& o_edmain.backgroundpage<>100 && setting_mode <> 4
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+462,view_yview[0]+420,0.6,1.3,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+462, view_yview[0]+420, 0.6, 1.3, 0.2);
         if mouse_check_button(mb_left) && wahaha=0 {o_edmain.backgroundpage=100; wahaha = 1}
     }
 
@@ -4374,9 +4348,7 @@ if czywybieranieback=1 && czywybieranieback<100
                     _bgx = 27 + _bgc * 142;  // 139 + 3 列间距
                     _bgy = 32 + _bgr * 118;  // 102 + 16 行间距
                     if ed_hit(_bgx, _bgy, 139, 103) {
-                        draw_set_blend_mode(bm_add)
-                        draw_sprite_ext(s_prefsanim, 0, view_xview[0] + _bgx, view_yview[0] + _bgy + 32, 1.2, 4, 0, c_white, 0.2)
-                        draw_set_blend_mode(bm_normal)
+                        draw_prefs_highlight(view_xview[0] + _bgx, view_yview[0] + _bgy + 32, 1.2, 4, 0.2);
                         backselect = _bgval;
                     }
                 }
@@ -4401,9 +4373,7 @@ if czywybieranieback=1 && czywybieranieback<100
     draw_set_color(c_white)
     if ed_hit(40, 90, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+90,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+90, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             if(setting_mode=6) { foforainy = max(0,min(5,get_integer("Set Rainy Level. Minimum is 0. Maximum is 5.", global.rainy)))
             } else {
@@ -4424,9 +4394,7 @@ if czywybieranieback=1 && czywybieranieback<100
     draw_set_color(c_white)
     if ed_hit(40, 120, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+120,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+120, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             if(setting_mode=6) { fofofallingstars = max(0,min(3,get_integer("Set Falling Stars Level. Minimum is 0. Maximum is 3.", global.fallingstars)))
             } else {
@@ -4447,9 +4415,7 @@ if czywybieranieback=1 && czywybieranieback<100
     draw_set_color(c_white)
     if ed_hit(40, 150, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+150,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+150, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             if(setting_mode=6) { fofosnowy = max(0,min(5,get_integer("Set Snowy Level. Minimum is 0. Maximum is 5.", global.snowy)))
             } else {
@@ -4470,9 +4436,7 @@ if czywybieranieback=1 && czywybieranieback<100
     draw_set_color(c_white)
     if ed_hit(40, 180, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+180,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+180, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             if(setting_mode=6) { fofothunder = max(0,min(1,get_integer("Set Thunder Level. Minimum is 0. Maximum is 1.", global.thunder)))
             } else {
@@ -4493,9 +4457,7 @@ if czywybieranieback=1 && czywybieranieback<100
     draw_set_color(c_white)
     if ed_hit(40, 210, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+210,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+210, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             if(setting_mode=6) { fofowindy = max(0,min(3,get_integer("Set Windy Level. Minimum is 0. Maximum is 3.", global.windy)))
             } else {
@@ -4516,9 +4478,7 @@ if czywybieranieback=1 && czywybieranieback<100
     draw_set_color(c_white)
     if ed_hit(40, 420, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+420,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+420, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             if(setting_mode=6) { fofodarkness = max(0,min(9,get_integer("Set Dark Level. Minimum is 0. Maximum is 9.", global.darkness)))
             } else {
@@ -4539,9 +4499,7 @@ if czywybieranieback=1 && czywybieranieback<100
     draw_set_color(c_white)
     if ed_hit(40, 450, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+450,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+450, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             if(setting_mode=6) { fofobrightness = max(0,min(5,get_integer("Set Bright Level. Minimum is 0. Maximum is 5.", global.brightness)))
             } else {
@@ -4555,9 +4513,7 @@ if czywybieranieback=1 && czywybieranieback<100
     //从天气页按BACK按钮退回到背景选择主页面
     if ed_hit(561, 427, 60, 30)&& o_edmain.backgroundpage=100
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+561,view_yview[0]+427,0.5,1.3,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+561, view_yview[0]+427, 0.5, 1.3, 0.2);
         if mouse_check_button(mb_left) && wahaha=0 {
             if(setting_mode=6) {
                 myfofo.rainy=foforainy;
@@ -4581,9 +4537,7 @@ if czywybieranieback=1 && czywybieranieback<100
 
     //按选择背景主页面BACK按钮退出
     if ed_hit(530, 420, 60, 30) && o_edmain.backgroundpage<>100 && wahaha = 0{
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+530,view_yview[0]+420,0.5,1.3,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+530, view_yview[0]+420, 0.5, 1.3, 0.2);
         quitbgpselect=1
     } else { quitbgpselect=0 }
 
@@ -4617,17 +4571,13 @@ if czywybieranieback=100
 
     for(ii=0;ii<8;ii+=1){
         if ed_hit(460, 114+35*ii, 150, (114+35*ii+16)-(114+35*ii)){
-            draw_set_blend_mode(bm_add)
-            draw_sprite_ext(s_prefsanim,0,view_xview[0]+460,view_yview[0]+114+35*ii,1.3,0.8,0,c_white,0.2)
-            draw_set_blend_mode(bm_normal)
+            draw_prefs_highlight(view_xview[0]+460, view_yview[0]+114+35*ii, 1.3, 0.8, 0.2);
             if mouse_check_button(mb_left){bgmpage=ii;}
         }
     }
     /*for(ii=4;ii<8;ii+=1){
         if ed_hit(460, 116+35*ii+, 150, (116+35*ii+12)-(116+35*ii+)){
-            draw_set_blend_mode(bm_add)
-            draw_sprite_ext(s_prefsanim,0,view_xview[0]+460,view_yview[0]+116+34*ii,1.3,0.8,0,c_white,0.2)
-            draw_set_blend_mode(bm_normal)
+            draw_prefs_highlight(view_xview[0]+460, view_yview[0]+116+34*ii, 1.3, 0.8, 0.2);
             if mouse_check_button(mb_left){bgmpage=ii;}
         }
     }*/
@@ -4647,9 +4597,7 @@ if czywybieranieback=100
                 if _bgm_val > 0 {
                     _bgm_x = 35 + _bgm_c * 205;
                     if ed_hit(_bgm_x, _bgm_y, 150, 12) {
-                        draw_set_blend_mode(bm_add)
-                        draw_sprite_ext(s_prefsanim, 0, view_xview[0] + _bgm_x, view_yview[0] + _bgm_y, 1.3, 0.8, 0, c_white, 0.2)
-                        draw_set_blend_mode(bm_normal)
+                        draw_prefs_highlight(view_xview[0] + _bgm_x, view_yview[0] + _bgm_y, 1.3, 0.8, 0.2);
                         muzioj = _bgm_val;
                     }
                 }
@@ -4669,21 +4617,15 @@ if czywybieranieback=100
         draw_text(view_xview[0] + 160, view_yview[0] + 400, 'NEXT')
         draw_text(view_xview[0] + 240, view_yview[0] + 400, 'REFRESH')
         if ed_hit(70, 390, 60, 30){
-            draw_set_blend_mode(bm_add)
-            draw_sprite_ext(s_prefsanim,0,view_xview[0]+70,view_yview[0]+390,0.4,0.8,0,c_white,0.2)
-            draw_set_blend_mode(bm_normal)
+            draw_prefs_highlight(view_xview[0]+70, view_yview[0]+390, 0.4, 0.8, 0.2);
             if mouse_check_button_pressed(mb_left) && listscroll>0 {listscroll-=10;}
         }
         if ed_hit(150, 390, 50, 30){
-            draw_set_blend_mode(bm_add)
-            draw_sprite_ext(s_prefsanim,0,view_xview[0]+150,view_yview[0]+390,0.4,0.8,0,c_white,0.2)
-            draw_set_blend_mode(bm_normal)
+            draw_prefs_highlight(view_xview[0]+150, view_yview[0]+390, 0.4, 0.8, 0.2);
             if mouse_check_button_pressed(mb_left) && listscroll < global.customMusicTotal - 10 {listscroll+=10;}
         }
         if ed_hit(230, 390, 70, 30){
-            draw_set_blend_mode(bm_add)
-            draw_sprite_ext(s_prefsanim,0,view_xview[0]+230,view_yview[0]+390,0.6,0.8,0,c_white,0.2)
-            draw_set_blend_mode(bm_normal)
+            draw_prefs_highlight(view_xview[0]+230, view_yview[0]+390, 0.6, 0.8, 0.2);
             // 点击后刷新音乐列表
             if mouse_check_button_pressed(mb_left){music_list_update();show_message('Custom music list refreshed.');listscroll=0}
             /*if mouse_check_button_pressed(mb_left){
@@ -4701,9 +4643,7 @@ if czywybieranieback=100
             draw_text(view_xview[0] + 20, view_yview[0] + 60+ 30 * i, string(i+listscroll))
             draw_text(view_xview[0] + 50, view_yview[0] + 60+ 30 * i, string_upper(global.customMusicFile[i+listscroll]))
             if ed_hit(20, 50+30*i, 340, (70+30*i)-(50+30*i)){
-                draw_set_blend_mode(bm_add)
-                draw_sprite_ext(s_prefsanim,0,view_xview[0]+20,view_yview[0]+50+30*i,2,0.8,0,c_white,0.2)
-                draw_set_blend_mode(bm_normal)
+                draw_prefs_highlight(view_xview[0]+20, view_yview[0]+50+30*i, 2, 0.8, 0.2);
                 muzioj = 626+i+listscroll
             }
         }
@@ -4712,17 +4652,13 @@ if czywybieranieback=100
 
     //no music
     if ed_hit(462, 420, 60, 30){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+462,view_yview[0]+420,0.6,1.3,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+462, view_yview[0]+420, 0.6, 1.3, 0.2);
         muzioj = 600  //600对应无音乐
     }
 
       //quitselect
     if ed_hit(550, 420, 60, 30){
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+550,view_yview[0]+420,0.5,1.3,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+550, view_yview[0]+420, 0.5, 1.3, 0.2);
         quitbgmselect=1}else
     {quitbgmselect=0}
 
@@ -4898,9 +4834,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 90, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+90,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+90, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.modifiedmov=1-global.modifiedmov;kliknieto=1}
     }
     //图层设置
@@ -4913,9 +4847,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 120, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+120,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+120, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.layerord=(global.layerord+1) mod 3;kliknieto=1}
     }
     //探照灯图层
@@ -4927,9 +4859,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 150, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+150,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+150, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.rotodisclay=1-global.rotodisclay;kliknieto=1}
     }
     //水面高度
@@ -4940,9 +4870,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 180, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+180,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+180, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.poziomwody=min(999999,get_integer("Set the height of the water level.",global.poziomwody))}
     }
     //全局岩浆
@@ -4954,9 +4882,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 210, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+210,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+210, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.lava=1-global.lava;kliknieto=1}
     }
     //自动水面
@@ -4968,9 +4894,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 240, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+240,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+240, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.auto=1-global.auto;kliknieto=1}
     }
     //自动系参数
@@ -4983,9 +4907,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 270, 140, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+270,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+270, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.firstbound=min(999999,max(-64,get_integer("Set the height of target 1. The fluid will automatically and repeatedly move between T1 and T2.",global.firstbound)))}
     }
 
@@ -4996,9 +4918,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(264, 270, 140, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+264,view_yview[0]+270,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+264, view_yview[0]+270, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.secondbound=min(999999,max(-64,get_integer("Set the height of target 2. Enter -64 to disable it, which means the fluid will stop moving after reaching T1",global.secondbound)))}
     }
 
@@ -5009,9 +4929,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 300, 140, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+300,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+300, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.water_velocity=min(9,max(0,get_integer("Set the speed of the fluid.(0,1,...,9)",global.water_velocity)))}
     }
 
@@ -5022,9 +4940,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(264, 300, 140, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+264,view_yview[0]+300,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+264, view_yview[0]+300, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.water_delay=max(0,get_integer("Set the delay time before the fluid starts to move.",global.water_delay))}
     }
 
@@ -5039,9 +4955,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 330, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+330,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+330, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.advswitch=1-global.advswitch;kliknieto=1}
     }
 
@@ -5054,9 +4968,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 360, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+360,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+360, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.fast_retry=1-global.fast_retry;kliknieto=1}
     }
 
@@ -5069,9 +4981,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 390, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+390,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+390, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.MFbeet=1-global.MFbeet;kliknieto=1}
     }
 
@@ -5084,9 +4994,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 420, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+420,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+420, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.celeste=1-global.celeste;kliknieto=1}
     }
 
@@ -5099,9 +5007,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 450, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+450,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+450, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.pipeout=1-global.pipeout;kliknieto=1}
     }
     //第一页结束
@@ -5119,9 +5025,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 90, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+90,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+90, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.fastpass=1-global.fastpass;kliknieto=1}
     }
 
@@ -5134,9 +5038,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 120, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+120,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+120, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.huddisplay=1-global.huddisplay;kliknieto=1}
     }
 
@@ -5145,9 +5047,7 @@ if czywybieranieback=1000
     draw_text(view_xview[0]+40,view_yview[0]+160,string_upper('Settings for special luminous objects'))
     if ed_hit(40, 150, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+150,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+150, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){o_edmain.additionalpage=100;wahaha = 1;kliknieto=1}
     }
 
@@ -5160,9 +5060,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 180, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+180,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+180, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.stunblock=1-global.stunblock;kliknieto=1}
     }
 
@@ -5175,9 +5073,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 210, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+210,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+210, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left){global.topdeath=1-global.topdeath;kliknieto=1}
     }
 
@@ -5201,9 +5097,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 90, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+90,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+90, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             kliknieto=1;
             if string_copy(global.lightobject,59,1) = '0' {
@@ -5223,9 +5117,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 120, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+120,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+120, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             kliknieto=1;
             if string_copy(global.lightobject,60,1) = '0' {
@@ -5245,9 +5137,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 150, 190, 10)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+150,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+150, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             kliknieto=1;
             if string_copy(global.lightobject,61,1) = '0' {
@@ -5267,9 +5157,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 180, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+180,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+180, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             kliknieto=1;
             if string_copy(global.lightobject,62,1) = '0' {
@@ -5289,9 +5177,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 210, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+210,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+210, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             kliknieto=1;
             if string_copy(global.lightobject,63,1) = '0' {
@@ -5311,9 +5197,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 240, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+240,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+240, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             kliknieto=1;
             if string_copy(global.lightobject,64,1) = '0' {
@@ -5333,9 +5217,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 270, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+270,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+270, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             kliknieto=1;
             if string_copy(global.lightobject,65,1) = '0' {
@@ -5355,9 +5237,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 300, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+300,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+300, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             kliknieto=1;
             if string_copy(global.lightobject,66,1) = '0' {
@@ -5377,9 +5257,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 330, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+330,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+330, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             kliknieto=1;
             if string_copy(global.lightobject,67,1) = '0' {
@@ -5399,9 +5277,7 @@ if czywybieranieback=1000
     draw_set_color(c_white)
     if ed_hit(40, 360, 190, 20)&& kliknieto=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+360,1.4,0.8,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+40, view_yview[0]+360, 1.4, 0.8, 0.2);
         if mouse_check_button(mb_left) {
             kliknieto=1;
             if string_copy(global.lightobject,68,1) = '0' {
@@ -5418,18 +5294,14 @@ if czywybieranieback=1000
     //退出（照明额外设置）
     if ed_hit(561, 427, 60, 30)&& o_edmain.additionalpage>=100
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+561,view_yview[0]+427,0.5,1.3,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+561, view_yview[0]+427, 0.5, 1.3, 0.2);
         if mouse_check_button(mb_left) {o_edmain.additionalpage=1;wahaha = 1;kliknieto=1;}
     }
 
     //退出（主页面）
     if ed_hit(561, 427, 60, 30)&& o_edmain.additionalpage<100 && wahaha=0
     {
-        draw_set_blend_mode(bm_add)
-        draw_sprite_ext(s_prefsanim,0,view_xview[0]+561,view_yview[0]+427,0.5,1.3,0,c_white,0.2)
-        draw_set_blend_mode(bm_normal)
+        draw_prefs_highlight(view_xview[0]+561, view_yview[0]+427, 0.5, 1.3, 0.2);
         quitadditional=1}else
     {quitadditional=0}
     if mouse_check_button(mb_left) && quitadditional=1
