@@ -428,10 +428,26 @@ if costawia3 <> 42 && change_alpha = 1{
 
 // 可配置编辑器画布滚动键（Step 检测）- 支持双绑定
 if wlaczonaopcja == 0 && !keyboard_check(global.key_select){
-    if (keyboard_check(global.key_ed_left) || keyboard_check(global.key_ed_left_2)) && scroolx>view_wview[0]/2 {scroolx-=32}
-    if (keyboard_check(global.key_ed_right) || keyboard_check(global.key_ed_right_2)) && scroolx<room_width-view_wview[0]/2 {scroolx+=32}
-    if (keyboard_check(global.key_ed_up) || keyboard_check(global.key_ed_up_2)) && scrooly>view_hview[0]/2 && !keyboard_check(vk_shift) {scrooly-=32}
-    if (keyboard_check(global.key_ed_down) || keyboard_check(global.key_ed_down_2)) && scrooly<room_height-view_hview[0]/2 && !keyboard_check(vk_shift) {scrooly+=32}
+    if keyboard_check(global.key_ed_left) && keyboard_check(global.key_ed_left_2){
+        if scroolx > view_wview[0] / 2 {scroolx -= 64}
+    } else if (keyboard_check(global.key_ed_left) || keyboard_check(global.key_ed_left_2)){
+        if scroolx > view_wview[0] / 2 {scroolx -= 32}
+    }
+    if keyboard_check(global.key_ed_right) && keyboard_check(global.key_ed_right_2){
+        if scroolx < room_width - view_wview[0] / 2 {scroolx += 64}
+    } else if (keyboard_check(global.key_ed_right) || keyboard_check(global.key_ed_right_2)){
+        if scroolx < room_width - view_wview[0] / 2 {scroolx += 32}
+    }
+    if keyboard_check(global.key_ed_up) && keyboard_check(global.key_ed_up_2){
+        if scrooly > view_hview[0] / 2 && !keyboard_check(vk_shift) {scrooly -= 64}
+    } else if (keyboard_check(global.key_ed_up) || keyboard_check(global.key_ed_up_2)){
+        if scrooly > view_hview[0] / 2 && !keyboard_check(vk_shift) {scrooly -= 32}
+    }
+    if keyboard_check(global.key_ed_down) && keyboard_check(global.key_ed_down_2){
+        if scrooly < room_height - view_hview[0] / 2 && !keyboard_check(vk_shift) {scrooly += 64}
+    } else if (keyboard_check(global.key_ed_down) || keyboard_check(global.key_ed_down_2)){
+        if scrooly < room_height - view_hview[0] / 2 && !keyboard_check(vk_shift) {scrooly += 32}
+    }
 }
 
 // 编辑器：PgUp/PgDn 跳转到上/下一个 Check Point（相机居中到该 CP）
