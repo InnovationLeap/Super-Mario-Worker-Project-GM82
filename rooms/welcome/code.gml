@@ -226,3 +226,6 @@ fw_draw_set_line_spacing(4)
 fw_set_render_scale(1+global.font_render)
 
 //Fox Writing init end
+
+// Persistent debug message manager
+instance_create(0, 0, o_debugmsg)

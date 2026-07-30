@@ -13,6 +13,7 @@
 	|object25
 	|object26
 	|o_readsmwpfile
+	|o_debugmsg
 +o_edit
 	|o_acc
 	|o_edblocks
