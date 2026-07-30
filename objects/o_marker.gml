@@ -555,6 +555,9 @@ if global.rodzajmaria = 6 && skusil = 0 {
         raccoon_fly_allowed = 1
     }
 
+    // Reset first-flight flag when landing, so next airborne flight press resets timer
+    if _on_ground { raccoon_flew = 0 }
+
     // Flight time extension: land while running with full P-Meter
     // P-Meter run timer fills up → reset flight timer, recharging full flight duration
     if raccoon_fly_allowed = 1 {
