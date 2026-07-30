@@ -3384,7 +3384,7 @@ if wlaczonaopcja=2
         }
         draw_sprite(s_mfcmask,global.spike_type,view_xview[0]+206+13,view_yview[0]+172+82)
         if global.shell_type<10{draw_sprite(s_shellmask,global.shell_type,view_xview[0]+206+13,view_yview[0]+174+144)}
-        else{draw_sprite(s_spinyshell,global.shell_type-10,view_xview[0]+206+13,view_yview[0]+174+144)}
+        else{draw_sprite(s_spinyshell,global.shell_type-10,view_xview[0]+206+13+16,view_yview[0]+174+144+16)}
     }
     }
 
