@@ -107,6 +107,26 @@ global.key_f9=ini_read_real('KeyConfig','f9',vk_f9)
 global.key_f10=ini_read_real('KeyConfig','f10',vk_f10)
 global.key_f11=ini_read_real('KeyConfig','f11',vk_f11)
 
+// God Mode 数字键（默认 1~0，可在设置第二页自定义）
+global.godkey_small=ini_read_real('KeyConfig','god_small',ord('1'))
+global.godkey_big=ini_read_real('KeyConfig','god_big',ord('2'))
+global.godkey_fire=ini_read_real('KeyConfig','god_fire',ord('3'))
+global.godkey_fruit=ini_read_real('KeyConfig','god_fruit',ord('4'))
+global.godkey_beet=ini_read_real('KeyConfig','god_beet',ord('5'))
+global.godkey_raccoon=ini_read_real('KeyConfig','god_raccoon',189)
+global.godkey_star=ini_read_real('KeyConfig','god_star',ord('6'))
+global.godkey_invincible=ini_read_real('KeyConfig','god_invincible',ord('7'))
+global.godkey_fly=ini_read_real('KeyConfig','god_fly',ord('8'))
+global.godkey_life=ini_read_real('KeyConfig','god_life',ord('9'))
+global.godkey_scroll=ini_read_real('KeyConfig','god_scroll',ord('0'))
+global.godkey_cp_prev=ini_read_real('KeyConfig','god_cp_prev',vk_pageup)
+global.godkey_cp_next=ini_read_real('KeyConfig','god_cp_next',vk_pagedown)
+global.godkey_bowser=ini_read_real('KeyConfig','god_bowser',vk_backspace)
+
+// 编辑器：PgUp/PgDn 跳转到上/下一个 Check Point（默认 PgUp/PgDn）
+global.edkey_cp_prev=ini_read_real('KeyConfig','ed_cp_prev',vk_pageup)
+global.edkey_cp_next=ini_read_real('KeyConfig','ed_cp_next',vk_pagedown)
+
 // 编辑器保存/读取（Ctrl 组合键的字母部分）
 global.key_ed_save=ini_read_real('KeyConfig','ed_save',ord('S'))
 global.key_ed_load=ini_read_real('KeyConfig','ed_load',ord('L'))

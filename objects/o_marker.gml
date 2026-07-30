@@ -496,7 +496,7 @@ if global.rodzajmaria=6 && raccoon_fly_allowed=1 && grawitacja>0 && keyboard_che
 // Flight timer: count up while flying, end flight when time expires or landing
 if raccoon_flew=1 {
     raccoon_fly_timer+=1
-    if raccoon_fly_timer>raccoon_fly_time || sekwencja=0 {
+    if raccoon_fly_timer>raccoon_fly_time {
         raccoon_flew=0
         raccoon_fly_timer=0
         raccoon_fly_allowed=0
@@ -556,10 +556,11 @@ if global.rodzajmaria = 6 && skusil = 0 {
     }
 
     // Flight time extension: land while running with full P-Meter
+    // P-Meter run timer fills up → reset flight timer, recharging full flight duration
     if raccoon_fly_allowed = 1 {
         if abs(szybkosc) > 6 && _on_ground {
             p_meter_run_timer += 1
-            if !raccoon_flew {
+            if p_meter_run_timer >= p_meter_run_time {
                 raccoon_fly_timer = 0
             }
         }
@@ -810,12 +811,12 @@ if keyboard_check(global.sterowaniedol) { y += 8; }
 //god模式中的CP跳转
 if global.godmode=1 {
 
-if keyboard_check_released(vk_pageup){
+if keyboard_check_released(global.godkey_cp_prev){
 global.checkpointa=global.checkpoint+1
 o_checkpoint.kk=1
 }
 
-if keyboard_check_released(vk_pagedown){
+if keyboard_check_released(global.godkey_cp_next){
 global.checkpointa=global.checkpoint-1
 o_checkpoint.kk=1
 }
@@ -964,19 +965,20 @@ if global.skin = 1 {
 //godmode
 if global.rodzajmaria<>5 && maria<>global.rodzajmaria {maria=global.rodzajmaria}
 if global.godmode=1{
-if keyboard_check(ord('1')){global.rodzajmaria=0;gwiazdka=0;shield=0} //小个子
-if keyboard_check(ord('2')){if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 2 };global.rodzajmaria=1;gwiazdka=0;shield=0} //大个子
-if keyboard_check(ord('3')){if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 2 };global.rodzajmaria=2;gwiazdka=0;shield=0} //花身
-if keyboard_check(ord('4')){if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 2 };global.rodzajmaria=4;gwiazdka=0;shield=0} //绿果（为啥甜菜在绿果后面……）
-if keyboard_check(ord('5')){if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 2 };global.rodzajmaria=3;gwiazdka=0;shield=0} //甜菜
-if keyboard_check(ord('6')){if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 2 };global.rodzajmaria=6;gwiazdka=0;shield=0}
-if keyboard_check(ord('7')){global.rodzajmaria=maria
+if keyboard_check(global.godkey_small){global.rodzajmaria=0;gwiazdka=0;shield=0} //小个子
+if keyboard_check(global.godkey_big){if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 2 };global.rodzajmaria=1;gwiazdka=0;shield=0} //大个子
+if keyboard_check(global.godkey_fire){if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 2 };global.rodzajmaria=2;gwiazdka=0;shield=0} //花身
+if keyboard_check(global.godkey_fruit){if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 2 };global.rodzajmaria=4;gwiazdka=0;shield=0} //绿果（为啥甜菜在绿果后面……）
+if keyboard_check(global.godkey_beet){if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 2 };global.rodzajmaria=3;gwiazdka=0;shield=0} //甜菜
+if keyboard_check(global.godkey_raccoon){if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 2 };global.rodzajmaria=6;gwiazdka=0;shield=0}
+if keyboard_check(global.godkey_star){global.rodzajmaria=maria;gwiazdka=500;animator2.visible=1}
+if keyboard_check(global.godkey_invincible){global.rodzajmaria=maria
 gwiazdka=500
     animator2.visible=1
  }
-if keyboard_check(ord('7')){global.rodzajmaria=maria;shield=10000000;gwiazdka=0}
-if keyboard_check_pressed(ord('8')){if global.rodzajmaria<>5{global.rodzajmaria=5} else{global.rodzajmaria=maria}}
-if keyboard_check_pressed(ord('9')){
+if keyboard_check(global.godkey_invincible){global.rodzajmaria=maria;shield=10000000;gwiazdka=0}
+if keyboard_check_pressed(global.godkey_fly){if global.rodzajmaria<>5{global.rodzajmaria=5} else{global.rodzajmaria=maria}}
+if keyboard_check_pressed(global.godkey_life){
     if global.zycia < 99{
     fifi=instance_create(x,y-32,o_punkciornik3)
     fifi.image_index=6
@@ -986,8 +988,8 @@ if keyboard_check_pressed(ord('9')){
     }
     //lobal.zycia+=1
     }}
-if keyboard_check_pressed(ord('0')){ global.scrollPaused *= -1 } //按0切换滚屏开关
-if global.scrollPaused = 1 && keyboard_check_pressed(vk_backspace) {global.aktywowanykuppa=0}
+if keyboard_check_pressed(global.godkey_scroll){ global.scrollPaused *= -1 } //按0切换滚屏开关
+if global.scrollPaused = 1 && keyboard_check_pressed(global.godkey_bowser) {global.aktywowanykuppa=0}
 }
 
 // MALY MARIO：小马里奥
@@ -1271,9 +1273,9 @@ if kierunek=1 && grawitacja<>0 && raccoon_fall=0 && raccoon_fly_allowed=0 && str
 if kierunek=0 && raccoon_fall=1 && strzelil=0 {animator.sprite_index=global.raccoon_character_fall; animator.image_index+=0.2; animator.image_xscale=1;animkind=1}
 if kierunek=1 && raccoon_fall=1 && strzelil=0 {animator.sprite_index=global.raccoon_character_fall; animator.image_index+=0.2; animator.image_xscale=-1;animkind=1}
 
-// Fly animation (when actively flying upwards)
-if kierunek=0 && raccoon_fly_allowed=1 && grawitacja<0 && strzelil=0 {animator.sprite_index=global.raccoon_character_fly; animator.image_index+=0.25; animator.image_xscale=1;animkind=1}
-if kierunek=1 && raccoon_fly_allowed=1 && grawitacja<0 && strzelil=0 {animator.sprite_index=global.raccoon_character_fly; animator.image_index+=0.25; animator.image_xscale=-1;animkind=1}
+// Fly animation (ascending or descending, matches SMWP2 behavior)
+if kierunek=0 && raccoon_fly_allowed=1 && grawitacja<>0 && strzelil=0 {animator.sprite_index=global.raccoon_character_fly; animator.image_index+=0.25; animator.image_xscale=1;animkind=1}
+if kierunek=1 && raccoon_fly_allowed=1 && grawitacja<>0 && strzelil=0 {animator.sprite_index=global.raccoon_character_fly; animator.image_index+=0.25; animator.image_xscale=-1;animkind=1}
 
 // Crouch
 if schylanie=1 && kierunek=0 {animator.sprite_index=global.raccoon_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
@@ -2605,6 +2607,8 @@ if warning2=1{
     if global.testmode=1{
         global.godmode=0;
         global.testout=1;
+        if global.sample=1 {sound_stop(snd_pmeter); sound_stop(snd_spin)}
+        p_meter_sfx_playing=0
         file_text_close(global.toload);
         file_delete(global.toloader)
         room_goto(editor_level)
@@ -2708,6 +2712,8 @@ if warning2=1{
     if global.testmode=1{
         global.godmode=0;
         global.testout=1;
+        if global.sample=1 {sound_stop(snd_pmeter); sound_stop(snd_spin)}
+        p_meter_sfx_playing=0
         file_text_close(global.toload);
         file_delete(global.toloader)
         room_goto(editor_level)

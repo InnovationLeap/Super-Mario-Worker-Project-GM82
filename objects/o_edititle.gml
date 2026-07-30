@@ -37,7 +37,7 @@ pufel3=0
 keyboard_page=0
 
 //键位设置
-for(i=0;i<10;i+=1){setkey[ord('i')]=string(i)}
+for(i=0;i<10;i+=1){setkey[ord('0')+i]=string(i)}
 for(i=0;i<26;i+=1){setkey[ord('A')+i]=chr(ord('A')+i)}
 setkey[vk_left]='left'
 setkey[vk_right]='right'
@@ -867,8 +867,302 @@ if globaloption>0
             keydetect=0
         }
 
-        //========== PAGE 1: 基础编辑键 + 保存/读取 ==========
+        //========== PAGE 1: God Mode 数字键 (1~0) ==========
         if keyboard_page=1{
+            draw_set_color(c_white)
+            draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- God Mode Keys ---'))
+            draw_set_color(c_white)
+            // 1: Small Mario
+            draw_text(view_xview[0]+40,view_yview[0]+125,string_upper('Small Mario'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+125,string_upper(keyshow50))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 115, 190, 20)&& kliknieto=0
+            {
+                draw_set_blend_mode(bm_add)
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+115,1.4,0.8,0,c_white,0.2)
+                draw_set_blend_mode(bm_normal)
+                if mouse_check_button(mb_left){
+                    keydetect=50;keydetect2=1
+                }
+            }
+            if keydetect=50{keyshow50='press a key...'}else{keyshow50=setkey[global.godkey_small]}
+            if keydetect=50 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.godkey_small=keyboard_lastkey
+                ini_write_real('KeyConfig','god_small',global.godkey_small)
+                keydetect=0
+            }
+            // 2: Big Mario
+            draw_text(view_xview[0]+40,view_yview[0]+150,string_upper('Big Mario'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+150,string_upper(keyshow51))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 140, 190, 20)&& kliknieto=0
+            {
+                draw_set_blend_mode(bm_add)
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+140,1.4,0.8,0,c_white,0.2)
+                draw_set_blend_mode(bm_normal)
+                if mouse_check_button(mb_left){
+                    keydetect=51;keydetect2=1
+                }
+            }
+            if keydetect=51{keyshow51='press a key...'}else{keyshow51=setkey[global.godkey_big]}
+            if keydetect=51 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.godkey_big=keyboard_lastkey
+                ini_write_real('KeyConfig','god_big',global.godkey_big)
+                keydetect=0
+            }
+            // 3: Fire Flower
+            draw_text(view_xview[0]+40,view_yview[0]+175,string_upper('Fire Flower'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+175,string_upper(keyshow52))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 165, 190, 20)&& kliknieto=0
+            {
+                draw_set_blend_mode(bm_add)
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+165,1.4,0.8,0,c_white,0.2)
+                draw_set_blend_mode(bm_normal)
+                if mouse_check_button(mb_left){
+                    keydetect=52;keydetect2=1
+                }
+            }
+            if keydetect=52{keyshow52='press a key...'}else{keyshow52=setkey[global.godkey_fire]}
+            if keydetect=52 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.godkey_fire=keyboard_lastkey
+                ini_write_real('KeyConfig','god_fire',global.godkey_fire)
+                keydetect=0
+            }
+            // 4: Green Lui
+            draw_text(view_xview[0]+40,view_yview[0]+200,string_upper('Green Lui'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+200,string_upper(keyshow53))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 190, 190, 20)&& kliknieto=0
+            {
+                draw_set_blend_mode(bm_add)
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+190,1.4,0.8,0,c_white,0.2)
+                draw_set_blend_mode(bm_normal)
+                if mouse_check_button(mb_left){
+                    keydetect=53;keydetect2=1
+                }
+            }
+            if keydetect=53{keyshow53='press a key...'}else{keyshow53=setkey[global.godkey_fruit]}
+            if keydetect=53 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.godkey_fruit=keyboard_lastkey
+                ini_write_real('KeyConfig','god_fruit',global.godkey_fruit)
+                keydetect=0
+            }
+            // 5: Beet
+            draw_text(view_xview[0]+40,view_yview[0]+225,string_upper('Beet'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+225,string_upper(keyshow54))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 215, 190, 20)&& kliknieto=0
+            {
+                draw_set_blend_mode(bm_add)
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+215,1.4,0.8,0,c_white,0.2)
+                draw_set_blend_mode(bm_normal)
+                if mouse_check_button(mb_left){
+                    keydetect=54;keydetect2=1
+                }
+            }
+            if keydetect=54{keyshow54='press a key...'}else{keyshow54=setkey[global.godkey_beet]}
+            if keydetect=54 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.godkey_beet=keyboard_lastkey
+                ini_write_real('KeyConfig','god_beet',global.godkey_beet)
+                keydetect=0
+            }
+            // 6: Super Star
+            draw_text(view_xview[0]+40,view_yview[0]+250,string_upper('Super Star'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+250,string_upper(keyshow55))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 240, 190, 20)&& kliknieto=0
+            {
+                draw_set_blend_mode(bm_add)
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+240,1.4,0.8,0,c_white,0.2)
+                draw_set_blend_mode(bm_normal)
+                if mouse_check_button(mb_left){
+                    keydetect=55;keydetect2=1
+                }
+            }
+            if keydetect=55{keyshow55='press a key...'}else{keyshow55=setkey[global.godkey_star]}
+            if keydetect=55 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.godkey_star=keyboard_lastkey
+                ini_write_real('KeyConfig','god_star',global.godkey_star)
+                keydetect=0
+            }
+            // 7: Invincible
+            draw_text(view_xview[0]+40,view_yview[0]+275,string_upper('Invincible'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+275,string_upper(keyshow56))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 265, 190, 20)&& kliknieto=0
+            {
+                draw_set_blend_mode(bm_add)
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+265,1.4,0.8,0,c_white,0.2)
+                draw_set_blend_mode(bm_normal)
+                if mouse_check_button(mb_left){
+                    keydetect=56;keydetect2=1
+                }
+            }
+            if keydetect=56{keyshow56='press a key...'}else{keyshow56=setkey[global.godkey_invincible]}
+            if keydetect=56 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.godkey_invincible=keyboard_lastkey
+                ini_write_real('KeyConfig','god_invincible',global.godkey_invincible)
+                keydetect=0
+            }
+            // 8: Toggle Fly
+            draw_text(view_xview[0]+40,view_yview[0]+300,string_upper('Toggle Fly'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+300,string_upper(keyshow57))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 290, 190, 20)&& kliknieto=0
+            {
+                draw_set_blend_mode(bm_add)
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+290,1.4,0.8,0,c_white,0.2)
+                draw_set_blend_mode(bm_normal)
+                if mouse_check_button(mb_left){
+                    keydetect=57;keydetect2=1
+                }
+            }
+            if keydetect=57{keyshow57='press a key...'}else{keyshow57=setkey[global.godkey_fly]}
+            if keydetect=57 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.godkey_fly=keyboard_lastkey
+                ini_write_real('KeyConfig','god_fly',global.godkey_fly)
+                keydetect=0
+            }
+            // 9: Extra Life
+            draw_text(view_xview[0]+40,view_yview[0]+325,string_upper('Extra Life'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+325,string_upper(keyshow58))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 315, 190, 20)&& kliknieto=0
+            {
+                draw_set_blend_mode(bm_add)
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+315,1.4,0.8,0,c_white,0.2)
+                draw_set_blend_mode(bm_normal)
+                if mouse_check_button(mb_left){
+                    keydetect=58;keydetect2=1
+                }
+            }
+            if keydetect=58{keyshow58='press a key...'}else{keyshow58=setkey[global.godkey_life]}
+            if keydetect=58 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.godkey_life=keyboard_lastkey
+                ini_write_real('KeyConfig','god_life',global.godkey_life)
+                keydetect=0
+            }
+            // 0: Toggle Scroll
+            draw_text(view_xview[0]+40,view_yview[0]+350,string_upper('Toggle Scroll'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+350,string_upper(keyshow59))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 340, 190, 20)&& kliknieto=0
+            {
+                draw_set_blend_mode(bm_add)
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+340,1.4,0.8,0,c_white,0.2)
+                draw_set_blend_mode(bm_normal)
+                if mouse_check_button(mb_left){
+                    keydetect=59;keydetect2=1
+                }
+            }
+            if keydetect=59{keyshow59='press a key...'}else{keyshow59=setkey[global.godkey_scroll]}
+            if keydetect=59 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.godkey_scroll=keyboard_lastkey
+                ini_write_real('KeyConfig','god_scroll',global.godkey_scroll)
+                keydetect=0
+            }
+            // Raccoon (-)
+            draw_text(view_xview[0]+40,view_yview[0]+375,string_upper('Raccoon'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+375,string_upper(keyshow65))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 365, 190, 20)&& kliknieto=0
+            {
+                draw_set_blend_mode(bm_add)
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+365,1.4,0.8,0,c_white,0.2)
+                draw_set_blend_mode(bm_normal)
+                if mouse_check_button(mb_left){
+                    keydetect=65;keydetect2=1
+                }
+            }
+            if keydetect=65{keyshow65='press a key...'}else{keyshow65=setkey[global.godkey_raccoon]}
+            if keydetect=65 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.godkey_raccoon=keyboard_lastkey
+                ini_write_real('KeyConfig','god_raccoon',global.godkey_raccoon)
+                keydetect=0
+            }
+        }
+
+        //========== PAGE 2: God Mode 辅助键 (PgUp/PgDn/Backspace) ==========
+        if keyboard_page=2{
+            draw_set_color(c_white)
+            draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- God Mode Extra Keys ---'))
+            draw_set_color(c_white)
+            // 1: Check Point Prev (PgUp)
+            draw_text(view_xview[0]+40,view_yview[0]+125,string_upper('CP Prev'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+125,string_upper(keyshow60))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 115, 190, 20)&& kliknieto=0
+            {
+                draw_set_blend_mode(bm_add)
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+115,1.4,0.8,0,c_white,0.2)
+                draw_set_blend_mode(bm_normal)
+                if mouse_check_button(mb_left){
+                    keydetect=60;keydetect2=1
+                }
+            }
+            if keydetect=60{keyshow60='press a key...'}else{keyshow60=setkey[global.godkey_cp_prev]}
+            if keydetect=60 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.godkey_cp_prev=keyboard_lastkey
+                ini_write_real('KeyConfig','god_cp_prev',global.godkey_cp_prev)
+                keydetect=0
+            }
+            // 2: Check Point Next (PgDn)
+            draw_text(view_xview[0]+40,view_yview[0]+155,string_upper('CP Next'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+155,string_upper(keyshow61))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 145, 190, 20)&& kliknieto=0
+            {
+                draw_set_blend_mode(bm_add)
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+145,1.4,0.8,0,c_white,0.2)
+                draw_set_blend_mode(bm_normal)
+                if mouse_check_button(mb_left){
+                    keydetect=61;keydetect2=1
+                }
+            }
+            if keydetect=61{keyshow61='press a key...'}else{keyshow61=setkey[global.godkey_cp_next]}
+            if keydetect=61 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.godkey_cp_next=keyboard_lastkey
+                ini_write_real('KeyConfig','god_cp_next',global.godkey_cp_next)
+                keydetect=0
+            }
+            // 3: Cancel Scroll (Backspace)
+            draw_text(view_xview[0]+40,view_yview[0]+185,string_upper('Cancel Scroll'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+185,string_upper(keyshow62))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 175, 190, 20)&& kliknieto=0
+            {
+                draw_set_blend_mode(bm_add)
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+175,1.4,0.8,0,c_white,0.2)
+                draw_set_blend_mode(bm_normal)
+                if mouse_check_button(mb_left){
+                    keydetect=62;keydetect2=1
+                }
+            }
+            if keydetect=62{keyshow62='press a key...'}else{keyshow62=setkey[global.godkey_bowser]}
+            if keydetect=62 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.godkey_bowser=keyboard_lastkey
+                ini_write_real('KeyConfig','god_bowser',global.godkey_bowser)
+                keydetect=0
+            }
+        }
+
+        //========== PAGE 3: 基础编辑键 + 保存/读取 ==========
+        if keyboard_page=3{
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- Basic Editor Keys ---'))
 
@@ -954,8 +1248,8 @@ if globaloption>0
             }
         }
 
-        //========== PAGE 2: 编辑器画布滚动 (8键) ==========
-        if keyboard_page=2{
+        //========== PAGE 4: 编辑器画布滚动 (8键) ==========
+        if keyboard_page=4{
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- ED SCROLL ---'))
 
@@ -1062,10 +1356,48 @@ if globaloption>0
                 draw_set_blend_mode(bm_normal);
                 if mouse_check_button(mb_left){keydetect=36;keydetect2=1}
             }
+
+            // 63: Ed CP Prev (jump to previous checkpoint)
+            draw_set_color(c_white)
+            draw_text(view_xview[0]+40,view_yview[0]+325,string_upper('Ed CP Prev Jump'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+325,string_upper(keyshow63))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 315, 190, 20)&& kliknieto=0{
+                draw_set_blend_mode(bm_add);
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+315,1.4,0.8,0,c_white,0.2);
+                draw_set_blend_mode(bm_normal);
+                if mouse_check_button(mb_left){keydetect=63;keydetect2=1}
+            }
+            if keydetect=63{keyshow63='press a key...'}else{keyshow63=setkey[global.edkey_cp_prev]}
+            if keydetect=63 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.edkey_cp_prev=keyboard_lastkey
+                ini_write_real('KeyConfig','ed_cp_prev',global.edkey_cp_prev)
+                keydetect=0
+            }
+
+            // 64: Ed CP Next (jump to next checkpoint)
+            draw_set_color(c_white)
+            draw_text(view_xview[0]+40,view_yview[0]+350,string_upper('Ed CP Next Jump'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+350,string_upper(keyshow64))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 340, 190, 20)&& kliknieto=0{
+                draw_set_blend_mode(bm_add);
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+340,1.4,0.8,0,c_white,0.2);
+                draw_set_blend_mode(bm_normal);
+                if mouse_check_button(mb_left){keydetect=64;keydetect2=1}
+            }
+            if keydetect=64{keyshow64='press a key...'}else{keyshow64=setkey[global.edkey_cp_next]}
+            if keydetect=64 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.edkey_cp_next=keyboard_lastkey
+                ini_write_real('KeyConfig','ed_cp_next',global.edkey_cp_next)
+                keydetect=0
+            }
         }
 
-        //========== PAGE 3: 缩放 + 水位 + 功能键 ==========
-        if keyboard_page=3{
+        //========== PAGE 5: 缩放 + 水位 + 功能键 ==========
+        if keyboard_page=5{
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- Zoom ---'))
 
@@ -1127,8 +1459,8 @@ if globaloption>0
 
         }
 
-        //========== PAGE 4: F 键 (F1-F12) ==========
-        if keyboard_page=4{
+        //========== PAGE 6: F 键 (F1-F12) ==========
+        if keyboard_page=6{
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- Tool Keys ---'))
 
@@ -1289,8 +1621,8 @@ if globaloption>0
             }
         }
 
-        //========== PAGE 5: 精确移动键 ==========
-        if keyboard_page=5{
+        //========== PAGE 7: 精确移动键 ==========
+        if keyboard_page=7{
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- Accurate Move ---'))
 
@@ -1405,26 +1737,26 @@ if globaloption>0
         //========== 页面导航按钮 ==========
         // 页面指示器
         draw_set_color(c_yellow)
-        draw_text(view_xview[0]+40,view_yview[0]+424,string_upper('Page ')+string(keyboard_page+1)+'/6')
+        draw_text(view_xview[0]+40,view_yview[0]+410,string_upper('Page ')+string(keyboard_page+1)+'/8')
         draw_set_color(c_white)
         // 上一页
         if keyboard_page>0 && keydetect=0{
             draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+444,string_upper('< Prev Page'))
-            if ed_hit(40, 434, 160, 20)&& kliknieto=0{
+            draw_text(view_xview[0]+40,view_yview[0]+428,string_upper('< Prev Page'))
+            if ed_hit(40, 418, 160, 20)&& kliknieto=0{
                 draw_set_blend_mode(bm_add);
-                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+434,1.4,0.8,0,c_white,0.2);
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+418,1.4,0.8,0,c_white,0.2);
                 draw_set_blend_mode(bm_normal);
                 if mouse_check_button(mb_left){keyboard_page-=1;keydetect=0;kliknieto=1}
             }
         }
         // 下一页
-        if keyboard_page<5 && keydetect=0{
+        if keyboard_page<7 && keydetect=0{
             draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+462,string_upper('< Next Page'))
-            if ed_hit(40, 452, 160, 20)&& kliknieto=0{
+            draw_text(view_xview[0]+40,view_yview[0]+446,string_upper('< Next Page'))
+            if ed_hit(40, 436, 160, 20)&& kliknieto=0{
                 draw_set_blend_mode(bm_add);
-                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+452,1.4,0.8,0,c_white,0.2);
+                draw_sprite_ext(s_prefsanim,0,view_xview[0]+40,view_yview[0]+436,1.4,0.8,0,c_white,0.2);
                 draw_set_blend_mode(bm_normal);
                 if mouse_check_button(mb_left){keyboard_page+=1;keydetect=0;kliknieto=1}
             }

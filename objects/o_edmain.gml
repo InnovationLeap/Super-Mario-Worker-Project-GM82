@@ -356,6 +356,37 @@ if wlaczony != 1 && wlaczonaopcja == 0 && !keyboard_check(global.key_select){
     if (keyboard_check(global.key_ed_up) || keyboard_check(global.key_ed_up_2)) && scrooly>view_hview[0]/2 && !keyboard_check(vk_shift) {scrooly-=32}
     if (keyboard_check(global.key_ed_down) || keyboard_check(global.key_ed_down_2)) && scrooly<room_height-view_hview[0]/2 && !keyboard_check(vk_shift) {scrooly+=32}
 }
+
+// 编辑器：PgUp/PgDn 跳转到上/下一个 Check Point（相机居中到该 CP）
+if wlaczony != 1 && wlaczonaopcja == 0 {
+    if keyboard_check_pressed(global.edkey_cp_prev) || keyboard_check_pressed(global.edkey_cp_next) {
+        var _camx, _camy, _bestpos, _bestx, _besty, _pos, _found;
+        _camx = scroolx
+        _camy = scrooly
+        _bestpos = -1
+        _bestx = _camx
+        _besty = _camy
+        _found = 0
+        with (o_checkpoint) {
+            _pos = y * 100000 + x
+            if (keyboard_check_pressed(global.edkey_cp_prev)) {
+                // 找位于相机中心"之前"且最接近的那个
+                if (_pos < _camy * 100000 + _camx) {
+                    if (_bestpos < 0 || _pos > _bestpos) { _bestpos = _pos; _bestx = x; _besty = y; _found = 1 }
+                }
+            } else {
+                // 找位于相机中心"之后"且最接近的那个
+                if (_pos > _camy * 100000 + _camx) {
+                    if (_bestpos < 0 || _pos < _bestpos) { _bestpos = _pos; _bestx = x; _besty = y; _found = 1 }
+                }
+            }
+        }
+        if (_found) {
+            scroolx = _bestx + 16
+            scrooly = _besty + 32
+        }
+    }
+}
 #define Keyboard_37
 /*"/*'/**//* YYD ACTION
 lib_id=1
