@@ -63,6 +63,7 @@ if (variable_global_exists("debug_msg_list")) {
         }
         _vx = view_xview[0] + 8;
         _vy = view_yview[0] + _my;
+        draw_set_font(testfont)
         draw_set_alpha(_alpha);
         draw_set_color(c_black);
         draw_text(_vx + 1, _vy + 1, _msg);
