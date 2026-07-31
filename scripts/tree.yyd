@@ -43,6 +43,8 @@
 	|gz_compress
 	|gz_selftest
 +Other
+	|ed_autopair_place
+	|ed_autopair_data
 	|corpse_anim
 	|draw_prefs_highlight
 	|ed_keyrow

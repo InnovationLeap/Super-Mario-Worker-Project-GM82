@@ -4,7 +4,7 @@ if (variable_global_exists("debug_msg_list") == false) {
     global.debug_msg_list = ds_list_create();
 }
 ds_list_add(global.debug_msg_list, "180|" + argument0);
-if debug_mode || global.ed_dbg == 1 // 临时插桩：ed_dbg 开关（测完恢复为 if debug_mode）
+if debug_mode
 {
     var _f; _f = file_text_open_append(working_directory + "\debug_log.txt")
     file_text_write_string(_f, argument0)

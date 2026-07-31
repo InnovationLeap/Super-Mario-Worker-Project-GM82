@@ -1143,3 +1143,8 @@ place_meeting_region
 ed_region_commit
 ed_region_paste
 corpse_anim
+
+ed_autopair_data
+
+ed_autopair_place
+
