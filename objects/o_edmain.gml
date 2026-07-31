@@ -6,6 +6,7 @@ applies_to=self
 */
 
 fw_release_cache(); //信息转字体缓存清理
+global.ed_dbg = 1 // 临时插桩：选区拖拽调试日志（测完删除）
 blocks_palette_data();
 background_palette_data();
 bgm_palette_data();
@@ -157,6 +158,36 @@ set_light_icon_alpha = 0.5;
 zoom_ratio = 1;
 ratio_level = 0;
 last_ratio_level = ratio_level;
+
+// 选区模式状态
+global.ed_region_active = false
+global.ed_region_state = 0 // 0=idle, 1=selecting, 2=confirmed, 3=moving
+global.ed_region_type = 1 // 1=blocks, 2=buddies, 3=scenery, 4=marks, 5=bonus, 0=all
+global.ed_region_mode = 0 // 0=any, 1=full, 2=half
+global.ed_region_sx = 0
+global.ed_region_sy = 0
+global.ed_region_ex = 0
+global.ed_region_ey = 0
+global.ed_region_mx = 0
+global.ed_region_my = 0
+global.ed_region_orig_x = 0
+global.ed_region_orig_y = 0
+global.ed_region_blk_orig = -1
+global.ed_region_blk_keys = -1
+global.ed_region_blk_keys2 = -1
+global.ed_region_scratch = -1
+global.ed_region_last_dcol = 0
+global.ed_region_last_drow = 0
+global.ed_region_list = -1
+global.ed_region_blk = -1
+global.ed_region_orig_mask = 0
+global.ed_region_block_panel = false
+global.ed_region_saved_costawia = 0
+global.ed_region_saved_costawia2 = 0
+global.ed_region_saved_costawia3 = 0
+global.ed_region_saved_costawia4 = 0
+global.ed_region_saved_costawia5 = 0
+
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -328,6 +359,157 @@ if set_scenery{
     }
     set_scenery = 0;
 }
+
+// 选区模式：进入/退出
+if keyboard_check_pressed(global.key_region_select) {
+    if o_edmain.wlaczonaopcja == 0 {
+        if !global.ed_region_active {
+            global.ed_region_active = true
+            global.ed_region_block_panel = true
+            global.ed_region_state = 0
+            global.ed_region_saved_costawia = o_edmain.costawia
+            global.ed_region_saved_costawia2 = o_edmain.costawia2
+            global.ed_region_saved_costawia3 = o_edmain.costawia3
+            global.ed_region_saved_costawia4 = o_edmain.costawia4
+            global.ed_region_saved_costawia5 = o_edmain.costawia5
+            o_edmain.costawia = 0
+            o_edmain.costawia2 = 0
+            o_edmain.costawia3 = 0
+            o_edmain.costawia4 = 0
+            o_edmain.costawia5 = 0
+            global.ed_region_sx = 0
+            global.ed_region_sy = 0
+            global.ed_region_ex = 0
+            global.ed_region_ey = 0
+            global.ed_region_list = -1
+            global.ed_region_blk = -1
+            if global.ed_region_blk_orig != -1 {
+                ds_list_destroy(global.ed_region_blk_orig)
+            }
+            global.ed_region_blk_orig = -1
+            if global.ed_region_blk_keys != -1 {
+                ds_list_destroy(global.ed_region_blk_keys)
+            }
+            global.ed_region_blk_keys = -1
+            if global.ed_region_blk_keys2 != -1 {
+                ds_list_destroy(global.ed_region_blk_keys2)
+            }
+            global.ed_region_blk_keys2 = -1
+            global.ed_region_scratch = -1
+            if global.deletemode == 1 {
+                global.ed_region_type = 0
+            } else if global.ed_region_saved_costawia != 0 {
+                global.ed_region_type = 1
+            } else if global.ed_region_saved_costawia2 != 0 {
+                global.ed_region_type = 2
+            } else if global.ed_region_saved_costawia3 != 0 {
+                global.ed_region_type = 3
+            } else if global.ed_region_saved_costawia4 != 0 {
+                global.ed_region_type = 4
+            } else if global.ed_region_saved_costawia5 != 0 {
+                global.ed_region_type = 5
+            } else {
+                global.ed_region_type = 1
+            }
+            debug_log("Region: Entered, type=" + string(global.ed_region_type) + ", mode=" + string(global.ed_region_mode))
+        } else {
+            global.ed_region_active = false
+            global.ed_region_block_panel = false
+            if global.ed_region_state == 3 {
+                if global.ed_region_blk_orig != -1 {
+                    ed_region_commit(global.ed_region_last_dcol, global.ed_region_last_drow)
+                }
+            }
+            global.ed_region_state = 0
+            if global.ed_region_list != -1 {
+                ds_list_destroy(global.ed_region_list)
+            }
+            if global.ed_region_blk != -1 {
+                ds_list_destroy(global.ed_region_blk)
+            }
+            global.ed_region_list = -1
+            global.ed_region_blk = -1
+            if global.ed_region_blk_orig != -1 {
+                ds_list_destroy(global.ed_region_blk_orig)
+            }
+            global.ed_region_blk_orig = -1
+            if global.ed_region_blk_keys != -1 {
+                ds_list_destroy(global.ed_region_blk_keys)
+            }
+            global.ed_region_blk_keys = -1
+            if global.ed_region_blk_keys2 != -1 {
+                ds_list_destroy(global.ed_region_blk_keys2)
+            }
+            global.ed_region_blk_keys2 = -1
+            global.ed_region_scratch = -1
+            global.ed_region_sx = 0
+            global.ed_region_sy = 0
+            global.ed_region_ex = 0
+            global.ed_region_ey = 0
+            o_edmain.costawia = global.ed_region_saved_costawia
+            o_edmain.costawia2 = global.ed_region_saved_costawia2
+            o_edmain.costawia3 = global.ed_region_saved_costawia3
+            o_edmain.costawia4 = global.ed_region_saved_costawia4
+            o_edmain.costawia5 = global.ed_region_saved_costawia5
+            debug_log("Region: Exited")
+        }
+    }
+}
+
+// 选区模式：判定模式循环切换
+if keyboard_check_pressed(global.key_region_cycle) {
+    if global.ed_region_active {
+        global.ed_region_mode = (global.ed_region_mode + 1) mod 3
+        debug_log("Region: Mode cycled to " + string(global.ed_region_mode))
+        if global.ed_region_state == 2 || global.ed_region_state == 3 {
+            if global.ed_region_state == 3 {
+                if global.ed_region_blk_orig != -1 {
+                    ed_region_commit(global.ed_region_last_dcol, global.ed_region_last_drow)
+                }
+                global.ed_region_state = 2
+            }
+            ed_region_recalc()
+        }
+    } else {
+        global.ed_region_mode = (global.ed_region_mode + 1) mod 3
+        debug_log("Region: Mode cycled to " + string(global.ed_region_mode))
+    }
+}
+
+// 选区模式：运行状态机
+if global.ed_region_active {
+    if o_edmain.wlaczonaopcja == 0 && o_edmain.wiatrak == 0 && o_edmain.setting_mode == 0 {
+        ed_region_select()
+    } else {
+        if global.ed_region_state == 1 {
+            global.ed_region_state = 0
+            if global.ed_region_list != -1 {
+                ds_list_destroy(global.ed_region_list)
+            }
+            if global.ed_region_blk != -1 {
+                ds_list_destroy(global.ed_region_blk)
+            }
+            global.ed_region_list = -1
+            global.ed_region_blk = -1
+        }
+        if global.ed_region_state == 3 {
+            if global.ed_region_blk_orig != -1 {
+                ed_region_commit(global.ed_region_last_dcol, global.ed_region_last_drow)
+            }
+            global.ed_region_state = 2
+        }
+    }
+}
+
+// 选区模式：面板键屏蔽
+if global.ed_region_block_panel {
+    if o_edmain.wiatrak == 0 && o_edmain.setting_mode == 0 && o_edmain.czywybieranieback == 0 {
+        if o_edmain.wlaczonaopcja > 0 {
+            o_edmain.wlaczonaopcja = 0
+        }
+    }
+}
+
 #define Step_2
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -735,12 +917,15 @@ arrayetapu[25,0]=1
 
 }
 // rysowanie
-var i,a;
+var i,a, _ed_drag_on;
+_ed_drag_on = (global.ed_region_active && global.ed_region_state == 3)
 for (i=0; i<20; i+=1)
     {
     for (a=0; a<15; a+=1)
         {
+        if !(_ed_drag_on && global.ed_region_orig_mask[i+floor(view_xview[0]/32),a+floor(view_yview[0]/32)] == 1) {
         draw_sprite_ext(s_blocks,arrayetapu[i+floor(view_xview[0]/32),a+floor(view_yview[0]/32)],view_xview[0]+i*32,view_yview[0]+a*32,1,1,0,c_white,1)
+        }
         }
     }
 /*"/*'/**//* YYD ACTION
@@ -2814,6 +2999,7 @@ if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& mouse_check_button(mb_lef
     autopair3=0
     if autopaircheck>0 && wlaczony=1 {if abs(view_xview[0]+224-mouse_x)<32 && abs(view_yview[0]+416-mouse_y)<32 {autopair3=1};if abs(view_xview[0]+224+66*1-mouse_x)<32 && abs(view_yview[0]+416-mouse_y)<32 {autopair3=1};if( abs(view_xview[0]+224+66*2-mouse_x)<32 && abs(view_yview[0]+416-mouse_y)<32 && autopaircheck<17){autopair3=1};if( abs(view_xview[0]+224+66*3-mouse_x)<32 && abs(view_yview[0]+416-mouse_y)<32 && autopaircheck<17 ){autopair3=1}}
 // stawianie BLOCZKOW i kasowanie
+if !global.ed_region_active {
 if autopair=0{
 if costawia<>0 && kliknieto=0 && autopair3=0
     && menujesie=0 && wlaczonaopcja=0
@@ -3506,6 +3692,7 @@ if  costawia2 = 0 && costawia3 = 0 && costawia4 = 0 && costawia5 = 0 && costawia
       autopair = 0
     }
     }
+}
 
 //block 与 模仿者 相互切换
 if costawia<>0 && mouse_check_button_pressed(mb_middle){
@@ -4210,6 +4397,7 @@ if costawia2<>0 && kliknieto=0 && mouse_check_button(mb_right) /*&& mouse_x>0 &&
 
 
 // 右下角图标显示
+if !global.ed_region_block_panel {
 if wlaczony=1
     {
     draw_set_blend_mode(bm_subtract)
@@ -4253,8 +4441,10 @@ if costawia5<>0
         draw_set_blend_mode(bm_normal)
         draw_sprite_ext(s_helpus,4,view_xview[0]+600,view_yview[0]+454,1,1,0,c_white,1)
         }
+}
 // 选中菜单栏某项后出现的箭头（这玩意有存在感吗？）
 menujesie=0
+if !global.ed_region_block_panel {
 if wlaczony=1 && costawia4b=0 && wiatrak=0
     {
     if ed_hit(40, 97, 120, 43){
@@ -4313,13 +4503,16 @@ if wlaczony=1 && costawia4b=0 && wiatrak=0
         menujesie=1
         }
     }
-if opcja<>0 && mouse_check_button(mb_left) && kliknieto=0 && czywybieranieback=0
-    {
-    kliknieto=1
-    wlaczonaopcja=opcja
-    drinkability=opcja
-    autopair=0 //怨念残留喝了
-    }
+}
+if !global.ed_region_block_panel {
+    if opcja<>0 && mouse_check_button(mb_left) && kliknieto=0 && czywybieranieback=0
+        {
+        kliknieto=1
+        wlaczonaopcja=opcja
+        drinkability=opcja
+        autopair=0 //怨念残留喝了
+        }
+}
 // sampel wyboru 这段代码说明，sampelwyboru1=1的时候发出音效
 if sampelwyboru1=1 {sampelwyboru1=0; if global.sample=1 {fofo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}}
 // 防止连点
@@ -6060,7 +6253,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if global.deletemode=1{
+if global.deletemode=1 && !global.ed_region_active{
 if mouse_check_button(mb_right)&& mouse_x>0 && mouse_y>0 && costawia4b=0 && kliknieto=0 && wiatrak=0 && menujesie=0 && wlaczonaopcja=0 && global.picking=false {
     arrayetapu[floor((mouse_x)/32),floor((mouse_y)/32)]=0
     fofo = instance_position(mouse_x,mouse_y,o_edenemyblock); with(fofo){instance_destroy()}
@@ -6077,4 +6270,8 @@ if !show_solid{
 draw_set_font(cyferkimario)
 draw_set_color(c_white)
 draw_text(view_xview[0]+245,view_yview[0]+16,'INVISIBLE SOLID')
+}
+
+if global.ed_region_active {
+    ed_region_draw()
 }

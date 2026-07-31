@@ -45,6 +45,11 @@
 +Other
 	|draw_prefs_highlight
 	|self_coto_check
+	|ed_region_select
+	|ed_region_draw
+	|ed_region_recalc
+	|ed_region_commit
+	|place_meeting_region
 	|delete_coto_check
 	|transC
 	|burax_hit

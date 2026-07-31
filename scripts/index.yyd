@@ -1134,3 +1134,9 @@ bgm_palette_data
 draw_light_icon
 toggle_light_icon
 draw_prefs_highlight
+
+ed_region_select
+ed_region_draw
+ed_region_recalc
+place_meeting_region
+ed_region_commit

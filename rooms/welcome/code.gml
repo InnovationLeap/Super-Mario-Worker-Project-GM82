@@ -151,6 +151,13 @@ global.key_acc_bigdown=ini_read_real('KeyConfig','acc_bigdown',ord('F'))
 global.key_acc_bigleft=ini_read_real('KeyConfig','acc_bigleft',ord('D'))
 global.key_acc_bigright=ini_read_real('KeyConfig','acc_bigright',ord('G'))
 
+// 编辑器复制键
+global.key_copy=ini_read_real('KeyConfig','copy',ord('C'))
+
+// 编辑器选区模式键
+global.key_region_select=ini_read_real('KeyConfig','region_select',ord('U'))
+global.key_region_cycle=ini_read_real('KeyConfig','region_cycle',ord('T'))
+
 global.customMusic = ini_read_string('GameConfig','CustomMusicPackage','Example')
 global.initiallives = ini_read_real('GameConfig','InitialLives',4)
 global.font_render = ini_read_real('GameConfig','2xFontRender',0)
