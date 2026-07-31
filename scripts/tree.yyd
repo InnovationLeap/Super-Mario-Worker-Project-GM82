@@ -45,6 +45,7 @@
 +Other
 	|corpse_anim
 	|draw_prefs_highlight
+	|ed_keyrow
 	|self_coto_check
 	|ed_region_select
 	|ed_region_draw

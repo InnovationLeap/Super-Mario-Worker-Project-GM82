@@ -436,145 +436,19 @@ if globaloption>0
         //========== PAGE 0: 游戏按键 + 基础编辑器按键 ==========
         if keyboard_page=0{
             //上键
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('Up'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+100,string_upper(keyshow1))
-            draw_set_halign(fa_left)
-            draw_set_color(c_white)
-            if ed_hit(40, 90, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+90, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=1;keydetect2=1
-                }
-            }
-            if keydetect=1{keyshow1='press a key...'}else{keyshow1=setkey[global.sterowaniegora]}
-            if keydetect=1 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.sterowaniegora=keyboard_lastkey
-                ini_write_real('KeyConfig','up',global.sterowaniegora)
-                keydetect=0
-            }
+            ed_keyrow(1,'Up',100,'sterowaniegora','up')
             //下键
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+130,string_upper('Down'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+130,string_upper(keyshow2))
-            draw_set_halign(fa_left)
-            draw_set_color(c_white)
-            if ed_hit(40, 120, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+120, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=2;keydetect2=1
-                }
-            }
-            if keydetect=2{keyshow2='press a key...'}else{keyshow2=setkey[global.sterowaniedol]}
-            if keydetect=2 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.sterowaniedol=keyboard_lastkey
-                ini_write_real('KeyConfig','down',global.sterowaniedol)
-                keydetect=0
-            }
+            ed_keyrow(2,'Down',130,'sterowaniedol','down')
             //左键
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+160,string_upper('Left'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+160,string_upper(keyshow3))
-            draw_set_halign(fa_left)
-            draw_set_color(c_white)
-            if ed_hit(40, 150, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+150, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=3;keydetect2=1
-                }
-            }
-            if keydetect=3{keyshow3='press a key...'}else{keyshow3=setkey[global.sterowanielewo]}
-            if keydetect=3 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.sterowanielewo=keyboard_lastkey
-                ini_write_real('KeyConfig','left',global.sterowanielewo)
-                keydetect=0
-            }
+            ed_keyrow(3,'Left',160,'sterowanielewo','left')
             //右键
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+190,string_upper('Right'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+190,string_upper(keyshow4))
-            draw_set_halign(fa_left)
-            draw_set_color(c_white)
-            if ed_hit(40, 180, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+180, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=4;keydetect2=1
-                }
-            }
-            if keydetect=4{keyshow4='press a key...'}else{keyshow4=setkey[global.sterowanieprawo]}
-            if keydetect=4 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.sterowanieprawo=keyboard_lastkey
-                ini_write_real('KeyConfig','right',global.sterowanieprawo)
-                keydetect=0
-            }
+            ed_keyrow(4,'Right',190,'sterowanieprawo','right')
             //跳键
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+220,string_upper('Jump'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+220,string_upper(keyshow5))
-            draw_set_halign(fa_left)
-            draw_set_color(c_white)
-            if ed_hit(40, 210, 190, 30)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+210, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=5;keydetect2=1
-                }
-            }
-            if keydetect=5{keyshow5='press a key...'}else{keyshow5=setkey[global.sterowanieskok]}
-            if keydetect=5 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.sterowanieskok=keyboard_lastkey
-                ini_write_real('KeyConfig','jump',global.sterowanieskok)
-                keydetect=0
-            }
+            ed_keyrow(5,'Jump',220,'sterowanieskok','jump')
             //开火键
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+250,string_upper('Fire'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+250,string_upper(keyshow6))
-            draw_set_halign(fa_left)
-            draw_set_color(c_white)
-            if ed_hit(40, 240, 220, 30)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+240, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=6;keydetect2=1
-                }
-            }
-            if keydetect=6{keyshow6='press a key...'}else{keyshow6=setkey[global.sterowaniebieg]}
-            if keydetect=6 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.sterowaniebieg=keyboard_lastkey
-                ini_write_real('KeyConfig','fire',global.sterowaniebieg)
-                keydetect=0
-            }
+            ed_keyrow(6,'Fire',250,'sterowaniebieg','fire')
             //10自杀键/自爆键
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+280,string_upper('Restart Level'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+280,string_upper(keyshow10))
-            draw_set_halign(fa_left)
-            draw_set_color(c_white)
-            if ed_hit(40, 270, 220, 30)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+270, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=10;keydetect2=1
-                }
-            }
-            if keydetect=10{keyshow10='press a key...'}else{keyshow10=setkey[global.restartlevelkey]}
-            if keydetect=10 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.restartlevelkey=keyboard_lastkey
-                ini_write_real('KeyConfig','restartlevel',global.restartlevelkey)
-                keydetect=0
-            }
+            ed_keyrow(10,'Restart Level',280,'restartlevelkey','restartlevel')
 
             //警告提示
             if keyboard_lastkey>222 {
@@ -588,461 +462,33 @@ if globaloption>0
             }
         }
 
-        // -- 编辑器 Pick/Accurate Move/Submenu (keydetect 7-9) --
-        if keydetect=7{keyshow7='press a key...'}else{keyshow7=setkey[global.key_pick]}
-        if keydetect=7 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_pick=keyboard_lastkey
-            ini_write_real('KeyConfig','pick',global.key_pick)
-            keydetect=0
-        }
-        if keydetect=8{keyshow8='press a key...'}else{keyshow8=setkey[global.key_select]}
-        if keydetect=8 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_select=keyboard_lastkey
-            ini_write_real('KeyConfig','accurate_move',global.key_select)
-            keydetect=0
-        }
-        if keydetect=9{keyshow9='press a key...'}else{keyshow9=setkey[global.key_submenu]}
-        if keydetect=9 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_submenu=keyboard_lastkey
-            ini_write_real('KeyConfig','submenu',global.key_submenu)
-            keydetect=0
-        }
-
-        //========== KEY DETECTION COMMON (ALL PAGES) ==========
-        // -- 编辑器画布滚动键 (keydetect 11-14) --
-        if keydetect=11{keyshow11='press a key...'}else{keyshow11=setkey[global.key_ed_left]}
-        if keydetect=11 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_ed_left=keyboard_lastkey
-            ini_write_real('KeyConfig','ed_left',global.key_ed_left)
-            keydetect=0
-        }
-        if keydetect=12{keyshow12='press a key...'}else{keyshow12=setkey[global.key_ed_right]}
-        if keydetect=12 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_ed_right=keyboard_lastkey
-            ini_write_real('KeyConfig','ed_right',global.key_ed_right)
-            keydetect=0
-        }
-        if keydetect=13{keyshow13='press a key...'}else{keyshow13=setkey[global.key_ed_up]}
-        if keydetect=13 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_ed_up=keyboard_lastkey
-            ini_write_real('KeyConfig','ed_up',global.key_ed_up)
-            keydetect=0
-        }
-        if keydetect=14{keyshow14='press a key...'}else{keyshow14=setkey[global.key_ed_down]}
-        if keydetect=14 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_ed_down=keyboard_lastkey
-            ini_write_real('KeyConfig','ed_down',global.key_ed_down)
-            keydetect=0
-        }
-        // -- 缩放 (keydetect 15-16) --
-        if keydetect=15{keyshow15='press a key...'}else{keyshow15=setkey[global.key_zoomin]}
-        if keydetect=15 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_zoomin=keyboard_lastkey
-            ini_write_real('KeyConfig','zoomin',global.key_zoomin)
-            keydetect=0
-        }
-        if keydetect=16{keyshow16='press a key...'}else{keyshow16=setkey[global.key_zoomout]}
-        if keydetect=16 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_zoomout=keyboard_lastkey
-            ini_write_real('KeyConfig','zoomout',global.key_zoomout)
-            keydetect=0
-        }
-        // -- 水位 (keydetect 17-18) --
-        if keydetect=17{keyshow17='press a key...'}else{keyshow17=setkey[global.key_waterup]}
-        if keydetect=17 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_waterup=keyboard_lastkey
-            ini_write_real('KeyConfig','waterup',global.key_waterup)
-            keydetect=0
-        }
-        if keydetect=18{keyshow18='press a key...'}else{keyshow18=setkey[global.key_waterdown]}
-        if keydetect=18 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_waterdown=keyboard_lastkey
-            ini_write_real('KeyConfig','waterdown',global.key_waterdown)
-            keydetect=0
-        }
-        // -- 功能键 (keydetect 19-24) --
-        if keydetect=19{keyshow19='press a key...'}else{keyshow19=setkey[global.key_musictoggle]}
-        if keydetect=19 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_musictoggle=keyboard_lastkey
-            ini_write_real('KeyConfig','musictoggle',global.key_musictoggle)
-            keydetect=0
-        }
-        if keydetect=20{keyshow20='press a key...'}else{keyshow20=setkey[global.key_autopair]}
-        if keydetect=20 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_autopair=keyboard_lastkey
-            ini_write_real('KeyConfig','autopair',global.key_autopair)
-            keydetect=0
-        }
-        if keydetect=21{keyshow21='press a key...'}else{keyshow21=setkey[global.key_bgpanel]}
-        if keydetect=21 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_bgpanel=keyboard_lastkey
-            ini_write_real('KeyConfig','bgpanel',global.key_bgpanel)
-            keydetect=0
-        }
-        if keydetect=22{keyshow22='press a key...'}else{keyshow22=setkey[global.key_ed_cancel]}
-        if keydetect=22 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_ed_cancel=keyboard_lastkey
-            ini_write_real('KeyConfig','ed_cancel',global.key_ed_cancel)
-            keydetect=0
-        }
-        if keydetect=23{keyshow23='press a key...'}else{keyshow23=setkey[global.key_ed_save]}
-        if keydetect=23 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_ed_save=keyboard_lastkey
-            ini_write_real('KeyConfig','ed_save',global.key_ed_save)
-            keydetect=0
-        }
-        if keydetect=24{keyshow24='press a key...'}else{keyshow24=setkey[global.key_ed_load]}
-        if keydetect=24 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_ed_load=keyboard_lastkey
-            ini_write_real('KeyConfig','ed_load',global.key_ed_load)
-            keydetect=0
-        }
-        // -- 精确移动方向键 (keydetect 25-32) --
-        if keydetect=25{keyshow25='press a key...'}else{keyshow25=setkey[global.key_acc_up]}
-        if keydetect=25 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_acc_up=keyboard_lastkey
-            ini_write_real('KeyConfig','acc_up',global.key_acc_up)
-            keydetect=0
-        }
-        if keydetect=26{keyshow26='press a key...'}else{keyshow26=setkey[global.key_acc_down]}
-        if keydetect=26 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_acc_down=keyboard_lastkey
-            ini_write_real('KeyConfig','acc_down',global.key_acc_down)
-            keydetect=0
-        }
-        if keydetect=27{keyshow27='press a key...'}else{keyshow27=setkey[global.key_acc_left]}
-        if keydetect=27 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_acc_left=keyboard_lastkey
-            ini_write_real('KeyConfig','acc_left',global.key_acc_left)
-            keydetect=0
-        }
-        if keydetect=28{keyshow28='press a key...'}else{keyshow28=setkey[global.key_acc_right]}
-        if keydetect=28 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_acc_right=keyboard_lastkey
-            ini_write_real('KeyConfig','acc_right',global.key_acc_right)
-            keydetect=0
-        }
-        if keydetect=29{keyshow29='press a key...'}else{keyshow29=setkey[global.key_acc_bigup]}
-        if keydetect=29 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_acc_bigup=keyboard_lastkey
-            ini_write_real('KeyConfig','acc_bigup',global.key_acc_bigup)
-            keydetect=0
-        }
-        if keydetect=30{keyshow30='press a key...'}else{keyshow30=setkey[global.key_acc_bigdown]}
-        if keydetect=30 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_acc_bigdown=keyboard_lastkey
-            ini_write_real('KeyConfig','acc_bigdown',global.key_acc_bigdown)
-            keydetect=0
-        }
-        if keydetect=31{keyshow31='press a key...'}else{keyshow31=setkey[global.key_acc_bigleft]}
-        if keydetect=31 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_acc_bigleft=keyboard_lastkey
-            ini_write_real('KeyConfig','acc_bigleft',global.key_acc_bigleft)
-            keydetect=0
-        }
-        if keydetect=32{keyshow32='press a key...'}else{keyshow32=setkey[global.key_acc_bigright]}
-        if keydetect=32 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_acc_bigright=keyboard_lastkey
-            ini_write_real('KeyConfig','acc_bigright',global.key_acc_bigright)
-            keydetect=0
-        }
-        // -- 编辑器画布滚动键 第二绑定 (keydetect 33-36) --
-        if keydetect=33{keyshow33='press a key...'}else{keyshow33=setkey[global.key_ed_left_2]}
-        if keydetect=33 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_ed_left_2=keyboard_lastkey
-            ini_write_real('KeyConfig','ed_left_2',global.key_ed_left_2)
-            keydetect=0
-        }
-        if keydetect=34{keyshow34='press a key...'}else{keyshow34=setkey[global.key_ed_right_2]}
-        if keydetect=34 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_ed_right_2=keyboard_lastkey
-            ini_write_real('KeyConfig','ed_right_2',global.key_ed_right_2)
-            keydetect=0
-        }
-        if keydetect=35{keyshow35='press a key...'}else{keyshow35=setkey[global.key_ed_up_2]}
-        if keydetect=35 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_ed_up_2=keyboard_lastkey
-            ini_write_real('KeyConfig','ed_up_2',global.key_ed_up_2)
-            keydetect=0
-        }
-        if keydetect=36{keyshow36='press a key...'}else{keyshow36=setkey[global.key_ed_down_2]}
-        if keydetect=36 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_ed_down_2=keyboard_lastkey
-            ini_write_real('KeyConfig','ed_down_2',global.key_ed_down_2)
-            keydetect=0
-        }
-        // -- F 键 (keydetect 37-45) --
-        if keydetect=37{keyshow37='press a key...'}else{keyshow37=setkey[global.key_f1]}
-        if keydetect=37 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_f1=keyboard_lastkey
-            ini_write_real('KeyConfig','f1',global.key_f1)
-            keydetect=0
-        }
-        if keydetect=38{keyshow38='press a key...'}else{keyshow38=setkey[global.key_f2]}
-        if keydetect=38 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_f2=keyboard_lastkey
-            ini_write_real('KeyConfig','f2',global.key_f2)
-            keydetect=0
-        }
-        if keydetect=39{keyshow39='press a key...'}else{keyshow39=setkey[global.key_f3]}
-        if keydetect=39 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_f3=keyboard_lastkey
-            ini_write_real('KeyConfig','f3',global.key_f3)
-            keydetect=0
-        }
-        if keydetect=40{keyshow40='press a key...'}else{keyshow40=setkey[global.key_f4]}
-        if keydetect=40 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_f4=keyboard_lastkey
-            ini_write_real('KeyConfig','f4',global.key_f4)
-            keydetect=0
-        }
-        if keydetect=41{keyshow41='press a key...'}else{keyshow41=setkey[global.key_f5]}
-        if keydetect=41 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_f5=keyboard_lastkey
-            ini_write_real('KeyConfig','f5',global.key_f5)
-            keydetect=0
-        }
-        if keydetect=42{keyshow42='press a key...'}else{keyshow42=setkey[global.key_f7]}
-        if keydetect=42 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_f7=keyboard_lastkey
-            ini_write_real('KeyConfig','f7',global.key_f7)
-            keydetect=0
-        }
-        if keydetect=43{keyshow43='press a key...'}else{keyshow43=setkey[global.key_f9]}
-        if keydetect=43 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_f9=keyboard_lastkey
-            ini_write_real('KeyConfig','f9',global.key_f9)
-            keydetect=0
-        }
-        if keydetect=44{keyshow44='press a key...'}else{keyshow44=setkey[global.key_f10]}
-        if keydetect=44 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_f10=keyboard_lastkey
-            ini_write_real('KeyConfig','f10',global.key_f10)
-            keydetect=0
-        }
-        if keydetect=45{keyshow45='press a key...'}else{keyshow45=setkey[global.key_f11]}
-        if keydetect=45 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_f11=keyboard_lastkey
-            ini_write_real('KeyConfig','f11',global.key_f11)
-            keydetect=0
-        }
-        // -- 编辑器暂停/删除 (keydetect 46-47) --
-        if keydetect=46{keyshow46='press a key...'}else{keyshow46=setkey[global.key_ed_pause]}
-        if keydetect=46 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_ed_pause=keyboard_lastkey
-            ini_write_real('KeyConfig','ed_pause',global.key_ed_pause)
-            keydetect=0
-        }
-        if keydetect=47{keyshow47='press a key...'}else{keyshow47=setkey[global.key_ed_delete]}
-        if keydetect=47 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-            global.key_ed_delete=keyboard_lastkey
-            ini_write_real('KeyConfig','ed_delete',global.key_ed_delete)
-            keydetect=0
-        }
-
         //========== PAGE 1: God Mode 数字键 (1~0) ==========
         if keyboard_page=1{
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- God Mode Keys ---'))
             draw_set_color(c_white)
             // 1: Small Mario
-            draw_text(view_xview[0]+40,view_yview[0]+125,string_upper('Small Mario'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+125,string_upper(keyshow50))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 115, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+115, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=50;keydetect2=1
-                }
-            }
-            if keydetect=50{keyshow50='press a key...'}else{keyshow50=setkey[global.godkey_small]}
-            if keydetect=50 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.godkey_small=keyboard_lastkey
-                ini_write_real('KeyConfig','god_small',global.godkey_small)
-                keydetect=0
-            }
+            ed_keyrow(50,'Small Mario',125,'godkey_small','god_small')
             // 2: Big Mario
-            draw_text(view_xview[0]+40,view_yview[0]+150,string_upper('Big Mario'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+150,string_upper(keyshow51))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 140, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+140, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=51;keydetect2=1
-                }
-            }
-            if keydetect=51{keyshow51='press a key...'}else{keyshow51=setkey[global.godkey_big]}
-            if keydetect=51 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.godkey_big=keyboard_lastkey
-                ini_write_real('KeyConfig','god_big',global.godkey_big)
-                keydetect=0
-            }
+            ed_keyrow(51,'Big Mario',150,'godkey_big','god_big')
             // 3: Fire Flower
-            draw_text(view_xview[0]+40,view_yview[0]+175,string_upper('Fire Flower'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+175,string_upper(keyshow52))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 165, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+165, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=52;keydetect2=1
-                }
-            }
-            if keydetect=52{keyshow52='press a key...'}else{keyshow52=setkey[global.godkey_fire]}
-            if keydetect=52 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.godkey_fire=keyboard_lastkey
-                ini_write_real('KeyConfig','god_fire',global.godkey_fire)
-                keydetect=0
-            }
+            ed_keyrow(52,'Fire Flower',175,'godkey_fire','god_fire')
             // 4: Green Lui
-            draw_text(view_xview[0]+40,view_yview[0]+200,string_upper('Green Lui'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+200,string_upper(keyshow53))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 190, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+190, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=53;keydetect2=1
-                }
-            }
-            if keydetect=53{keyshow53='press a key...'}else{keyshow53=setkey[global.godkey_fruit]}
-            if keydetect=53 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.godkey_fruit=keyboard_lastkey
-                ini_write_real('KeyConfig','god_fruit',global.godkey_fruit)
-                keydetect=0
-            }
+            ed_keyrow(53,'Green Lui',200,'godkey_fruit','god_fruit')
             // 5: Beet
-            draw_text(view_xview[0]+40,view_yview[0]+225,string_upper('Beet'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+225,string_upper(keyshow54))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 215, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+215, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=54;keydetect2=1
-                }
-            }
-            if keydetect=54{keyshow54='press a key...'}else{keyshow54=setkey[global.godkey_beet]}
-            if keydetect=54 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.godkey_beet=keyboard_lastkey
-                ini_write_real('KeyConfig','god_beet',global.godkey_beet)
-                keydetect=0
-            }
+            ed_keyrow(54,'Beet',225,'godkey_beet','god_beet')
             // 6: Super Star
-            draw_text(view_xview[0]+40,view_yview[0]+250,string_upper('Super Star'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+250,string_upper(keyshow55))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 240, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+240, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=55;keydetect2=1
-                }
-            }
-            if keydetect=55{keyshow55='press a key...'}else{keyshow55=setkey[global.godkey_star]}
-            if keydetect=55 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.godkey_star=keyboard_lastkey
-                ini_write_real('KeyConfig','god_star',global.godkey_star)
-                keydetect=0
-            }
+            ed_keyrow(55,'Super Star',250,'godkey_star','god_star')
             // 7: Invincible
-            draw_text(view_xview[0]+40,view_yview[0]+275,string_upper('Invincible'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+275,string_upper(keyshow56))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 265, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+265, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=56;keydetect2=1
-                }
-            }
-            if keydetect=56{keyshow56='press a key...'}else{keyshow56=setkey[global.godkey_invincible]}
-            if keydetect=56 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.godkey_invincible=keyboard_lastkey
-                ini_write_real('KeyConfig','god_invincible',global.godkey_invincible)
-                keydetect=0
-            }
+            ed_keyrow(56,'Invincible',275,'godkey_invincible','god_invincible')
             // 8: Toggle Fly
-            draw_text(view_xview[0]+40,view_yview[0]+300,string_upper('Toggle Fly'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+300,string_upper(keyshow57))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 290, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+290, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=57;keydetect2=1
-                }
-            }
-            if keydetect=57{keyshow57='press a key...'}else{keyshow57=setkey[global.godkey_fly]}
-            if keydetect=57 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.godkey_fly=keyboard_lastkey
-                ini_write_real('KeyConfig','god_fly',global.godkey_fly)
-                keydetect=0
-            }
+            ed_keyrow(57,'Toggle Fly',300,'godkey_fly','god_fly')
             // 9: Extra Life
-            draw_text(view_xview[0]+40,view_yview[0]+325,string_upper('Extra Life'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+325,string_upper(keyshow58))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 315, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+315, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=58;keydetect2=1
-                }
-            }
-            if keydetect=58{keyshow58='press a key...'}else{keyshow58=setkey[global.godkey_life]}
-            if keydetect=58 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.godkey_life=keyboard_lastkey
-                ini_write_real('KeyConfig','god_life',global.godkey_life)
-                keydetect=0
-            }
+            ed_keyrow(58,'Extra Life',325,'godkey_life','god_life')
             // 0: Toggle Scroll
-            draw_text(view_xview[0]+40,view_yview[0]+350,string_upper('Toggle Scroll'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+350,string_upper(keyshow59))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 340, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+340, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=59;keydetect2=1
-                }
-            }
-            if keydetect=59{keyshow59='press a key...'}else{keyshow59=setkey[global.godkey_scroll]}
-            if keydetect=59 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.godkey_scroll=keyboard_lastkey
-                ini_write_real('KeyConfig','god_scroll',global.godkey_scroll)
-                keydetect=0
-            }
+            ed_keyrow(59,'Toggle Scroll',350,'godkey_scroll','god_scroll')
             // Raccoon (-)
-            draw_text(view_xview[0]+40,view_yview[0]+375,string_upper('Raccoon'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+375,string_upper(keyshow65))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 365, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+365, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=65;keydetect2=1
-                }
-            }
-            if keydetect=65{keyshow65='press a key...'}else{keyshow65=setkey[global.godkey_raccoon]}
-            if keydetect=65 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.godkey_raccoon=keyboard_lastkey
-                ini_write_real('KeyConfig','god_raccoon',global.godkey_raccoon)
-                keydetect=0
-            }
+            ed_keyrow(65,'Raccoon',375,'godkey_raccoon','god_raccoon')
         }
 
         //========== PAGE 2: God Mode 辅助键 (PgUp/PgDn/Backspace) ==========
@@ -1051,59 +497,11 @@ if globaloption>0
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- God Mode Extra Keys ---'))
             draw_set_color(c_white)
             // 1: Check Point Prev (PgUp)
-            draw_text(view_xview[0]+40,view_yview[0]+125,string_upper('CP Prev'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+125,string_upper(keyshow60))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 115, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+115, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=60;keydetect2=1
-                }
-            }
-            if keydetect=60{keyshow60='press a key...'}else{keyshow60=setkey[global.godkey_cp_prev]}
-            if keydetect=60 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.godkey_cp_prev=keyboard_lastkey
-                ini_write_real('KeyConfig','god_cp_prev',global.godkey_cp_prev)
-                keydetect=0
-            }
+            ed_keyrow(60,'CP Prev',125,'godkey_cp_prev','god_cp_prev')
             // 2: Check Point Next (PgDn)
-            draw_text(view_xview[0]+40,view_yview[0]+155,string_upper('CP Next'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+155,string_upper(keyshow61))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 145, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+145, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=61;keydetect2=1
-                }
-            }
-            if keydetect=61{keyshow61='press a key...'}else{keyshow61=setkey[global.godkey_cp_next]}
-            if keydetect=61 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.godkey_cp_next=keyboard_lastkey
-                ini_write_real('KeyConfig','god_cp_next',global.godkey_cp_next)
-                keydetect=0
-            }
+            ed_keyrow(61,'CP Next',155,'godkey_cp_next','god_cp_next')
             // 3: Cancel Scroll (Backspace)
-            draw_text(view_xview[0]+40,view_yview[0]+185,string_upper('Cancel Scroll'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+185,string_upper(keyshow62))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 175, 190, 20)&& kliknieto=0
-            {
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+175, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){
-                    keydetect=62;keydetect2=1
-                }
-            }
-            if keydetect=62{keyshow62='press a key...'}else{keyshow62=setkey[global.godkey_bowser]}
-            if keydetect=62 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.godkey_bowser=keyboard_lastkey
-                ini_write_real('KeyConfig','god_bowser',global.godkey_bowser)
-                keydetect=0
-            }
+            ed_keyrow(62,'Cancel Scroll',185,'godkey_bowser','god_bowser')
         }
 
         //========== PAGE 3: 基础编辑键 + 保存/读取 ==========
@@ -1112,95 +510,31 @@ if globaloption>0
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- Basic Editor Keys ---'))
 
             // 7: PICK
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+125,string_upper('Pick'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+125,string_upper(keyshow7))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 115, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+115, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=7;keydetect2=1}
-            }
+            ed_keyrow(7,'Pick',125,'key_pick','pick')
 
             // 8: ACCURATE MOVE
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+150,string_upper('Accurate Move'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+150,string_upper(keyshow8))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 140, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+140, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=8;keydetect2=1}
-            }
+            ed_keyrow(8,'Accurate Move',150,'key_select','accurate_move')
 
             // 9: SUBMENU
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+175,string_upper('Submenu'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+175,string_upper(keyshow9))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 165, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+165, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=9;keydetect2=1}
-            }
+            ed_keyrow(9,'Submenu',175,'key_submenu','submenu')
 
             // 22: CANCEL
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+200,string_upper('Cancel'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+200,string_upper(keyshow22))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 190, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+190, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=22;keydetect2=1}
-            }
+            ed_keyrow(22,'Cancel',200,'key_ed_cancel','ed_cancel')
 
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+230,string_upper('--- Save / Load ---'))
 
             // 23: Save (Ctrl+)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+255,string_upper('Save (Ctrl+)'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+255,string_upper(keyshow23))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 245, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+245, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=23;keydetect2=1}
-            }
+            ed_keyrow(23,'Save (Ctrl+)',255,'key_ed_save','ed_save')
 
             // 24: Load (Ctrl+)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+280,string_upper('Load (Ctrl+)'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+280,string_upper(keyshow24))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 270, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+270, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=24;keydetect2=1}
-            }
+            ed_keyrow(24,'Load (Ctrl+)',280,'key_ed_load','ed_load')
 
             // 46: Ed Panel
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+305,string_upper('Edit Panel'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+305,string_upper(keyshow46))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 295, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+295, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=46;keydetect2=1}
-            }
+            ed_keyrow(46,'Edit Panel',305,'key_ed_pause','ed_pause')
 
             // 47: Ed Delete (删除模式)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+330,string_upper('Delete Mode'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+330,string_upper(keyshow47))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 320, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+320, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=47;keydetect2=1}
-            }
+            ed_keyrow(47,'Delete Mode',330,'key_ed_delete','ed_delete')
         }
 
         //========== PAGE 4: 编辑器画布滚动 (8键) ==========
@@ -1209,126 +543,34 @@ if globaloption>0
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- ED SCROLL ---'))
 
             // 11: Ed Scroll Left 1
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+125,string_upper('Ed Scroll Left 1'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+125,string_upper(keyshow11))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 115, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+115, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=11;keydetect2=1}
-            }
+            ed_keyrow(11,'Ed Scroll Left 1',125,'key_ed_left','ed_left')
 
             // 33: Ed Scroll Left 2
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+150,string_upper('Ed Scroll Left 2'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+150,string_upper(keyshow33))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 140, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+140, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=33;keydetect2=1}
-            }
+            ed_keyrow(33,'Ed Scroll Left 2',150,'key_ed_left_2','ed_left_2')
 
             // 12: Ed Scroll Right 1
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+175,string_upper('Ed Scroll Right 1'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+175,string_upper(keyshow12))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 165, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+165, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=12;keydetect2=1}
-            }
+            ed_keyrow(12,'Ed Scroll Right 1',175,'key_ed_right','ed_right')
 
             // 34: Ed Scroll Right 2
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+200,string_upper('Ed Scroll Right 2'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+200,string_upper(keyshow34))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 190, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+190, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=34;keydetect2=1}
-            }
+            ed_keyrow(34,'Ed Scroll Right 2',200,'key_ed_right_2','ed_right_2')
 
             // 13: Ed Scroll Up 1
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+225,string_upper('Ed Scroll Up 1'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+225,string_upper(keyshow13))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 215, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+215, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=13;keydetect2=1}
-            }
+            ed_keyrow(13,'Ed Scroll Up 1',225,'key_ed_up','ed_up')
 
             // 35: Ed Scroll Up 2
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+250,string_upper('Ed Scroll Up 2'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+250,string_upper(keyshow35))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 240, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+240, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=35;keydetect2=1}
-            }
+            ed_keyrow(35,'Ed Scroll Up 2',250,'key_ed_up_2','ed_up_2')
 
             // 14: Ed Scroll Down 1
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+275,string_upper('Ed Scroll Down 1'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+275,string_upper(keyshow14))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 265, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+265, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=14;keydetect2=1}
-            }
+            ed_keyrow(14,'Ed Scroll Down 1',275,'key_ed_down','ed_down')
 
             // 36: Ed Scroll Down 2
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+300,string_upper('Ed Scroll Down 2'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+300,string_upper(keyshow36))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 290, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+290, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=36;keydetect2=1}
-            }
+            ed_keyrow(36,'Ed Scroll Down 2',300,'key_ed_down_2','ed_down_2')
 
             // 63: Ed CP Prev (jump to previous checkpoint)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+325,string_upper('Ed CP Prev Jump'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+325,string_upper(keyshow63))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 315, 190, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+315, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=63;keydetect2=1}
-            }
-            if keydetect=63{keyshow63='press a key...'}else{keyshow63=setkey[global.edkey_cp_prev]}
-            if keydetect=63 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.edkey_cp_prev=keyboard_lastkey
-                ini_write_real('KeyConfig','ed_cp_prev',global.edkey_cp_prev)
-                keydetect=0
-            }
+            ed_keyrow(63,'Ed CP Prev Jump',325,'edkey_cp_prev','ed_cp_prev')
 
             // 64: Ed CP Next (jump to next checkpoint)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+350,string_upper('Ed CP Next Jump'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+350,string_upper(keyshow64))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 340, 190, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+340, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=64;keydetect2=1}
-            }
-            if keydetect=64{keyshow64='press a key...'}else{keyshow64=setkey[global.edkey_cp_next]}
-            if keydetect=64 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.edkey_cp_next=keyboard_lastkey
-                ini_write_real('KeyConfig','ed_cp_next',global.edkey_cp_next)
-                keydetect=0
-            }
+            ed_keyrow(64,'Ed CP Next Jump',350,'edkey_cp_next','ed_cp_next')
         }
 
         //========== PAGE 5: 缩放 + 水位 + 功能键 ==========
@@ -1337,51 +579,19 @@ if globaloption>0
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- Zoom ---'))
 
             // 15: Zoom In
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+125,string_upper('Zoom In (Ctrl+)'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+125,string_upper(keyshow15))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 115, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+115, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=15;keydetect2=1}
-            }
+            ed_keyrow(15,'Zoom In (Ctrl+)',125,'key_zoomin','zoomin')
 
             // 16: Zoom Out
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+150,string_upper('Zoom Out (Ctrl+)'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+150,string_upper(keyshow16))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 140, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+140, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=16;keydetect2=1}
-            }
+            ed_keyrow(16,'Zoom Out (Ctrl+)',150,'key_zoomout','zoomout')
 
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+180,string_upper('--- Water Level ---'))
 
             // 17: Water Up
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+205,string_upper('Water Up'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+205,string_upper(keyshow17))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 195, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+195, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=17;keydetect2=1}
-            }
+            ed_keyrow(17,'Water Up',205,'key_waterup','waterup')
 
             // 18: Water Down
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+230,string_upper('Water Down'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+230,string_upper(keyshow18))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 220, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+220, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=18;keydetect2=1}
-            }
+            ed_keyrow(18,'Water Down',230,'key_waterdown','waterdown')
 
 
         }
@@ -1392,136 +602,40 @@ if globaloption>0
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- Tool Keys ---'))
 
             // F1 (Level Info)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+122,string_upper('Level Info'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+122,string_upper(keyshow37))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 112, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+112, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=37;keydetect2=1}
-            }
+            ed_keyrow(37,'Level Info',122,'key_f1','f1')
 
             // F2 (Switch Sound)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+144,string_upper('Switch Sound'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+144,string_upper(keyshow38))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 134, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+134, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=38;keydetect2=1}
-            }
+            ed_keyrow(38,'Switch Sound',144,'key_f2','f2')
 
             // F3 (unused)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+166,string_upper('Test Level'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+166,string_upper(keyshow39))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 156, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+156, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=39;keydetect2=1}
-            }
+            ed_keyrow(39,'Test Level',166,'key_f3','f3')
 
             // F4 (unused)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+188,string_upper('God Mode'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+188,string_upper(keyshow40))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 178, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+178, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=40;keydetect2=1}
-            }
+            ed_keyrow(40,'God Mode',188,'key_f4','f4')
 
             // F5 (unused)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+210,string_upper('Solid View'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+210,string_upper(keyshow41))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 200, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+200, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=41;keydetect2=1}
-            }
+            ed_keyrow(41,'Solid View',210,'key_f5','f5')
 
             // F6 (BG Panel)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+232,string_upper('BG Panel'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+232,string_upper(keyshow21))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 222, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+222, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=21;keydetect2=1}
-            }
+            ed_keyrow(21,'BG Panel',232,'key_bgpanel','bgpanel')
 
             // F7 (unused)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+254,string_upper('Level Size'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+254,string_upper(keyshow42))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 244, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+244, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=42;keydetect2=1}
-            }
+            ed_keyrow(42,'Level Size',254,'key_f7','f7')
 
             // F8 (Music Toggle)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+276,string_upper('Music Toggle'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+276,string_upper(keyshow19))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 266, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+266, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=19;keydetect2=1}
-            }
+            ed_keyrow(19,'Music Toggle',276,'key_musictoggle','musictoggle')
 
             // F9 (Screenshot)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+298,string_upper('Screenshot'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+298,string_upper(keyshow43))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 288, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+288, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=43;keydetect2=1}
-            }
+            ed_keyrow(43,'Screenshot',298,'key_f9','f9')
 
             // F10 (unused)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+320,string_upper('Water Level'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+320,string_upper(keyshow44))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 310, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+310, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=44;keydetect2=1}
-            }
+            ed_keyrow(44,'Water Level',320,'key_f10','f10')
 
             // F11 (Smooth Mode)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+342,string_upper('Smooth Mode'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+342,string_upper(keyshow45))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 332, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+332, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=45;keydetect2=1}
-            }
+            ed_keyrow(45,'Smooth Mode',342,'key_f11','f11')
 
             // F12 (Auto Pair)
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+364,string_upper('Auto Pair'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+364,string_upper(keyshow20))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 354, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+354, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=20;keydetect2=1}
-            }
+            ed_keyrow(20,'Auto Pair',364,'key_autopair','autopair')
         }
 
         //========== PAGE 7: 精确移动键 ==========
@@ -1530,95 +644,31 @@ if globaloption>0
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- Accurate Move ---'))
 
             // 25: Acc Up
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+120,string_upper('Acc Up'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+120,string_upper(keyshow25))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 110, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+110, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=25;keydetect2=1}
-            }
+            ed_keyrow(25,'Acc Up',120,'key_acc_up','acc_up')
 
             // 26: Acc Down
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+140,string_upper('Acc Down'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+140,string_upper(keyshow26))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 130, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+130, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=26;keydetect2=1}
-            }
+            ed_keyrow(26,'Acc Down',140,'key_acc_down','acc_down')
 
             // 27: Acc Left
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+160,string_upper('Acc Left'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+160,string_upper(keyshow27))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 150, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+150, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=27;keydetect2=1}
-            }
+            ed_keyrow(27,'Acc Left',160,'key_acc_left','acc_left')
 
             // 28: Acc Right
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+180,string_upper('Acc Right'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+180,string_upper(keyshow28))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 170, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+170, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=28;keydetect2=1}
-            }
+            ed_keyrow(28,'Acc Right',180,'key_acc_right','acc_right')
 
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+230,string_upper('--- Big Step (16px) ---'))
 
             // 29: Acc Big Up
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+255,string_upper('Acc Big Up'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+255,string_upper(keyshow29))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 245, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+245, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=29;keydetect2=1}
-            }
+            ed_keyrow(29,'Acc Big Up',255,'key_acc_bigup','acc_bigup')
 
             // 30: Acc Big Down
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+280,string_upper('Acc Big Down'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+280,string_upper(keyshow30))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 270, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+270, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=30;keydetect2=1}
-            }
+            ed_keyrow(30,'Acc Big Down',280,'key_acc_bigdown','acc_bigdown')
 
             // 31: Acc Big Left
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+305,string_upper('Acc Big Left'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+305,string_upper(keyshow31))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 295, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+295, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=31;keydetect2=1}
-            }
+            ed_keyrow(31,'Acc Big Left',305,'key_acc_bigleft','acc_bigleft')
 
             // 32: Acc Big Right
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+330,string_upper('Acc Big Right'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+330,string_upper(keyshow32))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 320, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+320, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=32;keydetect2=1}
-            }
+            ed_keyrow(32,'Acc Big Right',330,'key_acc_bigright','acc_bigright')
         }
 
         //========== PAGE 8: 选区编辑键 ==========
@@ -1627,55 +677,13 @@ if globaloption>0
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- Region Selection ---'))
 
             // 48: Region Cycle (T) 选区判定模式切换
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+125,string_upper('Region Mode Cycle'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+125,string_upper(keyshow48))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 115, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+115, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=48;keydetect2=1}
-            }
-            if keydetect=48{keyshow48='press a key...'}else{keyshow48=setkey[global.key_region_cycle]}
-            if keydetect=48 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.key_region_cycle=keyboard_lastkey
-                ini_write_real('KeyConfig','region_cycle',global.key_region_cycle)
-                keydetect=0
-            }
+            ed_keyrow(48,'Region Mode Cycle',125,'key_region_cycle','region_cycle')
 
             // 49: Region Select (U) 进入/退出选区模式
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+155,string_upper('Region Select'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+155,string_upper(keyshow49))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 145, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+145, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=49;keydetect2=1}
-            }
-            if keydetect=49{keyshow49='press a key...'}else{keyshow49=setkey[global.key_region_select]}
-            if keydetect=49 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.key_region_select=keyboard_lastkey
-                ini_write_real('KeyConfig','region_select',global.key_region_select)
-                keydetect=0
-            }
+            ed_keyrow(49,'Region Select',155,'key_region_select','region_select')
 
             // 66: Copy Region (Ctrl+C) 选区复制
-            draw_set_color(c_white)
-            draw_text(view_xview[0]+40,view_yview[0]+185,string_upper('Copy Region (Ctrl+)'))
-            draw_set_halign(fa_right)
-            draw_text(view_xview[0]+405,view_yview[0]+185,string_upper(keyshow66))
-            draw_set_halign(fa_left)
-            if ed_hit(40, 175, 220, 20)&& kliknieto=0{
-                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+175, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keydetect=66;keydetect2=1}
-            }
-            if keydetect=66{keyshow66='press a key...'}else{keyshow66=setkey[global.key_copy]}
-            if keydetect=66 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
-                global.key_copy=keyboard_lastkey
-                ini_write_real('KeyConfig','copy',global.key_copy)
-                keydetect=0
-            }
+            ed_keyrow(66,'Copy Region (Ctrl+)',185,'key_copy','copy')
         }
 
         //========== 页面导航按钮 ==========
