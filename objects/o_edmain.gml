@@ -181,6 +181,7 @@ global.ed_region_last_drow = 0
 global.ed_region_list = -1
 global.ed_region_blk = -1
 global.ed_region_orig_mask = 0
+global.ed_region_copymode = false
 global.ed_region_block_panel = false
 global.ed_region_saved_costawia = 0
 global.ed_region_saved_costawia2 = 0
@@ -396,6 +397,7 @@ if keyboard_check_pressed(global.key_region_select) {
             }
             global.ed_region_blk_keys2 = -1
             global.ed_region_scratch = -1
+            global.ed_region_copymode = false
             if global.deletemode == 1 {
                 global.ed_region_type = 0
             } else if global.ed_region_saved_costawia != 0 {
@@ -416,7 +418,9 @@ if keyboard_check_pressed(global.key_region_select) {
             global.ed_region_active = false
             global.ed_region_block_panel = false
             if global.ed_region_state == 3 {
-                if global.ed_region_blk_orig != -1 {
+                if global.ed_region_copymode {
+                    global.ed_region_copymode = false
+                } else if global.ed_region_blk_orig != -1 {
                     ed_region_commit(global.ed_region_last_dcol, global.ed_region_last_drow)
                 }
             }
@@ -442,6 +446,7 @@ if keyboard_check_pressed(global.key_region_select) {
             }
             global.ed_region_blk_keys2 = -1
             global.ed_region_scratch = -1
+            global.ed_region_copymode = false
             global.ed_region_sx = 0
             global.ed_region_sy = 0
             global.ed_region_ex = 0
@@ -463,7 +468,13 @@ if keyboard_check_pressed(global.key_region_cycle) {
         debug_log("Region: Mode cycled to " + string(global.ed_region_mode))
         if global.ed_region_state == 2 || global.ed_region_state == 3 {
             if global.ed_region_state == 3 {
-                if global.ed_region_blk_orig != -1 {
+                if global.ed_region_copymode {
+                    global.ed_region_copymode = false
+                    if global.ed_region_blk_orig != -1 {
+                        ds_list_destroy(global.ed_region_blk_orig)
+                    }
+                    global.ed_region_blk_orig = -1
+                } else if global.ed_region_blk_orig != -1 {
                     ed_region_commit(global.ed_region_last_dcol, global.ed_region_last_drow)
                 }
                 global.ed_region_state = 2
@@ -493,7 +504,13 @@ if global.ed_region_active {
             global.ed_region_blk = -1
         }
         if global.ed_region_state == 3 {
-            if global.ed_region_blk_orig != -1 {
+            if global.ed_region_copymode {
+                global.ed_region_copymode = false
+                if global.ed_region_blk_orig != -1 {
+                    ds_list_destroy(global.ed_region_blk_orig)
+                }
+                global.ed_region_blk_orig = -1
+            } else if global.ed_region_blk_orig != -1 {
                 ed_region_commit(global.ed_region_last_dcol, global.ed_region_last_drow)
             }
             global.ed_region_state = 2

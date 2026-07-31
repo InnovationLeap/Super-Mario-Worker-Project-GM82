@@ -49,6 +49,7 @@
 	|ed_region_draw
 	|ed_region_recalc
 	|ed_region_commit
+	|ed_region_paste
 	|place_meeting_region
 	|delete_coto_check
 	|transC

@@ -53,52 +53,85 @@ if _state == 2 || _state == 3 {
             _i += 1
         }
     }
-    if _state == 3 && global.ed_region_blk_orig != -1 {
+    if _state == 3 && (global.ed_region_blk_orig != -1 || global.ed_region_copymode) {
         _dcol = floor((mouse_x - global.ed_region_orig_x) / 32)
         _drow = floor((mouse_y - global.ed_region_orig_y) / 32)
         _minc = room_width / 32 - 1
         _maxc = 0
         _minr = room_height / 32 - 1
         _maxr = 0
-        _i = 0
-        while _i < ds_list_size(global.ed_region_blk_orig) {
-            _blk_str = ds_list_find_value(global.ed_region_blk_orig, _i)
-            _j = string_pos(",", _blk_str)
-            _col = real(string_copy(_blk_str, 1, _j - 1))
-            _blk_str = string_copy(_blk_str, _j + 1, string_length(_blk_str) - _j)
-            _j = string_pos(",", _blk_str)
-            _row = real(string_copy(_blk_str, 1, _j - 1))
-            _minc = min(_minc, _col)
-            _maxc = max(_maxc, _col)
-            _minr = min(_minr, _row)
-            _maxr = max(_maxr, _row)
-            _i += 1
+        if global.ed_region_copymode {
+            if global.ed_region_list != -1 {
+                _i = 0
+                while _i < ds_list_size(global.ed_region_list) {
+                    _id = ds_list_find_value(global.ed_region_list, _i)
+                    if instance_exists(_id) {
+                        _minc = min(_minc, floor(_id.bbox_left / 32))
+                        _maxc = max(_maxc, floor((_id.bbox_right - 1) / 32))
+                        _minr = min(_minr, floor(_id.bbox_top / 32))
+                        _maxr = max(_maxr, floor((_id.bbox_bottom - 1) / 32))
+                    }
+                    _i += 1
+                }
+            }
+        }
+        if global.ed_region_blk_orig != -1 {
+            _i = 0
+            while _i < ds_list_size(global.ed_region_blk_orig) {
+                _blk_str = ds_list_find_value(global.ed_region_blk_orig, _i)
+                _j = string_pos(",", _blk_str)
+                _col = real(string_copy(_blk_str, 1, _j - 1))
+                _blk_str = string_copy(_blk_str, _j + 1, string_length(_blk_str) - _j)
+                _j = string_pos(",", _blk_str)
+                _row = real(string_copy(_blk_str, 1, _j - 1))
+                _minc = min(_minc, _col)
+                _maxc = max(_maxc, _col)
+                _minr = min(_minr, _row)
+                _maxr = max(_maxr, _row)
+                _i += 1
+            }
         }
         _dcol = clamp(_dcol, -_minc, room_width / 32 - 1 - _maxc)
         _drow = clamp(_drow, -_minr, room_height / 32 - 1 - _maxr)
-        _i = 0
-        while _i < ds_list_size(global.ed_region_blk_orig) {
-            _blk_str = ds_list_find_value(global.ed_region_blk_orig, _i)
-            _j = string_pos(",", _blk_str)
-            _col = real(string_copy(_blk_str, 1, _j - 1))
-            _blk_str = string_copy(_blk_str, _j + 1, string_length(_blk_str) - _j)
-            _j = string_pos(",", _blk_str)
-            _row = real(string_copy(_blk_str, 1, _j - 1))
-            _val = real(string_copy(_blk_str, _j + 1, string_length(_blk_str) - _j))
-            _col = _col + _dcol
-            _row = _row + _drow
-            if _col >= 0 && _col < room_width / 32 && _row >= 0 && _row < room_height / 32 {
-                draw_set_alpha(0.5)
-                draw_sprite_ext(s_blocks, _val, _col * 32, _row * 32, 1, 1, 0, c_white, 0.5)
-                draw_set_alpha(1)
-                draw_set_color(c_lime)
-                draw_set_alpha(0.4)
-                draw_rectangle(_col * 32, _row * 32, _col * 32 + 32, _row * 32 + 32, false)
-                draw_set_alpha(1)
-                draw_set_color(c_lime)
-                draw_rectangle(_col * 32, _row * 32, _col * 32 + 32, _row * 32 + 32, true)
+        if global.ed_region_blk_orig != -1 {
+            _i = 0
+            while _i < ds_list_size(global.ed_region_blk_orig) {
+                _blk_str = ds_list_find_value(global.ed_region_blk_orig, _i)
+                _j = string_pos(",", _blk_str)
+                _col = real(string_copy(_blk_str, 1, _j - 1))
+                _blk_str = string_copy(_blk_str, _j + 1, string_length(_blk_str) - _j)
+                _j = string_pos(",", _blk_str)
+                _row = real(string_copy(_blk_str, 1, _j - 1))
+                _val = real(string_copy(_blk_str, _j + 1, string_length(_blk_str) - _j))
+                _col = _col + _dcol
+                _row = _row + _drow
+                if _col >= 0 && _col < room_width / 32 && _row >= 0 && _row < room_height / 32 {
+                    draw_set_alpha(0.5)
+                    draw_sprite_ext(s_blocks, _val, _col * 32, _row * 32, 1, 1, 0, c_white, 0.5)
+                    draw_set_alpha(1)
+                    draw_set_color(c_lime)
+                    draw_set_alpha(0.4)
+                    draw_rectangle(_col * 32, _row * 32, _col * 32 + 32, _row * 32 + 32, false)
+                    draw_set_alpha(1)
+                    draw_set_color(c_lime)
+                    draw_rectangle(_col * 32, _row * 32, _col * 32 + 32, _row * 32 + 32, true)
+                }
+                _i += 1
             }
-            _i += 1
+        }
+        if global.ed_region_copymode && global.ed_region_list != -1 {
+            _i = 0
+            while _i < ds_list_size(global.ed_region_list) {
+                _id = ds_list_find_value(global.ed_region_list, _i)
+                if instance_exists(_id) {
+                    if _id.sprite_index != -1 {
+                        draw_set_alpha(0.5)
+                        draw_sprite_ext(_id.sprite_index, _id.image_index, _id.x + _dcol * 32, _id.y + _drow * 32, 1, 1, 0, c_white, 0.5)
+                        draw_set_alpha(1)
+                    }
+                }
+                _i += 1
+            }
         }
     }
 }
@@ -153,7 +186,11 @@ if _state == 1 {
     _info = _info + " DRAWING"
 }
 if _state == 3 {
-    _info = _info + " MOVING"
+    if global.ed_region_copymode {
+        _info = _info + " PASTE"
+    } else {
+        _info = _info + " MOVING"
+    }
 }
 
 draw_set_font(o_edmain.cyferki)

@@ -215,11 +215,6 @@ if _state == 3 {
     if mouse_check_button_released(mb_left) {
         _inst_list = global.ed_region_list
         _blk_list = global.ed_region_blk
-        if global.ed_region_blk_orig != -1 {
-            _dcol = floor((mouse_x - global.ed_region_orig_x) / 32)
-            _drow = floor((mouse_y - global.ed_region_orig_y) / 32)
-            ed_region_commit(_dcol, _drow)
-        }
         _si = 0
         if _inst_list != -1 {
             _si = ds_list_size(_inst_list)
@@ -228,37 +223,49 @@ if _state == 3 {
         if _blk_list != -1 {
             _blk_temp = ds_list_size(_blk_list)
         }
+        if global.ed_region_blk_orig != -1 || global.ed_region_copymode {
+            _dcol = floor((mouse_x - global.ed_region_orig_x) / 32)
+            _drow = floor((mouse_y - global.ed_region_orig_y) / 32)
+            if global.ed_region_copymode {
+                ed_region_paste(_dcol, _drow)
+                global.ed_region_copymode = false
+            } else {
+                ed_region_commit(_dcol, _drow)
+            }
+        }
         debug_log("Region: Moved - blocks=" + string(_blk_temp) + ", instances=" + string(_si))
         global.ed_region_state = 2
     } else {
         if mouse_check_button(mb_left) {
-            _inst_list = global.ed_region_list
-            if _inst_list != -1 {
-                _dx = mouse_x - global.ed_region_mx
-                _dy = mouse_y - global.ed_region_my
-                _i = 0
-                while _i < ds_list_size(_inst_list) {
-                    _id = ds_list_find_value(_inst_list, _i)
-                    if !instance_exists(_id) {
-                        ds_list_delete(_inst_list, _i)
-                    } else {
-                        if _id.object_index == o_edmarkerblock {
-                            if _id.coto == 18 || _id.coto == 22 {
-                                _id.x = _id.x + _dx
-                                _id.y = 0
+            if !global.ed_region_copymode {
+                _inst_list = global.ed_region_list
+                if _inst_list != -1 {
+                    _dx = mouse_x - global.ed_region_mx
+                    _dy = mouse_y - global.ed_region_my
+                    _i = 0
+                    while _i < ds_list_size(_inst_list) {
+                        _id = ds_list_find_value(_inst_list, _i)
+                        if !instance_exists(_id) {
+                            ds_list_delete(_inst_list, _i)
+                        } else {
+                            if _id.object_index == o_edmarkerblock {
+                                if _id.coto == 18 || _id.coto == 22 {
+                                    _id.x = _id.x + _dx
+                                    _id.y = 0
+                                } else {
+                                    _id.x = _id.x + _dx
+                                    _id.y = _id.y + _dy
+                                }
                             } else {
                                 _id.x = _id.x + _dx
                                 _id.y = _id.y + _dy
                             }
-                        } else {
-                            _id.x = _id.x + _dx
-                            _id.y = _id.y + _dy
+                            _i += 1
                         }
-                        _i += 1
                     }
+                    global.ed_region_mx = mouse_x
+                    global.ed_region_my = mouse_y
                 }
-                global.ed_region_mx = mouse_x
-                global.ed_region_my = mouse_y
             }
             _blk_list = global.ed_region_blk
             if _blk_list != -1 {
@@ -278,69 +285,31 @@ if _state == 3 {
 
 if keyboard_check(vk_control) && keyboard_check_pressed(global.key_copy) {
     if global.ed_region_active && global.ed_region_state == 2 {
-        _inst_list = global.ed_region_list
-        _blk_list = global.ed_region_blk
-        if _inst_list != -1 {
-            _i = 0
-            while _i < ds_list_size(_inst_list) {
-                _id = ds_list_find_value(_inst_list, _i)
-                if instance_exists(_id) {
-                    _new_id = instance_create(_id.x + 32, _id.y + 32, _id.object_index)
-                    _new_id.coto = _id.coto
-                    if _id.object_index == o_edmarkerblock {
-                        _new_id.type = _id.type
-                        _new_id.anime = _id.anime
-                        _new_id.color = _id.color
-                        _new_id.ledge_type = _id.ledge_type
-                        _new_id.target = _id.target
-                        _new_id.velocity = _id.velocity
-                        _new_id.bgm_change = _id.bgm_change
-                        _new_id.bgp_change = _id.bgp_change
-                        _new_id.weather_change = _id.weather_change
-                        _new_id.height = _id.height
-                        _new_id.is_orange = _id.is_orange
-                        _new_id.scrollspeed = _id.scrollspeed
-                        _new_id.textMessage = _id.textMessage
-                    }
-                    if _id.object_index == o_edpassage {
-                        _new_id.wejscie = _id.wejscie
-                        _new_id.wyjscie = _id.wyjscie
-                        _new_id.exitx = _id.exitx + 32
-                        _new_id.exity = _id.exity + 32
-                        _new_id.tak = _id.tak
-                        _new_id.tak2 = _id.tak2
-                        _new_id.tak3 = _id.tak3
-                        _new_id.warpnum = _id.warpnum
-                    }
-                    if _id.object_index == o_edenemyblock {
-                        _new_id.fishendX = _id.fishendX + 32
-                        _new_id.fishendY = _id.fishendY + 32
-                    }
-                }
-                _i += 1
+        global.ed_region_copymode = true
+        global.ed_region_mx = mouse_x
+        global.ed_region_my = mouse_y
+        global.ed_region_state = 3
+        global.ed_region_last_dcol = 1
+        global.ed_region_last_drow = 1
+        global.ed_region_orig_x = mouse_x - 32
+        global.ed_region_orig_y = mouse_y - 32
+        if global.ed_region_blk != -1 {
+            if global.ed_region_blk_orig != -1 {
+                ds_list_destroy(global.ed_region_blk_orig)
             }
-            debug_log("Region: Copied " + string(ds_list_size(_inst_list)) + " instances")
-        }
-        if _blk_list != -1 {
-            _i = 0
-            while _i < ds_list_size(_blk_list) {
-                _blk_str = ds_list_find_value(_blk_list, _i)
-                _j = string_pos(",", _blk_str)
-                _newcol = real(string_copy(_blk_str, 1, _j - 1))
-                _blk_str = string_copy(_blk_str, _j + 1, string_length(_blk_str) - _j)
-                _j = string_pos(",", _blk_str)
-                _newrow = real(string_copy(_blk_str, 1, _j - 1))
-                _val = real(string_copy(_blk_str, _j + 1, string_length(_blk_str) - _j))
-                _target_col = _newcol + 1
-                _target_row = _newrow + 1
-                if _target_col < room_width / 32 && _target_row < room_height / 32 {
-                    if o_edmain.arrayetapu[_target_col, _target_row] == 0 {
-                        o_edmain.arrayetapu[_target_col, _target_row] = _val
-                    }
-                }
-                _i += 1
+            global.ed_region_blk_orig = ds_list_create()
+            for (_i = 0; _i < ds_list_size(global.ed_region_blk); _i += 1) {
+                ds_list_add(global.ed_region_blk_orig, ds_list_find_value(global.ed_region_blk, _i))
             }
-            debug_log("Region: Copied " + string(ds_list_size(_blk_list)) + " blocks")
         }
+        _si = 0
+        if global.ed_region_list != -1 {
+            _si = ds_list_size(global.ed_region_list)
+        }
+        _blk_temp = 0
+        if global.ed_region_blk != -1 {
+            _blk_temp = ds_list_size(global.ed_region_blk)
+        }
+        debug_log("Region: Copy-started " + string(_si) + " instances, " + string(_blk_temp) + " blocks")
     }
 }
