@@ -2,6 +2,7 @@ var _state, _sx, _sy, _ex, _ey, _i, _id, _blk_str, _j;
 var _col, _row, _val, _mode;
 var _type_str, _mode_str, _info;
 var _dcol, _drow;
+var _minc, _maxc, _minr, _maxr;
 
 _state = global.ed_region_state
 _sx = global.ed_region_sx
@@ -55,6 +56,26 @@ if _state == 2 || _state == 3 {
     if _state == 3 && global.ed_region_blk_orig != -1 {
         _dcol = floor((mouse_x - global.ed_region_orig_x) / 32)
         _drow = floor((mouse_y - global.ed_region_orig_y) / 32)
+        _minc = room_width / 32 - 1
+        _maxc = 0
+        _minr = room_height / 32 - 1
+        _maxr = 0
+        _i = 0
+        while _i < ds_list_size(global.ed_region_blk_orig) {
+            _blk_str = ds_list_find_value(global.ed_region_blk_orig, _i)
+            _j = string_pos(",", _blk_str)
+            _col = real(string_copy(_blk_str, 1, _j - 1))
+            _blk_str = string_copy(_blk_str, _j + 1, string_length(_blk_str) - _j)
+            _j = string_pos(",", _blk_str)
+            _row = real(string_copy(_blk_str, 1, _j - 1))
+            _minc = min(_minc, _col)
+            _maxc = max(_maxc, _col)
+            _minr = min(_minr, _row)
+            _maxr = max(_maxr, _row)
+            _i += 1
+        }
+        _dcol = clamp(_dcol, -_minc, room_width / 32 - 1 - _maxc)
+        _drow = clamp(_drow, -_minr, room_height / 32 - 1 - _maxr)
         _i = 0
         while _i < ds_list_size(global.ed_region_blk_orig) {
             _blk_str = ds_list_find_value(global.ed_region_blk_orig, _i)
