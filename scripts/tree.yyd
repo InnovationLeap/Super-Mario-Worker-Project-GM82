@@ -43,6 +43,7 @@
 	|gz_compress
 	|gz_selftest
 +Other
+	|corpse_anim
 	|draw_prefs_highlight
 	|self_coto_check
 	|ed_region_select

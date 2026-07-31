@@ -1141,3 +1141,4 @@ ed_region_recalc
 place_meeting_region
 ed_region_commit
 ed_region_paste
+corpse_anim

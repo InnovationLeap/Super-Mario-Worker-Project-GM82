@@ -17,8 +17,6 @@ applies_to=self
 */
 if global.pauza=0 {
 
-if iyor<10 {iyor+=0.5}
-y+=iyor
-if y>view_yview[0]+700 {instance_destroy()}
+corpse_anim(0,0);
 
 }
