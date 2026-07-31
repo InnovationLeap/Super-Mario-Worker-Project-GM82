@@ -1621,10 +1621,67 @@ if globaloption>0
             }
         }
 
+        //========== PAGE 8: 选区编辑键 ==========
+        if keyboard_page=8{
+            draw_set_color(c_white)
+            draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- Region Selection ---'))
+
+            // 48: Region Cycle (T) 选区判定模式切换
+            draw_set_color(c_white)
+            draw_text(view_xview[0]+40,view_yview[0]+125,string_upper('Region Mode Cycle'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+125,string_upper(keyshow48))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 115, 220, 20)&& kliknieto=0{
+                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+115, 1.4, 0.8, 0.2);
+                if mouse_check_button(mb_left){keydetect=48;keydetect2=1}
+            }
+            if keydetect=48{keyshow48='press a key...'}else{keyshow48=setkey[global.key_region_cycle]}
+            if keydetect=48 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.key_region_cycle=keyboard_lastkey
+                ini_write_real('KeyConfig','region_cycle',global.key_region_cycle)
+                keydetect=0
+            }
+
+            // 49: Region Select (U) 进入/退出选区模式
+            draw_set_color(c_white)
+            draw_text(view_xview[0]+40,view_yview[0]+155,string_upper('Region Select'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+155,string_upper(keyshow49))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 145, 220, 20)&& kliknieto=0{
+                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+145, 1.4, 0.8, 0.2);
+                if mouse_check_button(mb_left){keydetect=49;keydetect2=1}
+            }
+            if keydetect=49{keyshow49='press a key...'}else{keyshow49=setkey[global.key_region_select]}
+            if keydetect=49 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.key_region_select=keyboard_lastkey
+                ini_write_real('KeyConfig','region_select',global.key_region_select)
+                keydetect=0
+            }
+
+            // 66: Copy Region (Ctrl+C) 选区复制
+            draw_set_color(c_white)
+            draw_text(view_xview[0]+40,view_yview[0]+185,string_upper('Copy Region (Ctrl+)'))
+            draw_set_halign(fa_right)
+            draw_text(view_xview[0]+405,view_yview[0]+185,string_upper(keyshow66))
+            draw_set_halign(fa_left)
+            if ed_hit(40, 175, 220, 20)&& kliknieto=0{
+                draw_prefs_highlight(view_xview[0]+40, view_yview[0]+175, 1.4, 0.8, 0.2);
+                if mouse_check_button(mb_left){keydetect=66;keydetect2=1}
+            }
+            if keydetect=66{keyshow66='press a key...'}else{keyshow66=setkey[global.key_copy]}
+            if keydetect=66 && keyboard_check_released(vk_anykey) && (keyboard_lastkey!=0&&keyboard_lastkey<=222){
+                global.key_copy=keyboard_lastkey
+                ini_write_real('KeyConfig','copy',global.key_copy)
+                keydetect=0
+            }
+        }
+
         //========== 页面导航按钮 ==========
         // 页面指示器
         draw_set_color(c_yellow)
-        draw_text(view_xview[0]+40,view_yview[0]+410,string_upper('Page ')+string(keyboard_page+1)+'/8')
+        draw_text(view_xview[0]+40,view_yview[0]+410,string_upper('Page ')+string(keyboard_page+1)+'/9')
         draw_set_color(c_white)
         // 上一页
         if keyboard_page>0 && keydetect=0{
@@ -1636,7 +1693,7 @@ if globaloption>0
             }
         }
         // 下一页
-        if keyboard_page<7 && keydetect=0{
+        if keyboard_page<8 && keydetect=0{
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+446,string_upper('< Next Page'))
             if ed_hit(40, 436, 160, 20)&& kliknieto=0{
