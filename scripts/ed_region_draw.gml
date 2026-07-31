@@ -2,6 +2,7 @@ var _state, _sx, _sy, _ex, _ey, _i, _id, _blk_str, _j;
 var _col, _row, _val, _mode;
 var _type_str, _mode_str, _info;
 var _dcol, _drow;
+var _dox, _doy;
 var _minc, _maxc, _minr, _maxr;
 
 _state = global.ed_region_state
@@ -60,21 +61,6 @@ if _state == 2 || _state == 3 {
         _maxc = 0
         _minr = room_height / 32 - 1
         _maxr = 0
-        if global.ed_region_copymode {
-            if global.ed_region_list != -1 {
-                _i = 0
-                while _i < ds_list_size(global.ed_region_list) {
-                    _id = ds_list_find_value(global.ed_region_list, _i)
-                    if instance_exists(_id) {
-                        _minc = min(_minc, floor(_id.bbox_left / 32))
-                        _maxc = max(_maxc, floor((_id.bbox_right - 1) / 32))
-                        _minr = min(_minr, floor(_id.bbox_top / 32))
-                        _maxr = max(_maxr, floor((_id.bbox_bottom - 1) / 32))
-                    }
-                    _i += 1
-                }
-            }
-        }
         if global.ed_region_blk_orig != -1 {
             _i = 0
             while _i < ds_list_size(global.ed_region_blk_orig) {
@@ -120,13 +106,15 @@ if _state == 2 || _state == 3 {
             }
         }
         if global.ed_region_copymode && global.ed_region_list != -1 {
+            _dox = floor((mouse_x - global.ed_region_orig_x) / 16) * 16
+            _doy = floor((mouse_y - global.ed_region_orig_y) / 16) * 16
             _i = 0
             while _i < ds_list_size(global.ed_region_list) {
                 _id = ds_list_find_value(global.ed_region_list, _i)
                 if instance_exists(_id) {
                     if _id.sprite_index != -1 {
                         draw_set_alpha(0.5)
-                        draw_sprite_ext(_id.sprite_index, _id.image_index, _id.x + _dcol * 32, _id.y + _drow * 32, 1, 1, 0, c_white, 0.5)
+                        draw_sprite_ext(_id.sprite_index, _id.image_index, _id.x + _dox, _id.y + _doy, 1, 1, 0, c_white, 0.5)
                         draw_set_alpha(1)
                     }
                 }

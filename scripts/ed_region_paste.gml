@@ -7,11 +7,12 @@ var _tcol, _trow;
 var _minc, _maxc, _minr, _maxr, _id, _new_id;
 var _new_list, _new_blk;
 var _bx1, _by1, _bx2, _by2;
+var _iox, _ioy;
 
 _dcol = argument0
 _drow = argument1
 
-// 1. 钳制偏移：包围盒覆盖方块与实例，保证副本整体不越出房间
+// 1. 钳制方块偏移：按方块包围盒，保证方块整体不越出房间（实例独立按 16px 偏移，不钳制）
 _minc = room_width / 32 - 1
 _maxc = 0
 _minr = room_height / 32 - 1
@@ -28,17 +29,6 @@ if global.ed_region_blk_orig != -1 {
         _maxc = max(_maxc, _newcol)
         _minr = min(_minr, _newrow)
         _maxr = max(_maxr, _newrow)
-    }
-}
-if global.ed_region_list != -1 {
-    for (_i = 0; _i < ds_list_size(global.ed_region_list); _i += 1) {
-        _id = ds_list_find_value(global.ed_region_list, _i)
-        if instance_exists(_id) {
-            _minc = min(_minc, floor(_id.bbox_left / 32))
-            _maxc = max(_maxc, floor((_id.bbox_right - 1) / 32))
-            _minr = min(_minr, floor(_id.bbox_top / 32))
-            _maxr = max(_maxr, floor((_id.bbox_bottom - 1) / 32))
-        }
     }
 }
 _dcol = clamp(_dcol, -_minc, room_width / 32 - 1 - _maxc)
@@ -63,15 +53,17 @@ if global.ed_region_blk_orig != -1 {
     }
 }
 
-// 3. 实例副本：创建于偏移位置，复制属性，收集新 id
+// 3. 实例副本：创建于 16px 网格偏移位置，复制属性，收集新 id
 _new_list = -1
+_iox = floor((mouse_x - global.ed_region_orig_x) / 16) * 16
+_ioy = floor((mouse_y - global.ed_region_orig_y) / 16) * 16
 if global.ed_region_list != -1 {
     if ds_list_size(global.ed_region_list) > 0 {
         _new_list = ds_list_create()
         for (_i = 0; _i < ds_list_size(global.ed_region_list); _i += 1) {
             _id = ds_list_find_value(global.ed_region_list, _i)
             if instance_exists(_id) {
-                _new_id = instance_create(_id.x + _dcol * 32, _id.y + _drow * 32, _id.object_index)
+                _new_id = instance_create(_id.x + _iox, _id.y + _ioy, _id.object_index)
                 _new_id.coto = _id.coto
                 if _id.object_index == o_edmarkerblock {
                     _new_id.type = _id.type
@@ -91,16 +83,16 @@ if global.ed_region_list != -1 {
                 if _id.object_index == o_edpassage {
                     _new_id.wejscie = _id.wejscie
                     _new_id.wyjscie = _id.wyjscie
-                    _new_id.exitx = _id.exitx + _dcol * 32
-                    _new_id.exity = _id.exity + _drow * 32
+                    _new_id.exitx = _id.exitx + _iox
+                    _new_id.exity = _id.exity + _ioy
                     _new_id.tak = _id.tak
                     _new_id.tak2 = _id.tak2
                     _new_id.tak3 = _id.tak3
                     _new_id.warpnum = _id.warpnum
                 }
                 if _id.object_index == o_edenemyblock {
-                    _new_id.fishendX = _id.fishendX + _dcol * 32
-                    _new_id.fishendY = _id.fishendY + _drow * 32
+                    _new_id.fishendX = _id.fishendX + _iox
+                    _new_id.fishendY = _id.fishendY + _ioy
                 }
                 ds_list_add(_new_list, _new_id)
             }

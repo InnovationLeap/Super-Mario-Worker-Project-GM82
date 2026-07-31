@@ -7,6 +7,7 @@ var _key, _keys_a;
 var _old_val, _new_val;
 var _blk_temp;
 var _dx, _dy;
+var _ox, _oy;
 
 _state = global.ed_region_state
 
@@ -164,6 +165,18 @@ if _state == 2 {
                     global.ed_region_last_drow = 0
                     global.ed_region_orig_x = mouse_x
                     global.ed_region_orig_y = mouse_y
+                    _inst_list = global.ed_region_list
+                    if _inst_list != -1 {
+                        _i = 0
+                        while _i < ds_list_size(_inst_list) {
+                            _id = ds_list_find_value(_inst_list, _i)
+                            if instance_exists(_id) {
+                                _id.ed_drag_sx = _id.x
+                                _id.ed_drag_sy = _id.y
+                            }
+                            _i += 1
+                        }
+                    }
                     if global.ed_region_blk != -1 {
                         if global.ed_region_blk_orig != -1 {
                             ds_list_destroy(global.ed_region_blk_orig)
@@ -240,8 +253,8 @@ if _state == 3 {
             if !global.ed_region_copymode {
                 _inst_list = global.ed_region_list
                 if _inst_list != -1 {
-                    _dx = mouse_x - global.ed_region_mx
-                    _dy = mouse_y - global.ed_region_my
+                    _ox = floor((mouse_x - global.ed_region_orig_x) / 16) * 16
+                    _oy = floor((mouse_y - global.ed_region_orig_y) / 16) * 16
                     _i = 0
                     while _i < ds_list_size(_inst_list) {
                         _id = ds_list_find_value(_inst_list, _i)
@@ -250,21 +263,19 @@ if _state == 3 {
                         } else {
                             if _id.object_index == o_edmarkerblock {
                                 if _id.coto == 18 || _id.coto == 22 {
-                                    _id.x = _id.x + _dx
+                                    _id.x = _id.ed_drag_sx + _ox
                                     _id.y = 0
                                 } else {
-                                    _id.x = _id.x + _dx
-                                    _id.y = _id.y + _dy
+                                    _id.x = _id.ed_drag_sx + _ox
+                                    _id.y = _id.ed_drag_sy + _oy
                                 }
                             } else {
-                                _id.x = _id.x + _dx
-                                _id.y = _id.y + _dy
+                                _id.x = _id.ed_drag_sx + _ox
+                                _id.y = _id.ed_drag_sy + _oy
                             }
                             _i += 1
                         }
                     }
-                    global.ed_region_mx = mouse_x
-                    global.ed_region_my = mouse_y
                 }
             }
             _blk_list = global.ed_region_blk
