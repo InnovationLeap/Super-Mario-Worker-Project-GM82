@@ -366,7 +366,9 @@ if coto=39 {
             rotor[rotomenu+1]=floor(min(ratio,6000))
             rotoa[rotomenu+1]=floor(min(angle,360))
             rotoc[rotomenu+1]=floor(min(agcount,360))
-            rotod[rotomenu+1]=floor(min(max(agdir,0),1))}
+            rotod[rotomenu+1]=floor(min(max(agdir,0),1))
+            // NET-SYNC: 金飞龟轨道参数修改
+            ed_net_ops_send_update(id, 8)}
          if rotomenu=rotoord{
             rotoord+=1
             var ratio,angle;
@@ -377,12 +379,16 @@ if coto=39 {
             rotor[rotomenu+1]=floor(min(ratio,6000))
             rotoa[rotomenu+1]=floor(min(angle,360))
             rotoc[rotomenu+1]=floor(min(agcount,360))
-            rotod[rotomenu+1]=floor(min(max(agdir,0),1))}
+            rotod[rotomenu+1]=floor(min(max(agdir,0),1))
+            // NET-SYNC: 金飞龟新增轨道
+            ed_net_ops_send_update(id, 8)}
          if rotomenu>rotoord{var i,j;
          j=get_integer('Set the number of the gold koopa paratroopa you want to delete.(0 stands for not deleting)',0)
          if j>0 && j <=rotoord{{for(i=1;i<=rotoord-1;i+=1)
          if i>=j{rotor[i]=rotor[i+1];rotoa[i]=rotoa[i+1];rotoc[i]=rotoc[i+1];rotod[i]=rotod[i+1]}}
-         rotor[rotoord]=32;rotoa[rotoord]=0;rotoc[rotoord]=1;rotod[rotoord]=1;rotoord-=1}}}}
+         rotor[rotoord]=32;rotoa[rotoord]=0;rotoc[rotoord]=1;rotod[rotoord]=1;rotoord-=1
+         // NET-SYNC: 金飞龟删除轨道
+         ed_net_ops_send_update(id, 8)}}}}
          draw_circle(x+16,y+16,rotor[rotoord],true)
          if test2=2&& mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 &&keyboard_check(global.key_submenu)&& global.picking = false{
          var rotomenu;
@@ -396,7 +402,9 @@ if coto=39 {
             rotor[rotoord]=floor(min(ratio,6000))
             rotoa[rotoord]=floor(min(angle,360))
             rotoc[rotoord]=floor(min(agcount,360))
-            rotod[rotoord]=floor(min(max(agdir,0),1))}
+            rotod[rotoord]=floor(min(max(agdir,0),1))
+            // NET-SYNC: 金飞龟轨道参数修改（单轨视图）
+            ed_net_ops_send_update(id, 8)}
          if rotomenu=1{
             rotoord+=1
             var ratio,angle;
@@ -407,7 +415,9 @@ if coto=39 {
             rotor[rotoord]=floor(min(ratio,6000))
             rotoa[rotoord]=floor(min(angle,360))
             rotoc[rotoord]=floor(min(agcount,360))
-            rotod[rotoord]=floor(min(max(agdir,0),1))}}
+            rotod[rotoord]=floor(min(max(agdir,0),1))
+            // NET-SYNC: 金飞龟新增轨道（单轨视图）
+            ed_net_ops_send_update(id, 8)}}
 
     if test2=1
             {
@@ -493,6 +503,8 @@ if coto=35
                 o_edmain.wiatrak=0
                 test2=2
                 o_edmain.kliknieto=1
+                // NET-SYNC: 跳乌龟 Shift 菜单修改高度
+                ed_net_ops_send_update(id, 7)
         }
         draw_line(x+16,y,x+16,y-jumph)
         draw_sprite_ext(s_enemiesbank,34,x+16,y-jumph+32,1,1,0,c_white,0.5)

@@ -1683,7 +1683,7 @@ applies_to=self
 */
 //fast retry 恢复背景音量;关于死亡时降低音量请访问马里奥狗带物件
 
-if(global.muzyka='146') && !instance_exists(o_skuszak){
+if(string(global.muzyka)='146') && !instance_exists(o_skuszak){
     if vvvv<1 && !setonce {vvvv=0.2;setonce=true;}
     surface_volume = 0.01*(global.poziomwody - y + 50)
     mm_set_volume(global.musicplay,vvvv*(surface_volume))
@@ -1790,7 +1790,7 @@ if gwiazdka>0
     //无敌星音乐重置
     if gwiazdka=1 && instance_number(object112)<>0 {mm_play_ext('.\Data\MW\ktkm8.dll',0)}
     if gwiazdka=1 && instance_number(object112)=0 {
-        if (global.muzyka == "600" || global.muzyka == "0") {
+        if (string(global.muzyka) == "600" || string(global.muzyka) == "0") {
             mm_stop_all_ext();
         } else {
             Music_Play()//大叔傻贲大叔傻贲大叔傻贲大叔傻贲大叔傻贲大叔傻贲大叔傻贲

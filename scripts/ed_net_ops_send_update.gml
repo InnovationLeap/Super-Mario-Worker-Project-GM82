@@ -1,9 +1,10 @@
 // ed_net_ops_send_update(inst, subop)
 // 在工具落定完成点广播 op19 参数更新（实例须存活）
-// subop: 1=探照灯(rotor/rotoa/rotomr/rotors/additional3/is_petal) 2=金飞龟(rotor/rotoa/additional3)
+// subop: 1=探照灯(rotor/rotoa/rotomr/rotors/additional3/is_petal) 2=金飞龟(rotor/rota/additional3)
 //        3=鱼(fishendX/fishendY) 4=镜头(camera_endX/Y) 5=水位(water_endX/Y)
 //        6=场景控制元件(bgm_change/bgm/bgp_change/bgp/linked/height/weather 七项)
-var _netid;
+//        7=跳乌龟(jumph) 8=金飞龟多轨道(rotoord+rotor/rota/rotoc/rotod 逐轨)
+var _netid, _i;
 _netid = 0
 if instance_exists(argument0) {
     with(argument0) {
@@ -58,6 +59,18 @@ if _netid <> 0 && instance_exists(o_ednet) && o_ednet.net_state = 3 {
         buffer_write_u16(o_ednet.net_sendbuf, argument0.windy)
         buffer_write_u16(o_ednet.net_sendbuf, argument0.darkness)
         buffer_write_u16(o_ednet.net_sendbuf, argument0.brightness)
+    }
+    if argument1 = 7 {
+        buffer_write_u32(o_ednet.net_sendbuf, argument0.jumph * 100)
+    }
+    if argument1 = 8 {
+        buffer_write_u16(o_ednet.net_sendbuf, argument0.rotoord)
+        for (_i = 1; _i <= argument0.rotoord; _i += 1) {
+            buffer_write_u32(o_ednet.net_sendbuf, argument0.rotor[_i])
+            buffer_write_u32(o_ednet.net_sendbuf, argument0.rotoa[_i])
+            buffer_write_u32(o_ednet.net_sendbuf, argument0.rotoc[_i])
+            buffer_write_u16(o_ednet.net_sendbuf, argument0.rotod[_i])
+        }
     }
     socket_write_message(o_ednet.net_sock, o_ednet.net_sendbuf)
     socket_send(o_ednet.net_sock)

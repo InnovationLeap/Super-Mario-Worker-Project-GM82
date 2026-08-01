@@ -30,6 +30,6 @@ if wiatrak=4 && mouse_check_button(mb_left) && kliknieto=0
     wiatrak=0
     fofo.test2=2
     kliknieto=1
-    // NET-SYNC: 完成点——金飞龟落定（rotor/rotoa/additional3）
-    ed_net_ops_send_update(fofo, 2)
+    // NET-SYNC: 完成点——金飞龟落定（rotoord/rotor/rota/rotoc/rotod 全轨道）
+    ed_net_ops_send_update(fofo, 8)
     }

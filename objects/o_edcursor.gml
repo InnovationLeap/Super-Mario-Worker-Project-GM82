@@ -9,11 +9,13 @@ applies_to=self
 if instance_exists(o_edmain) && instance_exists(o_ednet) {
     if o_ednet.net_peer_cursor_time > 0 {
         draw_set_blend_mode(bm_subtract)
-        draw_sprite_ext(s_edcursormask, 0, o_ednet.net_peer_mx, o_ednet.net_peer_my, 1, 1, 0, c_white, 1)
+        draw_sprite_ext(s_edcursormask, 0, o_ednet.net_peer_mx + 16, o_ednet.net_peer_my, 1, 1, 0, c_white, 1)
         draw_set_blend_mode(bm_normal)
-        draw_sprite_ext(s_edcursor, 0, o_ednet.net_peer_mx, o_ednet.net_peer_my, 1, 1, 0, c_red, 1)
+        draw_sprite_ext(s_edcursor, 0, o_ednet.net_peer_mx + 16, o_ednet.net_peer_my, 1, 1, 0, c_red, 1)
         draw_set_color(c_white)
-        fw_draw_set_font(o_ednet.net_font)
-        fw_draw_text(o_ednet.net_peer_mx + 14, o_ednet.net_peer_my + 6, o_ednet.net_peer_name)
+        if o_ednet.net_font > 0 {
+            fw_draw_set_font(o_ednet.net_font)
+        }
+        fw_draw_text(o_ednet.net_peer_mx + 30, o_ednet.net_peer_my + 6, o_ednet.net_peer_name)
     }
 }

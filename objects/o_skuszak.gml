@@ -20,7 +20,7 @@ applies_to=self
 if(global.fast_retry){
     if(vvv>0.2){
     vvv-=0.15;
-    if (global.muzyka='146'){
+    if (string(global.muzyka)='146'){
         if !getv{
             surface_get = mm_get_volume(global.musicplay);
             water_get = mm_get_volume(global.musicplay2);

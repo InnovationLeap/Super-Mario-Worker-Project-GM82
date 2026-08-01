@@ -26,6 +26,8 @@ if argument0 = 4 {
     with(o_edpassage){shuiguanhele = 0; shuiguanhele2 = 0}
     // NET-SYNC: 完成点——op16 cat4 广播（warpnum/wejscie/exitx/exity/wyjscie/x/y，远端创建或更新）
     ed_net_ops_send_create(fofo, 4)
+    // NET-SYNC: 配对完成后重算全部水管 warpnum（两端按 (x,y) 排序收敛，防交错放置重复编号）
+    ed_passage_reindex()
     return fofo
 }
 return -1

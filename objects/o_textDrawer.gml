@@ -6,17 +6,17 @@ applies_to=self
 */
 /*
 //Fox Writing init
-fw_release_cache();
-fw_set_encoding("GB18030");
-testfont = fw_add_font_from_file(".\Fonts\message.ttf", 14, false, false, true)
-fw_draw_set_font(testfont);
-fw_draw_set_halign(fa_left);
-fw_draw_set_valign(fa_bottom);
-fw_enable_pixel_alignment(true);
-draw_set_color(c_white)
-fw_draw_set_line_spacing(4)
+//fw_release_cache();
+//fw_set_encoding("GB18030");
+//fw_draw_set_halign(fa_left);
+//fw_draw_set_valign(fa_bottom);
+//fw_enable_pixel_alignment(true);
+//draw_set_color(c_white)
+//fw_draw_set_line_spacing(4)
 //Fox Writing init end
 */
+
+testfont = fw_add_font_from_file(".\Fonts\message.ttf", 14, false, false, true)
 
 global.isDisplaying = -1
 textMessage = ""
@@ -39,6 +39,8 @@ if pointerReset = 1{
     charCounter = 0
     pointerReset = 0
 }
+
+fw_draw_set_font(testfont)
 
 if global.isDisplaying && keyboard_check_pressed(vk_enter){
     global.isDisplaying=-1

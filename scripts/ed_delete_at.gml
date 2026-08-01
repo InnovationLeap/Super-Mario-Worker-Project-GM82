@@ -78,6 +78,8 @@ if argument0 = 5 {
     _t = instance_position(argument1, argument2, o_edpassage)
     ed_net_ops_send_delete(_t)
     with(_t){instance_destroy()}
+    // NET-SYNC: 删除后重算水管 warpnum
+    ed_passage_reindex()
     return -1
 }
 return -1

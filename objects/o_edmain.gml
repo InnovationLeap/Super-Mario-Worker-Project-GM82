@@ -1130,7 +1130,10 @@ if costawia6=7 && mouse_check_button(mb_left) && kliknieto=0 && czywybieraniebac
 if costawia6=13 && mouse_check_button(mb_left) && kliknieto=0 && czywybieranieback=0
     {var warning; warning=show_question('Do you REALLY want to load a level WITHOUT the current level saved???')
     if warning=1 {
-    global.autosavename='';Load_Script_Main()}
+    global.autosavename='';Load_Script_Main()
+    // NET-SYNC: 房主 Load 后全量同步给客户端
+    ed_net_ops_send_full()
+    ed_net_ops_send_settings()}
     if warning=0 {exit}
     }
 
@@ -4630,7 +4633,10 @@ setting_mode = 0 && wiatrak = 0
 {
     var warning; warning=show_question('Do you REALLY want to load a level WITHOUT the current level saved???')
     if warning=1 {
-    global.autosavename='';Load_Script_Main()}
+    global.autosavename='';Load_Script_Main()
+    // NET-SYNC: 房主 Load 后全量同步给客户端
+    ed_net_ops_send_full()
+    ed_net_ops_send_settings()}
     if warning=0 {exit}
 }
 

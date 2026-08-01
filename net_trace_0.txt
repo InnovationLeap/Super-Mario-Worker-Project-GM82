@@ -1,0 +1,209 @@
+S16 cato=2 netid=93 coto=1 x=256 y=352
+S16 cato=2 netid=94 coto=1 x=288 y=352
+S16 cato=2 netid=95 coto=1 x=288 y=320
+S16 cato=2 netid=96 coto=1 x=320 y=320
+S16 cato=2 netid=97 coto=1 x=352 y=320
+S16 cato=2 netid=98 coto=1 x=384 y=320
+S16 cato=2 netid=99 coto=1 x=416 y=320
+S16 cato=2 netid=100 coto=14 x=576 y=64
+S16 cato=2 netid=101 coto=14 x=576 y=96
+S16 cato=2 netid=102 coto=14 x=576 y=128
+S16 cato=2 netid=103 coto=14 x=576 y=160
+S16 cato=2 netid=104 coto=14 x=576 y=192
+S16 cato=2 netid=105 coto=14 x=576 y=224
+S16 cato=2 netid=106 coto=14 x=576 y=256
+S16 cato=2 netid=107 coto=14 x=576 y=288
+S16 cato=3 netid=108 coto=29 x=608 y=192
+S17 netid=108
+S16 cato=3 netid=109 coto=29 x=608 y=192
+S17 netid=109
+S16 cato=3 netid=110 coto=29 x=608 y=192
+S20 settings broadcast
+R16 netid=65596 cato=2 coto=2 inst=101051
+R20 settings applied bg=12 muz=28
+R16 netid=65597 cato=2 coto=16 inst=101180
+R16 netid=65598 cato=2 coto=16 inst=101181
+R16 netid=65599 cato=2 coto=16 inst=101182
+R17 netid=65599 destroyed inst=101182
+R17 netid=65598 destroyed inst=101181
+R17 netid=65597 destroyed inst=101180
+R16 netid=65600 cato=2 coto=16 inst=101183
+R17 netid=65600 destroyed inst=101183
+R16 netid=65601 cato=2 coto=16 inst=101184
+R17 netid=65601 destroyed inst=101184
+R16 netid=65602 cato=2 coto=16 inst=101185
+R17 netid=65602 destroyed inst=101185
+R16 netid=65603 cato=2 coto=16 inst=101186
+R17 netid=65603 destroyed inst=101186
+R16 netid=65604 cato=2 coto=13 inst=101187
+R17 netid=65604 destroyed inst=101187
+S16 cato=2 netid=111 coto=1 x=288 y=32
+S16 cato=2 netid=112 coto=1 x=320 y=32
+S17 netid=112
+S17 netid=111
+S16 cato=0 netid=113 coto=5 x=320 y=32
+S16 cato=0 netid=114 coto=5 x=352 y=32
+S16 cato=0 netid=115 coto=5 x=384 y=32
+S16 cato=0 netid=116 coto=5 x=416 y=32
+S16 cato=0 netid=117 coto=5 x=448 y=32
+S16 cato=0 netid=118 coto=5 x=480 y=32
+S17 netid=118
+S17 netid=117
+S17 netid=116
+S17 netid=115
+S17 netid=114
+S17 netid=113
+S16 cato=1 netid=119 coto=16 x=544 y=128
+S16 cato=1 netid=120 coto=16 x=544 y=160
+S16 cato=1 netid=121 coto=16 x=544 y=192
+S16 cato=1 netid=122 coto=16 x=544 y=224
+S16 cato=1 netid=123 coto=16 x=544 y=256
+S16 cato=1 netid=124 coto=16 x=544 y=288
+S16 cato=1 netid=125 coto=16 x=544 y=320
+S17 netid=125
+S17 netid=124
+S17 netid=123
+S17 netid=122
+S17 netid=121
+S17 netid=120
+S17 netid=119
+S16 cato=3 netid=126 coto=29 x=608 y=96
+S16 cato=3 netid=127 coto=29 x=608 y=64
+S16 cato=3 netid=128 coto=29 x=608 y=32
+S16 cato=3 netid=129 coto=29 x=608 y=0
+S16 cato=3 netid=130 coto=29 x=576 y=0
+S16 cato=3 netid=131 coto=29 x=544 y=0
+S16 cato=3 netid=132 coto=29 x=512 y=0
+S16 cato=3 netid=133 coto=29 x=480 y=0
+S16 cato=3 netid=134 coto=29 x=448 y=0
+S16 cato=3 netid=135 coto=29 x=416 y=0
+S17 netid=135
+S17 netid=134
+S17 netid=133
+S17 netid=132
+S17 netid=131
+S17 netid=130
+S17 netid=129
+S17 netid=128
+S17 netid=127
+S17 netid=126
+S17 SKIP netid=0
+S16 cato=1 netid=136 coto=35 x=576 y=416
+R16 netid=65605 cato=3 coto=18 inst=101214
+R16 netid=65606 cato=3 coto=18 inst=101215
+R16 netid=65607 cato=3 coto=18 inst=101216
+R16 netid=65608 cato=1 coto=20 inst=101217
+R19 netid=65608 subop=1 applied inst=101217
+S16 cato=1 netid=137 coto=35 x=544 y=64
+S17 netid=137
+S22 full w=20 h=15 insts=0
+S20 settings broadcast
+R16 netid=65537 cato=3 coto=18 inst=100357
+R16 netid=65538 cato=3 coto=18 inst=100358
+R16 netid=65539 cato=3 coto=18 inst=100359
+R16 netid=65540 cato=3 coto=18 inst=100360
+R16 netid=65541 cato=3 coto=19 inst=100361
+R16 netid=65542 cato=3 coto=26 inst=100362
+R16 netid=65543 cato=3 coto=26 inst=100391
+R16 netid=65544 cato=3 coto=26 inst=100392
+S22 full w=20 h=15 insts=0
+S20 settings broadcast
+R16 netid=65537 cato=1 coto=39 inst=101036
+R19 netid=65537 subop=2 applied inst=101036
+S16 cato=1 netid=1 coto=1 x=288 y=320
+S16 cato=1 netid=2 coto=1 x=320 y=320
+S16 cato=1 netid=3 coto=1 x=352 y=320
+S16 cato=3 netid=4 coto=23 x=272 y=128
+S16 cato=3 netid=5 coto=23 x=528 y=288
+S16 cato=1 netid=6 coto=35 x=480 y=192
+S16 cato=1 netid=7 coto=40 x=320 y=96
+S19 netid=7 subop=3
+S16 cato=1 netid=8 coto=41 x=416 y=320
+S19 netid=8 subop=3
+S16 cato=1 netid=9 coto=41 x=288 y=224
+S19 netid=9 subop=3
+R16 netid=65538 cato=3 coto=34 inst=101049
+R19 netid=65538 subop=4 applied inst=101049
+R16 netid=65539 cato=4 coto=0 inst=101051
+S16 cato=4 netid=10 coto=0 x=320 y=256
+R16 netid=65540 cato=4 coto=0 inst=101053
+S16 cato=3 netid=11 coto=29 x=288 y=352
+S16 cato=3 netid=12 coto=29 x=320 y=352
+S16 cato=3 netid=13 coto=29 x=96 y=256
+S16 cato=3 netid=14 coto=19 x=288 y=256
+S16 cato=1 netid=15 coto=1 x=512 y=0
+S16 cato=1 netid=16 coto=1 x=544 y=0
+S16 cato=1 netid=17 coto=1 x=544 y=32
+S16 cato=1 netid=18 coto=1 x=512 y=32
+S16 cato=1 netid=19 coto=1 x=512 y=64
+S16 cato=1 netid=20 coto=1 x=544 y=64
+S16 cato=1 netid=21 coto=1 x=544 y=96
+S16 cato=1 netid=22 coto=1 x=512 y=96
+S16 cato=1 netid=23 coto=1 x=512 y=128
+S16 cato=1 netid=24 coto=1 x=544 y=128
+S16 cato=1 netid=25 coto=1 x=576 y=128
+S16 cato=1 netid=26 coto=1 x=576 y=96
+S16 cato=1 netid=27 coto=1 x=576 y=64
+S16 cato=1 netid=28 coto=1 x=576 y=32
+S16 cato=1 netid=29 coto=1 x=576 y=0
+S16 cato=1 netid=30 coto=1 x=608 y=0
+S16 cato=1 netid=31 coto=1 x=608 y=32
+S16 cato=1 netid=32 coto=1 x=608 y=64
+S16 cato=1 netid=33 coto=1 x=608 y=96
+S16 cato=1 netid=34 coto=1 x=608 y=128
+S16 cato=1 netid=35 coto=1 x=608 y=160
+S16 cato=1 netid=36 coto=1 x=576 y=160
+S16 cato=1 netid=37 coto=1 x=544 y=160
+S16 cato=2 netid=38 coto=12 x=576 y=256
+S16 cato=2 netid=39 coto=12 x=608 y=256
+S16 cato=2 netid=40 coto=12 x=608 y=224
+S16 cato=2 netid=41 coto=12 x=576 y=224
+S16 cato=2 netid=42 coto=12 x=576 y=192
+S16 cato=2 netid=43 coto=12 x=608 y=192
+S16 cato=2 netid=44 coto=12 x=544 y=192
+S16 cato=2 netid=45 coto=12 x=544 y=160
+S20 settings broadcast
+S22 full w=189 h=15 insts=806
+S20 settings broadcast
+S22 full w=189 h=15 insts=806
+S20 settings broadcast
+R16 netid=65537 cato=2 coto=1 inst=101085
+R16 netid=65538 cato=2 coto=1 inst=101086
+R16 netid=65537 cato=1 coto=35 inst=101093
+R19 netid=65537 subop=7 applied inst=101093
+R16 netid=65538 cato=1 coto=39 inst=101094
+R19 netid=65538 subop=8 applied inst=101094
+R17 netid=65538 destroyed inst=101094
+R17 netid=65537 destroyed inst=101093
+R16 netid=65539 cato=1 coto=39 inst=101095
+R19 netid=65539 subop=8 applied inst=101095
+S22 full w=20 h=15 insts=0
+S20 settings broadcast
+S16 cato=1 netid=1 coto=2 x=352 y=288
+S16 cato=3 netid=2 coto=29 x=224 y=224
+S16 cato=3 netid=3 coto=29 x=256 y=224
+S16 cato=3 netid=4 coto=29 x=288 y=224
+S16 cato=3 netid=5 coto=29 x=320 y=224
+S16 cato=3 netid=6 coto=29 x=352 y=224
+S16 cato=3 netid=7 coto=29 x=384 y=224
+S16 cato=3 netid=8 coto=19 x=288 y=192
+S20 settings broadcast
+S16 cato=1 netid=9 coto=1 x=384 y=128
+S16 cato=1 netid=10 coto=1 x=448 y=160
+S16 cato=1 netid=11 coto=1 x=448 y=128
+S16 cato=1 netid=12 coto=1 x=480 y=128
+S16 cato=1 netid=13 coto=1 x=512 y=128
+S16 cato=1 netid=14 coto=1 x=512 y=160
+S16 cato=1 netid=15 coto=1 x=512 y=192
+S16 cato=1 netid=16 coto=1 x=480 y=192
+S16 cato=1 netid=17 coto=1 x=480 y=224
+S16 cato=1 netid=18 coto=1 x=480 y=160
+S16 cato=1 netid=19 coto=1 x=512 y=224
+S16 cato=1 netid=20 coto=1 x=512 y=256
+S16 cato=1 netid=21 coto=1 x=480 y=256
+S16 cato=1 netid=22 coto=1 x=448 y=288
+S16 cato=1 netid=23 coto=1 x=416 y=288
+S16 cato=1 netid=24 coto=1 x=416 y=256
+S16 cato=1 netid=25 coto=1 x=448 y=224
+S16 cato=1 netid=26 coto=1 x=448 y=192
+S16 cato=1 netid=27 coto=1 x=448 y=256

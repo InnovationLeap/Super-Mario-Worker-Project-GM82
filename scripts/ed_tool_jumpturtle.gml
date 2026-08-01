@@ -8,4 +8,5 @@ if wiatrak=5 && mouse_check_button(mb_left) && mouse_y < fofo.y && kliknieto=0
     fofo.test2=2
     kliknieto=1
     // NET-SYNC: 完成点——跳乌龟落定
+    ed_net_ops_send_update(fofo, 7)
     }

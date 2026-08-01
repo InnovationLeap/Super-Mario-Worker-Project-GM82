@@ -18,6 +18,7 @@ net_my_name = 'Player'
 net_last_err = ''
 panel_open = 0
 net_ver = 1
+net_font = -1
 net_chat = ds_list_create()
 if net_chat < 1 {
     net_chat = ds_list_create()

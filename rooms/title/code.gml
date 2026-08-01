@@ -53,3 +53,13 @@ global.customMusicDirectory = '.\Data\Custom\'
 ini_open('GameSettings.ini')
 global.customMusic = ini_read_string('GameConfig','CustomMusicPackage','Example')
 music_list_update()
+
+// 回到标题画面强制断开联机连接（覆盖 ESC 退出/通关/自杀等所有回标题路径）
+if instance_exists(o_ednet) {
+    with(o_ednet) {
+        if net_state > 0 {
+            ed_net_cleanup()
+            ed_net_add_line('[Returned to title, disconnected]')
+        }
+    }
+}

@@ -5,7 +5,7 @@ var _bg, _mu;
 _bg = buffer_read_u32(argument0)
 _mu = buffer_read_u32(argument0)
 global.background = _bg
-global.muzyka = _mu
+global.muzyka = string(_mu)
 global.etapnazwa = ed_net_read_str(argument0)
 global.etapautor = ed_net_read_str(argument0)
 global.etapczas = buffer_read_u32(argument0)
