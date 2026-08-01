@@ -39,7 +39,7 @@ applies_to=self
 var _st;
 ed_net_init()
 if net_font < 0 {
-    net_font = fw_add_font_from_file(".\Fonts\message.ttf", 10.1, false, false, true)
+    net_font = fw_add_font_from_file(".\Fonts\message.ttf", 13, false, false, true)
 }
 if net_sock >= 0 {
     if socket_exists(net_sock) {
@@ -103,60 +103,82 @@ action_id=603
 applies_to=self
 */
 var _vx, _vy, _mi, _my, _line, _st, _bx, _by, _bw, _bh, _btn, _input;
+var _m, _x1, _y1, _x2, _y2, _ww, _wh, _bn, _btn_x, _btn_y, _label, _bw2, _hover, _can, _maxw, _peer, _btn_labels;
+var _row_y, _lab_x, _btn_x2, _btn_y2;
 if instance_exists(o_edmain) {
     if panel_open = 1 {
+        _m = 16
         _vx = view_xview[0]
         _vy = view_yview[0]
-        draw_set_alpha(0.85)
+        _ww = view_wview[0]
+        _wh = view_hview[0]
+        _x1 = _vx + _m
+        _y1 = _vy + _m
+        _x2 = _vx + _ww - _m
+        _y2 = _vy + _wh - _m
+        // 背景：纯黑填充 + 双线白框（终端粗框感）
+        draw_set_alpha(0.92)
         draw_set_color(c_black)
-        draw_rectangle(_vx+172, _vy+96, _vx+628, _vy+383, 0)
+        draw_rectangle(_x1, _y1, _x2, _y2, 0)
         draw_set_alpha(1)
         draw_set_color(c_white)
-        draw_rectangle(_vx+172, _vy+96, _vx+628, _vy+383, 1)
-        draw_set_font(testfont)
+        draw_rectangle(_x1, _y1, _x2, _y2, 1)
+        draw_rectangle(_x1 + 1, _y1 + 1, _x2 - 1, _y2 - 1, 1)
+        // 标题栏（居中，fw y+18 修正基线偏移）+ 分隔线
+        fw_draw_set_font(net_font)
         draw_set_color(c_white)
-        draw_text(_vx+192, _vy+106, 'Networking')
+        fw_draw_text(_x1 + (_x2 - _x1 - fw_string_width('NETWORK CONSOLE')) / 2, _y1 + 26, 'NETWORK CONSOLE')
+        draw_line(_x1 + 4, _y1 + 34, _x2 - 4, _y1 + 34)
+        // 状态文本
         if net_state = 0 {
-            _st = 'Not connected'
+            _st = 'NOT CONNECTED'
         }
         if net_state = 1 {
-            _st = 'Hosting, waiting for players...'
+            _st = 'HOSTING, WAITING FOR PLAYERS...'
         }
         if net_state = 2 && net_role = 0 {
-            _st = 'Connecting...'
+            _st = 'CONNECTING...'
         }
         if net_state = 2 && net_role = 1 {
-            _st = 'Waiting for handshake...'
+            _st = 'WAITING FOR HANDSHAKE...'
         }
         if net_state = 3 && net_role = 1 {
-            _st = 'Host, connected: ' + net_peer_name
+            _st = 'HOST, CONNECTED: ' + net_peer_name
         }
         if net_state = 3 && net_role = 0 {
-            _st = 'Connected to: ' + net_peer_name
+            _st = 'CONNECTED TO: ' + net_peer_name
         }
         if net_state = 0 && net_last_err <> '' {
-            _st = net_last_err
+            _st = 'ERROR: ' + net_last_err
+        }
+        // 状态区（fw y+18 修正基线偏移）
+        _peer = net_peer_name
+        if _peer = '' {
+            _peer = '--'
         }
         fw_draw_set_font(net_font)
-        fw_draw_text(_vx+192, _vy+128, _st)
-        fw_draw_set_font(net_font)
-        fw_draw_text(_vx+192, _vy+148, 'Player: ' + string(net_my_name))
-        _bx = 436
-        _by = 148
-        _bw = 62
-        _bh = 22
-        draw_rectangle(_vx+_bx, _vy+_by, _vx+_bx+_bw, _vy+_by+_bh, 1)
-        _btn = 0
-        if mouse_x > _vx+_bx && mouse_x < _vx+_bx+_bw && mouse_y > _vy+_by && mouse_y < _vy+_by+_bh {
-            _btn = 1
-        }
-        if _btn = 1 {
-            draw_set_color(c_yellow)
-        } else {
+        draw_set_color(c_white)
+        fw_draw_text(_x1 + 12, _y1 + 56, '[STATE]  ' + _st)
+        fw_draw_text(_x1 + 12, _y1 + 76, '[PLAYER] ' + net_my_name)
+        fw_draw_text(_x1 + 12, _y1 + 96, '[PEER]   ' + _peer)
+        draw_line(_x1 + 4, _y1 + 110, _x2 - 4, _y1 + 110)
+        // RENAME 按钮（PLAYER 行右侧，右对齐）
+        _btn_x = _x2 - 12 - (fw_string_width('RENAME') + 16)
+        _btn_y = _y1 + 58
+        _bw2 = fw_string_width('RENAME') + 16
+        _hover = mouse_x > _btn_x && mouse_x < _btn_x + _bw2 && mouse_y > _btn_y && mouse_y < _btn_y + 22
+        draw_set_color(c_black)
+        draw_rectangle(_btn_x, _btn_y, _btn_x + _bw2, _btn_y + 22, 0)
+        draw_set_color(c_white)
+        draw_rectangle(_btn_x, _btn_y, _btn_x + _bw2, _btn_y + 22, 1)
+        if _hover {
             draw_set_color(c_white)
+            draw_rectangle(_btn_x, _btn_y, _btn_x + _bw2, _btn_y + 22, 0)
+            draw_set_color(c_black)
         }
-        draw_text(_vx+_bx+8, _vy+_by+3, 'Rename')
-        if mouse_check_button_pressed(mb_left) && mouse_x > _vx+_bx && mouse_x < _vx+_bx+_bw && mouse_y > _vy+_by && mouse_y < _vy+_by+_bh {
+        fw_draw_set_font(net_font)
+        fw_draw_text(_btn_x + 8, _btn_y + 22, 'RENAME')
+        if _hover && mouse_check_button_pressed(mb_left) {
             _input = get_string('Your name:', net_my_name)
             if string_length(string(_input)) > 24 {
                 _input = string_copy(string(_input), 1, 24)
@@ -169,132 +191,217 @@ if instance_exists(o_edmain) {
                 ed_net_add_line('[You are now: ' + net_my_name + ']')
             }
         }
-        _bx = 192
-        _by = 176
-        _bw = 82
-        _bh = 22
-        _btn = 0
-        draw_rectangle(_vx+_bx, _vy+_by, _vx+_bx+_bw, _vy+_by+_bh, 1)
-        if mouse_x > _vx+_bx && mouse_x < _vx+_bx+_bw && mouse_y > _vy+_by && mouse_y < _vy+_by+_bh {
-            _btn = 1
-        }
-        if _btn = 1 && net_state > 0 {
-            draw_set_color(c_gray)
-        } else {
-            draw_set_color(c_yellow)
-        }
-        draw_text(_vx+_bx+8, _vy+_by+3, 'Host Local')
-        if net_state = 0 && mouse_check_button_pressed(mb_left) && mouse_x > _vx+_bx && mouse_x < _vx+_bx+_bw && mouse_y > _vy+_by && mouse_y < _vy+_by+_bh {
-            ed_net_host(1)
-        }
-        _bx = 280
-        _bw = 82
-        draw_rectangle(_vx+_bx, _vy+_by, _vx+_bx+_bw, _vy+_by+_bh, 1)
-        _btn = 0
-        if mouse_x > _vx+_bx && mouse_x < _vx+_bx+_bw && mouse_y > _vy+_by && mouse_y < _vy+_by+_bh {
-            _btn = 1
-        }
-        if _btn = 1 && net_state > 0 {
-            draw_set_color(c_gray)
-        } else {
-            draw_set_color(c_yellow)
-        }
-        draw_text(_vx+_bx+8, _vy+_by+3, 'Host LAN')
-        if net_state = 0 && mouse_check_button_pressed(mb_left) && mouse_x > _vx+_bx && mouse_x < _vx+_bx+_bw && mouse_y > _vy+_by && mouse_y < _vy+_by+_bh {
-            ed_net_host(0)
-        }
-        _bx = 368
-        _bw = 62
-        draw_rectangle(_vx+_bx, _vy+_by, _vx+_bx+_bw, _vy+_by+_bh, 1)
-        _btn = 0
-        if mouse_x > _vx+_bx && mouse_x < _vx+_bx+_bw && mouse_y > _vy+_by && mouse_y < _vy+_by+_bh {
-            _btn = 1
-        }
-        if _btn = 1 && net_state > 0 {
-            draw_set_color(c_gray)
-        } else {
-            draw_set_color(c_yellow)
-        }
-        draw_text(_vx+_bx+8, _vy+_by+3, 'Join')
-        if net_state = 0 && mouse_check_button_pressed(mb_left) && mouse_x > _vx+_bx && mouse_x < _vx+_bx+_bw && mouse_y > _vy+_by && mouse_y < _vy+_by+_bh {
-            _input = get_string('Enter host IP (IP:port, e.g. frp-bar.com:41621):', '127.0.0.1')
-            if string_length(string(_input)) > 0 {
-                ed_net_join(string(_input))
-            }
-        }
-        _bx = 436
-        _bw = 62
-        draw_rectangle(_vx+_bx, _vy+_by, _vx+_bx+_bw, _vy+_by+_bh, 1)
-        _btn = 0
-        if mouse_x > _vx+_bx && mouse_x < _vx+_bx+_bw && mouse_y > _vy+_by && mouse_y < _vy+_by+_bh {
-            _btn = 1
-        }
-        if _btn = 1 && net_state = 0 {
-            draw_set_color(c_gray)
-        } else {
-            draw_set_color(c_yellow)
-        }
-        draw_text(_vx+_bx+8, _vy+_by+3, 'Leave')
-        if net_state > 0 && mouse_check_button_pressed(mb_left) && mouse_x > _vx+_bx && mouse_x < _vx+_bx+_bw && mouse_y > _vy+_by && mouse_y < _vy+_by+_bh {
-            if net_state = 3 {
-                ed_net_send_goodbye(net_sendbuf, '')
-            }
-            ed_net_cleanup()
-            net_last_err = ''
-            ed_net_add_line('[Disconnected]')
-        }
-        _by = 204
-        _bx = 192
-        _bw = 150
-        draw_rectangle(_vx+_bx, _vy+_by, _vx+_bx+_bw, _vy+_by+_bh, 1)
-        _btn = 0
-        if mouse_x > _vx+_bx && mouse_x < _vx+_bx+_bw && mouse_y > _vy+_by && mouse_y < _vy+_by+_bh {
-            _btn = 1
-        }
-        if _btn = 1 && net_state != 3 {
-            draw_set_color(c_gray)
-        } else {
-            draw_set_color(c_yellow)
-        }
-        draw_text(_vx+_bx+8, _vy+_by+3, 'Send')
-        if net_state = 3 && mouse_check_button_pressed(mb_left) && mouse_x > _vx+_bx && mouse_x < _vx+_bx+_bw && mouse_y > _vy+_by && mouse_y < _vy+_by+_bh {
-            _input = get_string('Enter message:', '')
-            if string_length(string(_input)) > 0 {
-                ed_net_send_chat(net_sendbuf, string(_input))
-            }
-        }
-        _bx = 348
-        draw_rectangle(_vx+_bx, _vy+_by, _vx+_bx+_bw, _vy+_by+_bh, 1)
-        _btn = 0
-        if mouse_x > _vx+_bx && mouse_x < _vx+_bx+_bw && mouse_y > _vy+_by && mouse_y < _vy+_by+_bh {
-            _btn = 1
-        }
-        if _btn = 1 {
-            draw_set_color(c_yellow)
-        } else {
-            draw_set_color(c_white)
-        }
-        draw_text(_vx+_bx+8, _vy+_by+3, 'Close')
-        if mouse_check_button_pressed(mb_left) && mouse_x > _vx+_bx && mouse_x < _vx+_bx+_bw && mouse_y > _vy+_by && mouse_y < _vy+_by+_bh {
-            panel_open = 0
-            o_edmain.czywybieranieback = 0
-        }
-        draw_set_color(c_white)
-        draw_line(_vx+192, _vy+238, _vx+628, _vy+238)
+        // 按钮区：分组矩形方框按钮（默认黑底白框白字；hover 反色白底黑字；不可用灰框）
+        // 组1: HOST: [HOST LOCAL][HOST LAN]  SESSION: [JOIN][LEAVE]
+        // 组2: CHAT: [SEND A MESSAGE][CLOSE]
+        _btn_labels[0] = 'HOST LOCAL'
+        _btn_labels[1] = 'HOST LAN'
+        _btn_labels[2] = 'JOIN'
+        _btn_labels[3] = 'LEAVE'
+        _btn_labels[4] = 'SEND A MESSAGE'
+        _btn_labels[5] = 'CLOSE'
+        _row_y = _y1 + 140
+        _lab_x = _x1 + 12
+        // 组1 行（HOST / SESSION）
         fw_draw_set_font(net_font)
-        _my = 248
-        _mi = ds_list_size(net_chat) - 1
-        while _mi >= 0 && _my < 380 {
-            _line = ds_list_find_value(net_chat, _mi)
-            if fw_string_width(_line) > 240 {
-                while fw_string_width(_line) > 240 && string_length(_line) > 1 {
-                    _line = string_copy(_line, 1, string_length(_line) - 1)
-                }
-                _line += '...'
+        draw_set_color(c_white)
+        fw_draw_text(_lab_x, _row_y + 22, 'HOST:')
+        _btn_x2 = _lab_x + fw_string_width('HOST:') + 12
+        _btn_y2 = _row_y
+        _bn = 0
+        while _bn < 2 {
+            _label = _btn_labels[_bn]
+            _bw2 = fw_string_width(_label) + 16
+            if _bn = 0 {
+                _bw2 += 4
             }
-            fw_draw_text(_vx+192, _vy+_my, _line)
-            _my += 16
+            _hover = mouse_x > _btn_x2 && mouse_x < _btn_x2 + _bw2 && mouse_y > _btn_y2 && mouse_y < _btn_y2 + 22
+            _can = 0
+            if _bn = 0 && net_state = 0 {
+                _can = 1
+            }
+            if _bn = 1 && net_state = 0 {
+                _can = 1
+            }
+            if _can = 0 {
+                draw_set_color(c_black)
+                draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 0)
+                draw_set_color(c_gray)
+                draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 1)
+                fw_draw_set_font(net_font)
+                fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+            } else {
+                if _hover {
+                    draw_set_color(c_white)
+                    draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 0)
+                    draw_set_color(c_black)
+                    fw_draw_set_font(net_font)
+                    fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+                } else {
+                    draw_set_color(c_black)
+                    draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 0)
+                    draw_set_color(c_white)
+                    draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 1)
+                    fw_draw_set_font(net_font)
+                    fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+                }
+                if _hover && mouse_check_button_pressed(mb_left) {
+                    if _bn = 0 {
+                        ed_net_host(1)
+                    }
+                    if _bn = 1 {
+                        ed_net_host(0)
+                    }
+                }
+            }
+            _btn_x2 += _bw2 + 8
+            _bn += 1
+        }
+        // SESSION 小标题 + 组1 后半（JOIN/LEAVE）
+        _lab_x = _btn_x2 + 12
+        fw_draw_set_font(net_font)
+        draw_set_color(c_white)
+        fw_draw_text(_lab_x, _row_y + 22, 'SESSION:')
+        _btn_x2 = _lab_x + fw_string_width('SESSION:') + 12
+        _bn = 2
+        while _bn < 4 {
+            _label = _btn_labels[_bn]
+            _bw2 = fw_string_width(_label) + 16
+            _hover = mouse_x > _btn_x2 && mouse_x < _btn_x2 + _bw2 && mouse_y > _btn_y2 && mouse_y < _btn_y2 + 22
+            _can = 0
+            if _bn = 2 && net_state = 0 {
+                _can = 1
+            }
+            if _bn = 3 && net_state > 0 {
+                _can = 1
+            }
+            if _can = 0 {
+                draw_set_color(c_black)
+                draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 0)
+                draw_set_color(c_gray)
+                draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 1)
+                fw_draw_set_font(net_font)
+                fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+            } else {
+                if _hover {
+                    draw_set_color(c_white)
+                    draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 0)
+                    draw_set_color(c_black)
+                    fw_draw_set_font(net_font)
+                    fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+                } else {
+                    draw_set_color(c_black)
+                    draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 0)
+                    draw_set_color(c_white)
+                    draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 1)
+                    fw_draw_set_font(net_font)
+                    fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+                }
+                if _hover && mouse_check_button_pressed(mb_left) {
+                    if _bn = 2 {
+                        _input = get_string('Enter host IP (IP:port, e.g. frp-bar.com:41621):', '127.0.0.1')
+                        if string_length(string(_input)) > 0 {
+                            ed_net_join(string(_input))
+                        }
+                    }
+                    if _bn = 3 {
+                        if net_state = 3 {
+                            ed_net_send_goodbye(net_sendbuf, '')
+                        }
+                        ed_net_cleanup()
+                        net_last_err = ''
+                        ed_net_add_line('[Disconnected]')
+                    }
+                }
+            }
+            _btn_x2 += _bw2 + 8
+            _bn += 1
+        }
+        // 组2 行（CHAT / CLOSE）
+        _row_y = _y1 + 176
+        _lab_x = _x1 + 12
+        fw_draw_set_font(net_font)
+        draw_set_color(c_white)
+        fw_draw_text(_lab_x, _row_y + 22, 'CHAT:')
+        _btn_x2 = _lab_x + fw_string_width('CHAT:') + 12
+        _btn_y2 = _row_y
+        _bn = 4
+        while _bn < 6 {
+            _label = _btn_labels[_bn]
+            _bw2 = fw_string_width(_label) + 16
+            if _bn = 4 {
+                _bw2 += 8
+            }
+            _hover = mouse_x > _btn_x2 && mouse_x < _btn_x2 + _bw2 && mouse_y > _btn_y2 && mouse_y < _btn_y2 + 22
+            _can = 0
+            if _bn = 4 {
+                _can = 1
+            }
+            if _bn = 5 {
+                _can = 1
+            }
+            if _can = 0 {
+                draw_set_color(c_black)
+                draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 0)
+                draw_set_color(c_gray)
+                draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 1)
+                fw_draw_set_font(net_font)
+                fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+            } else {
+                if _hover {
+                    draw_set_color(c_white)
+                    draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 0)
+                    draw_set_color(c_black)
+                    fw_draw_set_font(net_font)
+                    fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+                } else {
+                    draw_set_color(c_black)
+                    draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 0)
+                    draw_set_color(c_white)
+                    draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 1)
+                    fw_draw_set_font(net_font)
+                    fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+                }
+                if _hover && mouse_check_button_pressed(mb_left) {
+                    if _bn = 4 {
+                        _input = get_string('Enter message:', '')
+                        if string_length(string(_input)) > 0 {
+                            if net_state = 3 {
+                                ed_net_send_chat(net_sendbuf, string(_input))
+                            } else {
+                                ed_net_add_line('[Not connected, message not sent]')
+                            }
+                        }
+                    }
+                    if _bn = 5 {
+                        panel_open = 0
+                        o_edmain.czywybieranieback = 0
+                    }
+                }
+            }
+            _btn_x2 += _bw2 + 8
+            _bn += 1
+        }
+        draw_line(_x1 + 4, _y1 + 210, _x2 - 4, _y1 + 210)
+        // 日志区：从底部向上滚动显示最近消息 + 底部闪烁光标
+        fw_draw_set_font(net_font)
+        _maxw = _x2 - _x1 - 24
+        _my = _y2 - 10
+        _mi = ds_list_size(net_chat) - 1
+        while _mi >= 0 && _my > _y1 + 230 {
+            _line = ds_list_find_value(net_chat, _mi)
+            while fw_string_width(_line) > _maxw && string_length(_line) > 1 {
+                _line = string_copy(_line, 1, string_length(_line) - 1)
+            }
+            fw_draw_set_font(net_font)
+            draw_set_color(c_white)
+            fw_draw_text(_x1 + 12, _my + 4, _line)
+            _my -= 18
             _mi -= 1
+        }
+        if (current_time div 400) mod 2 = 0 {
+            draw_set_color(c_white)
+            draw_rectangle(_x1 + 12, _my - 4, _x1 + 22, _my + 10, 1)
         }
     }
 }

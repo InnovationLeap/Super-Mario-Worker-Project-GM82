@@ -1086,7 +1086,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     draw_text(view_xview[0]+350,view_yview[0]+186,global.etapczas)
     draw_text(view_xview[0]+350,view_yview[0]+209,global.etapgravity)
     draw_text(view_xview[0]+350,view_yview[0]+232,global.etapkuppa)
-    draw_text(view_xview[0]+350,view_yview[0]+346,'Online Edit')
+    draw_text(view_xview[0]+350 - 75,view_yview[0]+346,'Online Edit')
     }
     if costawia6=1 && mouse_check_button(mb_left) &&     kliknieto=0  //如果鼠标点击关卡名，则弹出窗口设置关卡名
     {
