@@ -222,7 +222,7 @@ if instance_exists(o_edmain) {
         }
         draw_text(_vx+_bx+8, _vy+_by+3, 'Join')
         if net_state = 0 && mouse_check_button_pressed(mb_left) && mouse_x > _vx+_bx && mouse_x < _vx+_bx+_bw && mouse_y > _vy+_by && mouse_y < _vy+_by+_bh {
-            _input = get_string('Enter host IP:', '127.0.0.1')
+            _input = get_string('Enter host IP (IP:port, e.g. frp-bar.com:41621):', '127.0.0.1')
             if string_length(string(_input)) > 0 {
                 ed_net_join(string(_input))
             }
