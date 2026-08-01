@@ -21,9 +21,9 @@ if instance_exists(o_edmain) && instance_exists(o_ednet) {
             if o_ednet.net_pl_id[_i] mod 8 = 6 { _col = c_orange }
             if o_ednet.net_pl_id[_i] mod 8 = 7 { _col = c_fuchsia }
             draw_set_blend_mode(bm_subtract)
-            draw_sprite_ext(s_edcursormask, 0, o_ednet.net_pl_mx[_i] + 16, o_ednet.net_pl_my[_i], 1, 1, 0, c_white, 1)
+            draw_sprite_ext(s_edcursormask, 0, o_ednet.net_pl_mx[_i] + 16, o_ednet.net_pl_my[_i], 1, 1, -45, c_white, 1)
             draw_set_blend_mode(bm_normal)
-            draw_sprite_ext(s_edcursor, 0, o_ednet.net_pl_mx[_i] + 16, o_ednet.net_pl_my[_i], 1, 1, 0, _col, 1)
+            draw_sprite_ext(s_edcursor, 0, o_ednet.net_pl_mx[_i] + 16, o_ednet.net_pl_my[_i], 1, 1, -45, _col, 1)
             // 名字用 fw_draw_text（屏幕坐标）：世界坐标 - view 偏移，避免镜头滚动时名字错位
             draw_set_color(c_white)
             if o_ednet.net_font > 0 {
