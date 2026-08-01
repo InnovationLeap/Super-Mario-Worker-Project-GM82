@@ -1178,6 +1178,7 @@ ed_net_ops_send_grid
 ed_net_ops_send_resize
 ed_net_ops_send_settings
 ed_net_ops_send_update
+ed_net_ops_request_full
 ed_net_ops_apply_create
 ed_net_ops_apply_delete
 ed_net_ops_apply_file

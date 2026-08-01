@@ -24,11 +24,12 @@ if instance_exists(o_edmain) && instance_exists(o_ednet) {
             draw_sprite_ext(s_edcursormask, 0, o_ednet.net_pl_mx[_i] + 16, o_ednet.net_pl_my[_i], 1, 1, 0, c_white, 1)
             draw_set_blend_mode(bm_normal)
             draw_sprite_ext(s_edcursor, 0, o_ednet.net_pl_mx[_i] + 16, o_ednet.net_pl_my[_i], 1, 1, 0, _col, 1)
+            // 名字用 fw_draw_text（屏幕坐标）：世界坐标 - view 偏移，避免镜头滚动时名字错位
             draw_set_color(c_white)
             if o_ednet.net_font > 0 {
                 fw_draw_set_font(o_ednet.net_font)
             }
-            fw_draw_text(o_ednet.net_pl_mx[_i] + 30, o_ednet.net_pl_my[_i] + 6, string(o_ednet.net_pl_id[_i]) + ':' + o_ednet.net_pl_name[_i])
+            fw_draw_text(o_ednet.net_pl_mx[_i] - view_xview[0] + 30, o_ednet.net_pl_my[_i] - view_yview[0] + 6, string(o_ednet.net_pl_id[_i]) + ':' + o_ednet.net_pl_name[_i])
         }
         _i += 1
     }

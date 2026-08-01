@@ -83,4 +83,19 @@ Load_Script_Main()
 global.testmode=0
 file_delete(global.autosavename)
 global.autosavename=global.autosavename1
-}}
+// NET-SYNC: 测关返回，重建 netid 表并请求全量重同步（修复测关后放置不再同步）
+if instance_exists(o_ednet) {
+    ed_net_rebuild_ids()
+    with(o_ednet) {
+        if net_state = 3 {
+            if net_role = 1 {
+                // 房主：广播全量给所有客户端
+                ed_net_ops_send_file()
+                ed_net_ops_send_settings()
+            } else {
+                // 客户端：请求房主重发全量
+                ed_net_ops_request_full(net_sendbuf)
+            }
+        }
+    }
+}}}

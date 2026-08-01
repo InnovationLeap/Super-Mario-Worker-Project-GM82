@@ -36,11 +36,13 @@ if net_chat < 1 {
 }
 net_sendbuf = buffer_create()
 net_recvbuf = buffer_create()
-// op23 文件传输接收状态（net_file_fid 为哨兵：>=0 表示正在接收）
+// op23 文件传输接收状态（net_file_fid 为哨兵：>=0 表示正在接收；net_file_active 为接收屏障）
 net_file_total = 0
 net_file_got = 0
 net_file_fid = -1
 net_file_path = ''
+net_file_active = 0
+net_pending_reload = 0
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -119,6 +121,13 @@ if net_listener >= 0 {
 }
 if net_state = 3 {
     ed_net_send_cursor(net_sendbuf, mouse_x, mouse_y)
+}
+// 待重载标记：测关中收到 op23 → 回编辑器后请求全量重同步
+if net_pending_reload = 1 && net_state = 3 && net_role = 0 {
+    if instance_exists(o_edmain) {
+        net_pending_reload = 0
+        ed_net_ops_request_full(net_sendbuf)
+    }
 }
 if keyboard_check_pressed(global.key_ed_cancel) && panel_open = 1 {
     panel_open = 0

@@ -597,7 +597,8 @@ view_hview[0] = 480 * zoom_ratio;
 view_xview[0] = round(min(room_width - 640 * zoom_ratio, max(0, scroolx - 320 * zoom_ratio)) / 32) * 32;
 view_yview[0] = round(min(room_height - 480 * zoom_ratio, max(0, scrooly - 240 * zoom_ratio)) / 32) * 32;
 if variable_global_exists('script_kile'){
-if real(global.script_kile)= 1
+// 注意：script_kile 是文件句柄（正数），不能假设恒为 1（联机中 send_file/apply_file 的 file_bin_open 会使句柄递增）
+if real(global.script_kile) > 0
 {Load_Script_Masta();global.script_kile=-1
     // NET-SYNC: Masta 填充完成后触发全量同步（数据/设置已完整，规避发送空关卡）
     if global.net_pending_sync = 1 {

@@ -35,6 +35,8 @@ with(o_ednet) {
         net_file_got = 0
         net_file_fid = -1
         net_file_path = ''
+        net_file_active = 0
+        net_pending_reload = 0
         for (_i = 0; _i < 8; _i += 1) {
             net_socks[_i] = -1
             net_pl_id[_i] = 0
