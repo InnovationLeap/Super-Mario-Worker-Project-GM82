@@ -26,7 +26,7 @@ with(o_ednet) {
     if !variable_global_exists('netid_counter') {
         global.netid_counter = 0
     }
-    if !variable_global_exists('netid_map') {
-        global.netid_map = ds_map_create()
+    if !variable_global_exists('netid_count') {
+        global.netid_count = 0
     }
 }

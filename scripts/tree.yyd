@@ -125,6 +125,7 @@
 	|ed_net_join
 	|ed_net_inst_register
 	|ed_net_inst_lookup
+	|ed_net_inst_unregister
 	|ed_net_ops_send_create
 	|ed_net_ops_send_delete
 	|ed_net_ops_send_grid
@@ -133,6 +134,7 @@
 	|ed_net_ops_apply_delete
 	|ed_net_ops_apply_grid
 	|ed_net_ops_apply_update
+	|ed_net_trace
 +EdTools
 	|ed_place_bonus
 	|ed_place_scenery

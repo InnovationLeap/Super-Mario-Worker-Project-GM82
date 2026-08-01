@@ -39,4 +39,7 @@ if instance_exists(_f) {
         if _f.water_endX > 2147483647 { _f.water_endX -= 4294967296 }
         if _f.water_endY > 2147483647 { _f.water_endY -= 4294967296 }
     }
+    ed_net_trace('R19 netid=' + string(_netid) + ' subop=' + string(_subop) + ' applied inst=' + string(_f))
+} else {
+    ed_net_trace('R19 MISS netid=' + string(_netid) + ' subop=' + string(_subop))
 }

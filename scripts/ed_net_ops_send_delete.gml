@@ -10,7 +10,7 @@ if instance_exists(argument0) {
         }
     }
     if _netid <> 0 {
-        ds_map_delete(global.netid_map, _netid)
+        ed_net_inst_unregister(_netid)
         if instance_exists(o_ednet) && o_ednet.net_state = 3 {
             buffer_clear(o_ednet.net_sendbuf)
             buffer_set_pos(o_ednet.net_sendbuf, 0)
@@ -18,6 +18,9 @@ if instance_exists(argument0) {
             buffer_write_u32(o_ednet.net_sendbuf, _netid)
             socket_write_message(o_ednet.net_sock, o_ednet.net_sendbuf)
             socket_send(o_ednet.net_sock)
+            ed_net_trace('S17 netid=' + string(_netid))
         }
+    } else {
+        ed_net_trace('S17 SKIP netid=0')
     }
 }

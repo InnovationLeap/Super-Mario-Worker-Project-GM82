@@ -14,5 +14,8 @@ if instance_exists(_f) {
     with (_f) {
         instance_destroy()
     }
+    ed_net_trace('R17 netid=' + string(_netid) + ' destroyed inst=' + string(_f))
+} else {
+    ed_net_trace('R17 MISS netid=' + string(_netid))
 }
-ds_map_delete(global.netid_map, _netid)
+ed_net_inst_unregister(_netid)

@@ -92,5 +92,8 @@ if _cato = 5 {
 }
 if instance_exists(_f) {
     _f.netid = _netid
-    ds_map_replace(global.netid_map, _netid, _f)
+    ed_net_inst_register(_f)
+    ed_net_trace('R16 netid=' + string(_netid) + ' cato=' + string(_cato) + ' coto=' + string(_coto) + ' inst=' + string(_f))
+} else {
+    ed_net_trace('R16 MISS cato=' + string(_cato) + ' netid=' + string(_netid))
 }

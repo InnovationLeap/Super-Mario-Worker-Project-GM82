@@ -66,4 +66,5 @@ if instance_exists(argument0) && instance_exists(o_ednet) && o_ednet.net_state =
     }
     socket_write_message(o_ednet.net_sock, o_ednet.net_sendbuf)
     socket_send(o_ednet.net_sock)
+    ed_net_trace('S16 cato=' + string(_cato) + ' netid=' + string(_id) + ' coto=' + string(argument0.coto) + ' x=' + string(argument0.x) + ' y=' + string(argument0.y))
 }

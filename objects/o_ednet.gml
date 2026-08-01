@@ -19,6 +19,9 @@ net_last_err = ''
 panel_open = 0
 net_ver = 1
 net_chat = ds_list_create()
+if net_chat < 1 {
+    net_chat = ds_list_create()
+}
 net_sendbuf = buffer_create()
 net_recvbuf = buffer_create()
 #define Step_0

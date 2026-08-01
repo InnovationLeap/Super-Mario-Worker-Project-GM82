@@ -44,4 +44,5 @@ if _netid <> 0 && instance_exists(o_ednet) && o_ednet.net_state = 3 {
     }
     socket_write_message(o_ednet.net_sock, o_ednet.net_sendbuf)
     socket_send(o_ednet.net_sock)
+    ed_net_trace('S19 netid=' + string(_netid) + ' subop=' + string(argument1))
 }

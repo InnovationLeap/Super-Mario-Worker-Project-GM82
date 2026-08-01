@@ -1,0 +1,9 @@
+R16 netid=65537 cato=1 coto=1 inst=100118
+R16 netid=65538 cato=1 coto=1 inst=100119
+R16 netid=65539 cato=1 coto=20 inst=100120
+R19 netid=65539 subop=1 applied inst=100120
+R17 netid=65538 destroyed inst=100119
+S16 cato=1 netid=1 coto=1 x=224 y=224
+S16 cato=1 netid=2 coto=1 x=320 y=224
+S16 cato=1 netid=3 coto=20 x=448 y=192
+S19 netid=3 subop=1
