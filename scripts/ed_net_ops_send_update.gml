@@ -8,9 +8,8 @@ var _netid, _i;
 _netid = 0
 if instance_exists(argument0) {
     with(argument0) {
-        if variable_local_exists('netid') {
-            _netid = netid
-        }
+        // GM8 访问未定义实例变量返回 0；variable_local_exists 只查 var 局部变量，对 netid 实例变量恒 false，不可用
+        _netid = netid
     }
 }
 if _netid <> 0 && instance_exists(o_ednet) && o_ednet.net_state = 3 {

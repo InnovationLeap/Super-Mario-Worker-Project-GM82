@@ -25,9 +25,8 @@ if instance_exists(argument0) && instance_exists(o_ednet) && o_ednet.net_state =
     if _cato = 3 {
         _t = 0
         with(argument0) {
-            if variable_local_exists('type') {
-                _t = type
-            }
+            // GM8 访问未定义实例变量返回 0；variable_local_exists 只查 var 局部变量，对 type 实例变量恒 false，不可用
+            _t = type
         }
         buffer_write_u16(o_ednet.net_sendbuf, _t)
         if argument0.coto = 23 {

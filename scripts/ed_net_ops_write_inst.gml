@@ -19,9 +19,8 @@ if argument2 = 2 {
 if argument2 = 3 {
     _t = 0
     with(argument1) {
-        if variable_local_exists('type') {
-            _t = type
-        }
+        // GM8 访问未定义实例变量返回 0；variable_local_exists 只查 var 局部变量，对 type 实例变量恒 false，不可用
+        _t = type
     }
     buffer_write_u16(argument0, _t)
     if argument1.coto = 23 {
