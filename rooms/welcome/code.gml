@@ -165,7 +165,7 @@ global.compress_save = ini_read_real('GameConfig','CompressSave',1)
 
 // 截图保存路径（GM8.2 UTF-8 环境，file_text 直接读取中文路径）
 var _ss_path, _ss_default, _ss_line, _ss_fid;
-var _ss_ti, _ss_ch;
+var _ss_ti, _ss_ch, _ss_sub, _ss_c;
 _ss_default = working_directory
 _ss_path = ''
 
@@ -197,10 +197,26 @@ if (file_exists(_ss_default + '\GameSettings.ini')){
     file_text_close(_ss_fid)
 }
 
-// 配置缺失 → 默认值
+// 解析 working_directory 相对语法（相对游戏根目录，移动游戏不失效）
+if (string_pos('working_directory://', _ss_path) == 1){
+    _ss_sub = string_copy(_ss_path, string_length('working_directory://') + 1, string_length(_ss_path))
+    _ss_c = string_char_at(_ss_sub, 1)
+    if (_ss_c == '\'){
+        _ss_sub = string_copy(_ss_sub, 2, string_length(_ss_sub))
+    }
+    if (_ss_c == '/'){
+        _ss_sub = string_copy(_ss_sub, 2, string_length(_ss_sub))
+    }
+    _ss_path = _ss_default + '\' + _ss_sub
+}
+if (_ss_path == 'working_directory'){
+    _ss_path = _ss_default
+}
+
+// 配置缺失 → 默认值（写入 working_directory 占位，保留便携性）
 if (_ss_path == ''){
     _ss_path = _ss_default
-    ini_write_string('GameConfig', 'ScreenshotPath', _ss_default)
+    ini_write_string('GameConfig', 'ScreenshotPath', 'working_directory')
 }
 global.screenshot_path = _ss_path
 
