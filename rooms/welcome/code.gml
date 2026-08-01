@@ -241,3 +241,7 @@ instance_create(0, 0, o_debugmsg)
 if !instance_exists(o_ednet) {
     instance_create(0, 0, o_ednet)
 }
+// Persistent network peer cursor drawer (depth above net panel)
+if !instance_exists(o_edcursor) {
+    instance_create(0, 0, o_edcursor)
+}

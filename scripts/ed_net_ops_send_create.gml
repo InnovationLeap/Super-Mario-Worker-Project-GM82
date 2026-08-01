@@ -50,7 +50,20 @@ if instance_exists(argument0) && instance_exists(o_ednet) && o_ednet.net_state =
             buffer_write_u16(o_ednet.net_sendbuf, argument0.velocity)
         }
         if argument0.coto = 33 {
+            buffer_write_u16(o_ednet.net_sendbuf, argument0.bgm_change)
+            ed_net_write_str(o_ednet.net_sendbuf, argument0.bgm)
+            buffer_write_u16(o_ednet.net_sendbuf, argument0.bgp_change)
+            buffer_write_u32(o_ednet.net_sendbuf, argument0.bgp + 1000000)
+            buffer_write_u16(o_ednet.net_sendbuf, argument0.linked)
             buffer_write_u32(o_ednet.net_sendbuf, argument0.height + 64)
+            buffer_write_u16(o_ednet.net_sendbuf, argument0.weather_change)
+            buffer_write_u16(o_ednet.net_sendbuf, argument0.rainy)
+            buffer_write_u16(o_ednet.net_sendbuf, argument0.fallingstars)
+            buffer_write_u16(o_ednet.net_sendbuf, argument0.snowy)
+            buffer_write_u16(o_ednet.net_sendbuf, argument0.thunder)
+            buffer_write_u16(o_ednet.net_sendbuf, argument0.windy)
+            buffer_write_u16(o_ednet.net_sendbuf, argument0.darkness)
+            buffer_write_u16(o_ednet.net_sendbuf, argument0.brightness)
         }
         if argument0.coto = 34 {
             buffer_write_u32(o_ednet.net_sendbuf, argument0.camera_endX)

@@ -98,17 +98,6 @@ applies_to=self
 */
 var _vx, _vy, _mi, _my, _line, _st, _bx, _by, _bw, _bh, _btn, _input;
 if instance_exists(o_edmain) {
-    if net_peer_cursor_time > 0 {
-        if get_timer() - net_peer_cursor_time < 5000 {
-            draw_set_blend_mode(bm_subtract)
-            draw_sprite_ext(s_edcursormask, 0, net_peer_mx, net_peer_my, 1, 1, 0, c_white, 1)
-            draw_set_blend_mode(bm_normal)
-            draw_sprite_ext(s_edcursor, 0, net_peer_mx, net_peer_my, 1, 1, 0, c_red, 1)
-            draw_set_color(c_white)
-            fw_draw_set_font(net_font)
-            fw_draw_text(net_peer_mx + 14, net_peer_my + 6, net_peer_name)
-        }
-    }
     if panel_open = 1 {
         _vx = view_xview[0]
         _vy = view_yview[0]

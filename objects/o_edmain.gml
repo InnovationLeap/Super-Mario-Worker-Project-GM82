@@ -115,6 +115,8 @@ global.imitater=1
 global.ledge_type = 0
 setting_mode=0
 resetting = 0
+net_water_dirty = 0
+net_water_throttle = -1000000
 global.background=real(global.background)
 global.local_background = global.background
 global.local_muzyka = global.muzyka
@@ -803,7 +805,9 @@ if wlaczonaopcja == 0 {
                 _edfv_q=show_question('Some blocks may be out of the new border, which will be DELETED. Do you want to continue?')
             }
             if _edfv_q=1 {
+                ed_net_ops_send_resize(x_new, y_new, x_trans, y_trans)
                 ed_resize_level(x_new, y_new, x_trans, y_trans)
+                ed_net_rebuild_ids()
             }
         }
     }
@@ -811,6 +815,7 @@ if wlaczonaopcja == 0 {
     if keyboard_check_pressed(global.key_f10){
         _edfv_w=get_integer('Set the height of the water',floor((global.poziomwody+16)/32))
         global.poziomwody=floor(_edfv_w*32-16)
+        ed_net_ops_send_settings()
     }
 }
 #define Other_3
@@ -834,10 +839,15 @@ for (i = 0; i < ceil(view_wview[0] / 640); i += 1) {
     if (global.lava){draw_sprite_ext(s_biglava,0,view_xview[0]+i*640,global.poziomwody,1,1,0,c_white,0.4)}
     else{draw_sprite_ext(s_woda,0,view_xview[0]+i*640,global.poziomwody,1,1,0,c_white,0.4)}
 }
-if keyboard_check(global.key_waterup){global.poziomwody-=4}
-if keyboard_check(global.key_waterdown){global.poziomwody+=4}
-if keyboard_check(vk_shift) && keyboard_check(global.key_ed_up) {global.poziomwody-=4}
-if keyboard_check(vk_shift) && keyboard_check(global.key_ed_down) {global.poziomwody+=4}
+if keyboard_check(global.key_waterup){global.poziomwody-=4;net_water_dirty=1}
+if keyboard_check(global.key_waterdown){global.poziomwody+=4;net_water_dirty=1}
+if keyboard_check(vk_shift) && keyboard_check(global.key_ed_up) {global.poziomwody-=4;net_water_dirty=1}
+if keyboard_check(vk_shift) && keyboard_check(global.key_ed_down) {global.poziomwody+=4;net_water_dirty=1}
+if net_water_dirty=1 && get_timer() - net_water_throttle > 300 {
+    net_water_throttle = get_timer()
+    ed_net_ops_send_settings()
+}
+net_water_dirty = 0
 /*
 // initializacja
 
@@ -1072,28 +1082,33 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     kliknieto=1
     global.etapnazwa=get_string('Please type the name of your level.',global.etapnazwa)
     global.etapnazwa=string_copy(global.etapnazwa,0,2000)
+    ed_net_ops_send_settings()
     }
 if costawia6=2 && mouse_check_button(mb_left) && kliknieto=0 && czywybieranieback=0  //如果鼠标点击关卡作者，则弹出窗口设置作者名，下面同理就不说了
     {
     kliknieto=1
     global.etapautor=get_string('Please type your name. Max 16 lenght.',global.etapautor)
     global.etapautor=string_copy(global.etapautor,0,16)
+    ed_net_ops_send_settings()
     }
 if costawia6=3 && mouse_check_button(mb_left) && kliknieto=0 && czywybieranieback=0
     {
     kliknieto=1
     global.etapczas=get_integer('Please enter value of time. Max 10000.',global.etapczas)
     if global.etapczas>10000 global.etapczas=10000
+    ed_net_ops_send_settings()
     }
 if costawia6=4 && mouse_check_button(mb_left) && kliknieto=0 && czywybieranieback=0
     {
     kliknieto=1
     global.etapgravity=get_integer('Please enter value.',global.etapgravity)
+    ed_net_ops_send_settings()
     }
 if costawia6=5 && mouse_check_button(mb_left) && kliknieto=0 && czywybieranieback=0
     {
     kliknieto=1
     global.etapkuppa=get_integer('Please enter value',global.etapkuppa)
+    ed_net_ops_send_settings()
     }
 
 
@@ -1985,7 +2000,8 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
     if(setting_mode=7){
         myfofo.height = min(999999,get_integer('Do you want to change water height INSTANTLY when Mario hit me? If yes, enter the height. If no, leave the number to be NO MORE THAN -64.',myfofo.height))
         if (myfofo.bgm_change=0 && myfofo.bgp_change=0 && myfofo.weather_change=0 && myfofo.height<=-64)
-        {with(myfofo){instance_destroy();}}
+        {ed_net_ops_send_delete(myfofo);with(myfofo){instance_destroy();}}
+        else {ed_net_ops_send_update(myfofo, 6)}
         setting_mode=0;resetting=0;wiatrak=0;
     }
 
@@ -3809,6 +3825,7 @@ if czywybieranieback=1 && czywybieranieback<100
                 myfofo.windy=fofowindy;
                 myfofo.darkness=fofodarkness;
                 myfofo.brightness=fofobrightness;
+                ed_net_ops_send_update(myfofo, 6)
                 //setting_mode=7-7*resetting;
                 //resetting=0;
                 setting_mode=7; wahaha = 1;
@@ -3839,8 +3856,8 @@ if czywybieranieback=1 && czywybieranieback<100
     &&((mouse_y>view_yview[0]+32 && mouse_y<view_yview[0]+135)||(mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16)||(mouse_y>view_yview[0]+32+102+16+102+16 && mouse_y<view_yview[0]+135+102+16+102+16))
     && quitbgpselect=0 && kliknieto=0 && backselect>0
         {
-        if(setting_mode=4){myfofo.bgp=backselect;setting_mode=5-5*resetting;resetting=0;myfofo.setonce2=0;costaiwa4=16}
-        else{global.background=backselect;if(global.preview=-1)global.local_background=backselect;}
+        if(setting_mode=4){myfofo.bgp=backselect;ed_net_ops_send_update(myfofo, 6);setting_mode=5-5*resetting;resetting=0;myfofo.setonce2=0;costaiwa4=16}
+        else{global.background=backselect;if(global.preview=-1)global.local_background=backselect;ed_net_ops_send_settings()}
         czywybieranieback=0;kliknieto=1
         }
 
@@ -4042,8 +4059,8 @@ if czywybieranieback=100
 
             if mouse_check_button(mb_left) && quitbgmselect=0 && kliknieto=0 && muzioj>0
             {
-            if (setting_mode=2){myfofo.bgm=string(muzior2);setting_mode=3-3*resetting;resetting=0;myfofo.setonce2=0;costaiwa4=16}
-            else{global.muzyka=muzior2;if(global.preview=-1)global.local_muzyka=muzior2;}
+            if (setting_mode=2){myfofo.bgm=string(muzior2);ed_net_ops_send_update(myfofo, 6);setting_mode=3-3*resetting;resetting=0;myfofo.setonce2=0;costaiwa4=16}
+            else{global.muzyka=muzior2;if(global.preview=-1)global.local_muzyka=muzior2;ed_net_ops_send_settings()}
             czywybieranieback=0;kliknieto=1;mm_stop_all_ext();
             }
 
@@ -4121,7 +4138,7 @@ if czywybieranieback=1000
     if ed_hit(40, 90, 190, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+90, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.modifiedmov=1-global.modifiedmov;kliknieto=1}
+        if mouse_check_button(mb_left){global.modifiedmov=1-global.modifiedmov;kliknieto=1;ed_net_ops_send_settings()}
     }
     //图层设置
     draw_text(view_xview[0]+40,view_yview[0]+130,string_upper('Layer Order'))
@@ -4134,7 +4151,7 @@ if czywybieranieback=1000
     if ed_hit(40, 120, 190, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+120, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.layerord=(global.layerord+1) mod 3;kliknieto=1}
+        if mouse_check_button(mb_left){global.layerord=(global.layerord+1) mod 3;kliknieto=1;ed_net_ops_send_settings()}
     }
     //探照灯图层
     draw_text(view_xview[0]+40,view_yview[0]+160,string_upper('Roto-disc Layer'))
@@ -4146,7 +4163,7 @@ if czywybieranieback=1000
     if ed_hit(40, 150, 190, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+150, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.rotodisclay=1-global.rotodisclay;kliknieto=1}
+        if mouse_check_button(mb_left){global.rotodisclay=1-global.rotodisclay;kliknieto=1;ed_net_ops_send_settings()}
     }
     //水面高度
     draw_text(view_xview[0]+40,view_yview[0]+190,string_upper('Water Level'))
@@ -4157,7 +4174,7 @@ if czywybieranieback=1000
     if ed_hit(40, 180, 190, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+180, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.poziomwody=min(999999,get_integer("Set the height of the water level.",global.poziomwody))}
+        if mouse_check_button(mb_left){global.poziomwody=min(999999,get_integer("Set the height of the water level.",global.poziomwody));ed_net_ops_send_settings()}
     }
     //全局岩浆
     draw_text(view_xview[0]+40,view_yview[0]+220,string_upper('Fluid Type'))
@@ -4169,7 +4186,7 @@ if czywybieranieback=1000
     if ed_hit(40, 210, 190, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+210, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.lava=1-global.lava;kliknieto=1}
+        if mouse_check_button(mb_left){global.lava=1-global.lava;kliknieto=1;ed_net_ops_send_settings()}
     }
     //自动水面
     draw_text(view_xview[0]+40,view_yview[0]+250,string_upper('Auto Fluid'))
@@ -4181,7 +4198,7 @@ if czywybieranieback=1000
     if ed_hit(40, 240, 190, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+240, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.auto=1-global.auto;kliknieto=1}
+        if mouse_check_button(mb_left){global.auto=1-global.auto;kliknieto=1;ed_net_ops_send_settings()}
     }
     //自动系参数
     if(global.auto){
@@ -4194,7 +4211,7 @@ if czywybieranieback=1000
     if ed_hit(40, 270, 140, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+270, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.firstbound=min(999999,max(-64,get_integer("Set the height of target 1. The fluid will automatically and repeatedly move between T1 and T2.",global.firstbound)))}
+        if mouse_check_button(mb_left){global.firstbound=min(999999,max(-64,get_integer("Set the height of target 1. The fluid will automatically and repeatedly move between T1 and T2.",global.firstbound)));ed_net_ops_send_settings()}
     }
 
     draw_text(view_xview[0]+264,view_yview[0]+280,string_upper('T2'))
@@ -4205,7 +4222,7 @@ if czywybieranieback=1000
     if ed_hit(264, 270, 140, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+264, view_yview[0]+270, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.secondbound=min(999999,max(-64,get_integer("Set the height of target 2. Enter -64 to disable it, which means the fluid will stop moving after reaching T1",global.secondbound)))}
+        if mouse_check_button(mb_left){global.secondbound=min(999999,max(-64,get_integer("Set the height of target 2. Enter -64 to disable it, which means the fluid will stop moving after reaching T1",global.secondbound)));ed_net_ops_send_settings()}
     }
 
     draw_text(view_xview[0]+40,view_yview[0]+310,string_upper('speed'))
@@ -4216,7 +4233,7 @@ if czywybieranieback=1000
     if ed_hit(40, 300, 140, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+300, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.water_velocity=min(9,max(0,get_integer("Set the speed of the fluid.(0,1,...,9)",global.water_velocity)))}
+        if mouse_check_button(mb_left){global.water_velocity=min(9,max(0,get_integer("Set the speed of the fluid.(0,1,...,9)",global.water_velocity)));ed_net_ops_send_settings()}
     }
 
     draw_text(view_xview[0]+264,view_yview[0]+310,string_upper('delay'))
@@ -4227,7 +4244,7 @@ if czywybieranieback=1000
     if ed_hit(264, 300, 140, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+264, view_yview[0]+300, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.water_delay=max(0,get_integer("Set the delay time before the fluid starts to move.",global.water_delay))}
+        if mouse_check_button(mb_left){global.water_delay=max(0,get_integer("Set the delay time before the fluid starts to move.",global.water_delay));ed_net_ops_send_settings()}
     }
 
     }
@@ -4242,7 +4259,7 @@ if czywybieranieback=1000
     if ed_hit(40, 330, 190, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+330, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.advswitch=1-global.advswitch;kliknieto=1}
+        if mouse_check_button(mb_left){global.advswitch=1-global.advswitch;kliknieto=1;ed_net_ops_send_settings()}
     }
 
     //死亡不切bgm+快速复活
@@ -4255,7 +4272,7 @@ if czywybieranieback=1000
     if ed_hit(40, 360, 190, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+360, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.fast_retry=1-global.fast_retry;kliknieto=1}
+        if mouse_check_button(mb_left){global.fast_retry=1-global.fast_retry;kliknieto=1;ed_net_ops_send_settings()}
     }
 
     //MF甜菜
@@ -4268,7 +4285,7 @@ if czywybieranieback=1000
     if ed_hit(40, 390, 190, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+390, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.MFbeet=1-global.MFbeet;kliknieto=1}
+        if mouse_check_button(mb_left){global.MFbeet=1-global.MFbeet;kliknieto=1;ed_net_ops_send_settings()}
     }
 
     //蔚蓝模式
@@ -4281,7 +4298,7 @@ if czywybieranieback=1000
     if ed_hit(40, 420, 190, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+420, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.celeste=1-global.celeste;kliknieto=1}
+        if mouse_check_button(mb_left){global.celeste=1-global.celeste;kliknieto=1;ed_net_ops_send_settings()}
     }
 
     //水管无敌
@@ -4294,7 +4311,7 @@ if czywybieranieback=1000
     if ed_hit(40, 450, 190, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+450, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.pipeout=1-global.pipeout;kliknieto=1}
+        if mouse_check_button(mb_left){global.pipeout=1-global.pipeout;kliknieto=1;ed_net_ops_send_settings()}
     }
     //第一页结束
     }
@@ -4312,7 +4329,7 @@ if czywybieranieback=1000
     if ed_hit(40, 90, 190, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+90, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.fastpass=1-global.fastpass;kliknieto=1}
+        if mouse_check_button(mb_left){global.fastpass=1-global.fastpass;kliknieto=1;ed_net_ops_send_settings()}
     }
 
     //状态栏显示（HUD）
@@ -4325,7 +4342,7 @@ if czywybieranieback=1000
     if ed_hit(40, 120, 190, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+120, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.huddisplay=1-global.huddisplay;kliknieto=1}
+        if mouse_check_button(mb_left){global.huddisplay=1-global.huddisplay;kliknieto=1;ed_net_ops_send_settings()}
     }
 
 
@@ -4347,7 +4364,7 @@ if czywybieranieback=1000
     if ed_hit(40, 180, 190, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+180, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.stunblock=1-global.stunblock;kliknieto=1}
+        if mouse_check_button(mb_left){global.stunblock=1-global.stunblock;kliknieto=1;ed_net_ops_send_settings()}
     }
 
     //橙色强滚向下时上方出界死亡
@@ -4360,7 +4377,7 @@ if czywybieranieback=1000
     if ed_hit(40, 210, 190, 20)&& kliknieto=0
     {
         draw_prefs_highlight(view_xview[0]+40, view_yview[0]+210, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){global.topdeath=1-global.topdeath;kliknieto=1}
+        if mouse_check_button(mb_left){global.topdeath=1-global.topdeath;kliknieto=1;ed_net_ops_send_settings()}
     }
 
 
@@ -4391,7 +4408,7 @@ if czywybieranieback=1000
             } else {
                 global.lightobject = string_replace_char(global.lightobject, 59, '0');
             }
-        }
+        } ed_net_ops_send_settings()
     }
 
     //玩家甜菜子弹o_burax
@@ -4411,7 +4428,7 @@ if czywybieranieback=1000
             } else {
                 global.lightobject = string_replace_char(global.lightobject, 60, '0');
             }
-        }
+        } ed_net_ops_send_settings()
     }
 
     //无敌星马里奥o_marker (gwiazdka>0)
@@ -4431,7 +4448,7 @@ if czywybieranieback=1000
             } else {
                 global.lightobject = string_replace_char(global.lightobject, 61, '0');
             }
-        }
+        } ed_net_ops_send_settings()
     }
 
     //红食人花子弹o_enemyfire
@@ -4451,7 +4468,7 @@ if czywybieranieback=1000
             } else {
                 global.lightobject = string_replace_char(global.lightobject, 62, '0');
             }
-        }
+        } ed_net_ops_send_settings()
     }
 
     //炮弹（普通）o_cannoni
@@ -4471,7 +4488,7 @@ if czywybieranieback=1000
             } else {
                 global.lightobject = string_replace_char(global.lightobject, 63, '0');
             }
-        }
+        } ed_net_ops_send_settings()
     }
 
     //锤子o_mlotekmalpki
@@ -4491,7 +4508,7 @@ if czywybieranieback=1000
             } else {
                 global.lightobject = string_replace_char(global.lightobject, 64, '0');
             }
-        }
+        } ed_net_ops_send_settings()
     }
 
     //库巴火焰o_kuppafire
@@ -4511,7 +4528,7 @@ if czywybieranieback=1000
             } else {
                 global.lightobject = string_replace_char(global.lightobject, 65, '0');
             }
-        }
+        } ed_net_ops_send_settings()
     }
 
     //跟踪炮弹o_cannonig
@@ -4531,7 +4548,7 @@ if czywybieranieback=1000
             } else {
                 global.lightobject = string_replace_char(global.lightobject, 66, '0');
             }
-        }
+        } ed_net_ops_send_settings()
     }
 
     //火球龟子弹o_fff
@@ -4551,7 +4568,7 @@ if czywybieranieback=1000
             } else {
                 global.lightobject = string_replace_char(global.lightobject, 67, '0');
             }
-        }
+        } ed_net_ops_send_settings()
     }
 
     //全局流体（岩浆）o_lightlava
@@ -4571,7 +4588,7 @@ if czywybieranieback=1000
             } else {
                 global.lightobject = string_replace_char(global.lightobject, 68, '0');
             }
-        }
+        } ed_net_ops_send_settings()
     }
 
     //照明额外设置页面结束
@@ -4919,32 +4936,32 @@ if set_light_mode {
             if ed_hit(206+ 64 * 3, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
                 if string_copy(global.lightobject, 1, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 1, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 1, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 1, '0'); } } ed_net_ops_send_settings()
 
             // o_ice
             if ed_hit(206+ 64 * 0, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 2, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 2, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 2, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 2, '0'); } } ed_net_ops_send_settings()
 
             // o_windas
             if ed_hit(206+ 64 * 0, 110+ 64 * 3, 384, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 3, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 3, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 3, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 3, '0'); } } ed_net_ops_send_settings()
 
             // 部分可顶砖块（这里是信息砖、开关砖、水位砖，Bonus 处还有问号砖）
             if(ed_hit(206+ 64 * 2, 110+ 64 * 1, 128, (110+ 64 * (1 + 1)-(110+ 64 * 1))))||
               (ed_hit(206+ 64 * 2, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2)))){
                 if string_copy(global.lightobject, 10, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 10, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 10, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 10, '0'); } } ed_net_ops_send_settings()
 
             // 开关砖阴阳部分另占一位
             if(ed_hit(206+ 64 * 4, 110+ 64 * 1, 128, (110+ 64 * (1 + 1)-(110+ 64 * 1)))){
                 if string_copy(global.lightobject, 69, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 69, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 69, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 69, '0'); } } ed_net_ops_send_settings()
         }
 
         // 景物第一页
@@ -4954,25 +4971,25 @@ if set_light_mode {
             if ed_hit(206+ 64 * 5, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
                 if string_copy(global.lightobject, 4, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 4, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 4, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 4, '0'); } } ed_net_ops_send_settings()
 
             // Big Night Tree
             if ed_hit(206+ 64 * 5, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
                 if string_copy(global.lightobject, 5, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 5, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 5, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 5, '0'); } } ed_net_ops_send_settings()
 
             // Bright Light
             if ed_hit(206+ 64 * 4, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 6, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 6, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 6, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 6, '0'); } } ed_net_ops_send_settings()
 
             // Potrait
             if ed_hit(206+ 64 * 5, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 7, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 7, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 7, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 7, '0'); } } ed_net_ops_send_settings()
 
         }
 
@@ -4983,13 +5000,13 @@ if set_light_mode {
             if ed_hit(206+ 64 * 4, 110+ 64 * 1, 64, (110+ 64 * (1 + 1)-(110+ 64 * 1))){
                 if string_copy(global.lightobject, 8, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 8, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 8, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 8, '0'); } } ed_net_ops_send_settings()
 
             // Roto-disc Center
             if ed_hit(206+ 64 * 1, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 9, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 9, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 9, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 9, '0'); } } ed_net_ops_send_settings()
 
         }
 
@@ -5001,55 +5018,55 @@ if set_light_mode {
               (ed_hit(206+ 64 * 0, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3)))){
                 if string_copy(global.lightobject, 10, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 10, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 10, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 10, '0'); } } ed_net_ops_send_settings()
 
             // 红蘑菇
             if ed_hit(206+ 64 * 0, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 11, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 11, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 11, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 11, '0'); } } ed_net_ops_send_settings()
 
             // 火力花
             if ed_hit(206+ 64 * 1, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 12, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 12, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 12, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 12, '0'); } } ed_net_ops_send_settings()
 
             // 甜菜
             if ed_hit(206+ 64 * 2, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 13, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 13, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 13, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 13, '0'); } } ed_net_ops_send_settings()
 
             // 绿果
             if ed_hit(206+ 64 * 3, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 14, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 14, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 14, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 14, '0'); } } ed_net_ops_send_settings()
 
             // 无敌星
             if ed_hit(206+ 64 * 4, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 15, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 15, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 15, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 15, '0'); } } ed_net_ops_send_settings()
 
             // 绿蘑菇
             if ed_hit(206+ 64 * 5, 110+ 64 * 2, 64, (110+ 64 * (2 + 1)-(110+ 64 * 2))){
                 if string_copy(global.lightobject, 16, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 16, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 16, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 16, '0'); } } ed_net_ops_send_settings()
 
             // 普通可碎砖、金砖
             if ed_hit(206+ 64 * 2, 110+ 64 * 3, 128, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 17, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 17, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 17, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 17, '0'); } } ed_net_ops_send_settings()
 
             // 金币
             if ed_hit(206+ 64 * 5, 110+ 64 * 3, 64, (110+ 64 * (3 + 1)-(110+ 64 * 3))){
                 if string_copy(global.lightobject, 18, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 18, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 18, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 18, '0'); } } ed_net_ops_send_settings()
 
         }
 
@@ -5060,13 +5077,13 @@ if set_light_mode {
             if ed_hit(206+ 64 * 0, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
                 if string_copy(global.lightobject, 10, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 10, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 10, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 10, '0'); } } ed_net_ops_send_settings()
 
             // 叶子
             if ed_hit(206+ 64 * 2, 110+ 64 * 0, 64, (110+ 64 * (0 + 1)-(110+ 64 * 0))){
                 if string_copy(global.lightobject, 70, 1) = '0'
                 { global.lightobject = string_replace_char(global.lightobject, 70, '1'); } else
-                { global.lightobject = string_replace_char(global.lightobject, 70, '0'); } }
+                { global.lightobject = string_replace_char(global.lightobject, 70, '0'); } } ed_net_ops_send_settings()
 
         }
 

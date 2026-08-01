@@ -17,6 +17,10 @@ if _op = 1 {
     net_state = 3
     ed_net_add_line('[Player joined: ' + _nm + ']')
     ed_net_send_hello_ack(net_sendbuf, 1, net_my_name)
+    if net_role = 1 {
+        ed_net_ops_send_full()
+        ed_net_ops_send_settings()
+    }
 }
 if _op = 2 {
     _sid = buffer_read_u32(argument1)
@@ -70,6 +74,31 @@ if _op = 18 {
 if _op = 19 {
     ed_net_ops_apply_update(argument1)
     debug_log('[net] op19 update applied')
+}
+if _op = 20 {
+    ed_net_ops_apply_settings(argument1)
+    debug_log('[net] op20 settings applied')
+}
+if _op = 21 {
+    _disp = buffer_read_u32(argument1)
+    _txt = buffer_read_u32(argument1)
+    _sid = buffer_read_u32(argument1)
+    _nm = buffer_read_u32(argument1)
+    if _sid > 2147483647 {
+        _sid -= 4294967296
+    }
+    if _nm > 2147483647 {
+        _nm -= 4294967296
+    }
+    debug_log('[net] op21 resize w=' + string(_disp) + ' h=' + string(_txt) + ' tx=' + string(_sid) + ' ty=' + string(_nm))
+    with(o_edmain) {
+        ed_resize_level(_disp, _txt, _sid, _nm)
+    }
+    ed_net_rebuild_ids()
+}
+if _op = 22 {
+    ed_net_ops_apply_full(argument1)
+    debug_log('[net] op22 full applied')
 }
 if _op = 240 {
     debug_log('[net] goodbye received')

@@ -39,6 +39,22 @@ if instance_exists(_f) {
         if _f.water_endX > 2147483647 { _f.water_endX -= 4294967296 }
         if _f.water_endY > 2147483647 { _f.water_endY -= 4294967296 }
     }
+    if _subop = 6 {
+        _f.bgm_change = buffer_read_u16(argument0)
+        _f.bgm = ed_net_read_str(argument0)
+        _f.bgp_change = buffer_read_u16(argument0)
+        _f.bgp = buffer_read_u32(argument0) - 1000000
+        _f.linked = buffer_read_u16(argument0)
+        _f.height = buffer_read_u32(argument0) - 64
+        _f.weather_change = buffer_read_u16(argument0)
+        _f.rainy = buffer_read_u16(argument0)
+        _f.fallingstars = buffer_read_u16(argument0)
+        _f.snowy = buffer_read_u16(argument0)
+        _f.thunder = buffer_read_u16(argument0)
+        _f.windy = buffer_read_u16(argument0)
+        _f.darkness = buffer_read_u16(argument0)
+        _f.brightness = buffer_read_u16(argument0)
+    }
     ed_net_trace('R19 netid=' + string(_netid) + ' subop=' + string(_subop) + ' applied inst=' + string(_f))
 } else {
     ed_net_trace('R19 MISS netid=' + string(_netid) + ' subop=' + string(_subop))

@@ -28,6 +28,13 @@ setonce2=0
 preview=-1
 target=0
 velocity=1
+rainy = 0
+fallingstars = 0
+snowy = 0
+thunder = 0
+windy = 0
+darkness = 0
+brightness = 0
 
 camera_endX=0
 camera_endY=0

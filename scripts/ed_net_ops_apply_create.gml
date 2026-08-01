@@ -24,6 +24,19 @@ if _cato = 2 {
     _f = instance_create(_x, _y, o_edsceneriesblock)
     _f.coto = _coto
     _f.block_index = buffer_read_u16(argument0)
+    if _coto = 42 {
+        _f.sprite_index = s_blocks
+        _f.image_index = _f.block_index
+        _f.image_alpha = 1
+    } else {
+        if _coto != 38 {
+            _f.sprite_index = s_sceneriesbank
+            _f.image_index = _coto - 1
+        } else {
+            _f.depth = 5
+            _f.sprite_index = s_edrotocenter
+        }
+    }
 }
 if _cato = 3 {
     _f = instance_create(_x, _y, o_edmarkerblock)
@@ -53,7 +66,20 @@ if _cato = 3 {
         _f.velocity = buffer_read_u16(argument0)
     }
     if _coto = 33 {
+        _f.bgm_change = buffer_read_u16(argument0)
+        _f.bgm = ed_net_read_str(argument0)
+        _f.bgp_change = buffer_read_u16(argument0)
+        _f.bgp = buffer_read_u32(argument0) - 1000000
+        _f.linked = buffer_read_u16(argument0)
         _f.height = buffer_read_u32(argument0) - 64
+        _f.weather_change = buffer_read_u16(argument0)
+        _f.rainy = buffer_read_u16(argument0)
+        _f.fallingstars = buffer_read_u16(argument0)
+        _f.snowy = buffer_read_u16(argument0)
+        _f.thunder = buffer_read_u16(argument0)
+        _f.windy = buffer_read_u16(argument0)
+        _f.darkness = buffer_read_u16(argument0)
+        _f.brightness = buffer_read_u16(argument0)
     }
     if _coto = 34 {
         _f.camera_endX = buffer_read_u32(argument0)
