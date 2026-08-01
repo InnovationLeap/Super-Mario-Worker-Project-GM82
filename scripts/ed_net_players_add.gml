@@ -7,8 +7,8 @@ if net_pl_count >= 8 {
     return 0
 }
 if argument2 = 0 {
-    // 自动分配：从 2 开始找空闲 id
-    _i = 2
+    // 自动分配：房主 id=0，客户端从 1 开始递增
+    _i = 1
     while _i < 65536 {
         _found = 0
         _j = 0

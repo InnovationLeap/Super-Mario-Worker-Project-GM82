@@ -128,8 +128,8 @@ if _op = 4 {
             }
             _i += 1
         }
-        if _found = 0 && net_pl_count < 8 {
-            // 防御：无条目时按 source_id 自动补（name 未知占位）
+        if _found = 0 && net_pl_count < 8 && _src > 0 {
+            // 防御：无条目时按 source_id 自动补（name 未知占位）；_src=0 无效（未握手/房主占位）不入表
             net_pl_id[net_pl_count] = _src
             net_pl_sock[net_pl_count] = -1
             net_pl_name[net_pl_count] = 'P' + string(_src)
@@ -152,7 +152,7 @@ if _op = 4 {
             }
             _i += 1
         }
-        if _found = 0 && net_pl_count < 8 {
+        if _found = 0 && net_pl_count < 8 && _src > 0 {
             net_pl_id[net_pl_count] = _src
             net_pl_sock[net_pl_count] = -1
             net_pl_name[net_pl_count] = 'P' + string(_src)

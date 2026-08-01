@@ -119,7 +119,8 @@ if net_listener >= 0 {
         net_listener = -1
     }
 }
-if net_state = 3 {
+// 光标发送：房主（net_role=1，net_myid 恒为 0）始终发；客户端需握手完成（net_myid>0）才发
+if net_state = 3 && (net_role = 1 || net_myid > 0) {
     ed_net_send_cursor(net_sendbuf, mouse_x, mouse_y)
 }
 // 待重载标记：测关中收到 op23 → 回编辑器后请求全量重同步
