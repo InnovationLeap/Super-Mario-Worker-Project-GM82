@@ -15,7 +15,13 @@ _bak_cs = global.compress_save
 global.autosavename = _fname
 global.compress_save = 1
 global.donottemp = 1
-Save_Script_Main()
+// 必须在 o_edmain 上下文保存：Save_Script_Blocks 使用裸 arrayetapu（依赖 self），
+// 握手路径从 o_ednet 调用时会读到未定义变量导致 blocks 全部写空
+if instance_exists(o_edmain) {
+    with(o_edmain) {
+        Save_Script_Main()
+    }
+}
 global.autosavename = _bak_save
 global.compress_save = _bak_cs
 if !file_exists(_fname) {
