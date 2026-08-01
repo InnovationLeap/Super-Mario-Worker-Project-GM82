@@ -456,7 +456,7 @@ if instance_exists(o_edmain) {
         }
         if (current_time div 400) mod 2 = 0 {
             draw_set_color(c_white)
-            draw_rectangle(_x1 + 12, _my - 4, _x1 + 22, _my + 10, 1)
+            draw_rectangle(_x1 + 12, _my - 16, _x1 + 22, _my - 2, 1)
         }
     }
 }
