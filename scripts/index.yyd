@@ -1162,3 +1162,18 @@ ed_net_init
 ed_net_host
 ed_net_join
 
+ed_place_bonus
+ed_place_scenery
+ed_place_block
+ed_place_marker
+ed_place_enemy
+ed_place_passage
+ed_delete_at
+ed_tool_spotlight
+ed_tool_goldfly
+ed_tool_jumpturtle
+ed_tool_fish
+ed_tool_camera
+ed_tool_water
+ed_resize_level
+

@@ -803,57 +803,7 @@ if wlaczonaopcja == 0 {
                 _edfv_q=show_question('Some blocks may be out of the new border, which will be DELETED. Do you want to continue?')
             }
             if _edfv_q=1 {
-                sizechange=1
-                with(o_edwallsdrawer){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32}
-                with(o_edbonusesblock){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32}
-                with(o_edbrowser){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32}
-                with(o_edenemyblock){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32
-                    if(coto=40||coto=41){fishendX+=o_edmain.x_trans*32;fishendY+=o_edmain.y_trans*32}
-                }
-                with(o_edmarkerblock){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32
-                    if(coto=32){target = max(target+o_edmain.y_trans*32,-64);if(type=2){water_endX+=o_edmain.x_trans*32;water_endY+=o_edmain.y_trans*32}}
-                    if(coto=33){if(height>-64)height = max(height+o_edmain.y_trans*32,-63)}
-                    if(coto=34){camera_endX+=o_edmain.x_trans*32;camera_endY+=o_edmain.y_trans*32}
-                }
-                with(o_edpassage){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32;exitx+=o_edmain.x_trans*32;exity+=o_edmain.y_trans*32}
-                with(o_edsceneriesblock){x+=o_edmain.x_trans*32;y+=o_edmain.y_trans*32}
-                for( i=0;i<x_new;i+=1 ){
-                    for( j=0;j<y_new;j+=1 ){
-                        global.arrayetapu2[i,j]=0
-                    }
-                }
-                for ( i=max(0,x_trans) ; i<min(x_new,floor(room_width/32)+x_trans) ; i+=1 ) {
-                    for( j=max(0,y_trans) ; j<min(y_new,floor(room_height/32)+y_trans) ; j+=1 ){
-                        global.arrayetapu2[i,j]=arrayetapu[i-x_trans,j-y_trans]
-                    }
-                }
-                global.poziomwody+=y_trans*32
-                if global.auto{
-                    global.firstbound = max(global.firstbound+y_trans*32,-64)
-                    if(global.secondbound>-64)global.secondbound = max(global.secondbound+y_trans*32,-63)
-                }
-                room_set_width(room,x_new*32)
-                room_set_height(room,y_new*32)
-                global.autosavename1=global.autosavename
-                global.autosavename=working_directory+".\temp\TempChangeSize.smwl"
-                create=file_text_open_write(global.autosavename)
-                file_text_write_string(create," ")
-                file_text_close(create)
-                global.lvlwidth=x_new*32
-                global.lvlheight=y_new*32
-                global.donottemp=1
-                Save_Script_Main()
-                with(o_edwallsdrawer){instance_destroy()}
-                with(o_edbonusesblock){instance_destroy()}
-                with(o_edbrowser){instance_destroy()}
-                with(o_edenemyblock){instance_destroy()}
-                with(o_edmarkerblock){instance_destroy()}
-                with(o_edpassage){instance_destroy()}
-                with(o_edsceneriesblock){instance_destroy()}
-                room_restart()
-                Load_Script_Main()
-                file_delete(global.autosavename)
-                global.autosavename = global.autosavename1
+                ed_resize_level(x_new, y_new, x_trans, y_trans)
             }
         }
     }
@@ -1340,16 +1290,14 @@ if wlaczonaopcja=5//下面四行红字用于显示bonus栏的界面
         {
         if self_coto_check(5,costawia5){
         kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edbonusesblock)
-        fofo.coto=costawia5
+        fofo=ed_place_bonus(costawia5,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32)
         }
         }//fofo是作者用来指? 在编辑界面上创建了的bonus（比如非隐藏绿果，给这个fofo定义一个叫做coto的变量来记录他的代号，令coto=costawia5，在本例中绿果的代号是3，所以coto=3）
     //delete bonus only when bonus is selected
     if costawia5<>0 && kliknieto=0 && mouse_check_button(mb_right) /*&& mouse_x>0 &&  mouse_y>0*/ && instance_position(mouse_x,mouse_y,o_edbonusesblock) && costawia4b=0 && wiatrak=0
     && menujesie=0 && wlaczonaopcja=0
         {
-        fofo=instance_position(mouse_x,mouse_y,o_edbonusesblock)
-        with(fofo){instance_destroy()}
+        ed_delete_at(1,mouse_x,mouse_y,0)
         }//右键删除
 
 
@@ -1536,9 +1484,7 @@ if costawia3<>0 && costawia3<42 && mouse_check_button(mb_left) /*&& mouse_x>0 &&
     {
     if self_coto_check(3,costawia3){
         kliknieto=1
-        my_scenery=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edsceneriesblock)
-        my_scenery.coto=costawia3
-        set_scenery=1
+        my_scenery=ed_place_scenery(costawia3,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32)
     }
     }
 
@@ -1577,25 +1523,14 @@ if costawia3<>0 && costawia3=42 && mouse_check_button(mb_left) /*&& mouse_x>0 &&
     {
     if (self_coto_check(3,42)){
         kliknieto=1
-        my_scenery=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edsceneriesblock)
-        my_scenery.coto=42
-        my_scenery.block_index = global.imitater
-        set_scenery=1
+        my_scenery=ed_place_scenery(42,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32)
     }
     }//imitater
 
 if costawia3<>0 && kliknieto=0 && mouse_check_button(mb_right) /*&& mouse_x>0 &&  mouse_y>0*/ && instance_position(mouse_x,mouse_y,o_edsceneriesblock) && wiatrak=0
     && menujesie=0 && wlaczonaopcja=0
     {
-       tester = instance_position(mouse_x,mouse_y,o_edsceneriesblock);
-       if(delete_coto_check(3,costawia3,tester.coto)){
-           with(tester){instance_destroy();}
-       }
-       else{
-           with(o_edsceneriesblock){
-           if(delete_coto_check(3,other.costawia3,coto) && instance_position(mouse_x,mouse_y,id))instance_destroy();
-           }
-       }
+       ed_delete_at(3,mouse_x,mouse_y,costawia3)
     }
 
 
@@ -1764,8 +1699,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
     && menujesie=0 && wlaczonaopcja=0
         {
         kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-        fofo.coto=17//喝了终点
+        fofo=ed_place_marker(17,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,-1)
         }
     if costawia4=3 && costawia4b=0 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edmarkerblock) && wiatrak=0
     && menujesie=0 && wlaczonaopcja=0 && delayus>15
@@ -1775,8 +1709,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         {
         if (self_coto_check(4,18)){
         kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-        fofo.coto=18//喝了实心
+        fofo=ed_place_marker(18,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,-1)
         autopair=0 //怨念残留喝了
         }
         }
@@ -1788,8 +1721,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         {
         if(self_coto_check(4,19)){
         kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-        fofo.coto=19//喝了起点
+        fofo=ed_place_marker(19,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,-1)
         autopair=0 //怨念残留喝了
         }
         }
@@ -1802,8 +1734,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         {
         if(self_coto_check(4,20)){
         kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-        fofo.coto=20//喝了cp
+        fofo=ed_place_marker(20,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,-1)
         autopair=0 //怨念残留喝了
         }
         }
@@ -1815,8 +1746,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         {
         if(self_coto_check(4,22)){
         kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-        fofo.coto=22//喝了封顶实心
+        fofo=ed_place_marker(22,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,-1)
         autopair=0 //怨念残留喝了
         }
         }
@@ -1836,19 +1766,8 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
     && menujesie=0 && wlaczonaopcja=0 && global.picking = false
     {
         kliknieto=1
-        fofo=instance_create(floor((mouse_x-16)/32)*32+16,floor((mouse_y)/32)*32,o_edmarkerblock)
-        fofo.coto=23//喝了强滚中心
-        fofo.is_orange=global.scrollorange
+        fofo=ed_place_marker(23,floor((mouse_x-16)/32)*32+16,floor((mouse_y)/32)*32,-1)
         autopair=0 //怨念残留喝了
-        ds_list_add(global.autoscrolls,fofo)
-        if ds_list_size(global.autoscrolls)=1{
-            // 首次放置时修改滚屏速度
-                var sspeed;
-                sspeed=get_integer('Set the scroll speed (unit: 0.01 pixel). Max=6000',100)
-                sspeed=max(0,sspeed)
-                sspeed=min(sspeed,6000)
-                fofo.scrollspeed=sspeed/100
-        }else{fofo.scrollspeed=ds_list_find_value(global.autoscrolls,ds_list_size(global.autoscrolls)-2).scrollspeed}
     }
     if costawia4=8 && costawia4b=0 && kliknieto=0 /*&& mouse_x>0 &&  mouse_y>0*/ && /*!instance_position(mouse_x,mouse_y,o_edmarkerblock) &&*/ wiatrak=0
     && menujesie=0 && wlaczonaopcja=0
@@ -1859,8 +1778,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
     {
         if(self_coto_check(4,24)){
         kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-        fofo.coto=24//喝了脚滑人杀手
+        fofo=ed_place_marker(24,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,-1)
         autopair=0 //怨念残留喝了
         }
     }
@@ -1883,11 +1801,8 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         {
         if(self_coto_check(4,25)){
         kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
+        fofo=ed_place_marker(25,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,costawia4-19)
         autopair=0 //怨念残留喝了
-        fofo.coto=25//新桥
-        fofo.type=costawia4-19
-        fofo.anime=global.platformanime
         }
         }
     /*这里是旧版运输桥，现在已经木有了
@@ -1912,13 +1827,8 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         {
         if(self_coto_check(4,26)){
         kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-        fofo.coto=26//喝了叹号
+        fofo=ed_place_marker(26,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,-1)
         autopair=0 //怨念残留喝了
-        var tempMessage;
-        tempMessage = get_string('Please type the message you want to hide in this block. (In Chinese or English)#Use \# to start a new line, and use \\# for a real "\#" in your text.',defMessage)
-        defMessage = tempMessage
-        fofo.textMessage = tempMessage
         }
         }
 
@@ -1943,9 +1853,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         {
         if(self_coto_check(4,27)){
         kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-        fofo.coto=27//喝了switch
-        fofo.color=global.yinyangcolor
+        fofo=ed_place_marker(27,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,-1)
         autopair=0 //怨念残留喝了
         }
         }
@@ -1960,9 +1868,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         {
         if(self_coto_check(4,28)){
         kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-        fofo.coto=28//喝了yin
-        fofo.color=global.yinyangcolor
+        fofo=ed_place_marker(28,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,-1)
         autopair=0 //
         }
         }
@@ -1976,9 +1882,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         {
         if(self_coto_check(4,29)){
         kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-        fofo.coto=29//喝了yang
-        fofo.color=global.yinyangcolor
+        fofo=ed_place_marker(29,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,-1)
         autopair=0 //
         }
         }
@@ -1992,8 +1896,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         {
         if(self_coto_check(4,30)){
         kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-        fofo.coto=30//喝了碎冰冰
+        fofo=ed_place_marker(30,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,-1)
         autopair=0 //
         }
         }
@@ -2018,9 +1921,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         {
         if(self_coto_check(4,31)){
         kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-        fofo.coto=31//喝了半实心
-        fofo.ledge_type=global.ledge_type
+        fofo=ed_place_marker(31,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,-1)
         autopair=0 //
         }
         }
@@ -2044,12 +1945,8 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
     {
         if(self_coto_check(4,32)){
             kliknieto=1
-            fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-            fofo.coto=32
-            fofo.type=global.water_change_type
+            fofo=ed_place_marker(32,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,-1)
             autopair=0 //怨念残留喝了
-            fofo.target = min(999999,max(-64,get_integer('Please type the target height.(unit: px, >=-64px)',0)))
-            fofo.velocity = min(max(0,get_integer('Please type the speed of the fluid(0,1,...,9).',1)),9)
             if(fofo.type=2){wiatrak=9}
         }
     }
@@ -2064,8 +1961,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         {
         if(self_coto_check(4,33)){
         kliknieto=1
-        myfofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-        myfofo.coto=33//喝了bgmbgp切换
+        myfofo=ed_place_marker(33,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,-1)
         if(myfofo.haveset=0){setting_mode = 1; myfofo.haveset=1;}
         autopair=0 //
         }
@@ -2102,8 +1998,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         {
         if(self_coto_check(4,34)){
         kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-        fofo.coto=34//喝了camera
+        fofo=ed_place_marker(34,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,-1)
         autopair=0 //
         wiatrak=8
         }
@@ -2113,29 +2008,14 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
     if costawia4<>0 && kliknieto=0 && mouse_check_button(mb_right) /*&& mouse_x>0 &&  mouse_y>0*/ && instance_position(mouse_x,mouse_y,o_edmarkerblock) && costawia4b=0 && wiatrak=0
     && menujesie=0 && wlaczonaopcja=0 && global.picking = false
     {
-       tester = instance_position(mouse_x,mouse_y,o_edmarkerblock);
-       if(delete_coto_check(4,costawia4,tester.coto)){
-           with(tester){
-               if coto=23{ds_list_delete(global.autoscrolls,ds_list_find_index(global.autoscrolls,id))}//删去这个恶劣强滚
-               instance_destroy();
-           }
-       }
-       else{
-           with(o_edmarkerblock){
-               if(delete_coto_check(4,other.costawia4,coto)&& instance_position(mouse_x,mouse_y,id)){
-                   if coto=23{ds_list_delete(global.autoscrolls,ds_list_find_index(global.autoscrolls,id))}//删去这个恶劣强滚
-                   instance_destroy();
-               }
-           }
-       }
+       ed_delete_at(4,mouse_x,mouse_y,costawia4)
     }
         //delete passage only when passage is selected
     if costawia4=1 && kliknieto=0 && mouse_check_button(mb_right) /*&& mouse_x>0 &&  mouse_y>0*/ && instance_position(mouse_x,mouse_y,o_edpassage) && costawia4b=0 && wiatrak=0
     && menujesie=0 && wlaczonaopcja=0
         {
-        fofo=instance_position(mouse_x,mouse_y,o_edpassage)
         autopair=0 //怨念残留喝了
-        with(fofo){instance_destroy()}
+        ed_delete_at(5,mouse_x,mouse_y,0)
         }
 
 
@@ -2156,9 +2036,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
     && menujesie=0 && wlaczonaopcja=0
         {
         kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edpassage)
-        fofo.warpnum=global.warpnum
-        global.warpnum+=1
+        fofo=ed_place_passage(1,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32)
         costawia4b=1
         autopair=0 //怨念残留喝了
         }
@@ -2179,8 +2057,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         {
         kliknieto=1
         costawia4b=2
-        fofo.wejscie=floor((point_direction(fofo.x+32,fofo.y+32,mouse_x,mouse_y)+45)/90)*90
-        fofo.tak=1
+        ed_place_passage(2,mouse_x,mouse_y)
         }
     // stawianie         exita
     if costawia4=1 && costawia4b=2
@@ -2198,9 +2075,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         {
         kliknieto=1
         costawia4b=3
-        fofo.exitx=(floor(mouse_x/32))*32
-        fofo.exity=(floor(mouse_y/32))*32
-        fofo.tak2=1
+        ed_place_passage(3,(floor(mouse_x/32))*32,(floor(mouse_y/32))*32)
         }
         //iiii.. kierunek
     if costawia4=1 && costawia4b=3
@@ -2217,10 +2092,7 @@ if wlaczonaopcja=4 && o_edmain.costawia4b=0 && ed_hit(206, 110+64*3, 384, 64)&& 
         {
         kliknieto=1
         costawia4b=0
-        fofo.wyjscie=floor((point_direction(fofo.exitx,fofo.exity,mouse_x,mouse_y)+45)/90)*90
-        if fofo.wyjscie>=360{fofo.wyjscie=fofo.wyjscie mod 360}
-        fofo.tak3=1
-        with(o_edpassage){shuiguanhele=0;shuiguanhele2=0}
+        ed_place_passage(4,mouse_x,mouse_y)
         }
 
 
@@ -3065,12 +2937,9 @@ if costawia<>0 && kliknieto=0 && autopair3=0
 if costawia<>0 && kliknieto=0 && autopair3=0 && mouse_x>0 &&  mouse_y>0 && mouse_check_button(mb_left)
     && menujesie=0 && wlaczonaopcja=0
     {
-    arrayetapu[floor((mouse_x)/32),floor((mouse_y)/32)]=costawia;
-    if (self_coto_check(4,18) && global.autosolid = 1){
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-        fofo.coto=18//喝了实心
-        autopair=0 //怨念残留喝了
-        }
+    fofo=ed_place_block(costawia,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32)
+    if fofo<>-1 {autopair=0 //怨念残留喝了
+    }
     }}
     if (mouse_x>0 && mouse_y>0){
 if autopair=2{ed_autopair_place(2);}
@@ -3122,9 +2991,7 @@ if autopair=68{ed_autopair_place(68);}
 if costawia<>0 && kliknieto=0 && autopair3=0 && mouse_check_button(mb_right) && mouse_x>0 &&  mouse_y>0 && wiatrak=0
     && menujesie=0 && wlaczonaopcja=0
     {
-    arrayetapu[floor((mouse_x)/32),floor((mouse_y)/32)]=0
-    fofo = instance_position(mouse_x,mouse_y,o_edmarkerblock)
-    if (fofo.coto=18 || fofo.coto=22) {with(fofo){instance_destroy()}}
+    ed_delete_at(0,mouse_x,mouse_y,0)
     }
 if  costawia2 = 0 && costawia3 = 0 && costawia4 = 0 && costawia5 = 0 && costawia6 = 0
     && kliknieto=0 && autopair3=0 &&( /*mouse_check_button(mb_middle) ||*/ keyboard_check_pressed(global.key_pick))
@@ -3368,11 +3235,8 @@ if costawia2<>0 && (costawia2=20||costawia2=35||costawia2=39) && kliknieto=0 && 
     && !(costawia2=35 && mouse_y <= 32)
     {
     kliknieto=1
-    fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edenemyblock)
+    fofo=ed_place_enemy(costawia2,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32)
     autopair=0 //怨念残留喝了
-    global.fotel=fofo.x
-    global.fotel2=fofo.y
-    fofo.coto=costawia2
     if costawia2=20 {wiatrak=1;fofo.is_petal=global.petal_spotlight;if global.petal_spotlight{fofo.rotomr[1]=global.petal_max_promien;fofo.rotors[1]=global.petal_promien_szybkosc}} //探照灯
     if costawia2=39 {wiatrak=3;global.goldcount=1}// 金飞龟——继承电光绕的优良传统
     if costawia2=35 {wiatrak=5} //可调跳乌龟
@@ -3388,11 +3252,8 @@ if costawia2<>0 && (costawia2<>20 && costawia2<>35 && costawia2<>39 && costawia2
     {
     if self_coto_check(2,costawia2){
     kliknieto=1
-    fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edenemyblock)
+    fofo=ed_place_enemy(costawia2,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32)
     autopair=0 //怨念残留喝了
-    global.fotel=fofo.x
-    global.fotel2=fofo.y
-    fofo.coto=costawia2
     }
     }
 
@@ -3418,11 +3279,8 @@ if (costawia2=40||costawia2=41) && kliknieto=0 && mouse_check_button(mb_left) /*
     && menujesie=0 && wlaczonaopcja=0 && setting_mode == 0
     {
     kliknieto=1
-    fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edenemyblock)
+    fofo=ed_place_enemy(costawia2,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32)
     autopair=0 //怨念残留喝了
-    global.fotel=fofo.x
-    global.fotel2=fofo.y
-    fofo.coto=costawia2
     wiatrak=6 //你们要的游鱼
     }
 
@@ -3435,11 +3293,8 @@ if global.objectoffset=0 && costawia2<>0 && (costawia2=6||costawia2=8||costawia2
     && menujesie=0 && wlaczonaopcja=0 && delayus>15
     {
     kliknieto=1
-    fofo=instance_create(floor((mouse_x-16)/32)*32+16,floor((mouse_y)/32)*32,o_edenemyblock)
+    fofo=ed_place_enemy(costawia2,floor((mouse_x-16)/32)*32+16,floor((mouse_y)/32)*32)
     autopair=0 //怨念残留喝了
-    global.fotel=fofo.x
-    global.fotel2=fofo.y
-    fofo.coto=costawia2
     }
 //绿色倒食人花处理(所见即所得限定)
 if global.objectoffset=0 && costawia2<>0 && costawia2=7 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edbonusesblock) &&     wiatrak=0
@@ -3450,11 +3305,8 @@ if global.objectoffset=0 && costawia2<>0 && costawia2=7 && mouse_check_button(mb
     && menujesie=0 && wlaczonaopcja=0 && delayus>15
     {
     kliknieto=1
-    fofo=instance_create(floor((mouse_x-16)/32)*32+16,floor((mouse_y)/32)*32,o_edenemyblock)
+    fofo=ed_place_enemy(costawia2,floor((mouse_x-16)/32)*32+16,floor((mouse_y)/32)*32)
     autopair=0 //怨念残留喝了
-    global.fotel=fofo.x
-    global.fotel2=fofo.y
-    fofo.coto=costawia2
     }
 //红色倒食人花处理(所见即所得限定)
 if global.objectoffset=0 && costawia2<>0 && costawia2=9 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edbonusesblock) &&     wiatrak=0
@@ -3465,11 +3317,8 @@ if global.objectoffset=0 && costawia2<>0 && costawia2=9 && mouse_check_button(mb
     && menujesie=0 && wlaczonaopcja=0 && delayus>15
     {
     kliknieto=1
-    fofo=instance_create(floor((mouse_x-16)/32)*32+16,floor((mouse_y)/32)*32,o_edenemyblock)
+    fofo=ed_place_enemy(costawia2,floor((mouse_x-16)/32)*32+16,floor((mouse_y)/32)*32)
     autopair=0 //怨念残留喝了
-    global.fotel=fofo.x
-    global.fotel2=fofo.y
-    fofo.coto=costawia2
     }
 //蓝色倒食人花处理(所见即所得限定)
 if global.objectoffset=0 && costawia2<>0 && costawia2=45 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edbonusesblock) &&     wiatrak=0
@@ -3480,11 +3329,8 @@ if global.objectoffset=0 && costawia2<>0 && costawia2=45 && mouse_check_button(m
     && menujesie=0 && wlaczonaopcja=0 && delayus>15
     {
     kliknieto=1
-    fofo=instance_create(floor((mouse_x-16)/32)*32+16,floor((mouse_y)/32)*32,o_edenemyblock)
+    fofo=ed_place_enemy(costawia2,floor((mouse_x-16)/32)*32+16,floor((mouse_y)/32)*32)
     autopair=0 //怨念残留喝了
-    global.fotel=fofo.x
-    global.fotel2=fofo.y
-    fofo.coto=costawia2
     }
 //灰色倒食人花处理(所见即所得限定)
 if global.objectoffset=0 && costawia2<>0 && costawia2=47 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edbonusesblock) &&     wiatrak=0
@@ -3495,11 +3341,8 @@ if global.objectoffset=0 && costawia2<>0 && costawia2=47 && mouse_check_button(m
     && menujesie=0 && wlaczonaopcja=0 && delayus>15
     {
     kliknieto=1
-    fofo=instance_create(floor((mouse_x-16)/32)*32+16,floor((mouse_y)/32)*32,o_edenemyblock)
+    fofo=ed_place_enemy(costawia2,floor((mouse_x-16)/32)*32+16,floor((mouse_y)/32)*32)
     autopair=0 //怨念残留喝了
-    global.fotel=fofo.x
-    global.fotel2=fofo.y
-    fofo.coto=costawia2
     }
 //龟壳摆放
 if costawia2=43 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edenemyblock) && wiatrak=0
@@ -3517,12 +3360,8 @@ if costawia2=43 && mouse_check_button(mb_left) /*&& mouse_x>0 &&  mouse_y>0*/ &&
     && menujesie=0 && wlaczonaopcja=0 && delayus>15 && setting_mode == 0
     {
     kliknieto=1
-    fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edenemyblock)
+    fofo=ed_place_enemy(costawia2,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32)
     autopair=0 //怨念残留喝了
-    global.fotel=fofo.x
-    global.fotel2=fofo.y
-    fofo.coto = costawia2;
-    fofo.shell_type = global.shell_type
     }
 //扎地摆放
 if costawia2=17 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edenemyblock) && wiatrak=0
@@ -3540,12 +3379,8 @@ if costawia2=17 && mouse_check_button(mb_left) /*&& mouse_x>0 &&  mouse_y>0*/ &&
     && menujesie=0 && wlaczonaopcja=0 && delayus>15 && setting_mode == 0
     {
     kliknieto=1
-    fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edenemyblock)
+    fofo=ed_place_enemy(costawia2,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32)
     autopair=0 //怨念残留喝了
-    global.fotel=fofo.x
-    global.fotel2=fofo.y
-    fofo.coto = costawia2;
-    fofo.spike_type = global.spike_type
     draw_spike(costawia2,global.spike_type,1);
     }
 //MW刺摆放
@@ -3564,12 +3399,8 @@ if costawia2=22 && mouse_check_button(mb_left) /*&& mouse_x>0 &&  mouse_y>0*/ &&
     && menujesie=0 && wlaczonaopcja=0 && delayus>15 && setting_mode == 0
     {
     kliknieto=1
-    fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edenemyblock)
+    fofo=ed_place_enemy(costawia2,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32)
     autopair=0 //怨念残留喝了
-    global.fotel=fofo.x
-    global.fotel2=fofo.y
-    fofo.coto = costawia2;
-    fofo.spike_type = global.spike_type
     }
 //MF刺摆放
 if costawia2=37 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edenemyblock) && wiatrak=0
@@ -3587,243 +3418,27 @@ if costawia2=37 && mouse_check_button(mb_left) /*&& mouse_x>0 &&  mouse_y>0*/ &&
     && menujesie=0 && wlaczonaopcja=0 && delayus>15 && setting_mode == 0
     {
     kliknieto=1
-    fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edenemyblock)
+    fofo=ed_place_enemy(costawia2,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32)
     autopair=0 //怨念残留喝了
-    global.fotel=fofo.x
-    global.fotel2=fofo.y
-    fofo.coto = costawia2;
-    fofo.spike_type = global.spike_type
     }
 
 if wiatrak>0
     {
-
-    //电光绕摆放
-    if wiatrak=1 {draw_sprite(s_wiatrak,0,(floor(mouse_x/32))*32+16,(floor(mouse_y/32))*32+16)}
-    if wiatrak=1 && mouse_check_button(mb_left) && kliknieto=0 && (global.fotel<>(floor(mouse_x/32))*32 || global.fotel2<>(floor(mouse_y/32))*32)
-        {
-        wiatrak=2;
-        fofo.rotor[1]=point_distance(fofo.x+16,fofo.y+16,floor((mouse_x)/32)*32+16,floor((mouse_y)/32)*32+16)
-        fofo.rotoa[1]=point_direction(fofo.x+16,fofo.y+16,floor((mouse_x)/32)*32+16,floor((mouse_y)/32)*32+16)
-        kliknieto=1
-        fofo.test2=1
-        }
-    if wiatrak=2{
-        if mouse_wheel_up() {
-        if(!keyboard_check(global.key_select))global.agspeed+=1;else{global.agspeed+=0.01}
-        if global.agspeed<=0{global.agspeed=global.agspeed+360}
-        if global.agspeed>360{global.agspeed=global.agspeed-360}
-        fofo.additional3=global.agspeed
-        }
-        if mouse_wheel_down() {
-        if(!keyboard_check(global.key_select))global.agspeed-=1;else{global.agspeed-=0.01}
-        if global.agspeed<=0{global.agspeed=global.agspeed+360}
-        if global.agspeed>360{global.agspeed=global.agspeed-360}
-        fofo.additional3=global.agspeed
-        }
-          if global.agspeed<0 {global.EDtest+=360+global.agspeed}
-          else{global.EDtest+=global.agspeed}
-          }
-    //花瓣探照灯：左键确认速度，进入最大半径设置
-    if wiatrak=2 && fofo.is_petal && mouse_check_button(mb_left) && kliknieto=0
-        {
-        wiatrak=10
-        global.petal_max_promien=fofo.rotomr[1]
-        global.petal_promien_szybkosc=fofo.rotors[1]
-        kliknieto=1
-        }
-    //花瓣探照灯：鼠标点击设置最大半径（网格吸附）
-    if wiatrak=10{
-        draw_sprite(s_wiatrak,0,floor(mouse_x/32)*32+16,floor(mouse_y/32)*32+16)
-        draw_set_color(c_red)
-        draw_line(fofo.x+16,fofo.y+16,floor(mouse_x/32)*32+16,floor(mouse_y/32)*32+16)
-        draw_set_alpha(0.3)
-        draw_circle(fofo.x+16,fofo.y+16,point_distance(fofo.x+16,fofo.y+16,floor(mouse_x/32)*32+16,floor(mouse_y/32)*32+16),0)
-        draw_set_alpha(1)
-        draw_set_font(cyferkimario)
-        draw_set_color(c_white)
-        draw_text(fofo.x,fofo.y-20,"max半径:"+string(point_distance(fofo.x+16,fofo.y+16,floor(mouse_x/32)*32+16,floor(mouse_y/32)*32+16)))
-           if mouse_check_button(mb_left) && kliknieto=0
-               {
-               fofo.rotomr[1]=point_distance(fofo.x+16,fofo.y+16,floor(mouse_x/32)*32+16,floor(mouse_y/32)*32+16)
-               global.petal_max_promien=fofo.rotomr[1]
-               fofo.petal_preview=fofo.rotor[1];if fofo.rotors[1]<0{fofo.petal_preview_dir=-1}else{fofo.petal_preview_dir=1};fofo.petal_dir_got_preview=0
-               fofo.trail_count=0
-               global.EDtest=0
-               wiatrak=11
-               kliknieto=1
-               }
-        if mouse_check_button(mb_right) {wiatrak=0;with(fofo)instance_destroy();}
-        }
-    //花瓣探照灯：鼠标滚轮设置半径变化速度
-     if wiatrak=11{
-         draw_set_font(cyferkimario)
-         draw_set_color(c_white)
-         draw_text(fofo.x,fofo.y-20,"半径变化速度:"+string(fofo.rotors[1]))
-         if global.agspeed<0 {global.EDtest+=360+global.agspeed}
-         else{global.EDtest+=global.agspeed}
-          if mouse_wheel_up() {
-             fofo.rotors[1]+=1
-              if fofo.rotors[1]>99{fofo.rotors[1]=99}
-             global.petal_promien_szybkosc=fofo.rotors[1]
-fofo.petal_preview=fofo.rotor[1];if fofo.rotors[1]<0{fofo.petal_preview_dir=-1}else{fofo.petal_preview_dir=1};fofo.petal_dir_got_preview=0
-              fofo.trail_count=0
-              global.EDtest=0
-              }
-          if mouse_wheel_down() {
-              fofo.rotors[1]-=1
-               if fofo.rotors[1]<-99{fofo.rotors[1]=-99}
-              global.petal_promien_szybkosc=fofo.rotors[1]
-              fofo.petal_preview=fofo.rotor[1];if fofo.rotors[1]<0{fofo.petal_preview_dir=-1}else{fofo.petal_preview_dir=1};fofo.petal_dir_got_preview=0
-             fofo.trail_count=0
-             global.EDtest=0
-             }
-        if mouse_check_button(mb_left) && kliknieto=0
-            {
-            fofo.test2=2
-            wiatrak=0
-            kliknieto=1
-            }
-        if mouse_check_button(mb_right) {wiatrak=0;with(fofo)instance_destroy();}
-        }
-//金飞龟分割线
-    if wiatrak=3 {draw_sprite(s_troopagoldfly,0,(floor(mouse_x/32))*32+16,(floor(mouse_y/32))*32+16);}//draw_text(fofo.x+4,fofo.y+4,global.agspeed)
-    if wiatrak=3 && mouse_check_button(mb_left) && kliknieto=0 && (global.fotel<>(floor(mouse_x/32))*32 || global.fotel2<>(floor(mouse_y/32))*32)
-        {
-        wiatrak=4;
-        fofo.rotor[1]=point_distance(fofo.x+16,fofo.y+16,floor((mouse_x)/32)*32+16,floor((mouse_y)/32)*32+16)
-        fofo.rotoa[1]=point_direction(fofo.x+16,fofo.y+16,floor((mouse_x)/32)*32+16,floor((mouse_y)/32)*32+16)
-        kliknieto=1
-        fofo.test2=1
-        global.EDtest = 0
-        }
-    if wiatrak=4{
-        if mouse_wheel_up(){global.goldcount+=1;
-        if global.goldcount<=0{global.goldcount=1}
-        if global.goldcount>360{global.goldcount=360}
-        fofo.additional3=global.goldcount
-        }
-        if mouse_wheel_down() {global.goldcount-=1;
-        if global.goldcount<=0{global.goldcount=1}
-        if global.goldcount>360{global.goldcount=360}
-        fofo.additional3=global.goldcount
-        }
-         }
-    //你们的血书跳乌龟
-    if wiatrak=5 { fofo.test2=1 }
-    //啊啊啊啊啊恶劣鱼
-    //预览区域显示
-    if wiatrak=6 && fofo.x<=(floor(mouse_x/32))*32 && fofo.y<=(floor(mouse_y/32))*32{
-        draw_sprite(s_swimfishbegin,0,fofo.x,fofo.y);
-        draw_sprite_ext(s_swimfishend,0,(floor(mouse_x/32))*32,(floor(mouse_y/32))*32,1,1,0,c_white,0.5);
-        draw_set_color(make_color_rgb(173,16,0))
-        draw_rectangle(fofo.x,fofo.y,(floor(mouse_x/32))*32+31,(floor(mouse_y/32))*32+31,1)
+    //分步放置工具状态机（中间过程仅本地交互，完成点即落定处含 NET-SYNC 钩子）
+    ed_tool_spotlight()
+    ed_tool_goldfly()
+    ed_tool_jumpturtle()
+    ed_tool_fish()
+    ed_tool_camera()
+    ed_tool_water()
     }
-    if wiatrak=6 && fofo.x>(floor(mouse_x/32))*32 && fofo.y<=(floor(mouse_y/32))*32{
-        draw_sprite_ext(s_swimfishbegin,0,fofo.x+32,fofo.y,-1,1,0,c_white,1);
-        draw_sprite_ext(s_swimfishend,0,(floor(mouse_x/32))*32+32,(floor(mouse_y/32))*32,-1,1,0,c_white,0.5);
-        draw_set_color(make_color_rgb(173,16,0))
-        draw_rectangle((floor(mouse_x/32))*32,fofo.y,fofo.x+31,(floor(mouse_y/32))*32+31,1)
-    }
-    //无效区域
-    if wiatrak=6 && fofo.x<=(floor(mouse_x/32))*32 && fofo.y>(floor(mouse_y/32))*32{
-        draw_sprite(s_fishdisabled,0,fofo.x,fofo.y);
-        draw_sprite_ext(s_fishdisabled,1,(floor(mouse_x/32))*32,(floor(mouse_y/32))*32,1,1,0,c_white,0.5);
-    }
-    if wiatrak=6 && fofo.x>(floor(mouse_x/32))*32 && fofo.y>(floor(mouse_y/32))*32{
-        draw_sprite_ext(s_fishdisabled,0,fofo.x+32,fofo.y,-1,1,0,c_white,1);
-        draw_sprite_ext(s_fishdisabled,1,(floor(mouse_x/32))*32+32,(floor(mouse_y/32))*32,-1,1,0,c_white,0.5);
-    }
-    //取消
-    if wiatrak=6 && mouse_check_button(mb_right) {wiatrak=0}
-    //放置
-    if wiatrak=6 && mouse_check_button(mb_left) && kliknieto=0 && fofo.y<=(floor(mouse_y/32))*32
-        {
-        fofo.fishendX=floor((mouse_x)/32)*32
-        fofo.fishendY=floor((mouse_y)/32)*32
-        fofo.test2=2
-        kliknieto=1
-        wiatrak=0
-        }
-
-    //view region
-    if wiatrak=8 && fofo.x<=(floor(mouse_x/32))*32 && fofo.y<=(floor(mouse_y/32))*32{
-        draw_sprite(s_camerabegin,0,fofo.x,fofo.y);
-        draw_sprite_ext(s_cameraend,0,(floor(mouse_x/32))*32,(floor(mouse_y/32))*32,1,1,0,c_white,0.5);
-        draw_set_color(make_color_rgb(173,16,0))
-        draw_rectangle(fofo.x,fofo.y,(floor(mouse_x/32))*32+31,(floor(mouse_y/32))*32+31,1)
-    }
-    if wiatrak=8 && mouse_check_button(mb_right) {wiatrak=0;with(fofo)instance_destroy();}
-    if wiatrak=8 && mouse_check_button(mb_left) && kliknieto=0 && fofo.x<=(floor(mouse_x/32))*32 && fofo.y<=(floor(mouse_y/32))*32 && floor((mouse_x-fofo.x)/32)>=19 && floor((mouse_y-fofo.y)/32)>=14
-        {
-        fofo.camera_endX=floor((mouse_x)/32)*32+32
-        fofo.camera_endY=floor((mouse_y)/32)*32+32
-        kliknieto=1
-        wiatrak=0
-        }
-
-    if wiatrak=9 && fofo.x<=(floor(mouse_x/32))*32 && fofo.y<=(floor(mouse_y/32))*32{
-        draw_sprite(s_waterbegin,0,fofo.x,fofo.y);
-        draw_sprite_ext(s_waterend,0,(floor(mouse_x/32))*32,(floor(mouse_y/32))*32,1,1,0,c_white,0.5);
-        draw_set_color(c_blue);draw_set_alpha(0.2)
-        draw_rectangle(fofo.x,fofo.y,(floor(mouse_x/32))*32+31,(floor(mouse_y/32))*32+31,0)
-        draw_set_color(c_white);draw_set_alpha(1)
-    }
-    if wiatrak=9 && mouse_check_button(mb_right) {wiatrak=0;with(fofo)instance_destroy();}
-    if wiatrak=9 && mouse_check_button(mb_left) && kliknieto=0 && fofo.x<=(floor(mouse_x/32))*32 && fofo.y<=(floor(mouse_y/32))*32
-        {
-        fofo.water_endX=floor((mouse_x)/32)*32+32
-        fofo.water_endY=floor((mouse_y)/32)*32+32
-        kliknieto=1
-        wiatrak=0
-        }
-    }
-
-    //if wiatrak=2 && mouse_x<fofo.x+16
-     //   {
-     //   global.EDtest+=max(0.1,(point_distance(fofo.x+16,fofo.y+16,mouse_x,mouse_y)/100))*-1
-     //   }
-    if wiatrak=2 && mouse_check_button(mb_left) && kliknieto=0
-        {
-        wiatrak=0
-        fofo.test2=2
-        kliknieto=1
-        }
-
-    if wiatrak=4 && mouse_check_button(mb_left) && kliknieto=0
-        {
-        wiatrak=0
-        fofo.test2=2
-        kliknieto=1
-        }
-
-    if wiatrak=5 && mouse_check_button(mb_left) && mouse_y < fofo.y && kliknieto=0
-        {
-        wiatrak=0
-        fofo.test2=2
-        kliknieto=1
-        }
-    if wiatrak=6 && mouse_check_button(mb_left) && mouse_y >= fofo.y && kliknieto=0
-        {
-        wiatrak=0
-        fofo.test2=2
-        kliknieto=1
-        }
     }
 //敌人削除
 
 if costawia2<>0 && kliknieto=0 && mouse_check_button(mb_right) /*&& mouse_x>0 &&  mouse_y>0*/ && instance_position(mouse_x,mouse_y,o_edenemyblock) && wiatrak=0 && global.picking = false
     && menujesie=0 && wlaczonaopcja=0
     {
-    fofo=instance_position(mouse_x,mouse_y,o_edenemyblock)
-    if(fofo.coto<>40 && fofo.coto<>41 /*&& fofo.coto<>20*/){
-        with(fofo){instance_destroy()}
-    }
-    else{
-        if(fofo.coto = costawia2 /*&& fofo.coto<>20*/){
-           with(fofo){instance_destroy()}
-        }
-    }
+    ed_delete_at(2,mouse_x,mouse_y,costawia2)
     }
 
 /*if costawia2 = 20 && kliknieto=0 && mouse_check_button_pressed(mb_right) &&  instance_position(mouse_x,mouse_y,o_edenemyblock) && wiatrak=0 && global.picking = false
