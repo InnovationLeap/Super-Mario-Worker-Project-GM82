@@ -1147,4 +1147,18 @@ corpse_anim
 ed_autopair_data
 
 ed_autopair_place
+ed_net_write_str
+ed_net_read_str
+ed_net_send_hello
+ed_net_send_hello_ack
+ed_net_send_chat
+ed_net_send_name
+ed_net_send_cursor
+ed_net_send_goodbye
+ed_net_handle_message
+ed_net_cleanup
+ed_net_add_line
+ed_net_init
+ed_net_host
+ed_net_join
 

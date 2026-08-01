@@ -188,7 +188,6 @@ global.ed_region_saved_costawia2 = 0
 global.ed_region_saved_costawia3 = 0
 global.ed_region_saved_costawia4 = 0
 global.ed_region_saved_costawia5 = 0
-
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -526,7 +525,6 @@ if global.ed_region_block_panel {
         }
     }
 }
-
 #define Step_2
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -1095,6 +1093,17 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     costawia5=0
     }//这里目测是作者脑抽或者后来补上去的，前面跳过了costawia6=8这项
 
+  if wlaczonaopcja=6 && ed_hit(281, 346, 151, 18)&& czywybieranieback=0
+    {
+    draw_prefs_highlight(view_xview[0]+275, view_yview[0]+346, 1.3, 1, 0.2);
+    costawia6=14
+    costawia=0
+    costawia2=0
+    //costawia3=0
+    costawia4=0
+    costawia5=0
+    }//联机编辑入口
+
   if wlaczonaopcja=6 && czywybieranieback=0 //这段实现关卡名、重力参数等数据在pref界面上的显示
     {
     draw_set_font(cyferki)
@@ -1106,6 +1115,7 @@ if wlaczonaopcja=6 && czywybieranieback=0  //wlaczonaopcja表示工具栏中bloc
     draw_text(view_xview[0]+350,view_yview[0]+186,global.etapczas)
     draw_text(view_xview[0]+350,view_yview[0]+209,global.etapgravity)
     draw_text(view_xview[0]+350,view_yview[0]+232,global.etapkuppa)
+    draw_text(view_xview[0]+350,view_yview[0]+346,'Online Edit')
     }
     if costawia6=1 && mouse_check_button(mb_left) &&     kliknieto=0  //如果鼠标点击关卡名，则弹出窗口设置关卡名
     {
@@ -1186,6 +1196,24 @@ if costawia6=11 && mouse_check_button(mb_left) && kliknieto=0 && czywybieranieba
     {
     czywybieranieback=1000;kliknieto=1
     }
+
+if costawia6=14 && mouse_check_button(mb_left) && kliknieto=0 && czywybieranieback=0
+    {
+    kliknieto=1
+    if !instance_exists(o_ednet) {
+        instance_create(0, 0, o_ednet)
+    }
+    czywybieranieback=9999
+    o_ednet.panel_open=1
+    ed_net_ip_str=string(get_string('Enter host IP to join (h = host, empty = open panel):', 'h'))
+    if ed_net_ip_str<>'' {
+        if string_lower(ed_net_ip_str)='h' {
+            ed_net_host(1)
+        } else {
+            ed_net_join(ed_net_ip_str)
+        }
+    }
+    }//打开联机面板
 
 
 //o_edadmin.loadcheck1=0

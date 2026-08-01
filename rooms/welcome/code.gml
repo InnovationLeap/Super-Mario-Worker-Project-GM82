@@ -236,3 +236,8 @@ fw_set_render_scale(1+global.font_render)
 
 // Persistent debug message manager
 instance_create(0, 0, o_debugmsg)
+
+// Persistent network session object
+if !instance_exists(o_ednet) {
+    instance_create(0, 0, o_ednet)
+}
