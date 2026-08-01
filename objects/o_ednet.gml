@@ -25,6 +25,11 @@ if net_chat < 1 {
 }
 net_sendbuf = buffer_create()
 net_recvbuf = buffer_create()
+// op23 文件传输接收状态（net_file_fid 为哨兵：>=0 表示正在接收）
+net_file_total = 0
+net_file_got = 0
+net_file_fid = -1
+net_file_path = ''
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

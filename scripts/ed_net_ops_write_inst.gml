@@ -1,5 +1,5 @@
 // ed_net_ops_write_inst(buf, inst, cato)
-// 将实例的 op16 负载写入 buf（供 op16 单条与 op22 全量复用）
+// 将实例的 op16 负载写入 buf（供 op16 单条与 op23 全量归档时实例序列化复用）
 // 负载：netid u32 + cato u8 + x u32 + y u32 + coto u16 + cato 专属字段
 // 与 ed_net_ops_apply_create 读取顺序严格一致；未连接时也返回 netid（0）
 var _id, _t;

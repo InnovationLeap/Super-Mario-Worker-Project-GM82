@@ -22,6 +22,10 @@ with(o_ednet) {
         net_chat = ds_list_create()
         net_sendbuf = buffer_create()
         net_recvbuf = buffer_create()
+        net_file_total = 0
+        net_file_got = 0
+        net_file_fid = -1
+        net_file_path = ''
     }
     if !variable_global_exists('netid_counter') {
         global.netid_counter = 0

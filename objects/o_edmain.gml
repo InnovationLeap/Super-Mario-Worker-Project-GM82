@@ -99,6 +99,10 @@ loadcheck1=0 // zmienna do wgrywania
 loadcheck2=0 // zmienna do wgrywania
 loadcheck3=0
 loadcheck4=0
+// NET-SYNC: 房主 Load 后待发全量同步标志（全局变量，room_restart 后保留；Load_Script_Masta 完成后触发）
+if !variable_global_exists('net_pending_sync') {
+    global.net_pending_sync = 0
+}
 koko=0
 
 instance_create(0,0,o_edwallsdrawer)
@@ -594,7 +598,14 @@ view_xview[0] = round(min(room_width - 640 * zoom_ratio, max(0, scroolx - 320 * 
 view_yview[0] = round(min(room_height - 480 * zoom_ratio, max(0, scrooly - 240 * zoom_ratio)) / 32) * 32;
 if variable_global_exists('script_kile'){
 if real(global.script_kile)= 1
-{Load_Script_Masta();global.script_kile=-1}
+{Load_Script_Masta();global.script_kile=-1
+    // NET-SYNC: Masta 填充完成后触发全量同步（数据/设置已完整，规避发送空关卡）
+    if global.net_pending_sync = 1 {
+        global.net_pending_sync = 0
+        ed_net_ops_send_file()
+        ed_net_ops_send_settings()
+    }
+}
 }
 
 if !first_set_scenery{
@@ -1128,14 +1139,13 @@ if costawia6=7 && mouse_check_button(mb_left) && kliknieto=0 && czywybieraniebac
     }
 // WGRYWANIE
 if costawia6=13 && mouse_check_button(mb_left) && kliknieto=0 && czywybieranieback=0
-    {var warning; warning=show_question('Do you REALLY want to load a level WITHOUT the current level saved???')
+{var warning; warning=show_question('Do you REALLY want to load a level WITHOUT the current level saved???')
     if warning=1 {
     global.autosavename='';Load_Script_Main()
-    // NET-SYNC: 房主 Load 后全量同步给客户端
-    ed_net_ops_send_full()
-    ed_net_ops_send_settings()}
+    // NET-SYNC: 房主 Load 后全量同步给客户端（Load_Script_Masta 完成后触发，数据/设置已填充完整）
+    global.net_pending_sync=1}
     if warning=0 {exit}
-    }
+}
 
     if costawia6=8 && mouse_check_button(mb_left) && kliknieto=0 && czywybieranieback=0
     {var warning2; warning2=show_question('Do you REALLY want to quit WITHOUT the current level saved???')
@@ -4634,9 +4644,8 @@ setting_mode = 0 && wiatrak = 0
     var warning; warning=show_question('Do you REALLY want to load a level WITHOUT the current level saved???')
     if warning=1 {
     global.autosavename='';Load_Script_Main()
-    // NET-SYNC: 房主 Load 后全量同步给客户端
-    ed_net_ops_send_full()
-    ed_net_ops_send_settings()}
+    // NET-SYNC: 房主 Load 后全量同步给客户端（Load_Script_Masta 完成后触发，数据/设置已填充完整）
+    global.net_pending_sync=1}
     if warning=0 {exit}
 }
 

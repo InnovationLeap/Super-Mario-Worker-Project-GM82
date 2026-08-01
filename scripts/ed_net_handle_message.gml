@@ -18,7 +18,7 @@ if _op = 1 {
     ed_net_add_line('[Player joined: ' + _nm + ']')
     ed_net_send_hello_ack(net_sendbuf, 1, net_my_name)
     if net_role = 1 {
-        ed_net_ops_send_full()
+        ed_net_ops_send_file()
         ed_net_ops_send_settings()
     }
 }
@@ -96,9 +96,9 @@ if _op = 21 {
     }
     ed_net_rebuild_ids()
 }
-if _op = 22 {
-    ed_net_ops_apply_full(argument1)
-    debug_log('[net] op22 full applied')
+if _op = 23 {
+    ed_net_ops_apply_file(argument1)
+    debug_log('[net] op23 file applied')
 }
 if _op = 240 {
     debug_log('[net] goodbye received')
