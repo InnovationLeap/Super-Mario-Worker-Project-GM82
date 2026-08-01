@@ -56,7 +56,7 @@ if wiatrak=10{
            wiatrak=11
            kliknieto=1
            }
-    if mouse_check_button(mb_right) {wiatrak=0;with(fofo)instance_destroy();}
+    if mouse_check_button(mb_right) {ed_net_ops_send_delete(fofo); wiatrak=0;with(fofo)instance_destroy();}
     }
 //花瓣探照灯：鼠标滚轮设置半径变化速度
  if wiatrak=11{
@@ -87,8 +87,9 @@ fofo.petal_preview=fofo.rotor[1];if fofo.rotors[1]<0{fofo.petal_preview_dir=-1}e
         wiatrak=0
         kliknieto=1
         // NET-SYNC: 完成点——花瓣探照灯落定（rotor/rotoa/rotomr/rotors/additional3/is_petal）
+        ed_net_ops_send_update(fofo, 1)
         }
-    if mouse_check_button(mb_right) {wiatrak=0;with(fofo)instance_destroy();}
+    if mouse_check_button(mb_right) {ed_net_ops_send_delete(fofo); wiatrak=0;with(fofo)instance_destroy();}
     }
 //普通探照灯：左键确认落定
 if wiatrak=2 && mouse_check_button(mb_left) && kliknieto=0
@@ -97,4 +98,5 @@ if wiatrak=2 && mouse_check_button(mb_left) && kliknieto=0
     fofo.test2=2
     kliknieto=1
     // NET-SYNC: 完成点——普通探照灯落定（rotor/rotoa/additional3）
+    ed_net_ops_send_update(fofo, 1)
     }

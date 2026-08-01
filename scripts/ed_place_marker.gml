@@ -48,5 +48,6 @@ if argument0 = 33 {
 if argument0 = 34 {
     //镜头控制：区域向导由调用处启动 wiatrak=8
 }
-// NET-SYNC: 完成点——联机同步钩子（coto/type/anime/textMessage/color/ledge_type/target/velocity/is_orange/scrollspeed/x/y）
+// NET-SYNC: 创建完成点——op16 广播（coto/type/anime/textMessage/color/ledge_type/target/velocity/is_orange/scrollspeed/height/camera_endX/Y/x/y）
+ed_net_ops_send_create(_f, 3)
 return _f

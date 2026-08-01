@@ -14,5 +14,6 @@ if argument0 = 17 || argument0 = 22 || argument0 = 37 {
     //扎地刺/MW刺/MF刺
     _f.spike_type = global.spike_type
 }
-// NET-SYNC: 完成点——联机同步钩子（coto/shell_type/spike_type/x/y）
+// NET-SYNC: 创建完成点（工具类 20/35/39/40/41 的向导完成后另有 op19 参数同步；向导右键取消由工具脚本发 op17）
+ed_net_ops_send_create(_f, 1)
 return _f

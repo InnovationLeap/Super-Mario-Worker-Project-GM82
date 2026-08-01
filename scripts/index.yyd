@@ -1162,6 +1162,17 @@ ed_net_init
 ed_net_host
 ed_net_join
 
+ed_net_inst_register
+ed_net_inst_lookup
+ed_net_ops_send_create
+ed_net_ops_send_delete
+ed_net_ops_send_grid
+ed_net_ops_send_update
+ed_net_ops_apply_create
+ed_net_ops_apply_delete
+ed_net_ops_apply_grid
+ed_net_ops_apply_update
+
 ed_place_bonus
 ed_place_scenery
 ed_place_block

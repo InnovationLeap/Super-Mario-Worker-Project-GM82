@@ -8,7 +8,7 @@ if wiatrak=9 && fofo.x<=(floor(mouse_x/32))*32 && fofo.y<=(floor(mouse_y/32))*32
     draw_rectangle(fofo.x,fofo.y,(floor(mouse_x/32))*32+31,(floor(mouse_y/32))*32+31,0)
     draw_set_color(c_white);draw_set_alpha(1)
 }
-if wiatrak=9 && mouse_check_button(mb_right) {wiatrak=0;with(fofo)instance_destroy();}
+if wiatrak=9 && mouse_check_button(mb_right) {ed_net_ops_send_delete(fofo); wiatrak=0;with(fofo)instance_destroy();}
 if wiatrak=9 && mouse_check_button(mb_left) && kliknieto=0 && fofo.x<=(floor(mouse_x/32))*32 && fofo.y<=(floor(mouse_y/32))*32
     {
     fofo.water_endX=floor((mouse_x)/32)*32+32
@@ -16,4 +16,5 @@ if wiatrak=9 && mouse_check_button(mb_left) && kliknieto=0 && fofo.x<=(floor(mou
     kliknieto=1
     wiatrak=0
     // NET-SYNC: 完成点——水位区域落定（water_endX/water_endY）
+    ed_net_ops_send_update(fofo, 5)
     }

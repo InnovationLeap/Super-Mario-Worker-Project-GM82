@@ -34,6 +34,7 @@ if wiatrak=6 && mouse_check_button(mb_left) && kliknieto=0 && fofo.y<=(floor(mou
     kliknieto=1
     wiatrak=0
     // NET-SYNC: 完成点——鱼区域落定（fishendX/fishendY）
+    ed_net_ops_send_update(fofo, 3)
     }
 if wiatrak=6 && mouse_check_button(mb_left) && mouse_y >= fofo.y && kliknieto=0
     {
@@ -41,4 +42,5 @@ if wiatrak=6 && mouse_check_button(mb_left) && mouse_y >= fofo.y && kliknieto=0
     fofo.test2=2
     kliknieto=1
     // NET-SYNC: 完成点——鱼区域落定（兜底）
+    ed_net_ops_send_update(fofo, 3)
     }

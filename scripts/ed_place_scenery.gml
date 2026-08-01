@@ -7,5 +7,5 @@ if argument0 = 42 {
     _f.block_index = global.imitater
 }
 set_scenery = 1
-// NET-SYNC: 完成点——联机同步钩子（coto/block_index/x/y）
+ed_net_ops_send_create(_f, 2)
 return _f

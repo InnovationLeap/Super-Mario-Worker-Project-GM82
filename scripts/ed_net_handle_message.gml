@@ -55,6 +55,22 @@ if _op = 112 {
     }
     ed_net_add_line(string(_disp) + ': ' + string(_txt))
 }
+if _op = 16 {
+    ed_net_ops_apply_create(argument1)
+    debug_log('[net] op16 create applied')
+}
+if _op = 17 {
+    ed_net_ops_apply_delete(argument1)
+    debug_log('[net] op17 delete applied')
+}
+if _op = 18 {
+    ed_net_ops_apply_grid(argument1)
+    debug_log('[net] op18 grid applied')
+}
+if _op = 19 {
+    ed_net_ops_apply_update(argument1)
+    debug_log('[net] op19 update applied')
+}
 if _op = 240 {
     debug_log('[net] goodbye received')
     ed_net_add_line('[Peer disconnected]')

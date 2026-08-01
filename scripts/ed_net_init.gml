@@ -23,4 +23,10 @@ with(o_ednet) {
         net_sendbuf = buffer_create()
         net_recvbuf = buffer_create()
     }
+    if !variable_global_exists('netid_counter') {
+        global.netid_counter = 0
+    }
+    if !variable_global_exists('netid_map') {
+        global.netid_map = ds_map_create()
+    }
 }

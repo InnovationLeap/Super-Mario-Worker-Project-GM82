@@ -5320,11 +5320,12 @@ applies_to=self
 if global.deletemode=1 && !global.ed_region_active{
 if mouse_check_button(mb_right)&& mouse_x>0 && mouse_y>0 && costawia4b=0 && kliknieto=0 && wiatrak=0 && menujesie=0 && wlaczonaopcja=0 && global.picking=false {
     arrayetapu[floor((mouse_x)/32),floor((mouse_y)/32)]=0
-    fofo = instance_position(mouse_x,mouse_y,o_edenemyblock); with(fofo){instance_destroy()}
-    fofo = instance_position(mouse_x,mouse_y,o_edsceneriesblock); with(fofo){instance_destroy()}
-    fofo = instance_position(mouse_x,mouse_y,o_edmarkerblock); with(fofo){instance_destroy()}
-    fofo = instance_position(mouse_x,mouse_y,o_edpassage); with(fofo){instance_destroy()}
-    fofo = instance_position(mouse_x,mouse_y,o_edbonusesblock); with(fofo){instance_destroy()}
+    ed_net_ops_send_grid(floor((mouse_x)/32),floor((mouse_y)/32),0)
+    fofo = instance_position(mouse_x,mouse_y,o_edenemyblock); ed_net_ops_send_delete(fofo); with(fofo){instance_destroy()}
+    fofo = instance_position(mouse_x,mouse_y,o_edsceneriesblock); ed_net_ops_send_delete(fofo); with(fofo){instance_destroy()}
+    fofo = instance_position(mouse_x,mouse_y,o_edmarkerblock); ed_net_ops_send_delete(fofo); with(fofo){instance_destroy()}
+    fofo = instance_position(mouse_x,mouse_y,o_edpassage); ed_net_ops_send_delete(fofo); with(fofo){instance_destroy()}
+    fofo = instance_position(mouse_x,mouse_y,o_edbonusesblock); ed_net_ops_send_delete(fofo); with(fofo){instance_destroy()}
 }
 room_caption='DELETE MODE: ON'
 }

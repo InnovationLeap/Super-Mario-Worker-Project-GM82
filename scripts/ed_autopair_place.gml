@@ -46,5 +46,6 @@ if costawia<>0 && kliknieto=0 && autopair3=0 && menujesie=0 && wlaczonaopcja=0 &
         _dy = global.autopair_layout[_ap, _i*3+1];
         _id = global.autopair_layout[_ap, _i*3+2];
         arrayetapu[_fx+_dx, _fy+_dy] = _id;
+        ed_net_ops_send_grid(_fx+_dx, _fy+_dy, _id);
     }
 }

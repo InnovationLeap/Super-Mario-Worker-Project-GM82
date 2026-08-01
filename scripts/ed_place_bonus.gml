@@ -3,5 +3,5 @@
 var _f;
 _f = instance_create(argument1, argument2, o_edbonusesblock)
 _f.coto = argument0
-// NET-SYNC: 完成点——联机同步钩子
+ed_net_ops_send_create(_f, 0)
 return _f
