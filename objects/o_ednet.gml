@@ -9,9 +9,20 @@ net_state = 0
 // net_state: 0=未连接 1=建房中 2=连接中(未握手) 3=已连接(握手完成)
 net_role = 0
 // net_role: 0=客户端 1=房主
-net_sock = -1
+// 3+ 人改造：socket 数组化。房主持有 net_socks[0..count-1]，客户端仅用 net_socks[0]
+net_socks[0] = -1
+net_sock_count = 0
 net_listener = -1
 net_myid = 0
+// 玩家表（按 sid 索引，net_players 容量 8）
+net_pl_count = 0
+net_pl_id[0] = 0
+net_pl_sock[0] = -1
+net_pl_name[0] = ''
+net_pl_mx[0] = 0
+net_pl_my[0] = 0
+net_pl_time[0] = -1
+// 兼容旧字段（客户端单对端时仍可用）
 net_peer_name = ''
 net_peer_addr = ''
 net_my_name = 'Player'
@@ -36,51 +47,70 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-var _st;
+var _st, _i, _s;
 ed_net_init()
 if net_font < 0 {
     net_font = fw_add_font_from_file(".\Fonts\message.ttf", 13, false, false, true)
 }
-if net_sock >= 0 {
-    if socket_exists(net_sock) {
-        socket_receive(net_sock)
-        while socket_read_message(net_sock, net_recvbuf) {
-            ed_net_handle_message(net_sock, net_recvbuf)
-        }
-        socket_send(net_sock)
-        _st = socket_get_state(net_sock)
-        if _st != net_last_state {
-            net_last_state = _st
-            debug_log('[net] sock=' + string(net_sock) + ' state=' + string(_st) + ' (net_state=' + string(net_state) + ', role=' + string(net_role) + ')')
-        }
-        if _st = tcp_connected {
-            if net_state = 2 && net_role = 0 {
-                net_state = 3
-                debug_log('[net] connected, sending hello')
-                ed_net_send_hello(net_sendbuf, net_my_name)
+// 3+ 人改造：逐 socket 轮询收发（客户端只有 net_socks[0]）
+_i = 0
+while _i < net_sock_count {
+    _s = net_socks[_i]
+    if _s >= 0 {
+        if socket_exists(_s) {
+            socket_receive(_s)
+            while socket_read_message(_s, net_recvbuf) {
+                ed_net_handle_message(_s, net_recvbuf)
             }
-        }
-        if _st = tcp_closed || _st = tcp_error {
-            if net_state > 0 {
-                ed_net_add_line('[Disconnected]')
-                debug_log('[net] disconnected: state=' + string(_st))
+            socket_send(_s)
+            _st = socket_get_state(_s)
+            if _st != net_last_state {
+                net_last_state = _st
+                debug_log('[net] sock=' + string(_s) + ' state=' + string(_st) + ' (net_state=' + string(net_state) + ', role=' + string(net_role) + ')')
+            }
+            if _st = tcp_connected {
+                if net_state = 2 && net_role = 0 {
+                    net_state = 3
+                    debug_log('[net] connected, sending hello')
+                    ed_net_send_hello(net_sendbuf, net_my_name)
+                }
+            }
+            if _st = tcp_closed || _st = tcp_error {
+                if net_role = 1 {
+                    // 房主：仅移除该玩家，不断开整体
+                    ed_net_players_leave_by_sock(_s)
+                } else {
+                    if net_state > 0 {
+                        ed_net_add_line('[Disconnected]')
+                        debug_log('[net] disconnected: state=' + string(_st))
+                    } else {
+                        debug_log('[net] connect failed: state=' + string(_st))
+                        net_last_err = 'Connect failed (state ' + string(_st) + ')'
+                    }
+                    ed_net_cleanup()
+                }
+            }
+        } else {
+            debug_log('[net] socket gone: ' + string(_s))
+            if net_role = 1 {
+                ed_net_players_leave_by_sock(_s)
             } else {
-                debug_log('[net] connect failed: state=' + string(_st))
-                net_last_err = 'Connect failed (state ' + string(_st) + ')'
+                ed_net_cleanup()
             }
-            ed_net_cleanup()
         }
-    } else {
-        debug_log('[net] socket gone: ' + string(net_sock))
-        ed_net_cleanup()
     }
+    _i += 1
 }
+// 房主：listener 持续 accept（不再限制单连接）
 if net_listener >= 0 {
     if listener_exists(net_listener) {
-        if listener_pending(net_listener) && net_sock < 0 {
-            net_sock = socket_create()
-            listener_accept(net_listener, net_sock)
-            debug_log('[net] accept: sock=' + string(net_sock) + ' state=' + string(socket_get_state(net_sock)))
+        while listener_pending(net_listener) && net_sock_count < 8 {
+            _s = socket_create()
+            listener_accept(net_listener, _s)
+            debug_log('[net] accept: sock=' + string(_s) + ' state=' + string(socket_get_state(_s)))
+            net_socks[net_sock_count] = _s
+            net_sock_count += 1
+            ed_net_add_line('[Player connecting...]')
         }
     } else {
         debug_log('[net] listener gone: ' + string(net_listener))
@@ -104,7 +134,7 @@ applies_to=self
 */
 var _vx, _vy, _mi, _my, _line, _st, _bx, _by, _bw, _bh, _btn, _input;
 var _m, _x1, _y1, _x2, _y2, _ww, _wh, _bn, _btn_x, _btn_y, _label, _bw2, _hover, _can, _maxw, _peer, _btn_labels;
-var _row_y, _lab_x, _btn_x2, _btn_y2;
+var _row_y, _lab_x, _btn_x2, _btn_y2, _i;
 if instance_exists(o_edmain) {
     if panel_open = 1 {
         _m = 16
@@ -143,7 +173,7 @@ if instance_exists(o_edmain) {
             _st = 'WAITING FOR HANDSHAKE...'
         }
         if net_state = 3 && net_role = 1 {
-            _st = 'HOST, CONNECTED: ' + net_peer_name
+            _st = 'HOST, PLAYERS: ' + string(net_pl_count + 1)
         }
         if net_state = 3 && net_role = 0 {
             _st = 'CONNECTED TO: ' + net_peer_name
@@ -160,7 +190,14 @@ if instance_exists(o_edmain) {
         draw_set_color(c_white)
         fw_draw_text(_x1 + 12, _y1 + 56, '[STATE]  ' + _st)
         fw_draw_text(_x1 + 12, _y1 + 76, '[PLAYER] ' + net_my_name)
-        fw_draw_text(_x1 + 12, _y1 + 96, '[PEER]   ' + _peer)
+        // 3+ 人：玩家列表（第一行显示在线数，后续每行一个玩家）
+        _peer = '[PEER]   ' + string(net_pl_count + 1) + ' ONLINE'
+        _i = 0
+        while _i < net_pl_count {
+            _peer += '  ' + string(net_pl_id[_i]) + ':' + net_pl_name[_i]
+            _i += 1
+        }
+        fw_draw_text(_x1 + 12, _y1 + 96, _peer)
         draw_line(_x1 + 4, _y1 + 110, _x2 - 4, _y1 + 110)
         // RENAME 按钮（PLAYER 行右侧，右对齐）
         _btn_x = _x2 - 12 - (fw_string_width('RENAME') + 16)
@@ -306,7 +343,15 @@ if instance_exists(o_edmain) {
                     }
                     if _bn = 3 {
                         if net_state = 3 {
-                            ed_net_send_goodbye(net_sendbuf, '')
+                            // 3+ 人：房主广播 goodbye 给所有客户端；客户端单发
+                            if net_role = 1 {
+                                buffer_clear(net_sendbuf)
+                                buffer_set_pos(net_sendbuf, 0)
+                                buffer_write_u8(net_sendbuf, 240)
+                                ed_net_broadcast(net_sendbuf)
+                            } else {
+                                ed_net_send_goodbye(net_sendbuf, '')
+                            }
                         }
                         ed_net_cleanup()
                         net_last_err = ''

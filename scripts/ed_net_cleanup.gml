@@ -1,12 +1,18 @@
 // ed_net_cleanup()
-// 清理 socket/listener 并复位会话状态（在 o_ednet 上下文调用）
-debug_log('[net] cleanup: state=' + string(net_state) + ' sock=' + string(net_sock) + ' listener=' + string(net_listener))
-if net_sock >= 0 {
-    if socket_exists(net_sock) {
-        socket_destroy(net_sock)
+// 清理所有 socket/listener 并复位会话状态（在 o_ednet 上下文调用）
+var _i;
+debug_log('[net] cleanup: state=' + string(net_state) + ' socks=' + string(net_sock_count) + ' listener=' + string(net_listener))
+_i = 0
+while _i < net_sock_count {
+    if net_socks[_i] >= 0 {
+        if socket_exists(net_socks[_i]) {
+            socket_destroy(net_socks[_i])
+        }
+        net_socks[_i] = -1
     }
-    net_sock = -1
+    _i += 1
 }
+net_sock_count = 0
 if net_listener >= 0 {
     if listener_exists(net_listener) {
         listener_destroy(net_listener)
@@ -16,6 +22,7 @@ if net_listener >= 0 {
 net_state = 0
 net_role = 0
 net_myid = 0
+net_pl_count = 0
 net_peer_name = ''
 net_peer_addr = ''
 net_peer_cursor_time = -1

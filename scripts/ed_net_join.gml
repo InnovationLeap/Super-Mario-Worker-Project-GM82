@@ -14,10 +14,11 @@ if _port < 1 || _port > 65535 {
 ed_net_init()
 with(o_ednet) {
     if net_state = 0 {
-        net_sock = socket_create()
-        debug_log('[net] join: socket_create -> ' + string(net_sock))
-        _sr = socket_connect(net_sock, _addr, _port)
+        net_socks[0] = socket_create()
+        debug_log('[net] join: socket_create -> ' + string(net_socks[0]))
+        _sr = socket_connect(net_socks[0], _addr, _port)
         debug_log('[net] join: socket_connect(' + string(_addr) + ', ' + string(_port) + ') -> ' + string(_sr))
+        net_sock_count = 1
         net_role = 0
         net_state = 2
     } else {

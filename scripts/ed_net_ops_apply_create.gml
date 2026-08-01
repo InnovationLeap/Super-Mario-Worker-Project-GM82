@@ -2,6 +2,7 @@
 // 应用 op16 创建消息（o_ednet 上下文调用）：按负载创建实例、恢复完整最终状态并登记 netid
 // 注意：远端路径不经过本地输入检查/弹窗，参数全部取自消息负载（与 ed_place_* 的字段一一对应）
 var _netid, _cato, _x, _y, _coto, _f, _t, _v;
+buffer_read_u8(argument0)
 _netid = buffer_read_u32(argument0)
 _cato = buffer_read_u8(argument0)
 _x = buffer_read_u32(argument0)

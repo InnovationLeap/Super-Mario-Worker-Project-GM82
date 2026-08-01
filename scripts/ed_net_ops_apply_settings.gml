@@ -2,6 +2,7 @@
 // 应用 op20 全量设置包（o_ednet 上下文调用）：解包写回 global 及 local_background/local_muzyka
 // 注意：游戏运行中用到的设置多为 global.*；编辑预览相关 global.preview=-1 时 local_* 跟随
 var _bg, _mu;
+buffer_read_u8(argument0)
 _bg = buffer_read_u32(argument0)
 _mu = buffer_read_u32(argument0)
 global.background = _bg

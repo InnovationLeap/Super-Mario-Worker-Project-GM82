@@ -46,6 +46,7 @@ if instance_exists(o_ednet) && o_ednet.net_state = 3 {
     buffer_clear(o_ednet.net_sendbuf)
     buffer_set_pos(o_ednet.net_sendbuf, 0)
     buffer_write_u8(o_ednet.net_sendbuf, 19)
+    buffer_write_u8(o_ednet.net_sendbuf, o_ednet.net_myid)
     buffer_write_u32(o_ednet.net_sendbuf, 0)
     buffer_write_u8(o_ednet.net_sendbuf, 9)
     buffer_write_u32(o_ednet.net_sendbuf, _n)
@@ -58,7 +59,14 @@ if instance_exists(o_ednet) && o_ednet.net_state = 3 {
         buffer_write_u16(o_ednet.net_sendbuf, _a.warpnum)
         _cnt += 1
     }
-    socket_write_message(o_ednet.net_sock, o_ednet.net_sendbuf)
-    socket_send(o_ednet.net_sock)
+    with(o_ednet) {
+        if net_role = 1 {
+            ed_net_broadcast(net_sendbuf)
+        } else {
+            if net_sock_count > 0 {
+                ed_net_send_to(net_socks[0], net_sendbuf)
+            }
+        }
+    }
     ed_net_trace('S19 subop=9 passage reindex n=' + string(_cnt))
 }

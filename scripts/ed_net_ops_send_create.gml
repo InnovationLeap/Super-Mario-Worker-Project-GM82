@@ -9,6 +9,7 @@ if instance_exists(argument0) && instance_exists(o_ednet) && o_ednet.net_state =
     buffer_clear(o_ednet.net_sendbuf)
     buffer_set_pos(o_ednet.net_sendbuf, 0)
     buffer_write_u8(o_ednet.net_sendbuf, 16)
+    buffer_write_u8(o_ednet.net_sendbuf, o_ednet.net_myid)
     buffer_write_u32(o_ednet.net_sendbuf, _id)
     buffer_write_u8(o_ednet.net_sendbuf, _cato)
     buffer_write_u32(o_ednet.net_sendbuf, argument0.x)
@@ -77,7 +78,16 @@ if instance_exists(argument0) && instance_exists(o_ednet) && o_ednet.net_state =
         buffer_write_u32(o_ednet.net_sendbuf, argument0.exity)
         buffer_write_u16(o_ednet.net_sendbuf, argument0.wyjscie)
     }
-    socket_write_message(o_ednet.net_sock, o_ednet.net_sendbuf)
-    socket_send(o_ednet.net_sock)
+    if o_ednet.net_role = 1 {
+        with(o_ednet) {
+            ed_net_broadcast(net_sendbuf)
+        }
+    } else {
+        with(o_ednet) {
+            if net_sock_count > 0 {
+                ed_net_send_to(net_socks[0], net_sendbuf)
+            }
+        }
+    }
     ed_net_trace('S16 cato=' + string(_cato) + ' netid=' + string(_id) + ' coto=' + string(argument0.coto) + ' x=' + string(argument0.x) + ' y=' + string(argument0.y))
 }

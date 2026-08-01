@@ -39,6 +39,22 @@
   ```
 - 如需处理二进制/原始字节数据，应使用外部 DLL（如 `EncodingConv.dll`）直接对文件进行操作，而非在 GML 层逐字节中转。
 
+### 字体加载：GM8 没有 `font_add`，TTF 只能走 fw 库
+
+- **GM8 没有 `font_add(filename, size, ...)` 函数**（那是 GMS 1.x 才引入的）。调用 `font_add` 无论传几个参数都会报 `Wrong number of arguments to function or script` 编译错误。
+- **GM8 字体资源（`Fonts/fontN.txt`）的 `name=` 字段只能填「系统已安装字体名」（如 `Times New Roman`），不能填 TTF 文件路径**。若填 `name=.\Fonts\message.ttf`：
+  - IDE 启动时弹警告 `Warning: this game uses the following fonts, which are not installed: ...message.ttf`
+  - 严重时**游戏直接打不开**（编译/加载崩溃）。此路不可行，不要尝试。
+- **运行时从 TTF 文件加载字体的唯一途径是 fw 库（FoxWriting_GM82.dll）**：
+  ```gml
+  testfont = fw_add_font_from_file('.\Fonts\message.ttf', 14.1, false, false, true)
+  fw_draw_set_font(testfont)   // 每次绘制前都要设置
+  fw_draw_text(x, y, '文本')
+  ```
+- **fw 库字体 ID 与 GM8 原生字体是两套体系，不可混用**：`draw_set_font(fw字体ID)` + `draw_text()` 会字体错乱（显示成别的字体/乱码），必须 `fw_draw_set_font()` + `fw_draw_text()` 配套使用。
+- 同理 `font_add_sprite()`（从精灵建字体）是 GM8 原生函数，可正常配 `draw_set_font()` + `draw_text()` 使用，但只能从精灵资源建字体，不能从 TTF 文件加载。
+- 项目内 `testfont` 是 fw 库字体 ID（welcome 房间加载），`cyferkimario`/`cyferki` 等是 `font_add_sprite` 原生字体。
+
 ### 文本文件 I/O
 
 - **`file_text_read_string()` / `file_text_write_string()` 原生支持 UTF-8**。读取 UTF-8 编码的文本文件无需额外转码。

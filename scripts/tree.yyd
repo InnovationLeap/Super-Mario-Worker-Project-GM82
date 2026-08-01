@@ -127,6 +127,11 @@
 	|ed_net_inst_register
 	|ed_net_inst_lookup
 	|ed_net_inst_unregister
+	|ed_net_send_to
+	|ed_net_broadcast
+	|ed_net_broadcast_except
+	|ed_net_players_add
+	|ed_net_players_leave_by_sock
 	|ed_net_ops_send_create
 	|ed_net_ops_send_delete
 	|ed_net_ops_send_file

@@ -1,10 +1,11 @@
-// ed_net_ops_send_file()
+// ed_net_ops_send_file([sock])
 // 全量关卡文件同步（op23）：把当前关卡保存为临时 .smwl 并分块传输
 // 对端写入临时文件 → Load_Script_Main() 全量重建（尺寸/网格/实例/设置完整一致）→ 删除临时文件
 // 与 op22 手工序列化相比：文件方案覆盖 w/h 尺寸与全部字段，且分块传输规避 buffer 大小风险
-// 消息格式：
-//   头消息  ：u8=23 | u8=0 | u32 总字节数
-//   数据消息：u8=23 | u8=1 | u16 块字节数 | <块字节数 字节数据>
+// 3+ 人：argument0 指定目标 socket（握手单播）；缺省 = 房主广播 / 客户端发给 net_socks[0]
+// 消息格式（含 source_id，接收端跳过）：
+//   头消息  ：u8=23 | u8=0 | u8 source_id | u32 总字节数
+//   数据消息：u8=23 | u8=1 | u8 source_id | u16 块字节数 | <块字节数 字节数据>
 var _fname, _fid, _total, _sent, _chunk, _i, _bak_save, _bak_cs;
 _fname = working_directory + '.\temp\NetSync_send.smwl'
 if file_exists(_fname) {
@@ -34,8 +35,23 @@ if instance_exists(o_ednet) && o_ednet.net_state = 3 {
     buffer_set_pos(o_ednet.net_sendbuf, 0)
     buffer_write_u8(o_ednet.net_sendbuf, 23)
     buffer_write_u8(o_ednet.net_sendbuf, 0)
+    buffer_write_u8(o_ednet.net_sendbuf, o_ednet.net_myid)
     buffer_write_u32(o_ednet.net_sendbuf, _total)
-    socket_write_message(o_ednet.net_sock, o_ednet.net_sendbuf)
+    if argument_count > 0 {
+        with(o_ednet) {
+            ed_net_send_to(argument0, net_sendbuf)
+        }
+    } else {
+        with(o_ednet) {
+            if net_role = 1 {
+                ed_net_broadcast(net_sendbuf)
+            } else {
+                if net_sock_count > 0 {
+                    ed_net_send_to(net_socks[0], net_sendbuf)
+                }
+            }
+        }
+    }
     _fid = file_bin_open(_fname, 0)
     _sent = 0
     while _sent < _total {
@@ -47,15 +63,29 @@ if instance_exists(o_ednet) && o_ednet.net_state = 3 {
         buffer_set_pos(o_ednet.net_sendbuf, 0)
         buffer_write_u8(o_ednet.net_sendbuf, 23)
         buffer_write_u8(o_ednet.net_sendbuf, 1)
+        buffer_write_u8(o_ednet.net_sendbuf, o_ednet.net_myid)
         buffer_write_u16(o_ednet.net_sendbuf, _chunk)
         for (_i = 0; _i < _chunk; _i += 1) {
             buffer_write_u8(o_ednet.net_sendbuf, file_bin_read_byte(_fid))
         }
-        socket_write_message(o_ednet.net_sock, o_ednet.net_sendbuf)
+        if argument_count > 0 {
+            with(o_ednet) {
+                ed_net_send_to(argument0, net_sendbuf)
+            }
+        } else {
+            with(o_ednet) {
+                if net_role = 1 {
+                    ed_net_broadcast(net_sendbuf)
+                } else {
+                    if net_sock_count > 0 {
+                        ed_net_send_to(net_socks[0], net_sendbuf)
+                    }
+                }
+            }
+        }
         _sent += _chunk
     }
     file_bin_close(_fid)
-    socket_send(o_ednet.net_sock)
     file_delete(_fname)
     ed_net_trace('S23 file total=' + string(_total))
 }

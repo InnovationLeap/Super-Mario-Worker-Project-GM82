@@ -6,6 +6,7 @@
 // 收满后：file_bin_close → autosavename 指向临时文件 → Load_Script_Main()（GZ 解压/读 w/h/room_restart 全量重建）
 //         → file_delete 临时 .smwl 与解压出的 .smwlx → 恢复 autosavename → rebuild_ids
 var _sub, _chunk, _i, _b, _save1;
+buffer_read_u8(argument0)
 _sub = buffer_read_u8(argument0)
 if _sub = 0 {
     // 头消息：初始化接收状态

@@ -1,6 +1,7 @@
 // ed_net_ops_apply_delete(buf)
 // 应用 op17 删除消息（o_ednet 上下文调用）：按 netid 销毁实例并清理登记
 var _netid, _f;
+buffer_read_u8(argument0)
 _netid = buffer_read_u32(argument0)
 _f = ed_net_inst_lookup(_netid)
 if instance_exists(_f) {

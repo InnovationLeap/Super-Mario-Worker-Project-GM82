@@ -2,6 +2,7 @@
 // 应用 op19 参数更新（o_ednet 上下文调用）：按 netid 更新工具型实例的最终参数
 // subop 9（水管 warpnum 重算广播）为全局操作，netid 字段为 0，不查实例直接处理
 var _netid, _subop, _f, _i, _j, _w, _g, _v;
+buffer_read_u8(argument0)
 _netid = buffer_read_u32(argument0)
 _subop = buffer_read_u8(argument0)
 if _subop = 9 {
