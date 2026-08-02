@@ -21,6 +21,9 @@ applies_to=self
       visible = 1
   }
   else{
-      window_set_cursor(cr_default)
+      // 联机中：系统箭头由 o_ednet 统一管理（隐藏），这里不覆盖，避免与白光标冲突
+      if !(instance_exists(o_ednet) && o_ednet.net_state = 3){
+          window_set_cursor(cr_default)
+      }
       visible = 0
   }
