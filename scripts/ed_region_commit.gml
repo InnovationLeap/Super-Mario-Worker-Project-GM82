@@ -4,7 +4,7 @@
 // 流程：按选区包围盒钳制偏移（整块选区不越出房间，与拖拽预览一致）→ Pass1 清原位（带值校验 + mask 复位）→ Pass2 平移写入（覆盖目标格）→ 重建 blk → 清理临时结构
 var _dcol, _drow, _i, _j, _blk_str, _newcol, _newrow, _val;
 var _tcol, _trow;
-var _minc, _maxc, _minr, _maxr;
+var _minc, _maxc, _minr, _maxr, _id;
 
 _dcol = argument0
 _drow = argument1
@@ -42,6 +42,7 @@ for (_i = 0; _i < ds_list_size(global.ed_region_blk_orig); _i += 1) {
     _val = real(string_copy(_blk_str, _j + 1, string_length(_blk_str) - _j))
     if o_edmain.arrayetapu[_newcol, _newrow] == _val {
         o_edmain.arrayetapu[_newcol, _newrow] = 0
+        ed_net_ops_send_grid(_newcol, _newrow, 0)
     }
     global.ed_region_orig_mask[_newcol, _newrow] = 0
 }
@@ -60,6 +61,7 @@ for (_i = 0; _i < ds_list_size(global.ed_region_blk_orig); _i += 1) {
     _tcol = _newcol + _dcol
     _trow = _newrow + _drow
     o_edmain.arrayetapu[_tcol, _trow] = _val
+    ed_net_ops_send_grid(_tcol, _trow, _val)
     if global.ed_region_blk != -1 {
         ds_list_add(global.ed_region_blk, string(_tcol) + "," + string(_trow) + "," + string(_val))
     }
@@ -67,3 +69,12 @@ for (_i = 0; _i < ds_list_size(global.ed_region_blk_orig); _i += 1) {
 
 ds_list_destroy(global.ed_region_blk_orig)
 global.ed_region_blk_orig = -1
+
+if global.ed_region_list != -1 {
+    for (_i = 0; _i < ds_list_size(global.ed_region_list); _i += 1) {
+        _id = ds_list_find_value(global.ed_region_list, _i)
+        if instance_exists(_id) {
+            ed_net_ops_send_update(_id, 10)
+        }
+    }
+}
