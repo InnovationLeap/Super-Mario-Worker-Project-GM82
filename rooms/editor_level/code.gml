@@ -83,18 +83,15 @@ Load_Script_Main()
 global.testmode=0
 file_delete(global.autosavename)
 global.autosavename=global.autosavename1
-// NET-SYNC: 测关返回，重建 netid 表并请求全量重同步（修复测关后放置不再同步）
+// NET-SYNC: 测关返回（room_restart 会重启本房间，重放/广播必须延后到 Load_Script_Masta 数据填充完成）
+// 房主：标记 net_pending_sync，由 o_edmain Step 在数据完整后触发重放+全量广播；
+// 客户端：请求房主重发全量（测关中静默丢弃的增量由此补齐）
 if instance_exists(o_ednet) {
-    ed_net_rebuild_ids()
     with(o_ednet) {
         if net_state = 3 {
             if net_role = 1 {
-                // 房主：先重放测关期间入队的编辑（保留客户端在测关中的操作），再广播全量给所有客户端
-                ed_net_replay_pending()
-                ed_net_ops_send_file()
-                ed_net_ops_send_settings()
+                global.net_pending_sync = 1
             } else {
-                // 客户端：请求房主重发全量
                 ed_net_ops_request_full(net_sendbuf)
             }
         }

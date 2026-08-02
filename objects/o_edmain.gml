@@ -603,6 +603,14 @@ if real(global.script_kile) > 0
     // NET-SYNC: Masta 填充完成后触发全量同步（数据/设置已完整，规避发送空关卡）
     if global.net_pending_sync = 1 {
         global.net_pending_sync = 0
+        // NET-SYNC: 数据加载完成（Load_Script_Masta 已填充）后统一出口：重放测关期间入队的编辑 +
+        // 幂等重建 netid 表（队列空时也保证表正确），再全量广播给所有客户端
+        with(o_ednet) {
+            if net_state = 3 && net_role = 1 {
+                ed_net_replay_pending()
+                ed_net_rebuild_ids()
+            }
+        }
         ed_net_ops_send_file()
         ed_net_ops_send_settings()
     }
@@ -800,23 +808,29 @@ if keyboard_check_pressed(global.key_ed_delete){
     }
     // F7: 关卡尺寸调整
     if keyboard_check_pressed(global.key_f7){
-        view_xview[0]=0
-        view_yview[0]=0
-        _edfv_q=show_question('Do you REALLY want to RESIZE of your level???')
-        if _edfv_q=1 {
-            _edfv_dupiks=get_integer('Set the size of level. X in tiles - min 20, max 1920',floor(room_width/32))
-            _edfv_dupigrek=get_integer('Y in tiles - min 15, max 1920',floor(room_height/32))
-            x_trans = get_integer('Move x (in tiles) of (0,0) to:',0)
-            y_trans = get_integer('Move y (in tiles) of (0,0) to:',0)
-            x_new = min(max(_edfv_dupiks,20),1920)
-            y_new = min(max(_edfv_dupigrek,15),1920)
-            if room_width+x_trans*32>x_new*32 || room_height+y_trans*32>y_new*32 || x_trans*32<0 || y_trans*32<0 {
-                _edfv_q=show_question('Some blocks may be out of the new border, which will be DELETED. Do you want to continue?')
-            }
+        if instance_exists(o_ednet) && o_ednet.net_state = 3 && o_ednet.net_role = 0 {
+            ed_net_notify('Only host can resize the level.')
+        } else {
+            view_xview[0]=0
+            view_yview[0]=0
+            _edfv_q=show_question('Do you REALLY want to RESIZE of your level???')
             if _edfv_q=1 {
-                ed_net_ops_send_resize(x_new, y_new, x_trans, y_trans)
-                ed_resize_level(x_new, y_new, x_trans, y_trans)
-                ed_net_rebuild_ids()
+                _edfv_dupiks=get_integer('Set the size of level. X in tiles - min 20, max 1920',floor(room_width/32))
+                _edfv_dupigrek=get_integer('Y in tiles - min 15, max 1920',floor(room_height/32))
+                x_trans = get_integer('Move x (in tiles) of (0,0) to:',0)
+                y_trans = get_integer('Move y (in tiles) of (0,0) to:',0)
+                x_new = min(max(_edfv_dupiks,20),1920)
+                y_new = min(max(_edfv_dupigrek,15),1920)
+                if room_width+x_trans*32>x_new*32 || room_height+y_trans*32>y_new*32 || x_trans*32<0 || y_trans*32<0 {
+                    _edfv_q=show_question('Some blocks may be out of the new border, which will be DELETED. Do you want to continue?')
+                }
+                if _edfv_q=1 {
+                    ed_net_ops_send_resize(x_new, y_new, x_trans, y_trans)
+                    ed_resize_level(x_new, y_new, x_trans, y_trans)
+                    ed_net_rebuild_ids()
+                    // NET-SYNC: resize 双重重载完成后由 o_edmain Step 触发全量广播，保证所有人关卡一致
+                    global.net_pending_sync = 1
+                }
             }
         }
     }
