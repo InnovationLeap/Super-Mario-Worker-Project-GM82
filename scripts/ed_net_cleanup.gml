@@ -1,7 +1,7 @@
 // ed_net_cleanup()
 // 清理所有 socket/listener 并复位会话状态（在 o_ednet 上下文调用）
 var _i;
-debug_log('[net] cleanup: state=' + string(net_state) + ' socks=' + string(net_sock_count) + ' listener=' + string(net_listener))
+// debug_log('[net] cleanup: state=' + string(net_state) + ' socks=' + string(net_sock_count) + ' listener=' + string(net_listener))
 _i = 0
 while _i < net_sock_count {
     if net_socks[_i] >= 0 {

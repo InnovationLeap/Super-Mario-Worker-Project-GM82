@@ -43,6 +43,8 @@ net_file_fid = -1
 net_file_path = ''
 net_file_active = 0
 net_pending_reload = 0
+// 联机中是否已隐藏系统鼠标箭头（编辑器内用白色光标替代）
+net_cursor_hidden = 0
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -68,12 +70,12 @@ while _i < net_sock_count {
             _st = socket_get_state(_s)
             if _st != net_last_state {
                 net_last_state = _st
-                debug_log('[net] sock=' + string(_s) + ' state=' + string(_st) + ' (net_state=' + string(net_state) + ', role=' + string(net_role) + ')')
+                // debug_log('[net] sock=' + string(_s) + ' state=' + string(_st) + ' (net_state=' + string(net_state) + ', role=' + string(net_role) + ')')
             }
             if _st = tcp_connected {
                 if net_state = 2 && net_role = 0 {
                     net_state = 3
-                    debug_log('[net] connected, sending hello')
+                    // debug_log('[net] connected, sending hello')
                     ed_net_send_hello(net_sendbuf, net_my_name)
                 }
             }
@@ -84,16 +86,16 @@ while _i < net_sock_count {
                 } else {
                     if net_state > 0 {
                         ed_net_add_line('[Disconnected]')
-                        debug_log('[net] disconnected: state=' + string(_st))
+                        // debug_log('[net] disconnected: state=' + string(_st))
                     } else {
-                        debug_log('[net] connect failed: state=' + string(_st))
+                        // debug_log('[net] connect failed: state=' + string(_st))
                         net_last_err = 'Connect failed (state ' + string(_st) + ')'
                     }
                     ed_net_cleanup()
                 }
             }
         } else {
-            debug_log('[net] socket gone: ' + string(_s))
+            // debug_log('[net] socket gone: ' + string(_s))
             if net_role = 1 {
                 ed_net_players_leave_by_sock(_s)
             } else {
@@ -109,13 +111,13 @@ if net_listener >= 0 {
         while listener_pending(net_listener) && net_sock_count < 8 {
             _s = socket_create()
             listener_accept(net_listener, _s)
-            debug_log('[net] accept: sock=' + string(_s) + ' state=' + string(socket_get_state(_s)))
+            // debug_log('[net] accept: sock=' + string(_s) + ' state=' + string(socket_get_state(_s)))
             net_socks[net_sock_count] = _s
             net_sock_count += 1
             ed_net_add_line('[Player connecting...]')
         }
     } else {
-        debug_log('[net] listener gone: ' + string(net_listener))
+        // debug_log('[net] listener gone: ' + string(net_listener))
         net_listener = -1
     }
 }
@@ -126,7 +128,7 @@ if net_state = 3 && (net_role = 1 || net_myid > 0) {
 // 待重载标记：测关中收到 op23 → 回编辑器后请求全量重同步
 if net_pending_reload = 1 && net_state = 3 && net_role = 0 {
     if instance_exists(o_edmain) {
-        net_pending_reload = 0
+net_pending_reload = 0
         ed_net_ops_request_full(net_sendbuf)
     }
 }
@@ -134,6 +136,19 @@ if keyboard_check_pressed(global.key_ed_cancel) && panel_open = 1 {
     panel_open = 0
     if instance_exists(o_edmain) {
         o_edmain.czywybieranieback = 0
+    }
+}
+// 系统箭头：编辑器内联机连接时隐藏（由 o_edcursor 画白色本地光标替代），
+// 测关/标题/断线等非编辑器场景恢复普通箭头
+if net_state = 3 && instance_exists(o_edmain) {
+    if net_cursor_hidden = 0 {
+        window_set_cursor(cr_none)
+        net_cursor_hidden = 1
+    }
+} else {
+    if net_cursor_hidden = 1 {
+        window_set_cursor(cr_arrow)
+        net_cursor_hidden = 0
     }
 }
 #define Draw_0

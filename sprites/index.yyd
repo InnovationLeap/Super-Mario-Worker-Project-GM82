@@ -103,6 +103,7 @@ s_edhud
 s_edhudmask
 s_edcursor
 s_edcursormask
+s_edcursormulti
 s_edblocks
 s_edblocksmask
 s_blocks
@@ -575,3 +576,4 @@ s_raccoonmariofly
 s_bonusleaf
 s_spinyshell
 s_spinyshelldead
+s_edcursormaskmulti

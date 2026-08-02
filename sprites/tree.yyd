@@ -40,6 +40,8 @@
 	|s_edbonuses
 	|s_edcursor
 	|s_edcursormask
+	|s_edcursormaskmulti
+	|s_edcursormulti
 	|s_edenemies
 	|s_edenemiesmask
 	|s_edhud

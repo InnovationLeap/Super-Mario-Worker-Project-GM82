@@ -33,4 +33,4 @@ with(o_edpassage) {
     _n += 1
 }
 global.netid_counter = _n - 1
-debug_log('[net] rebuild_ids: ' + string(_n - 1) + ' instances')
+// debug_log('[net] rebuild_ids: ' + string(_n - 1) + ' instances')

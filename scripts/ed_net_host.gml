@@ -11,6 +11,6 @@ with(o_ednet) {
         net_state = 1
         ed_net_add_line('[Hosting, waiting for players]')
     } else {
-        debug_log('[net] host: ignored, net_state=' + string(net_state))
+        // debug_log('[net] host: ignored, net_state=' + string(net_state))
     }
 }

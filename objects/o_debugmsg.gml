@@ -43,7 +43,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-var _mi, _my, _entry, _pipe, _msg, _timer, _alpha, _vx, _vy;
+var _mi, _my, _entry, _pipe, _msg, _timer, _vx, _vy;
 if (variable_global_exists("debug_msg_list")) {
     _my = 30;
     _mi = 0;
@@ -53,26 +53,22 @@ if (variable_global_exists("debug_msg_list")) {
         if (_pipe > 0) {
             _msg = string_copy(_entry, _pipe + 1, string_length(_entry) - _pipe);
             _timer = real(string_copy(_entry, 1, _pipe - 1));
-            if (_timer < 30) {
-                _alpha = _timer / 30;
-            } else {
-                _alpha = 1;
-            }
         } else {
             _msg = _entry;
-            _alpha = 1;
+            _timer = 999;
         }
         _vx = view_xview[0] + 8;
         _vy = view_yview[0] + _my;
+        // 最旧消息（列表头部）剩余寿命 <30 帧时向上滑出屏幕：
+        // fw 文本不支持透明度渲染，用位移代替 alpha 淡化
+        if (_mi = 0 && _timer < 30) {
+            _vy = _vy - (30 - _timer) * 2;
+        }
         // testfont 是 fw 库字体 ID（welcome 房间 fw_add_font_from_file 加载的 message.ttf），
-        // 必须用 fw_draw_set_font + fw_draw_text 配套绘制（投影阴影：黑右下偏移 + 白原位）
+        // 必须用 fw_draw_set_font + fw_draw_text 配套绘制
         fw_draw_set_font(testfont)
-        draw_set_alpha(_alpha);
-        draw_set_color(c_black);
-        fw_draw_text(_vx + 1, _vy + 1, _msg);
         draw_set_color(c_white);
         fw_draw_text(_vx, _vy, _msg);
-        draw_set_alpha(1);
         _mi += 1;
         _my += 20;
     }

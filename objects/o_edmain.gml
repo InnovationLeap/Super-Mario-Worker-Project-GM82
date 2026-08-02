@@ -1184,14 +1184,6 @@ if costawia6=14 && mouse_check_button(mb_left) && kliknieto=0 && czywybieranieba
     }
     czywybieranieback=9999
     o_ednet.panel_open=1
-    ed_net_ip_str=string(get_string('Enter host IP to join (IP:port, e.g. frp-bar.com:41621; h = host, empty = open panel):', 'h'))
-    if ed_net_ip_str<>'' {
-        if string_lower(ed_net_ip_str)='h' {
-            ed_net_host(1)
-        } else {
-            ed_net_join(ed_net_ip_str)
-        }
-    }
     }//打开联机面板
 
 

@@ -15,13 +15,13 @@ ed_net_init()
 with(o_ednet) {
     if net_state = 0 {
         net_socks[0] = socket_create()
-        debug_log('[net] join: socket_create -> ' + string(net_socks[0]))
+        // debug_log('[net] join: socket_create -> ' + string(net_socks[0]))
         _sr = socket_connect(net_socks[0], _addr, _port)
-        debug_log('[net] join: socket_connect(' + string(_addr) + ', ' + string(_port) + ') -> ' + string(_sr))
+        // debug_log('[net] join: socket_connect(' + string(_addr) + ', ' + string(_port) + ') -> ' + string(_sr))
         net_sock_count = 1
         net_role = 0
         net_state = 2
     } else {
-        debug_log('[net] join: ignored, net_state=' + string(net_state))
+        // debug_log('[net] join: ignored, net_state=' + string(net_state))
     }
 }
