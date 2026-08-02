@@ -638,7 +638,7 @@ if costawia3 <> 42 && change_alpha = 1{
 }
 
 // 可配置编辑器画布滚动键（Step 检测）- 支持双绑定
-if wlaczonaopcja == 0 && !keyboard_check(global.key_select){
+if !keyboard_check(global.key_select){
     if keyboard_check(global.key_ed_left) && keyboard_check(global.key_ed_left_2){
         if scroolx > view_wview[0] / 2 {scroolx -= 64}
     } else if (keyboard_check(global.key_ed_left) || keyboard_check(global.key_ed_left_2)){
@@ -735,27 +735,24 @@ if keyboard_check_pressed(global.key_ed_cancel){
 }
 
 // 空格：暂停/恢复关卡滚动
-if wlaczonaopcja == 0 && ratio_level == 0 && keyboard_check_pressed(global.key_ed_pause){
+if ratio_level == 0 && keyboard_check_pressed(global.key_ed_pause){
     wlaczony = -wlaczony
 }
 
 // Delete：删除模式切换
-if wlaczonaopcja == 0 {
-    if keyboard_check_pressed(global.key_ed_delete){
-        if global.deletemode=1{
-            _ed_del_q=show_question('Would you like to turn OFF delete mode? ')
-        }
-        else{
-            _ed_del_q=show_question('Would you like to turn ON delete mode? ')
-        }
-        if _ed_del_q=1{
-            global.deletemode = -global.deletemode
-        }
+if keyboard_check_pressed(global.key_ed_delete){
+    if global.deletemode=1{
+        _ed_del_q=show_question('Would you like to turn OFF delete mode? ')
+    }
+    else{
+        _ed_del_q=show_question('Would you like to turn ON delete mode? ')
+    }
+    if _ed_del_q=1{
+        global.deletemode = -global.deletemode
     }
 }
 
 // F3/F4/F5/F7/F10 编辑器功能键
-if wlaczonaopcja == 0 {
     // F3: 测试关卡
     if keyboard_check_pressed(global.key_f3){
         global.autosavename1=global.autosavename
@@ -829,7 +826,6 @@ if wlaczonaopcja == 0 {
         global.poziomwody=floor(_edfv_w*32-16)
         ed_net_ops_send_settings('Water Level')
     }
-}
 #define Other_3
 /*"/*'/**//* YYD ACTION
 lib_id=1
