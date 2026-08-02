@@ -481,20 +481,25 @@ if is_button_pressed('jump') && kuku>1 && grawitacja<0 && (y<global.poziomwody |
 // Raccoon flight takeoff (P-Meter full + press jump in air)
 // keyboard_check_pressed: must press jump fresh, not just hold it
 // Raccoon flight: takeoff (first press) and mid-air boost (subsequent presses)
-// Both give upward lift, but only first press initializes the flight timer
+// Both give upward lift, but only first press starts the flight timer counting
 if global.rodzajmaria=6 && raccoon_fly_allowed=1 && grawitacja>0 && keyboard_check_pressed(global.sterowanieskok) && y<global.poziomwody && sekwencja=1 && schylanie=0 && !stuck {
     grawitacja=-9
     szybkosc = max(-4, min(szybkosc, 4))
     if raccoon_flew=0 {
         raccoon_flew=1
-        raccoon_fly_timer=0
         p_meter_run_timer=0
     }
     if global.sample=1 {fofo=sound_play(snd_spin);sound_volume(snd_spin,global.glosnosc)}
 }
 
-// Flight timer: count up while flying, end flight when time expires or landing
-if raccoon_flew=1 {
+// Flight timer: prerequisite -- flight must be allowed (P-Meter full,
+// raccoon_fly_allowed=1), plus not hurt, above water, not on lava.
+// Then the timer counts if EITHER: x speed is below running speed
+// (abs(szybkosc) <= 6) OR the player is in the flew state (flew=1).
+// Running with a full P-Meter recharges it (see P-Meter logic below).
+// At 212 frames the flight state is force-cancelled (raccoon_flew=0,
+// P-Meter reset to 0).
+if raccoon_fly_allowed=1 && skusil=0 && global.rodzajmaria=6 && y<global.poziomwody && !place_meeting(x,y,o_lava) && (abs(szybkosc) <= 6 || raccoon_flew=1 || p_meter_run_timer > 0) {
     raccoon_fly_timer+=1
     if raccoon_fly_timer>raccoon_fly_time {
         raccoon_flew=0
@@ -513,7 +518,7 @@ rodzajmaria_is_raccoon = (global.rodzajmaria = 6)
 // P-Meter logic (Raccoon Mario)
 if global.rodzajmaria = 6 && skusil = 0 {
     var _on_ground;
-    _on_ground = (sekwencja = 0)
+    _on_ground = (sekwencja = 0 || place_meeting(x, y+2, o_windas))
 
     // Disallow flight if P-Meter is not full
     if raccoon_fly_allowed = 1 && p_meter < p_meter_max {
@@ -529,18 +534,20 @@ if global.rodzajmaria = 6 && skusil = 0 {
         _against_wall = (place_meeting(_nextx, y, obj_wall) || place_meeting(_nextx, y, o_pointblock))
         if !_at_edge && !_against_wall {
             p_meter = min(p_meter + 1, p_meter_max)
-            p_meter_run_timer += 1
+            if raccoon_fly_allowed = 0 {
+                p_meter_run_timer = min(p_meter_run_timer + 1, p_meter_run_time)
+            }
         } else {
             // Running against wall or screen edge: decay like stopped
             if raccoon_fly_allowed = 0 {
                 p_meter = max(p_meter - 1, 0)
-                p_meter_run_timer = 0
+                p_meter_run_timer = max(p_meter_run_timer - 1, 0)
             }
         }
     } else {
+        p_meter_run_timer = max(p_meter_run_timer - 1, 0)
         if raccoon_fly_allowed = 0 {
             p_meter = max(p_meter - 1, 0)
-            p_meter_run_timer = 0
         }
     }
 
@@ -555,14 +562,11 @@ if global.rodzajmaria = 6 && skusil = 0 {
         raccoon_fly_allowed = 1
     }
 
-    // Reset first-flight flag when landing, so next airborne flight press resets timer
-    if _on_ground { raccoon_flew = 0 }
-
     // Flight time extension: land while running with full P-Meter
     // P-Meter run timer fills up → reset flight timer, recharging full flight duration
     if raccoon_fly_allowed = 1 {
         if abs(szybkosc) > 6 && _on_ground {
-            p_meter_run_timer += 1
+            p_meter_run_timer = min(p_meter_run_timer + 1, p_meter_run_time)
             if p_meter_run_timer >= p_meter_run_time {
                 raccoon_fly_timer = 0
             }
