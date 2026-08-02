@@ -118,6 +118,14 @@ if _cato = 5 {
     _f.coto = 18
 }
 if instance_exists(_f) {
+    // NET-SYNC: 测关中远端编辑照常应用（数据进入存盘），但不绘制且不跑 Step（防游戏画面误删/误改）；
+    // deactivate 实例仍可被 instance_exists/ed_net_inst_lookup 找到，存盘时 Save_Script_Main 自带 activate_all
+    if variable_global_exists('testmode') {
+        if global.testmode = 1 {
+            // GM8 无按 id 的 instance_deactivate，按对象类型停用（测关中该类型实例本就应隐藏，重复停用无害）
+            instance_deactivate_object(_f.object_index)
+        }
+    }
     _f.netid = _netid
     ed_net_inst_register(_f)
     ed_net_trace('R16 netid=' + string(_netid) + ' cato=' + string(_cato) + ' coto=' + string(_coto) + ' inst=' + string(_f))

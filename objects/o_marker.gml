@@ -2564,6 +2564,10 @@ if global.przeszedllevel>=2000-fast_time global.przeszedllevel+=1
 if global.przeszedllevel>=2050-fast_time {global.etappokonany=0;
     if global.testmode=1{
     global.godmode=0;
+    // NET-SYNC: 测关结束，先把含远端编辑的数据存回 temp.smwl，并复位 o_edmain persistent
+    if instance_exists(o_edmain) {
+        with(o_edmain){Save_Script_Main(); persistent = false}
+    }
     room_goto(editor_level)
     }else{
     room_goto(Another_Level)
@@ -2618,6 +2622,10 @@ if warning2=1{
         p_meter_sfx_playing=0
         file_text_close(global.toload);
         file_delete(global.toloader)
+        // NET-SYNC: 测关结束，先把含远端编辑的数据存回 temp.smwl，并复位 o_edmain persistent
+        if instance_exists(o_edmain) {
+            with(o_edmain){Save_Script_Main(); persistent = false}
+        }
         room_goto(editor_level)
     }
     else{
@@ -2723,6 +2731,10 @@ if warning2=1{
         p_meter_sfx_playing=0
         file_text_close(global.toload);
         file_delete(global.toloader)
+        // NET-SYNC: 测关结束，先把含远端编辑的数据存回 temp.smwl，并复位 o_edmain persistent
+        if instance_exists(o_edmain) {
+            with(o_edmain){Save_Script_Main(); persistent = false}
+        }
         room_goto(editor_level)
     }
     else{

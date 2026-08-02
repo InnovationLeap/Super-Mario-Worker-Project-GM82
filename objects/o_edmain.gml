@@ -200,6 +200,12 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+// NET-SYNC: 测关中 o_edmain 假死存活（数据载体：arrayetapu），Step 空转
+if variable_global_exists('testmode') {
+    if global.testmode = 1 {
+        exit
+    }
+}
 global.muzyka=real(global.muzyka)
 // 音乐开关：按下时切换状态机，停止时立即 SXMS_C_Stop，恢复时在状态机完成时播放
 if keyboard_check_pressed(global.key_musictoggle) && global.musicon=1 {SXMS_C_Stop();global.musicon=2}
@@ -537,6 +543,11 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+if variable_global_exists('testmode') {
+    if global.testmode = 1 {
+        exit
+    }
+}
 if global.testout=1{    //自动回到测试前位置
     scroolx = global.xviewtemp
     scrooly = global.yviewtemp
@@ -603,11 +614,10 @@ if real(global.script_kile) > 0
     // NET-SYNC: Masta 填充完成后触发全量同步（数据/设置已完整，规避发送空关卡）
     if global.net_pending_sync = 1 {
         global.net_pending_sync = 0
-        // NET-SYNC: 数据加载完成（Load_Script_Masta 已填充）后统一出口：重放测关期间入队的编辑 +
-        // 幂等重建 netid 表（队列空时也保证表正确），再全量广播给所有客户端
+        // NET-SYNC: 数据加载完成（Load_Script_Masta 已填充）后统一出口：幂等重建 netid 表
+        //（测关期间远端编辑已随 temp.smwl 存盘生效，无需重放队列），再全量广播给所有客户端
         with(o_ednet) {
             if net_state = 3 && net_role = 1 {
-                ed_net_replay_pending()
                 ed_net_rebuild_ids()
             }
         }
@@ -770,21 +780,25 @@ if keyboard_check_pressed(global.key_ed_delete){
         file_text_close(create)
         Save_Script_Main()
         global.testmode=1
+        persistent = true // NET-SYNC: 测关期间保留 o_edmain（数据载体），返回时复位
         global.xviewtemp = scroolx
         global.yviewtemp = scrooly
-        with(o_edwallsdrawer){instance_destroy()}
-        with(o_edbonusesblock){instance_destroy()}
-        with(o_edbrowser){instance_destroy()}
-        with(o_edenemyblock){instance_destroy()}
-        with(o_edmarkerblock){instance_destroy()}
-        with(o_edpassage){instance_destroy()}
-        with(o_edsceneriesblock){instance_destroy()}
+        // NET-SYNC: 测关期间保留编辑器实例数据（deactivate 隐藏，不参与游戏；op16-21 照常作用于实例，
+        // 测关结束 Save_Script_Main 自带 instance_activate_all 后完整存盘），返回时随房间销毁重建
+        instance_deactivate_object(o_edwallsdrawer)
+        instance_deactivate_object(o_edbonusesblock)
+        instance_deactivate_object(o_edbrowser)
+        instance_deactivate_object(o_edenemyblock)
+        instance_deactivate_object(o_edmarkerblock)
+        instance_deactivate_object(o_edpassage)
+        instance_deactivate_object(o_edsceneriesblock)
         room_goto(Loader)
     }
     // F4: God Mode 测试
     if keyboard_check_pressed(global.key_f4){
         global.autosavename1=global.autosavename
         global.testmode=1
+        persistent = true // NET-SYNC: 测关期间保留 o_edmain（数据载体），返回时复位
         global.autosavename=working_directory+"\temp.smwl"
         create=file_text_open_write(global.autosavename)
         file_text_write_string(create," ")
@@ -793,13 +807,14 @@ if keyboard_check_pressed(global.key_ed_delete){
         global.godmode=1
         global.xviewtemp = scroolx
         global.yviewtemp = scrooly
-        with(o_edwallsdrawer){instance_destroy()}
-        with(o_edbonusesblock){instance_destroy()}
-        with(o_edbrowser){instance_destroy()}
-        with(o_edenemyblock){instance_destroy()}
-        with(o_edmarkerblock){instance_destroy()}
-        with(o_edpassage){instance_destroy()}
-        with(o_edsceneriesblock){instance_destroy()}
+        // NET-SYNC: 测关期间保留编辑器实例数据（deactivate 隐藏，不参与游戏），返回时随房间销毁重建
+        instance_deactivate_object(o_edwallsdrawer)
+        instance_deactivate_object(o_edbonusesblock)
+        instance_deactivate_object(o_edbrowser)
+        instance_deactivate_object(o_edenemyblock)
+        instance_deactivate_object(o_edmarkerblock)
+        instance_deactivate_object(o_edpassage)
+        instance_deactivate_object(o_edsceneriesblock)
         room_goto(Loader)
     }
     // F5: 实心块显示切换（松开触发）
@@ -852,6 +867,11 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+if variable_global_exists('testmode') {
+    if global.testmode = 1 {
+        exit
+    }
+}
 if instance_number(o_marker)>1 {instance_destroy()}
 
 

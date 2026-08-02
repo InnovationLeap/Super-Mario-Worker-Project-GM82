@@ -243,13 +243,9 @@ if _op = 16 {
     if net_role = 1 {
         ed_net_broadcast_except(argument0, argument1)
     }
-    // 测关守卫：房主测关中（无 o_edmain）入队待重放，客户端测关中静默丢弃（回编辑器后 op24 拉全量）
+    // NET-SYNC: 测关中 o_edmain 假死存活（persistent），消息照常应用；仅极端换房瞬间静默丢弃
     if instance_exists(o_edmain) {
         ed_net_ops_apply_create(argument1)
-    } else {
-        if net_role = 1 {
-            ed_net_queue(16, argument1)
-        }
     }
 }
 if _op = 17 {
@@ -261,10 +257,6 @@ if _op = 17 {
     }
     if instance_exists(o_edmain) {
         ed_net_ops_apply_delete(argument1)
-    } else {
-        if net_role = 1 {
-            ed_net_queue(17, argument1)
-        }
     }
 }
 if _op = 18 {
@@ -276,10 +268,6 @@ if _op = 18 {
     }
     if instance_exists(o_edmain) {
         ed_net_ops_apply_grid(argument1)
-    } else {
-        if net_role = 1 {
-            ed_net_queue(18, argument1)
-        }
     }
 }
 if _op = 19 {
@@ -291,10 +279,6 @@ if _op = 19 {
     }
     if instance_exists(o_edmain) {
         ed_net_ops_apply_update(argument1)
-    } else {
-        if net_role = 1 {
-            ed_net_queue(19, argument1)
-        }
     }
 }
 if _op = 20 {
@@ -306,10 +290,6 @@ if _op = 20 {
     }
     if instance_exists(o_edmain) {
         ed_net_ops_apply_settings(argument1)
-    } else {
-        if net_role = 1 {
-            ed_net_queue(20, argument1)
-        }
     }
 }
 if _op = 21 {
@@ -337,10 +317,6 @@ if _op = 21 {
             ed_resize_level(_disp, _txt, _sid, _nm)
         }
         ed_net_rebuild_ids()
-    } else {
-        if net_role = 1 {
-            ed_net_queue(21, argument1)
-        }
     }
 }
 if _op = 23 {

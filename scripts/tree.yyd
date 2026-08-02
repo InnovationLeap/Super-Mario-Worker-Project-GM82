@@ -131,8 +131,6 @@
 	|ed_net_send_to
 	|ed_net_broadcast
 	|ed_net_broadcast_except
-	|ed_net_queue
-	|ed_net_replay_pending
 	|ed_net_players_add
 	|ed_net_players_leave_by_sock
 	|ed_net_ops_send_create
