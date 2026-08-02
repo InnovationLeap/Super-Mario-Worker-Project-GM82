@@ -1140,12 +1140,19 @@ if costawia6=7 && mouse_check_button(mb_left) && kliknieto=0 && czywybieraniebac
     }
 // WGRYWANIE
 if costawia6=13 && mouse_check_button(mb_left) && kliknieto=0 && czywybieranieback=0
-{var warning; warning=show_question('Do you REALLY want to load a level WITHOUT the current level saved???')
+{
+kliknieto=1
+// NET-SYNC: 客户端禁止 Load（只有房主可 Load，客户端会强制接收房主关卡）
+if instance_exists(o_ednet) && o_ednet.net_state = 3 && o_ednet.net_role = 0 {
+    show_message('Load is disabled in co-op edit mode. Only the host can use load function.')
+    } else {
+var warning; warning=show_question('Do you REALLY want to load a level WITHOUT the current level saved???')
     if warning=1 {
     global.autosavename='';Load_Script_Main()
     // NET-SYNC: 房主 Load 后全量同步给客户端（Load_Script_Masta 完成后触发，数据/设置已填充完整）
     global.net_pending_sync=1}
     if warning=0 {exit}
+}
 }
 
     if costawia6=8 && mouse_check_button(mb_left) && kliknieto=0 && czywybieranieback=0
@@ -4634,12 +4641,17 @@ setting_mode = 0 && wiatrak = 0
 if keyboard_check(vk_control) && keyboard_check(global.key_ed_load) &&
 setting_mode = 0 && wiatrak = 0
 {
+    // NET-SYNC: 客户端禁止 Load（只有房主可 Load，客户端会强制接收房主关卡）
+    if instance_exists(o_ednet) && o_ednet.net_state = 3 && o_ednet.net_role = 0 {
+        show_message('Load is disabled in co-op edit mode. Only the host can use load function.')
+    } else {
     var warning; warning=show_question('Do you REALLY want to load a level WITHOUT the current level saved???')
     if warning=1 {
     global.autosavename='';Load_Script_Main()
     // NET-SYNC: 房主 Load 后全量同步给客户端（Load_Script_Masta 完成后触发，数据/设置已填充完整）
     global.net_pending_sync=1}
     if warning=0 {exit}
+    }
 }
 
 // 光照系统设置
