@@ -188,6 +188,7 @@ case 23:
         {
             global.picking=false
             picked=false
+            ed_net_ops_send_update(id, 10)
             if global.sample=1 {lololo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}
         }
     }
@@ -220,6 +221,7 @@ case 26:
         {
             global.picking=false
             picked=false
+            ed_net_ops_send_update(id, 10)
             if global.sample=1 {lololo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}
         }
     }
@@ -287,6 +289,7 @@ case 32:
         {
             global.picking=false
             picked=false
+            ed_net_ops_send_update(id, 10)
             if global.sample=1 {lololo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}
         }
     }
@@ -328,6 +331,7 @@ case 33:
         {
             global.picking=false
             picked=false
+            ed_net_ops_send_update(id, 10)
             if global.sample=1 {lololo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}
         }
     }

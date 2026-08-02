@@ -321,6 +321,7 @@ if coto=20{
         {
             global.picking=false
             picked=false
+            ed_net_ops_send_update(id, 10)
             if global.sample=1 {lololo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}
         }
     }

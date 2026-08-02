@@ -1,7 +1,7 @@
 // ed_net_ops_apply_update(buf)
 // 应用 op19 参数更新（o_ednet 上下文调用）：按 netid 更新工具型实例的最终参数
 // subop 9（水管 warpnum 重算广播）为全局操作，netid 字段为 0，不查实例直接处理
-var _netid, _subop, _f, _i, _j, _w, _g, _v;
+var _netid, _subop, _f, _i, _j, _w, _g, _v, _nx, _ny, _dx, _dy;
 buffer_read_u8(argument0)
 _netid = buffer_read_u32(argument0)
 _subop = buffer_read_u8(argument0)
@@ -97,6 +97,41 @@ if instance_exists(_f) {
             }
         }
         _f.test2 = 2
+    }
+    if _subop = 10 {
+        _f.x = buffer_read_u32(argument0)
+        _f.y = buffer_read_u32(argument0)
+        if _f.x > 2147483647 { _f.x -= 4294967296 }
+        if _f.y > 2147483647 { _f.y -= 4294967296 }
+    }
+    if _subop = 11 {
+        _nx = buffer_read_u32(argument0)
+        _ny = buffer_read_u32(argument0)
+        if _nx > 2147483647 { _nx -= 4294967296 }
+        if _ny > 2147483647 { _ny -= 4294967296 }
+        _dx = _nx - _f.x
+        _dy = _ny - _f.y
+        _f.x = _nx
+        _f.y = _ny
+        // acc 语义：x/y 与 end 变量同增量联动（按实例自身 coto）
+        if _f.coto = 32 {
+            _f.water_endX += _dx
+            _f.water_endY += _dy
+        }
+        if _f.coto = 34 {
+            _f.camera_endX += _dx
+            _f.camera_endY += _dy
+        }
+        if _f.coto = 40 || _f.coto = 41 {
+            _f.fishendX += _dx
+            _f.fishendY += _dy
+        }
+    }
+    if _subop = 12 {
+        _f.exitx = buffer_read_u32(argument0)
+        _f.exity = buffer_read_u32(argument0)
+        if _f.exitx > 2147483647 { _f.exitx -= 4294967296 }
+        if _f.exity > 2147483647 { _f.exity -= 4294967296 }
     }
     ed_net_trace('R19 netid=' + string(_netid) + ' subop=' + string(_subop) + ' applied inst=' + string(_f))
 } else {

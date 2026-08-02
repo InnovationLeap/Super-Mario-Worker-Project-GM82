@@ -87,6 +87,9 @@ if lockon=2{
 
     if !keyboard_check(global.key_acc_up) && !keyboard_check(global.key_acc_down) && !keyboard_check(global.key_acc_left) && !keyboard_check(global.key_acc_right)
     {drink=0}
+    // 联机同步：方向键按住/大键按下时（与上方 nudge 同条件）广播实例位置，apply 端按 coto 级联 end 变量
+    if keyboard_check(global.key_acc_up) || keyboard_check(global.key_acc_down) || keyboard_check(global.key_acc_left) || keyboard_check(global.key_acc_right) || keyboard_check_pressed(global.key_acc_bigup) || keyboard_check_pressed(global.key_acc_bigdown) || keyboard_check_pressed(global.key_acc_bigleft) || keyboard_check_pressed(global.key_acc_bigright)
+    {ed_net_ops_send_update(target, 11)}
 }
 
 if lockon=3{
@@ -111,10 +114,13 @@ if lockon=3{
         if keyboard_check(global.key_acc_left){target.exitx-=1;x-=1;}
         if keyboard_check(global.key_acc_right){target.exitx+=1;x+=1;}
     }
+
     if !keyboard_check(global.key_acc_up) && !keyboard_check(global.key_acc_down) && !keyboard_check(global.key_acc_left) && !keyboard_check(global.key_acc_right)
     {drink=0}
+    // 联机同步：通道出口移动广播（同条件）
+    if keyboard_check(global.key_acc_up) || keyboard_check(global.key_acc_down) || keyboard_check(global.key_acc_left) || keyboard_check(global.key_acc_right) || keyboard_check_pressed(global.key_acc_bigup) || keyboard_check_pressed(global.key_acc_bigdown) || keyboard_check_pressed(global.key_acc_bigleft) || keyboard_check_pressed(global.key_acc_bigright)
+    {ed_net_ops_send_update(target, 12)}
 }
-
 if keyboard_check_released(global.key_select){lockon=0;target=0;visible=0;/*check_double=true;sixteen=false*/}
 
 /*if check_double && !keyboard_check(global.key_select){
