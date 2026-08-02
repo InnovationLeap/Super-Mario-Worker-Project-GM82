@@ -34,7 +34,7 @@ if _gone = 1 {
     buffer_write_u32(net_sendbuf, _sid)
     ed_net_broadcast_except(argument0, net_sendbuf)
     ed_net_add_line('[Player left: id=' + string(_sid) + ']')
-    debug_log('[net] player left: id=' + string(_sid) + ' sock=' + string(argument0))
+    ed_net_notify('[Player left: id=' + string(_sid) + ']')
 }
 // 从 net_socks 移除（数组左移）
 _i = 0

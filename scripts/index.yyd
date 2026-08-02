@@ -1158,6 +1158,7 @@ ed_net_send_goodbye
 ed_net_handle_message
 ed_net_cleanup
 ed_net_add_line
+ed_net_notify
 ed_net_init
 ed_net_host
 ed_net_join

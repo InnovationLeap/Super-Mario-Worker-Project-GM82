@@ -1,8 +1,9 @@
 // ed_net_ops_apply_settings(buf)
 // 应用 op20 全量设置包（o_ednet 上下文调用）：解包写回 global 及 local_background/local_muzyka
 // 注意：游戏运行中用到的设置多为 global.*；编辑预览相关 global.preview=-1 时 local_* 跟随
-var _bg, _mu;
-buffer_read_u8(argument0)
+// 负载末尾可附加 desc（发送者修改描述），显示到 NETWORK CONSOLE：'[名字] changed: desc'
+var _bg, _mu, _src, _desc, _nm, _i;
+_src = buffer_read_u8(argument0)
 _bg = buffer_read_u32(argument0)
 _mu = buffer_read_u32(argument0)
 global.background = _bg
@@ -42,5 +43,17 @@ global.brightness = buffer_read_u16(argument0)
 if global.preview = -1 {
     global.local_background = _bg
     global.local_muzyka = _mu
+}
+if !buffer_at_end(argument0) {
+    _desc = ed_net_read_str(argument0)
+    if string_length(string(_desc)) > 0 {
+        _nm = 'P' + string(_src)
+        for (_i = 0; _i < net_pl_count; _i += 1) {
+            if net_pl_id[_i] = _src {
+                _nm = net_pl_name[_i]
+            }
+        }
+        ed_net_notify('[' + _nm + '] changed: ' + string(_desc))
+    }
 }
 ed_net_trace('R20 settings applied bg=' + string(_bg) + ' muz=' + string(_mu))

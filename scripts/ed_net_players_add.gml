@@ -41,5 +41,5 @@ buffer_write_u8(net_sendbuf, 0)
 buffer_write_u32(net_sendbuf, _i)
 ed_net_write_str(net_sendbuf, argument1)
 ed_net_broadcast_except(argument0, net_sendbuf)
-debug_log('[net] player added: id=' + string(_i) + ' sock=' + string(argument0) + ' name=' + string(argument1))
+ed_net_notify('[Player joined: ' + argument1 + ' (id ' + string(_i) + ')]')
 return _i

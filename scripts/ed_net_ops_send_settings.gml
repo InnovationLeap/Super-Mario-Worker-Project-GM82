@@ -1,5 +1,6 @@
-// ed_net_ops_send_settings()
+// ed_net_ops_send_settings(desc)
 // 广播 op20 全量设置包（o_edmain 上下文调用，各设置修改点挂接）
+// desc 可选：修改描述（如 'BGM = 5'）；非空时附加到负载末尾，并在本地 NETWORK CONSOLE 显示 '[You] changed: desc'
 // 字段顺序与 ed_net_ops_apply_settings 严格一致；带偏移字段 send 时 +1000000、apply 时 -1000000
 if instance_exists(o_ednet) && o_ednet.net_state = 3 {
     buffer_clear(o_ednet.net_sendbuf)
@@ -40,6 +41,9 @@ if instance_exists(o_ednet) && o_ednet.net_state = 3 {
     buffer_write_u16(o_ednet.net_sendbuf, global.windy)
     buffer_write_u16(o_ednet.net_sendbuf, global.darkness)
     buffer_write_u16(o_ednet.net_sendbuf, global.brightness)
+    if argument_count > 0 && string_length(string(argument0)) > 0 {
+        ed_net_write_str(o_ednet.net_sendbuf, string(argument0))
+    }
     with(o_ednet) {
         if net_role = 1 {
             ed_net_broadcast(net_sendbuf)
@@ -50,4 +54,7 @@ if instance_exists(o_ednet) && o_ednet.net_state = 3 {
         }
     }
     ed_net_trace('S20 settings broadcast')
+    if argument_count > 0 && string_length(string(argument0)) > 0 {
+        ed_net_notify('[You] changed: ' + string(argument0))
+    }
 }

@@ -262,7 +262,7 @@ if _state == 3 {
                             ds_list_delete(_inst_list, _i)
                         } else {
                             if _id.object_index == o_edmarkerblock {
-                                if _id.coto == 18 || _id.coto == 22 {
+                                if _id.coto == 22 {
                                     _id.x = _id.ed_drag_sx + _ox
                                     _id.y = 0
                                 } else {

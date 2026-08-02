@@ -167,7 +167,7 @@ if _op = 5 {
     // 房主→客户端：玩家加入广播
     _sid = buffer_read_u32(argument1)
     _nm = ed_net_read_str(argument1)
-    debug_log('[net] player join: id=' + string(_sid) + ' name=' + string(_nm))
+    ed_net_notify('[Player joined: ' + _nm + ' (id ' + string(_sid) + ')]')
     // 去重：若 sid 已在玩家表（如房主 id=0 经 op2 隐式加入、或重复广播），跳过
     _found = 0
     _i = 0
@@ -191,7 +191,7 @@ if _op = 5 {
 if _op = 6 {
     // 房主→客户端：玩家离开广播
     _sid = buffer_read_u32(argument1)
-    debug_log('[net] player leave: id=' + string(_sid))
+    ed_net_notify('[Player left: id ' + string(_sid) + ']')
     _i = 0
     while _i < net_pl_count {
         if net_pl_id[_i] = _sid {
@@ -232,7 +232,7 @@ if _op = 112 {
         }
     }
     // mp msg 上屏 + 面板控制台：名字: 内容
-    debug_log(string(_disp) + ': ' + string(_txt))
+    ed_net_notify(string(_disp) + ': ' + string(_txt))
     ed_net_add_line(string(_disp) + ': ' + string(_txt))
 }
 if _op = 16 {
