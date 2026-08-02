@@ -243,7 +243,14 @@ if _op = 16 {
     if net_role = 1 {
         ed_net_broadcast_except(argument0, argument1)
     }
-    ed_net_ops_apply_create(argument1)
+    // 测关守卫：房主测关中（无 o_edmain）入队待重放，客户端测关中静默丢弃（回编辑器后 op24 拉全量）
+    if instance_exists(o_edmain) {
+        ed_net_ops_apply_create(argument1)
+    } else {
+        if net_role = 1 {
+            ed_net_queue(16, argument1)
+        }
+    }
 }
 if _op = 17 {
     if net_role = 0 && net_file_active = 1 {
@@ -252,7 +259,13 @@ if _op = 17 {
     if net_role = 1 {
         ed_net_broadcast_except(argument0, argument1)
     }
-    ed_net_ops_apply_delete(argument1)
+    if instance_exists(o_edmain) {
+        ed_net_ops_apply_delete(argument1)
+    } else {
+        if net_role = 1 {
+            ed_net_queue(17, argument1)
+        }
+    }
 }
 if _op = 18 {
     if net_role = 0 && net_file_active = 1 {
@@ -261,7 +274,13 @@ if _op = 18 {
     if net_role = 1 {
         ed_net_broadcast_except(argument0, argument1)
     }
-    ed_net_ops_apply_grid(argument1)
+    if instance_exists(o_edmain) {
+        ed_net_ops_apply_grid(argument1)
+    } else {
+        if net_role = 1 {
+            ed_net_queue(18, argument1)
+        }
+    }
 }
 if _op = 19 {
     if net_role = 0 && net_file_active = 1 {
@@ -270,7 +289,13 @@ if _op = 19 {
     if net_role = 1 {
         ed_net_broadcast_except(argument0, argument1)
     }
-    ed_net_ops_apply_update(argument1)
+    if instance_exists(o_edmain) {
+        ed_net_ops_apply_update(argument1)
+    } else {
+        if net_role = 1 {
+            ed_net_queue(19, argument1)
+        }
+    }
 }
 if _op = 20 {
     if net_role = 0 && net_file_active = 1 {
@@ -279,12 +304,20 @@ if _op = 20 {
     if net_role = 1 {
         ed_net_broadcast_except(argument0, argument1)
     }
-    ed_net_ops_apply_settings(argument1)
+    if instance_exists(o_edmain) {
+        ed_net_ops_apply_settings(argument1)
+    } else {
+        if net_role = 1 {
+            ed_net_queue(20, argument1)
+        }
+    }
 }
 if _op = 21 {
     if net_role = 0 && net_file_active = 1 {
         exit
     }
+    // 注意：op21 无独立 apply 脚本，此处自行读取负载（含 source_id 跳过，与 send_resize 格式一致）
+    buffer_read_u8(argument1)
     _disp = buffer_read_u32(argument1)
     _txt = buffer_read_u32(argument1)
     _sid = buffer_read_u32(argument1)
@@ -299,10 +332,16 @@ if _op = 21 {
         ed_net_broadcast_except(argument0, argument1)
     }
     // debug_log('[net] op21 resize w=' + string(_disp) + ' h=' + string(_txt) + ' tx=' + string(_sid) + ' ty=' + string(_nm))
-    with(o_edmain) {
-        ed_resize_level(_disp, _txt, _sid, _nm)
+    if instance_exists(o_edmain) {
+        with(o_edmain) {
+            ed_resize_level(_disp, _txt, _sid, _nm)
+        }
+        ed_net_rebuild_ids()
+    } else {
+        if net_role = 1 {
+            ed_net_queue(21, argument1)
+        }
     }
-    ed_net_rebuild_ids()
 }
 if _op = 23 {
     if net_role = 1 {

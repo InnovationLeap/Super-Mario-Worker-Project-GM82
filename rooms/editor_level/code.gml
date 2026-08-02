@@ -89,7 +89,8 @@ if instance_exists(o_ednet) {
     with(o_ednet) {
         if net_state = 3 {
             if net_role = 1 {
-                // 房主：广播全量给所有客户端
+                // 房主：先重放测关期间入队的编辑（保留客户端在测关中的操作），再广播全量给所有客户端
+                ed_net_replay_pending()
                 ed_net_ops_send_file()
                 ed_net_ops_send_settings()
             } else {
