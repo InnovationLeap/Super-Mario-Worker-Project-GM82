@@ -77,8 +77,11 @@ if grawitacja<0{
     while place_meeting(x,y,obj_halfground) || place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock) || place_meeting(x,y,obj_waall) || place_meeting(x,y,o_breakblock) || place_meeting(x,y,o_pointblock2) || place_meeting(x,y,obj_static) {y+=1; grawitacja=0}
 }
 if sekwencja=1 && (place_meeting(x,y+1,obj_halfground) || place_meeting(x,y+1,obj_wall) || place_meeting(x,y+1,o_pointblock)) {grawitacja=0; sekwencja=2;}
-while sekwencja=2 && (place_meeting(x,y,obj_halfground) ||place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {y-=1}
-if (!place_meeting(x,y,obj_halfground) && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock)) {sekwencja=0}
+while sekwencja=2 && (place_meeting(x,y,obj_halfground) ||place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {
+    if (!place_meeting(x,y,obj_halfground) && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock)) {sekwencja=0}
+    y-=1;
+    debug_log("fofo");
+}
 
 if hardshell=1 {
 if place_meeting(x+5,y,o_pointblock) && kierunek>0 {lolo=instance_place(x+5,y,o_pointblock);lolo.podbity=1;if lolo.bonus=20{lolo.shaben=1;lolo.aplikacja=10};fangsi=1;kierunek=kierunek*-1}
