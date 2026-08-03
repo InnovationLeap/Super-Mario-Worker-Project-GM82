@@ -1162,6 +1162,8 @@ ed_net_notify
 ed_net_init
 ed_net_host
 ed_net_join
+ed_net_queue
+ed_net_replay_pending
 
 ed_net_rebuild_ids
 ed_net_inst_register

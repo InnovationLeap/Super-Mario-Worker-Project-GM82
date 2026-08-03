@@ -45,6 +45,9 @@ net_file_active = 0
 net_pending_reload = 0
 // 联机中是否已隐藏系统鼠标箭头（编辑器内用白色光标替代）
 net_cursor_hidden = 0
+// 测关期间房主收到的增量编辑队列（原始负载，按时间顺序），返回编辑器后由 ed_net_replay_pending 重放
+net_q = buffer_create()
+net_q_pending = 0
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

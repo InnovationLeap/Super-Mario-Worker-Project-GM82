@@ -2,9 +2,16 @@
 // 解析并处理一条收到的消息（在 o_ednet 上下文调用）
 // 3+ 人架构：房主 = 中继。所有上行消息（除 op1/2/240）带 u8 source_id；
 // 房主收到后：应用 + 转发给其他客户端（op16-21/23 不重放给来源）；客户端收到后仅应用。
-var _op, _ver, _nm, _sid, _txt, _disp, _src, _mx, _my, _i, _j, _found;
+var _op, _ver, _nm, _sid, _txt, _disp, _src, _mx, _my, _i, _j, _found, _ed_alive;
 buffer_set_pos(argument1, 0)
 _op = buffer_read_u8(argument1)
+// NET-SYNC: 测关中不 live-apply（Play 房实例集不可靠，返回时会丢），只入队由 ed_net_replay_pending 在编辑器重放
+_ed_alive = instance_exists(o_edmain)
+if variable_global_exists('testmode') {
+    if global.testmode = 1 {
+        _ed_alive = false
+    }
+}
 // debug_log('[net] recv opcode ' + string(_op))  // 光标消息每帧到达，双 debug 实例同写 debug_log.txt 会冲突，已注释
 _src = 0
 // 注意：op16-21/23 的 source_id 由各 ed_net_ops_apply_* 自行读取（统一在负载最前），
@@ -243,9 +250,13 @@ if _op = 16 {
     if net_role = 1 {
         ed_net_broadcast_except(argument0, argument1)
     }
-    // NET-SYNC: 测关中 o_edmain 假死存活（persistent），消息照常应用；仅极端换房瞬间静默丢弃
-    if instance_exists(o_edmain) {
+    // NET-SYNC: 测关中 o_edmain 存活则照常应用；否则房主入队待返回重放（客户端测关中静默丢弃，回编辑器后 op24 拉全量）
+    if _ed_alive {
         ed_net_ops_apply_create(argument1)
+    } else {
+        if net_role = 1 {
+            ed_net_queue(16, argument1)
+        }
     }
 }
 if _op = 17 {
@@ -255,8 +266,12 @@ if _op = 17 {
     if net_role = 1 {
         ed_net_broadcast_except(argument0, argument1)
     }
-    if instance_exists(o_edmain) {
+    if _ed_alive {
         ed_net_ops_apply_delete(argument1)
+    } else {
+        if net_role = 1 {
+            ed_net_queue(17, argument1)
+        }
     }
 }
 if _op = 18 {
@@ -266,8 +281,12 @@ if _op = 18 {
     if net_role = 1 {
         ed_net_broadcast_except(argument0, argument1)
     }
-    if instance_exists(o_edmain) {
+    if _ed_alive {
         ed_net_ops_apply_grid(argument1)
+    } else {
+        if net_role = 1 {
+            ed_net_queue(18, argument1)
+        }
     }
 }
 if _op = 19 {
@@ -277,8 +296,12 @@ if _op = 19 {
     if net_role = 1 {
         ed_net_broadcast_except(argument0, argument1)
     }
-    if instance_exists(o_edmain) {
+    if _ed_alive {
         ed_net_ops_apply_update(argument1)
+    } else {
+        if net_role = 1 {
+            ed_net_queue(19, argument1)
+        }
     }
 }
 if _op = 20 {
@@ -288,8 +311,12 @@ if _op = 20 {
     if net_role = 1 {
         ed_net_broadcast_except(argument0, argument1)
     }
-    if instance_exists(o_edmain) {
+    if _ed_alive {
         ed_net_ops_apply_settings(argument1)
+    } else {
+        if net_role = 1 {
+            ed_net_queue(20, argument1)
+        }
     }
 }
 if _op = 21 {
@@ -312,11 +339,15 @@ if _op = 21 {
         ed_net_broadcast_except(argument0, argument1)
     }
     // debug_log('[net] op21 resize w=' + string(_disp) + ' h=' + string(_txt) + ' tx=' + string(_sid) + ' ty=' + string(_nm))
-    if instance_exists(o_edmain) {
+    if _ed_alive {
         with(o_edmain) {
             ed_resize_level(_disp, _txt, _sid, _nm)
         }
         ed_net_rebuild_ids()
+    } else {
+        if net_role = 1 {
+            ed_net_queue(21, argument1)
+        }
     }
 }
 if _op = 23 {

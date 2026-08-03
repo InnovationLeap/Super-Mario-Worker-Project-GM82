@@ -79,6 +79,10 @@ global.beep=1
 
 if variable_global_exists('testmode'){
 if global.testmode=1{
+// NET-SYNC: 返回加载源改回 temp.smwl（testsave）——temp_play 副本已被 Load_Script_Play 删除
+if variable_global_exists('testsave') {
+    global.autosavename = global.testsave
+}
 Load_Script_Main()
 global.testmode=0
 file_delete(global.autosavename)

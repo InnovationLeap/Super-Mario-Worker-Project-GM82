@@ -42,3 +42,9 @@ if net_file_path <> '' {
 }
 net_file_total = 0
 net_file_got = 0
+// 清理测关编辑队列（重建空 buffer 供下次会话使用）
+if net_q >= 0 {
+    buffer_destroy(net_q)
+    net_q = buffer_create()
+    net_q_pending = 0
+}

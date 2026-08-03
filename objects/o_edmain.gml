@@ -614,10 +614,11 @@ if real(global.script_kile) > 0
     // NET-SYNC: Masta 填充完成后触发全量同步（数据/设置已完整，规避发送空关卡）
     if global.net_pending_sync = 1 {
         global.net_pending_sync = 0
-        // NET-SYNC: 数据加载完成（Load_Script_Masta 已填充）后统一出口：幂等重建 netid 表
-        //（测关期间远端编辑已随 temp.smwl 存盘生效，无需重放队列），再全量广播给所有客户端
+        // NET-SYNC: 数据加载完成（Load_Script_Masta 已填充）后统一出口：重放测关期间入队的编辑 +
+        // 幂等重建 netid 表（队列空时也保证表正确），再全量广播给所有客户端
         with(o_ednet) {
             if net_state = 3 && net_role = 1 {
+                ed_net_replay_pending()
                 ed_net_rebuild_ids()
             }
         }
@@ -779,12 +780,16 @@ if keyboard_check_pressed(global.key_ed_delete){
         file_text_write_string(create," ")
         file_text_close(create)
         Save_Script_Main()
+        // NET-SYNC: 数据经文件+队列传输：temp.smwl 是测关返回的数据源（F3 全量存盘，游戏路径不碰它），
+        // 复制 temp_play.smwl 给 Loader 加载（游戏路径只使用/删除副本）；o_edmain 不持久化，换房即销毁
+        global.testsave=working_directory+"\temp.smwl"
+        global.autosavename=working_directory+"\temp_play.smwl"
+        file_copy(global.testsave,global.autosavename)
         global.testmode=1
-        persistent = true // NET-SYNC: 测关期间保留 o_edmain（数据载体），返回时复位
         global.xviewtemp = scroolx
         global.yviewtemp = scrooly
-        // NET-SYNC: 测关期间保留编辑器实例数据（deactivate 隐藏，不参与游戏；op16-21 照常作用于实例，
-        // 测关结束 Save_Script_Main 自带 instance_activate_all 后完整存盘），返回时随房间销毁重建
+        // NET-SYNC: 测关中 o_edmain 随换房销毁（数据经文件/队列传输，无需常驻），编辑器实例 deactivate 防误跑；
+        // 好友编辑消息由 o_ednet 入队，返回后由触发器统一重放+全量广播
         instance_deactivate_object(o_edwallsdrawer)
         instance_deactivate_object(o_edbonusesblock)
         instance_deactivate_object(o_edbrowser)
@@ -798,16 +803,21 @@ if keyboard_check_pressed(global.key_ed_delete){
     if keyboard_check_pressed(global.key_f4){
         global.autosavename1=global.autosavename
         global.testmode=1
-        persistent = true // NET-SYNC: 测关期间保留 o_edmain（数据载体），返回时复位
         global.autosavename=working_directory+"\temp.smwl"
         create=file_text_open_write(global.autosavename)
         file_text_write_string(create," ")
         file_text_close(create)
         Save_Script_Main()
+        // NET-SYNC: 数据经文件+队列传输：temp.smwl 是测关返回的数据源（F3 全量存盘，游戏路径不碰它），
+        // 复制 temp_play.smwl 给 Loader 加载（游戏路径只使用/删除副本）；o_edmain 不持久化，换房即销毁
+        global.testsave=working_directory+"\temp.smwl"
+        global.autosavename=working_directory+"\temp_play.smwl"
+        file_copy(global.testsave,global.autosavename)
         global.godmode=1
         global.xviewtemp = scroolx
         global.yviewtemp = scrooly
-        // NET-SYNC: 测关期间保留编辑器实例数据（deactivate 隐藏，不参与游戏），返回时随房间销毁重建
+        // NET-SYNC: 测关中 o_edmain 随换房销毁（数据经文件/队列传输，无需常驻），编辑器实例 deactivate 防误跑；
+        // 好友编辑消息由 o_ednet 入队，返回后由触发器统一重放+全量广播
         instance_deactivate_object(o_edwallsdrawer)
         instance_deactivate_object(o_edbonusesblock)
         instance_deactivate_object(o_edbrowser)

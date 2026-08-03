@@ -2564,10 +2564,8 @@ if global.przeszedllevel>=2000-fast_time global.przeszedllevel+=1
 if global.przeszedllevel>=2050-fast_time {global.etappokonany=0;
     if global.testmode=1{
     global.godmode=0;
-    // NET-SYNC: 测关结束，先把含远端编辑的数据存回 temp.smwl，并复位 o_edmain persistent
-    if instance_exists(o_edmain) {
-        with(o_edmain){Save_Script_Main(); persistent = false}
-    }
+    // NET-SYNC: 测关结束返回。o_edmain 不持久化（换房即销毁），数据源 = F3 时的完整存盘（testsave/temp.smwl）；
+    // 测关期间好友的编辑已由 o_ednet 入队，返回后触发器统一重放+全量广播
     room_goto(editor_level)
     }else{
     room_goto(Another_Level)
@@ -2621,11 +2619,9 @@ if warning2=1{
         if global.sample=1 {sound_stop(snd_pmeter); sound_stop(snd_spin)}
         p_meter_sfx_playing=0
         file_text_close(global.toload);
-        file_delete(global.toloader)
-        // NET-SYNC: 测关结束，先把含远端编辑的数据存回 temp.smwl，并复位 o_edmain persistent
-        if instance_exists(o_edmain) {
-            with(o_edmain){Save_Script_Main(); persistent = false}
-        }
+        // NET-SYNC: 测关结束返回。o_edmain 不持久化（换房即销毁），数据源 = F3 时的完整存盘（testsave/temp.smwl）；
+        // 测关期间好友的编辑已由 o_ednet 入队，返回后触发器统一重放+全量广播
+        //（也不 file_delete(toloader)：toloader 是 temp_play 解压件，已由 Load_Script_Play 清理）
         room_goto(editor_level)
     }
     else{
@@ -2731,10 +2727,8 @@ if warning2=1{
         p_meter_sfx_playing=0
         file_text_close(global.toload);
         file_delete(global.toloader)
-        // NET-SYNC: 测关结束，先把含远端编辑的数据存回 temp.smwl，并复位 o_edmain persistent
-        if instance_exists(o_edmain) {
-            with(o_edmain){Save_Script_Main(); persistent = false}
-        }
+        // NET-SYNC: 测关结束返回。o_edmain 不持久化（换房即销毁），数据源 = F3 时的完整存盘（testsave/temp.smwl）；
+        // 测关期间好友的编辑已由 o_ednet 入队，返回后触发器统一重放+全量广播
         room_goto(editor_level)
     }
     else{
