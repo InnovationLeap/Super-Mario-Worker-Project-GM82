@@ -16,7 +16,7 @@ applies_to=self
 //Fox Writing init end
 */
 
-testfont = fw_add_font_from_file(".\Fonts\message.ttf", 14, false, false, true)
+myfont = fw_ensure_font(".\Fonts\message.ttf", 14, false, false, true)
 
 global.isDisplaying = -1
 textMessage = ""
@@ -40,7 +40,7 @@ if pointerReset = 1{
     pointerReset = 0
 }
 
-fw_draw_set_font(testfont)
+fw_draw_set_font(myfont)
 
 if global.isDisplaying && keyboard_check_pressed(vk_enter){
     global.isDisplaying=-1

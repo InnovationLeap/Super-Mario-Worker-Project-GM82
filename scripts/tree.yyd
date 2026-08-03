@@ -84,6 +84,7 @@
 	|fw_set_encoding_ext
 	|fw_add_font
 	|fw_add_font_from_file
+	|fw_ensure_font
 	|fw_set_font_offset
 	|fw_preload_font
 	|fw_delete_font

@@ -238,7 +238,7 @@ globalvar testfont;
 fw_init();
 fw_release_cache();
 fw_set_encoding("UTF-8");
-testfont = fw_add_font_from_file(".\Fonts\message.ttf", 14.1, false, false, true)
+testfont = fw_ensure_font(".\Fonts\message.ttf", 14.1, false, false, true)
 fw_draw_set_font(testfont);
 fw_draw_set_halign(fa_left);
 fw_draw_set_valign(fa_bottom);

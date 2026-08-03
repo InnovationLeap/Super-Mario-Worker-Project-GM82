@@ -57,7 +57,7 @@ applies_to=self
 var _st, _i, _s;
 ed_net_init()
 if net_font < 0 {
-    net_font = fw_add_font_from_file(".\Fonts\message.ttf", 13, false, false, true)
+    net_font = fw_ensure_font(".\Fonts\message.ttf", 13, false, false, true)
 }
 // 3+ 人改造：逐 socket 轮询收发（客户端只有 net_socks[0]）
 _i = 0
