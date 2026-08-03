@@ -365,8 +365,16 @@ if _op = 24 {
     // 客户端→房主：请求全量重同步（测关返回/待重载后触发）
     // debug_log('[net] op24 full reload requested')
     if net_role = 1 {
-        ed_net_ops_send_file(argument0)
-        ed_net_ops_send_settings()
+        // NET-SYNC: 房主测关中（o_edmain 不存在）无法立即 Save_Script_Main 生成全量文件，
+        // 直接 send_file 必然 S23 save failed 且客户端永远等不到全量（netid 表长期为 0 → SKIP/MISS 刷屏）。
+        // 改为标记 net_pending_sync：等房主返回编辑器、Load_Script_Masta 完成后，
+        // 由 o_edmain Step 统一出口「重放测关期间入队的编辑 → rebuild_ids → op23 全量广播」补齐所有客户端。
+        if instance_exists(o_edmain) {
+            ed_net_ops_send_file(argument0)
+            ed_net_ops_send_settings()
+        } else {
+            global.net_pending_sync = 1
+        }
     }
 }
 if _op = 240 {
