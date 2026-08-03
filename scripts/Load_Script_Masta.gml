@@ -16,6 +16,8 @@ global.local_background=global.background
 file_text_readln(script_file)
 global.muzyka=real(file_text_read_string(script_file))
 global.local_muzyka=global.muzyka
+// [M] DBG: Masta 读到的关键设置（默认空态 bg=0 可据此判定）
+debug_log("[M] Load_Script_Masta: bg=" + string(global.background) + " muzyka=" + string(global.muzyka) + " etapnazwa=" + global.etapnazwa)
 file_text_readln(script_file)
 global.checkpassage=0
 haveversion=0

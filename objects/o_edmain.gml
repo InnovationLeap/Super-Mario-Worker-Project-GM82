@@ -103,6 +103,13 @@ loadcheck4=0
 if !variable_global_exists('net_pending_sync') {
     global.net_pending_sync = 0
 }
+// NET-SYNC: 句柄自愈尝试计数与告警标志（Create 初始化，Step 中用于限制重建次数）
+if !variable_global_exists('net_selfheal_try') {
+    global.net_selfheal_try = 0
+}
+if !variable_global_exists('net_selfheal_warned') {
+    global.net_selfheal_warned = 0
+}
 koko=0
 
 instance_create(0,0,o_edwallsdrawer)
@@ -609,8 +616,25 @@ view_xview[0] = round(min(room_width - 640 * zoom_ratio, max(0, scroolx - 320 * 
 view_yview[0] = round(min(room_height - 480 * zoom_ratio, max(0, scrooly - 240 * zoom_ratio)) / 32) * 32;
 if variable_global_exists('script_kile'){
 // 注意：script_kile 是文件句柄（正数），不能假设恒为 1（联机中 send_file/apply_file 的 file_bin_open 会使句柄递增）
+// [S] DBG+自愈：句柄无效但有待同步标记时，按 script_kiler 路径重建句柄（覆盖 F3 返回/open_read 失败=0 场景）
+if real(global.script_kile) <= 0 && global.net_pending_sync = 1 && variable_global_exists('script_kiler') && global.script_kiler != ''
+{
+    if global.net_selfheal_try < 10
+    {
+        global.net_selfheal_try += 1
+        debug_log("[S] self-heal try#" + string(global.net_selfheal_try) + " kile=" + string(global.script_kile) + " src=" + global.script_kiler + " src_exists=" + string(file_exists(global.script_kiler)) + " smwlx_exists=" + string(file_exists(filename_change_ext(global.script_kiler,'.smwlx'))))
+        if file_exists(filename_change_ext(global.script_kiler,'.smwlx')) = false {
+            GZ_DeCompressFile(global.script_kiler, filename_change_ext(global.script_kiler,'.smwlx'))
+            ec_convert_file(filename_change_ext(global.script_kiler,'.smwlx'))
+        }
+        global.script_kile = file_text_open_read(filename_change_ext(global.script_kiler,'.smwlx'))
+        debug_log("[S] self-heal retry_handle=" + string(global.script_kile))
+    }
+}
 if real(global.script_kile) > 0
 {Load_Script_Masta();global.script_kile=-1
+    global.net_selfheal_try = 0
+    global.net_selfheal_warned = 0
     // NET-SYNC: Masta 填充完成后触发全量同步（数据/设置已完整，规避发送空关卡）
     if global.net_pending_sync = 1 {
         global.net_pending_sync = 0
@@ -625,6 +649,10 @@ if real(global.script_kile) > 0
         ed_net_ops_send_file()
         ed_net_ops_send_settings()
     }
+}
+else if global.net_pending_sync = 1 && global.net_selfheal_warned = 0 {
+    global.net_selfheal_warned = 1
+    debug_log("[S] WARN: pending sync but script_kile invalid (empty-broadcast suppressed)")
 }
 }
 

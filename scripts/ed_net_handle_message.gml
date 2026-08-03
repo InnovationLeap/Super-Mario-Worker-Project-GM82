@@ -344,6 +344,10 @@ if _op = 21 {
             ed_resize_level(_disp, _txt, _sid, _nm)
         }
         ed_net_rebuild_ids()
+        // NET-SYNC: 远端 resize 与本地 F7 保持对称——房主标记全量同步，待 Masta 填充后由 o_edmain Step 广播给所有客户端
+        if net_role = 1 {
+            global.net_pending_sync = 1
+        }
     } else {
         if net_role = 1 {
             ed_net_queue(21, argument1)

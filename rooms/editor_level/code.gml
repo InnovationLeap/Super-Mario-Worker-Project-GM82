@@ -83,6 +83,8 @@ if global.testmode=1{
 if variable_global_exists('testsave') {
     global.autosavename = global.testsave
 }
+// [R] DBG: 测关返回将加载的文件状态（temp.smwl 缺失/为 0 → 必然塌缩）
+debug_log("[R] editor_level: testsave_exists=" + string(variable_global_exists('testsave')) + " autosavename=" + global.autosavename + " exists=" + string(file_exists(global.autosavename)) + " size=" + string(file_size(global.autosavename)))
 Load_Script_Main()
 global.testmode=0
 file_delete(global.autosavename)

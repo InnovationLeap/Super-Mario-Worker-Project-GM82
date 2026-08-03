@@ -135,6 +135,8 @@ else{
     file_copy(global.fundel,global.tosave);  //跳过压缩，直接保存明文
     file_delete(global.fundel)  //删除mflx文件
 }
+// [SV] DBG: 保存产物存在性/尺寸（F3 测关 temp.smwl 若为 0 或缺失，返回时 Load_Script_Main 将直接塌缩）
+debug_log("[SV] Save_Script_Main: tosave=" + global.tosave + " exists=" + string(file_exists(global.tosave)) + " size=" + string(file_size(global.tosave)) + " compress=" + string(global.compress_save))
 if global.donottemp !=1{
     global.tempnumber+=1;
     tempwarning = 0
