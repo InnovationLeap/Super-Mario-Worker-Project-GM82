@@ -14,6 +14,7 @@ rodzajzabicia=0
 killer=1 // czy mozna rozdeptywac 0 - tak, 1 - nie, 2 - tak ale nie zabija,
 odpych=0 // przy rozdeptywaniu ile ma zwiekszyc odskok
 xiao=0
+zabil=0 // 是否已对本次玩家死亡嘲讽过（一次性）
 alter=0
 lilofon=0
 
@@ -155,7 +156,7 @@ if y>room_height[0]+64 {instance_destroy()}
 }
 
 
-if global.rodzajmaria=0 && o_marker.shield<=2 && place_meeting(x,y,o_marker) && o_marker.animator2.visible=0 && xiao=0 && global.rodzajmaria<>0 && global.rodzajmaria<>5{xiao=1}
+if place_meeting(x,y,o_marker) && o_marker.skusil=1 && zabil=0 {zabil=1; xiao=1}
 if place_meeting(x,y,o_marker)&& global.pauza=2 {xiao=0.5}
 if xiao=0.5 && global.pauza=0 {xiao=1}
 if xiao=1 {sound_play(snd_zgniatacz);sprite_index=sprite363;image_speed=0.1;xiao=2}
