@@ -4,18 +4,18 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if !variable_local_exists('wejscie'){wejscie=0
-wyjscie=0
-cyferkimario=font_add_sprite(txt_mariofonts,ord('!'),1,0) // 定义字体
+if !variable_local_exists('wejscie') {wejscie=0
+    wyjscie=0
+    cyferkimario=font_add_sprite(txt_mariofonts,ord('!'),1,0) // 定义字体
 
-tak=0
-tak2=0
-tak3=0
+    tak=0
+    tak2=0
+    tak3=0
 
-exitx=0
-exity=0
-deltax=0
-deltay=0
+    exitx=0
+    exity=0
+    deltax=0
+    deltay=0
 }
 //水管配对相关
 cyferkimario=font_add_sprite(txt_mariofonts,ord('!'),1,0) // 定义字体
@@ -67,21 +67,21 @@ if deltax<=0 && deltay<=0 {draw_text(view_xview[0]+16,view_yview[0]+468,'('+stri
 }*/
 //水管出入口配对?
 if  tak3=1 {
-if shuiguanhele2=1 && shuiguanhele=0{
-helewrap=global.warp[floor((abs(exitx)+16)/32)+50,floor((abs(exity)+16)/32)+50]
-global.warp[floor((abs(exitx)+16)/32)+50,floor((abs(exity)+16)/32)+50]+=1
-shuiguanhele=1}
-if shuiguanhele2=0{
-global.warp[floor((abs(exitx)+16)/32)+50,floor((abs(exity)+16)/32)+50]=1
-shuiguanhele2=1
-}
-textx=exitx+72
-texty=exity+58-12*(helewrap-1)
+    if shuiguanhele2=1 && shuiguanhele=0 {
+        helewrap=global.warp[floor((abs(exitx)+16)/32)+50,floor((abs(exity)+16)/32)+50]
+        global.warp[floor((abs(exitx)+16)/32)+50,floor((abs(exity)+16)/32)+50]+=1
+        shuiguanhele=1}
+    if shuiguanhele2=0 {
+        global.warp[floor((abs(exitx)+16)/32)+50,floor((abs(exity)+16)/32)+50]=1
+        shuiguanhele2=1
+    }
+    textx=exitx+72
+    texty=exity+58-12*(helewrap-1)
 
-entrancecolor=make_color_rgb(128,128,255)
-exitcolor=make_color_rgb(255,128,128)
-draw_set_color(entrancecolor)
-draw_set_font(cyferkimario)
-draw_text(x-8,y+8,string(warpnum))
-draw_set_color(exitcolor)
-draw_text(textx,texty,string(warpnum))}
+    entrancecolor=make_color_rgb(128,128,255)
+    exitcolor=make_color_rgb(255,128,128)
+    draw_set_color(entrancecolor)
+    draw_set_font(cyferkimario)
+    draw_text(x-8,y+8,string(warpnum))
+    draw_set_color(exitcolor)
+    draw_text(textx,texty,string(warpnum))}

@@ -4,15 +4,15 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if !variable_local_exists('coto'){
-coto=0
-drink=0
-imweitiao=0
-additional1=0
-additional2=0
-additional3=0
-additional4=0
-test2=0
+if !variable_local_exists('coto') {
+    coto=0
+    drink=0
+    imweitiao=0
+    additional1=0
+    additional2=0
+    additional3=0
+    additional4=0
+    test2=0
 }
 cyferkimario=font_add_sprite(txt_mariofonts,ord('!'),1,0) // 定义字体
 test=0

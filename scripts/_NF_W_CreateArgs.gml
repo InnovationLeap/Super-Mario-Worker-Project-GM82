@@ -13,6 +13,6 @@ ds_list_clear(list);
 
 count = argument[0];
 
-for(i = 1; i <= count; i+=1){
+for(i = 1; i <= count; i+=1) {
     ds_list_add(list, argument[i]);
 }

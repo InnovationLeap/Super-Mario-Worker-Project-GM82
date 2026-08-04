@@ -33,14 +33,14 @@ applies_to=self
 */
 if global.pauza=0 {
 
-if sekwencja=0 {sekwencja=1; iyor=-10}
-if sekwencja=1 {iyor+=0.25; y+=iyor}
-if iyor<0 image_yscale=1
-if iyor>0 image_yscale=-1
-if sekwencja=1 && y>starty && iyor>0 {sekwencja=2; iyor=0; y=-2000; instance_create(x,starty+16,o_firerico)}
-if sekwencja>=2 && sekwencja<200 {sekwencja+=1}
-if sekwencja=200 {sekwencja=0; y=starty}
+    if sekwencja=0 {sekwencja=1; iyor=-10}
+    if sekwencja=1 {iyor+=0.25; y+=iyor}
+    if iyor<0 image_yscale=1
+    if iyor>0 image_yscale=-1
+    if sekwencja=1 && y>starty && iyor>0 {sekwencja=2; iyor=0; y=-2000; instance_create(x,starty+16,o_firerico)}
+    if sekwencja>=2 && sekwencja<200 {sekwencja+=1}
+    if sekwencja=200 {sekwencja=0; y=starty}
 
-image_index=pokazywator.huoqiu
+    image_index=pokazywator.huoqiu
 
 }

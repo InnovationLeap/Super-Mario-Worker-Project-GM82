@@ -29,10 +29,10 @@ var i,j;
 i=0
 j=0
 while i<=19 {
-while j<=1 {
-global.check[i,j]=0
-j+=1}
-i+=1
+    while j<=1 {
+        global.check[i,j]=0
+        j+=1}
+    i+=1
 }
 
 ds_list_clear(global.autoscrolls)

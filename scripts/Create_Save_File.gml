@@ -4,8 +4,7 @@
 global.path = global.ascii_temp_path+"bass_tmp.smw"
 file_copy(global.mfsfilename,global.path)
 if(global.jiami=1) {
-if filename_ext(global.mfsfilename)='.mwsav' {script_text_crypt(global.path,2)}
-else{script_text_crypt(global.path,1)}
+    if filename_ext(global.mfsfilename)='.mwsav' {script_text_crypt(global.path,2)} else {script_text_crypt(global.path,1)}
 }
 
 //记录已解压文件
@@ -16,8 +15,7 @@ global.toload=file_text_open_read(global.mfsxname)
 
 //将mfs数据读入内存
 a=instance_create(0,0,o_readsmwpfile)
-while !file_text_eof(global.toload)&&o_readsmwpfile.toloadpointer<31995
-{
+while !file_text_eof(global.toload)&&o_readsmwpfile.toloadpointer<31995 {
     o_readsmwpfile.toloadpointer+=1
     o_readsmwpfile.toloadtext[o_readsmwpfile.toloadpointer]= file_text_read_string(global.toload)
     file_text_readln(global.toload);
@@ -37,7 +35,7 @@ o_readsmwpfile.toloadpointer=1
 file_text_close(global.toload);
 file_delete(global.mfsxname);
 levelcount=0;
-while(levelcount<global.currentlevel){
+while(levelcount<global.currentlevel) {
     o_readsmwpfile.toloadpointer+=1
     if o_readsmwpfile.toloadtext[o_readsmwpfile.toloadpointer] = "New Level" {levelcount+=1;}
 }
@@ -67,19 +65,19 @@ file_text_write_string(tosavefile,string(global.music_record));
 file_text_writeln(tosavefile);
 file_text_write_string(tosavefile,string(global.checkpoint));
 //show_message('checkpoint='+string(global.checkpoint));
-for(i=0;i<global.checkpoint;i+=1){
-file_text_write_string(tosavefile,string(global.check[i+1,0])+'|')
-//show_message('checkpointx'+string(i+1)+'='+string(global.check[i+1,0]));
+for(i=0;i<global.checkpoint;i+=1) {
+    file_text_write_string(tosavefile,string(global.check[i+1,0])+'|')
+    //show_message('checkpointx'+string(i+1)+'='+string(global.check[i+1,0]));
 }
 file_text_writeln(tosavefile);
-for(i=0;i<global.checkpoint;i+=1){
-file_text_write_string(tosavefile,string(global.check[i+1,1])+'|')
-//show_message('checkpointy'+string(i+1)+'='+string(global.check[i+1,1]));
+for(i=0;i<global.checkpoint;i+=1) {
+    file_text_write_string(tosavefile,string(global.check[i+1,1])+'|')
+    //show_message('checkpointy'+string(i+1)+'='+string(global.check[i+1,1]));
 }
 file_text_writeln(tosavefile);
 
 //写入关卡信息
-while o_readsmwpfile.tosavepointer <= o_readsmwpfile.toloadend{
+while o_readsmwpfile.tosavepointer <= o_readsmwpfile.toloadend {
     file_text_write_string(tosavefile,o_readsmwpfile.toloadtext[o_readsmwpfile.tosavepointer]);
     file_text_writeln(tosavefile);
     o_readsmwpfile.tosavepointer+=1;
@@ -89,6 +87,6 @@ file_text_close(tosavefile)
 //压缩与加密
 GZ_CompressFile(tosavename,tosavename2)
 file_delete(tosavename)
-    script_text_crypt(tosavename2,2);
+script_text_crypt(tosavename2,2);
 file_copy(tosavename2,newsavename)
 file_delete(tosavename2)

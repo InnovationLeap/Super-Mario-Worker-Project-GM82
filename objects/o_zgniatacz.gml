@@ -38,21 +38,20 @@ applies_to=self
 if global.pauza=0 && global.etappokonany=0 {
 
 
-aktywowany=0
-if x>view_xview[0]-100 && x<view_xview[0]+740 && y>view_yview[0]-100 && y<view_yview[0]+580 {aktywowany=1}
-if x>o_marker.x-80 && x<o_marker.x+80 && lilofon=0 {lilofon=1}
-if lilofon=1 && !place_meeting(x,y,obj_halfground) && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock) {iyor+=1; y+=iyor}
-if lilofon=1 && (place_meeting(x,y,obj_halfground) ||  place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {lilofon=2; iyor=0;if y>view_yview[0]-64 && y<view_yview[0]+480+64 {sound_play(snd_stun2)} }
+    aktywowany=0
+    if x>view_xview[0]-100 && x<view_xview[0]+740 && y>view_yview[0]-100 && y<view_yview[0]+580 {aktywowany=1}
+    if x>o_marker.x-80 && x<o_marker.x+80 && lilofon=0 {lilofon=1}
+    if lilofon=1 && !place_meeting(x,y,obj_halfground) && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock) {iyor+=1; y+=iyor}
+    if lilofon=1 && (place_meeting(x,y,obj_halfground) ||  place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {lilofon=2; iyor=0;if y>view_yview[0]-64 && y<view_yview[0]+480+64 {sound_play(snd_stun2)} }
 
-// 有关砸砖部分的失败内容已经被注释保留，供参考与纪念（
-// 根据已有的测试结果，直接拿石盾去做碰撞是有问题的，所以我直接生成了一个宽为石盾宽度、高 1 像素的彩条来作为砸砖判定。——绿糖留
+    // 有关砸砖部分的失败内容已经被注释保留，供参考与纪念（
+    // 根据已有的测试结果，直接拿石盾去做碰撞是有问题的，所以我直接生成了一个宽为石盾宽度、高 1 像素的彩条来作为砸砖判定。——绿糖留
 
-//collide_once_per_frame = true;
-//thwomp = self;
+    //collide_once_per_frame = true;
+    //thwomp = self;
 
-while lilofon=2 && (place_meeting(x,y,obj_halfground) ||  place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock))
-{
-    // 可选项：石盾触发砖块
+    while lilofon=2 && (place_meeting(x,y,obj_halfground) ||  place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {
+        // 可选项：石盾触发砖块
     /*if global.stunblock = 1 {
 
     collide_block = instance_place(x,y,o_pointblock);
@@ -102,14 +101,14 @@ while lilofon=2 && (place_meeting(x,y,obj_halfground) ||  place_meeting(x,y,obj_
 
     }*/
 
-    y -= 1;
+        y -= 1;
 
-    if global.stunblock {
-        instance_create(x, y + 35, o_thwompdetector);
+        if global.stunblock {
+            instance_create(x, y + 35, o_thwompdetector);
+        }
+
+        //stun = true;
     }
-
-    //stun = true;
-}
 
 
 /*if stun {
@@ -139,20 +138,20 @@ while (brick != noone) {
     brick = instance_place(x, y + 1, o_pointblock);
 }*/
 
-//stun = false;
+    //stun = false;
 
 
-if lilofon=2 {lilofon=3}
-if lilofon>=3 && lilofon<100 {lilofon+=1}
-if lilofon>=100 && y>starty {
-    y -= 1;
-    stun = false;
-}
-if lilofon>=100 && y<=starty {lilofon=0}
+    if lilofon=2 {lilofon=3}
+    if lilofon>=3 && lilofon<100 {lilofon+=1}
+    if lilofon>=100 && y>starty {
+        y -= 1;
+        stun = false;
+    }
+    if lilofon>=100 && y<=starty {lilofon=0}
 
 
-// niszcz po za ekranem
-if y>room_height[0]+64 {instance_destroy()}
+    // niszcz po za ekranem
+    if y>room_height[0]+64 {instance_destroy()}
 }
 
 

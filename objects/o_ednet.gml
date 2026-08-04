@@ -131,7 +131,7 @@ if net_state = 3 && (net_role = 1 || net_myid > 0) {
 // 待重载标记：测关中收到 op23 → 回编辑器后请求全量重同步
 if net_pending_reload = 1 && net_state = 3 && net_role = 0 {
     if instance_exists(o_edmain) {
-net_pending_reload = 0
+        net_pending_reload = 0
         ed_net_ops_request_full(net_sendbuf)
     }
 }

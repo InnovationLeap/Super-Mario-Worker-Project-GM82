@@ -23,8 +23,7 @@ applies_to=self
 */
 if place_meeting(x, y, o_thwompdetector) {
     if !hit {
-        if ( hp > 1 ) { sound_play(snd_icebreak1); }
-        else { sound_play(snd_icebreak2); }
+        if ( hp > 1 ) { sound_play(snd_icebreak1); } else { sound_play(snd_icebreak2); }
         hp -= 1;
         hit = true;
     }
@@ -38,7 +37,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if setonce=0 && hp=1{
+if setonce=0 && hp=1 {
     image_index+=1;
     setonce=1;
 }
@@ -46,10 +45,8 @@ if global.lava=1 && y>global.poziomwody+9 {instance_destroy();}
 
 //if hit { hit = false; }
 
-if attacked = true
-{
-    if (hp > 1) {sound_play(snd_icebreak1);}
-    else {sound_play(snd_icebreak2);}
+if attacked = true {
+    if (hp > 1) {sound_play(snd_icebreak1);} else {sound_play(snd_icebreak2);}
     hp -= 1;
 }
 

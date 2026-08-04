@@ -14,6 +14,6 @@ applies_to=self
 */
 if global.pauza=0 && global.etappokonany=0 {
 
-corpse_anim(1,0);
+    corpse_anim(1,0);
 
 }

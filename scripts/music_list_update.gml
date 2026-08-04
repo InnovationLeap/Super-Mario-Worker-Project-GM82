@@ -1,12 +1,12 @@
 listConfig = global.customMusicDirectory+global.customMusic+'\ListConfig.ini'
-if file_exists(listConfig){
+if file_exists(listConfig) {
     musiclist = file_text_open_read(listConfig)
     counter = 0;
-    while(!file_text_eof(musiclist)){
+    while(!file_text_eof(musiclist)) {
         counter+=1;
         global.customMusicFile[counter] = file_text_read_string(musiclist)
         file_text_readln(musiclist)
-     }
+    }
     file_text_close(musiclist)
 }
 global.customMusicTotal = counter

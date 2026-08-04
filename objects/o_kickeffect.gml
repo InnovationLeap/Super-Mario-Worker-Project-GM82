@@ -20,11 +20,11 @@ action_id=603
 applies_to=self
 */
 if global.pauza = 0 {
-timer += 1
-if timer = 1 { image_xscale = 0.25; image_yscale = 0.25; image_alpha = 1 }
-if timer = 2 { image_xscale = 0.62; image_yscale = 0.62; image_alpha = 1 }
-if timer = 3 { image_xscale = 1.0; image_yscale = 1.0; image_alpha = 0.5 }
-if timer = 4 { image_xscale = 0.62; image_yscale = 0.62; image_alpha = 1 }
-if timer = 5 { image_xscale = 0.25; image_yscale = 0.25; image_alpha = 1 }
-if timer > lifetime { instance_destroy() }
+    timer += 1
+    if timer = 1 { image_xscale = 0.25; image_yscale = 0.25; image_alpha = 1 }
+    if timer = 2 { image_xscale = 0.62; image_yscale = 0.62; image_alpha = 1 }
+    if timer = 3 { image_xscale = 1.0; image_yscale = 1.0; image_alpha = 0.5 }
+    if timer = 4 { image_xscale = 0.62; image_yscale = 0.62; image_alpha = 1 }
+    if timer = 5 { image_xscale = 0.25; image_yscale = 0.25; image_alpha = 1 }
+    if timer > lifetime { instance_destroy() }
 }

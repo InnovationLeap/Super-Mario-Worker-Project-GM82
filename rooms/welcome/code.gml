@@ -33,13 +33,13 @@ instance_create(0,0,o_welcome)
 instance_create(0,0,o_screenshot)
 room_caption='Super Mario Worker Project '+global.versiontext
 global.autoscrolls = ds_list_create();
-if !file_exists(working_directory+'\temp\TempSettings.ini'){
-directory_create(working_directory+'\temp\')
-tempid = file_text_open_write(working_directory+'\temp\TempSettings.ini')
-file_text_write_string(tempid,'CurrentTempNumber=0')
-file_text_writeln(tempid)
-file_text_write_string(tempid,'MaxTempNumber=100')
-file_text_close(tempid)
+if !file_exists(working_directory+'\temp\TempSettings.ini') {
+    directory_create(working_directory+'\temp\')
+    tempid = file_text_open_write(working_directory+'\temp\TempSettings.ini')
+    file_text_write_string(tempid,'CurrentTempNumber=0')
+    file_text_writeln(tempid)
+    file_text_write_string(tempid,'MaxTempNumber=100')
+    file_text_close(tempid)
 }
 tempid = file_text_open_read(working_directory+'\temp\TempSettings.ini')
 tempstr =file_text_read_string(tempid)
@@ -169,25 +169,25 @@ var _ss_ti, _ss_ch, _ss_sub, _ss_c;
 _ss_default = working_directory
 _ss_path = ''
 
-if (file_exists(_ss_default + '\GameSettings.ini')){
+if (file_exists(_ss_default + '\GameSettings.ini')) {
     _ss_fid = file_text_open_read(_ss_default + '\GameSettings.ini')
-    while (!file_text_eof(_ss_fid)){
+    while (!file_text_eof(_ss_fid)) {
         _ss_line = file_text_read_string(_ss_fid)
         file_text_readln(_ss_fid)
-        if (string_pos('ScreenshotPath=', _ss_line) == 1){
+        if (string_pos('ScreenshotPath=', _ss_line) == 1) {
             _ss_path = string_copy(_ss_line, string_length('ScreenshotPath=') + 1, string_length(_ss_line))
             // 手动 trim 首尾空白
             _ss_ti = 1
-            while (_ss_ti <= string_length(_ss_path)){
+            while (_ss_ti <= string_length(_ss_path)) {
                 _ss_ch = ord(string_char_at(_ss_path, _ss_ti))
-                if (_ss_ch != 32 && _ss_ch != 9 && _ss_ch != 13 && _ss_ch != 10){ break }
+                if (_ss_ch != 32 && _ss_ch != 9 && _ss_ch != 13 && _ss_ch != 10) { break }
                 _ss_ti += 1
             }
             _ss_path = string_copy(_ss_path, _ss_ti, string_length(_ss_path))
             _ss_ti = string_length(_ss_path)
-            while (_ss_ti >= 1){
+            while (_ss_ti >= 1) {
                 _ss_ch = ord(string_char_at(_ss_path, _ss_ti))
-                if (_ss_ch != 32 && _ss_ch != 9 && _ss_ch != 13 && _ss_ch != 10){ break }
+                if (_ss_ch != 32 && _ss_ch != 9 && _ss_ch != 13 && _ss_ch != 10) { break }
                 _ss_ti -= 1
             }
             _ss_path = string_copy(_ss_path, 1, _ss_ti)
@@ -198,23 +198,23 @@ if (file_exists(_ss_default + '\GameSettings.ini')){
 }
 
 // 解析 working_directory 相对语法（相对游戏根目录，移动游戏不失效）
-if (string_pos('working_directory://', _ss_path) == 1){
+if (string_pos('working_directory://', _ss_path) == 1) {
     _ss_sub = string_copy(_ss_path, string_length('working_directory://') + 1, string_length(_ss_path))
     _ss_c = string_char_at(_ss_sub, 1)
-    if (_ss_c == '\'){
+    if (_ss_c == '\') {
         _ss_sub = string_copy(_ss_sub, 2, string_length(_ss_sub))
     }
-    if (_ss_c == '/'){
+    if (_ss_c == '/') {
         _ss_sub = string_copy(_ss_sub, 2, string_length(_ss_sub))
     }
     _ss_path = _ss_default + '\' + _ss_sub
 }
-if (_ss_path == 'working_directory'){
+if (_ss_path == 'working_directory') {
     _ss_path = _ss_default
 }
 
 // 配置缺失 → 默认值（写入 working_directory 占位，保留便携性）
-if (_ss_path == ''){
+if (_ss_path == '') {
     _ss_path = _ss_default
     ini_write_string('GameConfig', 'ScreenshotPath', 'working_directory')
 }
@@ -223,7 +223,7 @@ global.screenshot_path = _ss_path
 ini_close()
 // 找到下一个可用的截图编号
 global.screenshot_count=100
-while (file_exists(global.screenshot_path+'\screenshot'+string(global.screenshot_count)+'.png')){
+while (file_exists(global.screenshot_path+'\screenshot'+string(global.screenshot_count)+'.png')) {
     global.screenshot_count+=1
 }
 

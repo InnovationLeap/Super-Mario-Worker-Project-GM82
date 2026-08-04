@@ -37,7 +37,7 @@ global.brightness_record=0
 global.lightobject='0000000000000000000000000000000000000000000000000000000000000000000000'
 global.stunblock=0
 
-for(i=0;i<8;i+=1){
+for(i=0;i<8;i+=1) {
     global.yinyang_status[i]=-1;
     global.yinyang_record[i]=-1;
 }
@@ -71,11 +71,11 @@ global.combo1reset=0
 global.toload=''
 
 global.toload=''
-if !variable_global_exists("autosavename"){
-global.autosavename=''
+if !variable_global_exists("autosavename") {
+    global.autosavename=''
 }
-if global.autosavename!=''{
-global.toload=global.autosavename
+if global.autosavename!='' {
+    global.toload=global.autosavename
 }
 
 if global.smwptas {
@@ -88,24 +88,24 @@ if global.smwptas {
     }
 }
 
-while global.toload=''{
-global.toload=get_open_filename('All Supported Formats (.smwl;.mfl)|*.smwl;*.mfl|Super Mario Worker Level (.smwl)|*.smwl|Mario Worker Level(.mfl)|*.mfl','')
-if global.toload=''{
-global.czup=show_question('Do you want to stop loading a level?');
-global.toload=''
-if global.czup=1{global.zamenowane=1;global.toload='cipas';room_goto(title)}} else {}
+while global.toload='' {
+    global.toload=get_open_filename('All Supported Formats (.smwl;.mfl)|*.smwl;*.mfl|Super Mario Worker Level (.smwl)|*.smwl|Mario Worker Level(.mfl)|*.mfl','')
+    if global.toload='' {
+        global.czup=show_question('Do you want to stop loading a level?');
+        global.toload=''
+        if global.czup=1 {global.zamenowane=1;global.toload='cipas';room_goto(title)}} else {}
 }
-if global.toload!='' && global.toload!='cipas'{
-room_tile_clear(Play_Room)
-room_instance_clear(Play_Room)
-Load_Script_Play()
-room_instance_add(Play_Room,0,0,o_assist)
-file_text_close(global.toload)
-global.lastlev=1
-room_goto(Play_Room)
-global.przeszedllevel=0
+if global.toload!='' && global.toload!='cipas' {
+    room_tile_clear(Play_Room)
+    room_instance_clear(Play_Room)
+    Load_Script_Play()
+    room_instance_add(Play_Room,0,0,o_assist)
+    file_text_close(global.toload)
+    global.lastlev=1
+    room_goto(Play_Room)
+    global.przeszedllevel=0
 
 
-global.paralax=0
-global.paralax2=0
-global.paralax3=0}
+    global.paralax=0
+    global.paralax2=0
+    global.paralax3=0}

@@ -34,8 +34,7 @@ var loop;
 loop = floor(argument1)
 
 //先做无限循环
-if global.musicfile2 != argument0 && loop <=0
-  {
+if global.musicfile2 != argument0 && loop <=0 {
     //先释放掉正在播的
     mm_music_free(global.musicplay2)
     //加载音乐
@@ -44,15 +43,14 @@ if global.musicfile2 != argument0 && loop <=0
     mm_play(global.musicplay2)
     //记录正在播放的文件
     global.musicfile2 = argument0
-//返回 1 以表明正常工作
-return 1;
-  }
+    //返回 1 以表明正常工作
+    return 1;
+}
 
 //然后是有限循环的处理
 
 //第一次播放
-if global.musicfile2 != argument0 && loop > 0 && global.musiclooptime2 = 0
-  {
+if global.musicfile2 != argument0 && loop > 0 && global.musiclooptime2 = 0 {
     //先释放掉正在播的
     mm_music_free(global.musicplay2)
     //加载音乐
@@ -63,34 +61,31 @@ if global.musicfile2 != argument0 && loop > 0 && global.musiclooptime2 = 0
     global.musicfile2 = argument0
     //循环用
     global.musiclooptime2 = 1
-  }
+}
 
 //然后处理循环
 
 //这里直接利用音乐位置来处理
-if global.musiclooptime2 > 0 && global.musiclooptime2 <= loop && mm_get_position(global.musicplay2) >= mm_get_length(global.musicplay2)
-  {
+if global.musiclooptime2 > 0 && global.musiclooptime2 <= loop && mm_get_position(global.musicplay2) >= mm_get_length(global.musicplay2) {
     //回到开始位置
     mm_set_position(global.musicplay2,0)
     //循环+1
     global.musiclooptime2 += 1
-  }
+}
 
 //循环结束
-if global.musiclooptime2 > 0 && global.musiclooptime2 > loop && mm_get_position(global.musicplay2) >= mm_get_length(global.musicplay2)
-  {
+if global.musiclooptime2 > 0 && global.musiclooptime2 > loop && mm_get_position(global.musicplay2) >= mm_get_length(global.musicplay2) {
     //停止音乐
     mm_stop(global.musicplay2)
-//释放音乐
-mm_free(global.musicplay2)
+    //释放音乐
+    mm_free(global.musicplay2)
     //循环重置
     global.musiclooptime2 = 0
-//return 1 表示播放完毕
-return 1;
-  }
+    //return 1 表示播放完毕
+    return 1;
+}
 
 //这里处理return
-if global.musiclooptime2 > 0
-  {
+if global.musiclooptime2 > 0 {
     if global.musiclooptime2 <= loop+1 { return 0; }
-  }
+}

@@ -37,8 +37,8 @@ pufel3=0
 keyboard_page=0
 
 //键位设置
-for(i=0;i<10;i+=1){setkey[ord('0')+i]=string(i)}
-for(i=0;i<26;i+=1){setkey[ord('A')+i]=chr(ord('A')+i)}
+for(i=0;i<10;i+=1) {setkey[ord('0')+i]=string(i)}
+for(i=0;i<26;i+=1) {setkey[ord('A')+i]=chr(ord('A')+i)}
 setkey[vk_left]='left'
 setkey[vk_right]='right'
 setkey[vk_up]='up'
@@ -96,188 +96,174 @@ applies_to=self
 */
 if !mouse_check_button(mb_left) && !mouse_check_button(mb_right) {kliknieto=0}
 
-if global.escowanie=0 && globaloption=0 && keyboard_check(vk_escape){
+if global.escowanie=0 && globaloption=0 && keyboard_check(vk_escape) {
     global.escowanie=1;
-    if globaloption=0{game_end()}
-    if globaloption=1 && keydetect=0{globaloption=0}
-    if globaloption=1 && keydetect>0{keydetect=0}
+    if globaloption=0 {game_end()}
+    if globaloption=1 && keydetect=0 {globaloption=0}
+    if globaloption=1 && keydetect>0 {keydetect=0}
 }
-if !(mouse_check_button(mb_left)&&mouse_check_button(mb_right)) && keydetect2=1 && keydetect>0{keydetect2=0}
-if (mouse_check_button(mb_left)||mouse_check_button(mb_right)) && keydetect2=0 && keydetect>0{keydetect=0}
+if !(mouse_check_button(mb_left)&&mouse_check_button(mb_right)) && keydetect2=1 && keydetect>0 {keydetect2=0}
+if (mouse_check_button(mb_left)||mouse_check_button(mb_right)) && keydetect2=0 && keydetect>0 {keydetect=0}
 if global.escowanie=1 && !keyboard_check(vk_escape) {global.escowanie=0}
 
-if staffmusic=1 && globaloption!=3{staffmusic=0;mm_stop_all_ext()}
+if staffmusic=1 && globaloption!=3 {staffmusic=0;mm_stop_all_ext()}
 
-if globaloption=0{
-if start<=0 && wafel<=0 && global.zamenowane=0 {
-draw_set_blend_mode(bm_add)
-draw_sprite(sprite176,0,65+1280,320+960-pufel+410)
-draw_set_blend_mode(bm_normal)
-draw_sprite(sprite175,0,65+1280,320+964-pufel+410)
-
-
-kreatuj+=1
-if kreatuj>20 {instance_create(65+1280+random(60)-random(60),320+960-pufel+410+random(150)-random(200),object129)}
+if globaloption=0 {
+    if start<=0 && wafel<=0 && global.zamenowane=0 {
+        draw_set_blend_mode(bm_add)
+        draw_sprite(sprite176,0,65+1280,320+960-pufel+410)
+        draw_set_blend_mode(bm_normal)
+        draw_sprite(sprite175,0,65+1280,320+964-pufel+410)
 
 
-
-if pufel2<12 && pufel3=0 {pufel3=1; sound_play(snd_marioworker)}
-if pufel2<2 && pufel3=1 {pufel3=2; sound_play(sound28);}
-if pufel2<0.1 && pufel3=2 {pufel3=3;  mm_play_ext('.\Data\MW\ktkm120.dll',0) }
-
-pufel+=pufel2
-pufel2=pufel2/1.05
-}
-
-//
-
-if !mouse_check_button(mb_left) && skipper=1 {skipper=0}
-if mouse_check_button_pressed(mb_left) && skipper=0 && ciper=0{skipper=1; wafel=0;ciper=1 ;view_angle[0]=0}
+        kreatuj+=1
+        if kreatuj>20 {instance_create(65+1280+random(60)-random(60),320+960-pufel+410+random(150)-random(200),object129)}
 
 
-if start>0 && wafel<=0
-    {
-    draw_set_blend_mode(bm_add)
-    draw_background_ext(background10,view_xview[0],view_yview[0],1,1,0,c_white,start)
-    draw_background_ext(background10,view_xview[0],view_yview[0],1,1,0,c_white,start)
-    draw_set_blend_mode(bm_normal)
-    start-=0.02
+
+        if pufel2<12 && pufel3=0 {pufel3=1; sound_play(snd_marioworker)}
+        if pufel2<2 && pufel3=1 {pufel3=2; sound_play(sound28);}
+        if pufel2<0.1 && pufel3=2 {pufel3=3;  mm_play_ext('.\Data\MW\ktkm120.dll',0) }
+
+        pufel+=pufel2
+        pufel2=pufel2/1.05
     }
 
-view_angle[0]=view_angle[0]+wafel
-if wafel>0 {wafel=wafel-1}
+    //
+
+    if !mouse_check_button(mb_left) && skipper=1 {skipper=0}
+    if mouse_check_button_pressed(mb_left) && skipper=0 && ciper=0 {skipper=1; wafel=0;ciper=1 ;view_angle[0]=0}
 
 
-// Debug Skip
-if debug_mode && debug_skip = 0 { debug_skip = 1; wafel = 0; ciper = 1; view_angle[0] = 0; start = 0; }
-
-
-if (start<=0 && wafel<=0) || debug_mode {
-ciper=1
-opcjon=0; folia+=0.1
-if mouse_x>128+1280 && mouse_x<250+1280 && mouse_y>160+960 && mouse_y<280+960
-    {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_maskselector,0,128-4+1280,160+960,1,1,0,c_white,0.3+sin(folia)/10)
-    draw_set_blend_mode(bm_normal)
-    opcjon=1
-    if mouse_check_button_pressed(mb_left) && skipper=0 {room_set_width(editor_level,640);room_set_height(editor_level,480);room_goto(editor_level);global.zamenowane=1;global.modifiedmov=1;global.layerord=2;global.rotodisclay=0}
+    if start>0 && wafel<=0 {
+        draw_set_blend_mode(bm_add)
+        draw_background_ext(background10,view_xview[0],view_yview[0],1,1,0,c_white,start)
+        draw_background_ext(background10,view_xview[0],view_yview[0],1,1,0,c_white,start)
+        draw_set_blend_mode(bm_normal)
+        start-=0.02
     }
 
-if mouse_x>128+131+9+1280  && mouse_x<250+131+9+1280  && mouse_y>160+960 && mouse_y<280+960
-    {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_maskselector,0,128-4+131+9+1280,160+960,1,1,0,c_white,0.3+sin(folia)/10)
-    draw_set_blend_mode(bm_normal)
-    opcjon=2
-    if mouse_check_button_pressed(mb_left) && skipper=0 {execute_shell('https://download.marioforever.net/mw-levels.html',0);global.zamenowane=1}
-    }
+    view_angle[0]=view_angle[0]+wafel
+    if wafel>0 {wafel=wafel-1}
 
-if mouse_x>128+131+9+131+9+1280  && mouse_x<250+131+9+131+9+1280  && mouse_y>160+960 && mouse_y<280+960
-    {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_maskselector,0,128-4+131+9+131+9+1280,160+960,1,1,0,c_white,0.3+sin(folia)/10)
-    draw_set_blend_mode(bm_normal)
-    opcjon=3
-    if mouse_check_button_pressed(mb_left) && skipper=0 {Create_Scenario()}
-    }
 
-if mouse_x>128+1280  && mouse_x<250+1280  && mouse_y>160+131+9+22+960 && mouse_y<280+131+9+22+960
-    {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_maskselector,0,128+1280 ,160+131+9+22+960,1,1,0,c_white,0.3+sin(folia)/10)
-    draw_set_blend_mode(bm_normal)
-    opcjon=3
-    if mouse_check_button_pressed(mb_left) && skipper=0 {room_goto(Loader);global.zamenowane=1}
-    }
+    // Debug Skip
+    if debug_mode && debug_skip = 0 { debug_skip = 1; wafel = 0; ciper = 1; view_angle[0] = 0; start = 0; }
 
-if mouse_x>128+131+9+1280  && mouse_x<250+131+9+1280  && mouse_y>160+131+9+22+960 && mouse_y<280+131+9+22+960
-    {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_maskselector,0,128+131+9+1280 ,160+131+9+22+960,1,1,0,c_white,0.3+sin(folia)/10)
-    draw_set_blend_mode(bm_normal)
-    opcjon=3
-    if mouse_check_button_pressed(mb_left) && skipper=0 {room_goto(LoaderScenario);global.zamenowane=1}
-    }
 
-if mouse_x>128+131+9+131+9+1280  && mouse_x<250+131+9+131+9+1280 && mouse_y>160+131+9+22+960 && mouse_y<280+131+9+22+960
-    {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_maskselector,0,128+131+9+131+1280,160+131+9+22+960,1,1,0,c_white,0.3+sin(folia)/10)
-    draw_set_blend_mode(bm_normal)
-    opcjon=3
-    if mouse_check_button_pressed(mb_left) && skipper=0 {game_end()}
-    }
+    if (start<=0 && wafel<=0) || debug_mode {
+        ciper=1
+        opcjon=0; folia+=0.1
+        if mouse_x>128+1280 && mouse_x<250+1280 && mouse_y>160+960 && mouse_y<280+960 {
+            draw_set_blend_mode(bm_add)
+            draw_sprite_ext(s_maskselector,0,128-4+1280,160+960,1,1,0,c_white,0.3+sin(folia)/10)
+            draw_set_blend_mode(bm_normal)
+            opcjon=1
+            if mouse_check_button_pressed(mb_left) && skipper=0 {room_set_width(editor_level,640);room_set_height(editor_level,480);room_goto(editor_level);global.zamenowane=1;global.modifiedmov=1;global.layerord=2;global.rotodisclay=0}
+        }
 
-if mouse_x>128+131+9+131+9+1280+131+9-20 && mouse_x<250+131+9+131+9+1280+131+9-48 && mouse_y>160+131+9+22+960+48-20 && mouse_y<280+131+9+22+960-48+32
-    {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_maskselector,0,128+131+9+131+1280+9+131+15,160+131+9+22+960+48-18,0.5,0.5,0,c_white,0.3+sin(folia)/10)
-    draw_set_blend_mode(bm_normal)
-    opcjon=3
-    if mouse_check_button_pressed(mb_left) && skipper=0 {execute_shell('https://zh.wiki.marioforever.net/wiki/Super_Mario_Worker_Project',0)}
-    }
+        if mouse_x>128+131+9+1280  && mouse_x<250+131+9+1280  && mouse_y>160+960 && mouse_y<280+960 {
+            draw_set_blend_mode(bm_add)
+            draw_sprite_ext(s_maskselector,0,128-4+131+9+1280,160+960,1,1,0,c_white,0.3+sin(folia)/10)
+            draw_set_blend_mode(bm_normal)
+            opcjon=2
+            if mouse_check_button_pressed(mb_left) && skipper=0 {execute_shell('https://download.marioforever.net/mw-levels.html',0);global.zamenowane=1}
+        }
 
-if mouse_x>128+131+9+131+9+1280+131+9-20 && mouse_x<250+131+9+131+9+1280+131+9-48 && mouse_y>160+131+9+22+960+48-20-80 && mouse_y<280+131+9+22+960-48+32-80
-    {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_maskselector,0,128+131+9+131+1280+9+131+15,160+131+9+22+960+48-18-80,0.5,0.5,0,c_white,0.3+sin(folia)/10)
-    draw_set_blend_mode(bm_normal)
-    opcjon=3
-    if mouse_check_button_pressed(mb_left) && skipper=0 {globaloption=1}
-    }
+        if mouse_x>128+131+9+131+9+1280  && mouse_x<250+131+9+131+9+1280  && mouse_y>160+960 && mouse_y<280+960 {
+            draw_set_blend_mode(bm_add)
+            draw_sprite_ext(s_maskselector,0,128-4+131+9+131+9+1280,160+960,1,1,0,c_white,0.3+sin(folia)/10)
+            draw_set_blend_mode(bm_normal)
+            opcjon=3
+            if mouse_check_button_pressed(mb_left) && skipper=0 {Create_Scenario()}
+        }
 
-if mouse_x>128+131+9+131+9+1280+131+9-20 && mouse_x<250+131+9+131+9+1280+131+9-48 && mouse_y>160+131+9+22+960+48-20-80-80 && mouse_y<280+131+9+22+960-48+32-80-80
-    {
-    draw_set_blend_mode(bm_add)
-    draw_sprite_ext(s_maskselector,0,128+131+9+131+1280+9+131+15,160+131+9+22+960+48-18-80-80,0.5,0.5,0,c_white,0.3+sin(folia)/10)
-    draw_set_blend_mode(bm_normal)
-    opcjon=3
-    if mouse_check_button_pressed(mb_left) && skipper=0 {execute_shell('https://smwp.marioforever.net/',0)}
-    }
+        if mouse_x>128+1280  && mouse_x<250+1280  && mouse_y>160+131+9+22+960 && mouse_y<280+131+9+22+960 {
+            draw_set_blend_mode(bm_add)
+            draw_sprite_ext(s_maskselector,0,128+1280 ,160+131+9+22+960,1,1,0,c_white,0.3+sin(folia)/10)
+            draw_set_blend_mode(bm_normal)
+            opcjon=3
+            if mouse_check_button_pressed(mb_left) && skipper=0 {room_goto(Loader);global.zamenowane=1}
+        }
+
+        if mouse_x>128+131+9+1280  && mouse_x<250+131+9+1280  && mouse_y>160+131+9+22+960 && mouse_y<280+131+9+22+960 {
+            draw_set_blend_mode(bm_add)
+            draw_sprite_ext(s_maskselector,0,128+131+9+1280 ,160+131+9+22+960,1,1,0,c_white,0.3+sin(folia)/10)
+            draw_set_blend_mode(bm_normal)
+            opcjon=3
+            if mouse_check_button_pressed(mb_left) && skipper=0 {room_goto(LoaderScenario);global.zamenowane=1}
+        }
+
+        if mouse_x>128+131+9+131+9+1280  && mouse_x<250+131+9+131+9+1280 && mouse_y>160+131+9+22+960 && mouse_y<280+131+9+22+960 {
+            draw_set_blend_mode(bm_add)
+            draw_sprite_ext(s_maskselector,0,128+131+9+131+1280,160+131+9+22+960,1,1,0,c_white,0.3+sin(folia)/10)
+            draw_set_blend_mode(bm_normal)
+            opcjon=3
+            if mouse_check_button_pressed(mb_left) && skipper=0 {game_end()}
+        }
+
+        if mouse_x>128+131+9+131+9+1280+131+9-20 && mouse_x<250+131+9+131+9+1280+131+9-48 && mouse_y>160+131+9+22+960+48-20 && mouse_y<280+131+9+22+960-48+32 {
+            draw_set_blend_mode(bm_add)
+            draw_sprite_ext(s_maskselector,0,128+131+9+131+1280+9+131+15,160+131+9+22+960+48-18,0.5,0.5,0,c_white,0.3+sin(folia)/10)
+            draw_set_blend_mode(bm_normal)
+            opcjon=3
+            if mouse_check_button_pressed(mb_left) && skipper=0 {execute_shell('https://zh.wiki.marioforever.net/wiki/Super_Mario_Worker_Project',0)}
+        }
+
+        if mouse_x>128+131+9+131+9+1280+131+9-20 && mouse_x<250+131+9+131+9+1280+131+9-48 && mouse_y>160+131+9+22+960+48-20-80 && mouse_y<280+131+9+22+960-48+32-80 {
+            draw_set_blend_mode(bm_add)
+            draw_sprite_ext(s_maskselector,0,128+131+9+131+1280+9+131+15,160+131+9+22+960+48-18-80,0.5,0.5,0,c_white,0.3+sin(folia)/10)
+            draw_set_blend_mode(bm_normal)
+            opcjon=3
+            if mouse_check_button_pressed(mb_left) && skipper=0 {globaloption=1}
+        }
+
+        if mouse_x>128+131+9+131+9+1280+131+9-20 && mouse_x<250+131+9+131+9+1280+131+9-48 && mouse_y>160+131+9+22+960+48-20-80-80 && mouse_y<280+131+9+22+960-48+32-80-80 {
+            draw_set_blend_mode(bm_add)
+            draw_sprite_ext(s_maskselector,0,128+131+9+131+1280+9+131+15,160+131+9+22+960+48-18-80-80,0.5,0.5,0,c_white,0.3+sin(folia)/10)
+            draw_set_blend_mode(bm_normal)
+            opcjon=3
+            if mouse_check_button_pressed(mb_left) && skipper=0 {execute_shell('https://smwp.marioforever.net/',0)}
+        }
 
     }
 }
-    // 进入全局选项界面
-if globaloption>0
-    {
+// 进入全局选项界面
+if globaloption>0 {
     draw_sprite(s_edadditional,1,view_xview[0],view_yview[0])
     draw_set_font(cyferkimario)
     //页面
-    if globaloption=1{draw_set_color(c_yellow)}else{draw_set_color(c_white)}
+    if globaloption=1 {draw_set_color(c_yellow)} else {draw_set_color(c_white)}
     draw_text(view_xview[0]+450,view_yview[0]+150,string_upper('Game Config'))
-    if ed_hit(450, 130, 150, 30)&& kliknieto=0
-    {
+    if ed_hit(450, 130, 150, 30)&& kliknieto=0 {
         draw_prefs_highlight(view_xview[0]+450, view_yview[0]+140, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){
-        globaloption=1
+        if mouse_check_button(mb_left) {
+            globaloption=1
         }
     }
-    if globaloption=2{draw_set_color(c_yellow)}else{draw_set_color(c_white)}
+    if globaloption=2 {draw_set_color(c_yellow)} else {draw_set_color(c_white)}
     draw_text(view_xview[0]+450,view_yview[0]+200,string_upper('Keyboard Config'))
-    if ed_hit(450, 180, 150, 30)&& kliknieto=0
-    {
+    if ed_hit(450, 180, 150, 30)&& kliknieto=0 {
         draw_prefs_highlight(view_xview[0]+450, view_yview[0]+190, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){
-        globaloption=2
-        keyboard_page=0
+        if mouse_check_button(mb_left) {
+            globaloption=2
+            keyboard_page=0
         }
     }
-    if globaloption=3{draw_set_color(c_yellow)}else{draw_set_color(c_white)}
+    if globaloption=3 {draw_set_color(c_yellow)} else {draw_set_color(c_white)}
     draw_text(view_xview[0]+450,view_yview[0]+250,string_upper('Staff Roll'))
-    if ed_hit(450, 230, 150, 30)&& kliknieto=0 &&globaloption!=3
-    {
+    if ed_hit(450, 230, 150, 30)&& kliknieto=0 &&globaloption!=3 {
         draw_prefs_highlight(view_xview[0]+450, view_yview[0]+240, 1.4, 0.8, 0.2);
-        if mouse_check_button(mb_left){
-        globaloption=3
-        staffmusic=1
-        staffY=view_yview+480
-        mm_play_ext('.\Data\MFR\ktkm0.dll',0);
+        if mouse_check_button(mb_left) {
+            globaloption=3
+            staffmusic=1
+            staffY=view_yview+480
+            mm_play_ext('.\Data\MFR\ktkm0.dll',0);
         }
     }
 
     //第一页
-    if globaloption=1{
+    if globaloption=1 {
         //临时文件数量
         draw_set_color(c_white)
         draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('Temporary Files'))
@@ -285,82 +271,76 @@ if globaloption>0
         draw_text(view_xview[0]+405,view_yview[0]+100,string(global.maxtemp))
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if ed_hit(40, 90, 190, 20)&& kliknieto=0
-        {
+        if ed_hit(40, 90, 190, 20)&& kliknieto=0 {
             draw_prefs_highlight(view_xview[0]+40, view_yview[0]+90, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left){
+            if mouse_check_button(mb_left) {
                 global.maxtemp=get_integer("Set the max number of the temporary files.",global.maxtemp)
             }
         }
         //开启坐标偏移
         draw_text(view_xview[0]+40,view_yview[0]+130,string_upper('Object Offset Correct'))
         draw_set_halign(fa_right)
-        if global.objectoffset=0{draw_set_color(make_color_rgb(168,160,248));draw_text(view_xview[0]+405,view_yview[0]+130,string_upper('yes'))}
-        if global.objectoffset=1{draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+130,string_upper('no'))}
+        if global.objectoffset=0 {draw_set_color(make_color_rgb(168,160,248));draw_text(view_xview[0]+405,view_yview[0]+130,string_upper('yes'))}
+        if global.objectoffset=1 {draw_set_color(make_color_rgb(248,136,112));draw_text(view_xview[0]+405,view_yview[0]+130,string_upper('no'))}
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if ed_hit(40, 120, 190, 20)&& kliknieto=0
-        {
+        if ed_hit(40, 120, 190, 20)&& kliknieto=0 {
             draw_prefs_highlight(view_xview[0]+40, view_yview[0]+120, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left){global.objectoffset=1-global.objectoffset;kliknieto=1;
+            if mouse_check_button(mb_left) {global.objectoffset=1-global.objectoffset;kliknieto=1;
                 ini_write_real('GameConfig','ObjOffset',global.objectoffset)
             }
         }
         //窗口化
         draw_text(view_xview[0]+40,view_yview[0]+160,string_upper('Display Mode'))
         draw_set_halign(fa_right)
-        if global.displaymode=1{draw_text(view_xview[0]+405,view_yview[0]+160,string_upper('Full Screen'))}
-        if global.displaymode=0{draw_text(view_xview[0]+405,view_yview[0]+160,string_upper('Window Screen'))}
+        if global.displaymode=1 {draw_text(view_xview[0]+405,view_yview[0]+160,string_upper('Full Screen'))}
+        if global.displaymode=0 {draw_text(view_xview[0]+405,view_yview[0]+160,string_upper('Window Screen'))}
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if ed_hit(40, 150, 190, 20)&& kliknieto=0
-        {
+        if ed_hit(40, 150, 190, 20)&& kliknieto=0 {
             draw_prefs_highlight(view_xview[0]+40, view_yview[0]+150, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left){global.displaymode=1-global.displaymode;kliknieto=1;
-                if global.displaymode=0{window_set_fullscreen(0)}
-                if global.displaymode=1{window_set_fullscreen(1)}
+            if mouse_check_button(mb_left) {global.displaymode=1-global.displaymode;kliknieto=1;
+                if global.displaymode=0 {window_set_fullscreen(0)}
+                if global.displaymode=1 {window_set_fullscreen(1)}
             }
         }
         //顺滑模式edit
         draw_text(view_xview[0]+40,view_yview[0]+190,string_upper('Smooth Mode (edit)'))
         draw_set_halign(fa_right)
-        if global.smoothmode=1{draw_set_color(c_red);draw_text(view_xview[0]+405,view_yview[0]+190,string_upper('Yes'))}
-        if global.smoothmode=-1{draw_text(view_xview[0]+405,view_yview[0]+190,string_upper('No'))}
+        if global.smoothmode=1 {draw_set_color(c_red);draw_text(view_xview[0]+405,view_yview[0]+190,string_upper('Yes'))}
+        if global.smoothmode=-1 {draw_text(view_xview[0]+405,view_yview[0]+190,string_upper('No'))}
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if ed_hit(40, 180, 190, 20)&& kliknieto=0
-        {
+        if ed_hit(40, 180, 190, 20)&& kliknieto=0 {
             draw_prefs_highlight(view_xview[0]+40, view_yview[0]+180, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left){global.smoothmode=-global.smoothmode;kliknieto=1;
-                if global.smoothmode=1{show_message("Warning: This is a beta-test function, and may cause many problems.#You could turn it off by pressing F11 when editing the level.")}
+            if mouse_check_button(mb_left) {global.smoothmode=-global.smoothmode;kliknieto=1;
+                if global.smoothmode=1 {show_message("Warning: This is a beta-test function, and may cause many problems.#You could turn it off by pressing F11 when editing the level.")}
             }
         }
         //顺滑模式level
         draw_text(view_xview[0]+40,view_yview[0]+220,string_upper('Smooth Mode (play)'))
         draw_set_halign(fa_right)
-        if global.levelsmooth=1{draw_set_color(c_red);draw_text(view_xview[0]+405,view_yview[0]+220,string_upper('Yes'))}
-        if global.levelsmooth=-1{draw_text(view_xview[0]+405,view_yview[0]+220,string_upper('No'))}
+        if global.levelsmooth=1 {draw_set_color(c_red);draw_text(view_xview[0]+405,view_yview[0]+220,string_upper('Yes'))}
+        if global.levelsmooth=-1 {draw_text(view_xview[0]+405,view_yview[0]+220,string_upper('No'))}
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if ed_hit(40, 210, 190, 20)&& kliknieto=0
-        {
+        if ed_hit(40, 210, 190, 20)&& kliknieto=0 {
             draw_prefs_highlight(view_xview[0]+40, view_yview[0]+210, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left){global.levelsmooth=-global.levelsmooth;kliknieto=1;
-                if global.levelsmooth=1{show_message("Warning: This is a beta-test function, and may cause many problems.#You could turn it off by pressing F11 when playing the level.")}
+            if mouse_check_button(mb_left) {global.levelsmooth=-global.levelsmooth;kliknieto=1;
+                if global.levelsmooth=1 {show_message("Warning: This is a beta-test function, and may cause many problems.#You could turn it off by pressing F11 when playing the level.")}
             }
         }
         //颜色辅助模式
         draw_text(view_xview[0]+40,view_yview[0]+250,string_upper('Accessibility Mode (color)'))
         draw_set_halign(fa_right)
-        if global.assist=1{draw_set_color(make_color_rgb(168,160,248));draw_text(view_xview[0]+405,view_yview[0]+250,string_upper('Yes'))}
-        if global.assist=0{draw_text(view_xview[0]+405,view_yview[0]+250,string_upper('No'))}
+        if global.assist=1 {draw_set_color(make_color_rgb(168,160,248));draw_text(view_xview[0]+405,view_yview[0]+250,string_upper('Yes'))}
+        if global.assist=0 {draw_text(view_xview[0]+405,view_yview[0]+250,string_upper('No'))}
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if ed_hit(40, 240, 190, 20)&& kliknieto=0
-        {
+        if ed_hit(40, 240, 190, 20)&& kliknieto=0 {
             draw_prefs_highlight(view_xview[0]+40, view_yview[0]+240, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left){global.assist=1-global.assist;kliknieto=1;
-                if global.assist=1{show_message("Attention: This function aims to help users distinguish colors.#Switch blocks and yinyang blocks will be marked with letters corresponding to their colors:#R-Red, G-Green, B-Blue, C-Cyan, M-Magenta, Y-Yellow, K-Black, W-White.")}
+            if mouse_check_button(mb_left) {global.assist=1-global.assist;kliknieto=1;
+                if global.assist=1 {show_message("Attention: This function aims to help users distinguish colors.#Switch blocks and yinyang blocks will be marked with letters corresponding to their colors:#R-Red, G-Green, B-Blue, C-Cyan, M-Magenta, Y-Yellow, K-Black, W-White.")}
                 ini_write_real('GameConfig','Assist',global.assist)
             }
         }
@@ -370,10 +350,9 @@ if globaloption>0
         draw_text(view_xview[0]+405,view_yview[0]+280,string_upper(global.customMusic))
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if ed_hit(40, 270, 190, 20)&& kliknieto=0
-        {
+        if ed_hit(40, 270, 190, 20)&& kliknieto=0 {
             draw_prefs_highlight(view_xview[0]+40, view_yview[0]+270, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left){
+            if mouse_check_button(mb_left) {
                 global.customMusic = get_string('Enter the name of your custom music package. The package should be a folder located at \data\custom.',global.customMusic)
                 ini_write_string('GameConfig','CustomMusicPackage',global.customMusic)
                 music_list_update();
@@ -387,10 +366,9 @@ if globaloption>0
         draw_text(view_xview[0]+405,view_yview[0]+310,string(global.initiallives))
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if ed_hit(40, 300, 190, 20)&& kliknieto=0
-        {
+        if ed_hit(40, 300, 190, 20)&& kliknieto=0 {
             draw_prefs_highlight(view_xview[0]+40, view_yview[0]+300, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left){
+            if mouse_check_button(mb_left) {
                 global.initiallives=get_integer("Set initial lives while playing single level.",global.initiallives)
                 ini_write_real('GameConfig','InitialLives',global.initiallives)
             }
@@ -400,14 +378,13 @@ if globaloption>0
         draw_set_color(c_white)
         draw_text(view_xview[0]+40,view_yview[0]+340,string_upper('2x Font Render'))
         draw_set_halign(fa_right)
-        if global.font_render=1{draw_set_color(make_color_rgb(168,160,248));draw_text(view_xview[0]+405,view_yview[0]+340,string_upper('Yes'))}
-        if global.font_render=0{draw_text(view_xview[0]+405,view_yview[0]+340,string_upper('No'))}
+        if global.font_render=1 {draw_set_color(make_color_rgb(168,160,248));draw_text(view_xview[0]+405,view_yview[0]+340,string_upper('Yes'))}
+        if global.font_render=0 {draw_text(view_xview[0]+405,view_yview[0]+340,string_upper('No'))}
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if ed_hit(40, 330, 190, 20)&& kliknieto=0
-        {
+        if ed_hit(40, 330, 190, 20)&& kliknieto=0 {
             draw_prefs_highlight(view_xview[0]+40, view_yview[0]+330, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left){global.font_render=1-global.font_render;kliknieto=1;
+            if mouse_check_button(mb_left) {global.font_render=1-global.font_render;kliknieto=1;
                 ini_write_real('GameConfig','2xFontRender',global.font_render)
                 fw_set_render_scale(1+global.font_render)
             }
@@ -417,24 +394,23 @@ if globaloption>0
         draw_set_color(c_white)
         draw_text(view_xview[0]+40,view_yview[0]+370,string_upper('Compress file when saving'))
         draw_set_halign(fa_right)
-        if global.compress_save=1{draw_set_color(make_color_rgb(168,160,248));draw_text(view_xview[0]+405,view_yview[0]+370,string_upper('Yes'))}
-        if global.compress_save=0{draw_text(view_xview[0]+405,view_yview[0]+370,string_upper('No'))}
+        if global.compress_save=1 {draw_set_color(make_color_rgb(168,160,248));draw_text(view_xview[0]+405,view_yview[0]+370,string_upper('Yes'))}
+        if global.compress_save=0 {draw_text(view_xview[0]+405,view_yview[0]+370,string_upper('No'))}
         draw_set_halign(fa_left)
         draw_set_color(c_white)
-        if ed_hit(40, 360, 190, 20)&& kliknieto=0
-        {
+        if ed_hit(40, 360, 190, 20)&& kliknieto=0 {
             draw_prefs_highlight(view_xview[0]+40, view_yview[0]+360, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left){global.compress_save=1-global.compress_save;kliknieto=1;
+            if mouse_check_button(mb_left) {global.compress_save=1-global.compress_save;kliknieto=1;
                 ini_write_real('GameConfig','CompressSave',global.compress_save)
             }
         }
 
     }
     //第二页 - 键盘设置
-    if globaloption=2{
+    if globaloption=2 {
 
         //========== PAGE 0: 游戏按键 + 基础编辑器按键 ==========
-        if keyboard_page=0{
+        if keyboard_page=0 {
             //上键
             ed_keyrow(1,'Up',100,'sterowaniegora','up')
             //下键
@@ -463,7 +439,7 @@ if globaloption>0
         }
 
         //========== PAGE 1: God Mode 数字键 (1~0) ==========
-        if keyboard_page=1{
+        if keyboard_page=1 {
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- God Mode Keys ---'))
             draw_set_color(c_white)
@@ -492,7 +468,7 @@ if globaloption>0
         }
 
         //========== PAGE 2: God Mode 辅助键 (PgUp/PgDn/Backspace) ==========
-        if keyboard_page=2{
+        if keyboard_page=2 {
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- God Mode Extra Keys ---'))
             draw_set_color(c_white)
@@ -505,7 +481,7 @@ if globaloption>0
         }
 
         //========== PAGE 3: 基础编辑键 + 保存/读取 ==========
-        if keyboard_page=3{
+        if keyboard_page=3 {
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- Basic Editor Keys ---'))
 
@@ -538,7 +514,7 @@ if globaloption>0
         }
 
         //========== PAGE 4: 编辑器画布滚动 (8键) ==========
-        if keyboard_page=4{
+        if keyboard_page=4 {
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- ED SCROLL ---'))
 
@@ -574,7 +550,7 @@ if globaloption>0
         }
 
         //========== PAGE 5: 缩放 + 水位 + 功能键 ==========
-        if keyboard_page=5{
+        if keyboard_page=5 {
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- Zoom ---'))
 
@@ -597,7 +573,7 @@ if globaloption>0
         }
 
         //========== PAGE 6: F 键 (F1-F12) ==========
-        if keyboard_page=6{
+        if keyboard_page=6 {
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- Tool Keys ---'))
 
@@ -639,7 +615,7 @@ if globaloption>0
         }
 
         //========== PAGE 7: 精确移动键 ==========
-        if keyboard_page=7{
+        if keyboard_page=7 {
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- Accurate Move ---'))
 
@@ -672,7 +648,7 @@ if globaloption>0
         }
 
         //========== PAGE 8: 选区编辑键 ==========
-        if keyboard_page=8{
+        if keyboard_page=8 {
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('--- Region Selection ---'))
 
@@ -692,45 +668,44 @@ if globaloption>0
         draw_text(view_xview[0]+40,view_yview[0]+410,string_upper('Page ')+string(keyboard_page+1)+'/9')
         draw_set_color(c_white)
         // 上一页
-        if keyboard_page>0 && keydetect=0{
+        if keyboard_page>0 && keydetect=0 {
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+428,string_upper('< Prev Page'))
-            if ed_hit(40, 418, 160, 20)&& kliknieto=0{
+            if ed_hit(40, 418, 160, 20)&& kliknieto=0 {
                 draw_prefs_highlight(view_xview[0]+40, view_yview[0]+418, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keyboard_page-=1;keydetect=0;kliknieto=1}
+                if mouse_check_button(mb_left) {keyboard_page-=1;keydetect=0;kliknieto=1}
             }
         }
         // 下一页
-        if keyboard_page<8 && keydetect=0{
+        if keyboard_page<8 && keydetect=0 {
             draw_set_color(c_white)
             draw_text(view_xview[0]+40,view_yview[0]+446,string_upper('< Next Page'))
-            if ed_hit(40, 436, 160, 20)&& kliknieto=0{
+            if ed_hit(40, 436, 160, 20)&& kliknieto=0 {
                 draw_prefs_highlight(view_xview[0]+40, view_yview[0]+436, 1.4, 0.8, 0.2);
-                if mouse_check_button(mb_left){keyboard_page+=1;keydetect=0;kliknieto=1}
+                if mouse_check_button(mb_left) {keyboard_page+=1;keydetect=0;kliknieto=1}
             }
         }
     }
     //第三页 - Staff Roll
-    if globaloption=3{
+    if globaloption=3 {
         draw_set_color(c_white)
         draw_sprite(s_staffroll,0,view_xview,staffY)
         //按住空格或回车快进
-        if keyboard_check(vk_space) || keyboard_check(vk_enter){
+        if keyboard_check(vk_space) || keyboard_check(vk_enter) {
             staffY-=2
-        }else{
+        } else {
             staffY-=0.5
         }
-        if staffY<=view_yview+480-2000{staffY+=2000}
+        if staffY<=view_yview+480-2000 {staffY+=2000}
         draw_sprite_part(s_edadditional,1,0,0,450,85,view_xview[0],view_yview[0])
     }
     //退出
-    if ed_hit(561, 427, 60, 30){
+    if ed_hit(561, 427, 60, 30) {
         draw_prefs_highlight(view_xview[0]+561, view_yview[0]+427, 0.5, 1.3, 0.2);
-        quitadditional=1}else
+        quitadditional=1} else
     {quitadditional=0}
-    if mouse_check_button(mb_left) && quitadditional=1
-    {globaloption=0;}
-    }
+    if mouse_check_button(mb_left) && quitadditional=1 {globaloption=0;}
+}
 
 // SMWP 单关 TAS 入口
 //global.smwptas = 1;
@@ -748,13 +723,7 @@ if global.smwptas == 0 { // 只有在未激活状态下才检测
         } else {
             smwptas_sequence = 0; // 输入错误，重置序列
         }
-    }
-    else if keyboard_check_pressed(ord('M')) && smwptas_sequence == 1 { smwptas_sequence = 2; } // 检测M键
-    else if keyboard_check_pressed(ord('W')) && smwptas_sequence == 2 { smwptas_sequence = 3; } // 检测W键
-    else if keyboard_check_pressed(ord('P')) && smwptas_sequence == 3 { smwptas_sequence = 4; } // 检测P键
-    else if keyboard_check_pressed(ord('T')) && smwptas_sequence == 4 { smwptas_sequence = 5; } // 检测T键
-    else if keyboard_check_pressed(ord('A')) && smwptas_sequence == 5 { smwptas_sequence = 6; } // 检测A键
-    else if keyboard_check_pressed(vk_anykey) { smwptas_sequence = 0; } // 按下了其他无关按键重置序列
+    } else if keyboard_check_pressed(ord('M')) && smwptas_sequence == 1 { smwptas_sequence = 2; } // 检测M键 else if keyboard_check_pressed(ord('W')) && smwptas_sequence == 2 { smwptas_sequence = 3; } // 检测W键 else if keyboard_check_pressed(ord('P')) && smwptas_sequence == 3 { smwptas_sequence = 4; } // 检测P键 else if keyboard_check_pressed(ord('T')) && smwptas_sequence == 4 { smwptas_sequence = 5; } // 检测T键 else if keyboard_check_pressed(ord('A')) && smwptas_sequence == 5 { smwptas_sequence = 6; } // 检测A键 else if keyboard_check_pressed(vk_anykey) { smwptas_sequence = 0; } // 按下了其他无关按键重置序列
 }
 
 if global.smwptas {

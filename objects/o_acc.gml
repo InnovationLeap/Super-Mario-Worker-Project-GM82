@@ -17,111 +17,103 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if keyboard_check_pressed(global.key_select){lockon=1;}
+if keyboard_check_pressed(global.key_select) {lockon=1;}
 
-if lockon=1{
-    switch(o_edmain.drinkability){
-        case 2:target = instance_position(mouse_x,mouse_y,o_edenemyblock);
-               if !target{
-                   temp_target = instance_position(mouse_x,mouse_y,o_range_end)
-                   if temp_target{
-                       if temp_target.costawia = 2 { target = temp_target; target.activated = 1}
-                   }
-               }
-               break;
-        case 3:target = instance_position(mouse_x,mouse_y,o_edsceneriesblock);break;
-        case 4:if(o_edmain.costawia4=1){
-                   target = instance_position(mouse_x,mouse_y,o_edpassage);
-               }
-               else{
-                   target = instance_position(mouse_x,mouse_y,o_edmarkerblock);
-                   if !target{
-                       temp_target = instance_position(mouse_x,mouse_y,o_range_end)
-                       if temp_target{
-                           if temp_target.costawia = 4 { target = temp_target; target.activated = 1}
-                       }
-                   }
-               }
-               break;
-        case 5:target = instance_position(mouse_x,mouse_y,o_edbonusesblock);break;
-    }
-
-    if target{lockon=2}
-    else{
-        with(o_edpassage){
-        if other.lockon=1{
-            if mouse_x>=exitx && mouse_x<exitx+32 && mouse_y>=exity && mouse_y<exity+32{
-                other.target = id
-                other.lockon = 3;
+if lockon=1 {
+    switch(o_edmain.drinkability) {
+    case 2:target = instance_position(mouse_x,mouse_y,o_edenemyblock);
+        if !target {
+            temp_target = instance_position(mouse_x,mouse_y,o_range_end)
+            if temp_target {
+                if temp_target.costawia = 2 { target = temp_target; target.activated = 1}
             }
         }
+        break;
+    case 3:target = instance_position(mouse_x,mouse_y,o_edsceneriesblock);break;
+    case 4:if(o_edmain.costawia4=1) {
+            target = instance_position(mouse_x,mouse_y,o_edpassage);
+    } else {
+            target = instance_position(mouse_x,mouse_y,o_edmarkerblock);
+            if !target {
+                temp_target = instance_position(mouse_x,mouse_y,o_range_end)
+                if temp_target {
+                    if temp_target.costawia = 4 { target = temp_target; target.activated = 1}
+                }
+            }
+    }
+        break;
+    case 5:target = instance_position(mouse_x,mouse_y,o_edbonusesblock);break;
+    }
+
+    if target {lockon=2} else {
+        with(o_edpassage) {
+            if other.lockon=1 {
+                if mouse_x>=exitx && mouse_x<exitx+32 && mouse_y>=exity && mouse_y<exity+32 {
+                    other.target = id
+                    other.lockon = 3;
+                }
+            }
         }
     }
-    if lockon=1{lockon=0}
+    if lockon=1 {lockon=0}
 }
 
-if lockon=2{
+if lockon=2 {
     visible=1;
     x = target.x
     y = target.y
-    if keyboard_check(global.key_acc_up) || keyboard_check(global.key_acc_down) || keyboard_check(global.key_acc_left) || keyboard_check(global.key_acc_right)
-    {drink+=1}
+    if keyboard_check(global.key_acc_up) || keyboard_check(global.key_acc_down) || keyboard_check(global.key_acc_left) || keyboard_check(global.key_acc_right) {drink+=1}
 
 
-    if drink<=10{
-        if keyboard_check_pressed(global.key_acc_up){target.y-=1;y-=1;with(target){if(coto=32)water_endY-=1;if(coto=34)camera_endY-=1;if(coto=40 || coto=41)fishendY-=1;}}
-        if keyboard_check_pressed(global.key_acc_down){target.y+=1;y+=1;with(target){if(coto=32)water_endY+=1;if(coto=34)camera_endY+=1;if(coto=40 || coto=41)fishendY+=1;}}
-        if keyboard_check_pressed(global.key_acc_left){target.x-=1;x-=1;with(target){if(coto=32)water_endX-=1;if(coto=34)camera_endX-=1;if(coto=40 || coto=41)fishendX-=1;}}
-        if keyboard_check_pressed(global.key_acc_right){target.x+=1;x+=1;with(target){if(coto=32)water_endX+=1;if(coto=34)camera_endX+=1;if(coto=40 || coto=41)fishendX+=1;}}
-        if keyboard_check_pressed(global.key_acc_bigup){target.y-=16;y-=16;with(target){if(coto=32)water_endY-=16;if(coto=34)camera_endY-=16;if(coto=40 || coto=41)fishendY-=16;}}
-        if keyboard_check_pressed(global.key_acc_bigdown){target.y+=16;y+=16;with(target){if(coto=32)water_endY+=16;if(coto=34)camera_endY+=16;if(coto=40 || coto=41)fishendY+=16;}}
-        if keyboard_check_pressed(global.key_acc_bigleft){target.x-=16;x-=16;with(target){if(coto=32)water_endX-=16;if(coto=34)camera_endX-=16;if(coto=40 || coto=41)fishendX-=16;}}
-        if keyboard_check_pressed(global.key_acc_bigright){target.x+=16;x+=16;with(target){if(coto=32)water_endX+=16;if(coto=34)camera_endX+=16;if(coto=40 || coto=41)fishendX+=16;}}
+    if drink<=10 {
+        if keyboard_check_pressed(global.key_acc_up) {target.y-=1;y-=1;with(target) {if(coto=32)water_endY-=1;if(coto=34)camera_endY-=1;if(coto=40 || coto=41)fishendY-=1;}}
+        if keyboard_check_pressed(global.key_acc_down) {target.y+=1;y+=1;with(target) {if(coto=32)water_endY+=1;if(coto=34)camera_endY+=1;if(coto=40 || coto=41)fishendY+=1;}}
+        if keyboard_check_pressed(global.key_acc_left) {target.x-=1;x-=1;with(target) {if(coto=32)water_endX-=1;if(coto=34)camera_endX-=1;if(coto=40 || coto=41)fishendX-=1;}}
+        if keyboard_check_pressed(global.key_acc_right) {target.x+=1;x+=1;with(target) {if(coto=32)water_endX+=1;if(coto=34)camera_endX+=1;if(coto=40 || coto=41)fishendX+=1;}}
+        if keyboard_check_pressed(global.key_acc_bigup) {target.y-=16;y-=16;with(target) {if(coto=32)water_endY-=16;if(coto=34)camera_endY-=16;if(coto=40 || coto=41)fishendY-=16;}}
+        if keyboard_check_pressed(global.key_acc_bigdown) {target.y+=16;y+=16;with(target) {if(coto=32)water_endY+=16;if(coto=34)camera_endY+=16;if(coto=40 || coto=41)fishendY+=16;}}
+        if keyboard_check_pressed(global.key_acc_bigleft) {target.x-=16;x-=16;with(target) {if(coto=32)water_endX-=16;if(coto=34)camera_endX-=16;if(coto=40 || coto=41)fishendX-=16;}}
+        if keyboard_check_pressed(global.key_acc_bigright) {target.x+=16;x+=16;with(target) {if(coto=32)water_endX+=16;if(coto=34)camera_endX+=16;if(coto=40 || coto=41)fishendX+=16;}}
     }
-    if drink>10{
-        if keyboard_check(global.key_acc_up){target.y-=1;y-=1;with(target){if(coto=32)water_endY-=1;if(coto=34)camera_endY-=1;if(coto=40 || coto=41)fishendY-=1;}}
-        if keyboard_check(global.key_acc_down){target.y+=1;y+=1;with(target){if(coto=32)water_endY+=1;if(coto=34)camera_endY+=1;if(coto=40 || coto=41)fishendY+=1;}}
-        if keyboard_check(global.key_acc_left){target.x-=1;x-=1;with(target){if(coto=32)water_endX-=1;if(coto=34)camera_endX-=1;if(coto=40 || coto=41)fishendX-=1;}}
-        if keyboard_check(global.key_acc_right){target.x+=1;x+=1;with(target){if(coto=32)water_endX+=1;if(coto=34)camera_endX+=1;if(coto=40 || coto=41)fishendX+=1;}}
+    if drink>10 {
+        if keyboard_check(global.key_acc_up) {target.y-=1;y-=1;with(target) {if(coto=32)water_endY-=1;if(coto=34)camera_endY-=1;if(coto=40 || coto=41)fishendY-=1;}}
+        if keyboard_check(global.key_acc_down) {target.y+=1;y+=1;with(target) {if(coto=32)water_endY+=1;if(coto=34)camera_endY+=1;if(coto=40 || coto=41)fishendY+=1;}}
+        if keyboard_check(global.key_acc_left) {target.x-=1;x-=1;with(target) {if(coto=32)water_endX-=1;if(coto=34)camera_endX-=1;if(coto=40 || coto=41)fishendX-=1;}}
+        if keyboard_check(global.key_acc_right) {target.x+=1;x+=1;with(target) {if(coto=32)water_endX+=1;if(coto=34)camera_endX+=1;if(coto=40 || coto=41)fishendX+=1;}}
     }
 
-    if !keyboard_check(global.key_acc_up) && !keyboard_check(global.key_acc_down) && !keyboard_check(global.key_acc_left) && !keyboard_check(global.key_acc_right)
-    {drink=0}
+    if !keyboard_check(global.key_acc_up) && !keyboard_check(global.key_acc_down) && !keyboard_check(global.key_acc_left) && !keyboard_check(global.key_acc_right) {drink=0}
     // 联机同步：方向键按住/大键按下时（与上方 nudge 同条件）广播实例位置，apply 端按 coto 级联 end 变量
-    if keyboard_check(global.key_acc_up) || keyboard_check(global.key_acc_down) || keyboard_check(global.key_acc_left) || keyboard_check(global.key_acc_right) || keyboard_check_pressed(global.key_acc_bigup) || keyboard_check_pressed(global.key_acc_bigdown) || keyboard_check_pressed(global.key_acc_bigleft) || keyboard_check_pressed(global.key_acc_bigright)
-    {ed_net_ops_send_update(target, 11)}
+    if keyboard_check(global.key_acc_up) || keyboard_check(global.key_acc_down) || keyboard_check(global.key_acc_left) || keyboard_check(global.key_acc_right) || keyboard_check_pressed(global.key_acc_bigup) || keyboard_check_pressed(global.key_acc_bigdown) || keyboard_check_pressed(global.key_acc_bigleft) || keyboard_check_pressed(global.key_acc_bigright) {ed_net_ops_send_update(target, 11)}
 }
 
-if lockon=3{
+if lockon=3 {
     visible=1;
     x = target.exitx
     y = target.exity
-    if keyboard_check(global.key_acc_up) || keyboard_check(global.key_acc_down) || keyboard_check(global.key_acc_left) || keyboard_check(global.key_acc_right)
-    {drink+=1}
-    if drink<=10{
-        if keyboard_check_pressed(global.key_acc_up){target.exity-=1;y-=1;}
-        if keyboard_check_pressed(global.key_acc_down){target.exity+=1;y+=1;}
-        if keyboard_check_pressed(global.key_acc_left){target.exitx-=1;x-=1;}
-        if keyboard_check_pressed(global.key_acc_right){target.exitx+=1;x+=1;}
-        if keyboard_check_pressed(global.key_acc_bigup){target.exity-=16;y-=16;}
-        if keyboard_check_pressed(global.key_acc_bigdown){target.exity+=16;y+=16;}
-        if keyboard_check_pressed(global.key_acc_bigleft){target.exitx-=16;x-=16;}
-        if keyboard_check_pressed(global.key_acc_bigright){target.exitx+=16;x+=16;}
+    if keyboard_check(global.key_acc_up) || keyboard_check(global.key_acc_down) || keyboard_check(global.key_acc_left) || keyboard_check(global.key_acc_right) {drink+=1}
+    if drink<=10 {
+        if keyboard_check_pressed(global.key_acc_up) {target.exity-=1;y-=1;}
+        if keyboard_check_pressed(global.key_acc_down) {target.exity+=1;y+=1;}
+        if keyboard_check_pressed(global.key_acc_left) {target.exitx-=1;x-=1;}
+        if keyboard_check_pressed(global.key_acc_right) {target.exitx+=1;x+=1;}
+        if keyboard_check_pressed(global.key_acc_bigup) {target.exity-=16;y-=16;}
+        if keyboard_check_pressed(global.key_acc_bigdown) {target.exity+=16;y+=16;}
+        if keyboard_check_pressed(global.key_acc_bigleft) {target.exitx-=16;x-=16;}
+        if keyboard_check_pressed(global.key_acc_bigright) {target.exitx+=16;x+=16;}
     }
-    if drink>10{
-        if keyboard_check(global.key_acc_up){target.exity-=1;y-=1;}
-        if keyboard_check(global.key_acc_down){target.exity+=1;y+=1;}
-        if keyboard_check(global.key_acc_left){target.exitx-=1;x-=1;}
-        if keyboard_check(global.key_acc_right){target.exitx+=1;x+=1;}
+    if drink>10 {
+        if keyboard_check(global.key_acc_up) {target.exity-=1;y-=1;}
+        if keyboard_check(global.key_acc_down) {target.exity+=1;y+=1;}
+        if keyboard_check(global.key_acc_left) {target.exitx-=1;x-=1;}
+        if keyboard_check(global.key_acc_right) {target.exitx+=1;x+=1;}
     }
 
-    if !keyboard_check(global.key_acc_up) && !keyboard_check(global.key_acc_down) && !keyboard_check(global.key_acc_left) && !keyboard_check(global.key_acc_right)
-    {drink=0}
+    if !keyboard_check(global.key_acc_up) && !keyboard_check(global.key_acc_down) && !keyboard_check(global.key_acc_left) && !keyboard_check(global.key_acc_right) {drink=0}
     // 联机同步：通道出口移动广播（同条件）
-    if keyboard_check(global.key_acc_up) || keyboard_check(global.key_acc_down) || keyboard_check(global.key_acc_left) || keyboard_check(global.key_acc_right) || keyboard_check_pressed(global.key_acc_bigup) || keyboard_check_pressed(global.key_acc_bigdown) || keyboard_check_pressed(global.key_acc_bigleft) || keyboard_check_pressed(global.key_acc_bigright)
-    {ed_net_ops_send_update(target, 12)}
+    if keyboard_check(global.key_acc_up) || keyboard_check(global.key_acc_down) || keyboard_check(global.key_acc_left) || keyboard_check(global.key_acc_right) || keyboard_check_pressed(global.key_acc_bigup) || keyboard_check_pressed(global.key_acc_bigdown) || keyboard_check_pressed(global.key_acc_bigleft) || keyboard_check_pressed(global.key_acc_bigright) {ed_net_ops_send_update(target, 12)}
 }
-if keyboard_check_released(global.key_select){lockon=0;target=0;visible=0;/*check_double=true;sixteen=false*/}
+if keyboard_check_released(global.key_select) {lockon=0;target=0;visible=0;/*check_double=true;sixteen=false*/}
 
 /*if check_double && !keyboard_check(global.key_select){
     timer +=1 ;
@@ -143,7 +135,7 @@ applies_to=self
 draw_sprite(s_acc,0,x,y)
 draw_set_color(c_white)
 draw_set_font(cyferkimario)
-if lockon>=2{
+if lockon>=2 {
     draw_set_halign(fa_right)
     draw_text(view_xview[0]+640,view_yview[0]+468,'('+string(x)+','+string(y)+')')
     draw_set_halign(fa_left)

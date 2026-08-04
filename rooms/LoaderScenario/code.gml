@@ -39,7 +39,7 @@ global.brightness_record=0
 global.lightobject='0000000000000000000000000000000000000000000000000000000000000000000000'
 global.stunblock=0
 
-for(i=0;i<8;i+=1){
+for(i=0;i<8;i+=1) {
     global.yinyang_status[i]=-1;
     global.yinyang_record[i]=-1;
 }
@@ -72,33 +72,33 @@ global.toload=''
 // 检测密钥是否存在：若密钥脚本缺失则只支持 .smws/.mfs，不显示 .smwp
 get_crypt_key1();
 //select a file to load
-while global.toload=''{
+while global.toload='' {
     if crypt_key_arr[0] != 0 {
         global.toload=get_open_filename('All Supported Formats (.smws;.smwp;.mfs)|*.smws;*.smwp;*.mfs|Super Mario Worker Scenario (.smws)|*.smws|Protected Mario Worker Scenario (.smwp)|*.smwp|Mario Worker Scenario(.mfs)|*.mfs','')
     } else {
         global.toload=get_open_filename('All Supported Formats (.smws;.mfs)|*.smws;*.mfs|Super Mario Worker Scenario (.smws)|*.smws|Mario Worker Scenario(.mfs)|*.mfs','')
     }
-    if global.toload=''{
+    if global.toload='' {
         global.czup=show_question('Do you want to stop loading a scenario?');global.toload=''
-        if global.czup=1{global.zamenowane=1;global.toload='cipas';room_goto(title)}
+        if global.czup=1 {global.zamenowane=1;global.toload='cipas';room_goto(title)}
     }
 }
 
 //loading
-if global.toload!='' && global.toload!='cipas'{
+if global.toload!='' && global.toload!='cipas' {
     room_tile_clear(Play_Room)
     room_instance_clear(Play_Room)
 
     global.mfsfilename=global.toload
 
-    if filename_ext(global.mfsfilename)='.smwp'{
+    if filename_ext(global.mfsfilename)='.smwp' {
         global.jiami=1
     }
     //检测是否存在存档文件，若是，则读取存档
     global.loadingsav = false
     if file_exists(filename_change_ext(global.mfsfilename,'.mwsav')) {
         global.loadingsav = show_question('.mwsav file detected. Continue your saved progress?')
-        if (global.loadingsav){
+        if (global.loadingsav) {
             global.mfsfilename = filename_change_ext(global.mfsfilename,'.mwsav');
         }
     }

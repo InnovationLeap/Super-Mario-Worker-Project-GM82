@@ -18,7 +18,7 @@ applies_to=self
 */
 if global.pauza=0 {
 
-image_index+=0.2
-if image_index>=3.8 {instance_destroy()}
+    image_index+=0.2
+    if image_index>=3.8 {instance_destroy()}
 
 }

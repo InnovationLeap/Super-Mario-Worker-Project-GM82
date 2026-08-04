@@ -13,7 +13,7 @@ applies_to=self
 */
 if global.pauza=0 {
 
-image_alpha-=0.1
-if image_alpha<=0 {instance_destroy()}
+    image_alpha-=0.1
+    if image_alpha<=0 {instance_destroy()}
 
 }

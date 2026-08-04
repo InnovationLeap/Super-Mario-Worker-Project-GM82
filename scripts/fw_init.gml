@@ -61,6 +61,6 @@ global.__NF_W_ED_DrawTextTransformedColorExt = external_define(global.__NF_W_DLL
 
 result = external_call(global.__NF_W_ED_Init, 0, 0);
 
-if(!result){
+if(!result) {
     show_error("FowWriting 初始化失败", true);
 }

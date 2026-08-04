@@ -15,7 +15,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-global.checkpassage=0{test233=1}//这些用于自动校正水管位置。
-if test233=0{
-place_meeting(x,y,obj_wall){y+=32;test233=1}
+global.checkpassage=0 {test233=1}//这些用于自动校正水管位置。
+if test233=0 {
+    place_meeting(x,y,obj_wall) {y+=32;test233=1}
 }

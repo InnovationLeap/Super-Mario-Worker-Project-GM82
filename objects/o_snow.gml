@@ -41,8 +41,7 @@ if y > view_yview[0] + 480 + 128 {
 
 // 碰撞
 if (place_meeting(x, y, obj_wall) || place_meeting(x, y, obj_halfground) ||
-place_meeting(x, y, obj_wall) || place_meeting(x, y, o_pointblock) )
-{
+place_meeting(x, y, obj_wall) || place_meeting(x, y, o_pointblock) ) {
     instance_create(x, y - 2, o_snowdrop);
     instance_destroy();
 }

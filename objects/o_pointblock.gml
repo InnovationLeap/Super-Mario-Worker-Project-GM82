@@ -85,48 +85,45 @@ if bonus=20 && podbity=1 && global.rodzajmaria=0 && shaben=0 {aplikacja=2;instan
 if bonus=20 && podbity=1 && global.rodzajmaria>0 && shaben=0 {aplikacja=10;instance_create(x,y-32,o_uppercut)}
 
 
-if aplikacja=2
-    {
+if aplikacja=2 {
     if global.sample=1 && dzwiek=0 {fofo=sound_play(snd_burb);sound_volume(snd_burb,global.glosnosc);dzwiek=1}
     draw_sprite_ext(s_pointblock3,0,x,y-niemozna,1,1,0,c_white,1)
     if niemozna2=0 && niemozna<10 {niemozna+=1}
     if niemozna2=0 && niemozna>=10 {niemozna2=1}
     if niemozna2=1 && niemozna>0 {niemozna-=1}
     if niemozna2=1 && niemozna<=0 {niemozna2=0; podbity=0;dzwiek=0;aplikacja=0;}
-    }
+}
 
 
-if aplikacja=10
-    {
+if aplikacja=10 {
     if global.sample=1 && dzwiek=0 {fofo=sound_play(snd_break);sound_volume(snd_break,global.glosnosc);dzwiek=1}
     instance_destroy()
-        lolo=instance_create(x+8,y+8,o_breakblock)
+    lolo=instance_create(x+8,y+8,o_breakblock)
     lolo.ixor=-3
     lolo.iyor=-6
     lolo.image_xscale=0.5
     lolo.image_yscale=0.5
-        lolo=instance_create(x+8+16,y+8,o_breakblock)
+    lolo=instance_create(x+8+16,y+8,o_breakblock)
     lolo.ixor=3
     lolo.iyor=-6
-        lolo.image_xscale=0.5
+    lolo.image_xscale=0.5
     lolo.image_yscale=0.5
-        lolo=instance_create(x+8+16,y+8+16,o_breakblock)
+    lolo=instance_create(x+8+16,y+8+16,o_breakblock)
     lolo.ixor=-2
     lolo.iyor=-4
-        lolo.image_xscale=0.5
+    lolo.image_xscale=0.5
     lolo.image_yscale=0.5
-        lolo=instance_create(x+8,y+8+16,o_breakblock)
+    lolo=instance_create(x+8,y+8+16,o_breakblock)
     lolo.ixor=2
     lolo.iyor=-4
-        lolo.image_xscale=0.5
+    lolo.image_xscale=0.5
     lolo.image_yscale=0.5
-    }
+}
 
 
 
-if podbity=0 && bonus<>20 && bonus<100{draw_sprite(s_pointblock,stefan,x,y)}
-if podbity=1 && bonus<>20 && bonus<100
-    {
+if podbity=0 && bonus<>20 && bonus<100 {draw_sprite(s_pointblock,stefan,x,y)}
+if podbity=1 && bonus<>20 && bonus<100 {
     if global.sample=1 && dzwiek=0 && bonus=0 {fofo=sound_play(snd_coin);sound_volume(snd_coin,global.glosnosc);dzwiek=1}
     if global.sample=1 && dzwiek=0 && bonus>0 && bonus<100 {fofo=sound_play(snd_vine);sound_volume(snd_vine,global.glosnosc);dzwiek=1}
     if bonus=0 {instance_create(x,y,o_coineffect);global.coins+=1;instance_create(x,y-32,o_uppercut);bonus=-1000}
@@ -155,7 +152,7 @@ if podbity=1 && bonus<>20 && bonus<100
     if sekwencja<10 {draw_sprite_ext(s_pointblock2,stefan,x+16,y+16-sekwencja*2,1,1,0,c_white,1); sekwencja+=1; kierunek+=lewoprawo}
     if sekwencja>=10 && sekwencja<20 {draw_sprite_ext(s_pointblock2,stefan,x+16,y+16-40+sekwencja*2,1,1,0,c_white,1); sekwencja+=1; kierunek-=lewoprawo}
     if sekwencja=20 draw_sprite(s_pointblock2,stefan,x+16,y+16)
-    }
+}
 stefan=pokazywator.wenhao
 
 //bonus only

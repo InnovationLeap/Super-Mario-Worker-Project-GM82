@@ -36,9 +36,9 @@ applies_to=self
 */
 
 switch (spike_type) {
-    case 0: sprite_index = s_kolec; break;
-    case 1: sprite_index = s_kolec2; break;
-    case 2: sprite_index = s_kolec3; break;
-    case 3: sprite_index = s_kolec4; break;
-    default: sprite_index = s_kolec; break;
+case 0: sprite_index = s_kolec; break;
+case 1: sprite_index = s_kolec2; break;
+case 2: sprite_index = s_kolec3; break;
+case 3: sprite_index = s_kolec4; break;
+default: sprite_index = s_kolec; break;
 }

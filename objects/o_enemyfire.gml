@@ -27,14 +27,14 @@ applies_to=self
 if global.pauza=0 && global.etappokonany=0 {
 
 
-y+=iyor
-x+=ixor
-iyor+=0.5
-image_angle+=30
+    y+=iyor
+    x+=ixor
+    iyor+=0.5
+    image_angle+=30
 
 
-// niszcz po za ekranem
-if y>room_height {instance_destroy()}
+    // niszcz po za ekranem
+    if y>room_height {instance_destroy()}
 
 
 }

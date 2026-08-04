@@ -30,74 +30,74 @@ applies_to=self
 */
 if global.pauza=0 && global.etappokonany=0 {
 
-// Auto-destroy if player changed to a different powerup
-if !instance_exists(o_marker) || o_marker.rodzajmaria_is_raccoon = 0 {
-    instance_destroy()
-    exit
-}
+    // Auto-destroy if player changed to a different powerup
+    if !instance_exists(o_marker) || o_marker.rodzajmaria_is_raccoon = 0 {
+        instance_destroy()
+        exit
+    }
 
-// Calculate sweep X offset based on SMWP2 AnimationPlayer keyframes
-// _dir = 1 for right, -1 for left
-var _dir, _sweepX;
-_dir = 1
-if kierunek = 1 { _dir = -1 }
+    // Calculate sweep X offset based on SMWP2 AnimationPlayer keyframes
+    // _dir = 1 for right, -1 for left
+    var _dir, _sweepX;
+    _dir = 1
+    if kierunek = 1 { _dir = -1 }
 
-if timer <= 2 {
-    _sweepX = 0
-} else {
-    if timer <= 4 {
-        // Forward swing: 0 → 20, linear over 2 frames
-        _sweepX = (timer - 2) / 2 * 20 * _dir
+    if timer <= 2 {
+        _sweepX = 0
     } else {
-        if timer <= 7 {
-            // Backward sweep: 20 → -20, linear over 3 frames
-            _sweepX = (20 - (timer - 4) / 3 * 40) * _dir
+        if timer <= 4 {
+            // Forward swing: 0 → 20, linear over 2 frames
+            _sweepX = (timer - 2) / 2 * 20 * _dir
         } else {
-            // Return to center: -20 → 0, linear over 5 frames
-            _sweepX = (-20 + (timer - 7) / 5 * 20) * _dir
-        }
-    }
-}
-
-// Update position: SMWP2 — tail at player's bottom, offset when falling
-if instance_exists(o_marker) {
-    var _px, _py, _tailY;
-    _px = o_marker.x
-    _py = o_marker.y
-
-    // Y position: align tail bottom with player bottom (SMWP2: both at collision bottom=12)
-    // Player: origin_y=65, bbox_bottom=65 → player bottom = _py
-    // Tail:   origin_y=12, bbox_bottom=23 → tail bottom = _tailY + 11
-    // To align: _tailY + 11 = _py → _tailY = _py - 11
-    _tailY = _py - 11
-
-    // SMWP2: when falling and no ground imminently below, offset down by fall speed
-    // This prevents tail-stomping enemies while falling through open air
-    if o_marker.grawitacja > 0 {
-        var _checkY;
-        _checkY = _py + o_marker.grawitacja + 1
-        if !place_meeting(_px, _checkY, obj_wall) && !place_meeting(_px, _checkY, o_pointblock) && !place_meeting(_px, _checkY, o_windas) {
-            _tailY = _py - 11 + o_marker.grawitacja
+            if timer <= 7 {
+                // Backward sweep: 20 → -20, linear over 3 frames
+                _sweepX = (20 - (timer - 4) / 3 * 40) * _dir
+            } else {
+                // Return to center: -20 → 0, linear over 5 frames
+                _sweepX = (-20 + (timer - 7) / 5 * 20) * _dir
+            }
         }
     }
 
-    // X: tail at player center (SMWP2: tail.Position = Vector2.Zero, no lateral offset)
-    x = _px + _sweepX
-    y = _tailY
+    // Update position: SMWP2 — tail at player's bottom, offset when falling
+    if instance_exists(o_marker) {
+        var _px, _py, _tailY;
+        _px = o_marker.x
+        _py = o_marker.y
 
-    // Flip sprite based on direction
-    if _dir = 1 { image_xscale = -1 }
-    if _dir = -1 { image_xscale = 1 }
-}
+        // Y position: align tail bottom with player bottom (SMWP2: both at collision bottom=12)
+        // Player: origin_y=65, bbox_bottom=65 → player bottom = _py
+        // Tail:   origin_y=12, bbox_bottom=23 → tail bottom = _tailY + 11
+        // To align: _tailY + 11 = _py → _tailY = _py - 11
+        _tailY = _py - 11
 
-// Animate sprite
-image_index += 0.4
+        // SMWP2: when falling and no ground imminently below, offset down by fall speed
+        // This prevents tail-stomping enemies while falling through open air
+        if o_marker.grawitacja > 0 {
+            var _checkY;
+            _checkY = _py + o_marker.grawitacja + 1
+            if !place_meeting(_px, _checkY, obj_wall) && !place_meeting(_px, _checkY, o_pointblock) && !place_meeting(_px, _checkY, o_windas) {
+                _tailY = _py - 11 + o_marker.grawitacja
+            }
+        }
 
-// Collision check every frame (sweep hits different positions each frame)
-raccoon_tail_hit_check()
+        // X: tail at player center (SMWP2: tail.Position = Vector2.Zero, no lateral offset)
+        x = _px + _sweepX
+        y = _tailY
 
-// Lifetime auto-destroy
-timer += 1
-if timer > lifetime { instance_destroy(); exit }
+        // Flip sprite based on direction
+        if _dir = 1 { image_xscale = -1 }
+        if _dir = -1 { image_xscale = 1 }
+    }
+
+    // Animate sprite
+    image_index += 0.4
+
+    // Collision check every frame (sweep hits different positions each frame)
+    raccoon_tail_hit_check()
+
+    // Lifetime auto-destroy
+    timer += 1
+    if timer > lifetime { instance_destroy(); exit }
 
 }

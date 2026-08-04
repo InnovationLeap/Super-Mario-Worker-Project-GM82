@@ -5,8 +5,7 @@ action_id=603
 applies_to=self
 */
 // Debug Skip
-if debug_mode
-{
+if debug_mode {
     room_goto_next();
 }
 

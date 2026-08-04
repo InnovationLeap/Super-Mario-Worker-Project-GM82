@@ -6,31 +6,31 @@ var _tx, _ty, _i, _j;
 _tx = argument2 * 32
 _ty = argument3 * 32
 sizechange = 1
-with(o_edwallsdrawer){x += _tx; y += _ty}
-with(o_edbonusesblock){x += _tx; y += _ty}
-with(o_edbrowser){x += _tx; y += _ty}
-with(o_edenemyblock){x += _tx; y += _ty
-    if(coto=40||coto=41){fishendX += _tx; fishendY += _ty}
+with(o_edwallsdrawer) {x += _tx; y += _ty}
+with(o_edbonusesblock) {x += _tx; y += _ty}
+with(o_edbrowser) {x += _tx; y += _ty}
+with(o_edenemyblock) {x += _tx; y += _ty
+    if(coto=40||coto=41) {fishendX += _tx; fishendY += _ty}
 }
-with(o_edmarkerblock){x += _tx; y += _ty
-    if(coto=32){target = max(target+_ty,-64);if(type=2){water_endX += _tx; water_endY += _ty}}
-    if(coto=33){if(height>-64)height = max(height+_ty,-63)}
-    if(coto=34){camera_endX += _tx; camera_endY += _ty}
+with(o_edmarkerblock) {x += _tx; y += _ty
+    if(coto=32) {target = max(target+_ty,-64);if(type=2) {water_endX += _tx; water_endY += _ty}}
+    if(coto=33) {if(height>-64)height = max(height+_ty,-63)}
+    if(coto=34) {camera_endX += _tx; camera_endY += _ty}
 }
-with(o_edpassage){x += _tx; y += _ty; exitx += _tx; exity += _ty}
-with(o_edsceneriesblock){x += _tx; y += _ty}
-for(_i = 0; _i < argument0; _i += 1){
-    for(_j = 0; _j < argument1; _j += 1){
+with(o_edpassage) {x += _tx; y += _ty; exitx += _tx; exity += _ty}
+with(o_edsceneriesblock) {x += _tx; y += _ty}
+for(_i = 0; _i < argument0; _i += 1) {
+    for(_j = 0; _j < argument1; _j += 1) {
         global.arrayetapu2[_i, _j] = 0
     }
 }
 for (_i = max(0,argument2) ; _i < min(argument0,floor(room_width/32)+argument2) ; _i += 1) {
-    for(_j = max(0,argument3) ; _j < min(argument1,floor(room_height/32)+argument3) ; _j += 1){
+    for(_j = max(0,argument3) ; _j < min(argument1,floor(room_height/32)+argument3) ; _j += 1) {
         global.arrayetapu2[_i, _j] = arrayetapu[_i-argument2, _j-argument3]
     }
 }
 global.poziomwody += argument3 * 32
-if global.auto{
+if global.auto {
     global.firstbound = max(global.firstbound + argument3 * 32, -64)
     if(global.secondbound > -64)global.secondbound = max(global.secondbound + argument3 * 32, -63)
 }
@@ -45,13 +45,13 @@ global.lvlwidth = argument0 * 32
 global.lvlheight = argument1 * 32
 global.donottemp = 1
 Save_Script_Main()
-with(o_edwallsdrawer){instance_destroy()}
-with(o_edbonusesblock){instance_destroy()}
-with(o_edbrowser){instance_destroy()}
-with(o_edenemyblock){instance_destroy()}
-with(o_edmarkerblock){instance_destroy()}
-with(o_edpassage){instance_destroy()}
-with(o_edsceneriesblock){instance_destroy()}
+with(o_edwallsdrawer) {instance_destroy()}
+with(o_edbonusesblock) {instance_destroy()}
+with(o_edbrowser) {instance_destroy()}
+with(o_edenemyblock) {instance_destroy()}
+with(o_edmarkerblock) {instance_destroy()}
+with(o_edpassage) {instance_destroy()}
+with(o_edsceneriesblock) {instance_destroy()}
 room_restart()
 Load_Script_Main()
 file_delete(global.autosavename)

@@ -4,7 +4,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if !variable_local_exists('coto'){coto=0}
+if !variable_local_exists('coto') {coto=0}
 drink=0
 cyferkimario=font_add_sprite(txt_mariofonts,ord('!'),1,0) // 定义字体
 deltax=0
@@ -17,7 +17,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if !setonce{
+if !setonce {
     image_index = coto-1;
     setonce=1
 }

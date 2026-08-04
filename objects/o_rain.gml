@@ -40,15 +40,13 @@ if y > view_yview[0] + 480 + 128 {
 // 透明的后景雨滴不参与碰撞
 if r >= alpha_rate &&
 (place_meeting(x, y, obj_wall) || place_meeting(x, y, obj_halfground) ||
-place_meeting(x, y, obj_wall) || place_meeting(x, y, o_pointblock) )
-{
+place_meeting(x, y, obj_wall) || place_meeting(x, y, o_pointblock) ) {
     instance_create(x, y - 8, o_raindrop);
     instance_destroy();
 }
 
 // 雨滴入水销毁，包括后景雨滴
-if y > global.poziomwody
-{
+if y > global.poziomwody {
     instance_destroy();
 }
 

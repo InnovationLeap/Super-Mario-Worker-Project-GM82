@@ -20,10 +20,10 @@ applies_to=self
 if global.pauza=0 {
 
 
-image_index+=0.2
-if sekwencja=0 && (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {y-=1}
-if sekwencja=0 && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock) {sekwencja=1}
+    image_index+=0.2
+    if sekwencja=0 && (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {y-=1}
+    if sekwencja=0 && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock) {sekwencja=1}
 
-// niszcz po za ekranem
+    // niszcz po za ekranem
 
 }

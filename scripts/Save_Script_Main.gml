@@ -1,16 +1,15 @@
 var _bakpath;
 instance_activate_all()
 global.script_file='' //初始化变量script_file（文件名）
-if !variable_global_exists("autosavename"){
-global.autosavename=''
+if !variable_global_exists("autosavename") {
+    global.autosavename=''
 }
-while global.script_file=''{
-    if global.autosavename=''{
+while global.script_file='' {
+    if global.autosavename='' {
         global.script_file=get_save_filename('Super Mario Worker Level (.smwl)|*.smwl','Untitled Level.smwl')
         global.autosavename=global.script_file
         global.autosavename_record = global.autosavename
-    }
-    else{global.script_file=global.autosavename}
+    } else {global.script_file=global.autosavename}
     //if filename_name(filename_change_ext(global.autosavename,''))<>'temp'{global.autosavename_record = global.autosavename}
     global.script_file=filename_change_ext(global.script_file,'.smwlx')
     global.fundel=global.script_file
@@ -23,12 +22,12 @@ while global.script_file=''{
 }
 
 // [BK] 旧版关卡（GM8.0 SMWL）首次保存前备份原始文件：Save As→目标位置（新名.bak.smwl），直接保存→当前关卡所在位置
-if variable_global_exists('dobackup_save'){
-    if global.dobackup_save=1{
+if variable_global_exists('dobackup_save') {
+    if global.dobackup_save=1 {
         global.dobackup_save=0
-        if variable_global_exists('oldlevel_detected'){
-            if global.oldlevel_detected=1 && global.oldlevel_backup_done=0{
-                if global.script_kiler!='' && file_exists(global.script_kiler){
+        if variable_global_exists('oldlevel_detected') {
+            if global.oldlevel_detected=1 && global.oldlevel_backup_done=0 {
+                if global.script_kiler!='' && file_exists(global.script_kiler) {
                     _bakpath=filename_change_ext(global.autosavename,'.bak.smwl')
                     file_copy(global.script_kiler,_bakpath)
                     global.oldlevel_backup_done=1
@@ -40,14 +39,12 @@ if variable_global_exists('dobackup_save'){
 }
 
 
- //记录文件名（mflx格式）
+//记录文件名（mflx格式）
 global.script_file=file_text_open_write(global.script_file)  //准备写入mflx文件
 //show_message(string(global.lvlwidth)+";"+string(global.lvlheight))
-if global.lvlwidth=0{file_text_write_string(global.script_file,string(room_width))}
-else{file_text_write_string(global.script_file,string(global.lvlwidth))}
+if global.lvlwidth=0 {file_text_write_string(global.script_file,string(room_width))} else {file_text_write_string(global.script_file,string(global.lvlwidth))}
 file_text_writeln(global.script_file) //关卡长度
-if global.lvlheight=0{file_text_write_string(global.script_file,string(room_height))}
-else{file_text_write_string(global.script_file,string(global.lvlheight))}
+if global.lvlheight=0 {file_text_write_string(global.script_file,string(room_height))} else {file_text_write_string(global.script_file,string(global.lvlheight))}
 file_text_writeln(global.script_file) //关卡高度
 file_text_write_string(global.script_file,global.etapnazwa)
 file_text_writeln(global.script_file)  //关卡名
@@ -66,26 +63,26 @@ file_text_writeln(global.script_file)  //背景
 file_text_write_string(global.script_file,string(global.muzyka))
 file_text_writeln(global.script_file)  //音乐
 Save_Script_Blocks()  //写入砖块数据
-with (o_edenemyblock)     {Save_Script_Enemy()} //写入敌人数据
+with (o_edenemyblock) {Save_Script_Enemy()} //写入敌人数据
 with (o_edsceneriesblock) {Save_Script_Rest('1')} //写入装饰物类数据
-with (o_edmarkerblock)    {Save_Script_Rest('2')} //写入mark类数据
-with (o_edbonusesblock)   {Save_Script_Rest('3')} //写入奖励类数据
-with (o_edpassage)        {Save_Script_Passage()} //写入管道出入口数据
-if global.modifiedmov=1{file_text_write_string(global.script_file,"modifiedmov=1")}
-if global.modifiedmov=0{file_text_write_string(global.script_file,"modifiedmov=0")}
+with (o_edmarkerblock) {Save_Script_Rest('2')} //写入mark类数据
+with (o_edbonusesblock) {Save_Script_Rest('3')} //写入奖励类数据
+with (o_edpassage) {Save_Script_Passage()} //写入管道出入口数据
+if global.modifiedmov=1 {file_text_write_string(global.script_file,"modifiedmov=1")}
+if global.modifiedmov=0 {file_text_write_string(global.script_file,"modifiedmov=0")}
 file_text_writeln(global.script_file)
-if global.rotodisclay=1{file_text_write_string(global.script_file,"rotodisclay=1")}
-if global.rotodisclay=0{file_text_write_string(global.script_file,"rotodisclay=0")}
+if global.rotodisclay=1 {file_text_write_string(global.script_file,"rotodisclay=1")}
+if global.rotodisclay=0 {file_text_write_string(global.script_file,"rotodisclay=0")}
 file_text_writeln(global.script_file)
-if global.layerord=2{file_text_write_string(global.script_file,"layerord=2")}
-if global.layerord=1{file_text_write_string(global.script_file,"layerord=1")}
-if global.layerord=0{file_text_write_string(global.script_file,"layerord=0")}
+if global.layerord=2 {file_text_write_string(global.script_file,"layerord=2")}
+if global.layerord=1 {file_text_write_string(global.script_file,"layerord=1")}
+if global.layerord=0 {file_text_write_string(global.script_file,"layerord=0")}
 file_text_writeln(global.script_file)
-if global.lava=1{file_text_write_string(global.script_file,"lava=1")}
-if global.lava=0{file_text_write_string(global.script_file,"lava=0")}
+if global.lava=1 {file_text_write_string(global.script_file,"lava=1")}
+if global.lava=0 {file_text_write_string(global.script_file,"lava=0")}
 file_text_writeln(global.script_file)
-if global.auto=1{file_text_write_string(global.script_file,"auto=1")}
-if global.auto=0{file_text_write_string(global.script_file,"auto=0")}
+if global.auto=1 {file_text_write_string(global.script_file,"auto=1")}
+if global.auto=0 {file_text_write_string(global.script_file,"auto=0")}
 file_text_writeln(global.script_file)
 file_text_write_string(global.script_file,"T1="+string(global.firstbound))
 file_text_writeln(global.script_file)
@@ -95,26 +92,26 @@ file_text_write_string(global.script_file,"velocity="+string(global.water_veloci
 file_text_writeln(global.script_file)
 file_text_write_string(global.script_file,"delay="+string(global.water_delay))
 file_text_writeln(global.script_file)
-if global.advswitch=1{file_text_write_string(global.script_file,"advswitch=1")}
-if global.advswitch=0{file_text_write_string(global.script_file,"advswitch=0")}
+if global.advswitch=1 {file_text_write_string(global.script_file,"advswitch=1")}
+if global.advswitch=0 {file_text_write_string(global.script_file,"advswitch=0")}
 file_text_writeln(global.script_file)
-if global.fast_retry=1{file_text_write_string(global.script_file,"fastretry=1")}
-if global.fast_retry=0{file_text_write_string(global.script_file,"fastretry=0")}
+if global.fast_retry=1 {file_text_write_string(global.script_file,"fastretry=1")}
+if global.fast_retry=0 {file_text_write_string(global.script_file,"fastretry=0")}
 file_text_writeln(global.script_file)
-if global.MFbeet=1{file_text_write_string(global.script_file,"MFbeet=1")}
-if global.MFbeet=0{file_text_write_string(global.script_file,"MFbeet=0")}
+if global.MFbeet=1 {file_text_write_string(global.script_file,"MFbeet=1")}
+if global.MFbeet=0 {file_text_write_string(global.script_file,"MFbeet=0")}
 file_text_writeln(global.script_file)
-if global.celeste=1{file_text_write_string(global.script_file,"celeste=1")}
-if global.celeste=0{file_text_write_string(global.script_file,"celeste=0")}
+if global.celeste=1 {file_text_write_string(global.script_file,"celeste=1")}
+if global.celeste=0 {file_text_write_string(global.script_file,"celeste=0")}
 file_text_writeln(global.script_file)
-if global.pipeout=1{file_text_write_string(global.script_file,"pipeout=1")}
-if global.pipeout=0{file_text_write_string(global.script_file,"pipeout=0")}
+if global.pipeout=1 {file_text_write_string(global.script_file,"pipeout=1")}
+if global.pipeout=0 {file_text_write_string(global.script_file,"pipeout=0")}
 file_text_writeln(global.script_file)
-if global.fastpass=1{file_text_write_string(global.script_file,"fastpass=1")}
-if global.fastpass=0{file_text_write_string(global.script_file,"fastpass=0")}
+if global.fastpass=1 {file_text_write_string(global.script_file,"fastpass=1")}
+if global.fastpass=0 {file_text_write_string(global.script_file,"fastpass=0")}
 file_text_writeln(global.script_file)
-if global.huddisplay=1{file_text_write_string(global.script_file,"huddisplay=1")}
-if global.huddisplay=0{file_text_write_string(global.script_file,"huddisplay=0")}
+if global.huddisplay=1 {file_text_write_string(global.script_file,"huddisplay=1")}
+if global.huddisplay=0 {file_text_write_string(global.script_file,"huddisplay=0")}
 file_text_writeln(global.script_file)
 file_text_write_string(global.script_file,"rainy="+string(global.rainy))
 file_text_writeln(global.script_file)
@@ -139,26 +136,24 @@ file_text_writeln(global.script_file)
 file_text_write_string(global.script_file,"version="+string(global.version))
 file_text_close(global.script_file)  //关闭文件
 global.script_file=global.fundel  //恢复文件名
-if global.saving=0{
+if global.saving=0 {
     global.tosave = filename_change_ext(global.fundel,'.smwl')
-}
-else{
+} else {
     global.tosave = filename_change_ext(global.fundel,'.mfl')
 }
-if global.compress_save=1{
+if global.compress_save=1 {
     GZ_CompressFile(global.fundel,global.tosave);  //gzip压缩成mfl文件
     file_delete(global.fundel)  //删除mflx文件
-}
-else{
+} else {
     file_copy(global.fundel,global.tosave);  //跳过压缩，直接保存明文
     file_delete(global.fundel)  //删除mflx文件
 }
 // [SV] DBG: 保存产物存在性/尺寸（F3 测关 temp.smwl 若为 0 或缺失，返回时 Load_Script_Main 将直接塌缩）
 debug_log("[SV] Save_Script_Main: tosave=" + global.tosave + " exists=" + string(file_exists(global.tosave)) + " size=" + string(file_size(global.tosave)) + " compress=" + string(global.compress_save))
-if global.donottemp !=1{
+if global.donottemp !=1 {
     global.tempnumber+=1;
     tempwarning = 0
-    if(global.tempnumber>global.maxtemp){
+    if(global.tempnumber>global.maxtemp) {
         tempwarning =1
         ques = show_question ('Out of max number of temporary files. The earlier temporary files will be replaced. Continue?')
         if ques = 1 {global.tempnumber = 1; tempwarning = 0}

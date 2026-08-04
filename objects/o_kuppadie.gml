@@ -39,13 +39,13 @@ if mid=0 {
     }
 }
 
-if mid=1{
+if mid=1 {
     if sekwencja>60 {
         y+=iyor; iyor+=0.1
         if smm=0 {smm=1 if global.sample=1 {fofo=sound_play(snd_kuppapapa);sound_volume(snd_kuppapapa,global.glosnosc)}}
     }
-    if sekwencja>120{
-        if(global.koopa_scroll_count=0){
+    if sekwencja>120 {
+        if(global.koopa_scroll_count=0) {
             global.muzyka = global.muzyka_save;
             Music_Play();
             global.aktywowanykuppa=4;  //修正滚屏，前往马里奥滚屏代码

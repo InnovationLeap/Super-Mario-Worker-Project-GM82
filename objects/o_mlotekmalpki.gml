@@ -28,17 +28,17 @@ applies_to=self
 */
 if global.pauza=0 && global.etappokonany=0 {
 
-if kierunek=1 {kierunek=2; ixor=4}
-if kierunek=-1 {kierunek=-2; ixor=-4}
+    if kierunek=1 {kierunek=2; ixor=4}
+    if kierunek=-1 {kierunek=-2; ixor=-4}
 
-y+=iyor
-x+=ixor
-iyor+=0.5
-image_angle+=10
+    y+=iyor
+    x+=ixor
+    iyor+=0.5
+    image_angle+=10
 
 
-// niszcz po za ekranem
-if y>room_height {instance_destroy()}
+    // niszcz po za ekranem
+    if y>room_height {instance_destroy()}
 
 
 }

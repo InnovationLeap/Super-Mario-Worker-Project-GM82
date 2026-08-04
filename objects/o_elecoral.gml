@@ -33,9 +33,9 @@ applies_to=self
 */
 if global.pauza=0 {
 
-image_index=pokazywator.dianshanhu
+    image_index=pokazywator.dianshanhu
 
-//if energia<=-100000 && rodzajzabicia=0 {instance_destroy(); }
-// niszcz po za ekranem
-if y>room_height+64 {instance_destroy()}
+    //if energia<=-100000 && rodzajzabicia=0 {instance_destroy(); }
+    // niszcz po za ekranem
+    if y>room_height+64 {instance_destroy()}
 }

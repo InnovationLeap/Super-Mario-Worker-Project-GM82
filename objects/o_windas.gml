@@ -28,9 +28,9 @@ applies_to=self
 if global.pauza=0 {
 
     if img_determine = 0 {
-    img_type = floor(type/6)
+        img_type = floor(type/6)
 
-    switch (img_type) {
+        switch (img_type) {
         case 0: image_index = 0; light_x = 48; light_y = 8; break; // 红长
         case 1: image_index = 1; light_x = 16; light_y = 8; break; // 红短
         case 3: image_index = 6; light_x = 48; light_y = 8; break; // 黄长
@@ -49,9 +49,9 @@ if global.pauza=0 {
         case 16: image_index = 19; light_x = 38; light_y = 16; break; // 城堡带点短
         case 17: image_index = 20; light_x = 60; light_y = 16; break; // 棕色城堡长
         case 18: image_index = 21; light_x = 38; light_y = 16; break; // 棕色城堡带点短
-    }
+        }
 
-    img_determine =1
+        img_determine =1
     }
 
     if img_type=2 {
@@ -67,451 +67,417 @@ applies_to=self
 
 
 if global.pauza=0 {
-//确定桥的形态
+    //确定桥的形态
 
 
 
 
 
 
-if global.modifiedmov=0 {
-if type mod 6=0 // 掉落浮桥
-    {
-    nabijacz+=1
-    if spadacz=1 && nabijacz>10
-        {iyor+=1; nabijacz=0}
-
-    if y>room_height {instance_destroy()}//纵坐标过大，销毁
-    if instance_place(x,y-2,o_marker) //马里奥站在浮桥上
+    if global.modifiedmov=0 {
+        if type mod 6=0 // 掉落浮桥
         {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if lolo.winduje=id && global.rodzajmaria<>5 {
-        with(lolo){if sekwencja=0 && !instance_place(x,y+1,obj_wall) && !instance_place(x,y+1,o_pointblock) && instance_place(x,y+1,o_windas) && huadun=0
+            nabijacz+=1
+            if spadacz=1 && nabijacz>10 {iyor+=1; nabijacz=0}
 
+            if y>room_height {instance_destroy()}//纵坐标过大，销毁
+            if instance_place(x,y-2,o_marker) //马里奥站在浮桥上
             {
-            findel=instance_place(x,y+1,o_windas)
-            findel.spadacz=1
-            if !instance_place(x,y+1+findel.iyor,obj_wall) && !instance_place(x,y+1+findel.iyor,o_pointblock) {y+=findel.iyor;wyspeed=iyor }
-            if (instance_place(x,y+1+findel.iyor,obj_wall) || instance_place(x,y+1+findel.iyor,o_pointblock)) {wyjatek=1};
-            while wyjatek=1 && !instance_place(x,y+1,obj_wall) && !instance_place(x,y+1,o_pointblock) {y+=1}
-            if wyjatek=1 && (instance_place(x,y+1,obj_wall) || instance_place(x,y+1,o_pointblock)) {wyjatek=0}
+                lolo=instance_place(x,y-2,o_marker)
+                lolo.windonip=id
+                if lolo.winduje=id && global.rodzajmaria<>5 {
+                    with(lolo) {if sekwencja=0 && !instance_place(x,y+1,obj_wall) && !instance_place(x,y+1,o_pointblock) && instance_place(x,y+1,o_windas) && huadun=0
+
+                        {
+                            findel=instance_place(x,y+1,o_windas)
+                            findel.spadacz=1
+                            if !instance_place(x,y+1+findel.iyor,obj_wall) && !instance_place(x,y+1+findel.iyor,o_pointblock) {y+=findel.iyor;wyspeed=iyor }
+                            if (instance_place(x,y+1+findel.iyor,obj_wall) || instance_place(x,y+1+findel.iyor,o_pointblock)) {wyjatek=1};
+                            while wyjatek=1 && !instance_place(x,y+1,obj_wall) && !instance_place(x,y+1,o_pointblock) {y+=1}
+                            if wyjatek=1 && (instance_place(x,y+1,obj_wall) || instance_place(x,y+1,o_pointblock)) {wyjatek=0}
+                        }
+                    }}
+
+            }y+=iyor;
+        }
+
+        if type mod 6 =1 // jadaca na boki
+        {
+            if instance_place(x+2,y,obj_wall) || instance_place(x+2,y,o_pointblock) && kierunek=1 {kierunek=-1}
+            if instance_place(x-2,y,obj_wall) || instance_place(x-2,y,o_pointblock) && kierunek=-1 {kierunek=1}
+            if instance_place(x+2,y,o_onlyU) && kierunek=1 {kierunek=-2;colspeed=1}//忽悠转向，colspeed为转向时速度
+            if instance_place(x-2,y,o_onlyU) && kierunek=-1 {kierunek=2;colspeed=-1}
+            if kierunek=2 {
+                if colspeed>=1 {kierunek=1}
+                colspeed+=0.1; x+=colspeed;
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
+                    }}
             }
-            }}
+            if kierunek=-2 {
+                if colspeed<=-1 {kierunek=-1}
+                colspeed-=0.1; x+=colspeed;
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
+                    }}
+            }
 
-        }y+=iyor;
-    }
+            if kierunek=1
+            {x+=1
+                if y>room_height {y=-32}
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=1;wxspeed=1}}
+                    }}
+            }
+            if kierunek=-1
+            {x-=1
+                if y>room_height {y=-32}
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x-2,y,obj_wall) && !instance_place(x-2,y,o_pointblock) && x>16 && huadun=0 {x-=1;;wxspeed=-1} }
+                    }}
+            }
 
-if type mod 6 =1 // jadaca na boki
-    {
-    if instance_place(x+2,y,obj_wall) || instance_place(x+2,y,o_pointblock) && kierunek=1 {kierunek=-1}
-    if instance_place(x-2,y,obj_wall) || instance_place(x-2,y,o_pointblock) && kierunek=-1 {kierunek=1}
-    if instance_place(x+2,y,o_onlyU) && kierunek=1 {kierunek=-2;colspeed=1}//忽悠转向，colspeed为转向时速度
-    if instance_place(x-2,y,o_onlyU) && kierunek=-1 {kierunek=2;colspeed=-1}
-    if kierunek=2{
-        if colspeed>=1{kierunek=1}
-        colspeed+=0.1; x+=colspeed;
-        if instance_place(x,y-2,o_marker)
-        {
-            lolo=instance_place(x,y-2,o_marker)
-            lolo.windonip=id
-            if global.rodzajmaria<>5{
-            with(lolo){if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0  {x+=other.colspeed;wxspeed=other.colspeed}}
-        }}
-    }
-    if kierunek=-2{
-        if colspeed<=-1{kierunek=-1}
-        colspeed-=0.1; x+=colspeed;
-        if instance_place(x,y-2,o_marker)
-        {
-            lolo=instance_place(x,y-2,o_marker)
-            lolo.windonip=id
-            if global.rodzajmaria<>5{
-            with(lolo){if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0  {x+=other.colspeed;wxspeed=other.colspeed}}
-        }}
-    }
-
-    if kierunek=1
-        {x+=1
-        if y>room_height {y=-32}
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0  {x+=1;wxspeed=1}}
-        }}
-        }
-    if kierunek=-1
-        {x-=1
-        if y>room_height {y=-32}
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x-2,y,obj_wall) && !instance_place(x-2,y,o_pointblock) && x>16 && huadun=0  {x-=1;;wxspeed=-1} }
-        }}
         }
 
-    }
+
+        if type mod 6=2 // jadaca na boki
+        {
 
 
-if type mod 6=2 // jadaca na boki
-    {
-
-
-    if kierunek=1
-        {x+=2
-        if y>room_height {y=-32}
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=2;wxspeed=2}}
-        }}
-        }
-    if kierunek=-1
-        {x-=2
-        if y>room_height {y=-32}
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x-2,y,obj_wall) && !instance_place(x-2,y,o_pointblock) && x>16 && huadun=0 {x-=2;wxspeed=-2}}
-        }}
-        }
-    if instance_place(x+2,y,obj_wall) || instance_place(x+2,y,o_pointblock) && kierunek=1 {kierunek=-1}
-    if instance_place(x-2,y,obj_wall) || instance_place(x-2,y,o_pointblock) && kierunek=-1 {kierunek=1}
-    if instance_place(x+2,y,o_onlyU) && kierunek=1 {kierunek=-2;colspeed=2}//忽悠转向，colspeed为转向时速度
-    if instance_place(x-2,y,o_onlyU) && kierunek=-1 {kierunek=2;colspeed=-2}
-    if kierunek=2{
-        if colspeed>=2{kierunek=1}
-        colspeed+=0.1; x+=colspeed;
-        if instance_place(x,y-2,o_marker)
-        {
-            lolo=instance_place(x,y-2,o_marker)
-            lolo.windonip=id
-            if global.rodzajmaria<>5{
-            with(lolo){if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0  {x+=other.colspeed;wxspeed=other.colspeed}}
-        }}
-    }
-    if kierunek=-2{
-        if colspeed<=-2{kierunek=-1}
-        colspeed-=0.1; x+=colspeed;
-        if instance_place(x,y-2,o_marker)
-        {
-            lolo=instance_place(x,y-2,o_marker)
-            lolo.windonip=id
-            if global.rodzajmaria<>5{
-            with(lolo){if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0  {x+=other.colspeed;wxspeed=other.colspeed}}
-        }}
-    }
-    }
-
-if type mod 6=3 // jadaca na boki
-    {
-    if kierunek=1
-        {x+=3
-        if y>room_height {y=-32}
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=3;wxspeed=3}}
-        }}
-        }
-    if kierunek=-1
-        {x-=3
-        if y>room_height {y=-32}
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x-2,y,obj_wall) && !instance_place(x-2,y,o_pointblock) && x>16 && huadun=0 {x-=3};wxspeed=-3}
-        }}
-        }
-    if instance_place(x+2,y,obj_wall) || instance_place(x+2,y,o_pointblock) && kierunek=1 {kierunek=-1}
-    if instance_place(x-2,y,obj_wall) || instance_place(x-2,y,o_pointblock) && kierunek=-1 {kierunek=1}
-    if instance_place(x+2,y,o_onlyU) && kierunek=1 {kierunek=-2;colspeed=3}//忽悠转向，colspeed为转向时速度
-    if instance_place(x-2,y,o_onlyU) && kierunek=-1 {kierunek=2;colspeed=-3}
-    if kierunek=2{
-        if colspeed>=3{kierunek=1}
-        colspeed+=0.1; x+=colspeed;
-        if instance_place(x,y-2,o_marker)
-        {
-            lolo=instance_place(x,y-2,o_marker)
-            lolo.windonip=id
-            if global.rodzajmaria<>5{
-            with(lolo){if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0  {x+=other.colspeed;wxspeed=other.colspeed}}
-        }}
-    }
-    if kierunek=-2{
-        if colspeed<=-3{kierunek=-1}
-        colspeed-=0.1; x+=colspeed;
-        if instance_place(x,y-2,o_marker)
-        {
-            lolo=instance_place(x,y-2,o_marker)
-            lolo.windonip=id
-            if global.rodzajmaria<>5{
-            with(lolo){if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0  {x+=other.colspeed;wxspeed=other.colspeed}}
-        }}
-    }
-    }
-
-if type mod 6=4 // jadaca na dol
-    {
-    y+=1
-    if y>room_height {y=-32}
-    if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x,y+1,obj_wall) && !instance_place(x,y+1,o_pointblock) && huadun=0 {y+=1};wyspeed=1}
-        }
-        }
-    }
-
-if type mod 6=5 // jadaca do gory
-    {
-    y-=1
-    if global.gameversion<1700{if y<-32 {y=room_height+32}}
-    else{if y<-32 {y=room_height}}
-    if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x,y-5,obj_wall) && !instance_place(x,y-5,o_pointblock) && huadun=0 {y-=1};wyspeed=-1}
-        }
+            if kierunek=1
+            {x+=2
+                if y>room_height {y=-32}
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=2;wxspeed=2}}
+                    }}
+            }
+            if kierunek=-1
+            {x-=2
+                if y>room_height {y=-32}
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x-2,y,obj_wall) && !instance_place(x-2,y,o_pointblock) && x>16 && huadun=0 {x-=2;wxspeed=-2}}
+                    }}
+            }
+            if instance_place(x+2,y,obj_wall) || instance_place(x+2,y,o_pointblock) && kierunek=1 {kierunek=-1}
+            if instance_place(x-2,y,obj_wall) || instance_place(x-2,y,o_pointblock) && kierunek=-1 {kierunek=1}
+            if instance_place(x+2,y,o_onlyU) && kierunek=1 {kierunek=-2;colspeed=2}//忽悠转向，colspeed为转向时速度
+            if instance_place(x-2,y,o_onlyU) && kierunek=-1 {kierunek=2;colspeed=-2}
+            if kierunek=2 {
+                if colspeed>=2 {kierunek=1}
+                colspeed+=0.1; x+=colspeed;
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
+                    }}
+            }
+            if kierunek=-2 {
+                if colspeed<=-2 {kierunek=-1}
+                colspeed-=0.1; x+=colspeed;
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
+                    }}
+            }
         }
 
-     }
-     }
- else {
-
-if type mod 6=0 // 掉落浮桥
-    {
-    nabijacz+=1
-    if spadacz=1 && nabijacz>10
-        {iyor+=1; nabijacz=0}
-
-    if y>room_height {instance_destroy()}//纵坐标过大，销毁
-    if instance_place(x,y-2,o_marker) //马里奥站在浮桥上
+        if type mod 6=3 // jadaca na boki
         {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if lolo.winduje=id && global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x,y+1,obj_wall) && !instance_place(x,y+1,o_pointblock) && instance_place(x,y+1,o_windas) && huadun=0
+            if kierunek=1
+            {x+=3
+                if y>room_height {y=-32}
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=3;wxspeed=3}}
+                    }}
+            }
+            if kierunek=-1
+            {x-=3
+                if y>room_height {y=-32}
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x-2,y,obj_wall) && !instance_place(x-2,y,o_pointblock) && x>16 && huadun=0 {x-=3};wxspeed=-3}
+                    }}
+            }
+            if instance_place(x+2,y,obj_wall) || instance_place(x+2,y,o_pointblock) && kierunek=1 {kierunek=-1}
+            if instance_place(x-2,y,obj_wall) || instance_place(x-2,y,o_pointblock) && kierunek=-1 {kierunek=1}
+            if instance_place(x+2,y,o_onlyU) && kierunek=1 {kierunek=-2;colspeed=3}//忽悠转向，colspeed为转向时速度
+            if instance_place(x-2,y,o_onlyU) && kierunek=-1 {kierunek=2;colspeed=-3}
+            if kierunek=2 {
+                if colspeed>=3 {kierunek=1}
+                colspeed+=0.1; x+=colspeed;
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
+                    }}
+            }
+            if kierunek=-2 {
+                if colspeed<=-3 {kierunek=-1}
+                colspeed-=0.1; x+=colspeed;
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
+                    }}
+            }
+        }
 
+        if type mod 6=4 // jadaca na dol
+        {
+            y+=1
+            if y>room_height {y=-32}
+            if instance_place(x,y-2,o_marker) {
+                lolo=instance_place(x,y-2,o_marker)
+                lolo.windonip=id
+                if global.rodzajmaria<>5 {
+                    with(lolo) {if sekwencja=0 && !instance_place(x,y+1,obj_wall) && !instance_place(x,y+1,o_pointblock) && huadun=0 {y+=1};wyspeed=1}
+                }
+            }
+        }
+
+        if type mod 6=5 // jadaca do gory
+        {
+            y-=1
+            if global.gameversion<1700 {if y<-32 {y=room_height+32}} else {if y<-32 {y=room_height}}
+            if instance_place(x,y-2,o_marker) {
+                lolo=instance_place(x,y-2,o_marker)
+                lolo.windonip=id
+                if global.rodzajmaria<>5 {
+                    with(lolo) {if sekwencja=0 && !instance_place(x,y-5,obj_wall) && !instance_place(x,y-5,o_pointblock) && huadun=0 {y-=1};wyspeed=-1}
+                }
+            }
+
+        }
+    } else {
+
+        if type mod 6=0 // 掉落浮桥
+        {
+            nabijacz+=1
+            if spadacz=1 && nabijacz>10 {iyor+=1; nabijacz=0}
+
+            if y>room_height {instance_destroy()}//纵坐标过大，销毁
+            if instance_place(x,y-2,o_marker) //马里奥站在浮桥上
             {
-            findel=instance_place(x,y+1,o_windas)
-            findel.spadacz=1
-            if !instance_place(x,y+1+findel.iyor,obj_wall) && !instance_place(x,y+1+findel.iyor,o_pointblock) {y+=findel.iyor;wyspeed=iyor }
-            if (instance_place(x,y+1+findel.iyor,obj_wall) || instance_place(x,y+1+findel.iyor,o_pointblock)) {wyjatek=1};
-            while wyjatek=1 && !instance_place(x,y+1,obj_wall) && !instance_place(x,y+1,o_pointblock) {y+=1}
-            if wyjatek=1 && (instance_place(x,y+1,obj_wall) || instance_place(x,y+1,o_pointblock)) {wyjatek=0}
+                lolo=instance_place(x,y-2,o_marker)
+                lolo.windonip=id
+                if lolo.winduje=id && global.rodzajmaria<>5 {
+                    with(lolo) {if sekwencja=0 && !instance_place(x,y+1,obj_wall) && !instance_place(x,y+1,o_pointblock) && instance_place(x,y+1,o_windas) && huadun=0
+
+                        {
+                            findel=instance_place(x,y+1,o_windas)
+                            findel.spadacz=1
+                            if !instance_place(x,y+1+findel.iyor,obj_wall) && !instance_place(x,y+1+findel.iyor,o_pointblock) {y+=findel.iyor;wyspeed=iyor }
+                            if (instance_place(x,y+1+findel.iyor,obj_wall) || instance_place(x,y+1+findel.iyor,o_pointblock)) {wyjatek=1};
+                            while wyjatek=1 && !instance_place(x,y+1,obj_wall) && !instance_place(x,y+1,o_pointblock) {y+=1}
+                            if wyjatek=1 && (instance_place(x,y+1,obj_wall) || instance_place(x,y+1,o_pointblock)) {wyjatek=0}
+                        }
+                    }}
+
+            }y+=iyor;
+        }
+
+        if type mod 6=1 // jadaca na boki
+        {
+            if instance_place(x+1,y,obj_wall) || instance_place(x+1,y,o_pointblock) && kierunek=1 {kierunek=-1}
+            if instance_place(x-1,y,obj_wall) || instance_place(x-1,y,o_pointblock) && kierunek=-1 {kierunek=1}
+            if instance_place(x+2,y,o_onlyU) && kierunek=1 {kierunek=-2;colspeed=1}//忽悠转向，colspeed为转向时速度
+            if instance_place(x-2,y,o_onlyU) && kierunek=-1 {kierunek=2;colspeed=-1}
+            if kierunek=2 {
+                if colspeed>=1 {kierunek=1}
+                colspeed+=0.1; x+=colspeed;
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
+                    }}
             }
-            }}
+            if kierunek=-2 {
+                if colspeed<=-1 {kierunek=-1}
+                colspeed-=0.1; x+=colspeed;
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
+                    }}
+            }
 
-        }y+=iyor;
-    }
+            if kierunek=1
+            {x+=1
+                if y>room_height {y=-32}
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=1;wxspeed=1}}
+                    }}
+            }
+            if kierunek=-1
+            {x-=1
+                if y>room_height {y=-32}
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x-2,y,obj_wall) && !instance_place(x-2,y,o_pointblock) && x>16 && huadun=0 {x-=1;;wxspeed=-1}}
+                    }}
+            }
 
-if type mod 6=1 // jadaca na boki
-    {
-    if instance_place(x+1,y,obj_wall) || instance_place(x+1,y,o_pointblock) && kierunek=1 {kierunek=-1}
-    if instance_place(x-1,y,obj_wall) || instance_place(x-1,y,o_pointblock) && kierunek=-1 {kierunek=1}
-    if instance_place(x+2,y,o_onlyU) && kierunek=1 {kierunek=-2;colspeed=1}//忽悠转向，colspeed为转向时速度
-    if instance_place(x-2,y,o_onlyU) && kierunek=-1 {kierunek=2;colspeed=-1}
-    if kierunek=2{
-        if colspeed>=1{kierunek=1}
-        colspeed+=0.1; x+=colspeed;
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
-        }}
-    }
-    if kierunek=-2{
-        if colspeed<=-1{kierunek=-1}
-        colspeed-=0.1; x+=colspeed;
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
-        }}
-    }
-
-    if kierunek=1
-        {x+=1
-        if y>room_height {y=-32}
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=1;wxspeed=1}}
-        }}
-        }
-    if kierunek=-1
-        {x-=1
-        if y>room_height {y=-32}
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x-2,y,obj_wall) && !instance_place(x-2,y,o_pointblock) && x>16 && huadun=0{x-=1;;wxspeed=-1}}
-        }}
         }
 
-    }
+
+        if type mod 6=2 // jadaca na boki
+        {
 
 
-if type mod 6=2 // jadaca na boki
-    {
-
-
-    if kierunek=1
-        {x+=2
-        if y>room_height {y=-32}
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x+3,y,obj_wall) && !instance_place(x+3,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=2;wxspeed=2}}
-        }}
-        }
-    if kierunek=-1
-        {x-=2
-        if y>room_height {y=-32}
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x-3,y,obj_wall) && !instance_place(x-3,y,o_pointblock) && x>16 && huadun=0 {x-=2;wxspeed=-2}}
-        }}
-        }
-    if instance_place(x+2,y,obj_wall) || instance_place(x+2,y,o_pointblock) && kierunek=1 {kierunek=-1}
-    if instance_place(x-2,y,obj_wall) || instance_place(x-2,y,o_pointblock) && kierunek=-1 {kierunek=1}
-    if instance_place(x+2,y,o_onlyU) && kierunek=1 {kierunek=-2;colspeed=2}//忽悠转向，colspeed为转向时速度
-    if instance_place(x-2,y,o_onlyU) && kierunek=-1 {kierunek=2;colspeed=-2}
-    if kierunek=2{
-        if colspeed>=2{kierunek=1}
-        colspeed+=0.1; x+=colspeed;
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
-        }}
-    }
-    if kierunek=-2{
-        if colspeed<=-2{kierunek=-1}
-        colspeed-=0.1; x+=colspeed;
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
-        }}
-    }
-    }
-
-if type mod 6=3 // jadaca na boki
-    {
-    if kierunek=1
-        {x+=3
-        if y>room_height {y=-32}
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x+4,y,obj_wall) && !instance_place(x+4,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=3;wxspeed=3}}
-        }}
-        }
-    if kierunek=-1
-        {x-=3
-        if y>room_height {y=-32}
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x-4,y,obj_wall) && !instance_place(x-4,y,o_pointblock) && x>16 && huadun=0 {x-=3};wxspeed=-3}
-        }}
-        }
-    if instance_place(x+3,y,obj_wall) || instance_place(x+3,y,o_pointblock) && kierunek=1 {kierunek=-1}
-    if instance_place(x-3,y,obj_wall) || instance_place(x-3,y,o_pointblock) && kierunek=-1 {kierunek=1}
-    if instance_place(x+2,y,o_onlyU) && kierunek=1 {kierunek=-2;colspeed=3}//忽悠转向，colspeed为转向时速度
-    if instance_place(x-2,y,o_onlyU) && kierunek=-1 {kierunek=2;colspeed=-3}
-    if kierunek=2{
-        if colspeed>=3{kierunek=1}
-        colspeed+=0.1; x+=colspeed;
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
-        }}
-    }
-    if kierunek=-2{
-        if colspeed<=-3{kierunek=-1}
-        colspeed-=0.1; x+=colspeed;
-        if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
-        }}
-    }
-    }
-
-if type mod 6=4 // jadaca na dol
-    {
-    y+=1
-    if global.gameversion<1700{if y>room_height {y=-32}}
-    else{if y>room_height {y=-32}}
-    if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x,y+1,obj_wall) && !instance_place(x,y+1,o_pointblock) && huadun=0 {y+=1};wyspeed=1}
-        }
-        }
-    }
-
-if type mod 6=5 // jadaca do gory
-    {
-    y-=1
-    if global.gameversion<1700{if y<-32 {y=room_height+32}}
-    else{if y<-32 {y=room_height}}
-    if instance_place(x,y-2,o_marker)
-        {
-        lolo=instance_place(x,y-2,o_marker)
-        lolo.windonip=id
-        if global.rodzajmaria<>5{
-        with(lolo){if sekwencja=0 && !instance_place(x,y-5,obj_wall) && !instance_place(x,y-5,o_pointblock) && huadun=0 {y-=1};wyspeed=-1}
-        }
+            if kierunek=1
+            {x+=2
+                if y>room_height {y=-32}
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+3,y,obj_wall) && !instance_place(x+3,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=2;wxspeed=2}}
+                    }}
+            }
+            if kierunek=-1
+            {x-=2
+                if y>room_height {y=-32}
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x-3,y,obj_wall) && !instance_place(x-3,y,o_pointblock) && x>16 && huadun=0 {x-=2;wxspeed=-2}}
+                    }}
+            }
+            if instance_place(x+2,y,obj_wall) || instance_place(x+2,y,o_pointblock) && kierunek=1 {kierunek=-1}
+            if instance_place(x-2,y,obj_wall) || instance_place(x-2,y,o_pointblock) && kierunek=-1 {kierunek=1}
+            if instance_place(x+2,y,o_onlyU) && kierunek=1 {kierunek=-2;colspeed=2}//忽悠转向，colspeed为转向时速度
+            if instance_place(x-2,y,o_onlyU) && kierunek=-1 {kierunek=2;colspeed=-2}
+            if kierunek=2 {
+                if colspeed>=2 {kierunek=1}
+                colspeed+=0.1; x+=colspeed;
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
+                    }}
+            }
+            if kierunek=-2 {
+                if colspeed<=-2 {kierunek=-1}
+                colspeed-=0.1; x+=colspeed;
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
+                    }}
+            }
         }
 
-     }
-     }
+        if type mod 6=3 // jadaca na boki
+        {
+            if kierunek=1
+            {x+=3
+                if y>room_height {y=-32}
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+4,y,obj_wall) && !instance_place(x+4,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=3;wxspeed=3}}
+                    }}
+            }
+            if kierunek=-1
+            {x-=3
+                if y>room_height {y=-32}
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x-4,y,obj_wall) && !instance_place(x-4,y,o_pointblock) && x>16 && huadun=0 {x-=3};wxspeed=-3}
+                    }}
+            }
+            if instance_place(x+3,y,obj_wall) || instance_place(x+3,y,o_pointblock) && kierunek=1 {kierunek=-1}
+            if instance_place(x-3,y,obj_wall) || instance_place(x-3,y,o_pointblock) && kierunek=-1 {kierunek=1}
+            if instance_place(x+2,y,o_onlyU) && kierunek=1 {kierunek=-2;colspeed=3}//忽悠转向，colspeed为转向时速度
+            if instance_place(x-2,y,o_onlyU) && kierunek=-1 {kierunek=2;colspeed=-3}
+            if kierunek=2 {
+                if colspeed>=3 {kierunek=1}
+                colspeed+=0.1; x+=colspeed;
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
+                    }}
+            }
+            if kierunek=-2 {
+                if colspeed<=-3 {kierunek=-1}
+                colspeed-=0.1; x+=colspeed;
+                if instance_place(x,y-2,o_marker) {
+                    lolo=instance_place(x,y-2,o_marker)
+                    lolo.windonip=id
+                    if global.rodzajmaria<>5 {
+                        with(lolo) {if sekwencja=0 && !instance_place(x+2,y,obj_wall) && !instance_place(x+2,y,o_pointblock) && x<room_width+16 && huadun=0 {x+=other.colspeed;wxspeed=other.colspeed}}
+                    }}
+            }
+        }
+
+        if type mod 6=4 // jadaca na dol
+        {
+            y+=1
+            if global.gameversion<1700 {if y>room_height {y=-32}} else {if y>room_height {y=-32}}
+            if instance_place(x,y-2,o_marker) {
+                lolo=instance_place(x,y-2,o_marker)
+                lolo.windonip=id
+                if global.rodzajmaria<>5 {
+                    with(lolo) {if sekwencja=0 && !instance_place(x,y+1,obj_wall) && !instance_place(x,y+1,o_pointblock) && huadun=0 {y+=1};wyspeed=1}
+                }
+            }
+        }
+
+        if type mod 6=5 // jadaca do gory
+        {
+            y-=1
+            if global.gameversion<1700 {if y<-32 {y=room_height+32}} else {if y<-32 {y=room_height}}
+            if instance_place(x,y-2,o_marker) {
+                lolo=instance_place(x,y-2,o_marker)
+                lolo.windonip=id
+                if global.rodzajmaria<>5 {
+                    with(lolo) {if sekwencja=0 && !instance_place(x,y-5,obj_wall) && !instance_place(x,y-5,o_pointblock) && huadun=0 {y-=1};wyspeed=-1}
+                }
+            }
+
+        }
+    }
 }

@@ -2,12 +2,11 @@ category=argument0
 tokill=argument1
 ind=argument2
 
-switch(category){
-  //case 2: //enemy
+switch(category) {
+    //case 2: //enemy
 
-  case 3:{ //scenery
-      if(tokill=ind || (tokill<>42 && ind<>42)) {return true;}
-      else{return false;}
+case 3: { //scenery
+        if(tokill=ind || (tokill<>42 && ind<>42)) {return true;} else {return false;}
       /*else{
           temp_stack = ds_stack_create()
           found=0
@@ -25,19 +24,16 @@ switch(category){
           }
           ds_stack_destroy(temp_stack);
       }*/
-      break;
-  }
+        break;
+}
 
-  case 4:{//marks
-      if (ind = tokill+15+max(0,sign(ind-20))+max(0,sign(ind-24))){return true;}
-      else{
-          if((ind=18 && tokill=6)||(ind=22 && tokill=3)||(ind=29 && tokill=11)||(ind=28 && tokill = 12)||(ind=31 && (tokill=3 || tokill=6))) {return true;}
-          else{
-              if(tokill>18 && (ind<=16 || ind=21 || ind=25)){return true;}
-              else{return false;}
-          }
-      }
-      break;
-  }
-  //case 5: //bonus
+case 4: {//marks
+        if (ind = tokill+15+max(0,sign(ind-20))+max(0,sign(ind-24))) {return true;} else {
+            if((ind=18 && tokill=6)||(ind=22 && tokill=3)||(ind=29 && tokill=11)||(ind=28 && tokill = 12)||(ind=31 && (tokill=3 || tokill=6))) {return true;} else {
+                if(tokill>18 && (ind<=16 || ind=21 || ind=25)) {return true;} else {return false;}
+            }
+        }
+        break;
+}
+    //case 5: //bonus
 }

@@ -13,9 +13,9 @@ applies_to=self
 */
 if global.pauza=0 {
 
-lifetime+=1
+    lifetime+=1
 
-if lifetime>100 {image_alpha-=0.1}
-if image_alpha<=0 {instance_destroy()}
+    if lifetime>100 {image_alpha-=0.1}
+    if image_alpha<=0 {instance_destroy()}
 
 }

@@ -25,27 +25,27 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if setup = 0{
-    if global.remember_color{
-        if(global.yinyang_record[color]=1){yin=1-yin}
+if setup = 0 {
+    if global.remember_color {
+        if(global.yinyang_record[color]=1) {yin=1-yin}
     }
     image_index = 2*color+yin+16*global.assist
     pre_index=image_index
     setup = 1;
 }
 
-if global.celeste{
+if global.celeste {
 
-    if !setonce{mask = instance_create(x,y,o_yinyangmask);setonce=1}
-    if abs(x-o_marker.x+16) <= 32 && abs(y-o_marker.y+48) <=64{
-        with(mask){
-           if place_meeting(x,y,o_marker){other.overlapped=1}
+    if !setonce {mask = instance_create(x,y,o_yinyangmask);setonce=1}
+    if abs(x-o_marker.x+16) <= 32 && abs(y-o_marker.y+48) <=64 {
+        with(mask) {
+            if place_meeting(x,y,o_marker) {other.overlapped=1}
         }
     }
 
-    if overlapped=1{
-        with(mask){
-            if !place_meeting(x,y,o_marker){
+    if overlapped=1 {
+        with(mask) {
+            if !place_meeting(x,y,o_marker) {
                 other.image_index=other.pre_index
                 other.overlapped=0
             }

@@ -192,107 +192,101 @@ action_id=603
 applies_to=self
 */
 // 下雨
-if global.rainy > 0
-{
+if global.rainy > 0 {
     rainy_position_x = view_xview[0] - 32 + random(640 + 160 *2);
     rainy_position_y = view_yview[0] - 32;
 
-    switch (global.rainy)
-    {
-        case 1:
-            // Rainy Level 1
-            if rainy_timer > 0 { rainy_timer -= 1; }
-            if rainy_timer = 0 { instance_create(rainy_position_x, rainy_position_y, o_rain); rainy_timer = 14; }
-            break;
+    switch (global.rainy) {
+    case 1:
+        // Rainy Level 1
+        if rainy_timer > 0 { rainy_timer -= 1; }
+        if rainy_timer = 0 { instance_create(rainy_position_x, rainy_position_y, o_rain); rainy_timer = 14; }
+        break;
 
-        case 2:
-            // Rainy Level 2
-            if rainy_timer > 0 { rainy_timer -= 1; }
-            if rainy_timer = 0 { instance_create(rainy_position_x, rainy_position_y, o_rain); rainy_timer = 4; }
-            break;
+    case 2:
+        // Rainy Level 2
+        if rainy_timer > 0 { rainy_timer -= 1; }
+        if rainy_timer = 0 { instance_create(rainy_position_x, rainy_position_y, o_rain); rainy_timer = 4; }
+        break;
 
-        case 3:
-            // Rainy Level 3
-            if rainy_timer > 0 { rainy_timer -= 1; }
-            instance_create(rainy_position_x, rainy_position_y, o_rain);
-            break;
+    case 3:
+        // Rainy Level 3
+        if rainy_timer > 0 { rainy_timer -= 1; }
+        instance_create(rainy_position_x, rainy_position_y, o_rain);
+        break;
 
-        case 4:
-            // Rainy Level 4
-            repeat (6) instance_create(rainy_position_x, rainy_position_y, o_rain);
-            break;
+    case 4:
+        // Rainy Level 4
+        repeat (6) instance_create(rainy_position_x, rainy_position_y, o_rain);
+        break;
 
-        case 5:
-            // Rainy Level 5
-            repeat (16) instance_create(rainy_position_x + random(640 + 128 *2), rainy_position_y, o_rain);
-            break;
+    case 5:
+        // Rainy Level 5
+        repeat (16) instance_create(rainy_position_x + random(640 + 128 *2), rainy_position_y, o_rain);
+        break;
     }
 }
 
 // 刘醒（流星）
-if global.fallingstars > 0
-{
+if global.fallingstars > 0 {
     fallingstars_position_x = view_xview[0] - 32 + random(640 + 160 *2);
     fallingstars_position_y = view_yview[0] - 32;
 
-    switch (global.fallingstars)
-    {
-        case 1:
-            // Falling Stars Level 1
-            if falling_timer > 0 { falling_timer -= 1; }
-            if falling_timer = 0 { instance_create(fallingstars_position_x, fallingstars_position_y, o_fallingstar); falling_timer = 14; }
-            break;
+    switch (global.fallingstars) {
+    case 1:
+        // Falling Stars Level 1
+        if falling_timer > 0 { falling_timer -= 1; }
+        if falling_timer = 0 { instance_create(fallingstars_position_x, fallingstars_position_y, o_fallingstar); falling_timer = 14; }
+        break;
 
-        case 2:
-            // Falling Stars Level 2
-            if falling_timer > 0 { falling_timer -= 1; }
-            if falling_timer = 0 { instance_create(fallingstars_position_x, fallingstars_position_y, o_fallingstar); falling_timer = 4; }
-            break;
+    case 2:
+        // Falling Stars Level 2
+        if falling_timer > 0 { falling_timer -= 1; }
+        if falling_timer = 0 { instance_create(fallingstars_position_x, fallingstars_position_y, o_fallingstar); falling_timer = 4; }
+        break;
 
-        case 3:
-            // Falling Stars Level 3
-            if falling_timer > 0 { falling_timer -= 1; }
-            instance_create(fallingstars_position_x, fallingstars_position_y, o_fallingstar);
-            break;
+    case 3:
+        // Falling Stars Level 3
+        if falling_timer > 0 { falling_timer -= 1; }
+        instance_create(fallingstars_position_x, fallingstars_position_y, o_fallingstar);
+        break;
 
     }
 }
 
 // 下雪
-if global.snowy > 0
-{
+if global.snowy > 0 {
     snowy_position_x = view_xview[0] - 32 + random(640 + 480 *2);
     snowy_position_y = view_yview[0] - 32;
 
-    switch (global.snowy)
-    {
-        case 1:
-            // Snowy Level 1
-            if snowy_timer > 0 { snowy_timer -= 1; }
-            if snowy_timer = 0 { instance_create(snowy_position_x, snowy_position_y, o_snow); snowy_timer = 14; }
-            break;
+    switch (global.snowy) {
+    case 1:
+        // Snowy Level 1
+        if snowy_timer > 0 { snowy_timer -= 1; }
+        if snowy_timer = 0 { instance_create(snowy_position_x, snowy_position_y, o_snow); snowy_timer = 14; }
+        break;
 
-        case 2:
-            // Snowy Level 2
-            if snowy_timer > 0 { snowy_timer -= 1; }
-            if snowy_timer = 0 { instance_create(snowy_position_x, snowy_position_y, o_snow); snowy_timer = 4; }
-            break;
+    case 2:
+        // Snowy Level 2
+        if snowy_timer > 0 { snowy_timer -= 1; }
+        if snowy_timer = 0 { instance_create(snowy_position_x, snowy_position_y, o_snow); snowy_timer = 4; }
+        break;
 
-        case 3:
-            // Snowy Level 3
-            if snowy_timer > 0 { snowy_timer -= 1; }
-            instance_create(snowy_position_x, snowy_position_y, o_snow);
-            break;
+    case 3:
+        // Snowy Level 3
+        if snowy_timer > 0 { snowy_timer -= 1; }
+        instance_create(snowy_position_x, snowy_position_y, o_snow);
+        break;
 
-        case 4:
-            // Snowy Level 4
-            repeat (6) instance_create(snowy_position_x, snowy_position_y, o_snow);
-            break;
+    case 4:
+        // Snowy Level 4
+        repeat (6) instance_create(snowy_position_x, snowy_position_y, o_snow);
+        break;
 
-        case 5:
-            // Snowy Level 5
-            repeat (16) instance_create(snowy_position_x + random(640 + 128 *2), snowy_position_y, o_snow);
-            break;
+    case 5:
+        // Snowy Level 5
+        repeat (16) instance_create(snowy_position_x + random(640 + 128 *2), snowy_position_y, o_snow);
+        break;
     }
 }
 
@@ -308,9 +302,9 @@ if global.thunder > 0 {
             fofo_thunder.thunder = true;
             random_sound = irandom(2);
             switch (random_sound) {
-                case 0: fofo=sound_play(snd_thunder1); sound_volume(snd_thunder1,global.glosnosc); break;
-                case 1: fofo=sound_play(snd_thunder1); sound_volume(snd_thunder1,global.glosnosc); break;
-                case 2: fofo=sound_play(snd_thunder1); sound_volume(snd_thunder1,global.glosnosc); break;
+            case 0: fofo=sound_play(snd_thunder1); sound_volume(snd_thunder1,global.glosnosc); break;
+            case 1: fofo=sound_play(snd_thunder1); sound_volume(snd_thunder1,global.glosnosc); break;
+            case 2: fofo=sound_play(snd_thunder1); sound_volume(snd_thunder1,global.glosnosc); break;
             }
         }
     }
@@ -323,10 +317,10 @@ wind_offset_x -= speed_wind;
 wind.y = view_yview[0];
 
 switch (global.windy) {
-    case 0: wind.visible = false; break;
-    case 1: speed_wind = 3.0; wind.visible = true; break;
-    case 2: speed_wind = 8.0; wind.visible = true; break;
-    case 3: speed_wind = 18.0; wind.visible = true; break;
+case 0: wind.visible = false; break;
+case 1: speed_wind = 3.0; wind.visible = true; break;
+case 2: speed_wind = 8.0; wind.visible = true; break;
+case 3: speed_wind = 18.0; wind.visible = true; break;
 }
 
 // 黑暗 & 光照 - 具体代码见 Draw 事件中
@@ -346,13 +340,13 @@ if (!surface_exists(surface_id)) {
 
 var scale;
 switch (global.brightness) {
-    case 0: scale = 0; break;
-    case 1: scale = 0.25; break;
-    case 2: scale = 0.5; break;
-    case 3: scale = 1; break;
-    case 4: scale = 1.8; break;
-    case 5: scale = 3; break;
-    default: scale = 0;
+case 0: scale = 0; break;
+case 1: scale = 0.25; break;
+case 2: scale = 0.5; break;
+case 3: scale = 1; break;
+case 4: scale = 1.8; break;
+case 5: scale = 3; break;
+default: scale = 0;
 }
 
 if (fofo_thunder.thunder) {
@@ -362,34 +356,34 @@ if (fofo_thunder.thunder) {
 dark_alpha = min(global.darkness / 9.0, dark_alpha + 0.06); // 黑暗透明度
 
 if (global.darkness > 0) {
-if surface_exists(surface_id) {
-    // 切换到Surface绘图
-    surface_set_target(surface_id);
-    draw_clear_alpha(c_black, dark_alpha);  // 设置黑暗透明度
+    if surface_exists(surface_id) {
+        // 切换到Surface绘图
+        surface_set_target(surface_id);
+        draw_clear_alpha(c_black, dark_alpha);  // 设置黑暗透明度
 
-    //draw_set_color(c_black);
-    draw_set_blend_mode(bm_subtract);
-    for (i = 0; i < ds_list_size(global.light_obj_list); i += 1) {
-        light_instance = ds_list_find_value(global.light_obj_list, i);
-        if instance_exists(light_instance) {
-            if (light_instance <> o_lightlava) {
-                with (light_instance) {
-                    draw_sprite_ext(s_lightcircle, 0, x + light_x - view_xview[0], y + light_y - view_yview[0], scale * light_radius, scale * light_radius, 0, c_white, 1);
+        //draw_set_color(c_black);
+        draw_set_blend_mode(bm_subtract);
+        for (i = 0; i < ds_list_size(global.light_obj_list); i += 1) {
+            light_instance = ds_list_find_value(global.light_obj_list, i);
+            if instance_exists(light_instance) {
+                if (light_instance <> o_lightlava) {
+                    with (light_instance) {
+                        draw_sprite_ext(s_lightcircle, 0, x + light_x - view_xview[0], y + light_y - view_yview[0], scale * light_radius, scale * light_radius, 0, c_white, 1);
+                    }
                 }
-            }
-            // Fluid Lava Light
-            else {
-                with (light_instance) {
-                    draw_sprite_ext(s_lightlava, 0, x + light_x - view_xview[0], y + light_y - view_yview[0], 1, scale * light_radius, 0, c_white, 1);
+                // Fluid Lava Light
+                else {
+                    with (light_instance) {
+                        draw_sprite_ext(s_lightlava, 0, x + light_x - view_xview[0], y + light_y - view_yview[0], 1, scale * light_radius, 0, c_white, 1);
+                    }
+                    //draw_sprite_ext(s_lightlava, 0, view_xview[0] + 320 - view_xview[0], global.poziomwody - view_yview[0], 1, scale * light_radius, 0, c_white, 1);
                 }
-                //draw_sprite_ext(s_lightlava, 0, view_xview[0] + 320 - view_xview[0], global.poziomwody - view_yview[0], 1, scale * light_radius, 0, c_white, 1);
             }
         }
+        draw_set_blend_mode(bm_normal);
+        // 恢复屏幕绘图
+        surface_reset_target();
     }
-    draw_set_blend_mode(bm_normal);
-    // 恢复屏幕绘图
-    surface_reset_target();
-}
 }
 #define Draw_0
 /*"/*'/**//* YYD ACTION

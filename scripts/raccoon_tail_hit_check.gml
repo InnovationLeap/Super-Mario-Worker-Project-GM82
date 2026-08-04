@@ -212,8 +212,7 @@ if place_meeting(_tx, _ty, o_fahlee) {
     if !_already_hit {
         // tail: bounce away from tail (does NOT kill grey spiny)
         // horizontal: always fly away from tail hit position
-        if _victim.x < _tx { _victim.kierunek = -abs(_victim.kierunek); }
-        else { _victim.kierunek = abs(_victim.kierunek); }
+        if _victim.x < _tx { _victim.kierunek = -abs(_victim.kierunek); } else { _victim.kierunek = abs(_victim.kierunek); }
         _victim.image_xscale = _victim.kierunek;
         _victim.grawitacja = -8;
         _victim.sekwencja = 1;
@@ -246,8 +245,7 @@ if place_meeting(_tx, _ty, o_troopashell2) {
         _victim.is_flipped = 1;
         _victim.hurt_delay = 10;
         _victim.grawitacja = -11;
-        if _victim.x < o_marker.x { _victim.kierunek = -1; }
-        else { _victim.kierunek = 1; }
+        if _victim.x < o_marker.x { _victim.kierunek = -1; } else { _victim.kierunek = 1; }
         global.combo1 += 1; global.combo1reset = 0;
         self.hit_list += _vid + "|"
         if global.sample = 1 { sound_play(snd_kick); sound_volume(snd_kick, global.glosnosc); }

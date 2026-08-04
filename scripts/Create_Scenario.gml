@@ -6,24 +6,23 @@ var orig_file, key_exists;
 aaa=0
 czup=0
 
-while aaa=0{
+while aaa=0 {
     bbb=get_integer('Please type how many levels you want to put into this Scenario.',5)
     if bbb>=5 or bbb<=32 {aaa=1}
 }
 
 aaa=0
 
-for (ccc=1;ccc<=bbb;ccc+=1){
+for (ccc=1;ccc<=bbb;ccc+=1) {
     aaa=0
-    while aaa=0{
-    ddd[ccc]=get_open_filename('All Supported Formats (.smwl;.mfl)|*.smwl;*.mfl|Super Mario Worker Level (.smwl)|*.smwl|Mario Worker Level(.mfl)|*.mfl','Please select the level number '+string(ccc)+'')
+    while aaa=0 {
+        ddd[ccc]=get_open_filename('All Supported Formats (.smwl;.mfl)|*.smwl;*.mfl|Super Mario Worker Level (.smwl)|*.smwl|Mario Worker Level(.mfl)|*.mfl','Please select the level number '+string(ccc)+'')
 
     /* File Checking*/
-    if file_exists(ddd[ccc]){
-    aaa=1
-    }
-    else {czup=show_question('Do you want to stop creating a new scenario?')}
-    if czup=1{exit}
+        if file_exists(ddd[ccc]) {
+            aaa=1
+        } else {czup=show_question('Do you want to stop creating a new scenario?')}
+        if czup=1 {exit}
     /*File Checking End*/
 
     }
@@ -50,7 +49,7 @@ if key_exists {
 }
 fff=''
 
-while fff=''{
+while fff='' {
     if jiami=0 {fff=get_save_filename('Mario Worker Scenario (.smws)|*.smws','Scenario.smws')}
     if jiami=1 {fff=get_save_filename('Protected Mario Worker Scenario (.smwp)|*.smwp','Scenario.smwp')}
     fff=filename_change_ext(fff,'.smwsx')
@@ -68,13 +67,13 @@ file_text_write_string(tor,string(aaa))
 file_text_writeln(tor)
 linecount+=1
 
-if mmm != ''{
+if mmm != '' {
     file_text_write_string(tor,string(mmm))
     file_text_writeln(tor)
     linecount += 1
 }
 
-for (ccc=1;ccc<=bbb;ccc+=1){
+for (ccc=1;ccc<=bbb;ccc+=1) {
     GZ_DeCompressFile(ddd[ccc],filename_change_ext(ddd[ccc],'.smwlx'))
     ddd[ccc]=filename_change_ext(ddd[ccc],'.smwlx')
     frr=file_text_open_read(ddd[ccc])
@@ -82,12 +81,12 @@ for (ccc=1;ccc<=bbb;ccc+=1){
     file_text_writeln(tor)
     linecount+=1
 
-    while !file_text_eof(frr){
+    while !file_text_eof(frr) {
         file_text_write_string(tor,file_text_read_string(frr))
         file_text_writeln(tor)
         linecount+=1
         file_text_readln(frr)
-        if file_text_eof(frr){file_text_write_string(tor,file_text_read_string(frr));file_text_writeln(tor)}
+        if file_text_eof(frr) {file_text_write_string(tor,file_text_read_string(frr));file_text_writeln(tor)}
     }
 
     file_text_close(frr)
@@ -113,7 +112,7 @@ if jiami=1 {
     file_rename(newfile,filename_change_ext(newfile,'.smwp'))
 
     if origin = 1 {
-    file_rename(dupa,filename_change_ext(dupa,'.smws'))
+        file_rename(dupa,filename_change_ext(dupa,'.smws'))
     }
 }
 

@@ -77,29 +77,29 @@ global.godmode=0
 global.levelsmooth=-1
 global.beep=1
 
-if variable_global_exists('testmode'){
-if global.testmode=1{
-// NET-SYNC: 返回加载源改回 temp.smwl（testsave）——temp_play 副本已被 Load_Script_Play 删除
-if variable_global_exists('testsave') {
-    global.autosavename = global.testsave
-}
-// [R] DBG: 测关返回将加载的文件状态（temp.smwl 缺失/为 0 → 必然塌缩）
-debug_log("[R] editor_level: testsave_exists=" + string(variable_global_exists('testsave')) + " autosavename=" + global.autosavename + " exists=" + string(file_exists(global.autosavename)) + " size=" + string(file_size(global.autosavename)))
-Load_Script_Main()
-global.testmode=0
-file_delete(global.autosavename)
-global.autosavename=global.autosavename1
-// NET-SYNC: 测关返回（room_restart 会重启本房间，重放/广播必须延后到 Load_Script_Masta 数据填充完成）
-// 房主：标记 net_pending_sync，由 o_edmain Step 在数据完整后触发重放+全量广播；
-// 客户端：请求房主重发全量（测关中静默丢弃的增量由此补齐）
-if instance_exists(o_ednet) {
-    with(o_ednet) {
-        if net_state = 3 {
-            if net_role = 1 {
-                global.net_pending_sync = 1
-            } else {
-                ed_net_ops_request_full(net_sendbuf)
-            }
+if variable_global_exists('testmode') {
+    if global.testmode=1 {
+        // NET-SYNC: 返回加载源改回 temp.smwl（testsave）——temp_play 副本已被 Load_Script_Play 删除
+        if variable_global_exists('testsave') {
+            global.autosavename = global.testsave
         }
-    }
-}}}
+        // [R] DBG: 测关返回将加载的文件状态（temp.smwl 缺失/为 0 → 必然塌缩）
+        debug_log("[R] editor_level: testsave_exists=" + string(variable_global_exists('testsave')) + " autosavename=" + global.autosavename + " exists=" + string(file_exists(global.autosavename)) + " size=" + string(file_size(global.autosavename)))
+        Load_Script_Main()
+        global.testmode=0
+        file_delete(global.autosavename)
+        global.autosavename=global.autosavename1
+        // NET-SYNC: 测关返回（room_restart 会重启本房间，重放/广播必须延后到 Load_Script_Masta 数据填充完成）
+        // 房主：标记 net_pending_sync，由 o_edmain Step 在数据完整后触发重放+全量广播；
+        // 客户端：请求房主重发全量（测关中静默丢弃的增量由此补齐）
+        if instance_exists(o_ednet) {
+            with(o_ednet) {
+                if net_state = 3 {
+                    if net_role = 1 {
+                        global.net_pending_sync = 1
+                    } else {
+                        ed_net_ops_request_full(net_sendbuf)
+                    }
+                }
+            }
+        }}}

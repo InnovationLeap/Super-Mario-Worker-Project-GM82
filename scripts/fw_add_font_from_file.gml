@@ -5,13 +5,13 @@
 
 var style;
 style = 0;
-if(argument2){
+if(argument2) {
     style = style | 1;
 }
-if(argument3){
+if(argument3) {
     style = style | 2;
 }
-if(argument4){
+if(argument4) {
     style = style | 4;
 }
 return external_call(global.__NF_W_ED_AddFontFromFile, argument0, argument1, style);

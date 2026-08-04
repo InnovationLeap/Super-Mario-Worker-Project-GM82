@@ -1,7 +1,6 @@
 // debug_log: 仅在 debug_mode 下添加消息到屏幕显示（3秒消失）并追加到 debug_log.txt
 // argument0 = 完整消息字符串
-if debug_mode
-{
+if debug_mode {
     if (variable_global_exists("debug_msg_list") == false) {
         global.debug_msg_list = ds_list_create();
     }

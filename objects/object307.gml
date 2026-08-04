@@ -4,8 +4,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if global.smoothmode = -1 {visible=false}
-else{visible=true}
+if global.smoothmode = -1 {visible=false} else {visible=true}
 #define Step_2
 /*"/*'/**//* YYD ACTION
 lib_id=1

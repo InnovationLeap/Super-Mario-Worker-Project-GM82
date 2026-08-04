@@ -32,17 +32,17 @@ applies_to=self
 */
 if global.pauza=0 && global.etappokonany=0 {
 
-if kierunek=1 {kierunek=2; ixor=4}
-if kierunek=-1 {kierunek=-2; ixor=-4; image_xscale=-1}
+    if kierunek=1 {kierunek=2; ixor=4}
+    if kierunek=-1 {kierunek=-2; ixor=-4; image_xscale=-1}
 
 
-if y>(iyus-wysokosc) {y-=2}
-if y<(iyus-wysokosc) {y+=2}
-x+=ixor
+    if y>(iyus-wysokosc) {y-=2}
+    if y<(iyus-wysokosc) {y+=2}
+    x+=ixor
 
-image_index+=0.2
-// niszcz po za ekranem
-if y>room_height || x<view_xview[0]-300 || x>view_xview[0]+940 {instance_destroy()}
+    image_index+=0.2
+    // niszcz po za ekranem
+    if y>room_height || x<view_xview[0]-300 || x>view_xview[0]+940 {instance_destroy()}
 
 
 }

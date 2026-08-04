@@ -15,20 +15,15 @@ while buffer_get_pos(net_q) < buffer_get_size(net_q) {
     _op = buffer_read_u8(net_q)
     if _op = 16 {
         ed_net_ops_apply_create(net_q)
-    }
-    else if _op = 17 {
+    } else if _op = 17 {
         ed_net_ops_apply_delete(net_q)
-    }
-    else if _op = 18 {
+    } else if _op = 18 {
         ed_net_ops_apply_grid(net_q)
-    }
-    else if _op = 19 {
+    } else if _op = 19 {
         ed_net_ops_apply_update(net_q)
-    }
-    else if _op = 20 {
+    } else if _op = 20 {
         ed_net_ops_apply_settings(net_q)
-    }
-    else if _op = 21 {
+    } else if _op = 21 {
         buffer_read_u8(net_q)
         _w = buffer_read_u32(net_q)
         _h = buffer_read_u32(net_q)

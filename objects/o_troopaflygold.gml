@@ -30,23 +30,23 @@ applies_to=self
 */
 if global.pauza=0 && global.etappokonany=0 {
 
-if dir>1 { dir = 1 }
-if dir>0 && dir<1 { dir=floor(dir) }
-if dir<0 { dir = 0 }
+    if dir>1 { dir = 1 }
+    if dir>0 && dir<1 { dir=floor(dir) }
+    if dir<0 { dir = 0 }
 
-x = cx+radius*sin(degtorad(angle))
-y = cy+radius*cos(degtorad(angle))
+    x = cx+radius*sin(degtorad(angle))
+    y = cy+radius*cos(degtorad(angle))
 
-if radius <= 150 { angle -= dir*2-1 } else { angle -= (150/radius)*(dir*2-1) }
+    if radius <= 150 { angle -= dir*2-1 } else { angle -= (150/radius)*(dir*2-1) }
 
-if x < o_marker.x { image_xscale = 1 } else { image_xscale = -1 }
-image_index+=0.1
+    if x < o_marker.x { image_xscale = 1 } else { image_xscale = -1 }
+    image_index+=0.1
 
-// uppercut i zwykla smierc
-//if place_meeting(x,y,o_uppercut) {energia-=3; rodzajzabicia=0}
-if rodzajzabicia=1 {instance_destroy(); instance_create(x,y,o_troopagold);instance_create(x,y,o_punkciornik)}
-if rodzajzabicia=7 {instance_destroy(); redduj=instance_create(x,y-1,o_troopashell2);redduj.sprite_index=s_troopashellgold;redduj.is_flipped=1;redduj.grawitacja=-11;redduj.czerwona=3;redduj.tail_kicked=1;redduj.kierunek=kierunek; instance_create(x,y,o_punkciornik)}
-if rodzajzabicia=3 || rodzajzabicia=4 || rodzajzabicia=5 {instance_destroy(); redduj=instance_create(x,y,o_troopadead); lolo=instance_create(x,y,o_punkciornik); lolo.image_index=0;redduj.sprite_index=s_troopashellgold; redduj.czerwona=czerwona;if global.sample=1 {fofo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}}
-if rodzajzabicia=2 {instance_destroy(); redduj=instance_create(x,y,o_troopadead);redduj.sprite_index=s_troopashellgold; redduj.czerwona=czerwona}
+    // uppercut i zwykla smierc
+    //if place_meeting(x,y,o_uppercut) {energia-=3; rodzajzabicia=0}
+    if rodzajzabicia=1 {instance_destroy(); instance_create(x,y,o_troopagold);instance_create(x,y,o_punkciornik)}
+    if rodzajzabicia=7 {instance_destroy(); redduj=instance_create(x,y-1,o_troopashell2);redduj.sprite_index=s_troopashellgold;redduj.is_flipped=1;redduj.grawitacja=-11;redduj.czerwona=3;redduj.tail_kicked=1;redduj.kierunek=kierunek; instance_create(x,y,o_punkciornik)}
+    if rodzajzabicia=3 || rodzajzabicia=4 || rodzajzabicia=5 {instance_destroy(); redduj=instance_create(x,y,o_troopadead); lolo=instance_create(x,y,o_punkciornik); lolo.image_index=0;redduj.sprite_index=s_troopashellgold; redduj.czerwona=czerwona;if global.sample=1 {fofo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}}
+    if rodzajzabicia=2 {instance_destroy(); redduj=instance_create(x,y,o_troopadead);redduj.sprite_index=s_troopashellgold; redduj.czerwona=czerwona}
 
 }

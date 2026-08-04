@@ -14,11 +14,11 @@ rodzajzabicia=0
 killer=1 // czy mozna rozdeptywac 0 - tak, 1 - nie, 2 - tak ale nie zabija,
 odpych=0 // przy rozdeptywaniu ile ma zwiekszyc odskok
 
-if global.rotodisclay=0{depth=0}
-if global.rotodisclay=1{
-   if global.layerord=0{depth=-22}
-   if global.layerord=1{depth=-20}
-   if global.layerord=2{depth=-21}
+if global.rotodisclay=0 {depth=0}
+if global.rotodisclay=1 {
+    if global.layerord=0 {depth=-22}
+    if global.layerord=1 {depth=-20}
+    if global.layerord=2 {depth=-21}
 }
 
 dabusi=1

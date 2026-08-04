@@ -50,79 +50,73 @@ x+=ixor
 if place_meeting(x+ixor,y-1,obj_wall) || place_meeting(x+ixor,y-1,o_pointblock) {instance_destroy(); instance_create(x,y,o_fireexplode)}
 */
 
-//上面是大叔的傻贲代码
+    //上面是大叔的傻贲代码
 
-//下面是新版代码
-//ixor是x速度 iyor是y速度
+    //下面是新版代码
+    //ixor是x速度 iyor是y速度
 
-//初始化x速度
-if kierunek != 233 { ixor = kierunek*5 ; kierunek=233 }
+    //初始化x速度
+    if kierunek != 233 { ixor = kierunek*5 ; kierunek=233 }
 
-//撞墙(横向)
-if ( instance_place(x+ixor,y,obj_wall) || instance_place(x+ixor,y,o_pointblock) ) {
-    lolo=instance_place(x+ixor,y,obj_wall);
-    if(object_get_name(lolo.object_index)='o_ice') {
-        with(lolo){
-            if(hp>1){sound_play(snd_icebreak1);}
-            else{sound_play(snd_icebreak2);}
-            hp-=1;
+    //撞墙(横向)
+    if ( instance_place(x+ixor,y,obj_wall) || instance_place(x+ixor,y,o_pointblock) ) {
+        lolo=instance_place(x+ixor,y,obj_wall);
+        if(object_get_name(lolo.object_index)='o_ice') {
+            with(lolo) {
+                if(hp>1) {sound_play(snd_icebreak1);} else {sound_play(snd_icebreak2);}
+                hp-=1;
+            }
         }
+        dobre = 1;
     }
-    dobre = 1;
-}
 
-//y加速度
-iyor += 0.5
-if iyor > 10 { iyor = 10 }
+    //y加速度
+    iyor += 0.5
+    if iyor > 10 { iyor = 10 }
 
-//弹起
-//弹起
-var nexty;
-nexty=y+iyor+1
-if ( instance_place(x,nexty,obj_halfground) || instance_place(x,nexty,obj_wall) || instance_place(x,nexty,o_pointblock) ) && iyor > 0 && drink=0 && dobre=0 {
-    lolo=instance_place(x,nexty,obj_wall);
-    if(object_get_name(lolo.object_index)='o_ice') {
-        with(lolo){
-            if(hp>1){sound_play(snd_icebreak1);}
-            else{sound_play(snd_icebreak2);}
-            hp-=1;
+    //弹起
+    //弹起
+    var nexty;
+    nexty=y+iyor+1
+    if ( instance_place(x,nexty,obj_halfground) || instance_place(x,nexty,obj_wall) || instance_place(x,nexty,o_pointblock) ) && iyor > 0 && drink=0 && dobre=0 {
+        lolo=instance_place(x,nexty,obj_wall);
+        if(object_get_name(lolo.object_index)='o_ice') {
+            with(lolo) {
+                if(hp>1) {sound_play(snd_icebreak1);} else {sound_play(snd_icebreak2);}
+                hp-=1;
+            }
+            dobre=1;
+        } else {drink=1}
+    }
+    while ( drink=1 ) { if ( instance_place(x,nexty,obj_halfground) || instance_place(x,nexty,obj_wall) || instance_place(x,nexty,o_pointblock) ) { nexty-=1 } else { drink=0;y=nexty;iyor=-4 }
+    }
+
+    //撞墙(纵向)
+    if ( instance_place(x,y+iyor,obj_wall) || instance_place(x,y+iyor,o_pointblock) ) && iyor < 0 && dobre=0 {
+        lolo=instance_place(x,y+iyor,obj_wall);
+        if(object_get_name(lolo.object_index)='o_ice') {
+            with(lolo) {
+                if(hp>1) {sound_play(snd_icebreak1);} else {sound_play(snd_icebreak2);}
+                hp-=1;
+            }
         }
         dobre=1;
     }
-    else{drink=1}
-}
-while ( drink=1 ) { if ( instance_place(x,nexty,obj_halfground) || instance_place(x,nexty,obj_wall) || instance_place(x,nexty,o_pointblock) ) { nexty-=1 }
-else { drink=0;y=nexty;iyor=-4 }
-}
 
-//撞墙(纵向)
-if ( instance_place(x,y+iyor,obj_wall) || instance_place(x,y+iyor,o_pointblock) ) && iyor < 0 && dobre=0 {
-    lolo=instance_place(x,y+iyor,obj_wall);
-    if(object_get_name(lolo.object_index)='o_ice') {
-        with(lolo){
-            if(hp>1){sound_play(snd_icebreak1);}
-            else{sound_play(snd_icebreak2);}
-            hp-=1;
-        }
-    }
-    dobre=1;
-}
+    //这里是敌人的攻击判定
+    if place_meeting(x,y,o_kuppa) && dobre=0 { lolo=instance_place(x,y,o_kuppa) if (lolo.koopa_strength=0 || lolo.oberw=0) {lolo.energia-=1;dobre=1}} //糟比库巴 为什么你加了父对象还要单独写 大叔傻贲
+    if place_meeting(x,y,o_goomba) && dobre=0 { lolo=instance_place(x,y,o_goomba) if(object_get_name(lolo.object_index)<>'o_kuppa') {lolo.rodzajzabicia=3 ; dobre=1} } //火球
+    //爆炸
+    if dobre=1 { instance_destroy(); instance_create(x,y,o_fireexplode) }
 
-//这里是敌人的攻击判定
-if place_meeting(x,y,o_kuppa) && dobre=0 { lolo=instance_place(x,y,o_kuppa) if (lolo.koopa_strength=0 || lolo.oberw=0){lolo.energia-=1;dobre=1}} //糟比库巴 为什么你加了父对象还要单独写 大叔傻贲
-if place_meeting(x,y,o_goomba) && dobre=0 { lolo=instance_place(x,y,o_goomba) if(object_get_name(lolo.object_index)<>'o_kuppa'){lolo.rodzajzabicia=3 ; dobre=1} } //火球
-//爆炸
-if dobre=1 { instance_destroy(); instance_create(x,y,o_fireexplode) }
+    //速度定义
+    x += ixor
+    y += iyor
 
-//速度定义
-x += ixor
-y += iyor
+    //动画
+    if ixor>0 { image_angle -= 10 } else { image_angle +=10 }
 
-//动画
-if ixor>0 { image_angle -= 10 }
-else { image_angle +=10 }
+    // niszcz po za ekranem
 
-// niszcz po za ekranem
-
-if x>view_xview[0]+650 || x<view_xview[0]-10 || y>view_yview[0]+490 {instance_destroy()}
+    if x>view_xview[0]+650 || x<view_xview[0]-10 || y>view_yview[0]+490 {instance_destroy()}
 }

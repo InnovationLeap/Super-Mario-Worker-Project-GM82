@@ -9,7 +9,7 @@ return result; } else { return max(real(argument0),-999) }*/
 var a,b,c;
 a = string_pos(string_copy(argument0,1,1),"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
 if a>0 {
-  b = string_delete(argument0,1,1)
-  c = string(a+9)+b
-  return real(c);
+    b = string_delete(argument0,1,1)
+    c = string(a+9)+b
+    return real(c);
 } else { return real(argument0) }

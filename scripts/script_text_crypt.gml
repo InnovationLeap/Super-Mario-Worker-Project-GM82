@@ -107,18 +107,15 @@ crypt_loops=floor(string_length(string(game_id))*5)
 crypt_key_len=0
 crypt_cycle=0
 
-if argument1 = 1
-{
+if argument1 = 1 {
     crypt_key_len = get_crypt_key1()
 }
-if argument1 = 2
-{
+if argument1 = 2 {
     crypt_key_len = get_crypt_key2()
 }
 // DBG: debug_log("DBG_key: len=" + string(crypt_key_len) + " val[0-4]=" + string(crypt_key_arr[0]) + "," + string(crypt_key_arr[1]) + "," + string(crypt_key_arr[2]) + "," + string(crypt_key_arr[3]) + "," + string(crypt_key_arr[4]))
 
-repeat (5)
-{
+repeat (5) {
     crypt_gmid=crypt_gmid + crypt_gmid;
 };
 
@@ -136,8 +133,7 @@ crypt_src = file_bin_open(argument0, 0)
 // file_bin_seek(crypt_src,0)
 // debug_log("DBG_SRC_BEFORE: b0=" + string(crypt_t1) + " b1=" + string(crypt_t2))
 
-repeat(file_bin_size(crypt_src))
-{
+repeat(file_bin_size(crypt_src)) {
     // gp = 56 正常，cycle%8==0 时返回 54（与 C 工具已验证公式一致）
     if (crypt_cycle > 0) && (crypt_cycle mod 8 == 0) then crypt_gp = 54 else crypt_gp = 56
     crypt_xor = crypt_gp ^ (crypt_key_arr[crypt_keypos] - floor(crypt_cycle/3))
@@ -152,21 +148,16 @@ repeat(file_bin_size(crypt_src))
 
     // 推进计数器
     crypt_cycle += 1
-    if crypt_cycle >= crypt_loops
-    {
+    if crypt_cycle >= crypt_loops {
         crypt_cycle = 0
         crypt_keypos = 0
-        if crypt_first_wrap
-        {
+        if crypt_first_wrap {
             crypt_first_wrap = false
-            if crypt_key_wrap_val >= 0
-            {
+            if crypt_key_wrap_val >= 0 {
                 crypt_key_arr[0] = crypt_key_wrap_val
             }
         }
-    }
-    else
-    {
+    } else {
         crypt_keypos += 1
         if crypt_keypos >= crypt_key_len then crypt_keypos = 0
     }

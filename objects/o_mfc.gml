@@ -36,9 +36,9 @@ applies_to=self
 */
 
 switch (spike_type) {
-    case 0: sprite_index = s_mfc; break;
-    case 1: sprite_index = s_mfc2; break;
-    case 2: sprite_index = s_mfc3; break;
-    case 3: sprite_index = s_mfc4; break;
-    default: sprite_index = s_mfc; break;
+case 0: sprite_index = s_mfc; break;
+case 1: sprite_index = s_mfc2; break;
+case 2: sprite_index = s_mfc3; break;
+case 3: sprite_index = s_mfc4; break;
+default: sprite_index = s_mfc; break;
 }
