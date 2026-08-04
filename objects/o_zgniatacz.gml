@@ -152,6 +152,7 @@ if lilofon>=100 && y<=starty {lilofon=0}
 
 // niszcz po za ekranem
 if y>room_height[0]+64 {instance_destroy()}
+}
 
 
 if global.rodzajmaria=0 && o_marker.shield<=2 && place_meeting(x,y,o_marker) && o_marker.animator2.visible=0 && xiao=0 && global.rodzajmaria<>0 && global.rodzajmaria<>5{xiao=1}
@@ -159,4 +160,3 @@ if place_meeting(x,y,o_marker)&& global.pauza=2 {xiao=0.5}
 if xiao=0.5 && global.pauza=0 {xiao=1}
 if xiao=1 {sound_play(snd_zgniatacz);sprite_index=sprite363;image_speed=0.1;xiao=2}
 if xiao=2 && !sound_isplaying(snd_zgniatacz) && image_index=11 {image_speed=0;image_index=0;sprite_index=sprite157;xiao=0}
-}
