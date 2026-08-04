@@ -1202,6 +1202,7 @@ if costawia6=5 && mouse_check_button(mb_left) && kliknieto=0 && czywybieraniebac
 // NAGRYWANIE
 if costawia6=6 && mouse_check_button(mb_left) && kliknieto=0 && czywybieranieback=0
     {
+    global.dobackup_save=1
     Save_Script_Main()
     if global.autosavename!=''{
     show_message("level saved")}
@@ -1210,6 +1211,7 @@ if costawia6=6 && mouse_check_button(mb_left) && kliknieto=0 && czywybieraniebac
 if costawia6=7 && mouse_check_button(mb_left) && kliknieto=0 && czywybieranieback=0
     {
     global.autosavename=''
+    global.dobackup_save=1
     Save_Script_Main()
     costawia6=0
     }
@@ -4715,6 +4717,7 @@ if czywybieranieback=1000
 if keyboard_check(vk_control) && keyboard_check(global.key_ed_save) &&
 setting_mode = 0 && wiatrak = 0
 {
+    global.dobackup_save=1
     Save_Script_Main()
     if global.autosavename!='' { show_message("level saved"); }
 }

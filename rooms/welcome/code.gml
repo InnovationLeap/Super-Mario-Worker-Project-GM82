@@ -230,6 +230,11 @@ while (file_exists(global.screenshot_path+'\screenshot'+string(global.screenshot
 //EncodingConv init
 ec_init();
 
+// [BK] 旧版关卡备份标志初始化
+global.oldlevel_detected=0
+global.oldlevel_backup_done=0
+global.dobackup_save=0
+
 //SMWGzip init
 gz_init();
 

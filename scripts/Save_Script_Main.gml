@@ -1,3 +1,4 @@
+var _bakpath;
 instance_activate_all()
 global.script_file='' //初始化变量script_file（文件名）
 if !variable_global_exists("autosavename"){
@@ -18,6 +19,23 @@ while global.script_file=''{
         show_message('Invalid directory!')
         global.script_file=''
         global.autosavename=''
+    }
+}
+
+// [BK] 旧版关卡（GM8.0 SMWL）首次保存前备份原始文件：Save As→目标位置（新名.bak.smwl），直接保存→当前关卡所在位置
+if variable_global_exists('dobackup_save'){
+    if global.dobackup_save=1{
+        global.dobackup_save=0
+        if variable_global_exists('oldlevel_detected'){
+            if global.oldlevel_detected=1 && global.oldlevel_backup_done=0{
+                if global.script_kiler!='' && file_exists(global.script_kiler){
+                    _bakpath=filename_change_ext(global.autosavename,'.bak.smwl')
+                    file_copy(global.script_kiler,_bakpath)
+                    global.oldlevel_backup_done=1
+                    debug_log("[BK] old level backup: "+_bakpath+" from "+global.script_kiler)
+                }
+            }
+        }
     }
 }
 

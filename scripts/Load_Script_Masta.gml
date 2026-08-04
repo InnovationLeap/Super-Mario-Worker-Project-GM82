@@ -307,6 +307,7 @@ if gameversion < 1500 && global.layerord=-1 {global.layerord=0}
 if gameversion >= 1500 && gameversion < 1600 && global.layerord=-1 {global.layerord=1}
 if gameversion >= 1600 && global.layerord=-1 {global.layerord=2}
 if gameversion < 1700 {global.MFbeet=0;global.fast_retry=0;}
+if gameversion <= 1712 {global.oldlevel_detected=1}
 }
 if string_copy(aa,0,13)='modifiedmov=1'{global.modifiedmov=1}
 if string_copy(aa,0,13)='rotodisclay=1'{global.rotodisclay=1}
@@ -354,6 +355,7 @@ if string_copy(aa,0,11)='stunblock=0'{global.stunblock=0}
 
 if haveversion=0{
 global.MFbeet=0;global.fast_retry=0;
+global.oldlevel_detected=1
 if filename_ext(global.autosavename)='.mfl' {
 show_message('This level is made with an older version of Super Mario Worker Project/Mario Worker.
 Your level will be transformed and it should be saved as .smwl file.')

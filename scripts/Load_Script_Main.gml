@@ -23,6 +23,11 @@ with(o_edenemyblock){instance_destroy()}
 with(o_edmarkerblock){instance_destroy()}
 with(o_edpassage){instance_destroy()}
 with(o_edsceneriesblock){instance_destroy()}
+// [BK] 真实用户加载时重置旧档检测标志（loadingtemp=1 的 resize/联机全量、testmode=1 的测关返回均不重置）
+if global.loadingtemp=0 && !global.testmode{
+global.oldlevel_detected=0
+global.oldlevel_backup_done=0
+}
 global.script_kiler=global.script_kile
 if file_exists(filename_change_ext(global.script_kile,'.smwlx')){file_delete(filename_change_ext(global.script_kile,'.smwlx'))}
 // [L1] DBG: 解压前源文件存在性/尺寸（temp.smwl 缺失或为 0 会直接导致 GZ 静默失败）
