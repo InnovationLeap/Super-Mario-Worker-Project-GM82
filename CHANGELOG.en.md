@@ -8,10 +8,13 @@
 - Added a new global setting option: "Compress file when saving", enabled by default. When disabled, SMWP will skip GZip compression and save level files directly.
 - Added Region Mode, allowing objects within a selected region to be moved or copied as a group.
 - Added multiplayer editing support, allowing up to 8 players to edit the same level simultaneously.
+- Level files from v1.7.12 and earlier versions will automatically generate a backup copy when saved in this version.
 ### Level Features
 - Added semi-open autoscroll object, allowing free vertical camera movement relative to scrolling nodes.
 - Added a new power-up: Leaf (Raccoon Suit).
 - Added new enemies: Upside-down Spiny (Shell type).
+### Bug Fixes
+- Fixed an issue where Thwomp did not smile when it hits Mario.
 
 ## v1.7.13-beta1 (2026-07-25)
 ### Core Improvements
