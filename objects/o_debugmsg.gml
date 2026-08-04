@@ -57,8 +57,8 @@ if (variable_global_exists("debug_msg_list")) {
             _msg = _entry;
             _timer = 999;
         }
-        _vx = view_xview[0] + 8;
-        _vy = view_yview[0] + _my;
+        _vx = 8;
+        _vy = _my;
         // 最旧消息（列表头部）剩余寿命 <30 帧时向上滑出屏幕：
         // fw 文本不支持透明度渲染，用位移代替 alpha 淡化
         if (_mi = 0 && _timer < 30) {

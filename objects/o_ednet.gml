@@ -185,7 +185,7 @@ if instance_exists(o_edmain) {
         // 标题栏（居中，fw y+18 修正基线偏移）+ 分隔线
         fw_draw_set_font(net_font)
         draw_set_color(c_white)
-        fw_draw_text(_x1 + (_x2 - _x1 - fw_string_width('NETWORK CONSOLE')) / 2, _y1 + 26, 'NETWORK CONSOLE')
+        fw_draw_text(_x1 - _vx + (_x2 - _x1 - fw_string_width('NETWORK CONSOLE')) / 2, _y1 - _vy + 26, 'NETWORK CONSOLE')
         draw_line(_x1 + 4, _y1 + 34, _x2 - 4, _y1 + 34)
         // 状态文本
         if net_state = 0 {
@@ -216,8 +216,8 @@ if instance_exists(o_edmain) {
         }
         fw_draw_set_font(net_font)
         draw_set_color(c_white)
-        fw_draw_text(_x1 + 12, _y1 + 56, '[STATE]  ' + _st)
-        fw_draw_text(_x1 + 12, _y1 + 76, '[PLAYER] ' + net_my_name)
+        fw_draw_text(_x1 - _vx + 12, _y1 - _vy + 56, '[STATE]  ' + _st)
+        fw_draw_text(_x1 - _vx + 12, _y1 - _vy + 76, '[PLAYER] ' + net_my_name)
         // 3+ 人：玩家列表（第一行显示在线数，后续每行一个玩家）
         _peer = '[PEER]   ' + string(net_pl_count + 1) + ' ONLINE'
         _i = 0
@@ -225,7 +225,7 @@ if instance_exists(o_edmain) {
             _peer += '  ' + string(net_pl_id[_i]) + ':' + net_pl_name[_i]
             _i += 1
         }
-        fw_draw_text(_x1 + 12, _y1 + 96, _peer)
+        fw_draw_text(_x1 - _vx + 12, _y1 - _vy + 96, _peer)
         draw_line(_x1 + 4, _y1 + 110, _x2 - 4, _y1 + 110)
         // RENAME 按钮（PLAYER 行右侧，右对齐）
         _btn_x = _x2 - 12 - (fw_string_width('RENAME') + 16)
@@ -242,7 +242,7 @@ if instance_exists(o_edmain) {
             draw_set_color(c_black)
         }
         fw_draw_set_font(net_font)
-        fw_draw_text(_btn_x + 8, _btn_y + 22, 'RENAME')
+        fw_draw_text(_btn_x - _vx + 8, _btn_y - _vy + 22, 'RENAME')
         if _hover && mouse_check_button_pressed(mb_left) {
             _input = get_string('Your name:', net_my_name)
             if string_length(string(_input)) > 24 {
@@ -270,7 +270,7 @@ if instance_exists(o_edmain) {
         // 组1 行（HOST / SESSION）
         fw_draw_set_font(net_font)
         draw_set_color(c_white)
-        fw_draw_text(_lab_x, _row_y + 22, 'HOST:')
+        fw_draw_text(_lab_x - _vx, _row_y - _vy + 22, 'HOST:')
         _btn_x2 = _lab_x + fw_string_width('HOST:') + 12
         _btn_y2 = _row_y
         _bn = 0
@@ -294,21 +294,21 @@ if instance_exists(o_edmain) {
                 draw_set_color(c_gray)
                 draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 1)
                 fw_draw_set_font(net_font)
-                fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+                fw_draw_text(_btn_x2 - _vx + 8, _btn_y2 - _vy + 22, _label)
             } else {
                 if _hover {
                     draw_set_color(c_white)
                     draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 0)
                     draw_set_color(c_black)
                     fw_draw_set_font(net_font)
-                    fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+                    fw_draw_text(_btn_x2 - _vx + 8, _btn_y2 - _vy + 22, _label)
                 } else {
                     draw_set_color(c_black)
                     draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 0)
                     draw_set_color(c_white)
                     draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 1)
                     fw_draw_set_font(net_font)
-                    fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+                    fw_draw_text(_btn_x2 - _vx + 8, _btn_y2 - _vy + 22, _label)
                 }
                 if _hover && mouse_check_button_pressed(mb_left) {
                     if _bn = 0 {
@@ -326,7 +326,7 @@ if instance_exists(o_edmain) {
         _lab_x = _btn_x2 + 12
         fw_draw_set_font(net_font)
         draw_set_color(c_white)
-        fw_draw_text(_lab_x, _row_y + 22, 'SESSION:')
+        fw_draw_text(_lab_x - _vx, _row_y - _vy + 22, 'SESSION:')
         _btn_x2 = _lab_x + fw_string_width('SESSION:') + 12
         _bn = 2
         while _bn < 4 {
@@ -346,21 +346,21 @@ if instance_exists(o_edmain) {
                 draw_set_color(c_gray)
                 draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 1)
                 fw_draw_set_font(net_font)
-                fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+                fw_draw_text(_btn_x2 - _vx + 8, _btn_y2 - _vy + 22, _label)
             } else {
                 if _hover {
                     draw_set_color(c_white)
                     draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 0)
                     draw_set_color(c_black)
                     fw_draw_set_font(net_font)
-                    fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+                    fw_draw_text(_btn_x2 - _vx + 8, _btn_y2 - _vy + 22, _label)
                 } else {
                     draw_set_color(c_black)
                     draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 0)
                     draw_set_color(c_white)
                     draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 1)
                     fw_draw_set_font(net_font)
-                    fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+                    fw_draw_text(_btn_x2 - _vx + 8, _btn_y2 - _vy + 22, _label)
                 }
                 if _hover && mouse_check_button_pressed(mb_left) {
                     if _bn = 2 {
@@ -395,7 +395,7 @@ if instance_exists(o_edmain) {
         _lab_x = _x1 + 12
         fw_draw_set_font(net_font)
         draw_set_color(c_white)
-        fw_draw_text(_lab_x, _row_y + 22, 'CHAT:')
+        fw_draw_text(_lab_x - _vx, _row_y - _vy + 22, 'CHAT:')
         _btn_x2 = _lab_x + fw_string_width('CHAT:') + 12
         _btn_y2 = _row_y
         _bn = 4
@@ -419,21 +419,21 @@ if instance_exists(o_edmain) {
                 draw_set_color(c_gray)
                 draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 1)
                 fw_draw_set_font(net_font)
-                fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+                fw_draw_text(_btn_x2 - _vx + 8, _btn_y2 - _vy + 22, _label)
             } else {
                 if _hover {
                     draw_set_color(c_white)
                     draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 0)
                     draw_set_color(c_black)
                     fw_draw_set_font(net_font)
-                    fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+                    fw_draw_text(_btn_x2 - _vx + 8, _btn_y2 - _vy + 22, _label)
                 } else {
                     draw_set_color(c_black)
                     draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 0)
                     draw_set_color(c_white)
                     draw_rectangle(_btn_x2, _btn_y2, _btn_x2 + _bw2, _btn_y2 + 22, 1)
                     fw_draw_set_font(net_font)
-                    fw_draw_text(_btn_x2 + 8, _btn_y2 + 22, _label)
+                    fw_draw_text(_btn_x2 - _vx + 8, _btn_y2 - _vy + 22, _label)
                 }
                 if _hover && mouse_check_button_pressed(mb_left) {
                     if _bn = 4 {
@@ -468,7 +468,7 @@ if instance_exists(o_edmain) {
             }
             fw_draw_set_font(net_font)
             draw_set_color(c_white)
-            fw_draw_text(_x1 + 12, _my + 4, _line)
+            fw_draw_text(_x1 - _vx + 12, _my - _vy + 4, _line)
             _my -= 18
             _mi -= 1
         }
