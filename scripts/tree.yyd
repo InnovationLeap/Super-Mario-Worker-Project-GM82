@@ -57,6 +57,7 @@
 	|place_meeting_region
 	|delete_coto_check
 	|transC
+	|Version_Info
 	|burax_hit
 	|yes_no
 	|draw_shell

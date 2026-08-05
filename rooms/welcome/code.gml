@@ -1,7 +1,4 @@
-//Important: Change the version
-global.version=1713
-global.betanumber=2
-global.versiontext='v1.7.13-beta2'
+Version_Info()
 
 global.musicfile=''
 global.musicfile2=''
