@@ -1,6 +1,6 @@
 # Super Mario Worker Project - Changelog
 
-## v1.8.0-beta1
+## v1.8.0-beta.1
 ### Editor
 - Added support for using the `PgUp` / `PgDown` keys to jump between the starting position and Check Point.
 - Added support for customizing editor shortcuts in Global Options.

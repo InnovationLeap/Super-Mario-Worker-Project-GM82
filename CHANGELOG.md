@@ -1,6 +1,6 @@
 # Super Mario Worker Project - 更新日志
 
-## v1.8.0-beta1
+## v1.8.0-beta.1
 ### 编辑功能
 - 支持使用 `PgUp` / `PgDown` 键在起点、Check Point 的所在位置之间跳转。
 - 支持在全局设置中修改编辑界面的快捷键。
