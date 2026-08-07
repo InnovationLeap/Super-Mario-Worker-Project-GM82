@@ -608,6 +608,11 @@ view_hview[0] = 480 * zoom_ratio;
 view_xview[0] = round(min(room_width - 640 * zoom_ratio, max(0, scroolx - 320 * zoom_ratio)) / 32) * 32;
 view_yview[0] = round(min(room_height - 480 * zoom_ratio, max(0, scrooly - 240 * zoom_ratio)) / 32) * 32;
 if variable_global_exists('script_kile') {
+    // 防御：script_kile 必须是数值（文件句柄/0/-1），字符串（取消对话框/GZ 失败残留路径）一律归零，
+    // 否则 real() 对空字符串/路径会报 Error in function real()
+    if is_string(global.script_kile) {
+        global.script_kile = 0
+    }
     // 注意：script_kile 是文件句柄（正数），不能假设恒为 1（联机中 send_file/apply_file 的 file_bin_open 会使句柄递增）
     // [S] DBG+自愈：句柄无效但有待同步标记时，按 script_kiler 路径重建句柄（覆盖 F3 返回/open_read 失败=0 场景）
     // GM8 的 && 不短路且未定义全局会读成 0，必须嵌套 if 逐层保护，避免实数对字符串比较
@@ -1190,8 +1195,14 @@ if scrolla<=1 && scrollb<=1 {
             var warning; warning=show_question('Do you REALLY want to load a level WITHOUT the current level saved???')
             if warning=1 {
                 global.autosavename='';Load_Script_Main()
-                // NET-SYNC: 房主 Load 后全量同步给客户端（Load_Script_Masta 完成后触发，数据/设置已填充完整）
-                global.net_pending_sync=1}
+                // NET-SYNC: 仅加载成功（script_kile=文件句柄>0）才触发全量同步；取消对话框时 script_kile=''，不标记
+                // GM8 字符串与数字不能混比较（Cannot compare arguments），且 && 可能不短路，须嵌套 if 逐层保护
+                if is_real(global.script_kile) {
+                    if global.script_kile > 0 {
+                        global.net_pending_sync=1
+                    }
+                }
+            }
             if warning=0 {exit}
         }
     }
@@ -4461,8 +4472,14 @@ setting_mode = 0 && wiatrak = 0 {
         var warning; warning=show_question('Do you REALLY want to load a level WITHOUT the current level saved???')
         if warning=1 {
             global.autosavename='';Load_Script_Main()
-            // NET-SYNC: 房主 Load 后全量同步给客户端（Load_Script_Masta 完成后触发，数据/设置已填充完整）
-            global.net_pending_sync=1}
+            // NET-SYNC: 仅加载成功（script_kile=文件句柄>0）才触发全量同步；取消对话框时 script_kile=''，不标记
+            // GM8 字符串与数字不能混比较（Cannot compare arguments），且 && 可能不短路，须嵌套 if 逐层保护
+            if is_real(global.script_kile) {
+                if global.script_kile > 0 {
+                    global.net_pending_sync=1
+                }
+            }
+        }
         if warning=0 {exit}
     }
 }

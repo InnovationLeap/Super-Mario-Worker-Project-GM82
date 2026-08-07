@@ -4,7 +4,10 @@ if !variable_global_exists("autosavename") {
 }
 if global.autosavename='' {
     global.script_kile=get_open_filename('All Supported Formats (.smwl;.mfl)|*.smwl;*.mfl|Super Mario Worker Level (.smwl)|*.smwl|Mario Worker Level(.mfl)|*.mfl','')
-    global.autosavename=global.script_kile
+    // 取消对话框：script_kile 保持 ''，不进入加载分支（空字符串由 o_edmain End Step 的 is_string 防御归零，避免 real('') 报错）
+    if global.script_kile != '' {
+        global.autosavename=global.script_kile
+    }
 } else {
     global.script_kile=global.autosavename
 }
