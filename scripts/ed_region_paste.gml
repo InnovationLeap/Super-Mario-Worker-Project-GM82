@@ -89,8 +89,11 @@ if global.ed_region_list != -1 {
                     _new_id.windy = _id.windy
                     _new_id.darkness = _id.darkness
                     _new_id.brightness = _id.brightness
-                    _new_id.camera_endX = _id.camera_endX
-                    _new_id.camera_endY = _id.camera_endY
+                    _new_id.camera_endX = _id.camera_endX + _iox
+                    _new_id.camera_endY = _id.camera_endY + _ioy
+                    _new_id.bgp = _id.bgp
+                    _new_id.water_endX = _id.water_endX + _iox
+                    _new_id.water_endY = _id.water_endY + _ioy
                 }
                 if _id.object_index == o_edpassage {
                     _new_id.wejscie = _id.wejscie
@@ -107,6 +110,30 @@ if global.ed_region_list != -1 {
                     _new_id.fishendY = _id.fishendY + _ioy
                     _new_id.shell_type = _id.shell_type
                     _new_id.spike_type = _id.spike_type
+                    _new_id.jumph = _id.jumph
+                    _new_id.type = _id.type
+                    if _id.coto == 20 {
+                        _new_id.rotoord = _id.rotoord
+                        _new_id.is_petal = _id.is_petal
+                        for (_j = 1; _j <= _id.rotoord; _j += 1) {
+                            _new_id.rotor[_j] = _id.rotor[_j]
+                            _new_id.rotoa[_j] = _id.rotoa[_j]
+                            _new_id.rotos[_j] = _id.rotos[_j]
+                            if _id.is_petal {
+                                _new_id.rotomr[_j] = _id.rotomr[_j]
+                                _new_id.rotors[_j] = _id.rotors[_j]
+                            }
+                        }
+                    }
+                    if _id.coto == 39 {
+                        _new_id.rotoord = _id.rotoord
+                        for (_j = 1; _j <= _id.rotoord; _j += 1) {
+                            _new_id.rotor[_j] = _id.rotor[_j]
+                            _new_id.rotoa[_j] = _id.rotoa[_j]
+                            _new_id.rotoc[_j] = _id.rotoc[_j]
+                            _new_id.rotod[_j] = _id.rotod[_j]
+                        }
+                    }
                 }
                 if _id.object_index == o_edsceneriesblock {
                     _new_id.block_index = _id.block_index

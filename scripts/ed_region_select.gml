@@ -173,6 +173,20 @@ if _state == 2 {
                             if instance_exists(_id) {
                                 _id.ed_drag_sx = _id.x
                                 _id.ed_drag_sy = _id.y
+                                if _id.object_index == o_edenemyblock {
+                                    _id.ed_drag_fx = _id.fishendX
+                                    _id.ed_drag_fy = _id.fishendY
+                                }
+                                if _id.object_index == o_edmarkerblock {
+                                    _id.ed_drag_wx = _id.water_endX
+                                    _id.ed_drag_wy = _id.water_endY
+                                    _id.ed_drag_cx = _id.camera_endX
+                                    _id.ed_drag_cy = _id.camera_endY
+                                }
+                                if _id.object_index == o_edpassage {
+                                    _id.ed_drag_ex = _id.exitx
+                                    _id.ed_drag_ey = _id.exity
+                                }
                             }
                             _i += 1
                         }
@@ -269,7 +283,25 @@ if _state == 3 {
                                     _id.x = _id.ed_drag_sx + _ox
                                     _id.y = _id.ed_drag_sy + _oy
                                 }
+                                if _id.coto == 32 {
+                                    _id.water_endX = _id.ed_drag_wx + _ox
+                                    _id.water_endY = _id.ed_drag_wy + _oy
+                                }
+                                if _id.coto == 34 {
+                                    _id.camera_endX = _id.ed_drag_cx + _ox
+                                    _id.camera_endY = _id.ed_drag_cy + _oy
+                                }
                             } else {
+                                if _id.object_index == o_edenemyblock {
+                                    if _id.coto == 40 || _id.coto == 41 {
+                                        _id.fishendX = _id.ed_drag_fx + _ox
+                                        _id.fishendY = _id.ed_drag_fy + _oy
+                                    }
+                                }
+                                if _id.object_index == o_edpassage {
+                                    _id.exitx = _id.ed_drag_ex + _ox
+                                    _id.exity = _id.ed_drag_ey + _oy
+                                }
                                 _id.x = _id.ed_drag_sx + _ox
                                 _id.y = _id.ed_drag_sy + _oy
                             }
