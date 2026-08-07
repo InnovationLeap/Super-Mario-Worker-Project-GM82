@@ -110,6 +110,7 @@
 	|_NF_W_CreateArgs
 	|is_button_pressed
 	|ed_hit
+	|input_sync_start
 +Net
 	|ed_net_write_str
 	|ed_net_read_str

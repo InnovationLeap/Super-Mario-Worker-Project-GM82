@@ -16,6 +16,7 @@
 ### Bug Fixes
 - Fixed an issue where Thwomp did not smile when it hits Mario.
 - Fixed a crash when the custom music ID exceeds the music pack list (or the music pack is missing); it now silently skips the track.
+- Fixed held keys (e.g. directional / run keys) being lost at level start or after a death restart.
 
 ## v1.7.13-beta1 (2026-07-25)
 ### Core Improvements

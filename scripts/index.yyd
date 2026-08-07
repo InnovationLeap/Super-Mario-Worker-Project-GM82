@@ -1129,6 +1129,7 @@ gz_selftest
 _NF_W_CreateArgs
 is_button_pressed
 ed_hit
+input_sync_start
 raccoon_tail_hit_check
 blocks_palette_data
 background_palette_data
