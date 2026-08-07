@@ -1,3 +1,5 @@
+var _cm_id, _cm_total;
+_cm_id = real(global.muzyka)
 if global.muzyka='1' {mm_play_ext('.\Data\MW\ktkm1.dll',0); }
 if global.muzyka='2' {mm_play_ext('.\Data\MW\ktkm5.dll',0); }
 if global.muzyka='3' {mm_play_ext('.\Data\MW\ktkm6.dll',0); }
@@ -79,4 +81,14 @@ if real(global.muzyka)>=205&&real(global.muzyka)<=230 {mm_play_ext('.\Data\Boss\
 if real(global.muzyka)>=301&&real(global.muzyka)<=400 {mm_play_ext('.\Data\OM\om'+string(real(global.muzyka)-300)+'.ogg',0); }
 
 //自定义
-if real(global.muzyka)>=627 {mm_play_ext(global.customMusicDirectory+global.customMusic+'\'+global.customMusicFile[real(global.muzyka)-626],0)}
+if _cm_id>=627 {
+    _cm_id = _cm_id-626
+    _cm_total = 0
+    if variable_global_exists("customMusicTotal") {_cm_total = global.customMusicTotal}
+    if _cm_id>=1 && _cm_id<=_cm_total && variable_global_exists("customMusicFile") {
+        mm_play_ext(global.customMusicDirectory+global.customMusic+'\'+global.customMusicFile[_cm_id],0)
+    } else {
+        debug_log('Music_Play: BGM '+string(_cm_id+626)+' 越界（自定义音乐共 '+string(_cm_total)+' 首），静默跳过')
+        mm_stop_all_ext()
+    }
+}

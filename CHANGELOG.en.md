@@ -15,6 +15,7 @@
 - Added new enemies: Upside-down Spiny (Shell type).
 ### Bug Fixes
 - Fixed an issue where Thwomp did not smile when it hits Mario.
+- Fixed a crash when the custom music ID exceeds the music pack list (or the music pack is missing); it now silently skips the track.
 
 ## v1.7.13-beta1 (2026-07-25)
 ### Core Improvements

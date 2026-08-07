@@ -289,7 +289,13 @@ if global.musicon=3 && !keyboard_check_pressed(global.key_musictoggle) {
     if global.local_muzyka>=201&&global.local_muzyka<=204 {mm_play_ext('.\Data\Boss\boss'+string(global.local_muzyka-200)+'.dll',0); }
     if global.local_muzyka>=205&&global.local_muzyka<=230 {mm_play_ext('.\Data\Boss\boss'+string(global.local_muzyka-200)+'.ogg',0); }
     if global.local_muzyka>=301&&global.local_muzyka<=400 {mm_play_ext('.\Data\OM\om'+string(global.local_muzyka-300)+'.ogg',0);}
-    if global.local_muzyka>=627 {mm_play_ext(global.customMusicDirectory+global.customMusic+'\'+global.customMusicFile[global.local_muzyka-626],0)}
+    if global.local_muzyka>=627 {
+        if variable_global_exists("customMusicTotal") && variable_global_exists("customMusicFile") {
+            if global.local_muzyka-626>=1 && global.local_muzyka-626<=global.customMusicTotal {
+                mm_play_ext(global.customMusicDirectory+global.customMusic+'\'+global.customMusicFile[global.local_muzyka-626],0)
+            } else {debug_log('o_edmain: BGM '+string(global.local_muzyka)+' 越界（共 '+string(global.customMusicTotal)+' 首），跳过')}
+        } else {debug_log('o_edmain: 自定义音乐列表未加载，跳过 BGM '+string(global.local_muzyka))}
+    }
 }
 
 global.autopair=real(global.autopair)
@@ -3923,9 +3929,12 @@ if czywybieranieback=100 {
         if muzior2>=205&&muzior2<=230 {mm_play_ext('.\Data\Boss\boss'+string(muzior2-200)+'.ogg',0); }
         if muzior2>=301&&muzior2<=400 {mm_play_ext('.\Data\OM\om'+string(muzior2-300)+'.ogg',0);}
         if muzior2>626 {
-            usePackage = global.customMusic;
-            useName = global.customMusicFile[muzior2-626]
-            mm_play_ext(global.customMusicDirectory+usePackage+'\'+useName,0)}
+            if variable_global_exists("customMusicTotal") && variable_global_exists("customMusicFile") && muzior2-626>=1 && muzior2-626<=global.customMusicTotal {
+                usePackage = global.customMusic;
+                useName = global.customMusicFile[muzior2-626]
+                mm_play_ext(global.customMusicDirectory+usePackage+'\'+useName,0)
+            } else {debug_log('o_edmain: BGM 预览 '+string(muzior2)+' 越界，跳过')}
+        }
     }
     if mouse_check_button(mb_left) && quitbgmselect=1
     {if(setting_mode>0) {setting_mode-=1}
