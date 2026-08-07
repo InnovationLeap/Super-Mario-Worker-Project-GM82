@@ -10,3 +10,4 @@ debug_log.txt
 /screenshot*
 bass.dll
 bass_fx.dll
+*.smwlx
