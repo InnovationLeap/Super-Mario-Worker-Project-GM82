@@ -4,7 +4,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-sekwencja=0
+state=0
 image_speed=0
 
 // 发光位置微调
@@ -20,9 +20,9 @@ applies_to=self
 if global.pauza=0 {
 
     image_index+=0.2
-    if sekwencja=0 {
+    if state=0 {
         if (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock) ) {y-=1}
-        if (!place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock)) {sekwencja=1}
+        if (!place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock)) {state=1}
     }
 
 

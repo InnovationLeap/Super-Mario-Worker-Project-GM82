@@ -6,8 +6,8 @@ applies_to=self
 */
 startx=x
 starty=y
-sekwencja=0
-iyor=0
+state=0
+vy_offset=0
 zabity=0
 ixor=0
 iyor2=-4
@@ -21,16 +21,16 @@ if global.pauza=0 {
 
     if zabity=0 {
         image_index = 0
-        if sekwencja=0 && iyor<200 {y+=3; iyor+=3}
-        if sekwencja=0 && iyor>=200 {sekwencja=1}
-        if sekwencja=1 && iyor>0 {y-=3; iyor-=3}
-        if sekwencja=1 && iyor<=0 {sekwencja=0}
+        if state=0 && vy_offset<200 {y+=3; vy_offset+=3}
+        if state=0 && vy_offset>=200 {state=1}
+        if state=1 && vy_offset>0 {y-=3; vy_offset-=3}
+        if state=1 && vy_offset<=0 {state=0}
     }
 
     if zabity=1 {
         if x>o_marker {ixor=5}
         if x>o_marker {ixor=-5}
-        global.przeszedllevel=100
+        global.level_cleared=100
         zabity=2
         mm_stop_all_ext();
 

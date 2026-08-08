@@ -16,7 +16,7 @@ applies_to=self
 */
 x = mouse_x
 y = mouse_y
-if o_edmain.costawia3=42 {
+if o_edmain.place_code3=42 {
     window_set_cursor(cr_none)
     visible = 1
 } else {

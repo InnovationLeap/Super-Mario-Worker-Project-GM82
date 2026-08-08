@@ -36,7 +36,7 @@
 		|o_bonuspanding
 		|o_bonus1up
 		|o_new1up
-		|o_bonusburak
+		|o_bonusbeetroot
 		|o_bonusraccoon
 		|o_bonusdead
 		|o_bonusflower
@@ -50,7 +50,7 @@
 		|o_pointblock
 		|o_pointblock2
 		|o_pointblock3
-		|o_pointblockpodbijacz
+		|o_blockbumper
 	+o_enemy
 		|o_boo
 		|o_buzzybeetle
@@ -61,60 +61,60 @@
 		|o_cannonig
 		|o_elecoral
 		|o_enemyfire
-		|o_fahdead
+		|o_fahleedead
 		|o_fahlee
 		|o_fakitu
-		|o_fakitubomb
+		|o_fahleeball
 		|o_fakitudead
 		|o_fff
 		|o_firerico
 		|o_firesister
 		|o_flyfisharea
 		|o_FSdead
-		|o_gnonnac
+		|o_cannonfollowflip
 		|o_goldcenter
 		|o_goomba
 		|o_goombadead
 		|o_goombadead2
 		|o_hammerbros
 		|o_hammerbrosdead
-		|o_kolcozwierz
-		|o_kolcozwierzdead
+		|o_spiny
+		|o_spinydead
 		|o_kickeffect
-		|o_kolec
-		|o_kuppa
-		|o_kuppadie
-		|o_kuppafire
+		|o_spike
+		|o_bowser
+		|o_bowserdead
+		|o_bowserfire
 		|o_lakitu
 		|o_lakitubomb
 		|o_lakitudead
 		|o_lava
 		|o_lavaball
-		|o_lavadier
+		|o_lavabottom
 		|o_mfc
-		|o_miejscowapirania
-		|o_mlotekmalpki
-		|o_nonnac
-		|o_pirania
-		|o_piraniablue
-		|o_piraniablueshot
-		|o_piraniagrey
-		|o_piraniagreyshot
-		|o_piraniainv
-		|o_piraniainvshot
-		|o_piraniashot
+		|o_groundpiranha
+		|o_hammerbro
+		|o_cannonflip
+		|o_piranha
+		|o_piranhablue
+		|o_piranhablueflip
+		|o_piranhagrey
+		|o_piranhagreyflip
+		|o_piranhafire
+		|o_piranhafireflip
+		|o_piranhaflip
 		|o_rotostill
-		|o_rybeka
-		|o_rybeka2
-		|o_rybeka3
-		|o_rybekadie
-		|o_rybekb
-		|o_rybekb2
-		|o_rybekb3
-		|o_rybekc
-		|o_rybekc3
-		|o_rybekd3
-		|o_rynekd
+		|o_fishred
+		|o_fishred2
+		|o_fishred3
+		|o_fishdead
+		|o_fishgreen
+		|o_fishgreen2
+		|o_fishgreen3
+		|o_fishblue
+		|o_fishblue3
+		|o_fishyellow3
+		|o_fishyellow
 		|o_shyguy
 		|o_swimfisharea
 		|o_troopa
@@ -128,9 +128,9 @@
 		|o_troopared
 		|o_troopashell
 		|o_troopashell2
-		|o_wiatrak
-		|o_wiatrakanim
-		|o_zgniatacz
+		|o_roto
+		|o_rotoanim
+		|o_thwomp
 		|object112
 		|object270
 		|object356
@@ -141,9 +141,9 @@
 		|o_exitar
 		|o_exitar2
 		|o_gameover
-		|o_punkciornik
-		|o_punkciornik2
-		|o_punkciornik3
+		|o_scorepop
+		|o_scorepop2
+		|o_scorepop3
 		|o_windas
 		|o_exiter
 		|o_scroll
@@ -158,7 +158,7 @@
 		|o_region
 		|o_smoke
 	+o_others
-		|o_burax
+		|o_beetroot
 		|o_raccoon_tail
 		|o_fireball
 		|o_fireexplode
@@ -168,7 +168,7 @@
 		|obj_halfwall
 		|obj_static
 		|obj_halfground
-		|pokazywator
+		|o_preview
 		|o_textDrawer
 		|o_textlayer
 		|o_yinyangmask
@@ -199,6 +199,6 @@
 +o_mario
 	|o_mario
 	|o_mario2
-	|o_marioeffektor
+	|o_mariofx
 	|o_marker
-	|o_skuszak
+	|o_mariodead

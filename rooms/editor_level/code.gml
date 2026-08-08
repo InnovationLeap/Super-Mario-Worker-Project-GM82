@@ -2,10 +2,10 @@ room_caption='Super Mario Worker Project '+global.versiontext
 
 global.przeciwnicyzatrzymani=0
 global.pauza=0
-global.paralax=0
+global.parallax=0
 global.paralax2=0
 global.paralax3=0
-global.muzyka=1
+global.bgm_id=1
 global.bgp=1
 global.musicon=0
 
@@ -39,17 +39,17 @@ global.stunblock=0
 //global.key_fire=90
 //global.key_up=38
 //global.key_down=40
-global.poziomwody=800
+global.water_level=800
 global.coins=0
 global.efekty=10
 global.sample=1
-global.glosnosc=1
+global.game_volume=1
 
 
 global.rodzajmaria=0
 global.zycia=global.initiallives
 global.coins=0
-global.punkty=0
+global.score=0
 
 global.combo1=0
 global.combo1reset=0
@@ -63,16 +63,16 @@ global.petal_spotlight=0
 global.petal_max_promien=200
 global.petal_promien_szybkosc=1
 
-global.etapnazwa='Level 1'
-global.etapautor=''
-global.etapczas=600
-global.etapgravity=5
-global.etapkuppa=5
+global.level_name_edit='Level 1'
+global.level_author=''
+global.level_time=600
+global.level_gravity=5
+global.level_bowser_hp=5
 global.save=0
 global.savename='null'
 global.wysokoscwody=1000
 global.background=0
-global.przeszedllevel=0
+global.level_cleared=0
 global.godmode=0
 global.levelsmooth=-1
 global.beep=1

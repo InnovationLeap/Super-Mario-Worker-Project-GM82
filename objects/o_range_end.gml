@@ -5,7 +5,7 @@ action_id=603
 applies_to=self
 */
 start = id;
-costawia = 0;
+place_code = 0;
 label = "";
 activated = 0
 #define Step_2

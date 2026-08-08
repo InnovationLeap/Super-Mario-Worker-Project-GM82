@@ -5,12 +5,12 @@ action_id=603
 applies_to=self
 */
 image_speed = 0
-podbity = 0
+bumped = 0
 showMessage = -1
 showed = 0
 textMessage = ""
-sekwencja=0
-stefan=0
+state=0
+block_frame=0
 setonce=0
 
 // 发光位置微调
@@ -24,25 +24,25 @@ action_id=603
 applies_to=self
 */
 if place_meeting(x, y, o_thwompdetector) {
-    podbity = 1;
+    bumped = 1;
 }
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
 applies_to=self
 */
-if podbity=1 && setonce=0 {
+if bumped=1 && setonce=0 {
     instance_create(x,y-32,o_uppercut)
     if (o_textDrawer.target = id) {
         global.isDisplaying *= -1
         if global.sample=1 && global.beep=1 {
             if(global.isDisplaying = -1) {
-                fofo=sound_play(snd_messageoff);
-                sound_volume(snd_messageoff,global.glosnosc)
+                tmp2=sound_play(snd_messageoff);
+                sound_volume(snd_messageoff,global.game_volume)
                 fw_release_cache()
             } else {
-                fofo=sound_play(snd_message);
-                sound_volume(snd_message,global.glosnosc)
+                tmp2=sound_play(snd_message);
+                sound_volume(snd_message,global.game_volume)
             }
         }
     } else {
@@ -52,8 +52,8 @@ if podbity=1 && setonce=0 {
         o_textDrawer.target = id
         o_textDrawer.pointerReset = 1
         if global.sample=1 && global.beep=1 {
-            fofo=sound_play(snd_message);
-            sound_volume(snd_message,global.glosnosc)
+            tmp2=sound_play(snd_message);
+            sound_volume(snd_message,global.game_volume)
         }
     }
     setonce=1
@@ -64,9 +64,9 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if podbity=0 {draw_sprite(s_pointblock5,stefan,x,y)} else {
-    if sekwencja<10 {draw_sprite_ext(s_pointblock2,stefan,x+16,y+16-sekwencja*2,1,1,0,c_white,1); sekwencja+=1; }
-    if sekwencja>=10 && sekwencja<20 {draw_sprite_ext(s_pointblock2,stefan,x+16,y+16-40+sekwencja*2,1,1,0,c_white,1); sekwencja+=1; }
-    if sekwencja=20 {podbity=0;sekwencja=0;setonce=0}
+if bumped=0 {draw_sprite(s_pointblock5,block_frame,x,y)} else {
+    if state<10 {draw_sprite_ext(s_pointblock2,block_frame,x+16,y+16-state*2,1,1,0,c_white,1); state+=1; }
+    if state>=10 && state<20 {draw_sprite_ext(s_pointblock2,block_frame,x+16,y+16-40+state*2,1,1,0,c_white,1); state+=1; }
+    if state=20 {bumped=0;state=0;setonce=0}
 }
-stefan=pokazywator.wenhao
+block_frame=o_preview.qblock_preview

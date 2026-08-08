@@ -1,23 +1,23 @@
 script_file=global.script_kile
-global.etapnazwa=file_text_read_string(script_file)
+global.level_name_edit=file_text_read_string(script_file)
 file_text_readln(script_file)
-global.etapautor=file_text_read_string(script_file)
+global.level_author=file_text_read_string(script_file)
 file_text_readln(script_file)
-global.etapczas=real(file_text_read_string(script_file))
+global.level_time=real(file_text_read_string(script_file))
 file_text_readln(script_file)
-global.etapgravity=real(file_text_read_string(script_file))
+global.level_gravity=real(file_text_read_string(script_file))
 file_text_readln(script_file)
-global.etapkuppa=real(file_text_read_string(script_file))
+global.level_bowser_hp=real(file_text_read_string(script_file))
 file_text_readln(script_file)
-global.poziomwody=real(file_text_read_string(script_file))
+global.water_level=real(file_text_read_string(script_file))
 file_text_readln(script_file)
 global.background=real(file_text_read_string(script_file))
 global.local_background=global.background
 file_text_readln(script_file)
-global.muzyka=real(file_text_read_string(script_file))
-global.local_muzyka=global.muzyka
+global.bgm_id=real(file_text_read_string(script_file))
+global.local_muzyka=global.bgm_id
 // [M] DBG: Masta 读到的关键设置（默认空态 bg=0 可据此判定）
-debug_log("[M] Load_Script_Masta: bg=" + string(global.background) + " muzyka=" + string(global.muzyka) + " etapnazwa=" + global.etapnazwa)
+debug_log("[M] Load_Script_Masta: bg=" + string(global.background) + " bgm_id=" + string(global.bgm_id) + " level_name_edit=" + global.level_name_edit)
 file_text_readln(script_file)
 global.checkpassage=0
 haveversion=0

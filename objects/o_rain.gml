@@ -46,7 +46,7 @@ place_meeting(x, y, obj_wall) || place_meeting(x, y, o_pointblock) ) {
 }
 
 // 雨滴入水销毁，包括后景雨滴
-if y > global.poziomwody {
+if y > global.water_level {
     instance_destroy();
 }
 

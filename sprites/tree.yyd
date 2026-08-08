@@ -17,7 +17,7 @@
 	|sprite370
 	|sprite372
 +s_edit
-	|klocek1
+	|s_solidcollisionmask
 	|s_acc
 	|s_autopair2
 	|s_autopairbutton
@@ -73,7 +73,7 @@
 	|s_help7
 	|s_help8
 	|s_kickeffect
-	|s_kolecmask
+	|s_spikemask
 	|s_ledge
 	|s_ledgemasks
 	|s_left
@@ -84,7 +84,7 @@
 	|s_maskselector
 	|s_mfcmask
 	|s_onlyyou
-	|s_piraniolebmask
+	|s_groundpiranhamask
 	|s_platformlabels
 	|s_platformmasks
 	|s_platforms
@@ -118,7 +118,7 @@
 +s_level
 	+s_enemy
 		|s_cannon
-		|s_nonnac
+		|s_cannonflip
 		|s_cannonig
 		|s_cannoni
 		|s_enemymarker
@@ -135,50 +135,50 @@
 		|s_goomba
 		|s_shyguy
 		|s_goombadead
-		|s_kolcozwierz
-		|s_kolec
-		|s_kolec2
-		|s_kolec3
-		|s_kolec4
+		|s_spiny
+		|s_spike
+		|s_spike2
+		|s_spike3
+		|s_spike4
 		|s_mfc
 		|s_mfc2
 		|s_mfc3
 		|s_mfc4
-		|s_kupamark
-		|s_kuppa
-		|s_kuppadie
-		|s_kuppaenergy
-		|s_kuppafire
-		|s_kuppajump
-		|s_kuppaziewacz
+		|s_bowsermark
+		|s_bowser
+		|s_bowserdead
+		|s_bowserhp
+		|s_bowserflame
+		|s_bowserjump
+		|s_bowserreadyfire
 		|s_lakitu
 		|s_fakitu
 		|s_lakitu2
 		|s_fakitu2
 		|s_lakitubomb
-		|s_fakitubomb
+		|s_fahleeball
 		|s_lava
 		|s_biglava
-		|s_lavadier
+		|s_lavabottom
 		|s_lavaball
-		|s_malpka
+		|s_hammerbro
 		|s_firesis
-		|s_malpkazmlotkiem
+		|s_hammerbroattack
 		|s_firesisfire
-		|s_malpkimlotek
-		|s_pirania
+		|s_hammer
+		|s_piranha
 		|s_piraniagrey
 		|s_piraniablue
-		|s_pirania2
+		|s_piranha2
 		|s_piraniagrey2
 		|s_piraniablue2
-		|s_pirania3
-		|s_pirania4
+		|s_piranha3
+		|s_piranha4
 		|s_elecoral
-		|s_piranioleb
-		|s_piranioleb2
-		|s_piranioleb3
-		|s_piranioleb4
+		|s_groundpiranhaup
+		|s_groundpiranhadown
+		|s_groundpiranhaleft
+		|s_groundpiranharight
 		|s_troopablueshell
 		|s_troopablue
 		|s_troopagold
@@ -186,16 +186,16 @@
 		|s_troopabluefly
 		|s_troopa
 		|s_troopa2
-		|s_troopalatajaca
-		|s_troopalatajacared
+		|s_troopafly
+		|s_troopaflyred
 		|s_troopared
 		|s_troopared2
 		|s_trooparedshell
 		|s_troopashell
 		|s_troopashellgold
-		|s_wiatrak
+		|s_roto
 		|s_rotostill
-		|s_wiatrakcentrum
+		|s_rotospotcenter
 		|sprite157
 		|sprite363
 		|s_buzzyshell
@@ -211,7 +211,7 @@
 		|s_checkpoint2
 		|s_endudus
 		|s_gameover
-		|s_punkciornik
+		|s_scorepop
 		|txt_coins
 		|s_static
 		|s_ground
@@ -228,7 +228,7 @@
 	+s_others
 		|sprite456
 		|o_explosion
-		|s_chmursenery
+		|s_cloudscenery
 		|s_clouddark
 		|s_clouddesert
 		|s_fireball
@@ -240,21 +240,21 @@
 		|s_grassdesert
 		|s_freefuck
 		|s_grassaunt
-		|s_woda
+		|s_water
 		|s_lavafall
 		|s_corala
 		|s_coralb
 		|s_coralc
 		|s_pmeterbar
 		|s_pmeter_active
-		|s_littlewoda
+		|s_waterlittle
 		|s_rotocenter
 	+s_bonus
 		|s_bonus1up
-		|s_bonusburak
+		|s_bonusbeetroot
 		|s_bonusdead
-		|s_bonusgrzyb
-		|s_bonuskwiatek
+		|s_bonusmush
+		|s_bonusflower
 		|s_bonuslui
 		|s_bonusstar
 		|s_coin
@@ -285,11 +285,11 @@
 	|s_bigmariojump
 	|s_bigmariorun
 	|s_bigmarioswim
-	|s_burakmariocrouch
-	|s_burakmariojump
-	|s_burakmariorun
-	|s_burakmarioshot
-	|s_burakmarioswim
+	|s_beetrootmariocrouch
+	|s_beetrootmariojump
+	|s_beetrootmariorun
+	|s_beetrootmarioshot
+	|s_beetrootmarioswim
 	|s_firemariocrouch
 	|s_firemariojump
 	|s_firemariorun
@@ -299,7 +299,7 @@
 	|s_luimariojump
 	|s_luimariorun
 	|s_luimarioswim
-	|s_skuszak
+	|s_mariodead
 	|s_smallmariojump
 	|s_smallmariorun
 	|s_smallmarioswim
@@ -319,11 +319,11 @@
 		|s_bigluigijump
 		|s_bigluigirun
 		|s_bigluigiswim
-		|s_burakluigicrouch
-		|s_burakluigijump
-		|s_burakluigirun
-		|s_burakluigishot
-		|s_burakluigiswim
+		|s_beetrootluigicrouch
+		|s_beetrootluigijump
+		|s_beetrootluigirun
+		|s_beetrootluigishot
+		|s_beetrootluigiswim
 		|s_fireluigicrouch
 		|s_fireluigijump
 		|s_fireluigirun
@@ -333,7 +333,7 @@
 		|s_luiluigijump
 		|s_luiluigirun
 		|s_luiluigiswim
-		|s_skuszak_luigi
+		|s_luigidead
 		|s_smallluigijump
 		|s_smallluigirun
 		|s_smallluigiswim

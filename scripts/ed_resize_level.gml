@@ -29,7 +29,7 @@ for (_i = max(0,argument2) ; _i < min(argument0,floor(room_width/32)+argument2) 
         global.arrayetapu2[_i, _j] = arrayetapu[_i-argument2, _j-argument3]
     }
 }
-global.poziomwody += argument3 * 32
+global.water_level += argument3 * 32
 if global.auto {
     global.firstbound = max(global.firstbound + argument3 * 32, -64)
     if(global.secondbound > -64)global.secondbound = max(global.secondbound + argument3 * 32, -63)

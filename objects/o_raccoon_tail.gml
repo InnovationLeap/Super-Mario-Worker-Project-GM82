@@ -12,7 +12,7 @@ applies_to=self
 //   timer 7-12: offsetX=-20→0   (return to center)
 // Total lifetime: 12 frames @30fps ≈ 400ms (matches SMWP2)
 
-kierunek = 0
+dir = 0
 timer = 0
 lifetime = 12
 image_speed = 0
@@ -28,7 +28,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if global.pauza=0 && global.etappokonany=0 {
+if global.pauza=0 && global.level_complete=0 {
 
     // Auto-destroy if player changed to a different powerup
     if !instance_exists(o_marker) || o_marker.rodzajmaria_is_raccoon = 0 {
@@ -40,7 +40,7 @@ if global.pauza=0 && global.etappokonany=0 {
     // _dir = 1 for right, -1 for left
     var _dir, _sweepX;
     _dir = 1
-    if kierunek = 1 { _dir = -1 }
+    if dir = 1 { _dir = -1 }
 
     if timer <= 2 {
         _sweepX = 0
@@ -73,11 +73,11 @@ if global.pauza=0 && global.etappokonany=0 {
 
         // SMWP2: when falling and no ground imminently below, offset down by fall speed
         // This prevents tail-stomping enemies while falling through open air
-        if o_marker.grawitacja > 0 {
+        if o_marker.grav > 0 {
             var _checkY;
-            _checkY = _py + o_marker.grawitacja + 1
+            _checkY = _py + o_marker.grav + 1
             if !place_meeting(_px, _checkY, obj_wall) && !place_meeting(_px, _checkY, o_pointblock) && !place_meeting(_px, _checkY, o_windas) {
-                _tailY = _py - 11 + o_marker.grawitacja
+                _tailY = _py - 11 + o_marker.grav
             }
         }
 

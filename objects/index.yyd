@@ -1,6 +1,6 @@
 o_marker
 obj_wall
-pokazywator
+o_preview
 
 
 
@@ -22,17 +22,17 @@ o_coineffect
 o_stareffect
 
 
-o_pointblockpodbijacz
+o_blockbumper
 object25
 object26
 o_bonusmush
 o_uppercut
-o_marioeffektor
-o_wiatrak
-o_wiatrakanim
+o_mariofx
+o_roto
+o_rotoanim
 o_goomba
 o_goombadead
-o_punkciornik
+o_scorepop
 o_goombadead2
 
 
@@ -43,21 +43,21 @@ o_troopa
 o_troopadead
 o_troopashell
 o_troopashell2
-o_punkciornik2
-o_kolcozwierz
-o_kolcozwierzdead
+o_scorepop2
+o_spiny
+o_spinydead
 o_troopafly
-o_pirania
+o_piranha
 o_hammerbros
-o_mlotekmalpki
+o_hammerbro
 o_hammerbrosdead
 o_bonusflower
 o_bonuslui
 o_bonusdead
 o_bonusstar
-o_punkciornik3
-o_bonusburak
-o_burax
+o_scorepop3
+o_bonusbeetroot
+o_beetroot
 
 o_lakitu
 o_lakitubomb
@@ -66,8 +66,8 @@ o_cannon
 o_cannoni
 
 o_cannonidead
-o_skuszak
-o_miejscowapirania
+o_mariodead
+o_groundpiranha
 o_edmain
 o_edcursor
 o_edblocks
@@ -84,9 +84,9 @@ o_edpassage
 o_edmarkerblock
 o_edbonusesblock
 o_troopared
-o_piraniashot
-o_piraniainvshot
-o_piraniainv
+o_piranhaflip
+o_piranhafireflip
+o_piranhafire
 
 
 
@@ -105,22 +105,22 @@ o_point
 o_bonus1up
 o_pointblock2
 o_kickeffect
-o_kolec
-o_kuppa
-o_kuppafire
+o_spike
+o_bowser
+o_bowserfire
 o_exitar
 o_exitar2
-o_kuppadie
+o_bowserdead
 object112
 o_enemyfire
-o_rybeka
-o_rybekadie
-o_rybekb
-o_rybekc
-o_rynekd
+o_fishred
+o_fishdead
+o_fishgreen
+o_fishblue
+o_fishyellow
 o_lavaball
 o_firerico
-o_zgniatacz
+o_thwomp
 o_markerwind
 
 o_edwallsdrawer
@@ -283,20 +283,20 @@ o_fahlee
 
 o_cannong
 o_cannonig
-o_fahdead
+o_fahleedead
 
 o_firesister
 o_fff
 o_FSdead
-o_lavadier
+o_lavabottom
 obj_waall
 
 
 o_newmush
 o_new1up
 
-o_nonnac
-o_gnonnac
+o_cannonflip
+o_cannonfollowflip
 o_buzzybeetle
 
 o_boo
@@ -320,10 +320,10 @@ o_onlyU
 o_swimfisharea
 o_flyfisharea
 
-o_rybeka2
-o_rybekb2
-o_rybeka3
-o_rybekc3
+o_fishred2
+o_fishgreen2
+o_fishred3
+o_fishblue3
 
 o_waterdraw
 
@@ -338,8 +338,8 @@ obj_static
 o_shyguy
 o_waterchanger
 
-o_rybekd3
-o_rybekb3
+o_fishyellow3
+o_fishgreen3
 o_ice
 o_breakice
 o_region
@@ -356,13 +356,13 @@ o_range_end
 
 o_imi
 object356
-o_piraniablue
-o_piraniablueshot
+o_piranhablue
+o_piranhablueflip
 o_fakitu
 o_fakitudead
-o_piraniagrey
-o_piraniagreyshot
-o_fakitubomb
+o_piranhagrey
+o_piranhagreyflip
+o_fahleeball
 o_smoke
 o_weather
 object366

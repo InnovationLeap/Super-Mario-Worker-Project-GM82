@@ -3,7 +3,7 @@
 //复制一份当前文件
 global.path = global.ascii_temp_path+"bass_tmp.smw"
 file_copy(global.mfsfilename,global.path)
-if(global.jiami=1) {
+if(global.encrypt=1) {
     if filename_ext(global.mfsfilename)='.mwsav' {script_text_crypt(global.path,2)} else {script_text_crypt(global.path,1)}
 }
 
@@ -51,7 +51,7 @@ tosavefile = file_text_open_write(tosavename)
 //写入命数分数金币状态CP等信息
 file_text_write_string(tosavefile,string(global.lastzycia));
 file_text_writeln(tosavefile);
-file_text_write_string(tosavefile,string(global.lastpunkty));
+file_text_write_string(tosavefile,string(global.last_score));
 file_text_writeln(tosavefile);
 file_text_write_string(tosavefile,string(global.lastcoins));
 file_text_writeln(tosavefile);

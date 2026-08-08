@@ -5,9 +5,9 @@ action_id=603
 applies_to=self
 */
 ixor=0
-iyor=0
+vy_offset=0
 loop=0
-dobre=0
+hit_done=0
 
 // 发光位置微调
 light_x = 0;
@@ -56,62 +56,62 @@ if place_meeting(x+ixor,y-1,obj_wall) || place_meeting(x+ixor,y-1,o_pointblock) 
     //ixor是x速度 iyor是y速度
 
     //初始化x速度
-    if kierunek != 233 { ixor = kierunek*5 ; kierunek=233 }
+    if dir != 233 { ixor = dir*5 ; dir=233 }
 
     //撞墙(横向)
     if ( instance_place(x+ixor,y,obj_wall) || instance_place(x+ixor,y,o_pointblock) ) {
-        lolo=instance_place(x+ixor,y,obj_wall);
-        if(object_get_name(lolo.object_index)='o_ice') {
-            with(lolo) {
+        tmp=instance_place(x+ixor,y,obj_wall);
+        if(object_get_name(tmp.object_index)='o_ice') {
+            with(tmp) {
                 if(hp>1) {sound_play(snd_icebreak1);} else {sound_play(snd_icebreak2);}
                 hp-=1;
             }
         }
-        dobre = 1;
+        hit_done = 1;
     }
 
     //y加速度
-    iyor += 0.5
-    if iyor > 10 { iyor = 10 }
+    vy_offset += 0.5
+    if vy_offset > 10 { vy_offset = 10 }
 
     //弹起
     //弹起
     var nexty;
-    nexty=y+iyor+1
-    if ( instance_place(x,nexty,obj_halfground) || instance_place(x,nexty,obj_wall) || instance_place(x,nexty,o_pointblock) ) && iyor > 0 && drink=0 && dobre=0 {
-        lolo=instance_place(x,nexty,obj_wall);
-        if(object_get_name(lolo.object_index)='o_ice') {
-            with(lolo) {
+    nexty=y+vy_offset+1
+    if ( instance_place(x,nexty,obj_halfground) || instance_place(x,nexty,obj_wall) || instance_place(x,nexty,o_pointblock) ) && vy_offset > 0 && drink=0 && hit_done=0 {
+        tmp=instance_place(x,nexty,obj_wall);
+        if(object_get_name(tmp.object_index)='o_ice') {
+            with(tmp) {
                 if(hp>1) {sound_play(snd_icebreak1);} else {sound_play(snd_icebreak2);}
                 hp-=1;
             }
-            dobre=1;
+            hit_done=1;
         } else {drink=1}
     }
-    while ( drink=1 ) { if ( instance_place(x,nexty,obj_halfground) || instance_place(x,nexty,obj_wall) || instance_place(x,nexty,o_pointblock) ) { nexty-=1 } else { drink=0;y=nexty;iyor=-4 }
+    while ( drink=1 ) { if ( instance_place(x,nexty,obj_halfground) || instance_place(x,nexty,obj_wall) || instance_place(x,nexty,o_pointblock) ) { nexty-=1 } else { drink=0;y=nexty;vy_offset=-4 }
     }
 
     //撞墙(纵向)
-    if ( instance_place(x,y+iyor,obj_wall) || instance_place(x,y+iyor,o_pointblock) ) && iyor < 0 && dobre=0 {
-        lolo=instance_place(x,y+iyor,obj_wall);
-        if(object_get_name(lolo.object_index)='o_ice') {
-            with(lolo) {
+    if ( instance_place(x,y+vy_offset,obj_wall) || instance_place(x,y+vy_offset,o_pointblock) ) && vy_offset < 0 && hit_done=0 {
+        tmp=instance_place(x,y+vy_offset,obj_wall);
+        if(object_get_name(tmp.object_index)='o_ice') {
+            with(tmp) {
                 if(hp>1) {sound_play(snd_icebreak1);} else {sound_play(snd_icebreak2);}
                 hp-=1;
             }
         }
-        dobre=1;
+        hit_done=1;
     }
 
     //这里是敌人的攻击判定
-    if place_meeting(x,y,o_kuppa) && dobre=0 { lolo=instance_place(x,y,o_kuppa) if (lolo.koopa_strength=0 || lolo.oberw=0) {lolo.energia-=1;dobre=1}} //糟比库巴 为什么你加了父对象还要单独写 大叔傻贲
-    if place_meeting(x,y,o_goomba) && dobre=0 { lolo=instance_place(x,y,o_goomba) if(object_get_name(lolo.object_index)<>'o_kuppa') {lolo.rodzajzabicia=3 ; dobre=1} } //火球
+    if place_meeting(x,y,o_bowser) && hit_done=0 { tmp=instance_place(x,y,o_bowser) if (tmp.koopa_strength=0 || tmp.hit=0) {tmp.hp-=1;hit_done=1}} //糟比库巴 为什么你加了父对象还要单独写 大叔傻贲
+    if place_meeting(x,y,o_goomba) && hit_done=0 { tmp=instance_place(x,y,o_goomba) if(object_get_name(tmp.object_index)<>'o_bowser') {tmp.kill_type=3 ; hit_done=1} } //火球
     //爆炸
-    if dobre=1 { instance_destroy(); instance_create(x,y,o_fireexplode) }
+    if hit_done=1 { instance_destroy(); instance_create(x,y,o_fireexplode) }
 
     //速度定义
     x += ixor
-    y += iyor
+    y += vy_offset
 
     //动画
     if ixor>0 { image_angle -= 10 } else { image_angle +=10 }

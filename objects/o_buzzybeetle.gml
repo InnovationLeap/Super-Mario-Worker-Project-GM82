@@ -4,17 +4,17 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-grawitacja=0
-sekwencja=0
+grav=0
+state=0
 
 image_speed=0
-kierunek=-1
-aktywowany=0
-rodzajzabicia=0
+dir=-1
+activated=0
+kill_type=0
 killer=0 // czy mozna rozdeptywac 0 - tak, 1 - nie, 2 - tak ale nie zabija,
-odpych=0 // przy rozdeptywaniu ile ma zwiekszyc odskok
+knockback=0 // przy rozdeptywaniu ile ma zwiekszyc odskok
 
-dasini=1
+shell_proof=1
 
 // 发光位置微调
 light_x = 0;
@@ -26,31 +26,31 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if global.pauza=0 && global.etappokonany=0 {
+if global.pauza=0 && global.level_complete=0 {
 
 
-    if aktywowany=0 {
+    if activated=0 {
         if x>view_xview[0]-100 && x<view_xview[0]+740 && y>view_yview[0]-100 && y<view_yview[0]+580 {
-            aktywowany=1
-            if x<o_marker.x {kierunek=1}
-            if x>=o_marker.x {kierunek=-1;image_xscale=-1;}
+            activated=1
+            if x<o_marker.x {dir=1}
+            if x>=o_marker.x {dir=-1;image_xscale=-1;}
         }
     }
 
-    if aktywowany=1 {
+    if activated=1 {
         if (!global.newsmooth) {
             // spadanie
-            if sekwencja=0 && !place_meeting(x,y+1,obj_halfground) && !place_meeting(x,y+1,obj_wall) && !place_meeting(x,y+1,o_pointblock) {sekwencja=1}
-            if sekwencja=1 {grawitacja+=0.5; y+=grawitacja}
-            if sekwencja=1 && (place_meeting(x,y+1,obj_halfground) || place_meeting(x,y+1,obj_wall) || place_meeting(x,y+1,o_pointblock)) && !place_meeting(x,y,o_uppercut) {grawitacja=0; sekwencja=2;}
-            while sekwencja=2 && (place_meeting(x,y+1,obj_halfground) || place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {y-=1}
-            if (!place_meeting(x,y+1,obj_halfground) && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock)) {sekwencja=0}
+            if state=0 && !place_meeting(x,y+1,obj_halfground) && !place_meeting(x,y+1,obj_wall) && !place_meeting(x,y+1,o_pointblock) {state=1}
+            if state=1 {grav+=0.5; y+=grav}
+            if state=1 && (place_meeting(x,y+1,obj_halfground) || place_meeting(x,y+1,obj_wall) || place_meeting(x,y+1,o_pointblock)) && !place_meeting(x,y,o_uppercut) {grav=0; state=2;}
+            while state=2 && (place_meeting(x,y+1,obj_halfground) || place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {y-=1}
+            if (!place_meeting(x,y+1,obj_halfground) && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock)) {state=0}
 
             // chodzenie
-            if kierunek=-1 && (!place_meeting(x-1,y,obj_wall) || !place_meeting(x-1,y,o_pointblock)) {x-=1;image_xscale=-1}
-            if kierunek=1 && (!place_meeting(x+1,y,obj_wall) || !place_meeting(x+1,y,o_pointblock)) {x+=1;image_xscale=1}
-            if (place_meeting(x+1,y,obj_wall) || place_meeting(x+1,y,o_pointblock)) && kierunek=1 {kierunek=-1}
-            if (place_meeting(x-1,y,obj_wall) || place_meeting(x-1,y,o_pointblock)) && kierunek=-1 {kierunek=1}
+            if dir=-1 && (!place_meeting(x-1,y,obj_wall) || !place_meeting(x-1,y,o_pointblock)) {x-=1;image_xscale=-1}
+            if dir=1 && (!place_meeting(x+1,y,obj_wall) || !place_meeting(x+1,y,o_pointblock)) {x+=1;image_xscale=1}
+            if (place_meeting(x+1,y,obj_wall) || place_meeting(x+1,y,o_pointblock)) && dir=1 {dir=-1}
+            if (place_meeting(x-1,y,obj_wall) || place_meeting(x-1,y,o_pointblock)) && dir=-1 {dir=1}
             image_index+=0.1
         } else {
             basic_movement(1,0.1,0,1);
@@ -60,40 +60,40 @@ if global.pauza=0 && global.etappokonany=0 {
     // uppercut i zwykla smierc
     //if place_meeting(x,y,o_uppercut) {energia-=23333333333333333; rodzajzabicia=0}//顶
 
-    if rodzajzabicia=1 {
+    if kill_type=1 {
         instance_destroy();
-        lolo=instance_create(x,y-0.5,o_troopashell2);
-        lolo.sprite_index=s_buzzyshell;
-        lolo.hardshell=1
-        lolo.kierunek=kierunek;
-        lolo.dasini=1
+        tmp=instance_create(x,y-0.5,o_troopashell2);
+        tmp.sprite_index=s_buzzyshell;
+        tmp.hardshell=1
+        tmp.dir=dir;
+        tmp.shell_proof=1
         //lolo.energia=23333333333
-        instance_create(x,y,o_punkciornik)}
+        instance_create(x,y,o_scorepop)}
 
-    if rodzajzabicia=7 {
+    if kill_type=7 {
         instance_destroy();
-        lolo=instance_create(x,y-0.5,o_troopashell2);
-        lolo.sprite_index=s_buzzyshell;
-        lolo.hardshell=1
-        lolo.kierunek=kierunek;
-        lolo.dasini=1
-        lolo.tail_kicked=1
-        lolo.is_flipped=1
-        lolo.grawitacja=-11
-        instance_create(x,y,o_punkciornik)}
+        tmp=instance_create(x,y-0.5,o_troopashell2);
+        tmp.sprite_index=s_buzzyshell;
+        tmp.hardshell=1
+        tmp.dir=dir;
+        tmp.shell_proof=1
+        tmp.tail_kicked=1
+        tmp.is_flipped=1
+        tmp.grav=-11
+        instance_create(x,y,o_scorepop)}
 
-    if rodzajzabicia=5 {
+    if kill_type=5 {
         instance_destroy();
-        fofo=instance_create(x,y,o_troopadead);
-        fofo.sprite_index=s_buzzyshell
-        lolo=instance_create(x,y,o_punkciornik);
-        lolo.image_index=0;
-        if global.sample=1 {fofo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}}//顶
+        tmp2=instance_create(x,y,o_troopadead);
+        tmp2.sprite_index=s_buzzyshell
+        tmp=instance_create(x,y,o_scorepop);
+        tmp.image_index=0;
+        if global.sample=1 {tmp2=sound_play(snd_kick);sound_volume(snd_kick,global.game_volume)}}//顶
 
-    if rodzajzabicia=2 {
+    if kill_type=2 {
         instance_destroy();
-        lolo=instance_create(x,y,o_troopadead);
-        lolo.sprite_index=s_buzzyshell}//龟壳
+        tmp=instance_create(x,y,o_troopadead);
+        tmp.sprite_index=s_buzzyshell}//龟壳
 
 
 

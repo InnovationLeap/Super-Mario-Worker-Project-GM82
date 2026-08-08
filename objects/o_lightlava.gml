@@ -17,5 +17,5 @@ x = view_xview[0] + 320;
 if (global.lava == 0) {
     y = -9999;
 } else {
-    y = global.poziomwody;
+    y = global.water_level;
 }

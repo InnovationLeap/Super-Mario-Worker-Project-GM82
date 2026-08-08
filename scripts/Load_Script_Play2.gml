@@ -19,32 +19,32 @@ v_ens[01]=o_goomba;
 v_ens[02]=o_troopa;
 v_ens[03]=o_troopared;
 v_ens[04]=o_troopafly;
-v_ens[05]=o_kolcozwierz;
-v_ens[06]=o_pirania;
-v_ens[07]=o_piraniashot;
-v_ens[08]=o_piraniainv;
-v_ens[09]=o_piraniainvshot;
+v_ens[05]=o_spiny;
+v_ens[06]=o_piranha;
+v_ens[07]=o_piranhaflip;
+v_ens[08]=o_piranhafire;
+v_ens[09]=o_piranhafireflip;
 v_ens[10]=o_lakitu;
 v_ens[11]=o_cannon;
-v_ens[12]=o_rybeka;
-v_ens[13]=o_rybekb;
-v_ens[14]=o_rybekc;
-v_ens[15]=o_rynekd;
+v_ens[12]=o_fishred;
+v_ens[13]=o_fishgreen;
+v_ens[14]=o_fishblue;
+v_ens[15]=o_fishyellow;
 v_ens[16]=o_bonusdead;
-v_ens[17]=o_miejscowapirania;
+v_ens[17]=o_groundpiranha;
 v_ens[18]=o_lava;
 v_ens[19]=o_hammerbros;
-v_ens[20]=o_wiatrak;
+v_ens[20]=o_roto;
 v_ens[21]=o_lavaball;
-v_ens[22]=o_kolec;
-v_ens[23]=o_zgniatacz;
-v_ens[24]=o_kuppa;
+v_ens[22]=o_spike;
+v_ens[23]=o_thwomp;
+v_ens[24]=o_bowser;
 v_ens[25]=o_fahlee;
 v_ens[26]=o_cannong;
 v_ens[27]=o_firesister;
-v_ens[28]=o_lavadier;
-v_ens[29]=o_nonnac;
-v_ens[30]=o_gnonnac;
+v_ens[28]=o_lavabottom;
+v_ens[29]=o_cannonflip;
+v_ens[30]=o_cannonfollowflip;
 v_ens[31]=o_boo;
 v_ens[32]=o_buzzybeetle;
 v_ens[33]=o_troopaflyred;
@@ -58,40 +58,40 @@ v_ens[40]=o_swimfisharea;
 v_ens[41]=o_flyfisharea;
 v_ens[42]=o_rotostill;
 v_ens[43]=o_troopashell2;
-v_ens[44]=o_piraniablue;
-v_ens[45]=o_piraniablueshot;
-v_ens[46]=o_piraniagrey;
-v_ens[47]=o_piraniagreyshot;
+v_ens[44]=o_piranhablue;
+v_ens[45]=o_piranhablueflip;
+v_ens[46]=o_piranhagrey;
+v_ens[47]=o_piranhagreyflip;
 v_ens[48]=o_fakitu;
 
-lolof=0;
+tmp3=0;
 
 room_set_width(Play_Room2,real(file_text_read_string(global.toload)))
 file_text_readln(global.toload)
 room_set_height(Play_Room2,real(file_text_read_string(global.toload)))
 file_text_readln(global.toload)
-global.etapnazw=file_text_read_string(global.toload)
+global.level_name_play=file_text_read_string(global.toload)
 file_text_readln(global.toload)
-global.etapautor=file_text_read_string(global.toload)
+global.level_author=file_text_read_string(global.toload)
 file_text_readln(global.toload)
-global.etapczas=real(file_text_read_string(global.toload))
+global.level_time=real(file_text_read_string(global.toload))
 file_text_readln(global.toload)
-global.etapgravity=real(file_text_read_string(global.toload))
+global.level_gravity=real(file_text_read_string(global.toload))
 file_text_readln(global.toload)
-global.etapkuppa=real(file_text_read_string(global.toload))
-global.etapkuppafixed=global.etapkuppa
+global.level_bowser_hp=real(file_text_read_string(global.toload))
+global.bowser_hp_fixed=global.level_bowser_hp
 file_text_readln(global.toload)
-global.poziomwody=real(file_text_read_string(global.toload))
-global.water_height_record=global.poziomwody
+global.water_level=real(file_text_read_string(global.toload))
+global.water_height_record=global.water_level
 file_text_readln(global.toload)
 global.background=real((file_text_read_string(global.toload)))
 global.background_record = global.background
 file_text_readln(global.toload)
-global.muzyka=file_text_read_string(global.toload)
-global.music_record = global.muzyka
+global.bgm_id=file_text_read_string(global.toload)
+global.music_record = global.bgm_id
 file_text_readln(global.toload)
 var aa,ab,ac,ad,af,ag,ah,ai,aj,zxy;
-zxy=room_instance_add(Play_Room2,0,0,pokazywator)
+zxy=room_instance_add(Play_Room2,0,0,o_preview)
 ah=0
 draw_set_alpha(1)
 draw_set_color(c_white)
@@ -137,7 +137,7 @@ while !file_text_eof(global.toload) {
             skript=string_insert('('+string(ae)+').rotor='+string(transA(string_copy(aa,12,3)))+';('+string(ae)+').rotoa='+string(string_copy(aa,15,3))+';('+string(ae)+').rotoc='+string(string_copy(aa,18,3))+';('+string(ae)+').rotod='+string(string_copy(aa,21,1))+';',skript,string_length(skript)+1)
         }
         if real(string_copy(aa,2,2))=20 {
-            skript=string_insert('('+string(ae)+').promien='+string(transA(string_copy(aa,12,3)))+';('+string(ae)+').kat='+string(string_copy(aa,15,3))+';('+string(ae)+').szybkosc='+string(string_copy(aa,18,3))+';('+string(ae)+').test2=2;',skript,string_length(skript)+1)
+            skript=string_insert('('+string(ae)+').promien='+string(transA(string_copy(aa,12,3)))+';('+string(ae)+').kat='+string(string_copy(aa,15,3))+';('+string(ae)+').hspd='+string(string_copy(aa,18,3))+';('+string(ae)+').test2=2;',skript,string_length(skript)+1)
             if string_length(aa)>=27 {
                 skript=string_insert('('+string(ae)+').is_petal='+string(string_copy(aa,21,1))+';('+string(ae)+').max_promien='+string(transA(string_copy(aa,22,3)))+';('+string(ae)+').promien_szybkosc='+string(string_copy(aa,25,3))+';('+string(ae)+').petal_current='+string(transA(string_copy(aa,12,3)))+';',skript,string_length(skript)+1)
             }
@@ -147,9 +147,9 @@ while !file_text_eof(global.toload) {
         }
         if real(string_copy(aa,2,2))=43 && string_length(aa) > 11 {
             _st = real(string_copy(aa,12,string_length(aa)-11));
-            if(_st<8) {skript=string_insert('('+string(ae)+').czerwona='+string(floor(_st/2))+';'+'('+string(ae)+').offset=1;',skript,string_length(skript)+1)} else if(_st=10) {skript=string_insert('('+string(ae)+').czerwona=4;'+'('+string(ae)+').offset=1;',skript,string_length(skript)+1)} else if(_st=11) {skript=string_insert('('+string(ae)+').czerwona=4;'+'('+string(ae)+').offset=1;'+'('+string(ae)+').rodzajzabicia=1;'+'('+string(ae)+').single=1;',skript,string_length(skript)+1)} else {skript=string_insert('('+string(ae)+').hardshell=1;'+'('+string(ae)+').offset=1;',skript,string_length(skript)+1)}
+            if(_st<8) {skript=string_insert('('+string(ae)+').shell_kind='+string(floor(_st/2))+';'+'('+string(ae)+').offset=1;',skript,string_length(skript)+1)} else if(_st=10) {skript=string_insert('('+string(ae)+').shell_kind=4;'+'('+string(ae)+').offset=1;',skript,string_length(skript)+1)} else if(_st=11) {skript=string_insert('('+string(ae)+').shell_kind=4;'+'('+string(ae)+').offset=1;'+'('+string(ae)+').kill_type=1;'+'('+string(ae)+').single=1;',skript,string_length(skript)+1)} else {skript=string_insert('('+string(ae)+').hardshell=1;'+'('+string(ae)+').offset=1;',skript,string_length(skript)+1)}
             if(_st<10 && floor(_st/2)<>_st/2) {
-                skript=string_insert('('+string(ae)+').rodzajzabicia=1;'+'('+string(ae)+').single=1;',skript,string_length(skript)+1)
+                skript=string_insert('('+string(ae)+').kill_type=1;'+'('+string(ae)+').single=1;',skript,string_length(skript)+1)
             }
         }
         if real(string_copy(aa,2,2))=17 && string_length(aa) > 11 {
@@ -254,8 +254,8 @@ while !file_text_eof(global.toload) {
         switch(ai) {
         case(13):ae=room_instance_add(Play_Room2,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_pointblock);skript=string_insert('('+string(ae)+').bonus=0;',skript,string_length(skript)+1);break;
         case(14):ae=room_instance_add(Play_Room2,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_pointblock2);skript=string_insert('('+string(ae)+').bonus=0;',skript,string_length(skript)+1);break;
-        case(15):ae=room_instance_add(Play_Room2,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_pointblockpodbijacz);skript=string_insert('('+string(ae)+').block=1;('+string(ae)+').podbicia=16;('+string(ae)+').podbity=1',skript,string_length(skript)+1);break;
-        case(16):ae=room_instance_add(Play_Room2,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_pointblockpodbijacz);break;
+        case(15):ae=room_instance_add(Play_Room2,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_blockbumper);skript=string_insert('('+string(ae)+').block=1;('+string(ae)+').bump_count=16;('+string(ae)+').bumped=1',skript,string_length(skript)+1);break;
+        case(16):ae=room_instance_add(Play_Room2,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_blockbumper);break;
         case(17):ae=room_instance_add(Play_Room2,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_pointblock2);skript=string_insert('('+string(ae)+').bonus=7;',skript,string_length(skript)+1);break;
         case(18):ae=room_instance_add(Play_Room2,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_point);break;
         case(25):ae=room_instance_add(Play_Room2,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_pointblock);skript=string_insert('('+string(ae)+').bonus=7;',skript,string_length(skript)+1);break;

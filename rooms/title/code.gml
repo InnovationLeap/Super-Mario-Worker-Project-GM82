@@ -1,9 +1,9 @@
-global.punkty=0
-global.etapnazwa='Test name'
-global.przeszedllevel=0
+global.score=0
+global.level_name_edit='Test name'
+global.level_cleared=0
 
 global.background=1
-global.muzyka=1
+global.bgm_id=1
 instance_create(0,0,o_edititle)
 room_caption='Super Mario Worker Project '+global.versiontext
 global.nastawielkosc=1
@@ -23,7 +23,7 @@ global.levelsmooth=-1
 global.lastrodzajmaria=0
 global.lastzycia=4
 global.lastcoins=0
-global.lastpunkty=0
+global.last_score=0
 
 var i,j;
 i=0

@@ -4,22 +4,22 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-grawitacja=0
-sekwencja=0
+grav=0
+state=0
 
 image_speed=0
-kierunek=-1
-aktywowany=1
-rodzajzabicia=0
+facing=-1
+activated=1
+kill_type=0
 killer=1 // czy mozna rozdeptywac 0 - tak, 1 - nie, 2 - tak ale nie zabija,
-odpych=0 // przy rozdeptywaniu ile ma zwiekszyc odskok
+knockback=0 // przy rozdeptywaniu ile ma zwiekszyc odskok
 
 
 dir=1 //??
 fy=y
 ysin=0
 
-dabusi=1
+stomp_proof=1
 
 if global.layerord=0||global.layerord=1 {depth=0}
 if global.layerord=2 {depth=-22}
@@ -37,16 +37,16 @@ applies_to=self
 /*备忘
 kierunek记录马里奥朝向，1为右，0为左
 */
-if global.pauza=0 && global.etappokonany=0 {
+if global.pauza=0 && global.level_complete=0 {
 
     if x>view_xview[0]-100 && x<view_xview[0]+740 && y>view_yview[0]-100 && y<view_yview[0]+580 {
         //状态检测
         if x > o.marker.x {
             dir = -1
-            if o_marker.kierunek=1 { move=1 } else { move=0 }
+            if o_marker.facing=1 { move=1 } else { move=0 }
         } else {
             dir = 1
-            if o_marker.kierunek=0 { move=1 } else { move=0 }
+            if o_marker.facing=0 { move=1 } else { move=0 }
         }
         //动画
         image_xscale = dir

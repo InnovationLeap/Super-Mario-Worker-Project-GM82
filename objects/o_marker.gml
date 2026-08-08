@@ -10,56 +10,56 @@ applies_to=self
 fangka = 0
 
 aktywowanamoza=0
-maria=0
+form_backup=0
 razujy=0
 //WTF，这三个是嘛玩意
-global.aktywowanykuppa=0 //翻译为“激活库巴”目测是库巴触发相关，设置为否
-prawdziwyczas=0 //初始时间设为0
-global.paralax=0
+global.bowser_phase=0 //翻译为“激活库巴”目测是库巴触发相关，设置为否
+real_time=0 //初始时间设为0
+global.parallax=0
 global.paralax2=0
 global.paralax3=0 //这三个目测滚屏相关，暂不讨论
-global.przeszedllevel=0 //是否为过关状态，初始设置为否
-prawdziwyczas=global.etapczas //把初始时间设置为关卡时间
+global.level_cleared=0 //是否为过关状态，初始设置为否
+real_time=global.level_time //把初始时间设置为关卡时间
 wlaczonykuppa=0 //翻译为”启用库巴“，这个是对象变量不是全局变量，暂时不知道在实质作用上和上面那个有何区别
 winduje=0  //翻译为”推升“，不明觉厉
-gwiazdka=0  //”明星“，继续懵逼
+star_timer=0  //”明星“，继续懵逼
 kolor=0  //颜色，啥颜色
 nabijanie=0 //”取笑“ WTH……
 
 monetowanie=0 //翻译器炸了
-czasor=0 //翻译器炸了×2
-czasoren=0//翻译器炸了×3
-rork=0//
-rork2=0//这两个玩意是用来辅助实现剩余100时间单位的时候时间字体震动的效果
+time_accum=0 //翻译器炸了×2
+time_accum2=0//翻译器炸了×3
+shake_timer=0//
+shake_offset=0//这两个玩意是用来辅助实现剩余100时间单位的时候时间字体震动的效果
 
 cyferkimario=font_add_sprite(txt_mariofonts,ord('!'),1,0) // 定义字体
 
 nabija=0  //”开玩笑“，和前面那个应该是一个词的不同词性，这就懵逼了
-woder=0 //蛤？
-chmurkir=0 //蛤？？
+water_alpha=0 //蛤？
+cloud_drift=0 //蛤？？
 windonip=0
 //muzyka负责记录音乐序号
 //大叔傻贲大叔傻贲大叔傻贲大叔傻贲大叔傻贲大叔傻贲大叔傻贲
 //你们要改音乐的到Scripts -> Music_Play改
 
-wyjatek=0 // wyjatkowa zmienna poprawiajaca wysokosc gracza do muru, gdy winda na ktorej siedzi gracz ma wiekszy delay Y spadania, ktory spowodowalby wejscie gracza w mur
-barkup=0 // pasek energii dla kuppy a dokladnie jego pozycja Y
+elevator_adjust=0 // wyjatkowa zmienna poprawiajaca wysokosc gracza do muru, gdy winda na ktorej siedzi gracz ma wiekszy delay Y spadania, ktory spowodowalby wejscie gracza w mur
+hpbar_y=0 // pasek energii dla kuppy a dokladnie jego pozycja Y
 
-teleportacja=0
-teledelay=0
+pipe_state=0
+pipe_delay=0
 tele=0
 
-oberwal=0 ; shield=0 ; shieldanim=0; skusil=0
-muszlowanie=0 //specjalny delay, tak aby po rozdeptaniu mario nie rozdeptywal ponownie
-zdobywanie=0 // specjalny delay czasu przy zdobywaniu bonusow
+hit_timer=0 ; shield=0 ; shieldanim=0; shell_lock=0
+stomp_lock=0 //specjalny delay, tak aby po rozdeptaniu mario nie rozdeptywal ponownie
+collect_delay=0 // specjalny delay czasu przy zdobywaniu bonusow
 sizing=0 // grafika powiekszania maria podczas zdobywania bonusow
 schylanie=0 // zmienna daj筩a do wiadomosci ze gracz "probuje" sie schylic
 image_speed=0
 global.input_sync_frames=6
-strzelil=0 // dla animacji strzelania
-strzelil2=0 // antyrapid fire
+shoot_anim=0 // dla animacji strzelania
+shoot_anim2=0 // antyrapid fire
 animkind=0 // przy zdobywaniu bonusow animacja mario musi wiedziec z jakiego w jakiego sie zamieniac
-bugort=0 // zmienna sprawdzajaca czy gracz stojacy w niewidzialnym punkcie chce go podbic
+bump_block=0 // zmienna sprawdzajaca czy gracz stojacy w niewidzialnym punkcie chce go podbic
 endscoring=0 // Czyli ile punktow dostane za przejscie etapu
 
 // Raccoon Mario variables
@@ -78,15 +78,15 @@ p_meter_run_time=35
 raccoon_fly_speed=-8
 p_meter_sfx_playing=0
 
-fetor=0
-fetor2=0
+prev_x=0
+prev_dx=0
 
-kuku=0
-grawitacja=0;
-sekwencja=0;
-szybkosc=0;
+jump_buffer=0
+grav=0;
+state=0;
+hspd=0;
 
-stepor=0
+step_timer=0
 teststep=0
 steploop=0
 teststep2=0
@@ -101,10 +101,10 @@ windor=instance_create(0,0,o_markerwind)
 windloop=0
 //animator.visible=0
 animacja=0
-kierunek=0
+dir=0
 
 
-stepor=0
+step_timer=0
 teststep=0
 steploop=0
 teststep2=0
@@ -117,20 +117,20 @@ efekt1=0
 
 global.step=0
 global.roznica=0
-wciskaczwodowy=0 // dla plywania w wodzie
-wpadldowody=0
-plywakanim=0
+water_jump_lock=0 // dla plywania w wodzie
+entered_water=0
+swim_anim=0
 
 
 
 numerspritea=0
-numerklatki=0
+frame_index=0
 
 animator2.visible=0
 
 if global.checkpoint=0 {checkpointdetect=1} else {checkpointdetect=0}
 
-global.etappokonany=0
+global.level_complete=0
 
 global.scrollPaused= -1 //强制滚屏开关，可在god中切换
 
@@ -172,8 +172,8 @@ fofo.bgp=i+1
 
 
 
-global.poziomwody=global.water_height_record;
-global.muzyka=global.music_record
+global.water_level=global.water_height_record;
+global.bgm_id=global.music_record
 global.fuck+=1
 global.background=global.background_record
 global.lava=global.lava_record
@@ -208,7 +208,7 @@ spring_settled_x=0
 spring_settled_y=0
 prev_osc_dx=0
 prev_osc_dy=0
-prev_aktywowanykuppa=0
+prev_bowser_phase=0
 spring_timer_x=0
 spring_timer_y=0
 //附加参数，记得最后去掉
@@ -241,7 +241,7 @@ if global.input_sync_frames>0 {
     input_sync_step();
     global.input_sync_frames-=1
 }
-if global.pauza=0 && skusil=0 && global.etappokonany=0 {
+if global.pauza=0 && shell_lock=0 && global.level_complete=0 {
 
     if !place_meeting(x,y,o_yinyang) {stuck=0}
     //global.roznica=x-20
@@ -250,42 +250,42 @@ if global.pauza=0 && skusil=0 && global.etappokonany=0 {
     if place_meeting(x,y,o_exiter) && global.rodzajmaria<>5 {
         tele=instance_place(x,y,o_exiter)
         //right
-        if tele.wejscie=0 && is_button_pressed('right') && x>tele.x+48 && teleportacja=0 && prawdziwyczas<>0 {teleportacja=1; szybkosc=0; sekwencja=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)} }
+        if tele.wejscie=0 && is_button_pressed('right') && x>tele.x+48 && pipe_state=0 && real_time<>0 {pipe_state=1; hspd=0; state=0;if global.sample=1 {tmp2=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.game_volume)} }
         //left
-        if tele.wejscie=2 && is_button_pressed('left') && x<tele.x+16 && teleportacja=0 && prawdziwyczas<>0 {teleportacja=3; szybkosc=0; sekwencja=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)} }
+        if tele.wejscie=2 && is_button_pressed('left') && x<tele.x+16 && pipe_state=0 && real_time<>0 {pipe_state=3; hspd=0; state=0;if global.sample=1 {tmp2=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.game_volume)} }
         //up
         if global.rodzajmaria=0 {
-            if tele.wejscie=1 && is_button_pressed('up') && y<tele.y+32 && teleportacja=0 && prawdziwyczas<>0 {teleportacja=4; szybkosc=0; sekwencja=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)} }
+            if tele.wejscie=1 && is_button_pressed('up') && y<tele.y+32 && pipe_state=0 && real_time<>0 {pipe_state=4; hspd=0; state=0;if global.sample=1 {tmp2=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.game_volume)} }
         }
         if global.rodzajmaria<>0 {
-            if tele.wejscie=1 && is_button_pressed('up') && y<tele.y+64 && teleportacja=0 && prawdziwyczas<>0 {teleportacja=4; szybkosc=0; sekwencja=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)} }
+            if tele.wejscie=1 && is_button_pressed('up') && y<tele.y+64 && pipe_state=0 && real_time<>0 {pipe_state=4; hspd=0; state=0;if global.sample=1 {tmp2=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.game_volume)} }
         }
         //down
-        if tele.wejscie=3 && is_button_pressed('down') && y>tele.y+16 && teleportacja=0 && prawdziwyczas<>0 {teleportacja=5; szybkosc=0; sekwencja=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)} }
+        if tele.wejscie=3 && is_button_pressed('down') && y>tele.y+16 && pipe_state=0 && real_time<>0 {pipe_state=5; hspd=0; state=0;if global.sample=1 {tmp2=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.game_volume)} }
     }
 
-    if teleportacja<>0 {
+    if pipe_state<>0 {
 
-        if teleportacja=1 && teledelay<32 {teledelay+=0.7; x+=0.7;y=tele.y+64}
-        if teleportacja=3 && teledelay<32 {teledelay+=0.7; x-=0.7;y=tele.y+64}
-        if teleportacja=4 && teledelay<32 {teledelay+=0.7; y-=0.7;x=tele.x+32}
-        if teleportacja=5 && teledelay<32 {teledelay+=0.7; y+=0.7;x=tele.x+32}
+        if pipe_state=1 && pipe_delay<32 {pipe_delay+=0.7; x+=0.7;y=tele.y+64}
+        if pipe_state=3 && pipe_delay<32 {pipe_delay+=0.7; x-=0.7;y=tele.y+64}
+        if pipe_state=4 && pipe_delay<32 {pipe_delay+=0.7; y-=0.7;x=tele.x+32}
+        if pipe_state=5 && pipe_delay<32 {pipe_delay+=0.7; y+=0.7;x=tele.x+32}
 
-        if teledelay>=32 && tele.wyjscie=0 {teleportacja=2;test_bound(tele.exitx+64,tele.exity+64); x=tele.exitx+32/* */+16*(global.gameversion>1709); y=tele.exity+64;teledelay=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)}}
-        if teleportacja=2 && place_meeting(x,y,obj_wall) {x+=0.7;o_marker.kierunek=0}
-        if teleportacja=2 && !place_meeting(x,y,obj_wall) {teledelay=0; teleportacja=0; if(!global.pipeout)shield=100; sekwencja=0; grawitacja=0}
+        if pipe_delay>=32 && tele.wyjscie=0 {pipe_state=2;test_bound(tele.exitx+64,tele.exity+64); x=tele.exitx+32/* */+16*(global.gameversion>1709); y=tele.exity+64;pipe_delay=0;if global.sample=1 {tmp2=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.game_volume)}}
+        if pipe_state=2 && place_meeting(x,y,obj_wall) {x+=0.7;o_marker.dir=0}
+        if pipe_state=2 && !place_meeting(x,y,obj_wall) {pipe_delay=0; pipe_state=0; if(!global.pipeout)shield=100; state=0; grav=0}
 
-        if teledelay>=32 && tele.wyjscie=1 {teleportacja=20;test_bound(tele.exitx+32,tele.exity);  x=tele.exitx+32; y=tele.exity+32;teledelay=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)}}
-        if teleportacja=20 && place_meeting(x,y,obj_wall) {y-=0.7}
-        if teleportacja=20 && !place_meeting(x,y,obj_wall) {teledelay=0; teleportacja=0; if(!global.pipeout)shield=100; sekwencja=0; grawitacja=0}
+        if pipe_delay>=32 && tele.wyjscie=1 {pipe_state=20;test_bound(tele.exitx+32,tele.exity);  x=tele.exitx+32; y=tele.exity+32;pipe_delay=0;if global.sample=1 {tmp2=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.game_volume)}}
+        if pipe_state=20 && place_meeting(x,y,obj_wall) {y-=0.7}
+        if pipe_state=20 && !place_meeting(x,y,obj_wall) {pipe_delay=0; pipe_state=0; if(!global.pipeout)shield=100; state=0; grav=0}
 
-        if teledelay>=32 && tele.wyjscie=2 {teleportacja=30;test_bound(tele.exitx-1,tele.exity+64);  x=tele.exitx/* */+16*(global.gameversion>1709); y=tele.exity+64;teledelay=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)}}
-        if teleportacja=30 && place_meeting(x,y,obj_wall) {x-=0.7;o_marker.kierunek=1}
-        if teleportacja=30 && !place_meeting(x,y,obj_wall) {teledelay=0; teleportacja=0; if(!global.pipeout)shield=100; sekwencja=0; grawitacja=0}
+        if pipe_delay>=32 && tele.wyjscie=2 {pipe_state=30;test_bound(tele.exitx-1,tele.exity+64);  x=tele.exitx/* */+16*(global.gameversion>1709); y=tele.exity+64;pipe_delay=0;if global.sample=1 {tmp2=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.game_volume)}}
+        if pipe_state=30 && place_meeting(x,y,obj_wall) {x-=0.7;o_marker.dir=1}
+        if pipe_state=30 && !place_meeting(x,y,obj_wall) {pipe_delay=0; pipe_state=0; if(!global.pipeout)shield=100; state=0; grav=0}
 
-        if teledelay>=32 && tele.wyjscie=3 {teleportacja=40;test_bound(tele.exitx+32,tele.exity+65);  x=tele.exitx+32; y=tele.exity+64;teledelay=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)}}
-        if teleportacja=40 && place_meeting(x,y,obj_wall) {y+=0.7}
-        if teleportacja=40 && !place_meeting(x,y,obj_wall) {if animator.sprite_index=s_bigmariocrouch {y=y+32} teledelay=0; teleportacja=0; if(!global.pipeout)shield=100; sekwencja=0; grawitacja=0}
+        if pipe_delay>=32 && tele.wyjscie=3 {pipe_state=40;test_bound(tele.exitx+32,tele.exity+65);  x=tele.exitx+32; y=tele.exity+64;pipe_delay=0;if global.sample=1 {tmp2=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.game_volume)}}
+        if pipe_state=40 && place_meeting(x,y,obj_wall) {y+=0.7}
+        if pipe_state=40 && !place_meeting(x,y,obj_wall) {if animator.sprite_index=s_bigmariocrouch {y=y+32} pipe_delay=0; pipe_state=0; if(!global.pipeout)shield=100; state=0; grav=0}
     }
 
 
@@ -294,92 +294,92 @@ if global.pauza=0 && skusil=0 && global.etappokonany=0 {
     //wejscie=0 //- k箃 pod jakim sie wchodzi
     //wyjscie=0 //- k箃 pod jakim si?wychodzi
     //
-    if fetor<>x {fetor2=fetor-x; fetor=x}
+    if prev_x<>x {prev_dx=prev_x-x; prev_x=x}
 
 
 
 
     // SCHYLANIE
 
-    if teleportacja=0 {
+    if pipe_state=0 {
         if global.modifiedmov=1 {
-            if is_button_pressed('down') && sekwencja=0 && schylanie=0 && !global.rodzajmaria=0 && huadun=0 { uabfx=x }
-            if is_button_pressed('down') && sekwencja=0 && !global.rodzajmaria=0 && huadun=0 {schylanie=1 ; image_index=0 }
-            if !is_button_pressed('down') && !global.rodzajmaria=0 && schylanie = 1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) { huadun = 1 }
-            if !is_button_pressed('down') && !global.rodzajmaria=0 && schylanie = 1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) { huadun = 2 }
+            if is_button_pressed('down') && state=0 && schylanie=0 && !global.rodzajmaria=0 && slide=0 { uabfx=x }
+            if is_button_pressed('down') && state=0 && !global.rodzajmaria=0 && slide=0 {schylanie=1 ; image_index=0 }
+            if !is_button_pressed('down') && !global.rodzajmaria=0 && schylanie = 1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) { slide = 1 }
+            if !is_button_pressed('down') && !global.rodzajmaria=0 && schylanie = 1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) { slide = 2 }
             if !is_button_pressed('down') && !global.rodzajmaria=0 {schylanie=0 ; image_index=1}
             if global.rodzajmaria=0 {schylanie=0 ; image_index=0}
         } else {
-            if is_button_pressed('down') && sekwencja=0 && !global.rodzajmaria=0 {schylanie=1}
+            if is_button_pressed('down') && state=0 && !global.rodzajmaria=0 {schylanie=1}
             //if !is_button_pressed('down') && !global.rodzajmaria=0 && schylanie = 1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 }
             if !is_button_pressed('down') && !global.rodzajmaria=0 {schylanie=0}
             if global.rodzajmaria=0 {schylanie=0}
         }
 
         if place_meeting(x,y+1,obj_wall) {
-            fofo=instance_place(x,y+1,obj_wall);
-            if ice_effect>0 && object_get_name(fofo.object_index)<>'o_ice' {
+            tmp2=instance_place(x,y+1,obj_wall);
+            if ice_effect>0 && object_get_name(tmp2.object_index)<>'o_ice' {
                 ice_effect=0;
             }
-            if ice_effect=0 && object_get_name(fofo.object_index)='o_ice' {
+            if ice_effect=0 && object_get_name(tmp2.object_index)='o_ice' {
                 ice_effect=0.2;
-                if(y>=global.poziomwody) {szybkosc=0}
+                if(y>=global.water_level) {hspd=0}
             }
-        } else if y>=global.poziomwody {ice_effect=0;}
+        } else if y>=global.water_level {ice_effect=0;}
 
         if (place_meeting(x,y+1,o_windas) || place_meeting(x,y+1,o_pointblock)) {ice_effect=0}
 
         // WPADANIE DO WODY
 
-        if wpadldowody=1 && (y<global.poziomwody || global.lava) && global.rodzajmaria<>5 {wpadldowody=0}
-        if wpadldowody=0 && (y>=global.poziomwody && !global.lava) && global.rodzajmaria<>5 {wpadldowody=1; grawitacja=0}
+        if entered_water=1 && (y<global.water_level || global.lava) && global.rodzajmaria<>5 {entered_water=0}
+        if entered_water=0 && (y>=global.water_level && !global.lava) && global.rodzajmaria<>5 {entered_water=1; grav=0}
 
         // CHODZENIE I BIEGANIE
 
-        if (global.lava || y<global.poziomwody) && global.rodzajmaria<>5 {
-            if is_button_pressed('right') && !is_button_pressed('run') && szybkosc<3 && schylanie=0 && huadun=0 && !stuck {szybkosc+=0.1-0.25*ice_effect}
-            if is_button_pressed('left') && !is_button_pressed('run') && szybkosc>-3 && schylanie=0 && huadun=0 && !stuck {szybkosc-=0.1-0.25*ice_effect}
+        if (global.lava || y<global.water_level) && global.rodzajmaria<>5 {
+            if is_button_pressed('right') && !is_button_pressed('run') && hspd<3 && schylanie=0 && slide=0 && !stuck {hspd+=0.1-0.25*ice_effect}
+            if is_button_pressed('left') && !is_button_pressed('run') && hspd>-3 && schylanie=0 && slide=0 && !stuck {hspd-=0.1-0.25*ice_effect}
 
-            if is_button_pressed('right') && is_button_pressed('run') && schylanie=0 && huadun=0 && !stuck {szybkosc+=0.3-ice_effect}
-            if is_button_pressed('left') && is_button_pressed('run') && schylanie=0 && huadun=0 && !stuck {szybkosc-=0.3-ice_effect}
+            if is_button_pressed('right') && is_button_pressed('run') && schylanie=0 && slide=0 && !stuck {hspd+=0.3-ice_effect}
+            if is_button_pressed('left') && is_button_pressed('run') && schylanie=0 && slide=0 && !stuck {hspd-=0.3-ice_effect}
 
-            if szybkosc>8 szybkosc=8
-            if szybkosc<-8 szybkosc=-8
+            if hspd>8 hspd=8
+            if hspd<-8 hspd=-8
         }
 
-        if !global.lava && y>=global.poziomwody && global.rodzajmaria<>5 {
-            if is_button_pressed('right') && !is_button_pressed('run') && szybkosc<1 && schylanie=0 && huadun=0 && ice_effect=0 && !stuck {szybkosc+=0.05}
-            if is_button_pressed('left') && !is_button_pressed('run') && szybkosc>-1 && schylanie=0 && huadun=0 && ice_effect=0 && !stuck {szybkosc-=0.05}
+        if !global.lava && y>=global.water_level && global.rodzajmaria<>5 {
+            if is_button_pressed('right') && !is_button_pressed('run') && hspd<1 && schylanie=0 && slide=0 && ice_effect=0 && !stuck {hspd+=0.05}
+            if is_button_pressed('left') && !is_button_pressed('run') && hspd>-1 && schylanie=0 && slide=0 && ice_effect=0 && !stuck {hspd-=0.05}
 
-            if is_button_pressed('right') && is_button_pressed('run') && schylanie=0 && huadun=0 && ice_effect=0 && !stuck {szybkosc+=0.05}
-            if is_button_pressed('left') && is_button_pressed('run') && schylanie=0 && huadun=0 && ice_effect=0 && !stuck {szybkosc-=0.05}
+            if is_button_pressed('right') && is_button_pressed('run') && schylanie=0 && slide=0 && ice_effect=0 && !stuck {hspd+=0.05}
+            if is_button_pressed('left') && is_button_pressed('run') && schylanie=0 && slide=0 && ice_effect=0 && !stuck {hspd-=0.05}
 
-            if szybkosc>3 szybkosc=3
-            if szybkosc<-3 szybkosc=-3
+            if hspd>3 hspd=3
+            if hspd<-3 hspd=-3
         }
         //穿墙强制静止
-        if global.aktywowanykuppa>=2 {
+        if global.bowser_phase>=2 {
             if ds_list_find_index(global.autoscrolls,firstscroll) < ds_list_size(global.autoscrolls) - 2 {
-                if x<view_xview[0]+16 && szybkosc<0 {szybkosc=0}
-                if x>view_xview[0]+624 && szybkosc>0 {szybkosc=0}
+                if x<view_xview[0]+16 && hspd<0 {hspd=0}
+                if x>view_xview[0]+624 && hspd>0 {hspd=0}
             }
         }
 
-        if szybkosc>-0.04 && szybkosc<0.04 {szybkosc=0}
+        if hspd>-0.04 && hspd<0.04 {hspd=0}
 
-        if ((!is_button_pressed('right') && !is_button_pressed('left')) || schylanie=1) && (y<global.poziomwody || global.lava) && !stuck {szybkosc=szybkosc/1.05}
-        if ((!is_button_pressed('right') && !is_button_pressed('left')) || schylanie=1) && (y>=global.poziomwody && !global.lava) && !stuck {szybkosc=szybkosc/1.03}
+        if ((!is_button_pressed('right') && !is_button_pressed('left')) || schylanie=1) && (y<global.water_level || global.lava) && !stuck {hspd=hspd/1.05}
+        if ((!is_button_pressed('right') && !is_button_pressed('left')) || schylanie=1) && (y>=global.water_level && !global.lava) && !stuck {hspd=hspd/1.03}
 
         //这里是横向碰撞判定，注意代码顺序调整
 
         if global.modifiedmov=1 && global.rodzajmaria != 5 {
             //然而还需要考虑滑蹲的问题
-            if huadun = 0 && !stuck {
+            if slide = 0 && !stuck {
                 var nextx;
-                nextx = x+szybkosc
-                if szybkosc != 0 && x>=view_xview[0]+16 && x<=view_xview[0]+624 && (place_meeting(nextx,y,obj_wall) || place_meeting(nextx,y,o_pointblock)) && global.rodzajmaria != 5 && teststep3=0 { teststep3 = 1;}
+                nextx = x+hspd
+                if hspd != 0 && x>=view_xview[0]+16 && x<=view_xview[0]+624 && (place_meeting(nextx,y,obj_wall) || place_meeting(nextx,y,o_pointblock)) && global.rodzajmaria != 5 && teststep3=0 { teststep3 = 1;}
                 while teststep3 = 1 {
-                    if (place_meeting(nextx,y,obj_wall) || place_meeting(nextx,y,o_pointblock)) { nextx -= sign(szybkosc);looplimit+=1; } else { teststep3 = 0 ; x = nextx; looplimit=0; }
+                    if (place_meeting(nextx,y,obj_wall) || place_meeting(nextx,y,o_pointblock)) { nextx -= sign(hspd);looplimit+=1; } else { teststep3 = 0 ; x = nextx; looplimit=0; }
                     if looplimit>=16 {teststep3=0; stuck=1;looplimit=0;}
                 }
                 var nextx2;
@@ -389,32 +389,32 @@ if global.pauza=0 && skusil=0 && global.etappokonany=0 {
                     if (place_meeting(nextx2,y,obj_wall) || place_meeting(nextx2,y,o_pointblock)) { nextx2 -= sign(wxspeed);looplimit+=1; } else { teststep233 = 0 ; x = nextx2;looplimit=0; }
                     if looplimit>=16 {teststep233=0; stuck=1;fuckstuck=1;looplimit=0;}
                 }
-            } else if huadun=1 {
+            } else if slide=1 {
                 if uabff=0 { if x<uabfx { uabf=1 } else { uabf=-1 }; uabff=1 }
-                if (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {szybkosc=0 ; x+=uabf } else { huadun = 0;uabff=0;uabf=0 }
-            } else if huadun=2 { if !(place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) { huadun=0;uabff=0;uabf=0 } }
+                if (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {hspd=0 ; x+=uabf } else { slide = 0;uabff=0;uabf=0 }
+            } else if slide=2 { if !(place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) { slide=0;uabff=0;uabf=0 } }
 
 
         }
 
         if global.modifiedmov=0 {
-            if global.aktywowanykuppa<=1 {
-                if szybkosc>0 && x<view_xview[0]+624 {x+=szybkosc}
-                if szybkosc<0 && x>view_xview[0]+16 {x+=szybkosc}
+            if global.bowser_phase<=1 {
+                if hspd>0 && x<view_xview[0]+624 {x+=hspd}
+                if hspd<0 && x>view_xview[0]+16 {x+=hspd}
             } else {
-                if szybkosc<>0 {x+=szybkosc}
+                if hspd<>0 {x+=hspd}
             }
         } else {
             var nextx;
-            nextx = x+szybkosc
-            if global.aktywowanykuppa<=1 {
-                if szybkosc>0 && x<view_xview[0]+624 && !(place_meeting(nextx,y,obj_wall) || place_meeting(nextx,y,o_pointblock)) {x+=szybkosc}
-                if szybkosc<0 && x>view_xview[0]+16 && !(place_meeting(nextx,y,obj_wall) || place_meeting(nextx,y,o_pointblock)) {x+=szybkosc}
+            nextx = x+hspd
+            if global.bowser_phase<=1 {
+                if hspd>0 && x<view_xview[0]+624 && !(place_meeting(nextx,y,obj_wall) || place_meeting(nextx,y,o_pointblock)) {x+=hspd}
+                if hspd<0 && x>view_xview[0]+16 && !(place_meeting(nextx,y,obj_wall) || place_meeting(nextx,y,o_pointblock)) {x+=hspd}
             } else {
-                if szybkosc>0 && !(place_meeting(nextx,y,obj_wall) || place_meeting(nextx,y,o_pointblock)) {x+=szybkosc}
-                if szybkosc<0 && !(place_meeting(nextx,y,obj_wall) || place_meeting(nextx,y,o_pointblock)) {x+=szybkosc}
+                if hspd>0 && !(place_meeting(nextx,y,obj_wall) || place_meeting(nextx,y,o_pointblock)) {x+=hspd}
+                if hspd<0 && !(place_meeting(nextx,y,obj_wall) || place_meeting(nextx,y,o_pointblock)) {x+=hspd}
             }}
-        if global.rodzajmaria=5 && szybkosc<>0 {szybkosc=0}
+        if global.rodzajmaria=5 && hspd<>0 {hspd=0}
 
 /*
 if szybkosc>0 {
@@ -450,11 +450,11 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
         // poprawianie pozycji X - tak aby gracz nie wbijal sie w bloki
 
         if global.modifiedmov=0 {
-            if (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock))&& teststep3=0 && szybkosc>0 && global.rodzajmaria<>5 {teststep3=1; steploop3=round(szybkosc)}
+            if (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock))&& teststep3=0 && hspd>0 && global.rodzajmaria<>5 {teststep3=1; steploop3=round(hspd)}
             while teststep3=1 {if (place_meeting(x+steploop3,y,obj_wall) || place_meeting(x+steploop3,y,o_pointblock)) {steploop3-=1;} if !place_meeting(x+steploop3,y,obj_wall) && !place_meeting(x+steploop3,y,o_pointblock){teststep3=0; x+=steploop3}}
 
             // poprawianie pozycji X - tak aby gracz nie wbijal sie w bloki
-            if (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock))&& teststep3=0 && szybkosc<0 && global.rodzajmaria<>5 {teststep3=1; steploop3=szybkosc}
+            if (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock))&& teststep3=0 && hspd<0 && global.rodzajmaria<>5 {teststep3=1; steploop3=hspd}
             while teststep3=1 {if (place_meeting(x+steploop3,y,obj_wall) || place_meeting(x+steploop3,y,o_pointblock)) {steploop3+=1;} if !place_meeting(x+steploop3,y,obj_wall) && !place_meeting(x+steploop3,y,o_pointblock){teststep3=0; x+=steploop3}}
         }
 
@@ -462,31 +462,31 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
         // spadanie i skakanie
 
         if global.rodzajmaria<>3 && global.rodzajmaria<>5 {
-            if is_button_pressed('jump') && sekwencja=0 && (y<global.poziomwody || global.lava) && schylanie=0 && huadun=0 && !stuck
-            {sekwencja=1; grawitacja=-(8+abs(szybkosc)/5); if global.sample=1 {fofo=sound_play(snd_jump);sound_volume(snd_jump,global.glosnosc)}};}
+            if is_button_pressed('jump') && state=0 && (y<global.water_level || global.lava) && schylanie=0 && slide=0 && !stuck
+            {state=1; grav=-(8+abs(hspd)/5); if global.sample=1 {tmp2=sound_play(snd_jump);sound_volume(snd_jump,global.game_volume)}};}
         if global.rodzajmaria=3 && global.rodzajmaria<>5 {
-            if is_button_pressed('jump') && sekwencja=0 && (y<global.poziomwody || global.lava) && schylanie=0 && huadun=0 && !stuck
-            {sekwencja=1; grawitacja=-(9+abs(szybkosc)/5); if global.sample=1 {fofo=sound_play(snd_jump);sound_volume(snd_jump,global.glosnosc)}};}
+            if is_button_pressed('jump') && state=0 && (y<global.water_level || global.lava) && schylanie=0 && slide=0 && !stuck
+            {state=1; grav=-(9+abs(hspd)/5); if global.sample=1 {tmp2=sound_play(snd_jump);sound_volume(snd_jump,global.game_volume)}};}
 
-        if is_button_pressed('jump') && y>=global.poziomwody && !global.lava && wciskaczwodowy=0 && y>global.poziomwody+32 && schylanie=0 && huadun=0 && global.rodzajmaria<>5 && !stuck {if global.sample=1 {fofo=sound_play(snd_plywak);sound_volume(snd_plywak,global.glosnosc)};plywakanim=0; sekwencja=1; grawitacja=-(4+abs(szybkosc)/10);  wciskaczwodowy=1};
-        if !global.lava && is_button_pressed('jump') && y>=global.poziomwody && !global.lava && wciskaczwodowy=0 && y<=global.poziomwody+32 && schylanie=0 && huadun=0 && global.rodzajmaria<>5 && !stuck {if global.sample=1 {fofo=sound_play(snd_plywak);sound_volume(snd_plywak,global.glosnosc)};sekwencja=1; grawitacja=-(6+abs(szybkosc)/5); wciskaczwodowy=1};
-        if !is_button_pressed('jump') {wciskaczwodowy=0}
+        if is_button_pressed('jump') && y>=global.water_level && !global.lava && water_jump_lock=0 && y>global.water_level+32 && schylanie=0 && slide=0 && global.rodzajmaria<>5 && !stuck {if global.sample=1 {tmp2=sound_play(snd_swim);sound_volume(snd_swim,global.game_volume)};swim_anim=0; state=1; grav=-(4+abs(hspd)/10);  water_jump_lock=1};
+        if !global.lava && is_button_pressed('jump') && y>=global.water_level && !global.lava && water_jump_lock=0 && y<=global.water_level+32 && schylanie=0 && slide=0 && global.rodzajmaria<>5 && !stuck {if global.sample=1 {tmp2=sound_play(snd_swim);sound_volume(snd_swim,global.game_volume)};state=1; grav=-(6+abs(hspd)/5); water_jump_lock=1};
+        if !is_button_pressed('jump') {water_jump_lock=0}
 
-        kuku+=1
-        if is_button_pressed('jump') && kuku>1 && grawitacja<0 && (y<global.poziomwody || global.lava) && global.rodzajmaria<>5 && !stuck {grawitacja-=1.5; kuku=0};
+        jump_buffer+=1
+        if is_button_pressed('jump') && jump_buffer>1 && grav<0 && (y<global.water_level || global.lava) && global.rodzajmaria<>5 && !stuck {grav-=1.5; jump_buffer=0};
 
         // Raccoon flight takeoff (P-Meter full + press jump in air)
         // keyboard_check_pressed: must press jump fresh, not just hold it
         // Raccoon flight: takeoff (first press) and mid-air boost (subsequent presses)
         // Both give upward lift, but only first press starts the flight timer counting
-        if global.rodzajmaria=6 && raccoon_fly_allowed=1 && grawitacja>0 && keyboard_check_pressed(global.key_jump) && y<global.poziomwody && sekwencja=1 && schylanie=0 && !stuck {
-            grawitacja=-9
-            szybkosc = max(-4, min(szybkosc, 4))
+        if global.rodzajmaria=6 && raccoon_fly_allowed=1 && grav>0 && keyboard_check_pressed(global.key_jump) && y<global.water_level && state=1 && schylanie=0 && !stuck {
+            grav=-9
+            hspd = max(-4, min(hspd, 4))
             if raccoon_flew=0 {
                 raccoon_flew=1
                 p_meter_run_timer=0
             }
-            if global.sample=1 {fofo=sound_play(snd_spin);sound_volume(snd_spin,global.glosnosc)}
+            if global.sample=1 {tmp2=sound_play(snd_spin);sound_volume(snd_spin,global.game_volume)}
         }
 
         // Flight timer: prerequisite -- flight must be allowed (P-Meter full,
@@ -496,7 +496,7 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
         // Running with a full P-Meter recharges it (see P-Meter logic below).
         // At 212 frames the flight state is force-cancelled (raccoon_flew=0,
         // P-Meter reset to 0).
-        if raccoon_fly_allowed=1 && skusil=0 && global.rodzajmaria=6 && y<global.poziomwody && !place_meeting(x,y,o_lava) && (abs(szybkosc) <= 6 || raccoon_flew=1 || p_meter_run_timer > 0) {
+        if raccoon_fly_allowed=1 && shell_lock=0 && global.rodzajmaria=6 && y<global.water_level && !place_meeting(x,y,o_lava) && (abs(hspd) <= 6 || raccoon_flew=1 || p_meter_run_timer > 0) {
             raccoon_fly_timer+=1
             if raccoon_fly_timer>raccoon_fly_time {
                 raccoon_flew=0
@@ -506,16 +506,16 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
             }
         }
 
-        if sekwencja=0 &&  global.rodzajmaria<>5 && !place_meeting(x,y+1,obj_wall) && !place_meeting(x,y+1,o_pointblock) && !place_meeting(x,y+2,o_windas) {sekwencja=1}
-        if global.modifiedmov=0 && sekwencja=1 && grawitacja<0 && global.rodzajmaria<>5 {y+=grawitacja+global.etapgravity/5; testujstepa=0}
+        if state=0 &&  global.rodzajmaria<>5 && !place_meeting(x,y+1,obj_wall) && !place_meeting(x,y+1,o_pointblock) && !place_meeting(x,y+2,o_windas) {state=1}
+        if global.modifiedmov=0 && state=1 && grav<0 && global.rodzajmaria<>5 {y+=grav+global.level_gravity/5; testujstepa=0}
 
         // Raccoon Mario sync flag
         rodzajmaria_is_raccoon = (global.rodzajmaria = 6)
 
         // P-Meter logic (Raccoon Mario)
-        if global.rodzajmaria = 6 && skusil = 0 {
+        if global.rodzajmaria = 6 && shell_lock = 0 {
             var _on_ground;
-            _on_ground = (sekwencja = 0 || place_meeting(x, y+2, o_windas))
+            _on_ground = (state = 0 || place_meeting(x, y+2, o_windas))
 
             // Disallow flight if P-Meter is not full
             if raccoon_fly_allowed = 1 && p_meter < p_meter_max {
@@ -523,11 +523,11 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
             }
 
             // P-Meter charging: running on ground, not in water, not against a wall, not at screen edge
-            if abs(szybkosc) > 6 && !place_meeting(x,y,o_lava) && y < global.poziomwody && _on_ground {
+            if abs(hspd) > 6 && !place_meeting(x,y,o_lava) && y < global.water_level && _on_ground {
                 var _at_edge, _against_wall, _nextx;
                 _at_edge = (x <= view_xview + 16 || x >= view_xview + 624)
                 // Check if running into a solid wall (obj_wall covers obj_waall/obj_halfwall via parent inheritance)
-                _nextx = x + sign(szybkosc) * 2
+                _nextx = x + sign(hspd) * 2
                 _against_wall = (place_meeting(_nextx, y, obj_wall) || place_meeting(_nextx, y, o_pointblock))
                 if !_at_edge && !_against_wall {
                     p_meter = min(p_meter + 1, p_meter_max)
@@ -549,7 +549,7 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
             }
 
             // In water: reset P-Meter
-            if y >= global.poziomwody || place_meeting(x,y,o_lava) {
+            if y >= global.water_level || place_meeting(x,y,o_lava) {
                 p_meter = 0
                 raccoon_fly_allowed = 0
             }
@@ -562,7 +562,7 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
             // Flight time extension: land while running with full P-Meter
             // P-Meter run timer fills up → reset flight timer, recharging full flight duration
             if raccoon_fly_allowed = 1 {
-                if abs(szybkosc) > 6 && _on_ground {
+                if abs(hspd) > 6 && _on_ground {
                     p_meter_run_timer = min(p_meter_run_timer + 1, p_meter_run_time)
                     if p_meter_run_timer >= p_meter_run_time {
                         raccoon_fly_timer = 0
@@ -574,7 +574,7 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
             if raccoon_fly_allowed = 1 {
                 if p_meter_sfx_playing = 0 {
                     p_meter_sfx_playing = 1
-                    if global.sample=1 {sound_loop(snd_pmeter); sound_volume(snd_pmeter, global.glosnosc)}
+                    if global.sample=1 {sound_loop(snd_pmeter); sound_volume(snd_pmeter, global.game_volume)}
                 }
             } else {
                 if p_meter_sfx_playing = 1 {
@@ -585,21 +585,21 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
         }
 
         // Raccoon flight and fall logic
-        if global.rodzajmaria = 6 && skusil = 0 {
+        if global.rodzajmaria = 6 && shell_lock = 0 {
             // Slow fall (raccoon parachute descent)
             // keyboard_check_pressed: must press jump fresh, not just hold it
-            if grawitacja > 0 && keyboard_check_pressed(global.key_jump) && !raccoon_fall && y < global.poziomwody && sekwencja = 1 && raccoon_fly_allowed = 0 {
+            if grav > 0 && keyboard_check_pressed(global.key_jump) && !raccoon_fall && y < global.water_level && state = 1 && raccoon_fly_allowed = 0 {
                 raccoon_fall = 1
                 raccoon_fall_timer = 0
-                szybkosc = max(-4, min(szybkosc, 4))
-                if global.sample=1 {fofo=sound_play(snd_spin);sound_volume(snd_spin,global.glosnosc)}
+                hspd = max(-4, min(hspd, 4))
+                if global.sample=1 {tmp2=sound_play(snd_spin);sound_volume(snd_spin,global.game_volume)}
             }
 
             if raccoon_fall = 1 {
-                if grawitacja > 0 && y < global.poziomwody {
-                    grawitacja = min(grawitacja, 2)
+                if grav > 0 && y < global.water_level {
+                    grav = min(grav, 2)
                     raccoon_fall_timer += 1
-                    if raccoon_fall_timer > raccoon_fall_time || grawitacja <= 0 {
+                    if raccoon_fall_timer > raccoon_fall_time || grav <= 0 {
                         raccoon_fall = 0
                         raccoon_fall_timer = 0
                     }
@@ -608,7 +608,7 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
                     raccoon_fall_timer = 0
                 }
             }
-            if !is_button_pressed('jump') || sekwencja = 0 {
+            if !is_button_pressed('jump') || state = 0 {
                 raccoon_fall = 0
                 raccoon_fall_timer = 0
             }
@@ -628,77 +628,77 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
         // Bugort - tlumaczenie w Create Actions
         // who can tell me wtf is this
 
-        if bugort=0 && place_meeting(x,y-8,o_pointblock2) && sekwencja=0 && global.rodzajmaria<>5 {bugort=1}
-        if bugort=0 && place_meeting(x,y-8,o_pointblock2) && sekwencja=0 && global.rodzajmaria<>5 {bugort=1}
+        if bump_block=0 && place_meeting(x,y-8,o_pointblock2) && state=0 && global.rodzajmaria<>5 {bump_block=1}
+        if bump_block=0 && place_meeting(x,y-8,o_pointblock2) && state=0 && global.rodzajmaria<>5 {bump_block=1}
 
         // podbijanie punktu
 
-        if place_meeting(x,y-8,o_pointblock) && grawitacja<0 && global.rodzajmaria<>5 {lolo=instance_place(x,y-8,o_pointblock); lolo.podbity=1; grawitacja=0}
-        if place_meeting(x,y-8,o_pointblockpodbijacz) && grawitacja<0 && global.rodzajmaria<>5 {lolo=instance_place(x,y-8,o_pointblockpodbijacz); if(!lolo.podbity) {lolo.podbity=1;} grawitacja=0 }
+        if place_meeting(x,y-8,o_pointblock) && grav<0 && global.rodzajmaria<>5 {tmp=instance_place(x,y-8,o_pointblock); tmp.bumped=1; grav=0}
+        if place_meeting(x,y-8,o_blockbumper) && grav<0 && global.rodzajmaria<>5 {tmp=instance_place(x,y-8,o_blockbumper); if(!tmp.bumped) {tmp.bumped=1;} grav=0 }
 
         if global.modifiedmov=0 {
-            if place_meeting(x,y-8,o_pointblock2) && grawitacja<0 && global.rodzajmaria<>5 {lolo=instance_place(x,y-8,o_pointblock2); lolo.podbity=1; grawitacja=0 y+=4}
+            if place_meeting(x,y-8,o_pointblock2) && grav<0 && global.rodzajmaria<>5 {tmp=instance_place(x,y-8,o_pointblock2); tmp.bumped=1; grav=0 y+=4}
         }
 
         //喝了这里负责的是顶头（原版代码）
 
         if global.modifiedmov=0 {
 
-            if (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) && grawitacja<0 && global.rodzajmaria<>5 {looptest3=1; grawitacja=0}
+            if (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) && grav<0 && global.rodzajmaria<>5 {looptest3=1; grav=0}
             {while looptest3=1 && (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {y+=1};} looptest3=0
         }
 
 
         if global.modifiedmov=1 {
-            if huadun = 0  && !stuck {
-                if (grawitacja+global.etapgravity/5) < 0 && sekwencja=1 {
+            if slide = 0  && !stuck {
+                if (grav+global.level_gravity/5) < 0 && state=1 {
                     var nexty;
-                    nexty = y+grawitacja+global.etapgravity/5
+                    nexty = y+grav+global.level_gravity/5
                     if (place_meeting(x,nexty,obj_wall) || place_meeting(x,nexty,o_pointblock)) && global.rodzajmaria<>5 { looptest3=1; }
                     while looptest3=1 {
-                        if (place_meeting(x,nexty,obj_wall) || place_meeting(x,nexty,o_pointblock)) { nexty+=1; looplimit+=1; } else { y=nexty ; looptest3=0 ; grawitacja=0;looplimit=0;
+                        if (place_meeting(x,nexty,obj_wall) || place_meeting(x,nexty,o_pointblock)) { nexty+=1; looplimit+=1; } else { y=nexty ; looptest3=0 ; grav=0;looplimit=0;
                             //负引力的处理
-                            if (global.etapgravity/5)>-13 && (global.etapgravity/5)<0 && abs(global.etapgravity/5) > grawitacja { grawitacja=abs(global.etapgravity/5) }
+                            if (global.level_gravity/5)>-13 && (global.level_gravity/5)<0 && abs(global.level_gravity/5) > grav { grav=abs(global.level_gravity/5) }
                         }
                         if looplimit>=16 {looptest3=0; stuck=1;looplimit=0;}
                     }
                 }
-                if wyspeed < 0 && grawitacja = 0 {
+                if shift_speed < 0 && grav = 0 {
                     var nexty2;
-                    nexty2 = y+wyspeed
+                    nexty2 = y+shift_speed
                     if (place_meeting(x,nexty2,obj_wall) || place_meeting(x,nexty2,o_pointblock)) && global.rodzajmaria<>5 { looptest233=1;}
                     while looptest233=1 {
-                        if (place_meeting(x,nexty2,obj_wall) || place_meeting(x,nexty2,o_pointblock)) { nexty2+=1;looplimit+=1; } else { y=nexty2 ; looptest233=0 ; grawitacja=0;looplimit=0; }
+                        if (place_meeting(x,nexty2,obj_wall) || place_meeting(x,nexty2,o_pointblock)) { nexty2+=1;looplimit+=1; } else { y=nexty2 ; looptest233=0 ; grav=0;looplimit=0; }
                         if looplimit>=16 {looptest233=0; stuck=1;looplimit=0;}
                     }
                 }
 
-                if (grawitacja+global.etapgravity/5+wyspeed) > 0 && sekwencja=1 {
+                if (grav+global.level_gravity/5+shift_speed) > 0 && state=1 {
                     var nexty;
-                    nexty = y+grawitacja+global.etapgravity/5
+                    nexty = y+grav+global.level_gravity/5
                     if (place_meeting(x,nexty,obj_wall) || place_meeting(x,nexty,o_pointblock)) && global.rodzajmaria<>5 { looptest3=2;}
                     while looptest3=2 {
-                        if (place_meeting(x,nexty,obj_wall) || place_meeting(x,nexty,o_pointblock)) { nexty-=1;looplimit+=1; } else { y=nexty ; looptest3=0 ; grawitacja=0 ; sekwencja=0;looplimit=0;}
+                        if (place_meeting(x,nexty,obj_wall) || place_meeting(x,nexty,o_pointblock)) { nexty-=1;looplimit+=1; } else { y=nexty ; looptest3=0 ; grav=0 ; state=0;looplimit=0;}
                         if looplimit>=16 {looptest3=0; stuck=1;looplimit=0;}
                     }
                 }
-                if wyspeed > 0 && grawitacja = 0 {
+                if shift_speed > 0 && grav = 0 {
                     var nexty2;
-                    nexty2 = y+wyspeed
+                    nexty2 = y+shift_speed
                     if (place_meeting(x,nexty2,obj_wall) || place_meeting(x,nexty2,o_pointblock)) && global.rodzajmaria<>5 { looptest233=1;}
                     while looptest233=1 {
-                        if (place_meeting(x,nexty2,obj_wall) || place_meeting(x,nexty2,o_pointblock)) { nexty2-=1;looplimit+=1; } else { y=nexty2 ; looptest233=0 ; grawitacja=0;looplimit=0; }
+                        if (place_meeting(x,nexty2,obj_wall) || place_meeting(x,nexty2,o_pointblock)) { nexty2-=1;looplimit+=1; } else { y=nexty2 ; looptest233=0 ; grav=0;looplimit=0; }
                         if looplimit>=16 {looptest233=0; stuck=1; looplimit=0;}
                     }
                 }
-            } else if huadun=2 {
+            } else if slide=2 {
                 var nexty;
                 nexty = y
                 if (place_meeting(x,nexty,obj_wall) || place_meeting(x,nexty,o_pointblock)) && global.rodzajmaria<>5 { looptest3=1 }
                 while looptest3=1 {
-                    if (place_meeting(x,nexty,obj_wall) || place_meeting(x,nexty,o_pointblock)) { nexty+=1 } else { y=nexty ; looptest3=0 ; grawitacja=0
+                    if (place_meeting(x,nexty,obj_wall) || place_meeting(x,nexty,o_pointblock)) { nexty+=1 } else { y=nexty ; looptest3=0 ; grav=0
                         //负引力的处理
-                        if (global.etapgravity/5)>-13 && (global.etapgravity/5)<0 && abs(global.etapgravity/5) > grawitacja { grawitacja=abs(global.etapgravity/5) }
+                        if (global.level_gravity/5)>-13 && (global.level_gravity/5)<0 && abs(global.level_gravity/5) > grav { grav=abs(global.level_gravity/5) }
                     }
                 }
             }
@@ -706,23 +706,23 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
 
         if global.modifiedmov=1 {
             //新版顶隐藏砖，仅在马里奥顶部撞到隐藏砖底部生效
-            if grawitacja<0 && instance_place(x,y+grawitacja,o_pointblock2) {
+            if grav<0 && instance_place(x,y+grav,o_pointblock2) {
                 var bump;
-                bump=instance_place(x,y+grawitacja,o_pointblock2)
+                bump=instance_place(x,y+grav,o_pointblock2)
                 var height;
                 if global.rodzajmaria=0 { height=24 } else { height=48 }
-                if y >= bump.y+32+height && bump.podbity=0 {
-                    if (global.etapgravity/5)>-13 && (global.etapgravity/5)<0 && abs(global.etapgravity/5) > grawitacja { grawitacja=abs(global.etapgravity/5) } else { grawitacja=0 }
-                    bump.podbity=1
+                if y >= bump.y+32+height && bump.bumped=0 {
+                    if (global.level_gravity/5)>-13 && (global.level_gravity/5)<0 && abs(global.level_gravity/5) > grav { grav=abs(global.level_gravity/5) } else { grav=0 }
+                    bump.bumped=1
                 }
             }
         }
 
         //移动桥相关
-        if sekwencja<>0 {winduje=0}
+        if state<>0 {winduje=0}
 
 
-        if grawitacja=0 && sekwencja=0 && !place_meeting(x,y-2,o_windas) && global.rodzajmaria<>5 // Lapanie windy, gdy mario stoi w miejscu
+        if grav=0 && state=0 && !place_meeting(x,y-2,o_windas) && global.rodzajmaria<>5 // Lapanie windy, gdy mario stoi w miejscu
         {
             o_marker.y=round(o_marker.y)
             windor.x=x
@@ -731,29 +731,29 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
                 if place_meeting(x,y+2,o_windas) && (place_meeting(x,y+o_marker.windloop,o_pointblock) && global.rodzajmaria<>5 || place_meeting(x,y+o_marker.windloop,obj_wall)) && global.rodzajmaria<>5 && !other.stuck {
                     getwind=instance_place(x,y+o_marker.windloop,o_windas)
                     o_marker.y=getwind.y
-                    o_marker.grawitacja=0
-                    o_marker.sekwencja=0
-                    o_marker.windloop=ceil(o_marker.grawitacja+1)
+                    o_marker.grav=0
+                    o_marker.state=0
+                    o_marker.windloop=ceil(o_marker.grav+1)
                     o_marker.winduje=getwind
                 }
             }
 
         }
 
-        if grawitacja>0 && !place_meeting(x,y-2,o_windas) && global.rodzajmaria<>5 // Lapanie windy
+        if grav>0 && !place_meeting(x,y-2,o_windas) && global.rodzajmaria<>5 // Lapanie windy
         {
             o_marker.y=round(o_marker.y)
             windor.x=x
             windor.y=y
             with(windor) {
 
-                while o_marker.windloop<ceil(o_marker.grawitacja+1) {
+                while o_marker.windloop<ceil(o_marker.grav+1) {
                     if place_meeting(x,y+o_marker.windloop,o_windas) && !place_meeting(x,y+o_marker.windloop,o_pointblock) && !place_meeting(x,y+o_marker.windloop,obj_wall) && global.rodzajmaria<>5 && !other.stuck {
                         getwind=instance_place(x,y+o_marker.windloop,o_windas)
                         o_marker.y=getwind.y
-                        o_marker.grawitacja=0
-                        o_marker.sekwencja=0
-                        o_marker.windloop=ceil(o_marker.grawitacja+1)
+                        o_marker.grav=0
+                        o_marker.state=0
+                        o_marker.windloop=ceil(o_marker.grav+1)
                         o_marker.winduje=getwind
                     }
                     o_marker.windloop+=1
@@ -761,38 +761,38 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
             }
             windloop=0
         }
-        if grawitacja=0 && place_meeting(x,y-2,o_windas) && (place_meeting(x,y-1,obj_wall) && global.rodzajmaria<>5 || place_meeting(x,y-1,o_pointblock)) && global.rodzajmaria<>5 {grawitacja=0; sekwencja=1}
+        if grav=0 && place_meeting(x,y-2,o_windas) && (place_meeting(x,y-1,obj_wall) && global.rodzajmaria<>5 || place_meeting(x,y-1,o_pointblock)) && global.rodzajmaria<>5 {grav=0; state=1}
 
 
-        if sekwencja=1 && !stuck //dodawaj do Y wspolczynnik grawitacji
+        if state=1 && !stuck //dodawaj do Y wspolczynnik grawitacji
         {
-            if grawitacja>=0 && global.modifiedmov=0 {y+=grawitacja+global.etapgravity/5}
+            if grav>=0 && global.modifiedmov=0 {y+=grav+global.level_gravity/5}
             if global.modifiedmov=1 {
                 var nexty3;
-                nexty3 = y+grawitacja+global.etapgravity/5
+                nexty3 = y+grav+global.level_gravity/5
                 if !(place_meeting(x,nexty3,obj_wall) || place_meeting(x,nexty3,o_pointblock)) {
-                    y+=grawitacja+global.etapgravity/5 }
+                    y+=grav+global.level_gravity/5 }
             }
-            if (y<global.poziomwody || global.lava) {grawitacja+=1}
-            if y>=global.poziomwody && !global.lava {grawitacja+=0.2}
+            if (y<global.water_level || global.lava) {grav+=1}
+            if y>=global.water_level && !global.lava {grav+=0.2}
 
-            if (y<global.poziomwody || global.lava) && grawitacja>13 {grawitacja=13}
-            if y>=global.poziomwody && !global.lava && grawitacja>6 {grawitacja=6}
+            if (y<global.water_level || global.lava) && grav>13 {grav=13}
+            if y>=global.water_level && !global.lava && grav>6 {grav=6}
         }
 
         if global.modifiedmov=0 {
 
-            if sekwencja=1 && (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) && grawitacja>0 {sekwencja=2; grawitacja=0};
+            if state=1 && (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) && grav>0 {state=2; grav=0};
 
-            while sekwencja=2 && (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock) ) {y-=1;};
+            while state=2 && (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock) ) {y-=1;};
 
-            if sekwencja=2 && (!place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock)) {sekwencja=0};
+            if state=2 && (!place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock)) {state=0};
 
         }
 
         if global.rodzajmaria=5 {
-            grawitacja=0
-            sekwencja=0
+            grav=0
+            state=0
             if keyboard_check(global.key_right) { x += 8; }
             if keyboard_check(global.key_left) { x -= 8; }
             if keyboard_check(global.key_up) { y -= 8; }
@@ -814,12 +814,12 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
         }
 
         wxspeed=0
-        wyspeed=0
+        shift_speed=0
 
         //尝试性修复非整格实心穿墙
-        if (szybkosc = 0)
+        if (hspd = 0)
         x = round(x);
-        if (grawitacja = 0)
+        if (grav = 0)
         y = round(y);
 
     }}
@@ -828,7 +828,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if global.pauza=0 && skusil=0 && global.etappokonany=0 {
+if global.pauza=0 && shell_lock=0 && global.level_complete=0 {
 
 
     //定义一系列全局变量作为玩家的皮肤
@@ -836,7 +836,7 @@ if global.pauza=0 && skusil=0 && global.etappokonany=0 {
 
     global.character_name = 'MARIO '
 
-    global.character_dead = s_skuszak
+    global.character_dead = s_mariodead
 
     global.small_character_run = s_smallmariorun
     global.small_character_jump = s_smallmariojump
@@ -858,17 +858,17 @@ if global.pauza=0 && skusil=0 && global.etappokonany=0 {
     global.lui_character_swim = s_luimarioswim
     global.lui_character_crouch = s_luimariocrouch
 
-    global.beetroot_character_run = s_burakmariorun
-    global.beetroot_character_jump = s_burakmariojump
-    global.beetroot_character_swim = s_burakmarioswim
-    global.beetroot_character_crouch = s_burakmariocrouch
-    global.beetroot_character_shoot = s_burakmarioshot
+    global.beetroot_character_run = s_beetrootmariorun
+    global.beetroot_character_jump = s_beetrootmariojump
+    global.beetroot_character_swim = s_beetrootmarioswim
+    global.beetroot_character_crouch = s_beetrootmariocrouch
+    global.beetroot_character_shoot = s_beetrootmarioshot
 
     //马里奥皮肤
     if global.skin = 0 {
         global.character_name = 'MARIO '
 
-        global.character_dead = s_skuszak
+        global.character_dead = s_mariodead
 
         global.small_character_run = s_smallmariorun
         global.small_character_jump = s_smallmariojump
@@ -890,11 +890,11 @@ if global.pauza=0 && skusil=0 && global.etappokonany=0 {
         global.lui_character_swim = s_luimarioswim
         global.lui_character_crouch = s_luimariocrouch
 
-        global.beetroot_character_run = s_burakmariorun
-        global.beetroot_character_jump = s_burakmariojump
-        global.beetroot_character_swim = s_burakmarioswim
-        global.beetroot_character_crouch = s_burakmariocrouch
-        global.beetroot_character_shoot = s_burakmarioshot
+        global.beetroot_character_run = s_beetrootmariorun
+        global.beetroot_character_jump = s_beetrootmariojump
+        global.beetroot_character_swim = s_beetrootmarioswim
+        global.beetroot_character_crouch = s_beetrootmariocrouch
+        global.beetroot_character_shoot = s_beetrootmarioshot
 
         global.raccoon_character_idle = s_raccoonmarioidle
         global.raccoon_character_run = s_raccoonmariorun
@@ -911,7 +911,7 @@ if global.pauza=0 && skusil=0 && global.etappokonany=0 {
     if global.skin = 1 {
         global.character_name = 'LUIGI '
 
-        global.character_dead = s_skuszak_luigi
+        global.character_dead = s_luigidead
 
         global.small_character_run = s_smallluigirun
         global.small_character_jump = s_smallluigijump
@@ -933,11 +933,11 @@ if global.pauza=0 && skusil=0 && global.etappokonany=0 {
         global.lui_character_swim = s_luiluigiswim
         global.lui_character_crouch = s_luiluigicrouch
 
-        global.beetroot_character_run = s_burakluigirun
-        global.beetroot_character_jump = s_burakluigijump
-        global.beetroot_character_swim = s_burakluigiswim
-        global.beetroot_character_crouch = s_burakluigicrouch
-        global.beetroot_character_shoot = s_burakluigishot
+        global.beetroot_character_run = s_beetrootluigirun
+        global.beetroot_character_jump = s_beetrootluigijump
+        global.beetroot_character_swim = s_beetrootluigiswim
+        global.beetroot_character_crouch = s_beetrootluigicrouch
+        global.beetroot_character_shoot = s_beetrootluigishot
 
         // Luigi uses same raccoon sprites as Mario for now (no Luigi raccoon skin yet)
         global.raccoon_character_idle = s_raccoonmarioidle
@@ -954,72 +954,72 @@ if global.pauza=0 && skusil=0 && global.etappokonany=0 {
 
     //下面是与马里奥状态相关的代码
     //godmode
-    if global.rodzajmaria<>5 && maria<>global.rodzajmaria {maria=global.rodzajmaria}
+    if global.rodzajmaria<>5 && form_backup<>global.rodzajmaria {form_backup=global.rodzajmaria}
     if global.godmode=1 {
-        if keyboard_check(global.godkey_small) {global.rodzajmaria=0;gwiazdka=0;shield=0} //小个子
-        if keyboard_check(global.godkey_big) {if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)){ huadun = 2 };global.rodzajmaria=1;gwiazdka=0;shield=0} //大个子
-        if keyboard_check(global.godkey_fire) {if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)){ huadun = 2 };global.rodzajmaria=2;gwiazdka=0;shield=0} //花身
-        if keyboard_check(global.godkey_fruit) {if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)){ huadun = 2 };global.rodzajmaria=4;gwiazdka=0;shield=0} //绿果（为啥甜菜在绿果后面……）
-        if keyboard_check(global.godkey_beet) {if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)){ huadun = 2 };global.rodzajmaria=3;gwiazdka=0;shield=0} //甜菜
-        if keyboard_check(global.godkey_raccoon) {if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { huadun = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)){ huadun = 2 };global.rodzajmaria=6;gwiazdka=0;shield=0}
-        if keyboard_check(global.godkey_star) {global.rodzajmaria=maria;gwiazdka=500;animator2.visible=1}
-        if keyboard_check(global.godkey_invincible) {global.rodzajmaria=maria
-            gwiazdka=500
+        if keyboard_check(global.godkey_small) {global.rodzajmaria=0;star_timer=0;shield=0} //小个子
+        if keyboard_check(global.godkey_big) {if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { slide = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)){ slide = 2 };global.rodzajmaria=1;star_timer=0;shield=0} //大个子
+        if keyboard_check(global.godkey_fire) {if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { slide = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)){ slide = 2 };global.rodzajmaria=2;star_timer=0;shield=0} //花身
+        if keyboard_check(global.godkey_fruit) {if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { slide = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)){ slide = 2 };global.rodzajmaria=4;star_timer=0;shield=0} //绿果（为啥甜菜在绿果后面……）
+        if keyboard_check(global.godkey_beet) {if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { slide = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)){ slide = 2 };global.rodzajmaria=3;star_timer=0;shield=0} //甜菜
+        if keyboard_check(global.godkey_raccoon) {if global.modifiedmov=1 && global.rodzajmaria=0 && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) { slide = 1 };if global.modifiedmov=1 && global.rodzajmaria=0 && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)){ slide = 2 };global.rodzajmaria=6;star_timer=0;shield=0}
+        if keyboard_check(global.godkey_star) {global.rodzajmaria=form_backup;star_timer=500;animator2.visible=1}
+        if keyboard_check(global.godkey_invincible) {global.rodzajmaria=form_backup
+            star_timer=500
             animator2.visible=1
         }
-        if keyboard_check(global.godkey_invincible) {global.rodzajmaria=maria;shield=10000000;gwiazdka=0}
-        if keyboard_check_pressed(global.godkey_fly) {if global.rodzajmaria<>5 {global.rodzajmaria=5} else {global.rodzajmaria=maria}}
+        if keyboard_check(global.godkey_invincible) {global.rodzajmaria=form_backup;shield=10000000;star_timer=0}
+        if keyboard_check_pressed(global.godkey_fly) {if global.rodzajmaria<>5 {global.rodzajmaria=5} else {global.rodzajmaria=form_backup}}
         if keyboard_check_pressed(global.godkey_life) {
             if global.zycia < 99 {
-                fifi=instance_create(x,y-32,o_punkciornik3)
+                fifi=instance_create(x,y-32,o_scorepop3)
                 fifi.image_index=6
                 if global.sample=1 {
-                    fofo=sound_play(snd_1up);
-                    sound_volume(snd_1up,global.glosnosc)
+                    tmp2=sound_play(snd_1up);
+                    sound_volume(snd_1up,global.game_volume)
                 }
                 //lobal.zycia+=1
             }}
         if keyboard_check_pressed(global.godkey_scroll) { global.scrollPaused *= -1 } //按0切换滚屏开关
-        if global.scrollPaused = 1 && keyboard_check_pressed(global.godkey_bowser) {global.aktywowanykuppa=0}
+        if global.scrollPaused = 1 && keyboard_check_pressed(global.godkey_bowser) {global.bowser_phase=0}
     }
 
     // MALY MARIO：小马里奥
     if global.rodzajmaria=0 { //rodazajmaria用来记录马里奥状态，对应表见上。
-        if y<global.poziomwody || global.lava //poziomwody记录水面高度，下面的代码为马里奥在水面上方的动画代码
+        if y<global.water_level || global.lava //poziomwody记录水面高度，下面的代码为马里奥在水面上方的动画代码
         {image_index=0
 
-            if szybkosc<0 {kierunek=1}//kierunek记录马里奥朝向，1为右，0为左
-            if szybkosc>0 {kierunek=0}
+            if hspd<0 {dir=1}//kierunek记录马里奥朝向，1为右，0为左
+            if hspd>0 {dir=0}
 
-            if szybkosc=0 && sekwencja=0 && kierunek=0 {animator.sprite_index=global.small_character_run; animator.image_index=0; animator.image_xscale=1; animkind=0}
-            if szybkosc=0 && sekwencja=0 && kierunek=1 {animator.sprite_index=global.small_character_run; animator.image_index=0; animator.image_xscale=-1; animkind=0}//image_xscale=-1表示把图像反向
+            if hspd=0 && state=0 && dir=0 {animator.sprite_index=global.small_character_run; animator.image_index=0; animator.image_xscale=1; animkind=0}
+            if hspd=0 && state=0 && dir=1 {animator.sprite_index=global.small_character_run; animator.image_index=0; animator.image_xscale=-1; animkind=0}//image_xscale=-1表示把图像反向
 
-            if szybkosc>0 && kierunek=0 && sekwencja=0 {animator.sprite_index=global.small_character_run; animator.image_index+=szybkosc/10; animator.image_xscale=1; animkind=0}
-            if szybkosc<0 && kierunek=1 && sekwencja=0 {animator.sprite_index=global.small_character_run; animator.image_index+=szybkosc/10; animator.image_xscale=-1; animkind=0}
+            if hspd>0 && dir=0 && state=0 {animator.sprite_index=global.small_character_run; animator.image_index+=hspd/10; animator.image_xscale=1; animkind=0}
+            if hspd<0 && dir=1 && state=0 {animator.sprite_index=global.small_character_run; animator.image_index+=hspd/10; animator.image_xscale=-1; animkind=0}
 
-            if kierunek=0 && grawitacja<>0 {animator.sprite_index=global.small_character_jump; animator.image_xscale=1;animkind=1} //grawitacja记录“重力状况”，也就是是否在空中（因为在地面上相当于“重力”为0）
-            if kierunek=1 && grawitacja<>0 {animator.sprite_index=global.small_character_jump; animator.image_xscale=-1;animkind=1}
+            if dir=0 && grav<>0 {animator.sprite_index=global.small_character_jump; animator.image_xscale=1;animkind=1} //grawitacja记录“重力状况”，也就是是否在空中（因为在地面上相当于“重力”为0）
+            if dir=1 && grav<>0 {animator.sprite_index=global.small_character_jump; animator.image_xscale=-1;animkind=1}
 
         }
 
-        if y>=global.poziomwody && !global.lava//poziomwody记录水面高度，下面的代码为马里奥在水面下方的动画代码
+        if y>=global.water_level && !global.lava//poziomwody记录水面高度，下面的代码为马里奥在水面下方的动画代码
         {image_index=0
 
-            if szybkosc<0 {kierunek=1}//szybkosc记录水平速度状态，0为静止，向左为正
-            if szybkosc>0 {kierunek=0}
+            if hspd<0 {dir=1}//szybkosc记录水平速度状态，0为静止，向左为正
+            if hspd>0 {dir=0}
 
-            if szybkosc=0 && sekwencja=0 && kierunek=0 {animator.sprite_index=global.small_character_run; animator.image_index=0; animator.image_xscale=1; animkind=0 }
-            if szybkosc=0 && sekwencja=0 && kierunek=1 {animator.sprite_index=global.small_character_run; animator.image_index=0; animator.image_xscale=-1; animkind=0 }
+            if hspd=0 && state=0 && dir=0 {animator.sprite_index=global.small_character_run; animator.image_index=0; animator.image_xscale=1; animkind=0 }
+            if hspd=0 && state=0 && dir=1 {animator.sprite_index=global.small_character_run; animator.image_index=0; animator.image_xscale=-1; animkind=0 }
 
-            if szybkosc>0 && kierunek=0 && sekwencja=0 {animator.sprite_index=global.small_character_run; animator.image_index+=szybkosc/20; animator.image_xscale=1; animkind=0}//image_index表示帧数，通过马里奥运动速度来控制帧的切换速度
-            if szybkosc<0 && kierunek=1 && sekwencja=0 {animator.sprite_index=global.small_character_run; animator.image_index+=szybkosc/20; animator.image_xscale=-1; animkind=0}
+            if hspd>0 && dir=0 && state=0 {animator.sprite_index=global.small_character_run; animator.image_index+=hspd/20; animator.image_xscale=1; animkind=0}//image_index表示帧数，通过马里奥运动速度来控制帧的切换速度
+            if hspd<0 && dir=1 && state=0 {animator.sprite_index=global.small_character_run; animator.image_index+=hspd/20; animator.image_xscale=-1; animkind=0}
 
-            if kierunek=0 && grawitacja<>0 {animator.sprite_index=global.small_character_swim; animator.image_index=plywakanim; animator.image_xscale=1;animkind=2}
-            if kierunek=1 && grawitacja<>0 {animator.sprite_index=global.small_character_swim; animator.image_index=plywakanim; animator.image_xscale=-1;animkind=2}
-            if plywakanim<9 {plywakanim+=0.2}
+            if dir=0 && grav<>0 {animator.sprite_index=global.small_character_swim; animator.image_index=swim_anim; animator.image_xscale=1;animkind=2}
+            if dir=1 && grav<>0 {animator.sprite_index=global.small_character_swim; animator.image_index=swim_anim; animator.image_xscale=-1;animkind=2}
+            if swim_anim<9 {swim_anim+=0.2}
 
 
-            if global.efekty>5 {lolo=instance_create(x,y,o_marioeffektor); lolo.sprite_index=animator.sprite_index; lolo.image_index=animator.image_index; lolo.image_speed=0;lolo.image_xscale=animator.image_xscale}
+            if global.efekty>5 {tmp=instance_create(x,y,o_mariofx); tmp.sprite_index=animator.sprite_index; tmp.image_index=animator.image_index; tmp.image_speed=0;tmp.image_xscale=animator.image_xscale}
 
 
         }}
@@ -1028,45 +1028,45 @@ if global.pauza=0 && skusil=0 && global.etappokonany=0 {
 
     // DUZY MARIO
     if global.rodzajmaria=1 {
-        if y<global.poziomwody || global.lava {
+        if y<global.water_level || global.lava {
 
-            if szybkosc<0 {kierunek=1}
-            if szybkosc>0 {kierunek=0}
+            if hspd<0 {dir=1}
+            if hspd>0 {dir=0}
 
-            if szybkosc=0 && sekwencja=0 && kierunek=0 {animator.sprite_index=global.big_character_run; animator.image_index=0; animator.image_xscale=1; animkind=0}
-            if szybkosc=0 && sekwencja=0 && kierunek=1 {animator.sprite_index=global.big_character_run; animator.image_index=0; animator.image_xscale=-1; animkind=0}
+            if hspd=0 && state=0 && dir=0 {animator.sprite_index=global.big_character_run; animator.image_index=0; animator.image_xscale=1; animkind=0}
+            if hspd=0 && state=0 && dir=1 {animator.sprite_index=global.big_character_run; animator.image_index=0; animator.image_xscale=-1; animkind=0}
 
-            if szybkosc>0 && kierunek=0 && sekwencja=0 {animator.sprite_index=global.big_character_run; animator.image_index+=szybkosc/10; animator.image_xscale=1; animkind=0}
-            if szybkosc<0 && kierunek=1 && sekwencja=0 {animator.sprite_index=global.big_character_run; animator.image_index+=szybkosc/10; animator.image_xscale=-1; animkind=0}
+            if hspd>0 && dir=0 && state=0 {animator.sprite_index=global.big_character_run; animator.image_index+=hspd/10; animator.image_xscale=1; animkind=0}
+            if hspd<0 && dir=1 && state=0 {animator.sprite_index=global.big_character_run; animator.image_index+=hspd/10; animator.image_xscale=-1; animkind=0}
 
-            if kierunek=0 && grawitacja<>0 {animator.sprite_index=global.big_character_jump; animator.image_xscale=1;animkind=1}
-            if kierunek=1 && grawitacja<>0 {animator.sprite_index=global.big_character_jump; animator.image_xscale=-1;animkind=1}
+            if dir=0 && grav<>0 {animator.sprite_index=global.big_character_jump; animator.image_xscale=1;animkind=1}
+            if dir=1 && grav<>0 {animator.sprite_index=global.big_character_jump; animator.image_xscale=-1;animkind=1}
 
-            if schylanie=1 && kierunek=0 {animator.sprite_index=global.big_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
-            if schylanie=1 && kierunek=1 {animator.sprite_index=global.big_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
+            if schylanie=1 && dir=0 {animator.sprite_index=global.big_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
+            if schylanie=1 && dir=1 {animator.sprite_index=global.big_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
             if !schylanie=1 {image_index=1}
         }
 
-        if y>=global.poziomwody && !global.lava {
+        if y>=global.water_level && !global.lava {
 
-            if szybkosc<0 {kierunek=1}
-            if szybkosc>0 {kierunek=0}
+            if hspd<0 {dir=1}
+            if hspd>0 {dir=0}
 
-            if szybkosc=0 && sekwencja=0 && kierunek=0 {animator.sprite_index=global.big_character_run; animator.image_index=0; animator.image_xscale=1 ; animkind=0}
-            if szybkosc=0 && sekwencja=0 && kierunek=1 {animator.sprite_index=global.big_character_run; animator.image_index=0; animator.image_xscale=-1 ; animkind=0}
+            if hspd=0 && state=0 && dir=0 {animator.sprite_index=global.big_character_run; animator.image_index=0; animator.image_xscale=1 ; animkind=0}
+            if hspd=0 && state=0 && dir=1 {animator.sprite_index=global.big_character_run; animator.image_index=0; animator.image_xscale=-1 ; animkind=0}
 
-            if szybkosc>0 && kierunek=0 && sekwencja=0 {animator.sprite_index=global.big_character_run; animator.image_index+=szybkosc/20; animator.image_xscale=1; animkind=0 }
-            if szybkosc<0 && kierunek=1 && sekwencja=0 {animator.sprite_index=global.big_character_run; animator.image_index+=szybkosc/20; animator.image_xscale=-1; animkind=0 }
+            if hspd>0 && dir=0 && state=0 {animator.sprite_index=global.big_character_run; animator.image_index+=hspd/20; animator.image_xscale=1; animkind=0 }
+            if hspd<0 && dir=1 && state=0 {animator.sprite_index=global.big_character_run; animator.image_index+=hspd/20; animator.image_xscale=-1; animkind=0 }
 
-            if kierunek=0 && grawitacja<>0 {animator.sprite_index=global.big_character_swim; animator.image_index=plywakanim; animator.image_xscale=1;animkind=2}
-            if kierunek=1 && grawitacja<>0 {animator.sprite_index=global.big_character_swim; animator.image_index=plywakanim; animator.image_xscale=-1;animkind=2}
-            if plywakanim<9 {plywakanim+=0.2}
+            if dir=0 && grav<>0 {animator.sprite_index=global.big_character_swim; animator.image_index=swim_anim; animator.image_xscale=1;animkind=2}
+            if dir=1 && grav<>0 {animator.sprite_index=global.big_character_swim; animator.image_index=swim_anim; animator.image_xscale=-1;animkind=2}
+            if swim_anim<9 {swim_anim+=0.2}
 
-            if schylanie=1 && kierunek=0 {animator.sprite_index=global.big_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
-            if schylanie=1 && kierunek=1 {animator.sprite_index=global.big_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
+            if schylanie=1 && dir=0 {animator.sprite_index=global.big_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
+            if schylanie=1 && dir=1 {animator.sprite_index=global.big_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
             if !schylanie=1 {image_index=1}
 
-            if global.efekty>5 {lolo=instance_create(x,y,o_marioeffektor); lolo.sprite_index=animator.sprite_index; lolo.image_index=animator.image_index; lolo.image_speed=0;lolo.image_xscale=animator.image_xscale}
+            if global.efekty>5 {tmp=instance_create(x,y,o_mariofx); tmp.sprite_index=animator.sprite_index; tmp.image_index=animator.image_index; tmp.image_speed=0;tmp.image_xscale=animator.image_xscale}
 
 
         }}
@@ -1074,225 +1074,225 @@ if global.pauza=0 && skusil=0 && global.etappokonany=0 {
 
     // FIRE MARIO
     if global.rodzajmaria=2 {
-        if y<global.poziomwody || global.lava {
+        if y<global.water_level || global.lava {
 
-            if szybkosc<0 {kierunek=1}
-            if szybkosc>0 {kierunek=0}
+            if hspd<0 {dir=1}
+            if hspd>0 {dir=0}
 
-            if szybkosc=0 && sekwencja=0 && kierunek=0 && strzelil=0 {animator.sprite_index=global.fire_character_run; animator.image_index=0; animator.image_xscale=1; animkind=0}
-            if szybkosc=0 && sekwencja=0 && kierunek=1 && strzelil=0 {animator.sprite_index=global.fire_character_run; animator.image_index=0; animator.image_xscale=-1; animkind=0}
+            if hspd=0 && state=0 && dir=0 && shoot_anim=0 {animator.sprite_index=global.fire_character_run; animator.image_index=0; animator.image_xscale=1; animkind=0}
+            if hspd=0 && state=0 && dir=1 && shoot_anim=0 {animator.sprite_index=global.fire_character_run; animator.image_index=0; animator.image_xscale=-1; animkind=0}
 
-            if szybkosc>0 && kierunek=0 && sekwencja=0 && strzelil=0 {animator.sprite_index=global.fire_character_run; animator.image_index+=szybkosc/10; animator.image_xscale=1; animkind=0}
-            if szybkosc<0 && kierunek=1 && sekwencja=0 && strzelil=0 {animator.sprite_index=global.fire_character_run; animator.image_index+=szybkosc/10; animator.image_xscale=-1; animkind=0}
+            if hspd>0 && dir=0 && state=0 && shoot_anim=0 {animator.sprite_index=global.fire_character_run; animator.image_index+=hspd/10; animator.image_xscale=1; animkind=0}
+            if hspd<0 && dir=1 && state=0 && shoot_anim=0 {animator.sprite_index=global.fire_character_run; animator.image_index+=hspd/10; animator.image_xscale=-1; animkind=0}
 
-            if kierunek=0 && grawitacja<>0 {animator.sprite_index=global.fire_character_jump; animator.image_xscale=1;animkind=1}
-            if kierunek=1 && grawitacja<>0 {animator.sprite_index=global.fire_character_jump; animator.image_xscale=-1;animkind=1}
+            if dir=0 && grav<>0 {animator.sprite_index=global.fire_character_jump; animator.image_xscale=1;animkind=1}
+            if dir=1 && grav<>0 {animator.sprite_index=global.fire_character_jump; animator.image_xscale=-1;animkind=1}
 
-            if schylanie=1 && kierunek=0 {animator.sprite_index=global.fire_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
-            if schylanie=1 && kierunek=1 {animator.sprite_index=global.fire_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
+            if schylanie=1 && dir=0 {animator.sprite_index=global.fire_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
+            if schylanie=1 && dir=1 {animator.sprite_index=global.fire_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
             if !schylanie=1 {image_index=1}
 
-            if schylanie=1 || sekwencja<>0 {strzelil=0}
-            if kierunek=0 && strzelil>0 {animator.sprite_index=global.fire_character_shoot; animator.image_xscale=1; strzelil+=1;animkind=0}
-            if kierunek=1 && strzelil>0 {animator.sprite_index=global.fire_character_shoot; animator.image_xscale=-1; strzelil+=1;animkind=0}
-            if strzelil>3 {strzelil=0}
+            if schylanie=1 || state<>0 {shoot_anim=0}
+            if dir=0 && shoot_anim>0 {animator.sprite_index=global.fire_character_shoot; animator.image_xscale=1; shoot_anim+=1;animkind=0}
+            if dir=1 && shoot_anim>0 {animator.sprite_index=global.fire_character_shoot; animator.image_xscale=-1; shoot_anim+=1;animkind=0}
+            if shoot_anim>3 {shoot_anim=0}
         }
 
-        if y>=global.poziomwody && !global.lava {
+        if y>=global.water_level && !global.lava {
 
-            if szybkosc<0 {kierunek=1}
-            if szybkosc>0 {kierunek=0}
+            if hspd<0 {dir=1}
+            if hspd>0 {dir=0}
 
-            if szybkosc=0 && sekwencja=0 && kierunek=0 {animator.sprite_index=global.fire_character_run; animator.image_index=0; animator.image_xscale=1; animkind=0}
-            if szybkosc=0 && sekwencja=0 && kierunek=1 {animator.sprite_index=global.fire_character_run; animator.image_index=0; animator.image_xscale=-1; animkind=0}
+            if hspd=0 && state=0 && dir=0 {animator.sprite_index=global.fire_character_run; animator.image_index=0; animator.image_xscale=1; animkind=0}
+            if hspd=0 && state=0 && dir=1 {animator.sprite_index=global.fire_character_run; animator.image_index=0; animator.image_xscale=-1; animkind=0}
 
-            if szybkosc>0 && kierunek=0 && sekwencja=0 {animator.sprite_index=global.fire_character_run; animator.image_index+=szybkosc/20; animator.image_xscale=1; animkind=0}
-            if szybkosc<0 && kierunek=1 && sekwencja=0 {animator.sprite_index=global.fire_character_run; animator.image_index+=szybkosc/20; animator.image_xscale=-1; animkind=0}
+            if hspd>0 && dir=0 && state=0 {animator.sprite_index=global.fire_character_run; animator.image_index+=hspd/20; animator.image_xscale=1; animkind=0}
+            if hspd<0 && dir=1 && state=0 {animator.sprite_index=global.fire_character_run; animator.image_index+=hspd/20; animator.image_xscale=-1; animkind=0}
 
-            if kierunek=0 && grawitacja<>0 {animator.sprite_index=global.fire_character_swim; animator.image_index=plywakanim; animator.image_xscale=1;animkind=2}
-            if kierunek=1 && grawitacja<>0 {animator.sprite_index=global.fire_character_swim; animator.image_index=plywakanim; animator.image_xscale=-1;animkind=2}
-            if plywakanim<9 {plywakanim+=0.2}
+            if dir=0 && grav<>0 {animator.sprite_index=global.fire_character_swim; animator.image_index=swim_anim; animator.image_xscale=1;animkind=2}
+            if dir=1 && grav<>0 {animator.sprite_index=global.fire_character_swim; animator.image_index=swim_anim; animator.image_xscale=-1;animkind=2}
+            if swim_anim<9 {swim_anim+=0.2}
 
-            if schylanie=1 && kierunek=0 {animator.sprite_index=global.fire_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
-            if schylanie=1 && kierunek=1 {animator.sprite_index=global.fire_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
+            if schylanie=1 && dir=0 {animator.sprite_index=global.fire_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
+            if schylanie=1 && dir=1 {animator.sprite_index=global.fire_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
             if !schylanie=1 {image_index=1}
 
-            if schylanie=1 || sekwencja<>0 {strzelil=0}
-            if kierunek=0 && strzelil>0 {animator.sprite_index=global.fire_character_shoot; animator.image_xscale=1; strzelil+=1;animkind=0}
-            if kierunek=1 && strzelil>0 {animator.sprite_index=global.fire_character_shoot; animator.image_xscale=-1; strzelil+=1;animkind=0}
-            if strzelil>3 {strzelil=0}
+            if schylanie=1 || state<>0 {shoot_anim=0}
+            if dir=0 && shoot_anim>0 {animator.sprite_index=global.fire_character_shoot; animator.image_xscale=1; shoot_anim+=1;animkind=0}
+            if dir=1 && shoot_anim>0 {animator.sprite_index=global.fire_character_shoot; animator.image_xscale=-1; shoot_anim+=1;animkind=0}
+            if shoot_anim>3 {shoot_anim=0}
 
-            if global.efekty>5 {lolo=instance_create(x,y,o_marioeffektor); lolo.sprite_index=animator.sprite_index; lolo.image_index=animator.image_index; lolo.image_speed=0;lolo.image_xscale=animator.image_xscale}
+            if global.efekty>5 {tmp=instance_create(x,y,o_mariofx); tmp.sprite_index=animator.sprite_index; tmp.image_index=animator.image_index; tmp.image_speed=0;tmp.image_xscale=animator.image_xscale}
 
 
         }}
 
     // OGRODNIX MARIO
     if global.rodzajmaria=3 {
-        if y<global.poziomwody || global.lava {
+        if y<global.water_level || global.lava {
 
-            if szybkosc<0 {kierunek=1}
-            if szybkosc>0 {kierunek=0}
+            if hspd<0 {dir=1}
+            if hspd>0 {dir=0}
 
-            if szybkosc=0 && sekwencja=0 && kierunek=0 && strzelil=0 {animator.sprite_index=global.lui_character_run; animator.image_index=0; animator.image_xscale=1;animkind=0}
-            if szybkosc=0 && sekwencja=0 && kierunek=1 && strzelil=0 {animator.sprite_index=global.lui_character_run; animator.image_index=0; animator.image_xscale=-1;animkind=0}
+            if hspd=0 && state=0 && dir=0 && shoot_anim=0 {animator.sprite_index=global.lui_character_run; animator.image_index=0; animator.image_xscale=1;animkind=0}
+            if hspd=0 && state=0 && dir=1 && shoot_anim=0 {animator.sprite_index=global.lui_character_run; animator.image_index=0; animator.image_xscale=-1;animkind=0}
 
-            if szybkosc>0 && kierunek=0 && sekwencja=0 && strzelil=0 {animator.sprite_index=global.lui_character_run; animator.image_index+=szybkosc/10; animator.image_xscale=1;animkind=0}
-            if szybkosc<0 && kierunek=1 && sekwencja=0 && strzelil=0 {animator.sprite_index=global.lui_character_run; animator.image_index+=szybkosc/10; animator.image_xscale=-1;animkind=0}
+            if hspd>0 && dir=0 && state=0 && shoot_anim=0 {animator.sprite_index=global.lui_character_run; animator.image_index+=hspd/10; animator.image_xscale=1;animkind=0}
+            if hspd<0 && dir=1 && state=0 && shoot_anim=0 {animator.sprite_index=global.lui_character_run; animator.image_index+=hspd/10; animator.image_xscale=-1;animkind=0}
 
-            if kierunek=0 && grawitacja<>0 {animator.sprite_index=global.lui_character_jump; animator.image_xscale=1;animkind=1}
-            if kierunek=1 && grawitacja<>0 {animator.sprite_index=global.lui_character_jump; animator.image_xscale=-1;animkind=1}
+            if dir=0 && grav<>0 {animator.sprite_index=global.lui_character_jump; animator.image_xscale=1;animkind=1}
+            if dir=1 && grav<>0 {animator.sprite_index=global.lui_character_jump; animator.image_xscale=-1;animkind=1}
 
-            if schylanie=1 && kierunek=0 {animator.sprite_index=global.lui_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
-            if schylanie=1 && kierunek=1 {animator.sprite_index=global.lui_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
+            if schylanie=1 && dir=0 {animator.sprite_index=global.lui_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
+            if schylanie=1 && dir=1 {animator.sprite_index=global.lui_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
             if !schylanie=1 {image_index=1}
 
-            strzelil=0 // nie ma strzelania!
+            shoot_anim=0 // nie ma strzelania!
 
         }
 
-        if y>=global.poziomwody && !global.lava {
+        if y>=global.water_level && !global.lava {
 
-            if szybkosc<0 {kierunek=1}
-            if szybkosc>0 {kierunek=0}
+            if hspd<0 {dir=1}
+            if hspd>0 {dir=0}
 
-            if szybkosc=0 && sekwencja=0 && kierunek=0 {animator.sprite_index=global.lui_character_run; animator.image_index=0; animator.image_xscale=1;animkind=0}
-            if szybkosc=0 && sekwencja=0 && kierunek=1 {animator.sprite_index=global.lui_character_run; animator.image_index=0; animator.image_xscale=-1;animkind=0}
+            if hspd=0 && state=0 && dir=0 {animator.sprite_index=global.lui_character_run; animator.image_index=0; animator.image_xscale=1;animkind=0}
+            if hspd=0 && state=0 && dir=1 {animator.sprite_index=global.lui_character_run; animator.image_index=0; animator.image_xscale=-1;animkind=0}
 
-            if szybkosc>0 && kierunek=0 && sekwencja=0 {animator.sprite_index=global.lui_character_run; animator.image_index+=szybkosc/20; animator.image_xscale=1;animkind=0}
-            if szybkosc<0 && kierunek=1 && sekwencja=0 {animator.sprite_index=global.lui_character_run; animator.image_index+=szybkosc/20; animator.image_xscale=-1;animkind=0}
+            if hspd>0 && dir=0 && state=0 {animator.sprite_index=global.lui_character_run; animator.image_index+=hspd/20; animator.image_xscale=1;animkind=0}
+            if hspd<0 && dir=1 && state=0 {animator.sprite_index=global.lui_character_run; animator.image_index+=hspd/20; animator.image_xscale=-1;animkind=0}
 
-            if kierunek=0 && grawitacja<>0 {animator.sprite_index=global.lui_character_swim; animator.image_index=plywakanim; animator.image_xscale=1;animkind=2}
-            if kierunek=1 && grawitacja<>0 {animator.sprite_index=global.lui_character_swim; animator.image_index=plywakanim; animator.image_xscale=-1;animkind=2}
-            if plywakanim<9 {plywakanim+=0.2}
+            if dir=0 && grav<>0 {animator.sprite_index=global.lui_character_swim; animator.image_index=swim_anim; animator.image_xscale=1;animkind=2}
+            if dir=1 && grav<>0 {animator.sprite_index=global.lui_character_swim; animator.image_index=swim_anim; animator.image_xscale=-1;animkind=2}
+            if swim_anim<9 {swim_anim+=0.2}
 
-            if schylanie=1 && kierunek=0 {animator.sprite_index=global.lui_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
-            if schylanie=1 && kierunek=1 {animator.sprite_index=global.lui_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
+            if schylanie=1 && dir=0 {animator.sprite_index=global.lui_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
+            if schylanie=1 && dir=1 {animator.sprite_index=global.lui_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
             if !schylanie=1 {image_index=1}
 
-            strzelil=0 // nie ma strzelania!
-            if global.efekty>5 {lolo=instance_create(x,y,o_marioeffektor); lolo.sprite_index=animator.sprite_index; lolo.image_index=animator.image_index; lolo.image_speed=0;lolo.image_xscale=animator.image_xscale}
+            shoot_anim=0 // nie ma strzelania!
+            if global.efekty>5 {tmp=instance_create(x,y,o_mariofx); tmp.sprite_index=animator.sprite_index; tmp.image_index=animator.image_index; tmp.image_speed=0;tmp.image_xscale=animator.image_xscale}
 
 
         }}
 
     // BURACZANY MARIO
     if global.rodzajmaria=4 {
-        if y<global.poziomwody || global.lava {
+        if y<global.water_level || global.lava {
 
-            if szybkosc<0 {kierunek=1}
-            if szybkosc>0 {kierunek=0}
+            if hspd<0 {dir=1}
+            if hspd>0 {dir=0}
 
-            if szybkosc=0 && sekwencja=0 && kierunek=0 && strzelil=0 {animator.sprite_index=global.beetroot_character_run; animator.image_index=0; animator.image_xscale=1;animkind=0}
-            if szybkosc=0 && sekwencja=0 && kierunek=1 && strzelil=0 {animator.sprite_index=global.beetroot_character_run; animator.image_index=0; animator.image_xscale=-1;animkind=0}
+            if hspd=0 && state=0 && dir=0 && shoot_anim=0 {animator.sprite_index=global.beetroot_character_run; animator.image_index=0; animator.image_xscale=1;animkind=0}
+            if hspd=0 && state=0 && dir=1 && shoot_anim=0 {animator.sprite_index=global.beetroot_character_run; animator.image_index=0; animator.image_xscale=-1;animkind=0}
 
-            if szybkosc>0 && kierunek=0 && sekwencja=0 && strzelil=0 {animator.sprite_index=global.beetroot_character_run; animator.image_index+=szybkosc/10; animator.image_xscale=1;animkind=0}
-            if szybkosc<0 && kierunek=1 && sekwencja=0 && strzelil=0 {animator.sprite_index=global.beetroot_character_run; animator.image_index+=szybkosc/10; animator.image_xscale=-1;animkind=0}
+            if hspd>0 && dir=0 && state=0 && shoot_anim=0 {animator.sprite_index=global.beetroot_character_run; animator.image_index+=hspd/10; animator.image_xscale=1;animkind=0}
+            if hspd<0 && dir=1 && state=0 && shoot_anim=0 {animator.sprite_index=global.beetroot_character_run; animator.image_index+=hspd/10; animator.image_xscale=-1;animkind=0}
 
-            if kierunek=0 && grawitacja<>0 {animator.sprite_index=global.beetroot_character_jump; animator.image_xscale=1;animkind=1}
-            if kierunek=1 && grawitacja<>0 {animator.sprite_index=global.beetroot_character_jump; animator.image_xscale=-1;animkind=1}
+            if dir=0 && grav<>0 {animator.sprite_index=global.beetroot_character_jump; animator.image_xscale=1;animkind=1}
+            if dir=1 && grav<>0 {animator.sprite_index=global.beetroot_character_jump; animator.image_xscale=-1;animkind=1}
 
-            if schylanie=1 && kierunek=0 {animator.sprite_index=global.beetroot_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
-            if schylanie=1 && kierunek=1 {animator.sprite_index=global.beetroot_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
+            if schylanie=1 && dir=0 {animator.sprite_index=global.beetroot_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
+            if schylanie=1 && dir=1 {animator.sprite_index=global.beetroot_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
             if !schylanie=1 {image_index=1}
 
-            if schylanie=1 || sekwencja<>0 {strzelil=0}
-            if kierunek=0 && strzelil>0 {animator.sprite_index=global.beetroot_character_shoot; animator.image_xscale=1; strzelil+=1;animkind=0}
-            if kierunek=1 && strzelil>0 {animator.sprite_index=global.beetroot_character_shoot; animator.image_xscale=-1; strzelil+=1;animkind=0}
-            if strzelil>3 {strzelil=0}
+            if schylanie=1 || state<>0 {shoot_anim=0}
+            if dir=0 && shoot_anim>0 {animator.sprite_index=global.beetroot_character_shoot; animator.image_xscale=1; shoot_anim+=1;animkind=0}
+            if dir=1 && shoot_anim>0 {animator.sprite_index=global.beetroot_character_shoot; animator.image_xscale=-1; shoot_anim+=1;animkind=0}
+            if shoot_anim>3 {shoot_anim=0}
         }
 
-        if y>=global.poziomwody && !global.lava {
+        if y>=global.water_level && !global.lava {
 
-            if szybkosc<0 {kierunek=1}
-            if szybkosc>0 {kierunek=0}
+            if hspd<0 {dir=1}
+            if hspd>0 {dir=0}
 
-            if szybkosc=0 && sekwencja=0 && kierunek=0 {animator.sprite_index=global.beetroot_character_run; animator.image_index=0; animator.image_xscale=1;animkind=0}
-            if szybkosc=0 && sekwencja=0 && kierunek=1 {animator.sprite_index=global.beetroot_character_run; animator.image_index=0; animator.image_xscale=-1;animkind=0}
+            if hspd=0 && state=0 && dir=0 {animator.sprite_index=global.beetroot_character_run; animator.image_index=0; animator.image_xscale=1;animkind=0}
+            if hspd=0 && state=0 && dir=1 {animator.sprite_index=global.beetroot_character_run; animator.image_index=0; animator.image_xscale=-1;animkind=0}
 
-            if szybkosc>0 && kierunek=0 && sekwencja=0 {animator.sprite_index=global.beetroot_character_run; animator.image_index+=szybkosc/20; animator.image_xscale=1;animkind=0}
-            if szybkosc<0 && kierunek=1 && sekwencja=0 {animator.sprite_index=global.beetroot_character_run; animator.image_index+=szybkosc/20; animator.image_xscale=-1;animkind=0}
+            if hspd>0 && dir=0 && state=0 {animator.sprite_index=global.beetroot_character_run; animator.image_index+=hspd/20; animator.image_xscale=1;animkind=0}
+            if hspd<0 && dir=1 && state=0 {animator.sprite_index=global.beetroot_character_run; animator.image_index+=hspd/20; animator.image_xscale=-1;animkind=0}
 
-            if kierunek=0 && grawitacja<>0 {animator.sprite_index=global.beetroot_character_swim; animator.image_index=plywakanim; animator.image_xscale=1;animkind=2}
-            if kierunek=1 && grawitacja<>0 {animator.sprite_index=global.beetroot_character_swim; animator.image_index=plywakanim; animator.image_xscale=-1;animkind=2}
-            if plywakanim<9 {plywakanim+=0.2}
+            if dir=0 && grav<>0 {animator.sprite_index=global.beetroot_character_swim; animator.image_index=swim_anim; animator.image_xscale=1;animkind=2}
+            if dir=1 && grav<>0 {animator.sprite_index=global.beetroot_character_swim; animator.image_index=swim_anim; animator.image_xscale=-1;animkind=2}
+            if swim_anim<9 {swim_anim+=0.2}
 
-            if schylanie=1 && kierunek=0 {animator.sprite_index=global.beetroot_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
-            if schylanie=1 && kierunek=1 {animator.sprite_index=global.beetroot_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
+            if schylanie=1 && dir=0 {animator.sprite_index=global.beetroot_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
+            if schylanie=1 && dir=1 {animator.sprite_index=global.beetroot_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
             if !schylanie=1 {image_index=1}
 
 
-            if global.efekty>5 {lolo=instance_create(x,y,o_marioeffektor); lolo.sprite_index=animator.sprite_index; lolo.image_index=animator.image_index; lolo.image_speed=0;lolo.image_xscale=animator.image_xscale}
+            if global.efekty>5 {tmp=instance_create(x,y,o_mariofx); tmp.sprite_index=animator.sprite_index; tmp.image_index=animator.image_index; tmp.image_speed=0;tmp.image_xscale=animator.image_xscale}
 
-            if schylanie=1 || sekwencja<>0 {strzelil=0}
-            if kierunek=0 && strzelil>0 {animator.sprite_index=global.beetroot_character_shoot; animator.image_xscale=1; strzelil+=1;animkind=0}
-            if kierunek=1 && strzelil>0 {animator.sprite_index=global.beetroot_character_shoot; animator.image_xscale=-1; strzelil+=1;animkind=0}
-            if strzelil>3 {strzelil=0}
+            if schylanie=1 || state<>0 {shoot_anim=0}
+            if dir=0 && shoot_anim>0 {animator.sprite_index=global.beetroot_character_shoot; animator.image_xscale=1; shoot_anim+=1;animkind=0}
+            if dir=1 && shoot_anim>0 {animator.sprite_index=global.beetroot_character_shoot; animator.image_xscale=-1; shoot_anim+=1;animkind=0}
+            if shoot_anim>3 {shoot_anim=0}
         }}
 
     // RACCOON MARIO
     if global.rodzajmaria=6 {
-        if y<global.poziomwody || global.lava {
+        if y<global.water_level || global.lava {
 
-            if szybkosc<0 {kierunek=1}
-            if szybkosc>0 {kierunek=0}
+            if hspd<0 {dir=1}
+            if hspd>0 {dir=0}
 
-            if szybkosc=0 && sekwencja=0 && kierunek=0 && strzelil=0 {animator.sprite_index=global.raccoon_character_idle; animator.image_index=0; animator.image_xscale=1;animkind=0}
-            if szybkosc=0 && sekwencja=0 && kierunek=1 && strzelil=0 {animator.sprite_index=global.raccoon_character_idle; animator.image_index=0; animator.image_xscale=-1;animkind=0}
+            if hspd=0 && state=0 && dir=0 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_idle; animator.image_index=0; animator.image_xscale=1;animkind=0}
+            if hspd=0 && state=0 && dir=1 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_idle; animator.image_index=0; animator.image_xscale=-1;animkind=0}
 
-            if szybkosc>0 && kierunek=0 && sekwencja=0 && strzelil=0 {animator.sprite_index=global.raccoon_character_walk; animator.image_index+=szybkosc/10; animator.image_xscale=1;animkind=0}
-            if szybkosc<0 && kierunek=1 && sekwencja=0 && strzelil=0 {animator.sprite_index=global.raccoon_character_walk; animator.image_index+=szybkosc/10; animator.image_xscale=-1;animkind=0}
+            if hspd>0 && dir=0 && state=0 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_walk; animator.image_index+=hspd/10; animator.image_xscale=1;animkind=0}
+            if hspd<0 && dir=1 && state=0 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_walk; animator.image_index+=hspd/10; animator.image_xscale=-1;animkind=0}
 
             // When P-Meter is full and running, use run animation
-            if abs(szybkosc)>6 && raccoon_fly_allowed=1 && sekwencja=0 && strzelil=0 && kierunek=0 {animator.sprite_index=global.raccoon_character_run; animator.image_index+=szybkosc/10; animator.image_xscale=1;animkind=0}
-            if abs(szybkosc)>6 && raccoon_fly_allowed=1 && sekwencja=0 && strzelil=0 && kierunek=1 {animator.sprite_index=global.raccoon_character_run; animator.image_index+=szybkosc/10; animator.image_xscale=-1;animkind=0}
+            if abs(hspd)>6 && raccoon_fly_allowed=1 && state=0 && shoot_anim=0 && dir=0 {animator.sprite_index=global.raccoon_character_run; animator.image_index+=hspd/10; animator.image_xscale=1;animkind=0}
+            if abs(hspd)>6 && raccoon_fly_allowed=1 && state=0 && shoot_anim=0 && dir=1 {animator.sprite_index=global.raccoon_character_run; animator.image_index+=hspd/10; animator.image_xscale=-1;animkind=0}
 
             // Jump animation
-            if kierunek=0 && grawitacja<>0 && raccoon_fall=0 && raccoon_fly_allowed=0 && strzelil=0 {animator.sprite_index=global.raccoon_character_jump; animator.image_xscale=1;animkind=1}
-            if kierunek=1 && grawitacja<>0 && raccoon_fall=0 && raccoon_fly_allowed=0 && strzelil=0 {animator.sprite_index=global.raccoon_character_jump; animator.image_xscale=-1;animkind=1}
+            if dir=0 && grav<>0 && raccoon_fall=0 && raccoon_fly_allowed=0 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_jump; animator.image_xscale=1;animkind=1}
+            if dir=1 && grav<>0 && raccoon_fall=0 && raccoon_fly_allowed=0 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_jump; animator.image_xscale=-1;animkind=1}
 
             // Fall / parachute animation
-            if kierunek=0 && raccoon_fall=1 && strzelil=0 {animator.sprite_index=global.raccoon_character_fall; animator.image_index+=0.2; animator.image_xscale=1;animkind=1}
-            if kierunek=1 && raccoon_fall=1 && strzelil=0 {animator.sprite_index=global.raccoon_character_fall; animator.image_index+=0.2; animator.image_xscale=-1;animkind=1}
+            if dir=0 && raccoon_fall=1 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_fall; animator.image_index+=0.2; animator.image_xscale=1;animkind=1}
+            if dir=1 && raccoon_fall=1 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_fall; animator.image_index+=0.2; animator.image_xscale=-1;animkind=1}
 
             // Fly animation (ascending or descending, matches SMWP2 behavior)
-            if kierunek=0 && raccoon_fly_allowed=1 && grawitacja<>0 && strzelil=0 {animator.sprite_index=global.raccoon_character_fly; animator.image_index+=0.25; animator.image_xscale=1;animkind=1}
-            if kierunek=1 && raccoon_fly_allowed=1 && grawitacja<>0 && strzelil=0 {animator.sprite_index=global.raccoon_character_fly; animator.image_index+=0.25; animator.image_xscale=-1;animkind=1}
+            if dir=0 && raccoon_fly_allowed=1 && grav<>0 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_fly; animator.image_index+=0.25; animator.image_xscale=1;animkind=1}
+            if dir=1 && raccoon_fly_allowed=1 && grav<>0 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_fly; animator.image_index+=0.25; animator.image_xscale=-1;animkind=1}
 
             // Crouch
-            if schylanie=1 && kierunek=0 {animator.sprite_index=global.raccoon_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
-            if schylanie=1 && kierunek=1 {animator.sprite_index=global.raccoon_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
+            if schylanie=1 && dir=0 {animator.sprite_index=global.raccoon_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
+            if schylanie=1 && dir=1 {animator.sprite_index=global.raccoon_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
             if !schylanie=1 {image_index=1}
 
             // Shooting (tail whip) animation — high priority, works in air and on ground
-            if schylanie=1 {strzelil=0}
-            if kierunek=0 && strzelil>0 {animator.sprite_index=global.raccoon_character_shoot; animator.image_index+=0.5; animator.image_xscale=1; strzelil+=1;animkind=0}
-            if kierunek=1 && strzelil>0 {animator.sprite_index=global.raccoon_character_shoot; animator.image_index+=0.5; animator.image_xscale=-1; strzelil+=1;animkind=0}
-            if strzelil>8 {strzelil=0; animator.image_index=0}
+            if schylanie=1 {shoot_anim=0}
+            if dir=0 && shoot_anim>0 {animator.sprite_index=global.raccoon_character_shoot; animator.image_index+=0.5; animator.image_xscale=1; shoot_anim+=1;animkind=0}
+            if dir=1 && shoot_anim>0 {animator.sprite_index=global.raccoon_character_shoot; animator.image_index+=0.5; animator.image_xscale=-1; shoot_anim+=1;animkind=0}
+            if shoot_anim>8 {shoot_anim=0; animator.image_index=0}
         }
 
-        if y>=global.poziomwody && !global.lava {
+        if y>=global.water_level && !global.lava {
 
-            if szybkosc<0 {kierunek=1}
-            if szybkosc>0 {kierunek=0}
+            if hspd<0 {dir=1}
+            if hspd>0 {dir=0}
 
-            if szybkosc=0 && sekwencja=0 && kierunek=0 {animator.sprite_index=global.raccoon_character_idle; animator.image_index=0; animator.image_xscale=1;animkind=0}
-            if szybkosc=0 && sekwencja=0 && kierunek=1 {animator.sprite_index=global.raccoon_character_idle; animator.image_index=0; animator.image_xscale=-1;animkind=0}
+            if hspd=0 && state=0 && dir=0 {animator.sprite_index=global.raccoon_character_idle; animator.image_index=0; animator.image_xscale=1;animkind=0}
+            if hspd=0 && state=0 && dir=1 {animator.sprite_index=global.raccoon_character_idle; animator.image_index=0; animator.image_xscale=-1;animkind=0}
 
-            if szybkosc>0 && kierunek=0 && sekwencja=0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index+=szybkosc/20; animator.image_xscale=1;animkind=0}
-            if szybkosc<0 && kierunek=1 && sekwencja=0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index+=szybkosc/20; animator.image_xscale=-1;animkind=0}
+            if hspd>0 && dir=0 && state=0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index+=hspd/20; animator.image_xscale=1;animkind=0}
+            if hspd<0 && dir=1 && state=0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index+=hspd/20; animator.image_xscale=-1;animkind=0}
 
-            if kierunek=0 && grawitacja<>0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index=plywakanim; animator.image_xscale=1;animkind=2}
-            if kierunek=1 && grawitacja<>0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index=plywakanim; animator.image_xscale=-1;animkind=2}
-            if plywakanim<9 {plywakanim+=0.2}
+            if dir=0 && grav<>0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index=swim_anim; animator.image_xscale=1;animkind=2}
+            if dir=1 && grav<>0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index=swim_anim; animator.image_xscale=-1;animkind=2}
+            if swim_anim<9 {swim_anim+=0.2}
 
-            if schylanie=1 && kierunek=0 {animator.sprite_index=global.raccoon_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
-            if schylanie=1 && kierunek=1 {animator.sprite_index=global.raccoon_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
+            if schylanie=1 && dir=0 {animator.sprite_index=global.raccoon_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
+            if schylanie=1 && dir=1 {animator.sprite_index=global.raccoon_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
             if !schylanie=1 {image_index=1}
 
-            strzelil=0
+            shoot_anim=0
 
-            if global.efekty>5 {lolo=instance_create(x,y,o_marioeffektor); lolo.sprite_index=animator.sprite_index; lolo.image_index=animator.image_index; lolo.image_speed=0;lolo.image_xscale=animator.image_xscale}
+            if global.efekty>5 {tmp=instance_create(x,y,o_mariofx); tmp.sprite_index=animator.sprite_index; tmp.image_index=animator.image_index; tmp.image_speed=0;tmp.image_xscale=animator.image_xscale}
 
         }}
 
@@ -1335,7 +1335,7 @@ applies_to=self
 // algorytm ktory resetuje nabijanie combo za zabijanie przeciwnikow, dla rozdeptywania bez dotykania ziemii i zabijania
 // muszla.
 
-if global.pauza=0 && skusil=0 && global.etappokonany=0 {
+if global.pauza=0 && shell_lock=0 && global.level_complete=0 {
 
     if global.combo1>0 {global.combo1reset+=1}
     if global.combo1reset>200 {global.combo1=0;global.combo1reset=0}
@@ -1352,7 +1352,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if global.pauza=0 && skusil=0 && global.etappokonany=0 && teleportacja=0 {
+if global.pauza=0 && shell_lock=0 && global.level_complete=0 && pipe_state=0 {
     // rozdeptywanie wrogow
 
     // Raccoon tail hit check runs first: mark enemies before stomp so tail takes priority
@@ -1361,7 +1361,7 @@ if global.pauza=0 && skusil=0 && global.etappokonany=0 && teleportacja=0 {
     if instance_exists(o_raccoon_tail) {
         var _tdir, _tsweepX, _ttimer, _ttailX, _ttailY;
         _tdir = 1
-        if o_raccoon_tail.kierunek = 1 { _tdir = -1 }
+        if o_raccoon_tail.dir = 1 { _tdir = -1 }
 
         _ttimer = o_raccoon_tail.timer
         if _ttimer <= 2 { _tsweepX = 0 } else {
@@ -1376,11 +1376,11 @@ if global.pauza=0 && skusil=0 && global.etappokonany=0 && teleportacja=0 {
         _ttailY = y - 11
 
         // Falling offset (SMWP2: offset down by fall speed in open air)
-        if grawitacja > 0 {
+        if grav > 0 {
             var _tcheckY;
-            _tcheckY = y + grawitacja + 1
+            _tcheckY = y + grav + 1
             if !place_meeting(x, _tcheckY, obj_wall) && !place_meeting(x, _tcheckY, o_pointblock) && !place_meeting(x, _tcheckY, o_windas) {
-                _ttailY = y - 11 + grawitacja
+                _ttailY = y - 11 + grav
             }
         }
 
@@ -1396,108 +1396,108 @@ if global.pauza=0 && skusil=0 && global.etappokonany=0 && teleportacja=0 {
     if global.rodzajmaria<>5 {
 
         //gwiazdka记录是否为无敌星状态
-        if gwiazdka<=0 {
+        if star_timer<=0 {
             //踩或撞普通可踩敌人
-            if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_goomba) && !place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell2)  && !place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell) && !place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_kuppa) /* && muszlowanie>10 */
+            if place_meeting(x,y+max(0,grav+global.level_gravity/5),o_goomba) && !place_meeting(x,y+max(0,grav+global.level_gravity/5),o_troopashell2)  && !place_meeting(x,y+max(0,grav+global.level_gravity/5),o_troopashell) && !place_meeting(x,y+max(0,grav+global.level_gravity/5),o_bowser) /* && muszlowanie>10 */
             {
-                lolo=instance_place(x,y+max(0,grawitacja+global.etapgravity/5),o_goomba)
-                if lolo.killer=0 && lolo.license <> 1 && lolo.hurt_delay=0 {
-                    if lolo.rodzajzabicia=0 && grawitacja>0 && y<lolo.y {
+                tmp=instance_place(x,y+max(0,grav+global.level_gravity/5),o_goomba)
+                if tmp.killer=0 && tmp.license <> 1 && tmp.hurt_delay=0 {
+                    if tmp.kill_type=0 && grav>0 && y<tmp.y {
                         //lolo.energia-=233333333333333333333; 恶劣变量
-                        lolo.rodzajzabicia=1;//这里是记录是普通的踩还是无敌星，估计主要是为了计分之类
-                        sekwencja=1;
-                        grawitacja=-8-lolo.odpych
+                        tmp.kill_type=1;//这里是记录是普通的踩还是无敌星，估计主要是为了计分之类
+                        state=1;
+                        grav=-8-tmp.knockback
                         if raccoon_flew=1 {raccoon_fly_timer=0}
                         global.combo1+=1
                         global.combo1reset=0
                         //muszlowanie=0
-                        if global.sample=1 {fofo=sound_play(snd_rozdeptanie);sound_volume(snd_rozdeptanie,global.glosnosc)} //sampel
-                        if lolo.object_index=o_kuppa && kierunek=0 {szybkosc+=6}
-                        if lolo.object_index=o_kuppa && kierunek=1 {szybkosc-=6}
+                        if global.sample=1 {tmp2=sound_play(snd_stomp);sound_volume(snd_stomp,global.game_volume)} //sampel
+                        if tmp.object_index=o_bowser && dir=0 {hspd+=6}
+                        if tmp.object_index=o_bowser && dir=1 {hspd-=6}
                     }
                 }
-                if lolo.hurt_delay=0 && lolo.killer=0 && oberwal=0 && y>=lolo.y && shield=0 && lolo.license <> 1 {oberwal=1}
+                if tmp.hurt_delay=0 && tmp.killer=0 && hit_timer=0 && y>=tmp.y && shield=0 && tmp.license <> 1 {hit_timer=1}
             }
 
             //踩或撞炮弹
-            if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_troopashell2) && !place_meeting(x,y,o_kuppa) /* && muszlowanie>10 */
+            if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_troopashell2) && !place_meeting(x,y,o_bowser) /* && muszlowanie>10 */
             {
-                lolo=instance_place(x,y,o_goomba)
-                if lolo.killer=0 && lolo.license = 1 {
-                    if lolo.rodzajzabicia=0 && grawitacja>0 && y<lolo.y {
+                tmp=instance_place(x,y,o_goomba)
+                if tmp.killer=0 && tmp.license = 1 {
+                    if tmp.kill_type=0 && grav>0 && y<tmp.y {
                         // lolo.energia-=233333333333333333333;
-                        lolo.rodzajzabicia=1;
-                        sekwencja=1;
-                        grawitacja=-8-lolo.odpych
+                        tmp.kill_type=1;
+                        state=1;
+                        grav=-8-tmp.knockback
                         if raccoon_flew=1 {raccoon_fly_timer=0}
                         global.combo1+=1
                         global.combo1reset=0
                         //muszlowanie=0
-                        if global.sample=1 {fofo=sound_play(snd_rozdeptanie);sound_volume(snd_rozdeptanie,global.glosnosc)} //sampel
-                        if lolo.object_index=o_kuppa && kierunek=0 {szybkosc+=6}
-                        if lolo.object_index=o_kuppa && kierunek=1 {szybkosc-=6}
+                        if global.sample=1 {tmp2=sound_play(snd_stomp);sound_volume(snd_stomp,global.game_volume)} //sampel
+                        if tmp.object_index=o_bowser && dir=0 {hspd+=6}
+                        if tmp.object_index=o_bowser && dir=1 {hspd-=6}
                     } }
-                if lolo.killer=0 && oberwal=0 && y>=lolo.y && shield=0 && lolo.license = 1 {oberwal=1}
+                if tmp.killer=0 && hit_timer=0 && y>=tmp.y && shield=0 && tmp.license = 1 {hit_timer=1}
             }
 
             //踩或撞到危险敌人
-            if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_troopashell2) && !place_meeting(x,y,o_kuppa) /* && muszlowanie>10 */
+            if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_troopashell2) && !place_meeting(x,y,o_bowser) /* && muszlowanie>10 */
             {
-                lolo=instance_place(x,y,o_goomba)
-                if lolo.killer=1 && oberwal=0 && shield=0 {oberwal=1}//killer=1就是不能踩（刺猬）
+                tmp=instance_place(x,y,o_goomba)
+                if tmp.killer=1 && hit_timer=0 && shield=0 {hit_timer=1}//killer=1就是不能踩（刺猬）
             }
 
             //踢静止龟壳
-            if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell2) /* && muszlowanie>10*/ && skusil=0//这个是静止龟壳
+            if place_meeting(x,y+max(0,grav+global.level_gravity/5),o_troopashell2) /* && muszlowanie>10*/ && shell_lock=0//这个是静止龟壳
             {
-                lolo=instance_place(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell2)
-                if lolo.hurt_delay=0 && lolo.rodzajzabicia=0 {
+                tmp=instance_place(x,y+max(0,grav+global.level_gravity/5),o_troopashell2)
+                if tmp.hurt_delay=0 && tmp.kill_type=0 {
                     // spiny shell: kick only on the safe (non-spike) side
                     var _canKick; _canKick = 1;
-                    if lolo.czerwona=4 {
-                        if lolo.is_flipped=0 {
+                    if tmp.shell_kind=4 {
+                        if tmp.is_flipped=0 {
                             // spikes on top: player above (y < shell.y) → hurt
-                            if y < lolo.y { _canKick = 0; }
+                            if y < tmp.y { _canKick = 0; }
                         } else {
                             // spikes on bottom: player below (y >= shell.y) → hurt
-                            if y >= lolo.y { _canKick = 0; }
+                            if y >= tmp.y { _canKick = 0; }
                         }
-                        if _canKick=0 && oberwal=0 && shield=0 { oberwal=1 }
+                        if _canKick=0 && hit_timer=0 && shield=0 { hit_timer=1 }
                     }
                     if _canKick=1 {
-                        if x<lolo.x {lolo.kierunek=1;lolo.rodzajzabicia=1}
-                        if x>=lolo.x {lolo.kierunek=-1;lolo.rodzajzabicia=1}//这里实现的是踢龟壳（所以为什么要以踩为判定基础……）
-                        if sekwencja=1 {grawitacja=-8; if raccoon_flew=1 {raccoon_fly_timer=0}}
-                        if global.sample=1 {fofo=sound_play(snd_rozdeptanie);sound_volume(snd_rozdeptanie,global.glosnosc)} //sampel
+                        if x<tmp.x {tmp.dir=1;tmp.kill_type=1}
+                        if x>=tmp.x {tmp.dir=-1;tmp.kill_type=1}//这里实现的是踢龟壳（所以为什么要以踩为判定基础……）
+                        if state=1 {grav=-8; if raccoon_flew=1 {raccoon_fly_timer=0}}
+                        if global.sample=1 {tmp2=sound_play(snd_stomp);sound_volume(snd_stomp,global.game_volume)} //sampel
                     }
                 }
             }
 
             //踩停运动龟壳
-            if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell) {
-                lolo=instance_place(x,y+max(0,grawitacja+global.etapgravity/5),o_troopashell)
+            if place_meeting(x,y+max(0,grav+global.level_gravity/5),o_troopashell) {
+                tmp=instance_place(x,y+max(0,grav+global.level_gravity/5),o_troopashell)
                 // spiny shell (czerwona=4): 移动刺壳 - 碰到即受伤，不可踩停
                 var _stopAbove, _hurtSide;
-                _stopAbove = (y<lolo.y);   // normal: above = safe stop
-                _hurtSide = (y>=lolo.y);   // normal: below/side = hurt
-                if lolo.czerwona=4 {
-                    if lolo.is_flipped=0 {
+                _stopAbove = (y<tmp.y);   // normal: above = safe stop
+                _hurtSide = (y>=tmp.y);   // normal: below/side = hurt
+                if tmp.shell_kind=4 {
+                    if tmp.is_flipped=0 {
                         // 刺向上：移动刺壳不可踩停，接触即受伤
                         _stopAbove = 0;
                         _hurtSide = 1;
                     }
                     // is_flipped=1: 倒立刺壳，和普通龟壳无异（保持默认）
                 }
-                if lolo.rodzajzabicia=0 && grawitacja>0 && _stopAbove && lolo.hurt_delay=0 {
-                    lolo.rodzajzabicia=1;
-                    sekwencja=1;
-                    grawitacja=-8-lolo.odpych
+                if tmp.kill_type=0 && grav>0 && _stopAbove && tmp.hurt_delay=0 {
+                    tmp.kill_type=1;
+                    state=1;
+                    grav=-8-tmp.knockback
                     if raccoon_flew=1 {raccoon_fly_timer=0}
                     global.combo1+=1
                     global.combo1reset=0
-                    if global.sample=1 {fofo=sound_play(snd_rozdeptanie);sound_volume(snd_rozdeptanie,global.glosnosc)}
+                    if global.sample=1 {tmp2=sound_play(snd_stomp);sound_volume(snd_stomp,global.game_volume)}
                 }
-                if lolo.hurt_delay=0 && oberwal=0 && _hurtSide && shield=0 {oberwal=1}
+                if tmp.hurt_delay=0 && hit_timer=0 && _hurtSide && shield=0 {hit_timer=1}
             }
         }
 
@@ -1505,75 +1505,75 @@ if global.pauza=0 && skusil=0 && global.etappokonany=0 && teleportacja=0 {
 
         else {
 
-            if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_goomba) && !place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_kuppa) {
-                lolo=instance_place(x,y+max(0,grawitacja+global.etapgravity/5),o_goomba)
-                if lolo.dabusi=0 && lolo.killer=0 && lolo.license <> 1 {
-                    if lolo.rodzajzabicia=0 && grawitacja>0 && y<lolo.y {
+            if place_meeting(x,y+max(0,grav+global.level_gravity/5),o_goomba) && !place_meeting(x,y+max(0,grav+global.level_gravity/5),o_bowser) {
+                tmp=instance_place(x,y+max(0,grav+global.level_gravity/5),o_goomba)
+                if tmp.stomp_proof=0 && tmp.killer=0 && tmp.license <> 1 {
+                    if tmp.kill_type=0 && grav>0 && y<tmp.y {
                         // lolo.energia-=233333333333333333333333333333
-                        lolo.rodzajzabicia=2//这个是无敌星
+                        tmp.kill_type=2//这个是无敌星
                         nabijanie+=1
-                        fofo=instance_create(x,y,o_punkciornik2)
-                        fofo.image_index=nabijanie-1
+                        tmp2=instance_create(x,y,o_scorepop2)
+                        tmp2.image_index=nabijanie-1
                         if nabijanie>6 {nabijanie=0}
-                        sekwencja=1;
-                        grawitacja=-8-lolo.odpych
+                        state=1;
+                        grav=-8-tmp.knockback
                         if raccoon_flew=1 {raccoon_fly_timer=0}
                         global.combo1+=1
                         global.combo1reset=0
-                        if global.sample=1 {fofo=sound_play(snd_rozdeptanie);sound_volume(snd_rozdeptanie,global.glosnosc)} //sampel
+                        if global.sample=1 {tmp2=sound_play(snd_stomp);sound_volume(snd_stomp,global.game_volume)} //sampel
                     } }
             }
 
-            if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_kuppa) {
-                lolo=instance_place(x,y,o_goomba)
-                if lolo.dabusi=0 && lolo.killer=0 && lolo.license = 1 {
-                    if lolo.rodzajzabicia=0 && grawitacja>0 && y<lolo.y {
+            if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_bowser) {
+                tmp=instance_place(x,y,o_goomba)
+                if tmp.stomp_proof=0 && tmp.killer=0 && tmp.license = 1 {
+                    if tmp.kill_type=0 && grav>0 && y<tmp.y {
                         //  lolo.energia-=233333333333333333333333333333
-                        lolo.rodzajzabicia=2
+                        tmp.kill_type=2
                         nabijanie+=1
-                        fofo=instance_create(x,y,o_punkciornik2)
-                        fofo.image_index=nabijanie-1
+                        tmp2=instance_create(x,y,o_scorepop2)
+                        tmp2.image_index=nabijanie-1
                         if nabijanie>6 {nabijanie=0}
-                        sekwencja=1;
-                        grawitacja=-8-lolo.odpych
+                        state=1;
+                        grav=-8-tmp.knockback
                         if raccoon_flew=1 {raccoon_fly_timer=0}
                         global.combo1+=1
                         global.combo1reset=0
-                        if global.sample=1 {fofo=sound_play(snd_rozdeptanie);sound_volume(snd_rozdeptanie,global.glosnosc)} //sampel
+                        if global.sample=1 {tmp2=sound_play(snd_stomp);sound_volume(snd_stomp,global.game_volume)} //sampel
                     } }
             }
 
-            if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_kuppa) {
-                lolo=instance_place(x,y,o_goomba)
-                if lolo.dabusi=0 && lolo.rodzajzabicia=0 {//lolo.energia-=233333333333333333333333333333 啊，这个dabusi变量是我以前加的，防止敌人被星死，以及龟壳撞死
-                    lolo.rodzajzabicia=2
+            if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_bowser) {
+                tmp=instance_place(x,y,o_goomba)
+                if tmp.stomp_proof=0 && tmp.kill_type=0 {//lolo.energia-=233333333333333333333333333333 啊，这个dabusi变量是我以前加的，防止敌人被星死，以及龟壳撞死
+                    tmp.kill_type=2
                     nabijanie+=1
-                    fofo=instance_create(x,y,o_punkciornik2)
-                    fofo.image_index=nabijanie-1
+                    tmp2=instance_create(x,y,o_scorepop2)
+                    tmp2.image_index=nabijanie-1
                     if nabijanie>6 {nabijanie=0}
                 }
             }
         }
 
-        if place_meeting(x,y+max(0,grawitacja+global.etapgravity/5),o_kuppa) /* && muszlowanie>10 *///库巴咱就不管了
+        if place_meeting(x,y+max(0,grav+global.level_gravity/5),o_bowser) /* && muszlowanie>10 *///库巴咱就不管了
         {
-            lolo=instance_place(x,y+max(0,grawitacja+global.etapgravity/5),o_kuppa)
-            if lolo.killer=0 {
-                if lolo.rodzajzabicia=0 && grawitacja>0 && y<lolo.y-40 && lolo.oberw<=0 {
-                    lolo.energia-=114514; //踩一次必然扣HP，但子弹攻击要看库巴的koopa_strength来判断
-                    lolo.rodzajzabicia=1;
-                    sekwencja=1;
-                    grawitacja=-8//-lolo.odpych
+            tmp=instance_place(x,y+max(0,grav+global.level_gravity/5),o_bowser)
+            if tmp.killer=0 {
+                if tmp.kill_type=0 && grav>0 && y<tmp.y-40 && tmp.hit<=0 {
+                    tmp.hp-=114514; //踩一次必然扣HP，但子弹攻击要看库巴的koopa_strength来判断
+                    tmp.kill_type=1;
+                    state=1;
+                    grav=-8//-lolo.odpych
                     if raccoon_flew=1 {raccoon_fly_timer=0}
                     global.combo1+=1
                     global.combo1reset=0
                     //muszlowanie=0
 
-                    if lolo.object_index=o_kuppa && kierunek=0 {szybkosc+=6}
-                    if lolo.object_index=o_kuppa && kierunek=1 {szybkosc-=6}
+                    if tmp.object_index=o_bowser && dir=0 {hspd+=6}
+                    if tmp.object_index=o_bowser && dir=1 {hspd-=6}
                 } }
-            if lolo.killer=0 && oberwal=0 && y>=lolo.y-40 && shield=0 && gwiazdka<=0 {oberwal=1}
-            if lolo.oberw>0 && lolo.oberw<170 && shield=0 && gwiazdka<=0 {oberwal=1}
+            if tmp.killer=0 && hit_timer=0 && y>=tmp.y-40 && shield=0 && star_timer<=0 {hit_timer=1}
+            if tmp.hit>0 && tmp.hit<170 && shield=0 && star_timer<=0 {hit_timer=1}
         }
 
     }
@@ -1590,47 +1590,47 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if global.pauza=0 && global.rodzajmaria=2 && skusil=0 && global.etappokonany=0 && teleportacja=0 {
+if global.pauza=0 && global.rodzajmaria=2 && shell_lock=0 && global.level_complete=0 && pipe_state=0 {
     if instance_number(o_fireball)<2 {
-        if kierunek=1 && keyboard_check(global.key_fire) && strzelil2=0 {strzelil2=1; lolo=instance_create(x-10,y-40,o_fireball); lolo.kierunek=-1; strzelil=1;if global.sample=1 {fofo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}}
-        if kierunek=0 && keyboard_check(global.key_fire) && strzelil2=0 {strzelil2=1; lolo=instance_create(x+10,y-40,o_fireball); lolo.kierunek=1; strzelil=1;if global.sample=1 {fofo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}}
+        if dir=1 && keyboard_check(global.key_fire) && shoot_anim2=0 {shoot_anim2=1; tmp=instance_create(x-10,y-40,o_fireball); tmp.dir=-1; shoot_anim=1;if global.sample=1 {tmp2=sound_play(snd_fire);sound_volume(snd_fire,global.game_volume)}}
+        if dir=0 && keyboard_check(global.key_fire) && shoot_anim2=0 {shoot_anim2=1; tmp=instance_create(x+10,y-40,o_fireball); tmp.dir=1; shoot_anim=1;if global.sample=1 {tmp2=sound_play(snd_fire);sound_volume(snd_fire,global.game_volume)}}
     }
-    if !keyboard_check(global.key_fire) {strzelil2=0}
+    if !keyboard_check(global.key_fire) {shoot_anim2=0}
 
 }
 
-if global.pauza=0 && global.rodzajmaria=4 && skusil=0 && teleportacja=0 {
-    if instance_number(o_burax)<2 {
-        if kierunek=1 && keyboard_check(global.key_fire) && strzelil2=0 {strzelil2=1; lolo=instance_create(x-10,y-48,o_burax); lolo.kierunek=-1; strzelil=1;if global.sample=1 {fofo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}}
-        if kierunek=0 && keyboard_check(global.key_fire) && strzelil2=0 {strzelil2=1; lolo=instance_create(x+10-30*global.MFbeet,y-48,o_burax); lolo.kierunek=1; strzelil=1;if global.sample=1 {fofo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}}
+if global.pauza=0 && global.rodzajmaria=4 && shell_lock=0 && pipe_state=0 {
+    if instance_number(o_beetroot)<2 {
+        if dir=1 && keyboard_check(global.key_fire) && shoot_anim2=0 {shoot_anim2=1; tmp=instance_create(x-10,y-48,o_beetroot); tmp.dir=-1; shoot_anim=1;if global.sample=1 {tmp2=sound_play(snd_fire);sound_volume(snd_fire,global.game_volume)}}
+        if dir=0 && keyboard_check(global.key_fire) && shoot_anim2=0 {shoot_anim2=1; tmp=instance_create(x+10-30*global.MFbeet,y-48,o_beetroot); tmp.dir=1; shoot_anim=1;if global.sample=1 {tmp2=sound_play(snd_fire);sound_volume(snd_fire,global.game_volume)}}
     }
-    if !keyboard_check(global.key_fire) {strzelil2=0}
+    if !keyboard_check(global.key_fire) {shoot_anim2=0}
 
 }
 
 // Raccoon tail attack
-if global.pauza=0 && global.rodzajmaria=6 && skusil=0 && global.etappokonany=0 && teleportacja=0 && schylanie=0 {
+if global.pauza=0 && global.rodzajmaria=6 && shell_lock=0 && global.level_complete=0 && pipe_state=0 && schylanie=0 {
     if !instance_exists(o_raccoon_tail) {
-        if kierunek=1 && keyboard_check(global.key_fire) && strzelil2=0 {
-            strzelil2=1;
-            lolo=instance_create(x,y-11,o_raccoon_tail);
-            lolo.kierunek=1;
-            lolo.timer=0;
-            strzelil=1;
+        if dir=1 && keyboard_check(global.key_fire) && shoot_anim2=0 {
+            shoot_anim2=1;
+            tmp=instance_create(x,y-11,o_raccoon_tail);
+            tmp.dir=1;
+            tmp.timer=0;
+            shoot_anim=1;
             animator.image_index=0;
-            if global.sample=1 {fofo=sound_play(snd_spin);sound_volume(snd_spin,global.glosnosc)}
+            if global.sample=1 {tmp2=sound_play(snd_spin);sound_volume(snd_spin,global.game_volume)}
         }
-        if kierunek=0 && keyboard_check(global.key_fire) && strzelil2=0 {
-            strzelil2=1;
-            lolo=instance_create(x,y-11,o_raccoon_tail);
-            lolo.kierunek=0;
-            lolo.timer=0;
-            strzelil=1;
+        if dir=0 && keyboard_check(global.key_fire) && shoot_anim2=0 {
+            shoot_anim2=1;
+            tmp=instance_create(x,y-11,o_raccoon_tail);
+            tmp.dir=0;
+            tmp.timer=0;
+            shoot_anim=1;
             animator.image_index=0;
-            if global.sample=1 {fofo=sound_play(snd_spin);sound_volume(snd_spin,global.glosnosc)}
+            if global.sample=1 {tmp2=sound_play(snd_spin);sound_volume(snd_spin,global.game_volume)}
         }
     }
-    if !keyboard_check(global.key_fire) {strzelil2=0}
+    if !keyboard_check(global.key_fire) {shoot_anim2=0}
 }
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -1645,16 +1645,16 @@ applies_to=self
 */
 //fast retry 恢复背景音量;关于死亡时降低音量请访问马里奥狗带物件
 
-if(string(global.muzyka)='146') && !instance_exists(o_skuszak) {
+if(string(global.bgm_id)='146') && !instance_exists(o_mariodead) {
     if vvvv<1 && !setonce {vvvv=0.2;setonce=true;}
-    surface_volume = 0.01*(global.poziomwody - y + 50)
+    surface_volume = 0.01*(global.water_level - y + 50)
     mm_set_volume(global.musicplay,vvvv*(surface_volume))
     mm_set_volume(global.musicplay2,vvvv*(1-surface_volume))
     if vvvv<1 {vvvv+=0.05;}
 } else { if vvvv<1 {vvvv+=0.05; mm_set_volume(global.musicplay,vvvv)}}
 
-if teleportacja=0 {
-    if global.pauza=0 && skusil=0 && global.etappokonany=0 {
+if pipe_state=0 {
+    if global.pauza=0 && shell_lock=0 && global.level_complete=0 {
 
         // zdobywanie monety
 
@@ -1664,7 +1664,7 @@ if teleportacja=0 {
             bonus=instance_place(x,y,o_point)
             with(bonus) {instance_destroy()}
             global.coins+=1
-            if global.sample=1 {fofo=sound_play(snd_coin);sound_volume(snd_coin,global.glosnosc)}
+            if global.sample=1 {tmp2=sound_play(snd_coin);sound_volume(snd_coin,global.game_volume)}
         }
 
         //特殊音乐
@@ -1672,45 +1672,45 @@ if teleportacja=0 {
 
         // OBRYWANIE
 
-        if y>room_height+30 && oberwal=0 && global.rodzajmaria<>5 {oberwal=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white}
-        if (global.aktywowanykuppa=2||global.aktywowanykuppa=3)&& y>view_yview+480+30 && oberwal=0 && global.rodzajmaria<>5 {
-            oberwal=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white
+        if y>room_height+30 && hit_timer=0 && global.rodzajmaria<>5 {hit_timer=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white}
+        if (global.bowser_phase=2||global.bowser_phase=3)&& y>view_yview+480+30 && hit_timer=0 && global.rodzajmaria<>5 {
+            hit_timer=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white
         }
-        if global.aktywowanykuppa=0 && region_count>0 && view_set=1 && y>view_yview+480+30 && oberwal=0 && global.rodzajmaria<>5 {
-            oberwal=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white
+        if global.bowser_phase=0 && region_count>0 && view_set=1 && y>view_yview+480+30 && hit_timer=0 && global.rodzajmaria<>5 {
+            hit_timer=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white
         }
-        if place_meeting(x,y,o_lava) && oberwal=0 && global.rodzajmaria<>5 {
-            oberwal=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white
+        if place_meeting(x,y,o_lava) && hit_timer=0 && global.rodzajmaria<>5 {
+            hit_timer=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white
         }
 
-        if place_meeting(x,y,o_bonusdead) && oberwal=0 && global.rodzajmaria<>5 {oberwal=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white}
+        if place_meeting(x,y,o_bonusdead) && hit_timer=0 && global.rodzajmaria<>5 {hit_timer=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white}
         //下面一行，SMWP1.7新增：马里奥掉进全局岩浆即死
-        if y>=global.poziomwody+2 && global.lava=1  && oberwal=0 && global.rodzajmaria<>5 {
-            oberwal=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white
+        if y>=global.water_level+2 && global.lava=1  && hit_timer=0 && global.rodzajmaria<>5 {
+            hit_timer=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white
         }
 
-        if oberwal=1 && global.rodzajmaria=5 {oberwal=0}
-        if oberwal=1 && shield=0 && global.rodzajmaria<>5 {
-            if global.rodzajmaria<>0 {shield=200; oberwal=2; global.pauza=2;}
+        if hit_timer=1 && global.rodzajmaria=5 {hit_timer=0}
+        if hit_timer=1 && shield=0 && global.rodzajmaria<>5 {
+            if global.rodzajmaria<>0 {shield=200; hit_timer=2; global.pauza=2;}
             if global.rodzajmaria=0 {
-                global.zycia-=1; skusil=1;
+                global.zycia-=1; shell_lock=1;
                 if(!global.fast_retry) {
                     mm_stop_all_ext();
-                    if global.sample=1 {fofo=sound_play(snd_die);sound_volume(snd_die,global.glosnosc)}
+                    if global.sample=1 {tmp2=sound_play(snd_die);sound_volume(snd_die,global.game_volume)}
                 } else {
                     if global.sample=1 {
-                        fofo=sound_play(snd_fastdie);
-                        sound_volume(snd_fastdie,global.glosnosc);
+                        tmp2=sound_play(snd_fastdie);
+                        sound_volume(snd_fastdie,global.game_volume);
                     }
                 }
-                instance_create(x,y,o_skuszak);animator.visible=0;
+                instance_create(x,y,o_mariodead);animator.visible=0;
                 // 光照设置
                 light_radius = 0;
             }
-            if global.rodzajmaria=1 {global.rodzajmaria=0;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)}}
-            if global.rodzajmaria>=2 {global.rodzajmaria=1;if global.sample=1 {fofo=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.glosnosc)}}
+            if global.rodzajmaria=1 {global.rodzajmaria=0;if global.sample=1 {tmp2=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.game_volume)}}
+            if global.rodzajmaria>=2 {global.rodzajmaria=1;if global.sample=1 {tmp2=sound_play(snd_powerdown);sound_volume(snd_powerdown,global.game_volume)}}
         }
-        if shield>0 && skusil=0 {
+        if shield>0 && shell_lock=0 {
             shield-=1;
             shieldanim+=1
             if shieldanim>3 && animator.visible=1 {animator.visible=0;shieldanim=0;}
@@ -1720,7 +1720,7 @@ if teleportacja=0 {
 
 
 
-        if shield=0 && skusil=0 {animator.visible=1}
+        if shield=0 && shell_lock=0 {animator.visible=1}
 
 
         // GWIAZDKA
@@ -1728,7 +1728,7 @@ if teleportacja=0 {
         if place_meeting(x,y,o_bonusstar) && global.rodzajmaria<>5 {
             kafel=instance_place(x,y,o_bonusstar)
             with(kafel) {instance_destroy()}
-            gwiazdka=500
+            star_timer=500
             mm_play_ext('.\Data\MW\ktkm3.dll',0)
             animator2.visible=1
         }
@@ -1736,16 +1736,16 @@ if teleportacja=0 {
 
 
 
-        if /*global.godmode=0 &&*/ keyboard_check(global.key_restart) && oberwal=0 {instance_create(x,y,o_fireexplode);sound_play(snd_break)oberwal=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white;suicide=1}
-        if gwiazdka<=0 {animator.image_blend=c_white;animator2.visible=0}
-        if gwiazdka>0 {
-            gwiazdka-=1; kolor=make_color_rgb(random(255),random(255),random(255)); animator.image_blend=kolor
+        if /*global.godmode=0 &&*/ keyboard_check(global.key_restart) && hit_timer=0 {instance_create(x,y,o_fireexplode);sound_play(snd_break)hit_timer=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white;suicide=1}
+        if star_timer<=0 {animator.image_blend=c_white;animator2.visible=0}
+        if star_timer>0 {
+            star_timer-=1; kolor=make_color_rgb(random(255),random(255),random(255)); animator.image_blend=kolor
 
         }
         //无敌星音乐重置
-        if gwiazdka=1 && instance_number(object112)<>0 {mm_play_ext('.\Data\MW\ktkm8.dll',0)}
-        if gwiazdka=1 && instance_number(object112)=0 {
-            if (string(global.muzyka) == "600" || string(global.muzyka) == "0") {
+        if star_timer=1 && instance_number(object112)<>0 {mm_play_ext('.\Data\MW\ktkm8.dll',0)}
+        if star_timer=1 && instance_number(object112)=0 {
+            if (string(global.bgm_id) == "600" || string(global.bgm_id) == "0") {
                 mm_stop_all_ext();
             } else {
                 Music_Play()//大叔傻贲大叔傻贲大叔傻贲大叔傻贲大叔傻贲大叔傻贲大叔傻贲
@@ -1761,8 +1761,8 @@ if teleportacja=0 {
             bonus=instance_place(x,y,o_bonusmush)
             with(bonus) {instance_destroy()}
             global.rodzajmaria=1
-            if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) { huadun = 1 };if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)){ huadun = 2 }    global.pauza=1
-            if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
+            if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) { slide = 1 };if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)){ slide = 2 }    global.pauza=1
+            if global.sample=1 {tmp2=sound_play(snd_powerup);sound_volume(snd_powerup,global.game_volume)}
 
             if animkind=0 {animator.sprite_index=global.big_character_run}
             if animkind=1 {animator.sprite_index=global.big_character_jump}
@@ -1774,8 +1774,8 @@ if teleportacja=0 {
             bonus=instance_place(x,y,o_bonusflower)
             with(bonus) {instance_destroy()}
             global.rodzajmaria=1
-            if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) { huadun = 1 };if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)){ huadun = 2 }    global.pauza=1
-            if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
+            if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) { slide = 1 };if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)){ slide = 2 }    global.pauza=1
+            if global.sample=1 {tmp2=sound_play(snd_powerup);sound_volume(snd_powerup,global.game_volume)}
 
             if animkind=0 {animator.sprite_index=global.big_character_run}
             if animkind=1 {animator.sprite_index=global.big_character_jump}
@@ -1787,9 +1787,9 @@ if teleportacja=0 {
             bonus=instance_place(x,y,o_bonus1up)
             with(bonus) {instance_destroy()}
 
-            fifi=instance_create(x,y-32,o_punkciornik3)
+            fifi=instance_create(x,y-32,o_scorepop3)
             fifi.image_index=6
-            if global.sample=1 {fofo=sound_play(snd_1up);sound_volume(snd_1up,global.glosnosc)}
+            if global.sample=1 {tmp2=sound_play(snd_1up);sound_volume(snd_1up,global.game_volume)}
 
         }
 
@@ -1799,20 +1799,20 @@ if teleportacja=0 {
             bonus=instance_place(x,y,o_bonuslui)
             with(bonus) {instance_destroy()}
             global.rodzajmaria=1
-            if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) { huadun = 1 };if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)){ huadun = 2 }    global.pauza=1
-            if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
+            if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) { slide = 1 };if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)){ slide = 2 }    global.pauza=1
+            if global.sample=1 {tmp2=sound_play(snd_powerup);sound_volume(snd_powerup,global.game_volume)}
 
             if animkind=0 {animator.sprite_index=global.big_character_run}
             if animkind=1 {animator.sprite_index=global.big_character_jump}
             if animkind=2 {animator.sprite_index=global.big_character_swim}
         }
 
-        if place_meeting(x,y,o_bonusburak) && global.rodzajmaria=0 && global.rodzajmaria<>5 && checkpointdetect=1 {
-            bonus=instance_place(x,y,o_bonusburak)
+        if place_meeting(x,y,o_bonusbeetroot) && global.rodzajmaria=0 && global.rodzajmaria<>5 && checkpointdetect=1 {
+            bonus=instance_place(x,y,o_bonusbeetroot)
             with(bonus) {instance_destroy()}
             global.rodzajmaria=1
-            if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) { huadun = 1 };if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)){ huadun = 2 }    global.pauza=1
-            if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
+            if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) { slide = 1 };if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)){ slide = 2 }    global.pauza=1
+            if global.sample=1 {tmp2=sound_play(snd_powerup);sound_volume(snd_powerup,global.game_volume)}
 
             if animkind=0 {animator.sprite_index=global.big_character_run}
             if animkind=1 {animator.sprite_index=global.big_character_jump}
@@ -1825,9 +1825,9 @@ if teleportacja=0 {
     // Zdobycie 1000 punktow za grzyba gdy mario nie jest juz maly
     if place_meeting(x,y,o_bonusmush) && global.rodzajmaria>0 && global.rodzajmaria<>5 && checkpointdetect=1 {
         bonus=instance_place(x,y,o_bonusmush)
-        if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
-        lolo=instance_create(bonus.x,bonus.y,o_punkciornik3)
-        lolo.image_index=3
+        if global.sample=1 {tmp2=sound_play(snd_powerup);sound_volume(snd_powerup,global.game_volume)}
+        tmp=instance_create(bonus.x,bonus.y,o_scorepop3)
+        tmp.image_index=3
         with(bonus) {instance_destroy()}
     }
 
@@ -1836,9 +1836,9 @@ if teleportacja=0 {
     //
     if place_meeting(x,y,o_bonusflower) && global.rodzajmaria=2 && global.rodzajmaria<>5 && checkpointdetect=1 {
         bonus=instance_place(x,y,o_bonusflower)
-        if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
-        lolo=instance_create(bonus.x,bonus.y,o_punkciornik3)
-        lolo.image_index=3
+        if global.sample=1 {tmp2=sound_play(snd_powerup);sound_volume(snd_powerup,global.game_volume)}
+        tmp=instance_create(bonus.x,bonus.y,o_scorepop3)
+        tmp.image_index=3
         with(bonus) {instance_destroy()}
     }
 
@@ -1847,7 +1847,7 @@ if teleportacja=0 {
         with(bonus) {instance_destroy()}
         global.rodzajmaria=2
         global.pauza=1
-        if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
+        if global.sample=1 {tmp2=sound_play(snd_powerup);sound_volume(snd_powerup,global.game_volume)}
 
         if animkind=0 {animator.sprite_index=global.fire_character_run}
         if animkind=1 {animator.sprite_index=global.fire_character_jump}
@@ -1859,9 +1859,9 @@ if teleportacja=0 {
     //
     if place_meeting(x,y,o_bonuslui) && global.rodzajmaria=3 && global.rodzajmaria<>5 && checkpointdetect=1 {
         bonus=instance_place(x,y,o_bonuslui)
-        if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
-        lolo=instance_create(bonus.x,bonus.y,o_punkciornik3)
-        lolo.image_index=3
+        if global.sample=1 {tmp2=sound_play(snd_powerup);sound_volume(snd_powerup,global.game_volume)}
+        tmp=instance_create(bonus.x,bonus.y,o_scorepop3)
+        tmp.image_index=3
         with(bonus) {instance_destroy()}
     }
 
@@ -1870,7 +1870,7 @@ if teleportacja=0 {
         with(bonus) {instance_destroy()}
         global.rodzajmaria=3
         global.pauza=1
-        if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
+        if global.sample=1 {tmp2=sound_play(snd_powerup);sound_volume(snd_powerup,global.game_volume)}
 
         if animkind=0 {animator.sprite_index=global.lui_character_run}
         if animkind=1 {animator.sprite_index=global.lui_character_jump}
@@ -1880,20 +1880,20 @@ if teleportacja=0 {
     // ------------------------------------------------------------------------------------------------------
     // ZDOBYWANIE LUIGDY MARIO JEST DUZY | GDY JEST LUI'WOY | GDY NIE JEST LUI'OWY, ALE TEZ NIE MALY
     //
-    if place_meeting(x,y,o_bonusburak) && global.rodzajmaria=4 && global.rodzajmaria<>5 && checkpointdetect=1 {
-        bonus=instance_place(x,y,o_bonusburak)
-        if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
-        lolo=instance_create(bonus.x,bonus.y,o_punkciornik3)
-        lolo.image_index=3
+    if place_meeting(x,y,o_bonusbeetroot) && global.rodzajmaria=4 && global.rodzajmaria<>5 && checkpointdetect=1 {
+        bonus=instance_place(x,y,o_bonusbeetroot)
+        if global.sample=1 {tmp2=sound_play(snd_powerup);sound_volume(snd_powerup,global.game_volume)}
+        tmp=instance_create(bonus.x,bonus.y,o_scorepop3)
+        tmp.image_index=3
         with(bonus) {instance_destroy()}
     }
 
-    if place_meeting(x,y,o_bonusburak) && global.rodzajmaria<>4 && global.rodzajmaria<>5 && checkpointdetect=1 {
-        bonus=instance_place(x,y,o_bonusburak)
+    if place_meeting(x,y,o_bonusbeetroot) && global.rodzajmaria<>4 && global.rodzajmaria<>5 && checkpointdetect=1 {
+        bonus=instance_place(x,y,o_bonusbeetroot)
         with(bonus) {instance_destroy()}
         global.rodzajmaria=4
         global.pauza=1
-        if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
+        if global.sample=1 {tmp2=sound_play(snd_powerup);sound_volume(snd_powerup,global.game_volume)}
 
         if animkind=0 {animator.sprite_index=global.beetroot_character_run}
         if animkind=1 {animator.sprite_index=global.beetroot_character_jump}
@@ -1906,8 +1906,8 @@ if teleportacja=0 {
         bonus=instance_place(x,y,o_bonusraccoon)
         with(bonus) {instance_destroy()}
         global.rodzajmaria=1
-        if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) { huadun = 1 };if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)){ huadun = 2 }    global.pauza=1
-        if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
+        if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && (place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)) { slide = 1 };if global.modifiedmov=1 && (place_meeting(x,y-32,obj_wall) || place_meeting(x,y-32,o_pointblock)) && !(place_meeting(x,y+8,obj_wall) || place_meeting(x,y+8,o_pointblock) || place_meeting(x,y+8,o_windas)){ slide = 2 }    global.pauza=1
+        if global.sample=1 {tmp2=sound_play(snd_powerup);sound_volume(snd_powerup,global.game_volume)}
 
         if animkind=0 {animator.sprite_index=global.big_character_run}
         if animkind=1 {animator.sprite_index=global.big_character_jump}
@@ -1916,9 +1916,9 @@ if teleportacja=0 {
 
     if place_meeting(x,y,o_bonusraccoon) && global.rodzajmaria=6 && global.rodzajmaria<>5 && checkpointdetect=1 {
         bonus=instance_place(x,y,o_bonusraccoon)
-        if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
-        lolo=instance_create(bonus.x,bonus.y,o_punkciornik3)
-        lolo.image_index=3
+        if global.sample=1 {tmp2=sound_play(snd_powerup);sound_volume(snd_powerup,global.game_volume)}
+        tmp=instance_create(bonus.x,bonus.y,o_scorepop3)
+        tmp.image_index=3
         with(bonus) {instance_destroy()}
     }
 
@@ -1927,7 +1927,7 @@ if teleportacja=0 {
         with(bonus) {instance_destroy()}
         global.rodzajmaria=6
         global.pauza=1
-        if global.sample=1 {fofo=sound_play(snd_powerup);sound_volume(snd_powerup,global.glosnosc)}
+        if global.sample=1 {tmp2=sound_play(snd_powerup);sound_volume(snd_powerup,global.game_volume)}
 
         if animkind=0 {animator.sprite_index=global.raccoon_character_idle}
         if animkind=1 {animator.sprite_index=global.raccoon_character_jump}
@@ -1936,21 +1936,21 @@ if teleportacja=0 {
 
 
     if global.pauza=1 {
-        if kierunek=0 {/*animator.image_xscale=1+sin(degtorad(sizing/3 ))/2*/}
-        if kierunek=1 {/*animator.image_xscale=-1-sin(degtorad(sizing/3 ))/2*/}
+        if dir=0 {/*animator.image_xscale=1+sin(degtorad(sizing/3 ))/2*/}
+        if dir=1 {/*animator.image_xscale=-1-sin(degtorad(sizing/3 ))/2*/}
         animator.image_yscale=1+(sin(degtorad(sizing)))/3
         sizing+=10
-        if zdobywanie<60 {zdobywanie+=1}
-        if zdobywanie=60 {zdobywanie=0; global.pauza=0;animator.image_xscale=1;animator.image_yscale=1}
+        if collect_delay<60 {collect_delay+=1}
+        if collect_delay=60 {collect_delay=0; global.pauza=0;animator.image_xscale=1;animator.image_yscale=1}
     }
 
     if global.pauza=2 {
-        if kierunek=0 {/*animator.image_xscale=1-sin(degtorad(sizing/3 ))/2*/}
-        if kierunek=1 {/*animator.image_xscale=-1-sin(degtorad(sizing/3 ))/2*/}
+        if dir=0 {/*animator.image_xscale=1-sin(degtorad(sizing/3 ))/2*/}
+        if dir=1 {/*animator.image_xscale=-1-sin(degtorad(sizing/3 ))/2*/}
         animator.image_yscale=1+(sin(degtorad(sizing)))/3
         sizing+=10
-        if zdobywanie<60 {zdobywanie+=1}
-        if zdobywanie=60 {zdobywanie=0; global.pauza=0;animator.image_xscale=1;animator.image_yscale=1; oberwal=0}
+        if collect_delay<60 {collect_delay+=1}
+        if collect_delay=60 {collect_delay=0; global.pauza=0;animator.image_xscale=1;animator.image_yscale=1; hit_timer=0}
     }
 
 
@@ -1973,52 +1973,52 @@ if place_meeting(x,y,o_swimfisharea) {
     fishcounter+=1
     if fisharea.type=0 {
         if fishcounter = 50 {
-            fishcreateY=max(view_yview-60,global.poziomwody+38)+random(300)
-            if instance_number(o_rybeka2)<8 {
-                fish=instance_create(view_xview+320-354*fisharea.fishdir,fishcreateY,o_rybeka2)
-                fish.aktywowany=1; fish.kierunek=fisharea.fishdir
+            fishcreateY=max(view_yview-60,global.water_level+38)+random(300)
+            if instance_number(o_fishred2)<8 {
+                fish=instance_create(view_xview+320-354*fisharea.fishdir,fishcreateY,o_fishred2)
+                fish.activated=1; fish.dir=fisharea.fishdir
             }
         }
         if fishcounter >= 100 {
             fishcounter=0
-            fishcreateY=max(view_yview-60,global.poziomwody+38)+300+random(300)
-            if instance_number(o_rybeka2)<8 {
-                fish=instance_create(view_xview+320-354*fisharea.fishdir,fishcreateY,o_rybeka2)
-                fish.aktywowany=1; fish.kierunek=fisharea.fishdir
+            fishcreateY=max(view_yview-60,global.water_level+38)+300+random(300)
+            if instance_number(o_fishred2)<8 {
+                fish=instance_create(view_xview+320-354*fisharea.fishdir,fishcreateY,o_fishred2)
+                fish.activated=1; fish.dir=fisharea.fishdir
             }
         }
     }
     if fisharea.type=1 {
         if fishcounter = 38 {
-            fishcreateY=max(view_yview-60,global.poziomwody+38)+random(300)
-            if instance_number(o_rybeka2)<10 {
-                fish=instance_create(view_xview+320-354*fisharea.fishdir,fishcreateY,o_rybeka2)
-                fish.aktywowany=1; fish.kierunek=fisharea.fishdir
+            fishcreateY=max(view_yview-60,global.water_level+38)+random(300)
+            if instance_number(o_fishred2)<10 {
+                fish=instance_create(view_xview+320-354*fisharea.fishdir,fishcreateY,o_fishred2)
+                fish.activated=1; fish.dir=fisharea.fishdir
             }
         }
         if fishcounter >= 75 {
             fishcounter=0
-            fishcreateY=max(view_yview-60,global.poziomwody+38)+300+random(300)
-            if instance_number(o_rybeka2)<10 {
-                fish=instance_create(view_xview+320-354*fisharea.fishdir,fishcreateY,o_rybeka2)
-                fish.aktywowany=1; fish.kierunek=fisharea.fishdir
+            fishcreateY=max(view_yview-60,global.water_level+38)+300+random(300)
+            if instance_number(o_fishred2)<10 {
+                fish=instance_create(view_xview+320-354*fisharea.fishdir,fishcreateY,o_fishred2)
+                fish.activated=1; fish.dir=fisharea.fishdir
             }
         }
     }
     if fisharea.type=2 {
         if fishcounter = 50 {
-            fishcreateY=max(view_yview-60,global.poziomwody+38)+random(300)
-            if instance_number(o_rybekb2)<10 {
-                fish=instance_create(view_xview+320-354*fisharea.fishdir,fishcreateY,o_rybekb2)
-                fish.aktywowany=1; fish.kierunek=fisharea.fishdir
+            fishcreateY=max(view_yview-60,global.water_level+38)+random(300)
+            if instance_number(o_fishgreen2)<10 {
+                fish=instance_create(view_xview+320-354*fisharea.fishdir,fishcreateY,o_fishgreen2)
+                fish.activated=1; fish.dir=fisharea.fishdir
             }
         }
         if fishcounter >= 100 {
             fishcounter=0
-            fishcreateY=max(view_yview-60,global.poziomwody+38)+300+random(300)
-            if instance_number(o_rybekb2)<10 {
-                fish=instance_create(view_xview+320-354*fisharea.fishdir,fishcreateY,o_rybekb2)
-                fish.aktywowany=1; fish.kierunek=fisharea.fishdir
+            fishcreateY=max(view_yview-60,global.water_level+38)+300+random(300)
+            if instance_number(o_fishgreen2)<10 {
+                fish=instance_create(view_xview+320-354*fisharea.fishdir,fishcreateY,o_fishgreen2)
+                fish.activated=1; fish.dir=fisharea.fishdir
             }
         }
     }
@@ -2027,56 +2027,56 @@ if place_meeting(x,y,o_flyfisharea) {
     fisharea2=instance_place(x,y,o_flyfisharea)
     fishcounter2+=1
     if fisharea2.type=0 {
-        if fishcounter2 >= 25 && fisharea2.fishdir*szybkosc>=0 {
+        if fishcounter2 >= 25 && fisharea2.fishdir*hspd>=0 {
             fishcounter2=0
             fishcreateY=view_yview+464+38+random(300)
-            if instance_number(o_rybeka3)<3 {
-                fish=instance_create(view_xview+320-354*fisharea2.fishdir,fishcreateY,o_rybeka3)
-                fish.aktywowany=1; fish.kierunek=fisharea2.fishdir
+            if instance_number(o_fishred3)<3 {
+                fish=instance_create(view_xview+320-354*fisharea2.fishdir,fishcreateY,o_fishred3)
+                fish.activated=1; fish.dir=fisharea2.fishdir
             }
         }
-        if fishcounter2 >= 13 && fisharea2.fishdir*szybkosc<0 {
+        if fishcounter2 >= 13 && fisharea2.fishdir*hspd<0 {
             fishcounter2=0
             fishcreateY=view_yview+464+38+random(300)
-            if instance_number(o_rybeka3)<3 {
-                fish=instance_create(view_xview+320-354*fisharea2.fishdir,fishcreateY,o_rybeka3)
-                fish.aktywowany=1; fish.kierunek=fisharea2.fishdir
+            if instance_number(o_fishred3)<3 {
+                fish=instance_create(view_xview+320-354*fisharea2.fishdir,fishcreateY,o_fishred3)
+                fish.activated=1; fish.dir=fisharea2.fishdir
             }
         }
     }
     if fisharea2.type=1 {
-        if fishcounter2 >= 10 && fisharea2.fishdir*szybkosc>=0 {
+        if fishcounter2 >= 10 && fisharea2.fishdir*hspd>=0 {
             fishcounter2=0
             fishcreateY=view_yview+464+38+random(300)
-            if instance_number(o_rybeka3)<3 {
-                fish=instance_create(view_xview+320-354*fisharea2.fishdir,fishcreateY,o_rybeka3)
-                fish.aktywowany=1; fish.kierunek=fisharea2.fishdir
+            if instance_number(o_fishred3)<3 {
+                fish=instance_create(view_xview+320-354*fisharea2.fishdir,fishcreateY,o_fishred3)
+                fish.activated=1; fish.dir=fisharea2.fishdir
             }
         }
-        if fishcounter2 >= 4 && fisharea2.fishdir*szybkosc<0 {
+        if fishcounter2 >= 4 && fisharea2.fishdir*hspd<0 {
             fishcounter2=0
             fishcreateY=view_yview+464+38+random(300)
-            if instance_number(o_rybeka3)<3 {
-                fish=instance_create(view_xview+320-354*fisharea2.fishdir,fishcreateY,o_rybeka3)
-                fish.aktywowany=1; fish.kierunek=fisharea2.fishdir
+            if instance_number(o_fishred3)<3 {
+                fish=instance_create(view_xview+320-354*fisharea2.fishdir,fishcreateY,o_fishred3)
+                fish.activated=1; fish.dir=fisharea2.fishdir
             }
         }
     }
     if fisharea2.type=2 {
-        if fishcounter2 >= 25 && fisharea2.fishdir*szybkosc>=0 {
+        if fishcounter2 >= 25 && fisharea2.fishdir*hspd>=0 {
             fishcounter2=0
             fishcreateY=view_yview+464+38+random(300)
-            if instance_number(o_rybekc3)<3 {
-                fish=instance_create(view_xview+320-354*fisharea2.fishdir,fishcreateY,o_rybekc3)
-                fish.aktywowany=1; fish.kierunek=fisharea2.fishdir
+            if instance_number(o_fishblue3)<3 {
+                fish=instance_create(view_xview+320-354*fisharea2.fishdir,fishcreateY,o_fishblue3)
+                fish.activated=1; fish.dir=fisharea2.fishdir
             }
         }
-        if fishcounter2 >= 13 && fisharea2.fishdir*szybkosc<0 {
+        if fishcounter2 >= 13 && fisharea2.fishdir*hspd<0 {
             fishcounter2=0
             fishcreateY=view_yview+464+38+random(300)
-            if instance_number(o_rybekc3)<3 {
-                fish=instance_create(view_xview+320-354*fisharea2.fishdir,fishcreateY,o_rybekc3)
-                fish.aktywowany=1; fish.kierunek=fisharea2.fishdir
+            if instance_number(o_fishblue3)<3 {
+                fish=instance_create(view_xview+320-354*fisharea2.fishdir,fishcreateY,o_fishblue3)
+                fish.activated=1; fish.dir=fisharea2.fishdir
             }
         }
     }
@@ -2092,40 +2092,40 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if global.pauza=0 && teleportacja=0 /*&& prawdziwyczas>0*/ && oberwal=0 && global.rodzajmaria<>5 {
-    if place_meeting(x,y,o_exitar2) && global.etappokonany=0 {
-        global.etappokonany=1
-        lolo=instance_place(x,y,o_exitar2)
-        endscoring=lolo.iyor
-        lolo.zabity=1
+if global.pauza=0 && pipe_state=0 /*&& prawdziwyczas>0*/ && hit_timer=0 && global.rodzajmaria<>5 {
+    if place_meeting(x,y,o_exitar2) && global.level_complete=0 {
+        global.level_complete=1
+        tmp=instance_place(x,y,o_exitar2)
+        endscoring=tmp.vy_offset
+        tmp.zabity=1
         if endscoring>=0 && endscoring<10 {
-            lolo=instance_create(x,y,o_punkciornik)
-            lolo.image_index=7
-            global.punkty+=10000
+            tmp=instance_create(x,y,o_scorepop)
+            tmp.image_index=7
+            global.score+=10000
         }
         if endscoring>=10 && endscoring<30 {
-            lolo=instance_create(x,y,o_punkciornik)
-            lolo.image_index=5
+            tmp=instance_create(x,y,o_scorepop)
+            tmp.image_index=5
         }
         if endscoring>=30 && endscoring<50 {
-            lolo=instance_create(x,y,o_punkciornik)
-            lolo.image_index=4
+            tmp=instance_create(x,y,o_scorepop)
+            tmp.image_index=4
         }
         if endscoring>=50 && endscoring<70 {
-            lolo=instance_create(x,y,o_punkciornik)
-            lolo.image_index=3
+            tmp=instance_create(x,y,o_scorepop)
+            tmp.image_index=3
         }
         if endscoring>=70 && endscoring<100 {
-            lolo=instance_create(x,y,o_punkciornik)
-            lolo.image_index=2
+            tmp=instance_create(x,y,o_scorepop)
+            tmp.image_index=2
         }
         if endscoring>=100 && endscoring<140 {
-            lolo=instance_create(x,y,o_punkciornik)
-            lolo.image_index=1
+            tmp=instance_create(x,y,o_scorepop)
+            tmp.image_index=1
         }
         if endscoring>=140 && endscoring<=200 {
-            lolo=instance_create(x,y,o_punkciornik)
-            lolo.image_index=0
+            tmp=instance_create(x,y,o_scorepop)
+            tmp.image_index=0
         }
     }
 
@@ -2148,7 +2148,7 @@ applies_to=self
 */
 if !initial_check {test_bound(x,y);initial_check=1}
 
-if global.aktywowanykuppa=0 {//普通状态
+if global.bowser_phase=0 {//普通状态
     view_xview=min(max(0,x-320,left_bound),max(0,right_bound),room_width-640)
     view_yview=min(max(0,y-240,top_bound),max(0,bottom_bound),room_height-480)
     if region_count=1 && view_set=0 {view_set = 1}
@@ -2156,7 +2156,7 @@ if global.aktywowanykuppa=0 {//普通状态
     if ds_list_size(global.autoscrolls)>0 && global.scrollPaused = -1 {
         firstscroll=ds_list_find_value(global.autoscrolls,0)
         if x>firstscroll.x+16-320&&x<firstscroll.x+16+320&&y>firstscroll.y+16-240&&y<firstscroll.y+16+240&&checkpointdetect=1 {
-            global.aktywowanykuppa=2
+            global.bowser_phase=2
             if scrolldetect2=0 {
                 xcenter=firstscroll.x+16
                 ycenter=firstscroll.y+16
@@ -2173,7 +2173,7 @@ if global.aktywowanykuppa=0 {//普通状态
         for(i=0;i<ds_list_size(global.autoscrolls);i+=1) {
             tmpscroll=ds_list_find_value(global.autoscrolls,i)
             if x>tmpscroll.x+16-320&&x<tmpscroll.x+16+320&&y>tmpscroll.y+16-240&&y<tmpscroll.y+16+240 {
-                global.aktywowanykuppa=2
+                global.bowser_phase=2
                 firstscroll=tmpscroll
                 if scrolldetect2=0 {
                     xcenter=firstscroll.x+16
@@ -2190,18 +2190,18 @@ if global.aktywowanykuppa=0 {//普通状态
     if checkpointdetect<>0 {scrolldetect2=1}//本变量负责判断是否开场在强滚区域内
 }
 
-if global.koopa_scroll_count>0 {global.aktywowanykuppa=1}
+if global.koopa_scroll_count>0 {global.bowser_phase=1}
 
 if global.scrollPaused = -1 {
 
-    if global.aktywowanykuppa=1//库巴状态，触发库巴见库巴对应object代码
+    if global.bowser_phase=1//库巴状态，触发库巴见库巴对应object代码
     {
-        if instance_exists(o_kuppa) {if view_xview<o_kuppa.ixornik-320 && instance_number(o_skuszak)=0 && view_xview<room_width-640 {view_xview+=1;if x<=view_xview[0]+16 {x+=1; if place_meeting(x+3,y,obj_wall) || place_meeting(x+3,y,o_pointblock) {oberwal=1 ; shield=0 ; global.rodzajmaria=0}}}}
-        if instance_exists(o_kuppa) {if view_xview>o_kuppa.ixornik-320 && instance_number(o_skuszak)=0 && view_xview>0 {view_xview-=1;if x>=view_xview[0]+624 {x-=1; if place_meeting(x-3,y,obj_wall) || place_meeting(x-3,y,o_pointblock) {oberwal=1 ; shield=0 ; global.rodzajmaria=0}}}}
+        if instance_exists(o_bowser) {if view_xview<o_bowser.pivot_x-320 && instance_number(o_mariodead)=0 && view_xview<room_width-640 {view_xview+=1;if x<=view_xview[0]+16 {x+=1; if place_meeting(x+3,y,obj_wall) || place_meeting(x+3,y,o_pointblock) {hit_timer=1 ; shield=0 ; global.rodzajmaria=0}}}}
+        if instance_exists(o_bowser) {if view_xview>o_bowser.pivot_x-320 && instance_number(o_mariodead)=0 && view_xview>0 {view_xview-=1;if x>=view_xview[0]+624 {x-=1; if place_meeting(x-3,y,obj_wall) || place_meeting(x-3,y,o_pointblock) {hit_timer=1 ; shield=0 ; global.rodzajmaria=0}}}}
         view_yview=min(max(y-240,0),room_height-480)
     }
 
-    if global.aktywowanykuppa=2 && instance_number(o_skuszak)=0//滚屏至第一个滚屏obj
+    if global.bowser_phase=2 && instance_number(o_mariodead)=0//滚屏至第一个滚屏obj
     {
         //if tttest=0{show_message("bingo");tttest=1}
         xcenter+=cos(point_direction(xcenter,ycenter,firstscroll.x+16,firstscroll.y+16)/360*2*pi)*firstscroll.scrollspeed
@@ -2210,12 +2210,12 @@ if global.scrollPaused = -1 {
         view_yview=min(max(ycenter-240,0),room_height-480)
         if point_distance(xcenter,ycenter,firstscroll.x+16,firstscroll.y+16)<=firstscroll.scrollspeed*1.5 {
             xcenter=firstscroll.x+16;ycenter=firstscroll.y+16
-            global.aktywowanykuppa=3}
+            global.bowser_phase=3}
     }
 
-    if global.aktywowanykuppa=3//好了开始激动人心的滚屏环节了
+    if global.bowser_phase=3//好了开始激动人心的滚屏环节了
     {
-        if orange_recover=0 && ds_list_find_index(global.autoscrolls,firstscroll) < ds_list_size(global.autoscrolls) - 1 && instance_number(o_skuszak)=0 {
+        if orange_recover=0 && ds_list_find_index(global.autoscrolls,firstscroll) < ds_list_size(global.autoscrolls) - 1 && instance_number(o_mariodead)=0 {
             nextscroll = ds_list_find_value(global.autoscrolls,ds_list_find_index(global.autoscrolls,firstscroll)+1)
             xcenter+=cos(point_direction(xcenter,ycenter,nextscroll.x+16,nextscroll.y+16)/360*2*pi)*firstscroll.scrollspeed
             ycenter-=sin(point_direction(xcenter,ycenter,nextscroll.x+16,nextscroll.y+16)/360*2*pi)*firstscroll.scrollspeed
@@ -2230,7 +2230,7 @@ if global.scrollPaused = -1 {
         } else {
             nextscroll=firstscroll;
         }
-        if instance_number(o_skuszak)=0 {
+        if instance_number(o_mariodead)=0 {
             if orange_recover=1 {
                 // 橙→绿过渡：镜头以滚屏速度平滑移向绿色节点（xcenter已在节点位置等待）
                 var rec_dir;
@@ -2262,7 +2262,7 @@ if global.scrollPaused = -1 {
                     }
                     // 自适应阻尼弹簧过渡：仅用于初次追上玩家，收束后切回直接跟随
                     // 非滚屏状态下进入的首个橙色节点 → 不应用阻尼，直接跟踪
-                    if prev_aktywowanykuppa!=2 && prev_aktywowanykuppa!=3 {
+                    if prev_bowser_phase!=2 && prev_bowser_phase!=3 {
                         spring_settled_x=1
                         spring_settled_y=1
                         spring_timer_x=0
@@ -2397,45 +2397,45 @@ if global.scrollPaused = -1 {
         }
     }
 
-    if (global.aktywowanykuppa=2 && global.rodzajmaria<>5) {//位置矫正1
-        if instance_number(o_skuszak)=0 {if x<=view_xview[0] && !(place_meeting(x-3,y,obj_wall) || place_meeting(x-3,y,o_pointblock)) {x+=cos(point_direction(xcenter,ycenter,firstscroll.x+16,firstscroll.y+16)/360*2*pi)*firstscroll.scrollspeed}
-            if x<view_xview[0]-16 && teleportacja=0 {oberwal=1 ; shield=0 ; global.rodzajmaria=0}}
-        if instance_number(o_skuszak)=0 {if x>=view_xview[0]+640 && !(place_meeting(x+3,y,obj_wall) || place_meeting(x+3,y,o_pointblock)) {x+=cos(point_direction(xcenter,ycenter,firstscroll.x+16,firstscroll.y+16)/360*2*pi)*firstscroll.scrollspeed}
-            if x>view_xview[0]+656 && teleportacja=0 {oberwal=1 ; shield=0 ; global.rodzajmaria=0}}
+    if (global.bowser_phase=2 && global.rodzajmaria<>5) {//位置矫正1
+        if instance_number(o_mariodead)=0 {if x<=view_xview[0] && !(place_meeting(x-3,y,obj_wall) || place_meeting(x-3,y,o_pointblock)) {x+=cos(point_direction(xcenter,ycenter,firstscroll.x+16,firstscroll.y+16)/360*2*pi)*firstscroll.scrollspeed}
+            if x<view_xview[0]-16 && pipe_state=0 {hit_timer=1 ; shield=0 ; global.rodzajmaria=0}}
+        if instance_number(o_mariodead)=0 {if x>=view_xview[0]+640 && !(place_meeting(x+3,y,obj_wall) || place_meeting(x+3,y,o_pointblock)) {x+=cos(point_direction(xcenter,ycenter,firstscroll.x+16,firstscroll.y+16)/360*2*pi)*firstscroll.scrollspeed}
+            if x>view_xview[0]+656 && pipe_state=0 {hit_timer=1 ; shield=0 ; global.rodzajmaria=0}}
         if x>view_xview[0]+624 && !(place_meeting(x-3,y,obj_wall) || place_meeting(x-3,y,o_pointblock)) {x=view_xview[0]+624;}
         if x<view_xview[0]+16 && !(place_meeting(x+3,y,obj_wall) || place_meeting(x+3,y,o_pointblock)) {x=view_xview[0]+16;}
-        if teledelay>=31 {global.aktywowanykuppa=0}
+        if pipe_delay>=31 {global.bowser_phase=0}
     }
-    if (global.aktywowanykuppa=3 && global.rodzajmaria<>5) {//位置矫正2
-        if instance_number(o_skuszak)=0 {if x<=view_xview[0] && !(place_meeting(x+3,y,obj_wall) || place_meeting(x+3,y,o_pointblock)) {x+=cos(point_direction(xcenter,ycenter,nextscroll.x+16,nextscroll.y+16)/360*2*pi)*firstscroll.scrollspeed}
-            if x<view_xview[0]-16 && teleportacja=0 {oberwal=1 ; shield=0 ; global.rodzajmaria=0}}
-        if instance_number(o_skuszak)=0 {if x>=view_xview[0]+640 && !(place_meeting(x-3,y,obj_wall) || place_meeting(x-3,y,o_pointblock)) {x+=cos(point_direction(xcenter,ycenter,nextscroll.x+16,nextscroll.y+16)/360*2*pi)*firstscroll.scrollspeed}
-            if x>view_xview[0]+656 && teleportacja=0 {oberwal=1 ; shield=0 ; global.rodzajmaria=0}}
+    if (global.bowser_phase=3 && global.rodzajmaria<>5) {//位置矫正2
+        if instance_number(o_mariodead)=0 {if x<=view_xview[0] && !(place_meeting(x+3,y,obj_wall) || place_meeting(x+3,y,o_pointblock)) {x+=cos(point_direction(xcenter,ycenter,nextscroll.x+16,nextscroll.y+16)/360*2*pi)*firstscroll.scrollspeed}
+            if x<view_xview[0]-16 && pipe_state=0 {hit_timer=1 ; shield=0 ; global.rodzajmaria=0}}
+        if instance_number(o_mariodead)=0 {if x>=view_xview[0]+640 && !(place_meeting(x-3,y,obj_wall) || place_meeting(x-3,y,o_pointblock)) {x+=cos(point_direction(xcenter,ycenter,nextscroll.x+16,nextscroll.y+16)/360*2*pi)*firstscroll.scrollspeed}
+            if x>view_xview[0]+656 && pipe_state=0 {hit_timer=1 ; shield=0 ; global.rodzajmaria=0}}
         //强滚向下分量：上面出界死亡（到最后一个节点 nextscroll==firstscroll 时停止；镜头触底 view_yview==room_height-480 时也停止）
         // 橙→osc_dy>0；绿→nextscroll.y>firstscroll.y
         if global.topdeath=1 && nextscroll!=firstscroll && view_yview[0] < room_height - 480 {
             if (firstscroll.is_orange=1 && osc_dy>0) || (firstscroll.is_orange=0 && nextscroll.y>firstscroll.y) {
-                if y<view_yview[0]-16 && teleportacja=0 {
-                    oberwal=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white
+                if y<view_yview[0]-16 && pipe_state=0 {
+                    hit_timer=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white
                 }
             }
         }
         if x>view_xview[0]+624 && !(place_meeting(x-3,y,obj_wall) || place_meeting(x-3,y,o_pointblock)) {x=view_xview[0]+624;}
         if x<view_xview[0]+16 && !(place_meeting(x+3,y,obj_wall) || place_meeting(x+3,y,o_pointblock)) {x=view_xview[0]+16;}
-        if teledelay>=31 {global.aktywowanykuppa=0}
+        if pipe_delay>=31 {global.bowser_phase=0}
     }
 
-    prev_aktywowanykuppa=global.aktywowanykuppa
+    prev_bowser_phase=global.bowser_phase
 }
 
-if global.aktywowanykuppa=4 { //道中库巴战结束后的滚屏修正过程
+if global.bowser_phase=4 { //道中库巴战结束后的滚屏修正过程
     centerset=0 {xcenter = view_xview+320;ycenter = view_yview+240;centerset=1}
     xcenter+=cos(point_direction(xcenter,ycenter,x,y)/360*2*pi)*3
     ycenter-=sin(point_direction(xcenter,ycenter,x,y)/360*2*pi)*3
     if point_distance(xcenter,ycenter,x,y)<=3*1.5 {
         xcenter=x;ycenter=y
         global.pauza=0;
-        global.aktywowanykuppa=0;
+        global.bowser_phase=0;
     }
     view_xview=min(max(xcenter-320,0),room_width-640)
     view_yview=min(max(ycenter-240,0),room_height-480)
@@ -2474,16 +2474,16 @@ if global.pauza=0 {
         fast_time = 300;
     }
 
-    if global.przeszedllevel>0 && global.przeszedllevel<1000-fast_time {global.przeszedllevel+=1}
-    if global.przeszedllevel>450-fast_time && prawdziwyczas>0 {prawdziwyczas-=1; global.punkty+=100;nabija+=1}
-    if global.przeszedllevel>500-fast_time && prawdziwyczas>9 {prawdziwyczas-=10; global.punkty+=1000;nabija+=1}
-    if global.przeszedllevel>650-fast_time && prawdziwyczas>99 {prawdziwyczas-=100; global.punkty+=10000;nabija+=1}
+    if global.level_cleared>0 && global.level_cleared<1000-fast_time {global.level_cleared+=1}
+    if global.level_cleared>450-fast_time && real_time>0 {real_time-=1; global.score+=100;nabija+=1}
+    if global.level_cleared>500-fast_time && real_time>9 {real_time-=10; global.score+=1000;nabija+=1}
+    if global.level_cleared>650-fast_time && real_time>99 {real_time-=100; global.score+=10000;nabija+=1}
 
-    if nabija>5 {nabija=0; if global.sample=1 {fofo=sound_play(snd_nabija);sound_volume(snd_nabija,global.glosnosc)}}
+    if nabija>5 {nabija=0; if global.sample=1 {tmp2=sound_play(snd_timescore);sound_volume(snd_timescore,global.game_volume)}}
 
-    if global.przeszedllevel>450-fast_time && global.przeszedllevel<1000-fast_time && prawdziwyczas<=0 {global.przeszedllevel=2000-fast_time}
-    if global.przeszedllevel>=2000-fast_time global.przeszedllevel+=1
-    if global.przeszedllevel>=2050-fast_time {global.etappokonany=0;
+    if global.level_cleared>450-fast_time && global.level_cleared<1000-fast_time && real_time<=0 {global.level_cleared=2000-fast_time}
+    if global.level_cleared>=2000-fast_time global.level_cleared+=1
+    if global.level_cleared>=2050-fast_time {global.level_complete=0;
         if global.testmode=1 {
             global.godmode=0;
             // NET-SYNC: 测关结束返回。o_edmain 不持久化（换房即销毁），数据源 = F3 时的完整存盘（testsave/temp.smwl）；
@@ -2586,12 +2586,12 @@ applies_to=self
 //血条：有最终koopa出现时才出现
 if global.koopa_activated=2 {
     aktywowanamoza=1
-    if instance_number(object112)=0 {fofoxx=instance_create(view_xview[0]+500,view_yview[0]-100,object112)} //object112是库巴血量条
-    fofoxx.x=view_xview[0]+480
-    fofoxx.y=view_yview[0]+barkup-60
-    if barkup<120 barkup+=1
+    if instance_number(object112)=0 {hud_inst=instance_create(view_xview[0]+500,view_yview[0]-100,object112)} //object112是库巴血量条
+    hud_inst.x=view_xview[0]+480
+    hud_inst.y=view_yview[0]+hpbar_y-60
+    if hpbar_y<120 hpbar_y+=1
 
-    if (global.huddisplay = 1) { fofoxx.visible = false;} else { fofoxx.visible = true; }
+    if (global.huddisplay = 1) { hud_inst.visible = false;} else { hud_inst.visible = true; }
 }
 
 //库巴音乐：库巴滚屏启动时才播放，根据koopa_activated决定播放道中boss音乐还是最终boss音乐
@@ -2601,9 +2601,9 @@ if global.koopa_activated=2 {
 }*/
 
 
-if global.paralax<>x {
+if global.parallax<>x {
     fangka = 1
-    global.paralax2=x-global.paralax ;global.paralax=x;
+    global.paralax2=x-global.parallax ;global.parallax=x;
     if x>320 && x<room_width-320 {global.paralax3+=global.paralax2/10}
 }
 animator.x=x
@@ -2711,9 +2711,9 @@ if global.huddisplay=0 || global.gameversion <= 1711 {
         _dy += _dh
         draw_text(_dx, _dy, "RUN TIMER: " + string(p_meter_run_timer) + "/" + string(p_meter_run_time))
         _dy += _dh
-        draw_text(_dx, _dy, "SEQ: " + string(sekwencja) + "  GRAV: " + string(grawitacja))
+        draw_text(_dx, _dy, "SEQ: " + string(state) + "  GRAV: " + string(grav))
         _dy += _dh
-        draw_text(_dx, _dy, "SKUSIL: " + string(skusil) + "  SCHYLANIE: " + string(schylanie))
+        draw_text(_dx, _dy, "SKUSIL: " + string(shell_lock) + "  SCHYLANIE: " + string(schylanie))
     }
 
     if global.godmode=0 && !global.levelsmooth=1 {draw_text(view_xview[0]+40,view_yview[0]+20,string(global.character_name)+string(global.zycia)) }//zycia是生命数
@@ -2721,12 +2721,12 @@ if global.huddisplay=0 || global.gameversion <= 1711 {
     if global.godmode=0 && global.levelsmooth=1 {draw_text(view_xview[0]+40,view_yview[0]+20,'SMOOTH '+string(global.zycia))}
     if global.godmode=1 && global.levelsmooth=1 {draw_text(view_xview[0]+40,view_yview[0]+20,'GOD '+string(global.zycia))
         draw_text(view_xview[0]+40,view_yview[0]+35,"(SMOOTH)")}
-    if global.godmode=1 && global.levelsmooth=1 {draw_text(view_xview[0]+40,view_yview[0]+50,string(global.punkty))} else {draw_text(view_xview[0]+40,view_yview[0]+35,string(global.punkty))}//punkty是分数
+    if global.godmode=1 && global.levelsmooth=1 {draw_text(view_xview[0]+40,view_yview[0]+50,string(global.score))} else {draw_text(view_xview[0]+40,view_yview[0]+35,string(global.score))}//punkty是分数
     if global.scrollPaused = 1 {draw_text(view_xview[0]+40,view_yview[0]+464,'SCROLL DISABLED ')} else {draw_text(view_xview[0]+40,view_yview[0]+464,'')} //关闭滚屏的提示
-    if instance_exists(o_kuppa) {
+    if instance_exists(o_bowser) {
         iii = 0;
-        while(iii<instance_number(o_kuppa)) {
-            fofofo = instance_find(o_kuppa,iii)
+        while(iii<instance_number(o_bowser)) {
+            fofofo = instance_find(o_bowser,iii)
             if fofofo.koopa_midboss_hp>0 {
                 draw_text(fofofo.x,fofofo.y-32,string(fofofo.koopa_midboss_hp));
             }
@@ -2746,12 +2746,12 @@ if global.huddisplay=0 || global.gameversion <= 1711 {
         draw_text(view_xview[0]+400,view_yview[0]+20,'WORLD')
 
         draw_set_halign(fa_center)
-        draw_text(view_xview[0]+430,view_yview[0]+35,string_upper(global.etapnazw))
+        draw_text(view_xview[0]+430,view_yview[0]+35,string_upper(global.level_name_play))
         draw_set_halign(fa_left)
     } else {
         // 标题中“WORLD”一行可自定义修改
         var len, i, result0, result1;
-        len = string_length(global.etapnazw);
+        len = string_length(global.level_name_play);
 
         // 不使用array_create，直接初始化数组元素
         result0 = "";
@@ -2762,20 +2762,20 @@ if global.huddisplay=0 || global.gameversion <= 1711 {
         // 直接内联拆分逻辑
         // 直接内联拆分逻辑
         while (i <= len) {
-            if (string_char_at(global.etapnazw, i) == "#") {
+            if (string_char_at(global.level_name_play, i) == "#") {
                 // 处理单独的#符号（排除被反斜杠转义的\#）
                 // 检查当前#的前一个字符是否为反斜杠，如果是则视为转义，不拆分
                 if (i == 1) {
                     // 第一个字符是#，不可能有反斜杠前缀，直接视为单独#
-                    result0 = string_copy(global.etapnazw, 1, i-1); // 空字符串（因为i=1）
-                    result1 = string_copy(global.etapnazw, i+1, len - i);
+                    result0 = string_copy(global.level_name_play, 1, i-1); // 空字符串（因为i=1）
+                    result1 = string_copy(global.level_name_play, i+1, len - i);
                     break;
                 } else {
                     // 非第一个字符，检查前一个字符是否为反斜杠
-                    if (string_char_at(global.etapnazw, i-1) != "\") {
+                    if (string_char_at(global.level_name_play, i-1) != "\") {
                         // 前一个字符不是反斜杠，视为单独#
-                        result0 = string_copy(global.etapnazw, 1, i-1);
-                        result1 = string_copy(global.etapnazw, i+1, len - i);
+                        result0 = string_copy(global.level_name_play, 1, i-1);
+                        result1 = string_copy(global.level_name_play, i+1, len - i);
                         break;
                     }
                 }
@@ -2785,7 +2785,7 @@ if global.huddisplay=0 || global.gameversion <= 1711 {
 
         // 如果未找到单独的#，使用完整标题作为第一行
         if (i > len) {
-            result0 = global.etapnazw;
+            result0 = global.level_name_play;
         }
 
         // 存储结果到全局变量
@@ -2804,26 +2804,26 @@ if global.huddisplay=0 || global.gameversion <= 1711 {
         }
     }
 
-    if prawdziwyczas>=0 {
-        draw_text(view_xview[0]+580+rork2,view_yview[0]+20+rork2,'TIME')
+    if real_time>=0 {
+        draw_text(view_xview[0]+580+shake_offset,view_yview[0]+20+shake_offset,'TIME')
 
         draw_set_halign(fa_center) //prawdziwyczas显示时间，那个rork和rork2是用来实现100单位的时候时间字体震动效果的
-        if prawdziwyczas>-1 {
-            draw_text(view_xview[0]+600+rork2,view_yview[0]+35+rork2,string(prawdziwyczas))} else
+        if real_time>-1 {
+            draw_text(view_xview[0]+600+shake_offset,view_yview[0]+35+shake_offset,string(real_time))} else
         {
-            draw_text(view_xview[0]+600+rork2,view_yview[0]+35+rork2,string(0))}
+            draw_text(view_xview[0]+600+shake_offset,view_yview[0]+35+shake_offset,string(0))}
         draw_set_halign(fa_left)
     }
 
-    rork2=random(rork)-random(rork)
+    shake_offset=random(shake_timer)-random(shake_timer)
 }
 
-if teleportacja=0 {czasor+=1} //czasor是基本计时单位，每个绘制周期czasor增加1
-if rork>0 rork-=0.1
-if czasor>15 && prawdziwyczas>0 && global.przeszedllevel=0 && instance_number(o_skuszak)=0 && global.pauza!=3 {czasor=0; prawdziwyczas-=1;} //每过16个绘制周期，czasor增加到16，这时候时间-1，然后czasor归零循环）
-if prawdziwyczas>0&&prawdziwyczas<100 && czasoren=0 && global.przeszedllevel=0 {rork=10;czasoren=1;if global.sample=1 {fofo=sound_play(snd_timeover);sound_volume(snd_timeover,global.glosnosc)}} //100时间单位警报
-if global.coins>99 {global.coins=0; global.zycia+=1;if global.sample=1 {fofo=sound_play(snd_1up);sound_volume(snd_1up,global.glosnosc)}} //100金币奖命音效
-if prawdziwyczas=0 && global.przeszedllevel=0 {global.rodzajmaria=0; oberwal=1 ; shield=0} //时间归零死亡
+if pipe_state=0 {time_accum+=1} //czasor是基本计时单位，每个绘制周期czasor增加1
+if shake_timer>0 shake_timer-=0.1
+if time_accum>15 && real_time>0 && global.level_cleared=0 && instance_number(o_mariodead)=0 && global.pauza!=3 {time_accum=0; real_time-=1;} //每过16个绘制周期，czasor增加到16，这时候时间-1，然后czasor归零循环）
+if real_time>0&&real_time<100 && time_accum2=0 && global.level_cleared=0 {shake_timer=10;time_accum2=1;if global.sample=1 {tmp2=sound_play(snd_timeover);sound_volume(snd_timeover,global.game_volume)}} //100时间单位警报
+if global.coins>99 {global.coins=0; global.zycia+=1;if global.sample=1 {tmp2=sound_play(snd_1up);sound_volume(snd_1up,global.game_volume)}} //100金币奖命音效
+if real_time=0 && global.level_cleared=0 {global.rodzajmaria=0; hit_timer=1 ; shield=0} //时间归零死亡
 
 
 if keyboard_check_pressed(global.key_f2) {
@@ -2853,7 +2853,7 @@ if smooth_text>60 {smooth_text=0}
 var line_spacing;
 line_spacing = 24;
 if keyboard_check(global.key_f1) {
-    room_caption = '[Level Author]: ' + global.etapautor + ' (' + string(global.gameversion) + ')'
+    room_caption = '[Level Author]: ' + global.level_author + ' (' + string(global.gameversion) + ')'
     draw_text(view_xview[0]+32,view_yview[0]+464 - line_spacing * 6, 'MODIFIED MOVEMENT: ' + yes_no(global.modifiedmov))
     draw_text(view_xview[0]+32,view_yview[0]+464 - line_spacing * 5, 'ADVANCED SWITCH: ' + yes_no(global.advswitch))
     draw_text(view_xview[0]+32,view_yview[0]+464 - line_spacing * 4, 'MF STYLE BEET: ' + yes_no(global.MFbeet))

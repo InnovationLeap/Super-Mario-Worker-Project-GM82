@@ -9,25 +9,25 @@ if argument0 = 1 {
     return _f
 }
 if argument0 = 2 {
-    fofo.wejscie = floor((point_direction(fofo.x+32, fofo.y+32, argument1, argument2)+45)/90)*90
-    fofo.tak = 1
+    tmp2.wejscie = floor((point_direction(tmp2.x+32, tmp2.y+32, argument1, argument2)+45)/90)*90
+    tmp2.tak = 1
     return -1
 }
 if argument0 = 3 {
-    fofo.exitx = argument1
-    fofo.exity = argument2
-    fofo.tak2 = 1
+    tmp2.exitx = argument1
+    tmp2.exity = argument2
+    tmp2.tak2 = 1
     return -1
 }
 if argument0 = 4 {
-    fofo.wyjscie = floor((point_direction(fofo.exitx, fofo.exity, argument1, argument2)+45)/90)*90
-    if fofo.wyjscie >= 360 {fofo.wyjscie = fofo.wyjscie mod 360}
-    fofo.tak3 = 1
+    tmp2.wyjscie = floor((point_direction(tmp2.exitx, tmp2.exity, argument1, argument2)+45)/90)*90
+    if tmp2.wyjscie >= 360 {tmp2.wyjscie = tmp2.wyjscie mod 360}
+    tmp2.tak3 = 1
     with(o_edpassage) {shuiguanhele = 0; shuiguanhele2 = 0}
     // NET-SYNC: 完成点——op16 cat4 广播（warpnum/wejscie/exitx/exity/wyjscie/x/y，远端创建或更新）
-    ed_net_ops_send_create(fofo, 4)
+    ed_net_ops_send_create(tmp2, 4)
     // NET-SYNC: 配对完成后重算全部水管 warpnum（两端按 (x,y) 排序收敛，防交错放置重复编号）
     ed_passage_reindex()
-    return fofo
+    return tmp2
 }
 return -1

@@ -23,7 +23,7 @@ if !setonce {
             //把下面5行复制一份改改就OK
         case 0: //这个值应对应景物编号-1
             {
-                sprite_index=s_chmursenery //景物动画
+                sprite_index=s_cloudscenery //景物动画
                 image_speed=0.1
                 break;
             }
@@ -146,39 +146,39 @@ applies_to=self
 with(o_bgmchange) {
 
     if linked=1 {
-        fofo = instance_place(x-32,y,o_region);
-        fofo.linked=1
-        fofo.bgm_change = bgm_change;
-        fofo.bgm = bgm;
-        fofo.bgp_change = bgp_change;
-        fofo.bgp = bgp;
-        fofo.height = height;
-        fofo.weather_change = weather_change;
-        fofo.rainy = rainy;
-        fofo.fallingstars = fallingstars;
-        fofo.snowy = snowy;
-        fofo.thunder = thunder;
-        fofo.windy = windy;
-        fofo.darkness = darkness;
-        fofo.brightness = brightness;
+        tmp2 = instance_place(x-32,y,o_region);
+        tmp2.linked=1
+        tmp2.bgm_change = bgm_change;
+        tmp2.bgm = bgm;
+        tmp2.bgp_change = bgp_change;
+        tmp2.bgp = bgp;
+        tmp2.height = height;
+        tmp2.weather_change = weather_change;
+        tmp2.rainy = rainy;
+        tmp2.fallingstars = fallingstars;
+        tmp2.snowy = snowy;
+        tmp2.thunder = thunder;
+        tmp2.windy = windy;
+        tmp2.darkness = darkness;
+        tmp2.brightness = brightness;
         instance_destroy();
     }
 
     if linked=2 {
-        fofo = instance_place(x-32,y,o_kuppa)
-        fofo.bgm_change = bgm_change;
-        fofo.bgm = bgm;
-        fofo.bgp_change = bgp_change;
-        fofo.bgp = bgp;
-        fofo.height = height;
-        fofo.weather_change = weather_change;
-        fofo.rainy = rainy;
-        fofo.fallingstars = fallingstars;
-        fofo.snowy = snowy;
-        fofo.thunder = thunder;
-        fofo.windy = windy;
-        fofo.darkness = darkness;
-        fofo.brightness = brightness;
+        tmp2 = instance_place(x-32,y,o_bowser)
+        tmp2.bgm_change = bgm_change;
+        tmp2.bgm = bgm;
+        tmp2.bgp_change = bgp_change;
+        tmp2.bgp = bgp;
+        tmp2.height = height;
+        tmp2.weather_change = weather_change;
+        tmp2.rainy = rainy;
+        tmp2.fallingstars = fallingstars;
+        tmp2.snowy = snowy;
+        tmp2.thunder = thunder;
+        tmp2.windy = windy;
+        tmp2.darkness = darkness;
+        tmp2.brightness = brightness;
         instance_destroy();
     };
 

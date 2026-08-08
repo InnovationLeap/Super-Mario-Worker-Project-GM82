@@ -1,4 +1,4 @@
-klocek1
+s_solidcollisionmask
 sprite1
 
 
@@ -33,7 +33,7 @@ s_pointblock3
 s_pointblock4
 sprite33
 sprite34
-s_bonusgrzyb
+s_bonusmush
 s_markerus_small
 s_markerus_upper
 
@@ -45,20 +45,20 @@ s_smallmariorun
 s_goomba
 s_goombadead
 s_troopashell
-s_pirania
+s_piranha
 
-s_kolcozwierz
+s_spiny
 s_lavaball
 s_lava
-s_piranioleb
-s_wiatrak
-s_wiatrakcentrum
-s_malpka
-s_malpkazmlotkiem
-s_malpkimlotek
-s_troopalatajaca
+s_groundpiranhaup
+s_roto
+s_rotospotcenter
+s_hammerbro
+s_hammerbroattack
+s_hammer
+s_troopafly
 s_enemymarker
-s_punkciornik
+s_scorepop
 s_fireball
 o_explosion
 
@@ -72,7 +72,7 @@ s_firemarioswim
 s_firemariorun
 s_firemariojump
 s_firemarioshot
-s_bonuskwiatek
+s_bonusflower
 s_bonuslui
 s_bonus1up
 s_bonusstar
@@ -83,12 +83,12 @@ s_luimariorun
 s_luimariojump
 
 s_luimarioswim
-s_burakmariocrouch
-s_burakmariorun
-s_burakmariojump
-s_burakmarioswim
-s_bonusburak
-s_burakmarioshot
+s_beetrootmariocrouch
+s_beetrootmariorun
+s_beetrootmariojump
+s_beetrootmarioswim
+s_bonusbeetroot
+s_beetrootmarioshot
 s_lakitu
 s_lakitu2
 s_lakitubomb
@@ -97,7 +97,7 @@ s_cannoni
 s_enemymarker4
 
 
-s_skuszak
+s_mariodead
 s_enemymarker5
 s_edhud
 s_edhudmask
@@ -141,20 +141,20 @@ s_guibutton
 s_markersbank3
 s_markersbank4
 s_kickeffect
-s_kolec
-s_kuppa
-s_kuppajump
-s_kuppaziewacz
-s_kupamark
-s_kuppafire
+s_spike
+s_bowser
+s_bowserjump
+s_bowserreadyfire
+s_bowsermark
+s_bowserflame
 s_endudus
-s_kuppadie
-s_kuppaenergy
-s_pirania3
-s_pirania2
-s_pirania4
+s_bowserdead
+s_bowserhp
+s_piranha3
+s_piranha2
+s_piranha4
 
-s_woda
+s_water
 s_firebalrico
 
 sprite157
@@ -171,7 +171,7 @@ txt_mariofonts
 txt_coins
 s_gameover
 
-s_chmursenery
+s_cloudscenery
 s_troopared
 s_troopared2
 s_trooparedshell
@@ -388,7 +388,7 @@ s_left
 
 s_firesis
 s_firesisfire
-s_lavadier
+s_lavabottom
 s_falixnami
 s_choosingobj
 s_sealroof
@@ -400,13 +400,13 @@ s_light
 s_clouddark
 
 
-s_nonnac
+s_cannonflip
 s_grassaunt
 s_buzzybeetle
 s_buzzyshell
 s_boo
 
-s_troopalatajacared
+s_troopaflyred
 s_troopablue
 s_troopabluefly
 s_troopablueshell
@@ -478,7 +478,7 @@ s_bgmchange
 s_ledge
 
 s_ground
-s_littlewoda
+s_waterlittle
 s_waterbegin
 s_waterend
 s_waterchangemasks
@@ -502,16 +502,16 @@ s_piraniagrey
 s_piraniagrey2
 s_fakitu
 s_fakitu2
-s_fakitubomb
+s_fahleeball
 s_bigluigicrouch
 s_bigluigijump
 s_bigluigirun
 s_bigluigiswim
-s_burakluigicrouch
-s_burakluigijump
-s_burakluigirun
-s_burakluigishot
-s_burakluigiswim
+s_beetrootluigicrouch
+s_beetrootluigijump
+s_beetrootluigirun
+s_beetrootluigishot
+s_beetrootluigiswim
 s_firemariocrouch
 s_fireluigijump
 s_fireluigirun
@@ -521,7 +521,7 @@ s_luiluigicrouch
 s_luiluigijump
 s_luiluigirun
 s_luiluigiswim
-s_skuszak_luigi
+s_luigidead
 s_smallluigijump
 s_smallluigirun
 s_smallluigiswim
@@ -540,17 +540,17 @@ s_snow
 
 s_snowdrop
 s_wind
-s_piranioleb2
-s_piranioleb3
+s_groundpiranhadown
+s_groundpiranhaleft
 s_mfc2
 s_mfc3
 s_mfc4
-s_kolec2
-s_kolec3
-s_kolec4
-s_piranioleb4
-s_kolecmask
-s_piraniolebmask
+s_spike2
+s_spike3
+s_spike4
+s_groundpiranharight
+s_spikemask
+s_groundpiranhamask
 s_mfcmask
 s_thunder
 s_inleapbar

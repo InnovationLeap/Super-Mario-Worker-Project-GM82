@@ -4,8 +4,8 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-ladowanie=1+random(0.1)
-strzal=0
+reload_timer=1+random(0.1)
+shot_timer=0
 
 if global.layerord=0||global.layerord=1 {depth=0}
 if global.layerord=2 {depth=-21}
@@ -21,11 +21,11 @@ action_id=603
 applies_to=self
 */
 
-if global.pauza=0 && global.etappokonany=0 {
+if global.pauza=0 && global.level_complete=0 {
 
-    if x<view_xview[0]+720 && x>view_xview[0]-80 && !(x<=o_marker.x && x>o_marker.x-75-32) && !(x>=o_marker.x && x<o_marker.x+75) {strzal+=ladowanie}
+    if x<view_xview[0]+720 && x>view_xview[0]-80 && !(x<=o_marker.x && x>o_marker.x-75-32) && !(x>=o_marker.x && x<o_marker.x+75) {shot_timer+=reload_timer}
 
-    if strzal>200 {instance_create(x+16,y+16,o_cannoni) ; strzal=0;ladowanie=1+random(0.1)
-        if global.sample=1 && y<view_yview[0]+480 && y>view_yview[0]-32 {fofo=sound_play(snd_shoot);sound_volume(snd_shoot,global.glosnosc)}}
+    if shot_timer>200 {instance_create(x+16,y+16,o_cannoni) ; shot_timer=0;reload_timer=1+random(0.1)
+        if global.sample=1 && y<view_yview[0]+480 && y>view_yview[0]-32 {tmp2=sound_play(snd_shoot);sound_volume(snd_shoot,global.game_volume)}}
 
 }

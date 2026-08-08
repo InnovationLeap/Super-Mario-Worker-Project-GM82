@@ -4,7 +4,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-sekwencja=0
+state=0
 image_speed=0
 image_xscale=1
 
@@ -39,9 +39,9 @@ if global.pauza=0 {
     image_index=0
 
     if leaf_faza=0 {
-        if sekwencja=0 && (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {y-=1}
-        if sekwencja=0 && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock) {sekwencja=1}
-        if sekwencja=1 {
+        if state=0 && (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {y-=1}
+        if state=0 && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock) {state=1}
+        if state=1 {
             leaf_speedY+=leaf_gravity
             y+=leaf_speedY
             if leaf_speedY>=0 {

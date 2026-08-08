@@ -170,22 +170,22 @@ case 23: {
             if scrollmenu=1 {is_orange=1-is_orange}
         }
     /*picking start*/
-        if mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 && keyboard_check_pressed(global.key_pick) && o_edmain.costawia4 = 7 && global.picking = false {
-            if global.sample=1 {lololo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}
+        if mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 && keyboard_check_pressed(global.key_pick) && o_edmain.place_code4 = 7 && global.picking = false {
+            if global.sample=1 {tmp4=sound_play(snd_kick);sound_volume(snd_kick,global.game_volume)}
             global.picking = true
             picked = true
         }
-        if picked=true && o_edmain.costawia4 = 7 {
+        if picked=true && o_edmain.place_code4 = 7 {
             x = floor((mouse_x)/32)*32
             y = floor((mouse_y)/32)*32
             if keyboard_check_released(global.key_pick) {
                 global.picking=false
                 picked=false
                 ed_net_ops_send_update(id, 10)
-                if global.sample=1 {lololo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}
+                if global.sample=1 {tmp4=sound_play(snd_fire);sound_volume(snd_fire,global.game_volume)}
             }
         }
-        if o_edmain.costawia4 <>7 {picked=false}
+        if o_edmain.place_code4 <>7 {picked=false}
     /*picking end*/
 }break;
     //恶劣强滚结束
@@ -193,28 +193,28 @@ case 23: {
     //Messageblock Start
 case 26: {
         draw_sprite(s_pointblock5,0,x,y)
-        if mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 &&keyboard_check(global.key_submenu) && o_edmain.costawia4 = 9 && global.picking = false {
+        if mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 &&keyboard_check(global.key_submenu) && o_edmain.place_code4 = 9 && global.picking = false {
             var tempMessage;
             tempMessage=get_string('Edit the message (in Chinese or English)',textMessage)
             textMessage = tempMessage
         }
     /*picking start*/
-        if mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 && keyboard_check_pressed(global.key_pick) && o_edmain.costawia4 = 9 && global.picking = false {
-            if global.sample=1 {lololo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}
+        if mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 && keyboard_check_pressed(global.key_pick) && o_edmain.place_code4 = 9 && global.picking = false {
+            if global.sample=1 {tmp4=sound_play(snd_kick);sound_volume(snd_kick,global.game_volume)}
             global.picking= true
             picked = true
         }
-        if picked=true && o_edmain.costawia4 = 9 {
+        if picked=true && o_edmain.place_code4 = 9 {
             x = floor((mouse_x)/32)*32
             y = floor((mouse_y)/32)*32
             if keyboard_check_released(global.key_pick) {
                 global.picking=false
                 picked=false
                 ed_net_ops_send_update(id, 10)
-                if global.sample=1 {lololo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}
+                if global.sample=1 {tmp4=sound_play(snd_fire);sound_volume(snd_fire,global.game_volume)}
             }
         }
-        if o_edmain.costawia4 <>9 {picked=false}
+        if o_edmain.place_code4 <>9 {picked=false}
     /*picking end*/
 }break;
     //Messageblock End
@@ -246,38 +246,38 @@ case 32: {
             draw_rectangle(x,y,water_endX-1,water_endY-1,0)
             draw_set_color(c_white);draw_set_alpha(1)
             if mouse_x>=water_endX&&mouse_x<water_endX+32&&mouse_y>=water_endY&&mouse_y<water_endY+32&&mouse_x>0&&mouse_y>0&&mouse_check_button(mb_right)
-            && o_edmain.wiatrak=0 && o_edmain.menujesie=0 && o_edmain.wlaczonaopcja=0 && (o_edmain.costawia4=15 || global.deletemode=1) {instance_destroy()}
+            && o_edmain.tool_mode=0 && o_edmain.menu_open=0 && o_edmain.option_open=0 && (o_edmain.place_code4=15 || global.deletemode=1) {instance_destroy()}
             if !end_mark {//create end_mark
                 fofo_end = instance_create(water_endX-32,water_endY-32,o_range_end)
                 fofo_end.start = id
-                fofo_end.costawia = 4
+                fofo_end.place_code = 4
                 fofo_end.label = "water"
                 end_mark = 1
             }
 
         } else {draw_sprite(s_waterchanger,type+2*global.lava,x,y)}
-        if mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 &&keyboard_check(global.key_submenu) && o_edmain.costawia4 = 15 && global.picking = false {
+        if mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 &&keyboard_check(global.key_submenu) && o_edmain.place_code4 = 15 && global.picking = false {
             target = max(-64,get_integer('Edit the target height',target))
             velocity = min(max(0,get_integer('Edit the speed of the fluid',velocity)),9)
         }
     /*picking start*/
         if(type<2) {
-            if mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 && keyboard_check_pressed(global.key_pick) && o_edmain.costawia4 = 15 && global.picking = false {
-                if global.sample=1 {lololo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}
+            if mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 && keyboard_check_pressed(global.key_pick) && o_edmain.place_code4 = 15 && global.picking = false {
+                if global.sample=1 {tmp4=sound_play(snd_kick);sound_volume(snd_kick,global.game_volume)}
                 global.picking= true
                 picked = true
             }
-            if picked=true && o_edmain.costawia4 = 15 {
+            if picked=true && o_edmain.place_code4 = 15 {
                 x = floor((mouse_x)/32)*32
                 y = floor((mouse_y)/32)*32
                 if keyboard_check_released(global.key_pick) {
                     global.picking=false
                     picked=false
                     ed_net_ops_send_update(id, 10)
-                    if global.sample=1 {lololo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}
+                    if global.sample=1 {tmp4=sound_play(snd_fire);sound_volume(snd_fire,global.game_volume)}
                 }
             }
-            if o_edmain.costawia4 <>15 {picked=false}
+            if o_edmain.place_code4 <>15 {picked=false}
     /*picking end*/
         }
 }break;
@@ -288,7 +288,7 @@ case 33: {  //scene control
         if(bgm_change=1 && bgp_change=1)draw_sprite(s_bgmchange,2,x,y);
         if(bgm_change=0 && bgp_change=0)draw_rectangle_color(x,y,x+32,y+32,c_navy,c_navy,c_navy,c_navy,1);
         if(weather_change=1)draw_sprite_ext(s_weathericon,0,x,y,1,1,0,c_white,0.9);
-        if(height>-64)draw_sprite_ext(s_littlewoda,0,x,y,1,1,0,c_white,0.5);
+        if(height>-64)draw_sprite_ext(s_waterlittle,0,x,y,1,1,0,c_white,0.5);
         lalala = instance_place(x-32,y,o_edmarkerblock);
         if lalala.coto=34 {
             linked=1;
@@ -301,22 +301,22 @@ case 33: {  //scene control
         }
 
     /*picking start*/
-        if mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 && keyboard_check_pressed(global.key_pick) && o_edmain.costawia4 = 16 && global.picking = false {
-            if global.sample=1 {lololo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}
+        if mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 && keyboard_check_pressed(global.key_pick) && o_edmain.place_code4 = 16 && global.picking = false {
+            if global.sample=1 {tmp4=sound_play(snd_kick);sound_volume(snd_kick,global.game_volume)}
             global.picking = true
             picked = true
         }
-        if picked=true && o_edmain.costawia4 = 16 {
+        if picked=true && o_edmain.place_code4 = 16 {
             x = floor((mouse_x)/32)*32
             y = floor((mouse_y)/32)*32
             if keyboard_check_released(global.key_pick) {
                 global.picking=false
                 picked=false
                 ed_net_ops_send_update(id, 10)
-                if global.sample=1 {lololo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}
+                if global.sample=1 {tmp4=sound_play(snd_fire);sound_volume(snd_fire,global.game_volume)}
             }
         }
-        if o_edmain.costawia4 <>16 {picked=false}
+        if o_edmain.place_code4 <>16 {picked=false}
     /*picking end*/
 
         if mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 && keyboard_check(global.key_submenu) && global.picking = false {
@@ -324,20 +324,20 @@ case 33: {  //scene control
             if(preview=1) {menustr='Reset BGM|Reset BGP|Reset weather|Reset water height|Turn OFF preview mode'} else {menustr='Reset BGM|Reset BGP|Reset weather|Reset water height|Turn ON preview mode'}
             scenemenu=show_menu(menustr,-1)
             if scenemenu != -1 && scenemenu < 4 {
-                o_edmain.myfofo = id;
+                o_edmain.marker_inst = id;
                 o_edmain.resetting = 1;
                 o_edmain.setting_mode = 1 + 2 * scenemenu;
-                with(o_edmain) {costawia=0;costaiwa2=0;costawia3=0;costawia4=0;costawia5=0;costawia6=0;}
+                with(o_edmain) {place_code=0;costaiwa2=0;place_code3=0;place_code4=0;place_code5=0;place_code6=0;}
 
                 // 天气参数读取，便于设置参数类似的天气控件
                 if scenemenu == 2 {
-                    foforainy = o_edmain.myfofo.rainy;
-                    fofofallingstars = o_edmain.myfofo.fallingstars;
-                    fofosnowy = o_edmain.myfofo.snowy;
-                    fofothunder = o_edmain.myfofo.thunder;
-                    fofowindy = o_edmain.myfofo.windy;
-                    fofodarkness = o_edmain.myfofo.darkness;
-                    fofobrightness = o_edmain.myfofo.brightness;
+                    marker_rainy = o_edmain.marker_inst.rainy;
+                    marker_fallingstars = o_edmain.marker_inst.fallingstars;
+                    marker_snowy = o_edmain.marker_inst.snowy;
+                    marker_thunder = o_edmain.marker_inst.thunder;
+                    marker_windy = o_edmain.marker_inst.windy;
+                    marker_darkness = o_edmain.marker_inst.darkness;
+                    marker_brightness = o_edmain.marker_inst.brightness;
                 }
             }
             if(scenemenu=4) {
@@ -353,7 +353,7 @@ case 33: {  //scene control
             setonce2=1;
         }
         if(preview=-1 && setonce=0) {
-            global.local_muzyka = global.muzyka;
+            global.local_muzyka = global.bgm_id;
             global.local_background = global.background;
             setonce=1;
         }
@@ -369,11 +369,11 @@ case 34: {
         draw_rectangle(x,y,camera_endX-1,camera_endY-1,1)
         draw_set_color(c_white)
         if mouse_x>=camera_endX&&mouse_x<camera_endX+32&&mouse_y>=camera_endY&&mouse_y<camera_endY+32&&mouse_x>0&&mouse_y>0&&mouse_check_button(mb_right)
-        && o_edmain.wiatrak=0 && o_edmain.menujesie=0 && o_edmain.wlaczonaopcja=0 && (o_edmain.costawia4=17 || global.deletemode=1) {instance_destroy()}
+        && o_edmain.tool_mode=0 && o_edmain.menu_open=0 && o_edmain.option_open=0 && (o_edmain.place_code4=17 || global.deletemode=1) {instance_destroy()}
         if !end_mark {//create end_mark
             fofo_end = instance_create(camera_endX-32,camera_endY-32,o_range_end)
             fofo_end.start = id
-            fofo_end.costawia = 4
+            fofo_end.place_code = 4
             fofo_end.label = "camera"
             end_mark = 1
         }

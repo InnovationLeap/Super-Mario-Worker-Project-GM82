@@ -55,7 +55,7 @@ if (string_copy(global.lightobject, 11, 1) = '1') {
 }
 
 if (string_copy(global.lightobject, 12, 1) = '1') {ds_list_add(global.light_obj_list, o_bonusflower);}
-if (string_copy(global.lightobject, 13, 1) = '1') {ds_list_add(global.light_obj_list, o_bonusburak);}
+if (string_copy(global.lightobject, 13, 1) = '1') {ds_list_add(global.light_obj_list, o_bonusbeetroot);}
 if (string_copy(global.lightobject, 14, 1) = '1') {ds_list_add(global.light_obj_list, o_bonuslui);}
 if (string_copy(global.lightobject, 15, 1) = '1') {ds_list_add(global.light_obj_list, o_bonusstar);}
 
@@ -64,7 +64,7 @@ if (string_copy(global.lightobject, 16, 1) = '1') {
     ds_list_add(global.light_obj_list, o_new1up);
 }
 
-if (string_copy(global.lightobject, 17, 1) = '1') {ds_list_add(global.light_obj_list, o_pointblockpodbijacz);}
+if (string_copy(global.lightobject, 17, 1) = '1') {ds_list_add(global.light_obj_list, o_blockbumper);}
 if (string_copy(global.lightobject, 18, 1) = '1') {ds_list_add(global.light_obj_list, o_point);}
 if (string_copy(global.lightobject, 19, 1) = '1') {ds_list_add(global.light_obj_list, o_lightgoomba);}
 if (string_copy(global.lightobject, 20, 1) = '1') {ds_list_add(global.light_obj_list, o_troopa);}
@@ -72,64 +72,64 @@ if (string_copy(global.lightobject, 21, 1) = '1') {ds_list_add(global.light_obj_
 if (string_copy(global.lightobject, 22, 1) = '1') {ds_list_add(global.light_obj_list, o_troopafly);}
 
 if (string_copy(global.lightobject, 23, 1) = '1') {
-    ds_list_add(global.light_obj_list, o_kolcozwierz);
+    ds_list_add(global.light_obj_list, o_spiny);
     ds_list_add(global.light_obj_list, o_lakitubomb);
 }
 if (string_copy(global.lightobject, 24, 1) = '1') {
-    ds_list_add(global.light_obj_list, o_pirania);
-    ds_list_add(global.light_obj_list, o_piraniashot);
+    ds_list_add(global.light_obj_list, o_piranha);
+    ds_list_add(global.light_obj_list, o_piranhaflip);
 }
 if (string_copy(global.lightobject, 25, 1) = '1') {
-    ds_list_add(global.light_obj_list, o_piraniainv);
-    ds_list_add(global.light_obj_list, o_piraniainvshot);
+    ds_list_add(global.light_obj_list, o_piranhafire);
+    ds_list_add(global.light_obj_list, o_piranhafireflip);
 }
 
 if (string_copy(global.lightobject, 26, 1) = '1') {ds_list_add(global.light_obj_list, o_lakitu);}
 
 if (string_copy(global.lightobject, 27, 1) = '1') {
     ds_list_add(global.light_obj_list, o_cannon);
-    ds_list_add(global.light_obj_list, o_nonnac);
+    ds_list_add(global.light_obj_list, o_cannonflip);
 }
 if (string_copy(global.lightobject, 28, 1) = '1') {
-    ds_list_add(global.light_obj_list, o_rybeka);
-    ds_list_add(global.light_obj_list, o_rybeka2);
-    ds_list_add(global.light_obj_list, o_rybeka3);
+    ds_list_add(global.light_obj_list, o_fishred);
+    ds_list_add(global.light_obj_list, o_fishred2);
+    ds_list_add(global.light_obj_list, o_fishred3);
 }
 if (string_copy(global.lightobject, 29, 1) = '1') {
-    ds_list_add(global.light_obj_list, o_rybekb);
-    ds_list_add(global.light_obj_list, o_rybekb2);
-    ds_list_add(global.light_obj_list, o_rybekb3);
+    ds_list_add(global.light_obj_list, o_fishgreen);
+    ds_list_add(global.light_obj_list, o_fishgreen2);
+    ds_list_add(global.light_obj_list, o_fishgreen3);
 }
 if (string_copy(global.lightobject, 30, 1) = '1') {
-    ds_list_add(global.light_obj_list, o_rybekc);
-    ds_list_add(global.light_obj_list, o_rybekc3);
+    ds_list_add(global.light_obj_list, o_fishblue);
+    ds_list_add(global.light_obj_list, o_fishblue3);
 }
 if (string_copy(global.lightobject, 31, 1) = '1') {
-    ds_list_add(global.light_obj_list, o_rybekd3);
+    ds_list_add(global.light_obj_list, o_fishyellow3);
     ds_list_add(global.light_obj_list, o_rybekd);
 }
 
 if (string_copy(global.lightobject, 32, 1) = '1') {ds_list_add(global.light_obj_list, o_bonusdead);}
-if (string_copy(global.lightobject, 33, 1) = '1') {ds_list_add(global.light_obj_list, o_miejscowapirania);}
+if (string_copy(global.lightobject, 33, 1) = '1') {ds_list_add(global.light_obj_list, o_groundpiranha);}
 if (string_copy(global.lightobject, 34, 1) = '1') {ds_list_add(global.light_obj_list, o_lava);}
 if (string_copy(global.lightobject, 35, 1) = '1') {ds_list_add(global.light_obj_list, o_hammerbros);}
-if (string_copy(global.lightobject, 36, 1) = '1') {ds_list_add(global.light_obj_list, o_wiatrakanim);}
+if (string_copy(global.lightobject, 36, 1) = '1') {ds_list_add(global.light_obj_list, o_rotoanim);}
 if (string_copy(global.lightobject, 37, 1) = '1') {ds_list_add(global.light_obj_list, o_lavaball);}
-if (string_copy(global.lightobject, 38, 1) = '1') {ds_list_add(global.light_obj_list, o_kolec);}
-if (string_copy(global.lightobject, 39, 1) = '1') {ds_list_add(global.light_obj_list, o_zgniatacz);}
-if (string_copy(global.lightobject, 40, 1) = '1') {ds_list_add(global.light_obj_list, o_kuppa);}
+if (string_copy(global.lightobject, 38, 1) = '1') {ds_list_add(global.light_obj_list, o_spike);}
+if (string_copy(global.lightobject, 39, 1) = '1') {ds_list_add(global.light_obj_list, o_thwomp);}
+if (string_copy(global.lightobject, 40, 1) = '1') {ds_list_add(global.light_obj_list, o_bowser);}
 
 if (string_copy(global.lightobject, 41, 1) = '1') {
     ds_list_add(global.light_obj_list, o_fahlee);
-    ds_list_add(global.light_obj_list, o_fakitubomb);
+    ds_list_add(global.light_obj_list, o_fahleeball);
 }
 if (string_copy(global.lightobject, 42, 1) = '1') {
     ds_list_add(global.light_obj_list, o_cannong);
-    ds_list_add(global.light_obj_list, o_gnonnac);
+    ds_list_add(global.light_obj_list, o_cannonfollowflip);
 }
 
 if (string_copy(global.lightobject, 43, 1) = '1') {ds_list_add(global.light_obj_list, o_firesister);}
-if (string_copy(global.lightobject, 44, 1) = '1') {ds_list_add(global.light_obj_list, o_lavadier);}
+if (string_copy(global.lightobject, 44, 1) = '1') {ds_list_add(global.light_obj_list, o_lavabottom);}
 if (string_copy(global.lightobject, 45, 1) = '1') {ds_list_add(global.light_obj_list, o_boo);}
 if (string_copy(global.lightobject, 46, 1) = '1') {ds_list_add(global.light_obj_list, o_buzzybeetle);}
 if (string_copy(global.lightobject, 47, 1) = '1') {ds_list_add(global.light_obj_list, o_troopaflyred);}
@@ -146,12 +146,12 @@ if (string_copy(global.lightobject, 55, 1) = '1') {
     ds_list_add(global.light_obj_list, o_troopashell2);
 }
 if (string_copy(global.lightobject, 56, 1) = '1') {
-    ds_list_add(global.light_obj_list, o_piraniablue);
-    ds_list_add(global.light_obj_list, o_piraniablueshot);
+    ds_list_add(global.light_obj_list, o_piranhablue);
+    ds_list_add(global.light_obj_list, o_piranhablueflip);
 }
 if (string_copy(global.lightobject, 57, 1) = '1') {
-    ds_list_add(global.light_obj_list, o_piraniagrey);
-    ds_list_add(global.light_obj_list, o_piraniagreyshot);
+    ds_list_add(global.light_obj_list, o_piranhagrey);
+    ds_list_add(global.light_obj_list, o_piranhagreyflip);
 }
 
 if (string_copy(global.lightobject, 58, 1) = '1') {ds_list_add(global.light_obj_list, o_fakitu);}
@@ -160,7 +160,7 @@ if (string_copy(global.lightobject, 59, 1) = '1') {
     ds_list_add(global.light_obj_list, o_fireball);
     ds_list_add(global.light_obj_list, o_fireexplode);
 }
-if (string_copy(global.lightobject, 60, 1) = '1') {ds_list_add(global.light_obj_list, o_burax);}
+if (string_copy(global.lightobject, 60, 1) = '1') {ds_list_add(global.light_obj_list, o_beetroot);}
 if (string_copy(global.lightobject, 61, 1) = '1') {ds_list_add(global.light_obj_list, o_lightmarker);}
 
 if (string_copy(global.lightobject, 62, 1) = '1') {
@@ -168,8 +168,8 @@ if (string_copy(global.lightobject, 62, 1) = '1') {
     ds_list_add(global.light_obj_list, o_fireexplode);
 }
 if (string_copy(global.lightobject, 63, 1) = '1') {ds_list_add(global.light_obj_list, o_cannoni);}
-if (string_copy(global.lightobject, 64, 1) = '1') {ds_list_add(global.light_obj_list, o_mlotekmalpki);}
-if (string_copy(global.lightobject, 65, 1) = '1') {ds_list_add(global.light_obj_list, o_kuppafire);}
+if (string_copy(global.lightobject, 64, 1) = '1') {ds_list_add(global.light_obj_list, o_hammerbro);}
+if (string_copy(global.lightobject, 65, 1) = '1') {ds_list_add(global.light_obj_list, o_bowserfire);}
 if (string_copy(global.lightobject, 66, 1) = '1') {ds_list_add(global.light_obj_list, o_cannonig);}
 
 if (string_copy(global.lightobject, 67, 1) = '1') {
@@ -302,9 +302,9 @@ if global.thunder > 0 {
             fofo_thunder.thunder = true;
             random_sound = irandom(2);
             switch (random_sound) {
-            case 0: fofo=sound_play(snd_thunder1); sound_volume(snd_thunder1,global.glosnosc); break;
-            case 1: fofo=sound_play(snd_thunder1); sound_volume(snd_thunder1,global.glosnosc); break;
-            case 2: fofo=sound_play(snd_thunder1); sound_volume(snd_thunder1,global.glosnosc); break;
+            case 0: tmp2=sound_play(snd_thunder1); sound_volume(snd_thunder1,global.game_volume); break;
+            case 1: tmp2=sound_play(snd_thunder1); sound_volume(snd_thunder1,global.game_volume); break;
+            case 2: tmp2=sound_play(snd_thunder1); sound_volume(snd_thunder1,global.game_volume); break;
             }
         }
     }

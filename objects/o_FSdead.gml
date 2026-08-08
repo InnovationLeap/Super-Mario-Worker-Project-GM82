@@ -5,7 +5,7 @@ action_id=603
 applies_to=self
 */
 image_speed=0
-iyor=-8
+vy_offset=-8
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

@@ -31,7 +31,7 @@ if instance_exists(o_edmain) && instance_exists(o_ednet) {
     if o_ednet.net_state = 3 {
         _f = (o_ednet.net_myid + 1) mod 8
         // 模仿者模式：锤子光标已跟随鼠标（o_imi），不画本地光标，仅保留右侧名字
-        if o_edmain.costawia3 <> 42 {
+        if o_edmain.place_code3 <> 42 {
             draw_set_blend_mode(bm_subtract)
             draw_sprite_ext(s_edcursormaskmulti, 0, mouse_x, mouse_y, 1, 1, -45, c_white, 1)
             draw_set_blend_mode(bm_normal)

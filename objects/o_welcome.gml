@@ -12,7 +12,7 @@ if debug_mode {
 mm_stop_all()
 sound_play(INL)
 
-fofo = instance_create(404, 250, o_welcomebar)
+tmp2 = instance_create(404, 250, o_welcomebar)
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

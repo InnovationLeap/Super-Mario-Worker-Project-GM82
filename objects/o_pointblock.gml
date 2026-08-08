@@ -4,18 +4,18 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-podbity=0
-sekwencja=0
-dzwiek=0
-stefan=0
-lewoprawo=random(5)-random(5)
-kierunek=0
+bumped=0
+state=0
+sound_played=0
+block_frame=0
+bounce_dir=random(5)-random(5)
+dir=0
 
 
-niemozna=0
-niemozna2=0
+deny_anim=0
+deny_phase=0
 
-aplikacja=0
+spawn_delay=0
 
 shaben=0
 avoid_change=0
@@ -69,8 +69,8 @@ applies_to=self
 }*/
 
 if place_meeting(x, y, o_thwompdetector) {
-    if bonus = 20 { aplikacja = 10; }   // 可碎普通砖块
-    if bonus <> 20 { podbity = 1; }     // 问号
+    if bonus = 20 { spawn_delay = 10; }   // 可碎普通砖块
+    if bonus <> 20 { bumped = 1; }     // 问号
 }
 #define Draw_0
 /*"/*'/**//* YYD ACTION
@@ -80,58 +80,58 @@ applies_to=self
 */
 
 
-if bonus=20 && podbity=0 {draw_sprite_ext(s_pointblock3,stefan,x,y,1,1,0,c_white,1)}
-if bonus=20 && podbity=1 && global.rodzajmaria=0 && shaben=0 {aplikacja=2;instance_create(x,y-32,o_uppercut)}
-if bonus=20 && podbity=1 && global.rodzajmaria>0 && shaben=0 {aplikacja=10;instance_create(x,y-32,o_uppercut)}
+if bonus=20 && bumped=0 {draw_sprite_ext(s_pointblock3,block_frame,x,y,1,1,0,c_white,1)}
+if bonus=20 && bumped=1 && global.rodzajmaria=0 && shaben=0 {spawn_delay=2;instance_create(x,y-32,o_uppercut)}
+if bonus=20 && bumped=1 && global.rodzajmaria>0 && shaben=0 {spawn_delay=10;instance_create(x,y-32,o_uppercut)}
 
 
-if aplikacja=2 {
-    if global.sample=1 && dzwiek=0 {fofo=sound_play(snd_burb);sound_volume(snd_burb,global.glosnosc);dzwiek=1}
-    draw_sprite_ext(s_pointblock3,0,x,y-niemozna,1,1,0,c_white,1)
-    if niemozna2=0 && niemozna<10 {niemozna+=1}
-    if niemozna2=0 && niemozna>=10 {niemozna2=1}
-    if niemozna2=1 && niemozna>0 {niemozna-=1}
-    if niemozna2=1 && niemozna<=0 {niemozna2=0; podbity=0;dzwiek=0;aplikacja=0;}
+if spawn_delay=2 {
+    if global.sample=1 && sound_played=0 {tmp2=sound_play(snd_burb);sound_volume(snd_burb,global.game_volume);sound_played=1}
+    draw_sprite_ext(s_pointblock3,0,x,y-deny_anim,1,1,0,c_white,1)
+    if deny_phase=0 && deny_anim<10 {deny_anim+=1}
+    if deny_phase=0 && deny_anim>=10 {deny_phase=1}
+    if deny_phase=1 && deny_anim>0 {deny_anim-=1}
+    if deny_phase=1 && deny_anim<=0 {deny_phase=0; bumped=0;sound_played=0;spawn_delay=0;}
 }
 
 
-if aplikacja=10 {
-    if global.sample=1 && dzwiek=0 {fofo=sound_play(snd_break);sound_volume(snd_break,global.glosnosc);dzwiek=1}
+if spawn_delay=10 {
+    if global.sample=1 && sound_played=0 {tmp2=sound_play(snd_break);sound_volume(snd_break,global.game_volume);sound_played=1}
     instance_destroy()
-    lolo=instance_create(x+8,y+8,o_breakblock)
-    lolo.ixor=-3
-    lolo.iyor=-6
-    lolo.image_xscale=0.5
-    lolo.image_yscale=0.5
-    lolo=instance_create(x+8+16,y+8,o_breakblock)
-    lolo.ixor=3
-    lolo.iyor=-6
-    lolo.image_xscale=0.5
-    lolo.image_yscale=0.5
-    lolo=instance_create(x+8+16,y+8+16,o_breakblock)
-    lolo.ixor=-2
-    lolo.iyor=-4
-    lolo.image_xscale=0.5
-    lolo.image_yscale=0.5
-    lolo=instance_create(x+8,y+8+16,o_breakblock)
-    lolo.ixor=2
-    lolo.iyor=-4
-    lolo.image_xscale=0.5
-    lolo.image_yscale=0.5
+    tmp=instance_create(x+8,y+8,o_breakblock)
+    tmp.ixor=-3
+    tmp.vy_offset=-6
+    tmp.image_xscale=0.5
+    tmp.image_yscale=0.5
+    tmp=instance_create(x+8+16,y+8,o_breakblock)
+    tmp.ixor=3
+    tmp.vy_offset=-6
+    tmp.image_xscale=0.5
+    tmp.image_yscale=0.5
+    tmp=instance_create(x+8+16,y+8+16,o_breakblock)
+    tmp.ixor=-2
+    tmp.vy_offset=-4
+    tmp.image_xscale=0.5
+    tmp.image_yscale=0.5
+    tmp=instance_create(x+8,y+8+16,o_breakblock)
+    tmp.ixor=2
+    tmp.vy_offset=-4
+    tmp.image_xscale=0.5
+    tmp.image_yscale=0.5
 }
 
 
 
-if podbity=0 && bonus<>20 && bonus<100 {draw_sprite(s_pointblock,stefan,x,y)}
-if podbity=1 && bonus<>20 && bonus<100 {
-    if global.sample=1 && dzwiek=0 && bonus=0 {fofo=sound_play(snd_coin);sound_volume(snd_coin,global.glosnosc);dzwiek=1}
-    if global.sample=1 && dzwiek=0 && bonus>0 && bonus<100 {fofo=sound_play(snd_vine);sound_volume(snd_vine,global.glosnosc);dzwiek=1}
+if bumped=0 && bonus<>20 && bonus<100 {draw_sprite(s_pointblock,block_frame,x,y)}
+if bumped=1 && bonus<>20 && bonus<100 {
+    if global.sample=1 && sound_played=0 && bonus=0 {tmp2=sound_play(snd_coin);sound_volume(snd_coin,global.game_volume);sound_played=1}
+    if global.sample=1 && sound_played=0 && bonus>0 && bonus<100 {tmp2=sound_play(snd_vine);sound_volume(snd_vine,global.game_volume);sound_played=1}
     if bonus=0 {instance_create(x,y,o_coineffect);global.coins+=1;instance_create(x,y-32,o_uppercut);bonus=-1000}
 
     if bonus=1 && global.rodzajmaria<>0 {instance_create(x,y,o_bonusflower);instance_create(x,y-32,o_uppercut);bonus=-1000}
     if bonus=1 && global.rodzajmaria=0 {instance_create(x,y,o_bonusmush);instance_create(x,y-32,o_uppercut);bonus=-1000}
 
-    if bonus=2 && global.rodzajmaria<>0 {instance_create(x,y,o_bonusburak);instance_create(x,y-32,o_uppercut);bonus=-1000}
+    if bonus=2 && global.rodzajmaria<>0 {instance_create(x,y,o_bonusbeetroot);instance_create(x,y-32,o_uppercut);bonus=-1000}
     if bonus=2 && global.rodzajmaria=0 {instance_create(x,y,o_bonusmush);instance_create(x,y-32,o_uppercut);bonus=-1000}
 
     if bonus=3 && global.rodzajmaria<>0 {instance_create(x,y,o_bonuslui);instance_create(x,y-32,o_uppercut);bonus=-1000}
@@ -149,17 +149,17 @@ if podbity=1 && bonus<>20 && bonus<100 {
     if bonus=8 && global.rodzajmaria<>0 {instance_create(x+16,y,o_bonusraccoon);instance_create(x,y-32,o_uppercut);bonus=-1000}
     if bonus=8 && global.rodzajmaria=0 {instance_create(x,y,o_bonusmush);instance_create(x,y-32,o_uppercut);bonus=-1000}
 
-    if sekwencja<10 {draw_sprite_ext(s_pointblock2,stefan,x+16,y+16-sekwencja*2,1,1,0,c_white,1); sekwencja+=1; kierunek+=lewoprawo}
-    if sekwencja>=10 && sekwencja<20 {draw_sprite_ext(s_pointblock2,stefan,x+16,y+16-40+sekwencja*2,1,1,0,c_white,1); sekwencja+=1; kierunek-=lewoprawo}
-    if sekwencja=20 draw_sprite(s_pointblock2,stefan,x+16,y+16)
+    if state<10 {draw_sprite_ext(s_pointblock2,block_frame,x+16,y+16-state*2,1,1,0,c_white,1); state+=1; dir+=bounce_dir}
+    if state>=10 && state<20 {draw_sprite_ext(s_pointblock2,block_frame,x+16,y+16-40+state*2,1,1,0,c_white,1); state+=1; dir-=bounce_dir}
+    if state=20 draw_sprite(s_pointblock2,block_frame,x+16,y+16)
 }
-stefan=pokazywator.wenhao
+block_frame=o_preview.qblock_preview
 
 //bonus only
 
 if bonus=101 {instance_create(x,y,o_newmush);instance_destroy()}
 if bonus=102 {instance_create(x,y,o_bonusflower);instance_destroy()}
-if bonus=103 {instance_create(x,y,o_bonusburak);instance_destroy()}
+if bonus=103 {instance_create(x,y,o_bonusbeetroot);instance_destroy()}
 if bonus=104 {instance_create(x,y,o_bonuslui);instance_destroy()}
 if bonus=105 {instance_create(x,y,o_bonusstar);instance_destroy()}
 if bonus=106 {instance_create(x,y,o_new1up);instance_destroy()}

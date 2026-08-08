@@ -5,5 +5,5 @@ action_id=603
 applies_to=self
 */
 image_speed=0
-ustawiony=0
-image_index=ustawiony
+placed=0
+image_index=placed

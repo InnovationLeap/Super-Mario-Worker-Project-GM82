@@ -1,12 +1,12 @@
 room_caption='Super Mario Worker Project '+global.versiontext
 
 
-global.aktywowanykuppa=0
-global.aktywowanykuppa=0
-global.etapkuppa=5
+global.bowser_phase=0
+global.bowser_phase=0
+global.level_bowser_hp=5
 global.przeciwnicyzatrzymani=0
 global.pauza=0
-global.etappokonany=0
+global.level_complete=0
 
 global.auto=0
 global.lava=0
@@ -52,21 +52,21 @@ global.auto_record=0
 //global.key_fire=ord('X')
 //global.key_up=38
 //global.key_down=40
-global.poziomwody=200
+global.water_level=200
 global.coins=0
 global.efekty=10
 global.sample=1
-global.glosnosc=1
+global.game_volume=1
 
 
 global.rodzajmaria=0
 global.coins=0
-global.punkty=0
+global.score=0
 
 global.combo1=0
 global.combo1reset=0
 global.lastlev=0
-global.jiami=0
+global.encrypt=0
 global.toload=''
 
 // 检测密钥是否存在：若密钥脚本缺失则只支持 .smws/.mfs，不显示 .smwp
@@ -79,8 +79,8 @@ while global.toload='' {
         global.toload=get_open_filename('All Supported Formats (.smws;.mfs)|*.smws;*.mfs|Super Mario Worker Scenario (.smws)|*.smws|Mario Worker Scenario(.mfs)|*.mfs','')
     }
     if global.toload='' {
-        global.czup=show_question('Do you want to stop loading a scenario?');global.toload=''
-        if global.czup=1 {global.zamenowane=1;global.toload='cipas';room_goto(title)}
+        global.stop_choice=show_question('Do you want to stop loading a scenario?');global.toload=''
+        if global.stop_choice=1 {global.entered_editor=1;global.toload='cipas';room_goto(title)}
     }
 }
 
@@ -92,7 +92,7 @@ if global.toload!='' && global.toload!='cipas' {
     global.mfsfilename=global.toload
 
     if filename_ext(global.mfsfilename)='.smwp' {
-        global.jiami=1
+        global.encrypt=1
     }
     //检测是否存在存档文件，若是，则读取存档
     global.loadingsav = false
@@ -111,8 +111,8 @@ if global.toload!='' && global.toload!='cipas' {
     global.lastlev=0
     room_goto(Another_Level)
 
-    global.przeszedllevel=0
-    global.paralax=0
+    global.level_cleared=0
+    global.parallax=0
     global.paralax2=0
     global.paralax3=0
 }

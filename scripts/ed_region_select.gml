@@ -13,8 +13,8 @@ _state = global.ed_region_state
 
 if _state == 0 {
     if mouse_check_button_pressed(mb_left) {
-        if o_edmain.menujesie == 0 && o_edmain.wiatrak == 0 && o_edmain.setting_mode == 0 {
-            if o_edmain.czywybieranieback == 0 {
+        if o_edmain.menu_open == 0 && o_edmain.tool_mode == 0 && o_edmain.setting_mode == 0 {
+            if o_edmain.bg_selecting == 0 {
                 global.ed_region_mx = mouse_x
                 global.ed_region_my = mouse_y
                 global.ed_region_sx = mouse_x
@@ -121,8 +121,8 @@ if _state == 1 {
 
 if _state == 2 {
     if mouse_check_button_pressed(mb_left) {
-        if o_edmain.menujesie == 0 && o_edmain.wiatrak == 0 && o_edmain.setting_mode == 0 {
-            if o_edmain.czywybieranieback == 0 {
+        if o_edmain.menu_open == 0 && o_edmain.tool_mode == 0 && o_edmain.setting_mode == 0 {
+            if o_edmain.bg_selecting == 0 {
                 _hit = false
                 _inst_list = global.ed_region_list
                 if _inst_list != -1 {

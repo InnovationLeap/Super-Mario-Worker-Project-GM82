@@ -4,7 +4,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-iyor=-random(2)
+vy_offset=-random(2)
 krecialek=random(20)-random(20)
 #define Step_0
 /*"/*'/**//* YYD ACTION
@@ -14,8 +14,8 @@ applies_to=self
 */
 if global.pauza=0 {
 
-    y+=iyor
-    iyor+=0.5
+    y+=vy_offset
+    vy_offset+=0.5
     x+=ixor
 
 

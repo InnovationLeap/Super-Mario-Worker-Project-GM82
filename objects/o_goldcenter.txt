@@ -1,4 +1,4 @@
-sprite=s_wiatrakcentrum
+sprite=s_rotospotcenter
 visible=0
 solid=0
 persistent=0

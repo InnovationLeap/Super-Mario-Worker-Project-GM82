@@ -24,10 +24,10 @@ if sprite_index=s_checkpoint && place_meeting(x,y,o_marker) {
     global.lastrodzajmaria=global.rodzajmaria
     global.lastzycia=global.zycia
     global.lastcoins=global.coins
-    global.lastpunkty=global.punkty
+    global.last_score=global.score
 
     if(save_water) {
-        if(global.poziomwody<1000000) {global.water_height_record = global.poziomwody} else {global.water_height_record = global.water_height_record2}
+        if(global.water_level<1000000) {global.water_height_record = global.water_level} else {global.water_height_record = global.water_height_record2}
     }
 
     if(save_color) {
@@ -36,7 +36,7 @@ if sprite_index=s_checkpoint && place_meeting(x,y,o_marker) {
         }
     }
 
-    global.music_record = global.muzyka
+    global.music_record = global.bgm_id
     global.background_record = global.background
     // Weather records
     global.rainy_record = global.rainy

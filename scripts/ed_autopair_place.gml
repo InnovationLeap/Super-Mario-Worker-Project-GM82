@@ -8,7 +8,7 @@ _cnt = global.autopair_count[_ap];
 _fx = floor(mouse_x / 32);
 _fy = floor(mouse_y / 32);
 // 半透明预览
-if costawia<>0 && kliknieto=0 && autopair3=0 && menujesie=0 && wlaczonaopcja=0 && mouse_x>0 && mouse_y>0 {
+if place_code<>0 && clicked=0 && autopair3=0 && menu_open=0 && option_open=0 && mouse_x>0 && mouse_y>0 {
     for (_i=0; _i<_cnt; _i+=1) {
         _dx = global.autopair_layout[_ap, _i*3];
         _dy = global.autopair_layout[_ap, _i*3+1];
@@ -17,7 +17,7 @@ if costawia<>0 && kliknieto=0 && autopair3=0 && menujesie=0 && wlaczonaopcja=0 &
     }
 }
 // 放置
-if costawia<>0 && kliknieto=0 && autopair3=0 && menujesie=0 && wlaczonaopcja=0 && mouse_x>0 && mouse_y>0 && mouse_check_button(mb_left) {
+if place_code<>0 && clicked=0 && autopair3=0 && menu_open=0 && option_open=0 && mouse_x>0 && mouse_y>0 && mouse_check_button(mb_left) {
     // 特例 8/68：边缘守卫（鼠标不出右/下边缘）
     if global.autopair_edge[_ap] = 1 {
         if mouse_x >= room_width-32 || mouse_y >= room_height {

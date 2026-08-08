@@ -7,7 +7,7 @@ applies_to=self
 kokoz=0
 global.dowownix=70
 efektor=0
-findel=1000
+f_inst=1000
 skipper=0
 
 cyferkimario=font_add_sprite(txt_mariofonts55,ord('!'),0,-15) // nastaw fonty
@@ -20,7 +20,7 @@ cyferkimario2=font_add_sprite(txt_mariofonts555,ord('!'),0,-15) // nastaw fonty
 
 
 textrotfl=0
-sekwencja=0
+state=0
 timerrotfl=0
 
 
@@ -89,106 +89,106 @@ delay+=1
 
 
 if bigur>0 bigur=bigur/1.5
-if delay>100 && sekwencja=0 {delay=0; sekwencja=1;bigur=10}
-if sekwencja=1 {kokoz+=1}
+if delay>100 && state=0 {delay=0; state=1;bigur=10}
+if state=1 {kokoz+=1}
 
 
 if kokoz=400 {instance_create(910,30,object132)}
 
-findel=findel/1.1
-if sekwencja=0 && global.checkupdate != 0 {
+f_inst=f_inst/1.1
+if state=0 && global.checkupdate != 0 {
     if textrotfl=3 {
         draw_set_font(cyferkimario2)
         draw_set_blend_mode(bm_subtract)
-        draw_text_ext_transformed(905-40-20,300-findel+global.dowownix,'CHECKING',0,0,1+bigur,1,0)
-        draw_text_ext_transformed(930-40-20,320+findel+global.dowownix,'UPDATE...',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(905-40-20,300-f_inst+global.dowownix,'CHECKING',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(930-40-20,320+f_inst+global.dowownix,'UPDATE...',0,0,1+bigur,1,0)
         draw_set_font(cyferkimario)
         draw_set_blend_mode(bm_add)
-        draw_text_ext_transformed(905-40-20,300-findel+global.dowownix,'CHECKING',0,0,1+bigur,1,0)
-        draw_text_ext_transformed(930-40-20,320+findel+global.dowownix,'UPDATE...',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(905-40-20,300-f_inst+global.dowownix,'CHECKING',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(930-40-20,320+f_inst+global.dowownix,'UPDATE...',0,0,1+bigur,1,0)
         draw_set_blend_mode(bm_normal)
     }
     if textrotfl=2 {
         draw_set_font(cyferkimario2)
         draw_set_blend_mode(bm_subtract)
-        draw_text_ext_transformed(905-40-20,300-findel+global.dowownix,'CHECKING',0,0,1+bigur,1,0)
-        draw_text_ext_transformed(930-40-20,320+findel+global.dowownix,'UPDATE..',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(905-40-20,300-f_inst+global.dowownix,'CHECKING',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(930-40-20,320+f_inst+global.dowownix,'UPDATE..',0,0,1+bigur,1,0)
         draw_set_font(cyferkimario)
         draw_set_blend_mode(bm_add)
-        draw_text_ext_transformed(905-40-20,300-findel+global.dowownix,'CHECKING',0,0,1+bigur,1,0)
-        draw_text_ext_transformed(930-40-20,320+findel+global.dowownix,'UPDATE..',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(905-40-20,300-f_inst+global.dowownix,'CHECKING',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(930-40-20,320+f_inst+global.dowownix,'UPDATE..',0,0,1+bigur,1,0)
         draw_set_blend_mode(bm_normal)
     }
     if textrotfl=1 {
         draw_set_font(cyferkimario2)
         draw_set_blend_mode(bm_subtract)
-        draw_text_ext_transformed(905-40-20,300-findel+global.dowownix,'CHECKING',0,0,1+bigur,1,0)
-        draw_text_ext_transformed(930-40-20,320+findel+global.dowownix,'UPDATE.',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(905-40-20,300-f_inst+global.dowownix,'CHECKING',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(930-40-20,320+f_inst+global.dowownix,'UPDATE.',0,0,1+bigur,1,0)
         draw_set_font(cyferkimario)
         draw_set_blend_mode(bm_add)
-        draw_text_ext_transformed(905-40-20,300-findel+global.dowownix,'CHECKING',0,0,1+bigur,1,0)
-        draw_text_ext_transformed(930-40-20,320+findel+global.dowownix,'UPDATE.',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(905-40-20,300-f_inst+global.dowownix,'CHECKING',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(930-40-20,320+f_inst+global.dowownix,'UPDATE.',0,0,1+bigur,1,0)
         draw_set_blend_mode(bm_normal)
     }
     if textrotfl=0 {
         draw_set_font(cyferkimario2)
         draw_set_blend_mode(bm_subtract)
-        draw_text_ext_transformed(905-40-20,300-findel+global.dowownix,'CHECKING',0,0,1+bigur,1,0)
-        draw_text_ext_transformed(930-40-20,320+findel+global.dowownix,'UPDATE',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(905-40-20,300-f_inst+global.dowownix,'CHECKING',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(930-40-20,320+f_inst+global.dowownix,'UPDATE',0,0,1+bigur,1,0)
         draw_set_font(cyferkimario)
         draw_set_blend_mode(bm_add)
-        draw_text_ext_transformed(905-40-20,300-findel+global.dowownix,'CHECKING',0,0,1+bigur,1,0)
-        draw_text_ext_transformed(930-40-20,320+findel+global.dowownix,'UPDATE',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(905-40-20,300-f_inst+global.dowownix,'CHECKING',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(930-40-20,320+f_inst+global.dowownix,'UPDATE',0,0,1+bigur,1,0)
         draw_set_blend_mode(bm_normal)
     }}
 
-if sekwencja=0 && global.checkupdate = 0 {
+if state=0 && global.checkupdate = 0 {
     if textrotfl=3 {
         draw_set_font(cyferkimario2)
         draw_set_blend_mode(bm_subtract)
-        draw_text_ext_transformed(905-40-20,300-findel+global.dowownix,'PREPARING',0,0,1+bigur,1,0)
-        draw_text_ext_transformed(930-40-20,320+findel+global.dowownix,'FILES...',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(905-40-20,300-f_inst+global.dowownix,'PREPARING',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(930-40-20,320+f_inst+global.dowownix,'FILES...',0,0,1+bigur,1,0)
         draw_set_font(cyferkimario)
         draw_set_blend_mode(bm_add)
-        draw_text_ext_transformed(905-40-20,300-findel+global.dowownix,'PREPARING',0,0,1+bigur,1,0)
-        draw_text_ext_transformed(930-40-20,320+findel+global.dowownix,'FILES...',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(905-40-20,300-f_inst+global.dowownix,'PREPARING',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(930-40-20,320+f_inst+global.dowownix,'FILES...',0,0,1+bigur,1,0)
         draw_set_blend_mode(bm_normal)
     }
     if textrotfl=2 {
         draw_set_font(cyferkimario2)
         draw_set_blend_mode(bm_subtract)
-        draw_text_ext_transformed(905-40-20,300-findel+global.dowownix,'PREPARING',0,0,1+bigur,1,0)
-        draw_text_ext_transformed(930-40-20,320+findel+global.dowownix,'FILES..',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(905-40-20,300-f_inst+global.dowownix,'PREPARING',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(930-40-20,320+f_inst+global.dowownix,'FILES..',0,0,1+bigur,1,0)
         draw_set_font(cyferkimario)
         draw_set_blend_mode(bm_add)
-        draw_text_ext_transformed(905-40-20,300-findel+global.dowownix,'PREPARING',0,0,1+bigur,1,0)
-        draw_text_ext_transformed(930-40-20,320+findel+global.dowownix,'FILES..',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(905-40-20,300-f_inst+global.dowownix,'PREPARING',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(930-40-20,320+f_inst+global.dowownix,'FILES..',0,0,1+bigur,1,0)
         draw_set_blend_mode(bm_normal)
     }
     if textrotfl=1 {
         draw_set_font(cyferkimario2)
         draw_set_blend_mode(bm_subtract)
-        draw_text_ext_transformed(905-40-20,300-findel+global.dowownix,'PREPARING',0,0,1+bigur,1,0)
-        draw_text_ext_transformed(930-40-20,320+findel+global.dowownix,'FILES.',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(905-40-20,300-f_inst+global.dowownix,'PREPARING',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(930-40-20,320+f_inst+global.dowownix,'FILES.',0,0,1+bigur,1,0)
         draw_set_font(cyferkimario)
         draw_set_blend_mode(bm_add)
-        draw_text_ext_transformed(905-40-20,300-findel+global.dowownix,'PREPARING',0,0,1+bigur,1,0)
-        draw_text_ext_transformed(930-40-20,320+findel+global.dowownix,'FILES.',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(905-40-20,300-f_inst+global.dowownix,'PREPARING',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(930-40-20,320+f_inst+global.dowownix,'FILES.',0,0,1+bigur,1,0)
         draw_set_blend_mode(bm_normal)
     }
     if textrotfl=0 {
         draw_set_font(cyferkimario2)
         draw_set_blend_mode(bm_subtract)
-        draw_text_ext_transformed(905-40-20,300-findel+global.dowownix,'PREPARING',0,0,1+bigur,1,0)
-        draw_text_ext_transformed(930-40-20,320+findel+global.dowownix,'FILES',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(905-40-20,300-f_inst+global.dowownix,'PREPARING',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(930-40-20,320+f_inst+global.dowownix,'FILES',0,0,1+bigur,1,0)
         draw_set_font(cyferkimario)
         draw_set_blend_mode(bm_add)
-        draw_text_ext_transformed(905-40-20,300-findel+global.dowownix,'PREPARING',0,0,1+bigur,1,0)
-        draw_text_ext_transformed(930-40-20,320+findel+global.dowownix,'FILES',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(905-40-20,300-f_inst+global.dowownix,'PREPARING',0,0,1+bigur,1,0)
+        draw_text_ext_transformed(930-40-20,320+f_inst+global.dowownix,'FILES',0,0,1+bigur,1,0)
         draw_set_blend_mode(bm_normal)
     }}
 
-if sekwencja=1
+if state=1
 {draw_set_halign(fa_center)
 
     if mouse_x>860 && mouse_x<1024 && mouse_y>280 && mouse_y<455 {
@@ -209,7 +209,7 @@ if sekwencja=1
     draw_set_blend_mode(bm_normal)
 }
 
-if sekwencja=1 && (global.checkupdate = 1 || (global.checkupdate > 1 && betanumber = 0)) && drawUpdate = true {
+if state=1 && (global.checkupdate = 1 || (global.checkupdate > 1 && betanumber = 0)) && drawUpdate = true {
     draw_set_halign(fa_center)
 
     if mouse_x>860 && mouse_x<1024 && mouse_y>590 && mouse_y<660 {
@@ -218,16 +218,16 @@ if sekwencja=1 && (global.checkupdate = 1 || (global.checkupdate > 1 && betanumb
     }
     draw_set_font(cyferkimario2)
     draw_set_blend_mode(bm_subtract)
-    draw_text_ext_transformed_color(965-40-20,540+findel+global.dowownix,'UPDATE_'+webversionnumber,0,0,1+bigur,1,0,c_white,c_white,c_white,c_white,1)
-    draw_text_ext_transformed_color(965-40-20,565+findel+global.dowownix,'IS_AVAILABLE',0,0,1+bigur,1,0,c_white,c_white,c_white,c_white,1)
+    draw_text_ext_transformed_color(965-40-20,540+f_inst+global.dowownix,'UPDATE_'+webversionnumber,0,0,1+bigur,1,0,c_white,c_white,c_white,c_white,1)
+    draw_text_ext_transformed_color(965-40-20,565+f_inst+global.dowownix,'IS_AVAILABLE',0,0,1+bigur,1,0,c_white,c_white,c_white,c_white,1)
     draw_set_font(cyferkimario)
     draw_set_blend_mode(bm_add)
-    draw_text_ext_transformed_color(965-40-20,540-3+findel+global.dowownix,'UPDATE_'+webversionnumber,0,0,1+bigur,1,0,c_yellow,c_yellow,c_yellow,c_yellow,1)
-    draw_text_ext_transformed_color(965-40-20,565-3+findel+global.dowownix,'IS_AVAILABLE',0,0,1+bigur,1,0,c_yellow,c_yellow,c_yellow,c_yellow,1)
+    draw_text_ext_transformed_color(965-40-20,540-3+f_inst+global.dowownix,'UPDATE_'+webversionnumber,0,0,1+bigur,1,0,c_yellow,c_yellow,c_yellow,c_yellow,1)
+    draw_text_ext_transformed_color(965-40-20,565-3+f_inst+global.dowownix,'IS_AVAILABLE',0,0,1+bigur,1,0,c_yellow,c_yellow,c_yellow,c_yellow,1)
     draw_set_blend_mode(bm_normal)
 }
 
-if sekwencja=1 && global.checkupdate > 1 && betanumber != 0 && drawUpdate = true {
+if state=1 && global.checkupdate > 1 && betanumber != 0 && drawUpdate = true {
     draw_set_halign(fa_center)
 
     if mouse_x>860 && mouse_x<1024 && mouse_y>590 && mouse_y<660 {
@@ -236,12 +236,12 @@ if sekwencja=1 && global.checkupdate > 1 && betanumber != 0 && drawUpdate = true
     }
     draw_set_font(cyferkimario2)
     draw_set_blend_mode(bm_subtract)
-    draw_text_ext_transformed_color(965-40-20,540+findel+global.dowownix,webversionnumber+'_BETA'+betanum,0,0,1+bigur,1,0,c_white,c_white,c_white,c_white,1)
-    draw_text_ext_transformed_color(965-40-20,565+findel+global.dowownix,'IS_AVAILABLE',0,0,1+bigur,1,0,c_white,c_white,c_white,c_white,1)
+    draw_text_ext_transformed_color(965-40-20,540+f_inst+global.dowownix,webversionnumber+'_BETA'+betanum,0,0,1+bigur,1,0,c_white,c_white,c_white,c_white,1)
+    draw_text_ext_transformed_color(965-40-20,565+f_inst+global.dowownix,'IS_AVAILABLE',0,0,1+bigur,1,0,c_white,c_white,c_white,c_white,1)
     draw_set_font(cyferkimario)
     draw_set_blend_mode(bm_add)
-    draw_text_ext_transformed_color(965-40-20,540-3+findel+global.dowownix,webversionnumber+'_BETA'+betanum,0,0,1+bigur,1,0,c_yellow,c_yellow,c_yellow,c_yellow,1)
-    draw_text_ext_transformed_color(965-40-20,565-3+findel+global.dowownix,'IS_AVAILABLE',0,0,1+bigur,1,0,c_yellow,c_yellow,c_yellow,c_yellow,1)
+    draw_text_ext_transformed_color(965-40-20,540-3+f_inst+global.dowownix,webversionnumber+'_BETA'+betanum,0,0,1+bigur,1,0,c_yellow,c_yellow,c_yellow,c_yellow,1)
+    draw_text_ext_transformed_color(965-40-20,565-3+f_inst+global.dowownix,'IS_AVAILABLE',0,0,1+bigur,1,0,c_yellow,c_yellow,c_yellow,c_yellow,1)
     draw_set_blend_mode(bm_normal)
 }
 

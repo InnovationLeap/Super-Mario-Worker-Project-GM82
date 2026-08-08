@@ -25,19 +25,19 @@ if lockon=1 {
         if !target {
             temp_target = instance_position(mouse_x,mouse_y,o_range_end)
             if temp_target {
-                if temp_target.costawia = 2 { target = temp_target; target.activated = 1}
+                if temp_target.place_code = 2 { target = temp_target; target.activated = 1}
             }
         }
         break;
     case 3:target = instance_position(mouse_x,mouse_y,o_edsceneriesblock);break;
-    case 4:if(o_edmain.costawia4=1) {
+    case 4:if(o_edmain.place_code4=1) {
             target = instance_position(mouse_x,mouse_y,o_edpassage);
     } else {
             target = instance_position(mouse_x,mouse_y,o_edmarkerblock);
             if !target {
                 temp_target = instance_position(mouse_x,mouse_y,o_range_end)
                 if temp_target {
-                    if temp_target.costawia = 4 { target = temp_target; target.activated = 1}
+                    if temp_target.place_code = 4 { target = temp_target; target.activated = 1}
                 }
             }
     }

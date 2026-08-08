@@ -116,7 +116,7 @@ if coto=20 {
         draw_set_font(cyferkimario)
         var m;m=1
         {for (j=1;j<=rotoord-1;j+=1)
-            draw_sprite(s_wiatrak,0,x+16+rotor[j]*sin(degtorad(rotoa[j]+90)),y+16+rotor[j]*cos(degtorad(rotoa[j]+90)))
+            draw_sprite(s_roto,0,x+16+rotor[j]*sin(degtorad(rotoa[j]+90)),y+16+rotor[j]*cos(degtorad(rotoa[j]+90)))
         }
         i=1; {do {
                 draw_circle(x+16,y+16,rotor[i],true)
@@ -218,13 +218,13 @@ if coto=20 {
     if test2=1 {  //放置灯的阶段叫做test2=1（确定半径及初始角度）
         rotos[rotoord]=global.agspeed
         draw_set_font(cyferkimario)
-        if !(is_petal && o_edmain.wiatrak=11) {
+        if !(is_petal && o_edmain.tool_mode=11) {
             draw_set_color(c_white)
             draw_circle(x+16,y+16,test3,1)
             if test3<rotor[rotoord] {test3+=1}
             if test3>=rotor[rotoord] {test3=0}
         }
-        if is_petal && o_edmain.wiatrak=11 {
+        if is_petal && o_edmain.tool_mode=11 {
             if !petal_dir_got_preview {
                 if rotors[rotoord]<0 {petal_preview_dir=-1}
                 petal_dir_got_preview=1
@@ -249,18 +249,18 @@ if coto=20 {
             }
             draw_set_color(c_red)
             draw_circle(x+16,y+16,petal_preview,true)
-            draw_sprite(s_wiatrak,floor(testani) mod 26,sx,sy)
+            draw_sprite(s_roto,floor(testani) mod 26,sx,sy)
         } else {
-            if !(is_petal && o_edmain.wiatrak=10) {
-                draw_sprite(s_wiatrak,floor(testani) mod 26,x+16+rotor[rotoord]*sin(degtorad(rotoa[rotoord]+90+global.EDtest)),y+16+rotor[rotoord]*cos(degtorad(rotoa[rotoord]+90+global.EDtest)))
+            if !(is_petal && o_edmain.tool_mode=10) {
+                draw_sprite(s_roto,floor(testani) mod 26,x+16+rotor[rotoord]*sin(degtorad(rotoa[rotoord]+90+global.EDtest)),y+16+rotor[rotoord]*cos(degtorad(rotoa[rotoord]+90+global.EDtest)))
             }
         }
         testani+=0.2
-        if !(is_petal && o_edmain.wiatrak=11) {
+        if !(is_petal && o_edmain.tool_mode=11) {
             draw_circle(x+16,y+16,rotor[rotoord],true)
         }
         if is_petal {
-            if !(o_edmain.wiatrak=11) {
+            if !(o_edmain.tool_mode=11) {
                 draw_set_alpha(0.3)
                 draw_set_color(c_red)
                 draw_circle(x+16,y+16,rotomr[rotoord],true)
@@ -283,9 +283,9 @@ if coto=20 {
                 rotomr[rotoord]=floor(min(agmr,6000))
                 rotors[rotoord]=(min(agrs,360))
             }
-            o_edmain.wiatrak=0
+            o_edmain.tool_mode=0
             test2=2
-            o_edmain.kliknieto=1
+            o_edmain.clicked=1
         }
     }
 
@@ -302,27 +302,27 @@ if coto=20 {
             draw_set_color(c_white)
             draw_text(x+4,y+20,"mr:"+string(rotomr[rotoord])+" rs:"+string(rotors[rotoord]))
         }
-        draw_sprite(s_wiatrak,0,x+16+rotor[rotoord]*sin(degtorad(rotoa[rotoord]+90)),y+16+rotor[rotoord]*cos(degtorad(rotoa[rotoord]+90)))
+        draw_sprite(s_roto,0,x+16+rotor[rotoord]*sin(degtorad(rotoa[rotoord]+90)),y+16+rotor[rotoord]*cos(degtorad(rotoa[rotoord]+90)))
         draw_set_font(cyferkimario)
     }
 
     /*pick begin*/
-    if test2=2 && mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 && keyboard_check_pressed(global.key_pick) && o_edmain.costawia2 = 20 && global.picking = false {
-        if global.sample=1 {lololo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}
+    if test2=2 && mouse_x>x && mouse_x<x+32 && mouse_y>y && mouse_y<y+32 && keyboard_check_pressed(global.key_pick) && o_edmain.place_code2 = 20 && global.picking = false {
+        if global.sample=1 {tmp4=sound_play(snd_kick);sound_volume(snd_kick,global.game_volume)}
         global.picking = true
         picked = true
     }
-    if picked=true && o_edmain.costawia2 = 20 {
+    if picked=true && o_edmain.place_code2 = 20 {
         x = floor((mouse_x)/32)*32
         y = floor((mouse_y)/32)*32
         if keyboard_check_released(global.key_pick) {
             global.picking=false
             picked=false
             ed_net_ops_send_update(id, 10)
-            if global.sample=1 {lololo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}
+            if global.sample=1 {tmp4=sound_play(snd_fire);sound_volume(snd_fire,global.game_volume)}
         }
     }
-    if o_edmain.costawia2 <>20 {picked=false}
+    if o_edmain.place_code2 <>20 {picked=false}
     /*pick end*/
 }
 
@@ -441,9 +441,9 @@ if coto=39 {
             rotoa[rotoord]=floor(min(angle,360))
             rotoc[rotoord]=floor(min(agcount,360))
             rotod[rotoord]=floor(min(max(agdir,0),1))
-            o_edmain.wiatrak=0
+            o_edmain.tool_mode=0
             test2=2
-            o_edmain.kliknieto=1
+            o_edmain.clicked=1
 /*if mouse_check_button(mb_left) {
             o_edmain.wiatrak=0
             test2=2
@@ -476,9 +476,9 @@ if coto=35 {
                 height=get_integer('Set the height.',96)
                 jumph=max(1,height)
                 jumph=min(jumph,999)
-                o_edmain.wiatrak=0
+                o_edmain.tool_mode=0
                 test2=2
-                o_edmain.kliknieto=1
+                o_edmain.clicked=1
             }
         }
     }
@@ -489,9 +489,9 @@ if coto=35 {
             height=get_integer('Set the height.',jumph)
             jumph=max(1,height)
             jumph=min(jumph,999)
-            o_edmain.wiatrak=0
+            o_edmain.tool_mode=0
             test2=2
-            o_edmain.kliknieto=1
+            o_edmain.clicked=1
             // NET-SYNC: 跳乌龟 Shift 菜单修改高度
             ed_net_ops_send_update(id, 7)
         }
@@ -505,7 +505,7 @@ if coto=40 && test2=2//游鱼
     if !end_mark {//create end_mark
         fofo_end = instance_create(fishendX,fishendY,o_range_end)
         fofo_end.start = id
-        fofo_end.costawia = 2
+        fofo_end.place_code = 2
         fofo_end.label = "fish"
         end_mark = 1
     }
@@ -534,14 +534,14 @@ if coto=40 && test2=2//游鱼
     }
     //削除鱼的终点
     if mouse_x>=fishendX&&mouse_x<fishendX+32&&mouse_y>=fishendY&&mouse_y<fishendY+32&&mouse_x>0&&mouse_y>0&&mouse_check_button(mb_right)
-    && o_edmain.wiatrak=0 && o_edmain.menujesie=0 && o_edmain.wlaczonaopcja=0 && (o_edmain.costawia2=40 || global.deletemode=1) {instance_destroy()}
+    && o_edmain.tool_mode=0 && o_edmain.menu_open=0 && o_edmain.option_open=0 && (o_edmain.place_code2=40 || global.deletemode=1) {instance_destroy()}
 }
 if coto=41 && test2=2//飞鱼
 {
     if !end_mark {//create end_mark
         fofo_end = instance_create(fishendX,fishendY,o_range_end)
         fofo_end.start = id
-        fofo_end.costawia = 2
+        fofo_end.place_code = 2
         fofo_end.label = "fish"
         end_mark = 1
     }
@@ -569,7 +569,7 @@ if coto=41 && test2=2//飞鱼
     }
     //削除鱼的终点
     if mouse_x>=fishendX&&mouse_x<fishendX+32&&mouse_y>=fishendY&&mouse_y<fishendY+32&&mouse_x>0&&mouse_y>0&&mouse_check_button(mb_right)
-    && o_edmain.wiatrak=0 && o_edmain.menujesie=0 && o_edmain.wlaczonaopcja=0 && (o_edmain.costawia2=41 || global.deletemode=1) {instance_destroy()}
+    && o_edmain.tool_mode=0 && o_edmain.menu_open=0 && o_edmain.option_open=0 && (o_edmain.place_code2=41 || global.deletemode=1) {instance_destroy()}
 }
 
 if coto=43 {

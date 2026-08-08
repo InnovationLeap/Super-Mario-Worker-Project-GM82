@@ -14,7 +14,7 @@ draw_text(view_xview[0] + 40, view_yview[0] + _y, string_upper(_label))
 draw_set_halign(fa_right)
 draw_text(view_xview[0] + 405, view_yview[0] + _y, string_upper(_disp))
 draw_set_halign(fa_left)
-if ed_hit(40, _y - 10, 220, 20) && kliknieto = 0 {
+if ed_hit(40, _y - 10, 220, 20) && clicked = 0 {
     draw_prefs_highlight(view_xview[0] + 40, view_yview[0] + _y - 10, 1.4, 0.8, 0.2);
     if mouse_check_button(mb_left) { keydetect = _id; keydetect2 = 1 }
 }

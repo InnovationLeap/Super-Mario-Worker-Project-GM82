@@ -6,11 +6,11 @@ applies_to=self
 */
 
 image_speed=0
-kierunek=-1
-aktywowany=0
-rodzajzabicia=0
+facing=-1
+activated=0
+kill_type=0
 killer=0 // czy mozna rozdeptywac 0 - tak, 1 - nie, 2 - tak ale nie zabija,
-odpych=0 // przy rozdeptywaniu ile ma zwiekszyc odskok
+knockback=0 // przy rozdeptywaniu ile ma zwiekszyc odskok
 
 cx=0
 cy=0
@@ -28,7 +28,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if global.pauza=0 && global.etappokonany=0 {
+if global.pauza=0 && global.level_complete=0 {
 
     if dir>1 { dir = 1 }
     if dir>0 && dir<1 { dir=floor(dir) }
@@ -44,9 +44,9 @@ if global.pauza=0 && global.etappokonany=0 {
 
     // uppercut i zwykla smierc
     //if place_meeting(x,y,o_uppercut) {energia-=3; rodzajzabicia=0}
-    if rodzajzabicia=1 {instance_destroy(); instance_create(x,y,o_troopagold);instance_create(x,y,o_punkciornik)}
-    if rodzajzabicia=7 {instance_destroy(); redduj=instance_create(x,y-1,o_troopashell2);redduj.sprite_index=s_troopashellgold;redduj.is_flipped=1;redduj.grawitacja=-11;redduj.czerwona=3;redduj.tail_kicked=1;redduj.kierunek=kierunek; instance_create(x,y,o_punkciornik)}
-    if rodzajzabicia=3 || rodzajzabicia=4 || rodzajzabicia=5 {instance_destroy(); redduj=instance_create(x,y,o_troopadead); lolo=instance_create(x,y,o_punkciornik); lolo.image_index=0;redduj.sprite_index=s_troopashellgold; redduj.czerwona=czerwona;if global.sample=1 {fofo=sound_play(snd_kick);sound_volume(snd_kick,global.glosnosc)}}
-    if rodzajzabicia=2 {instance_destroy(); redduj=instance_create(x,y,o_troopadead);redduj.sprite_index=s_troopashellgold; redduj.czerwona=czerwona}
+    if kill_type=1 {instance_destroy(); instance_create(x,y,o_troopagold);instance_create(x,y,o_scorepop)}
+    if kill_type=7 {instance_destroy(); shell_inst=instance_create(x,y-1,o_troopashell2);shell_inst.sprite_index=s_troopashellgold;shell_inst.is_flipped=1;shell_inst.grav=-11;shell_inst.shell_kind=3;shell_inst.tail_kicked=1;shell_inst.facing=facing; instance_create(x,y,o_scorepop)}
+    if kill_type=3 || kill_type=4 || kill_type=5 {instance_destroy(); shell_inst=instance_create(x,y,o_troopadead); tmp=instance_create(x,y,o_scorepop); tmp.image_index=0;shell_inst.sprite_index=s_troopashellgold; shell_inst.shell_kind=shell_kind;if global.sample=1 {tmp2=sound_play(snd_kick);sound_volume(snd_kick,global.game_volume)}}
+    if kill_type=2 {instance_destroy(); shell_inst=instance_create(x,y,o_troopadead);shell_inst.sprite_index=s_troopashellgold; shell_inst.shell_kind=shell_kind}
 
 }

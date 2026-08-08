@@ -138,7 +138,7 @@ if net_pending_reload = 1 && net_state = 3 && net_role = 0 {
 if keyboard_check_pressed(global.key_ed_cancel) && panel_open = 1 {
     panel_open = 0
     if instance_exists(o_edmain) {
-        o_edmain.czywybieranieback = 0
+        o_edmain.bg_selecting = 0
     }
 }
 // 系统箭头：编辑器内联机连接时隐藏（由 o_edcursor 画白色本地光标替代），
@@ -448,7 +448,7 @@ if instance_exists(o_edmain) {
                     }
                     if _bn = 5 {
                         panel_open = 0
-                        o_edmain.czywybieranieback = 0
+                        o_edmain.bg_selecting = 0
                     }
                 }
             }

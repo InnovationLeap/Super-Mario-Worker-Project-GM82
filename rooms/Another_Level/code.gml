@@ -17,7 +17,7 @@ if global.lastlev=0 {
     file_copy(global.mfsfilename,global.path)
 
     //解密
-    if(global.jiami=1 &&global.loadingsav=false) {script_text_crypt(global.path,1)}
+    if(global.encrypt=1 &&global.loadingsav=false) {script_text_crypt(global.path,1)}
     //存档文件专用解密
     if(global.loadingsav=true) {script_text_crypt(global.path,2)}
 
@@ -83,7 +83,7 @@ if global.lastlev=0 {
             global.lastzycia = global.zycia
             if global.loadingsav = 1 {
                 o_readsmwpfile.toloadpointer+=1;
-                global.punkty = real(o_readsmwpfile.toloadtext[o_readsmwpfile.toloadpointer])
+                global.score = real(o_readsmwpfile.toloadtext[o_readsmwpfile.toloadpointer])
                 //show_message(o_readsmwpfile.toloadtext[o_readsmwpfile.toloadpointer]);
                 o_readsmwpfile.toloadpointer+=1;
                 global.coins = real(o_readsmwpfile.toloadtext[o_readsmwpfile.toloadpointer])
@@ -177,9 +177,9 @@ if global.lastlev=0 {
         file_delete(global.mfsxname);
     }
 
-    global.muzyka=muzykaa
+    global.bgm_id=muzykaa
     room_goto(Play_Room)
 
 }
 global.beep=1
-global.przeszedllevel=0
+global.level_cleared=0

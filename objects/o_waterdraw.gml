@@ -4,16 +4,16 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-fofo=0
+tmp2=0
 kolorek=make_color_rgb(90,140,231)
 lavarek=make_color_rgb(123,0,0)
 
 zhadi=0
 fish=0
-dianshanhu=0
-yanjiang=0
+coral_preview=0
+lava_preview=0
 huoqiu=0
-wenhao=0
+qblock_preview=0
 yuncao=0
 deng=0
 
@@ -37,7 +37,7 @@ action_id=603
 applies_to=self
 */
 if !setonce && global.auto {
-    target = global.poziomwody
+    target = global.water_level
     velocity = global.water_velocity
     firstbound = global.firstbound
     secondbound = global.secondbound
@@ -55,16 +55,16 @@ if global.pauza=0 {
         if(bound=1) {target=firstbound} else if(secondbound>-64) {target=secondbound}
     }
 
-    if (global.poziomwody<1000000) {
-        if velocity<>0 && global.poziomwody<>target {
+    if (global.water_level<1000000) {
+        if velocity<>0 && global.water_level<>target {
             timecount=0;use_timecount=0
-            if abs(global.poziomwody-target)>(velocity*0.4) {
-                global.poziomwody+=sign(target-global.poziomwody)*(velocity*0.4);
+            if abs(global.water_level-target)>(velocity*0.4) {
+                global.water_level+=sign(target-global.water_level)*(velocity*0.4);
             } else {
-                global.poziomwody=target;
+                global.water_level=target;
             }
         }
-        if global.auto=1 && global.poziomwody = target {bound*=-1;use_timecount=1}
+        if global.auto=1 && global.water_level = target {bound*=-1;use_timecount=1}
     }
 
     else {
@@ -89,19 +89,19 @@ applies_to=self
 draw_set_alpha(1)
 draw_set_color(c_white)
 
-fofo+=0.2
+tmp2+=0.2
 if(global.lava) {
-    draw_sprite_ext(s_biglava,fofo,view_xview[0],global.poziomwody,1,1,0,c_white,1)
+    draw_sprite_ext(s_biglava,tmp2,view_xview[0],global.water_level,1,1,0,c_white,1)
 
-    if view_yview[0]+480>global.poziomwody+16 {
-        draw_rectangle_color(view_xview[0],global.poziomwody+32,view_xview[0]+640,view_yview[0]+480,lavarek,lavarek,lavarek,lavarek,0)
+    if view_yview[0]+480>global.water_level+16 {
+        draw_rectangle_color(view_xview[0],global.water_level+32,view_xview[0]+640,view_yview[0]+480,lavarek,lavarek,lavarek,lavarek,0)
     }
 } else {
-    draw_sprite_ext(s_woda,fofo,view_xview[0],round(global.poziomwody),1,1,0,c_white,0.5)
+    draw_sprite_ext(s_water,tmp2,view_xview[0],round(global.water_level),1,1,0,c_white,0.5)
 
-    if view_yview[0]+480>global.poziomwody+16 {
+    if view_yview[0]+480>global.water_level+16 {
         draw_set_alpha(0.5)
-        draw_rectangle_color(view_xview[0],round(global.poziomwody)+16,view_xview[0]+640,view_yview[0]+480,kolorek,kolorek,kolorek,kolorek,0)
+        draw_rectangle_color(view_xview[0],round(global.water_level)+16,view_xview[0]+640,view_yview[0]+480,kolorek,kolorek,kolorek,kolorek,0)
         draw_set_alpha(1)
     }
 }

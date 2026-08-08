@@ -41,7 +41,7 @@ if setonce=0 && hp=1 {
     image_index+=1;
     setonce=1;
 }
-if global.lava=1 && y>global.poziomwody+9 {instance_destroy();}
+if global.lava=1 && y>global.water_level+9 {instance_destroy();}
 
 //if hit { hit = false; }
 
@@ -52,24 +52,24 @@ if attacked = true {
 
 if hp<=0 {
     instance_destroy();
-    lolo=instance_create(x+8,y+8,o_breakice)
-    lolo.ixor=-3
-    lolo.iyor=-6
-    lolo.image_xscale=0.5
-    lolo.image_yscale=0.5
-    lolo=instance_create(x+8+16,y+8,o_breakice)
-    lolo.ixor=3
-    lolo.iyor=-6
-    lolo.image_xscale=0.5
-    lolo.image_yscale=0.5
-    lolo=instance_create(x+8+16,y+8+16,o_breakice)
-    lolo.ixor=-2
-    lolo.iyor=-4
-    lolo.image_xscale=0.5
-    lolo.image_yscale=0.5
-    lolo=instance_create(x+8,y+8+16,o_breakice)
-    lolo.ixor=2
-    lolo.iyor=-4
-    lolo.image_xscale=0.5
-    lolo.image_yscale=0.5
+    tmp=instance_create(x+8,y+8,o_breakice)
+    tmp.ixor=-3
+    tmp.vy_offset=-6
+    tmp.image_xscale=0.5
+    tmp.image_yscale=0.5
+    tmp=instance_create(x+8+16,y+8,o_breakice)
+    tmp.ixor=3
+    tmp.vy_offset=-6
+    tmp.image_xscale=0.5
+    tmp.image_yscale=0.5
+    tmp=instance_create(x+8+16,y+8+16,o_breakice)
+    tmp.ixor=-2
+    tmp.vy_offset=-4
+    tmp.image_xscale=0.5
+    tmp.image_yscale=0.5
+    tmp=instance_create(x+8,y+8+16,o_breakice)
+    tmp.ixor=2
+    tmp.vy_offset=-4
+    tmp.image_xscale=0.5
+    tmp.image_yscale=0.5
 }

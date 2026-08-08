@@ -1,10 +1,10 @@
 window_set_cursor(cr_default)
 room_caption='Super Mario Worker Project '+global.versiontext
-global.aktywowanykuppa=0
-global.etapkuppa=5
+global.bowser_phase=0
+global.level_bowser_hp=5
 global.przeciwnicyzatrzymani=0
 global.pauza=0
-global.etappokonany=0
+global.level_complete=0
 
 global.auto=0
 global.lava=0
@@ -50,21 +50,21 @@ global.auto_record=0
 //global.key_fire=ord('X')
 //global.key_up=38
 //global.key_down=40
-global.poziomwody=200
+global.water_level=200
 global.coins=0
 global.efekty=10
 global.sample=1
-global.glosnosc=1
+global.game_volume=1
 
 
 global.rodzajmaria=0
 global.zycia=global.initiallives
 global.coins=0
-global.punkty=0
+global.score=0
 global.lastrodzajmaria=0
 global.lastzycia=4
 global.lastcoins=0
-global.lastpunkty=0
+global.last_score=0
 
 global.combo1=0
 global.combo1reset=0
@@ -91,9 +91,9 @@ if global.smwptas {
 while global.toload='' {
     global.toload=get_open_filename('All Supported Formats (.smwl;.mfl)|*.smwl;*.mfl|Super Mario Worker Level (.smwl)|*.smwl|Mario Worker Level(.mfl)|*.mfl','')
     if global.toload='' {
-        global.czup=show_question('Do you want to stop loading a level?');
+        global.stop_choice=show_question('Do you want to stop loading a level?');
         global.toload=''
-        if global.czup=1 {global.zamenowane=1;global.toload='cipas';room_goto(title)}} else {}
+        if global.stop_choice=1 {global.entered_editor=1;global.toload='cipas';room_goto(title)}} else {}
 }
 if global.toload!='' && global.toload!='cipas' {
     room_tile_clear(Play_Room)
@@ -103,9 +103,9 @@ if global.toload!='' && global.toload!='cipas' {
     file_text_close(global.toload)
     global.lastlev=1
     room_goto(Play_Room)
-    global.przeszedllevel=0
+    global.level_cleared=0
 
 
-    global.paralax=0
+    global.parallax=0
     global.paralax2=0
     global.paralax3=0}

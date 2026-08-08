@@ -17,6 +17,6 @@ if global.pauza=0 {
 }
 
 if instance_place(x,y,o_goomba) {
-    lolo=instance_place(x,y,o_goomba)
-    lolo.rodzajzabicia=5 //顶
+    tmp=instance_place(x,y,o_goomba)
+    tmp.kill_type=5 //顶
 }

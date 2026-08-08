@@ -4,11 +4,11 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-sekwencja=0
-grawitacja=0
+state=0
+grav=0
 ixor=0
-kierunek=1
-if kierunek>=0.5 {kierunek=-1} else {kierunek=1}
+dir=1
+if dir>=0.5 {dir=-1} else {dir=1}
 image_speed=0
 
 // 发光位置微调
@@ -24,23 +24,23 @@ applies_to=self
 if global.pauza=0 {
 
     image_index+=0.2
-    if sekwencja=0 && (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {y-=1}
-    if sekwencja=0 && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock) {sekwencja=1}
+    if state=0 && (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {y-=1}
+    if state=0 && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock) {state=1}
 
-    if sekwencja=1 {sekwencja=2; grawitacja=-10}
-    if sekwencja=2 {
-        grawitacja+=0.5
-        if !place_meeting(x,y-10,obj_wall) && !place_meeting(x,y-10,o_pointblock) && grawitacja<0 {y+=grawitacja}
-        if (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) && grawitacja<0 {y+=1}
-        if grawitacja>0 {y+=grawitacja}
-        if grawitacja>0 && (place_meeting(x,y,obj_halfground) || place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {grawitacja=0; sekwencja=3}
+    if state=1 {state=2; grav=-10}
+    if state=2 {
+        grav+=0.5
+        if !place_meeting(x,y-10,obj_wall) && !place_meeting(x,y-10,o_pointblock) && grav<0 {y+=grav}
+        if (place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) && grav<0 {y+=1}
+        if grav>0 {y+=grav}
+        if grav>0 && (place_meeting(x,y,obj_halfground) || place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {grav=0; state=3}
     }
-    while sekwencja=3 && (place_meeting(x,y,obj_halfground) || place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {y-=1; if !place_meeting(x,y,obj_halfground) && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock) {sekwencja=1}}
+    while state=3 && (place_meeting(x,y,obj_halfground) || place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock)) {y-=1; if !place_meeting(x,y,obj_halfground) && !place_meeting(x,y,obj_wall) && !place_meeting(x,y,o_pointblock) {state=1}}
 
 
     // chodzenie gwiazdki
 
-    if kierunek=-1 && !place_meeting(x-2,y,obj_wall) && !place_meeting(x-2,y,o_pointblock) {x-=2}
-    if kierunek=1 && !place_meeting(x+2,y,obj_wall) && !place_meeting(x-2,y,o_pointblock) {x+=2}
-    if place_meeting(x-2,y,obj_wall) or place_meeting(x+2,y,obj_wall) or place_meeting(x-2,y,o_pointblock) or place_meeting(x+2,y,o_pointblock) {kierunek=kierunek*-1}
+    if dir=-1 && !place_meeting(x-2,y,obj_wall) && !place_meeting(x-2,y,o_pointblock) {x-=2}
+    if dir=1 && !place_meeting(x+2,y,obj_wall) && !place_meeting(x-2,y,o_pointblock) {x+=2}
+    if place_meeting(x-2,y,obj_wall) or place_meeting(x+2,y,obj_wall) or place_meeting(x-2,y,o_pointblock) or place_meeting(x+2,y,o_pointblock) {dir=dir*-1}
 }

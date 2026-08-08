@@ -46,21 +46,21 @@ if global.lvlwidth=0 {file_text_write_string(global.script_file,string(room_widt
 file_text_writeln(global.script_file) //关卡长度
 if global.lvlheight=0 {file_text_write_string(global.script_file,string(room_height))} else {file_text_write_string(global.script_file,string(global.lvlheight))}
 file_text_writeln(global.script_file) //关卡高度
-file_text_write_string(global.script_file,global.etapnazwa)
+file_text_write_string(global.script_file,global.level_name_edit)
 file_text_writeln(global.script_file)  //关卡名
-file_text_write_string(global.script_file,global.etapautor)
+file_text_write_string(global.script_file,global.level_author)
 file_text_writeln(global.script_file)  //关卡作者
-file_text_write_string(global.script_file,string(global.etapczas))
+file_text_write_string(global.script_file,string(global.level_time))
 file_text_writeln(global.script_file)  //时间
-file_text_write_string(global.script_file,string(global.etapgravity))
+file_text_write_string(global.script_file,string(global.level_gravity))
 file_text_writeln(global.script_file)  //重力
-file_text_write_string(global.script_file,string(global.etapkuppa))
+file_text_write_string(global.script_file,string(global.level_bowser_hp))
 file_text_writeln(global.script_file)  //库巴血量
-file_text_write_string(global.script_file,string(global.poziomwody))
+file_text_write_string(global.script_file,string(global.water_level))
 file_text_writeln(global.script_file)  //水面高度
 file_text_write_string(global.script_file,string(global.background))
 file_text_writeln(global.script_file)  //背景
-file_text_write_string(global.script_file,string(global.muzyka))
+file_text_write_string(global.script_file,string(global.bgm_id))
 file_text_writeln(global.script_file)  //音乐
 Save_Script_Blocks()  //写入砖块数据
 with (o_edenemyblock) {Save_Script_Enemy()} //写入敌人数据

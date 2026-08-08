@@ -120,8 +120,8 @@ case 4 :    //白天+草地（满速滚屏）
     background_yscale[2]=1
     background_blend[2]=c_white
     background_y[2]=view_yview[0]+50
-    background_x[2]=view_xview[0]-global.paralax3*2+chmurkir
-    background_alpha[2]=woder
+    background_x[2]=view_xview[0]-global.paralax3*2+cloud_drift
+    background_alpha[2]=water_alpha
 
     background_index[3]=background14
     background_htiled[3]=1
@@ -130,12 +130,12 @@ case 4 :    //白天+草地（满速滚屏）
     background_yscale[3]=1
     background_blend[3]=c_white
     background_y[3]=view_yview[0]
-    background_x[3]=view_xview[0]-global.paralax3*3+chmurkir*2
-    background_alpha[3]=woder
+    background_x[3]=view_xview[0]-global.paralax3*3+cloud_drift*2
+    background_alpha[3]=water_alpha
 
-    chmurkir+=0.2
-    if view_yview[0]+100>global.poziomwody && woder>0 {woder-=0.05}
-    if view_yview[0]+100<global.poziomwody && woder<1 {woder+=0.05}
+    cloud_drift+=0.2
+    if view_yview[0]+100>global.water_level && water_alpha>0 {water_alpha-=0.05}
+    if view_yview[0]+100<global.water_level && water_alpha<1 {water_alpha+=0.05}
 
     break;
 
@@ -848,7 +848,7 @@ case 29 :    //One Fine Day
     background_blend[2]=c_white
     background_y[2]=18
     background_x[2]=-35
-    background_alpha[2]=woder
+    background_alpha[2]=water_alpha
 
     background_index[3]=background_HLCloud
     background_htiled[3]=1
@@ -858,11 +858,11 @@ case 29 :    //One Fine Day
     background_blend[3]=c_white
     background_y[3]=0
     background_x[3]=0
-    background_alpha[3]=woder
+    background_alpha[3]=water_alpha
 
-    chmurkir+=0.2
-    if view_yview[0]+100>global.poziomwody && woder>0 {woder-=0.05}
-    if view_yview[0]+100<global.poziomwody && woder<1 {woder+=0.05}
+    cloud_drift+=0.2
+    if view_yview[0]+100>global.water_level && water_alpha>0 {water_alpha-=0.05}
+    if view_yview[0]+100<global.water_level && water_alpha<1 {water_alpha+=0.05}
 
     break;
 

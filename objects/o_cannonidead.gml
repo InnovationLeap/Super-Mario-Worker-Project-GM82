@@ -5,7 +5,7 @@ action_id=603
 applies_to=self
 */
 image_speed=0
-iyor=-8
+vy_offset=-8
 
 if global.layerord=0||global.layerord=1 {depth=1}
 if global.layerord=2 {depth=-20}

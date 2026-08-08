@@ -20,7 +20,7 @@
 	|real_string_length
 +background_show
 	|background_show
-+jiami
++encrypt
 	|get_crypt_key1
 	|get_crypt_key2
 	|script_text_crypt
@@ -58,7 +58,7 @@
 	|delete_coto_check
 	|transC
 	|Version_Info
-	|burax_hit
+	|beetroot_hit
 	|yes_no
 	|draw_shell
 	|draw_spike

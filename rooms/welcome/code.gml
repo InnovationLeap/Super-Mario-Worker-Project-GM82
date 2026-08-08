@@ -11,7 +11,7 @@ global.musicplay2=0
 //再见 SXMS
 //SXMS_I_Init(44000,200,0,0,0,0)
 global.nastawielkosc=0
-global.zamenowane=0
+global.entered_editor=0
 global.escowanie=0
 global.saving=0
 global.smoothmode=-1

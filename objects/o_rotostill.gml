@@ -4,15 +4,15 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-grawitacja=0
-sekwencja=0
+grav=0
+state=0
 //energia=1
 image_speed=0.3
-kierunek=-1
-aktywowany=1
-rodzajzabicia=0
+dir=-1
+activated=1
+kill_type=0
 killer=1 // czy mozna rozdeptywac 0 - tak, 1 - nie, 2 - tak ale nie zabija,
-odpych=0 // przy rozdeptywaniu ile ma zwiekszyc odskok
+knockback=0 // przy rozdeptywaniu ile ma zwiekszyc odskok
 
 if global.rotodisclay=0 {depth=0}
 if global.rotodisclay=1 {
@@ -21,7 +21,7 @@ if global.rotodisclay=1 {
     if global.layerord=2 {depth=-21}
 }
 
-dabusi=1
+stomp_proof=1
 
 // 发光位置微调
 light_x = 16;

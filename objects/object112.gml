@@ -24,12 +24,12 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if global.etapkuppa>=0 && global.etapkuppa<=20     draw_sprite(s_kuppaenergy,global.etapkuppa,x,y)
-if global.etapkuppa>20 && global.etapkuppa<=500 {
+if global.level_bowser_hp>=0 && global.level_bowser_hp<=20     draw_sprite(s_bowserhp,global.level_bowser_hp,x,y)
+if global.level_bowser_hp>20 && global.level_bowser_hp<=500 {
     image_index=20
-    draw_sprite(s_kuppaenergy,20,x,y)
+    draw_sprite(s_bowserhp,20,x,y)
     hele=make_color_rgb(255,64,64)
     draw_set_color(hele)
     draw_set_font(cyferkimario)
-    draw_text(x+100,y+50,string(global.etapkuppa))
+    draw_text(x+100,y+50,string(global.level_bowser_hp))
 }

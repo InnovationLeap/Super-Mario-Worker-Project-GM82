@@ -45,7 +45,7 @@ fw_draw_set_font(myfont)
 if global.isDisplaying && keyboard_check_pressed(vk_enter) {
     global.isDisplaying=-1
     sound_play(snd_messageoff);
-    sound_volume(snd_messageoff,global.glosnosc)
+    sound_volume(snd_messageoff,global.game_volume)
 }
 
 if global.isDisplaying = -1 {

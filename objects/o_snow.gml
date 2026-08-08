@@ -47,13 +47,13 @@ place_meeting(x, y, obj_wall) || place_meeting(x, y, o_pointblock) ) {
 }
 
 // 雪即将进入水面的时候淡出销毁
-if y > global.poziomwody - 48 {
+if y > global.water_level - 48 {
     image_alpha -= 0.2;
     if image_alpha <= 0 { instance_destroy(); }
 }
 
 // 防止意外的水面越界情况，强制销毁
-if y > global.poziomwody + 64 {
+if y > global.water_level + 64 {
     instance_destroy();
 }
 

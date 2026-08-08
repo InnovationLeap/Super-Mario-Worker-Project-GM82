@@ -1,4 +1,4 @@
-sprite=s_bonuskwiatek
+sprite=s_bonusflower
 visible=1
 solid=0
 persistent=0

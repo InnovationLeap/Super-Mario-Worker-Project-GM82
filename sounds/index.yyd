@@ -2,7 +2,7 @@
 
 
 snd_coin
-snd_rozdeptanie
+snd_stomp
 snd_1up
 snd_kick
 snd_powerup
@@ -14,14 +14,14 @@ snd_die
 
 
 snd_vine
-snd_kuppapapa
-snd_kuppaoberw
-snd_kuppazianie
-snd_kuppalast
+snd_bowserfall
+snd_bowserhit
+snd_bowsersnore
+snd_bowserdefeat
 
 snd_timeover
-snd_nabija
-snd_plywak
+snd_timescore
+snd_swim
 snd_gameover
 
 snd_jump
@@ -31,7 +31,7 @@ snd_break
 snd_burb
 snd_marioworker
 snd_thrwomb
-snd_mlotek
+snd_hammer
 
 
 
@@ -72,7 +72,7 @@ snd_lakitu1
 snd_lakitu2
 snd_lakitu3
 snd_stun2
-snd_zgniatacz
+snd_thwomp
 INL
 
 snd_bulletgz
