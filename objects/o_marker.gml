@@ -56,6 +56,7 @@ zdobywanie=0 // specjalny delay czasu przy zdobywaniu bonusow
 sizing=0 // grafika powiekszania maria podczas zdobywania bonusow
 schylanie=0 // zmienna daj筩a do wiadomosci ze gracz "probuje" sie schylic
 image_speed=0
+global.input_sync_frames=6
 strzelil=0 // dla animacji strzelania
 strzelil2=0 // antyrapid fire
 animkind=0 // przy zdobywaniu bonusow animacja mario musi wiedziec z jakiego w jakiego sie zamieniac
@@ -236,8 +237,11 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-//开局按键状态维护：重同步按住键（2帧确认防误判）+ 自动清理异常卡键，每帧执行
-input_sync_step();
+//开局按键状态维护：仅在进入关卡/重开后的前6帧执行（重同步按住键 + 清理卡键），失焦时不会向系统注入按键
+if global.input_sync_frames>0 {
+    input_sync_step();
+    global.input_sync_frames-=1
+}
 if global.pauza=0 && skusil=0 && global.etappokonany=0 {
 
     if !place_meeting(x,y,o_yinyang) {stuck=0}
