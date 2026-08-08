@@ -44,12 +44,12 @@ for(i=0;i<8;i+=1) {
 
 global.lava_record=0
 global.auto_record=0
-//global.sterowanielewo=37
-//global.sterowanieprawo=39
-//global.sterowanieskok=ord('Z')
-//global.sterowaniebieg=ord('X')
-//global.sterowaniegora=38
-//global.sterowaniedol=40
+//global.key_left=37
+//global.key_right=39
+//global.key_jump=ord('Z')
+//global.key_fire=ord('X')
+//global.key_up=38
+//global.key_down=40
 global.poziomwody=200
 global.coins=0
 global.efekty=10

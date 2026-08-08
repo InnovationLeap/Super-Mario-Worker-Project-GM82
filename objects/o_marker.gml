@@ -56,7 +56,6 @@ zdobywanie=0 // specjalny delay czasu przy zdobywaniu bonusow
 sizing=0 // grafika powiekszania maria podczas zdobywania bonusow
 schylanie=0 // zmienna daj筩a do wiadomosci ze gracz "probuje" sie schylic
 image_speed=0
-global.input_sync_frames=4
 strzelil=0 // dla animacji strzelania
 strzelil2=0 // antyrapid fire
 animkind=0 // przy zdobywaniu bonusow animacja mario musi wiedziec z jakiego w jakiego sie zamieniac
@@ -237,11 +236,8 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-//开局按键重同步：房间重开瞬间按住键的状态可能丢失，前4帧持续校正
-if global.input_sync_frames>0 {
-    input_sync_start();
-    global.input_sync_frames-=1
-}
+//开局按键状态维护：重同步按住键（2帧确认防误判）+ 自动清理异常卡键，每帧执行
+input_sync_step();
 if global.pauza=0 && skusil=0 && global.etappokonany=0 {
 
     if !place_meeting(x,y,o_yinyang) {stuck=0}
@@ -480,7 +476,7 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
         // keyboard_check_pressed: must press jump fresh, not just hold it
         // Raccoon flight: takeoff (first press) and mid-air boost (subsequent presses)
         // Both give upward lift, but only first press starts the flight timer counting
-        if global.rodzajmaria=6 && raccoon_fly_allowed=1 && grawitacja>0 && keyboard_check_pressed(global.sterowanieskok) && y<global.poziomwody && sekwencja=1 && schylanie=0 && !stuck {
+        if global.rodzajmaria=6 && raccoon_fly_allowed=1 && grawitacja>0 && keyboard_check_pressed(global.key_jump) && y<global.poziomwody && sekwencja=1 && schylanie=0 && !stuck {
             grawitacja=-9
             szybkosc = max(-4, min(szybkosc, 4))
             if raccoon_flew=0 {
@@ -589,7 +585,7 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
         if global.rodzajmaria = 6 && skusil = 0 {
             // Slow fall (raccoon parachute descent)
             // keyboard_check_pressed: must press jump fresh, not just hold it
-            if grawitacja > 0 && keyboard_check_pressed(global.sterowanieskok) && !raccoon_fall && y < global.poziomwody && sekwencja = 1 && raccoon_fly_allowed = 0 {
+            if grawitacja > 0 && keyboard_check_pressed(global.key_jump) && !raccoon_fall && y < global.poziomwody && sekwencja = 1 && raccoon_fly_allowed = 0 {
                 raccoon_fall = 1
                 raccoon_fall_timer = 0
                 szybkosc = max(-4, min(szybkosc, 4))
@@ -794,10 +790,10 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
         if global.rodzajmaria=5 {
             grawitacja=0
             sekwencja=0
-            if keyboard_check(global.sterowanieprawo) { x += 8; }
-            if keyboard_check(global.sterowanielewo) { x -= 8; }
-            if keyboard_check(global.sterowaniegora) { y -= 8; }
-            if keyboard_check(global.sterowaniedol) { y += 8; }
+            if keyboard_check(global.key_right) { x += 8; }
+            if keyboard_check(global.key_left) { x -= 8; }
+            if keyboard_check(global.key_up) { y -= 8; }
+            if keyboard_check(global.key_down) { y += 8; }
         }
 
         //god模式中的CP跳转
@@ -1593,26 +1589,26 @@ applies_to=self
 */
 if global.pauza=0 && global.rodzajmaria=2 && skusil=0 && global.etappokonany=0 && teleportacja=0 {
     if instance_number(o_fireball)<2 {
-        if kierunek=1 && keyboard_check(global.sterowaniebieg) && strzelil2=0 {strzelil2=1; lolo=instance_create(x-10,y-40,o_fireball); lolo.kierunek=-1; strzelil=1;if global.sample=1 {fofo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}}
-        if kierunek=0 && keyboard_check(global.sterowaniebieg) && strzelil2=0 {strzelil2=1; lolo=instance_create(x+10,y-40,o_fireball); lolo.kierunek=1; strzelil=1;if global.sample=1 {fofo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}}
+        if kierunek=1 && keyboard_check(global.key_fire) && strzelil2=0 {strzelil2=1; lolo=instance_create(x-10,y-40,o_fireball); lolo.kierunek=-1; strzelil=1;if global.sample=1 {fofo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}}
+        if kierunek=0 && keyboard_check(global.key_fire) && strzelil2=0 {strzelil2=1; lolo=instance_create(x+10,y-40,o_fireball); lolo.kierunek=1; strzelil=1;if global.sample=1 {fofo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}}
     }
-    if !keyboard_check(global.sterowaniebieg) {strzelil2=0}
+    if !keyboard_check(global.key_fire) {strzelil2=0}
 
 }
 
 if global.pauza=0 && global.rodzajmaria=4 && skusil=0 && teleportacja=0 {
     if instance_number(o_burax)<2 {
-        if kierunek=1 && keyboard_check(global.sterowaniebieg) && strzelil2=0 {strzelil2=1; lolo=instance_create(x-10,y-48,o_burax); lolo.kierunek=-1; strzelil=1;if global.sample=1 {fofo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}}
-        if kierunek=0 && keyboard_check(global.sterowaniebieg) && strzelil2=0 {strzelil2=1; lolo=instance_create(x+10-30*global.MFbeet,y-48,o_burax); lolo.kierunek=1; strzelil=1;if global.sample=1 {fofo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}}
+        if kierunek=1 && keyboard_check(global.key_fire) && strzelil2=0 {strzelil2=1; lolo=instance_create(x-10,y-48,o_burax); lolo.kierunek=-1; strzelil=1;if global.sample=1 {fofo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}}
+        if kierunek=0 && keyboard_check(global.key_fire) && strzelil2=0 {strzelil2=1; lolo=instance_create(x+10-30*global.MFbeet,y-48,o_burax); lolo.kierunek=1; strzelil=1;if global.sample=1 {fofo=sound_play(snd_fire);sound_volume(snd_fire,global.glosnosc)}}
     }
-    if !keyboard_check(global.sterowaniebieg) {strzelil2=0}
+    if !keyboard_check(global.key_fire) {strzelil2=0}
 
 }
 
 // Raccoon tail attack
 if global.pauza=0 && global.rodzajmaria=6 && skusil=0 && global.etappokonany=0 && teleportacja=0 && schylanie=0 {
     if !instance_exists(o_raccoon_tail) {
-        if kierunek=1 && keyboard_check(global.sterowaniebieg) && strzelil2=0 {
+        if kierunek=1 && keyboard_check(global.key_fire) && strzelil2=0 {
             strzelil2=1;
             lolo=instance_create(x,y-11,o_raccoon_tail);
             lolo.kierunek=1;
@@ -1621,7 +1617,7 @@ if global.pauza=0 && global.rodzajmaria=6 && skusil=0 && global.etappokonany=0 &
             animator.image_index=0;
             if global.sample=1 {fofo=sound_play(snd_spin);sound_volume(snd_spin,global.glosnosc)}
         }
-        if kierunek=0 && keyboard_check(global.sterowaniebieg) && strzelil2=0 {
+        if kierunek=0 && keyboard_check(global.key_fire) && strzelil2=0 {
             strzelil2=1;
             lolo=instance_create(x,y-11,o_raccoon_tail);
             lolo.kierunek=0;
@@ -1631,7 +1627,7 @@ if global.pauza=0 && global.rodzajmaria=6 && skusil=0 && global.etappokonany=0 &
             if global.sample=1 {fofo=sound_play(snd_spin);sound_volume(snd_spin,global.glosnosc)}
         }
     }
-    if !keyboard_check(global.sterowaniebieg) {strzelil2=0}
+    if !keyboard_check(global.key_fire) {strzelil2=0}
 }
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -1737,7 +1733,7 @@ if teleportacja=0 {
 
 
 
-        if /*global.godmode=0 &&*/ keyboard_check(global.restartlevelkey) && oberwal=0 {instance_create(x,y,o_fireexplode);sound_play(snd_break)oberwal=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white;suicide=1}
+        if /*global.godmode=0 &&*/ keyboard_check(global.key_restart) && oberwal=0 {instance_create(x,y,o_fireexplode);sound_play(snd_break)oberwal=1 ; shield=0 ; global.rodzajmaria=0;animator2.visible=0;animator.image_blend=c_white;suicide=1}
         if gwiazdka<=0 {animator.image_blend=c_white;animator2.visible=0}
         if gwiazdka>0 {
             gwiazdka-=1; kolor=make_color_rgb(random(255),random(255),random(255)); animator.image_blend=kolor

@@ -412,19 +412,19 @@ if globaloption>0 {
         //========== PAGE 0: 游戏按键 + 基础编辑器按键 ==========
         if keyboard_page=0 {
             //上键
-            ed_keyrow(1,'Up',100,'sterowaniegora','up')
+            ed_keyrow(1,'Up',100,'key_up','up')
             //下键
-            ed_keyrow(2,'Down',130,'sterowaniedol','down')
+            ed_keyrow(2,'Down',130,'key_down','down')
             //左键
-            ed_keyrow(3,'Left',160,'sterowanielewo','left')
+            ed_keyrow(3,'Left',160,'key_left','left')
             //右键
-            ed_keyrow(4,'Right',190,'sterowanieprawo','right')
+            ed_keyrow(4,'Right',190,'key_right','right')
             //跳键
-            ed_keyrow(5,'Jump',220,'sterowanieskok','jump')
+            ed_keyrow(5,'Jump',220,'key_jump','jump')
             //开火键
-            ed_keyrow(6,'Fire',250,'sterowaniebieg','fire')
+            ed_keyrow(6,'Fire',250,'key_fire','fire')
             //10自杀键/自爆键
-            ed_keyrow(10,'Restart Level',280,'restartlevelkey','restartlevel')
+            ed_keyrow(10,'Restart Level',280,'key_restart','restartlevel')
 
             //警告提示
             if keyboard_lastkey>222 {
