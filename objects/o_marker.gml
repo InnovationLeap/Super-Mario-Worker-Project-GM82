@@ -11,7 +11,6 @@ fangka = 0
 
 aktywowanamoza=0
 maria=0
-sizingus=0
 razujy=0
 //WTF，这三个是嘛玩意
 global.aktywowanykuppa=0 //翻译为“激活库巴”目测是库巴触发相关，设置为否
@@ -1940,8 +1939,7 @@ if teleportacja=0 {
         if kierunek=0 {/*animator.image_xscale=1+sin(degtorad(sizing/3 ))/2*/}
         if kierunek=1 {/*animator.image_xscale=-1-sin(degtorad(sizing/3 ))/2*/}
         animator.image_yscale=1+(sin(degtorad(sizing)))/3
-        sizingus+=1
-        if sizingus>1 {sizing+=20; sizingus=0}
+        sizing+=10
         if zdobywanie<60 {zdobywanie+=1}
         if zdobywanie=60 {zdobywanie=0; global.pauza=0;animator.image_xscale=1;animator.image_yscale=1}
     }
@@ -1950,8 +1948,7 @@ if teleportacja=0 {
         if kierunek=0 {/*animator.image_xscale=1-sin(degtorad(sizing/3 ))/2*/}
         if kierunek=1 {/*animator.image_xscale=-1-sin(degtorad(sizing/3 ))/2*/}
         animator.image_yscale=1+(sin(degtorad(sizing)))/3
-        sizingus+=1
-        if sizingus>1 {sizing+=20; sizingus=0}
+        sizing+=10
         if zdobywanie<60 {zdobywanie+=1}
         if zdobywanie=60 {zdobywanie=0; global.pauza=0;animator.image_xscale=1;animator.image_yscale=1; oberwal=0}
     }
