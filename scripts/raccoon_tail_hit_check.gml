@@ -41,6 +41,16 @@ if place_meeting(_tx, _ty, o_pointblock2) {
         self.hit_list += _vid + "|"
     }
 }
+// Gold blocks (316) and bricks (315) are both o_blockbumper — bumpable for coins
+if place_meeting(_tx, _ty, o_blockbumper) {
+    _victim = instance_place(_tx, _ty, o_blockbumper);
+    _vid = string(_victim.id);
+    _already_hit = (string_pos(_vid, self.hit_list) > 0);
+    if !_already_hit {
+        _victim.bumped = 1
+        self.hit_list += _vid + "|"
+    }
+}
 
 // --- Enemy interactions ---
 // IMPORTANT: All specific checks MUST come before o_goomba because ALL enemies
