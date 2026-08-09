@@ -66,7 +66,7 @@ if !global.MFbeet && global.pauza=0 {
 
     //if place_meeting(x,y,o_kuppa) && uzyto<=4 { uzyto+=100 }
     if place_meeting(x,y,o_bowser) && use_count<=4 { use_count+=100 ; tmp=instance_place(x,y,o_bowser) if (tmp.koopa_strength=0 || tmp.hit=0) {tmp.hp-=1};instance_create(x,y,o_fireexplode) }
-    if place_meeting(x,y,o_goomba) && use_count<=4 {use_count+=1; tmp=instance_place(x,y,o_goomba); if(object_get_name(tmp.object_index)<>'o_bowser') {tmp.kill_type=4; instance_create(x,y,o_fireexplode)}} //甜菜
+    if place_meeting(x,y,o_goomba) && use_count<=4 {use_count+=1; tmp=instance_place(x,y,o_goomba); if(object_get_name(tmp.object_index)<>'o_bowser') {if(object_get_name(tmp.object_index)='o_cannoni' || object_get_name(tmp.object_index)='o_cannonig' || object_get_name(tmp.object_index)='o_groundpiranha') {instance_create(x,y,o_fireexplode)} else {tmp.kill_type=4; instance_create(x,y,o_fireexplode)}}} //甜菜，炮弹/扎地免疫伤害但会爆炸
 
 }
 
@@ -113,6 +113,6 @@ if global.MFbeet && global.pauza=0 {
 
     //if place_meeting(x,y,o_kuppa) && uzyto<=4 { uzyto+=100 }
     if place_meeting(x,y,o_bowser) && use_count<=limit { use_count+=100 ; tmp=instance_place(x,y,o_bowser) if (tmp.koopa_strength=0 || tmp.hit=0) {tmp.hp-=1};instance_create(x,y,o_fireexplode) }
-    if place_meeting(x,y,o_goomba) && use_count<=limit {use_count+=1; tmp=instance_place(x,y,o_goomba); if(object_get_name(tmp.object_index)<>'o_bowser') {tmp.kill_type=4; instance_create(x,y,o_fireexplode)}} //甜菜
+    if place_meeting(x,y,o_goomba) && use_count<=limit {use_count+=1; tmp=instance_place(x,y,o_goomba); if(object_get_name(tmp.object_index)<>'o_bowser') {if(object_get_name(tmp.object_index)='o_cannoni' || object_get_name(tmp.object_index)='o_cannonig' || object_get_name(tmp.object_index)='o_groundpiranha') {instance_create(x,y,o_fireexplode)} else {tmp.kill_type=4; instance_create(x,y,o_fireexplode)}}} //甜菜，炮弹/扎地免疫伤害但会爆炸
 
 }

@@ -105,7 +105,7 @@ if place_meeting(x+ixor,y-1,obj_wall) || place_meeting(x+ixor,y-1,o_pointblock) 
 
     //这里是敌人的攻击判定
     if place_meeting(x,y,o_bowser) && hit_done=0 { tmp=instance_place(x,y,o_bowser) if (tmp.koopa_strength=0 || tmp.hit=0) {tmp.hp-=1;hit_done=1}} //糟比库巴 为什么你加了父对象还要单独写 大叔傻贲
-    if place_meeting(x,y,o_goomba) && hit_done=0 { tmp=instance_place(x,y,o_goomba) if(object_get_name(tmp.object_index)<>'o_bowser') {tmp.kill_type=3 ; hit_done=1} } //火球
+    if place_meeting(x,y,o_goomba) && hit_done=0 { tmp=instance_place(x,y,o_goomba) if(object_get_name(tmp.object_index)<>'o_bowser') { if(object_get_name(tmp.object_index)='o_cannoni' || object_get_name(tmp.object_index)='o_cannonig' || object_get_name(tmp.object_index)='o_groundpiranha') {hit_done=1} else {tmp.kill_type=3 ; hit_done=1} } } //火球，炮弹/扎地免疫伤害但会爆炸
     //爆炸
     if hit_done=1 { instance_destroy(); instance_create(x,y,o_fireexplode) }
 
