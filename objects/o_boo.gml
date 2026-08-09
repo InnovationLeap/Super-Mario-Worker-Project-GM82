@@ -43,10 +43,10 @@ if global.pauza=0 && global.level_complete=0 {
         //状态检测
         if x > o.marker.x {
             dir = -1
-            if o_marker.facing=1 { move=1 } else { move=0 }
+            if o_marker.dir=1 { move=1 } else { move=0 }
         } else {
             dir = 1
-            if o_marker.facing=0 { move=1 } else { move=0 }
+            if o_marker.dir=0 { move=1 } else { move=0 }
         }
         //动画
         image_xscale = dir
