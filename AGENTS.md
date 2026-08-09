@@ -195,8 +195,11 @@
 | o_bonus1up    | 绿蘑菇  | 305    |
 | o_bonusdead   | 毒蘑菇  | 306    |
 | o_pointblock  | 问号砖  | 313    |
-| o_breakblock  | 砖头   | 315    |
-| o_pointblock2 | 金砖   | 316    |
+| o_pointblock2 | 隐藏砖（314 金币 / 317 金砖 / 326 浣熊叶） | 314/317/326 |
+| o_blockbumper | 砖头（顶后转 `o_pointblock` 可碎砖） | 315    |
+| o_blockbumper | 金砖（时限内可反复顶出金币，耗尽后变砖头） | 316    |
 | o_point       | 金币   | 318    |
+
+> `o_breakblock` 不是代码 315，而是砖头破碎后的碎块特效，无对应代码。
 
 > 景物（Scenery，代码 1xx）统一使用 `o_scenery`（`image_single = 代码 - 1`），非一对象一编号，故未列入。
