@@ -174,7 +174,10 @@ if place_meeting(x-5,y,o_pointblockpodbijacz)&& kierunek<0 {lolo=instance_place(
                 // normal shell hitting static spiny shell: kill the static spiny, not self
                 if tmp.object_index == o_troopashell2 && tmp.shell_kind == 4 {
                     tmp.kill_type = 2
-                    tmp2=sound_play(snd_kick);sound_volume(snd_kick,global.game_volume)
+                    nabijanie+=1
+                    tmp2=instance_create(x,y,o_scorepop2)
+                    tmp2.image_index=nabijanie-1
+                    if nabijanie>6 {nabijanie=0}
                 } else { kill_type=2 ;tmp2=sound_play(snd_kick);sound_volume(snd_kick,global.game_volume)}
             }
 
