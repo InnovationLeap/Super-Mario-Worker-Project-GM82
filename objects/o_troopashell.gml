@@ -183,22 +183,6 @@ if place_meeting(x-5,y,o_pointblockpodbijacz)&& kierunek<0 {lolo=instance_place(
 
         }
 
-        if place_meeting(x,y,o_troopashell) {
-            tmp=instance_place(x,y,o_troopashell)
-  /*  if lolo.dabusi=0 && lolo.dasini=0 {
-  //  lolo.energia-=10000000
-    lolo.rodzajzabicia=2
-    nabijanie+=1
-    fofo=instance_create(x,y,o_punkciornik2)
-    fofo.image_index=nabijanie-1
-    if nabijanie>6 {nabijanie=0}
-    energia-=1
-    rodzajzabicia=2
-}*/
-            if tmp.shell_proof <> 0 { kill_type=2 ;tmp2=sound_play(snd_kick);sound_volume(snd_kick,global.game_volume)}
-
-        }
-
     } else {
 
         if place_meeting(x,y,o_goomba) && !place_meeting(x,y,o_troopashell) /*&& !place_meeting(x,y,o_rybekc) && !place_meeting(x,y,o_rynekd)*/
