@@ -41,10 +41,10 @@ if global.pauza=0 && global.level_complete=0 {
             // spadanie
             if state=0 && !place_meeting(x,y+1,obj_halfground) && !place_meeting(x,y+1,obj_wall) && !place_meeting(x,y+1,o_pointblock) {state=1}
             if state=1 {grav+=0.5; y+=grav}
-            // ceiling check (after gravity, at y-1, blue-koopa style)
-            if grav<0 && (place_meeting(x,y-1,obj_wall)||place_meeting(x,y-1,obj_static)||place_meeting(x,y-1,o_pointblock)||place_meeting(x,y-1,o_pointblock2)||place_meeting(x,y-1,o_breakblock)) {
+            // ceiling check (after gravity, at y-1, blue-koopa style; semi-solids pass-through)
+            if grav<0 && ((place_meeting(x,y-1,obj_wall) && !place_meeting(x,y-1,obj_halfwall)) || (place_meeting(x,y-1,obj_static) && !place_meeting(x,y-1,obj_halfground)) || place_meeting(x,y-1,o_pointblock) || place_meeting(x,y-1,o_pointblock2) || place_meeting(x,y-1,o_breakblock)) {
                 grav=0
-                while place_meeting(x,y,obj_wall)||place_meeting(x,y,obj_static)||place_meeting(x,y,o_pointblock)||place_meeting(x,y,o_pointblock2)||place_meeting(x,y,o_breakblock) {y+=1}
+                while (place_meeting(x,y,obj_wall) && !place_meeting(x,y,obj_halfwall)) || (place_meeting(x,y,obj_static) && !place_meeting(x,y,obj_halfground)) || place_meeting(x,y,o_pointblock) || place_meeting(x,y,o_pointblock2) || place_meeting(x,y,o_breakblock) {y+=1}
             }
             if state=1 && grav>=0 && (place_meeting(x,y+1,obj_halfground) || place_meeting(x,y+1,obj_wall) || place_meeting(x,y+1,o_pointblock)) && !place_meeting(x,y,o_uppercut) {grav=0; state=2;}
             while state=2 && (place_meeting(x,y+1,obj_halfground) || place_meeting(x,y+1,obj_wall) || place_meeting(x,y+1,o_pointblock)) {y-=1}
@@ -69,13 +69,13 @@ if global.pauza=0 && global.level_complete=0 {
             }
             if state=1 {
                 grav+=0.5; y+=grav
-                // ceiling check (after gravity, at y-1 = one pixel above new position)
-                if grav<0 && (place_meeting(x,y-1,obj_wall)||place_meeting(x,y-1,obj_static)||place_meeting(x,y-1,o_pointblock)||place_meeting(x,y-1,o_pointblock2)||place_meeting(x,y-1,o_breakblock)) {
+                // ceiling check (after gravity, at y-1 = one pixel above new position; semi-solids pass-through)
+                if grav<0 && ((place_meeting(x,y-1,obj_wall) && !place_meeting(x,y-1,obj_halfwall)) || (place_meeting(x,y-1,obj_static) && !place_meeting(x,y-1,obj_halfground)) || place_meeting(x,y-1,o_pointblock) || place_meeting(x,y-1,o_pointblock2) || place_meeting(x,y-1,o_breakblock)) {
                     grav=0
-                    while place_meeting(x,y,obj_wall)||place_meeting(x,y,obj_static)||place_meeting(x,y,o_pointblock)||place_meeting(x,y,o_pointblock2)||place_meeting(x,y,o_breakblock) {y+=1}
+                    while (place_meeting(x,y,obj_wall) && !place_meeting(x,y,obj_halfwall)) || (place_meeting(x,y,obj_static) && !place_meeting(x,y,obj_halfground)) || place_meeting(x,y,o_pointblock) || place_meeting(x,y,o_pointblock2) || place_meeting(x,y,o_breakblock) {y+=1}
                 }
                 if !place_meeting(x,y,o_uppercut) {
-                    if (place_meeting(x,y+1,obj_halfground) || place_meeting(x,y+1,obj_wall) || place_meeting(x,y+1,o_pointblock)) {
+                    if grav>=0 && (place_meeting(x,y+1,obj_halfground) || place_meeting(x,y+1,obj_wall) || place_meeting(x,y+1,o_pointblock)) {
                         grav=0; state=2;
                     }
                 }
