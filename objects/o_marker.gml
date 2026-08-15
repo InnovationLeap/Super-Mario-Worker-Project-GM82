@@ -1459,8 +1459,8 @@ if global.pauza=0 && shell_lock=0 && global.level_complete=0 && pipe_state=0 {
                             // spikes on top: player above (y < shell.y) → hurt
                             if y < tmp.y { _canKick = 0; }
                         } else {
-                            // spikes on bottom: player below (y >= shell.y) → hurt
-                            if y >= tmp.y { _canKick = 0; }
+                            // spikes on bottom: hurt only when truly below (feet y-1 below shell bottom shell.y+13; same ground = kickable)
+                            if y > tmp.y + 14 { _canKick = 0; }
                         }
                         if _canKick=0 && hit_timer=0 && shield=0 { hit_timer=1 }
                     }

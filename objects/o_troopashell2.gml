@@ -70,9 +70,9 @@ if global.pauza=0 && global.level_complete=0 {
             }
             // gravity
             grav+=0.5; y+=grav
-            // ceiling: if moving up and inside a block, push down out of it
+            // ceiling: if moving up and inside a block, push down out of it (semi-solids pass-through)
             if grav<0 {
-                while place_meeting(x,y,obj_halfground) || place_meeting(x,y,obj_wall) || place_meeting(x,y,o_pointblock) || place_meeting(x,y,obj_waall) || place_meeting(x,y,o_breakblock) || place_meeting(x,y,o_pointblock2) || place_meeting(x,y,obj_static) {y+=1; grav=0}
+                while (place_meeting(x,y,obj_wall) && !place_meeting(x,y,obj_halfwall)) || place_meeting(x,y,o_pointblock) || place_meeting(x,y,obj_waall) || place_meeting(x,y,o_breakblock) || place_meeting(x,y,o_pointblock2) || (place_meeting(x,y,obj_static) && !place_meeting(x,y,obj_halfground)) {y+=1; grav=0}
             }
             // landing: stop kick, revert to normal static shell
             if grav>0 {
