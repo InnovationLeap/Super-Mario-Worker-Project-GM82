@@ -1,6 +1,6 @@
 # Super Mario Worker Project - Changelog
 
-## v1.8.0-beta.1
+## v1.8.0-beta.1 (2026-08-16)
 ### Editor
 - Added support for using the `PgUp` / `PgDown` keys to jump between the starting position and Check Point.
 - Added support for customizing editor shortcuts in Global Options.
@@ -16,8 +16,8 @@
 ### Bug Fixes
 - Fixed an issue where Thwomp did not smile when it hits Mario.
 - Fixed a crash when the custom music ID exceeds the music pack list (or the music pack is missing); it now silently skips the track.
-- Fixed held keys (e.g. directional / run keys) being lost at level start or after a death restart.
-- Fixed player transformation animation being choppy.
+- Fixed an issue where held keys (e.g. directional / run keys) were being lost at level start or after a death restart.
+- Fixed an issue where the player transformation animation was being choppy.
 
 ## v1.7.13-beta1 (2026-07-25)
 ### Core Improvements
