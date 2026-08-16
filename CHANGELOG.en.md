@@ -30,6 +30,13 @@
 ### Level Features
 - Added petal-patterned Roto-disc.
 
+## v1.7.12.2 (2026-08-16)
+### Editor
+- Added an editor zoom feature. When the panel is closed, use `Ctrl + Mouse Wheel` or the `+` / `-` keys to zoom the editor.
+### Bug Fixes
+- Fixed an issue where Thwomp did not smile when it hits Mario.
+- Fixed an issue where held keys (e.g. directional / run keys) were being lost at level start or after a death restart.
+
 ## v1.7.12.1 (2026-07-18)
 ### Bug Fixes
 - Fixed an issue where SMWP could not be opened on some new Intel hardware.
