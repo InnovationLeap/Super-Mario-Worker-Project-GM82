@@ -6,6 +6,9 @@
 	|Create_Save_File
 	|Save_Script_Enemy
 	|Save_Script_Prog
++gm8_dialog
+	|scr_gm8_rfill
+	|scr_gm8_button
 	|Load_Script_Main
 	|Load_Script_Prog
 	|Load_Script_Masta
@@ -170,3 +173,7 @@
 	|ed_tool_water
 	|ed_resize_level
 	|ed_passage_reindex
++UserPause
+	|UserPause_Start
+	|UserPause_End
+	|UserPause_Quit

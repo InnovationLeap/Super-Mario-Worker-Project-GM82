@@ -1,6 +1,8 @@
 Save_Script_Blocks
 Save_Script_Main
 Load_Script_Main
+scr_gm8_rfill
+scr_gm8_button
 
 Save_Script_Enemy
 Save_Script_Passage
@@ -1210,3 +1212,6 @@ ed_tool_water
 ed_resize_level
 ed_passage_reindex
 
+UserPause_Start
+UserPause_End
+UserPause_Quit

@@ -236,6 +236,8 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+//自定义暂停：外层暂停期间 o_marker 完全休眠（不跑按键同步/逻辑/绘制）
+if global.userpause=1 exit
 //开局按键状态维护：仅在进入关卡/重开后的前6帧执行（重同步按住键 + 清理卡键），失焦时不会向系统注入按键
 if global.input_sync_frames>0 {
     input_sync_step();
@@ -1276,21 +1278,25 @@ if global.pauza=0 && shell_lock=0 && global.level_complete=0 {
             if hspd<0 {dir=1}
             if hspd>0 {dir=0}
 
-            if hspd=0 && state=0 && dir=0 {animator.sprite_index=global.raccoon_character_idle; animator.image_index=0; animator.image_xscale=1;animkind=0}
-            if hspd=0 && state=0 && dir=1 {animator.sprite_index=global.raccoon_character_idle; animator.image_index=0; animator.image_xscale=-1;animkind=0}
+            if hspd=0 && state=0 && dir=0 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_idle; animator.image_index=0; animator.image_xscale=1;animkind=0}
+            if hspd=0 && state=0 && dir=1 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_idle; animator.image_index=0; animator.image_xscale=-1;animkind=0}
 
-            if hspd>0 && dir=0 && state=0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index+=hspd/20; animator.image_xscale=1;animkind=0}
-            if hspd<0 && dir=1 && state=0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index+=hspd/20; animator.image_xscale=-1;animkind=0}
+            if hspd>0 && dir=0 && state=0 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_walk; animator.image_index+=hspd/20; animator.image_xscale=1;animkind=0}
+            if hspd<0 && dir=1 && state=0 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_walk; animator.image_index+=hspd/20; animator.image_xscale=-1;animkind=0}
 
-            if dir=0 && grav<>0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index=swim_anim; animator.image_xscale=1;animkind=2}
-            if dir=1 && grav<>0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index=swim_anim; animator.image_xscale=-1;animkind=2}
+            if dir=0 && grav<>0 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index=swim_anim; animator.image_xscale=1;animkind=2}
+            if dir=1 && grav<>0 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_swim; animator.image_index=swim_anim; animator.image_xscale=-1;animkind=2}
             if swim_anim<9 {swim_anim+=0.2}
 
             if schylanie=1 && dir=0 {animator.sprite_index=global.raccoon_character_crouch; animator.image_xscale=1;image_index=0;animkind=3}
             if schylanie=1 && dir=1 {animator.sprite_index=global.raccoon_character_crouch; animator.image_xscale=-1;image_index=0;animkind=3}
             if !schylanie=1 {image_index=1}
 
-            shoot_anim=0
+            // Shooting (tail whip) animation — high priority, works in water too
+            if schylanie=1 {shoot_anim=0}
+            if dir=0 && shoot_anim>0 {animator.sprite_index=global.raccoon_character_shoot; animator.image_index+=0.5; animator.image_xscale=1; shoot_anim+=1;animkind=0}
+            if dir=1 && shoot_anim>0 {animator.sprite_index=global.raccoon_character_shoot; animator.image_index+=0.5; animator.image_xscale=-1; shoot_anim+=1;animkind=0}
+            if shoot_anim>8 {shoot_anim=0; animator.image_index=0}
 
             if global.efekty>5 {tmp=instance_create(x,y,o_mariofx); tmp.sprite_index=animator.sprite_index; tmp.image_index=animator.image_index; tmp.image_speed=0;tmp.image_xscale=animator.image_xscale}
 
@@ -2518,45 +2524,9 @@ action_id=603
 applies_to=self
 */
 // Pause
-if global.escowanie=0 && keyboard_check(vk_escape) {
-
-    if !variable_global_exists("testmode") {
-        global.testmode=0
-    }
-
-    warning2=0;
-    warning3=0;
-
-    if global.testmode=0 {
-        warning2=show_question('Do you REALLY want to quit the level and go back to title screen???')
-    } else {
-        warning2=show_question('Do you REALLY want to quit the level and go back to edit screen???')
-    }
-
-    if warning2=1 {
-        if global.testmode=1 {
-            global.godmode=0;
-            global.testout=1;
-            if global.sample=1 {sound_stop(snd_pmeter); sound_stop(snd_spin)}
-            p_meter_sfx_playing=0
-            file_text_close(global.toload);
-            // NET-SYNC: 测关结束返回。o_edmain 不持久化（换房即销毁），数据源 = F3 时的完整存盘（testsave/temp.smwl）；
-            // 测关期间好友的编辑已由 o_ednet 入队，返回后触发器统一重放+全量广播
-            //（也不 file_delete(toloader)：toloader 是 temp_play 解压件，已由 Load_Script_Play 清理）
-            room_goto(editor_level)
-        } else {
-            if global.currentlevel>0 && global.enablesave {warning3 = show_question('SAVE Progress?')}
-            if warning3=1 {Create_Save_File();}
-            global.escowanie=1;
-            file_text_close(global.toload);
-            file_delete(global.toloader);
-            if global.sample=1 {sound_stop(snd_pmeter); sound_stop(snd_spin)}
-            p_meter_sfx_playing=0
-            room_goto(title);
-            mm_stop_all_ext()
-        }
-    } else {exit}
-
+if global.escowanie=1 && !keyboard_check(vk_escape) {global.escowanie=0}
+if global.escowanie=0 && global.userpause=0 && keyboard_check(vk_escape) {
+    UserPause_Start()
 }
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -2583,6 +2553,8 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+//自定义暂停：外层暂停期间视差/血条/animator 同步全部休眠
+if global.userpause=1 exit
 //血条：有最终koopa出现时才出现
 if global.koopa_activated=2 {
     aktywowanamoza=1
@@ -2621,6 +2593,8 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+//自定义暂停：外层暂停期间 HUD 绘制与时间/奖命/调试键逻辑全部休眠（冻结帧由 o_pausemenu 绘制）
+if global.userpause=1 exit
 /*
 if global.escowanie=0 && keyboard_check(vk_escape) {
 

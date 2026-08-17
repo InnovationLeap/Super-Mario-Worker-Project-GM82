@@ -13,6 +13,7 @@ global.musicplay2=0
 global.nastawielkosc=0
 global.entered_editor=0
 global.escowanie=0
+global.userpause=0
 global.saving=0
 global.smoothmode=-1
 global.levelsmooth=-1
