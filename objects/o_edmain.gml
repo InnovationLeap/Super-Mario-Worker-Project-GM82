@@ -908,6 +908,8 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+// 敌人选择面板循环用的临时变量（GM8: var 必须在事件顶部声明，不能放进 if/while 块）
+var _er, _ec, _eid, _ex, _ey;
 if variable_global_exists('testmode') {
     if global.testmode = 1 {
         exit
@@ -2988,8 +2990,22 @@ if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& mouse_check_button(mb_lef
         draw_set_blend_mode(bm_subtract)
         draw_sprite_ext(s_edenemiesmask,0,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)
         draw_set_blend_mode(bm_normal)
-        if costawia2b=0 {draw_sprite_ext(s_edenemies,0,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)}
-        if costawia2b=1 {draw_sprite_ext(s_edenemies,1,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)}
+        // 空白面板底版（EnemiesSelect2.png），不再用内含图标的 s_edenemies
+        draw_sprite_ext(s_edenemies_blank,0,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)
+        // 敌人图标用游戏内真实精灵动态绘制到每个格子
+        // 逐格循环：6列×4行，每页24个，第2页从 id 25 起。
+        _er = 0;
+        while (_er < 4) {
+            _ec = 0;
+            while (_ec < 6) {
+                _eid = _er * 6 + _ec + 1 + costawia2b * 24;
+                _ex = view_xview[0] + 206 + _ec * 64;
+                _ey = view_yview[0] + 110 + _er * 64;
+                ed_enemy_draw(_eid, _ex, _ey);
+                _ec = _ec + 1;
+            }
+            _er = _er + 1;
+        }
         if abs(view_xview[0]+256-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 {draw_sprite_ext(s_left,0,view_xview[0]+256,view_yview[0]+384,1,1,0,c_yellow,1)} else {draw_sprite_ext(s_left,0,view_xview[0]+256,view_yview[0]+384,1,1,0,c_white,1)}
         if abs(view_xview[0]+512-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 {draw_sprite_ext(s_right,0,view_xview[0]+512,view_yview[0]+384,1,1,0,c_yellow,1)} else {draw_sprite_ext(s_right,0,view_xview[0]+512,view_yview[0]+384,1,1,0,c_white,1)}
         if abs(view_xview[0]+256-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 && mouse_check_button(mb_left) {

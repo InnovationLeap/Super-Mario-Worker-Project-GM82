@@ -346,3 +346,5 @@
 	|s_inleap
 	|sprite16
 	|s_inleapbar
++Enemies
+	|s_edenemies_blank
