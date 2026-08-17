@@ -65,8 +65,9 @@ for (i = 0; i < line_n; i += 1) { if (string_width(line_arr[i]) > qlw) { qlw = s
 qdw = qlw + pad_x * 2
 if (qdw < 240) { qdw = 240 }
 qdh = txt_y0 + line_n * line_h + 15 + btn_h + btn_bm
-yes_x = btn_mx
-no_x  = qdw - btn_mx - btn_w
+// 两按钮各自向水平中间靠拢 32px
+yes_x = btn_mx + 32
+no_x  = qdw - btn_mx - btn_w - 32
 btn_y = qdh - btn_bm - btn_h
 draw_set_font(-1)
 #define Step_0
