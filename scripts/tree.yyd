@@ -9,6 +9,7 @@
 +gm8_dialog
 	|scr_gm8_rfill
 	|scr_gm8_button
+	|scr_hold_confirm
 	|Load_Script_Main
 	|Load_Script_Prog
 	|Load_Script_Masta

@@ -6,6 +6,10 @@ applies_to=self
 */
 focus_yes = 1
 menu_delay = 3
+// 长按确认状态机（与弹窗解耦，见 scr_hold_confirm）
+hc_t = 0
+hc_progress = 0
+hold_need = 50
 // ===== GM82 对话框像素级配色（取自对比图右边真·GM82）=====
 // 绿系 187,189,186 / 142,165,130 / 143,154,183 是 GM8 3D 斜面手柄色
 // （对话框外框与按钮共用同一套 bevel：左上亮灰绿 / 右下蓝灰），并非纯绿外框。
@@ -83,15 +87,29 @@ if menu_delay = 0 {
     if keyboard_check_pressed(vk_right) { focus_yes = 1 - focus_yes }
     if keyboard_check_pressed(vk_up)    { focus_yes = 1 - focus_yes }
     if keyboard_check_pressed(vk_down)  { focus_yes = 1 - focus_yes }
-    if keyboard_check_pressed(vk_enter) {
-        if focus_yes = 1 { UserPause_Quit() } else { UserPause_End() }
-    }
-    if keyboard_check_pressed(vk_space) {
-        if focus_yes = 1 { UserPause_Quit() } else { UserPause_End() }
+    // No 仍瞬发退出（不受长按约束）
+    if focus_yes = 0 {
+        if keyboard_check_pressed(vk_enter) || keyboard_check_pressed(vk_space) { UserPause_End() }
     }
     if mouse_check_button_pressed(mb_left) {
-        if (mouse_x > qax + yes_x) && (mouse_x < qax + yes_x + btn_w) && (mouse_y > qay + btn_y) && (mouse_y < qay + btn_y + btn_h) { UserPause_Quit() }
-        if (mouse_x > qax + no_x)  && (mouse_x < qax + no_x  + btn_w) && (mouse_y > qay + btn_y) && (mouse_y < qay + btn_y + btn_h) { UserPause_End() }
+        if (mouse_x > qax + no_x) && (mouse_x < qax + no_x + btn_w) && (mouse_y > qay + btn_y) && (mouse_y < qay + btn_y + btn_h) { UserPause_End() }
+    }
+    // Yes 触发：Play(testmode=0) 需长按防误触；Edit(testmode=1) 反复测试需瞬发
+    if global.testmode = 1 {
+        // Edit：瞬发退出（Enter/Space 在 Yes 上，或点击 Yes 按钮）
+        if focus_yes = 1 {
+            if keyboard_check_pressed(vk_enter) || keyboard_check_pressed(vk_space) { UserPause_Quit() }
+        }
+        if mouse_check_button_pressed(mb_left) {
+            if (mouse_x > qax + yes_x) && (mouse_x < qax + yes_x + btn_w) && (mouse_y > qay + btn_y) && (mouse_y < qay + btn_y + btn_h) { UserPause_Quit() }
+        }
+        hc_progress = 0
+    } else {
+        // Play：长按确认（仅焦点在 Yes 时累计；Enter 按住 或 鼠标按住 Yes 按钮）
+        yes_hover = (mouse_x > qax + yes_x) && (mouse_x < qax + yes_x + btn_w) && (mouse_y > qay + btn_y) && (mouse_y < qay + btn_y + btn_h)
+        yes_held = (focus_yes = 1) && (keyboard_check(vk_enter) || (yes_hover && mouse_check_button(mb_left)))
+        hc_progress = scr_hold_confirm(yes_held, hold_need)
+        if (hc_progress >= 1) { UserPause_Quit() }
     }
     if (mouse_x > qax + yes_x) && (mouse_x < qax + yes_x + btn_w) && (mouse_y > qay + btn_y) && (mouse_y < qay + btn_y + btn_h) { focus_yes = 1 }
     if (mouse_x > qax + no_x)  && (mouse_x < qax + no_x  + btn_w) && (mouse_y > qay + btn_y) && (mouse_y < qay + btn_y + btn_h) { focus_yes = 0 }
@@ -130,7 +148,7 @@ for (i = 0; i < line_n; i += 1) {
     draw_text(qax + pad_x,     qay + txt_y0 + i * line_h,     line_arr[i])
 }
 draw_set_valign(fa_top)
-// 按钮：Yes 贴左 / No 贴右
-scr_gm8_button(qax + yes_x, qay + btn_y, btn_w, btn_h, 'Yes', focus_yes)
+// 按钮：Yes 贴左 / No 贴右；Yes 传长按进度(0..1)做内部填充反馈
+scr_gm8_button(qax + yes_x, qay + btn_y, btn_w, btn_h, 'Yes', focus_yes, hc_progress)
 scr_gm8_button(qax + no_x,  qay + btn_y, btn_w, btn_h, 'No', 1 - focus_yes)
 draw_set_halign(fa_left)
