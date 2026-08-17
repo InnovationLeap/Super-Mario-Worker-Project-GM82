@@ -106,8 +106,8 @@ var qax, qay, i;
 
 qax = floor(view_xview[0] + (640 - qdw) / 2)
 qay = floor(view_yview[0] + (480 - qdh) / 2)
-// 冻结帧（无暗色遮罩）
-if global.pausesprite >= 0 { draw_sprite(global.pausesprite, 0, view_xview[0], view_yview[0]) }
+// 冻结帧（拉伸铺满整个视图，避免视图缩放/滚动导致房间灰白背景透出）
+if global.pausesprite >= 0 { draw_sprite_stretched(global.pausesprite, 0, view_xview[0], view_yview[0], view_wview[0], view_hview[0]) }
 // 柔和投影（右下偏移，两层近似 GM82）
 draw_set_color(c_black)
 draw_set_alpha(0.12)
