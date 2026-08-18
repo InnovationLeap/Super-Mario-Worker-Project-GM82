@@ -909,7 +909,7 @@ action_id=603
 applies_to=self
 */
 // 选择面板循环用的临时变量（GM8: var 必须在事件顶部声明，不能放进 if/while 块）
-var _er, _ec, _eid, _ex, _ey, _sc_list, _sc_idx, _sc_coto, _bn_list, _bn_idx, _bn_coto;
+var _er, _ec, _eid, _ex, _ey, _sc_list, _sc_idx, _sc_coto, _bn_list, _bn_idx, _bn_coto, _mk_list, _mk_idx, _mk_coto, _mk_cnt, _mk_c;
 if variable_global_exists('testmode') {
     if global.testmode = 1 {
         exit
@@ -1625,7 +1625,38 @@ if costawia3<>0 && costawia3<>20 && costawia3!=35 && costawia3<42 && kliknieto=0
         draw_set_blend_mode(bm_subtract)
         draw_sprite_ext(s_edenemiesmask,0,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)
         draw_set_blend_mode(bm_normal)
-        if costawia4b=0 {draw_sprite_ext(s_edmarkers,0,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)}
+        if costawia4b=0 {
+            draw_sprite_ext(s_edenemies_blank,0,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)
+            // 逐格子程序化绘制 marks 图标 + 文字（第0/1/3行6列，第2行5列）
+            _mk_list = "01 02 03 04 05 06"
+            _mk_c = 0
+            while (_mk_c < 6) {
+                _mk_coto = real(string_copy(_mk_list, _mk_c * 3 + 1, 2))
+                ed_mark_draw(_mk_coto, view_xview[0]+206+_mk_c*64, view_yview[0]+110, ed_mark_label(_mk_coto))
+                _mk_c = _mk_c + 1
+            }
+            _mk_list = "07 08 09 10 11 12"
+            _mk_c = 0
+            while (_mk_c < 6) {
+                _mk_coto = real(string_copy(_mk_list, _mk_c * 3 + 1, 2))
+                ed_mark_draw(_mk_coto, view_xview[0]+206+_mk_c*64, view_yview[0]+110+64, ed_mark_label(_mk_coto))
+                _mk_c = _mk_c + 1
+            }
+            _mk_list = "13 14 15 16 17"
+            _mk_c = 0
+            while (_mk_c < 5) {
+                _mk_coto = real(string_copy(_mk_list, _mk_c * 3 + 1, 2))
+                ed_mark_draw(_mk_coto, view_xview[0]+206+_mk_c*64, view_yview[0]+110+64*2, ed_mark_label(_mk_coto))
+                _mk_c = _mk_c + 1
+            }
+            _mk_list = "19 20 21 22 23 24"
+            _mk_c = 0
+            while (_mk_c < 6) {
+                _mk_coto = real(string_copy(_mk_list, _mk_c * 3 + 1, 2))
+                ed_mark_draw(_mk_coto, view_xview[0]+206+_mk_c*64, view_yview[0]+110+64*3, ed_mark_label(_mk_coto))
+                _mk_c = _mk_c + 1
+            }
+        }
         //if costawia4b=1{draw_sprite_ext(s_edmarkers,1,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)}
         //桥预览
         draw_sprite(s_platformmasks,global.platformanime,view_xview[0]+400+61,view_yview[0]+240+239)
@@ -1634,10 +1665,6 @@ if costawia3<>0 && costawia3<>20 && costawia3!=35 && costawia3<42 && kliknieto=0
         draw_sprite(s_platformmasks,global.platformanime,view_xview[0]+400+253,view_yview[0]+240+236)
         draw_sprite(s_platformmasks,global.platformanime,view_xview[0]+400+316,view_yview[0]+240+233)
         draw_sprite(s_platformmasks,global.platformanime,view_xview[0]+400+381,view_yview[0]+240+231)
-        //解密砖预览
-        draw_sprite(s_switchmasks,global.yinyangcolor+8*global.assist,view_xview[0]+224+64*3,view_yview[0]+128+64)
-        draw_sprite(s_yinmasks,global.yinyangcolor+8*global.assist,view_xview[0]+224+64*4,view_yview[0]+128+64)
-        draw_sprite(s_yangmasks,global.yinyangcolor+8*global.assist,view_xview[0]+224+64*5,view_yview[0]+128+64)
         //半实心预览
         draw_sprite(s_ledgemasks,global.ledge_type,view_xview[0]+224+64,view_yview[0]+128+128)
         //水位砖预览
@@ -1654,10 +1681,10 @@ if costawia3<>0 && costawia3<>20 && costawia3!=35 && costawia3<42 && kliknieto=0
             global.platformanime+=1
         }
 
-        if mouse_wheel_up() && global.yinyangcolor>0 && mouse_y>view_yview[0]+128+64-16 && mouse_y<view_yview[0]+128+64+48 && mouse_x>view_xview[0]+224+64*3 && mouse_x<view_xview[0]+224+64*5+64 {//鼠标滚轮向上
+        if mouse_wheel_up() && global.yinyangcolor>0 && mouse_y>view_yview[0]+128+64-16 && mouse_y<view_yview[0]+128+64+48 && mouse_x>view_xview[0]+224+64*2 && mouse_x<view_xview[0]+224+64*5+64 {//鼠标滚轮向上（覆盖 switch/type a/type b 列）
             global.yinyangcolor-=1
         }
-        if mouse_wheel_down() && global.yinyangcolor<7 && mouse_y>view_yview[0]+128+64-16 && mouse_y<view_yview[0]+128+64+48 && mouse_x>view_xview[0]+224+64*3 && mouse_x<view_xview[0]+224+64*5+64 {//鼠标滚轮向下
+        if mouse_wheel_down() && global.yinyangcolor<7 && mouse_y>view_yview[0]+128+64-16 && mouse_y<view_yview[0]+128+64+48 && mouse_x>view_xview[0]+224+64*2 && mouse_x<view_xview[0]+224+64*5+64 {//鼠标滚轮向下
             global.yinyangcolor+=1
         }
 

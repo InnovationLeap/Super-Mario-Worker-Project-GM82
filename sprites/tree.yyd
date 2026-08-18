@@ -98,12 +98,9 @@
 	|s_smooth
 	|s_swimfishbegin
 	|s_swimfishend
-	|s_switchmasks
 	|s_waterbegin
 	|s_waterchangemasks
 	|s_waterend
-	|s_yangmasks
-	|s_yinmasks
 	|sprite175
 	|sprite176
 	|sprite179

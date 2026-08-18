@@ -171,3 +171,5 @@ ed_scenery_draw
 ed_scenery_label
 ed_bonus_draw
 ed_bonus_label
+ed_mark_draw
+ed_mark_label

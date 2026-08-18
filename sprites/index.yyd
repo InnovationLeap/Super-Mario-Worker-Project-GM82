@@ -465,9 +465,6 @@ s_biglava
 s_static
 s_shyguy
 s_waterchanger
-s_yinmasks
-s_yangmasks
-s_switchmasks
 s_ice
 s_breakice
 s_camerabegin
