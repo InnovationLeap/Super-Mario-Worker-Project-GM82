@@ -34,10 +34,16 @@ case 13: _spr = s_fish2;           break;
 case 14: _spr = s_fish3;           break;
 case 15: _spr = s_fish4;           break;
 case 16: _spr = s_bonusdead;       break;
-// 以下为滚轮滑动控制变种的「特殊物品」，面板里不绘制图标：
+// 以下为滚轮滑动控制变种的「特殊物品」，现改用游戏内真实精灵绘制（不再依赖 mask 覆盖层）：
 //   17 扎地食人花 / 20 探照灯 / 22 刺(MW) / 37 刺(MF) / 42 探照灯(静止) / 43 龟壳
-// 它们的变种预览由 o_edmain 里单独的 mask 绘制负责（page0）。
-case 17: return 0; // 扎地食人花
+case 17:
+    switch (global.spike_type) {
+        case 0: _spr = s_groundpiranhaup;    _subimg = 2; break;
+        case 1: _spr = s_groundpiranhadown;  _subimg = 2; break;
+        case 2: _spr = s_groundpiranhaleft;  _subimg = 2; break;
+        case 3: _spr = s_groundpiranharight; _subimg = 2; break;
+    }
+    break; // 扎地食人花
 case 18: _spr = s_lava;            break;
 // 锤子龟：本体左偏，右侧绘制三个不同角度的锤子（最下方半透明）
 case 19:
@@ -46,9 +52,35 @@ case 19:
     draw_sprite_ext(s_hammer, 0, _cx + 52, _cy + 34, 0.5, 0.5,   0, c_white, 0.7);
     draw_sprite_ext(s_hammer, 0, _cx + 46, _cy + 50, 0.5, 0.5, -45, c_white, 0.4);
     return 0;
-case 20: return 0; // 探照灯
+case 20:
+    // 探照灯：灯芯(roto-center)在格子左下角，探照灯(roto-disc)在右上角。
+    // 圆形：disc 在右上角；花瓣：disc 靠近灯芯(格子中點)，且灯芯与右上角之间有两个残影 disc。
+    _sw = sprite_get_width(s_rotospotcenter);
+    _sh = sprite_get_height(s_rotospotcenter);
+    _ox = sprite_get_xoffset(s_rotospotcenter);
+    _oy = sprite_get_yoffset(s_rotospotcenter);
+    _dx = (_cx + 18) - (_sw / 2 - _ox);   // 灯芯中心落在 (_cx+14, _cy+50) 左下角
+    _dy = (_cy + 50) - (_sh / 2 - _oy);
+    draw_sprite_ext(s_rotospotcenter, 0, _dx, _dy, 0.8, 0.8, 0, c_white, 1);
+    if global.petal_spotlight {
+        // 花瓣：disc 靠近灯芯(中点) + 两个残影延伸到右上角
+        draw_sprite_ext(s_roto, 4, _cx + 50 - 8, _cy + 14, 0.8, 0.8, 0, c_white, 0.2);
+        draw_sprite_ext(s_roto, 5, _cx + 41 - 8, _cy + 23, 0.8, 0.8, 0, c_white, 0.45);
+        draw_sprite_ext(s_roto, 6, _cx + 32 - 8, _cy + 32, 0.8, 0.8, 0, c_white, 1);
+    } else {
+        // 圆形：disc 在右上角
+        draw_sprite_ext(s_roto, 6, _cx + 50 - 8, _cy + 14, 0.8, 0.8, 0, c_white, 1);
+    }
+    return 0; // 探照灯
 case 21: _spr = s_lavaball;        break;
-case 22: return 0; // 刺(MW)
+case 22:
+    switch (global.spike_type) {
+        case 0: _spr = s_spike;  break;
+        case 1: _spr = s_spike2; break;
+        case 2: _spr = s_spike3; break;
+        case 3: _spr = s_spike4; break;
+    }
+    break; // 刺(MW)
 case 23: _spr = sprite157;         break; // thwomp
 case 24: _spr = s_bowser;          break;
 case 25: _spr = s_fahlee;          break;
@@ -68,7 +100,14 @@ case 33: _spr = s_troopaflyred;   _subimg = 1; break; // 红飞龟用另一帧
 case 34: _spr = s_troopablue;      _subimg = 1; break; // 蓝龟用另一帧
 case 35: _spr = s_troopabluefly;   _subimg = 1; break; // 蓝飞龟用另一帧
 case 36: _spr = s_elecoral;        _subimg = 1; break; // 电珊瑚用发电那一帧
-case 37: return 0; // 刺(MF)
+case 37:
+    switch (global.spike_type) {
+        case 0: _spr = s_mfc;  break;
+        case 1: _spr = s_mfc2; break;
+        case 2: _spr = s_mfc3; break;
+        case 3: _spr = s_mfc4; break;
+    }
+    break; // 刺(MF)
 case 38: _spr = s_troopagold;      _subimg = 1; break; // 黄/金龟用另一帧
 case 39: _spr = s_troopagoldfly;   _subimg = 1; break; // 金/黄飞龟用另一帧
 // id 40/41 为区域图标,直接组合绘制(水面/天空背景 + bank 红鱼),不走统一缩放
@@ -118,7 +157,26 @@ case 41:
     draw_sprite_ext(s_fish1, 0, _cx + 32, _cy + 19, 0.95, 0.95, 0, c_white, 1);
     return 0;
 case 42: _spr = s_rotostill;       break; // 静止探照灯（只有一种，需绘制）
-case 43: return 0; // 龟壳
+case 43:
+    switch (global.shell_type) {
+        case 0:  _spr = s_troopashell;     _subimg = 0; break;
+        case 1:  _spr = s_troopashell;     _subimg = 1; break;
+        case 2:  _spr = s_trooparedshell;  _subimg = 0; break;
+        case 3:  _spr = s_trooparedshell;  _subimg = 1; break;
+        case 4:  _spr = s_troopablueshell; _subimg = 0; break;
+        case 5:  _spr = s_troopablueshell; _subimg = 3; break;
+        case 6:  _spr = s_troopashellgold; _subimg = 0; break;
+        case 7:  _spr = s_troopashellgold; _subimg = 1; break;
+        case 8:  _spr = s_buzzyshell;      _subimg = 0; break;
+        case 9:  _spr = s_buzzyshell;      _subimg = 1; break;
+        case 10: _spr = s_spinyshell;      _subimg = 0; break;
+        case 11: _spr = s_spinyshell;      _subimg = 1; break;
+    }
+    _w = sprite_get_width(_spr); _h = sprite_get_height(_spr);
+    _ox = sprite_get_xoffset(_spr); _oy = sprite_get_yoffset(_spr);
+    _dx = floor((_cx + 32) - (_w / 2 - _ox)); _dy = floor((_cy + 32) - (_h / 2 - _oy));
+    draw_sprite_ext(_spr, _subimg, _dx, _dy, 0.8, 0.8, 0, c_white, 1);
+    return 0; // 龟壳
 
 case 44: _spr = s_piraniablue;    _subimg = 1; break; // 倒食人花-蓝 用另一帧
 case 45: _spr = s_piraniablue2;   _subimg = 1; break; // 倒食人花 用另一帧

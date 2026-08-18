@@ -1665,8 +1665,7 @@ if costawia3<>0 && costawia3<>20 && costawia3!=35 && costawia3<42 && kliknieto=0
         draw_sprite(s_platformmasks,global.platformanime,view_xview[0]+400+253,view_yview[0]+240+236)
         draw_sprite(s_platformmasks,global.platformanime,view_xview[0]+400+316,view_yview[0]+240+233)
         draw_sprite(s_platformmasks,global.platformanime,view_xview[0]+400+381,view_yview[0]+240+231)
-        //半实心预览
-        draw_sprite(s_ledgemasks,global.ledge_type,view_xview[0]+224+64,view_yview[0]+128+128)
+        //半实心预览（LEDGE 已改为 ed_mark_draw 用游戏内 s_ledge 绘制，不再使用 s_ledgemasks 覆盖层）
         //水位砖预览
         if(global.water_change_type<2) {draw_sprite(s_waterchangemasks,global.water_change_type+2*global.lava,view_xview[0]+224+128,view_yview[0]+128+128)} else {draw_sprite(s_waterchangemasks,4,view_xview[0]+224+128,view_yview[0]+128+128)}
         //强滚预览
@@ -1691,7 +1690,7 @@ if costawia3<>0 && costawia3<>20 && costawia3!=35 && costawia3<42 && kliknieto=0
         if mouse_wheel_up() && global.ledge_type>0 && mouse_y>view_yview[0]+128+128-16 && mouse_y<view_yview[0]+128+128+48 {//鼠标滚轮向上
             if(mouse_x<view_xview[0]+334)global.ledge_type-=1
         }
-        if mouse_wheel_down() && global.ledge_type<sprite_get_number(s_ledgemasks)-1 && mouse_y>view_yview[0]+128+128-16 && mouse_y<view_yview[0]+128+128+48 {//鼠标滚轮向下
+        if mouse_wheel_down() && global.ledge_type<sprite_get_number(s_ledge)-1 && mouse_y>view_yview[0]+128+128-16 && mouse_y<view_yview[0]+128+128+48 {//鼠标滚轮向下
             if(mouse_x<view_xview[0]+334)global.ledge_type+=1
         }
         if mouse_wheel_up() && global.water_change_type>0 && mouse_y>view_yview[0]+128+128-16 && mouse_y<view_yview[0]+128+128+48 {//鼠标滚轮向上
@@ -3084,10 +3083,7 @@ if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& mouse_check_button(mb_lef
                 if mouse_wheel_up() && global.spike_type>0 {global.spike_type-=1}
                 if mouse_wheel_down() && global.spike_type<3 {global.spike_type+=1}
             }
-            draw_sprite(s_groundpiranhamask,global.spike_type,view_xview[0]+206+270,view_yview[0]+174+80)
-            draw_sprite(s_spikemask,global.spike_type,view_xview[0]+214+198,view_yview[0]+174+144)
-            //用贴图显示探照灯图标：第一帧默认圆形，第二帧花瓣
-            draw_sprite(s_rotomask,global.petal_spotlight,view_xview[0]+270,view_yview[0]+302)
+            // 17/20/22 的图标已由 ed_enemy_draw 用游戏内精灵绘制（扎地食人花/探照灯/刺），不再使用 mask 覆盖层
         }
 
         if costawia2b=1 {
@@ -3097,8 +3093,7 @@ if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& mouse_check_button(mb_lef
             if mouse_wheel_down() && global.shell_type<11 {//鼠标滚轮向下
                 global.shell_type+=1
             }
-            draw_sprite(s_mfcmask,global.spike_type,view_xview[0]+206+13,view_yview[0]+172+82)
-            if global.shell_type<10 {draw_sprite(s_shellmask,global.shell_type,view_xview[0]+206+13,view_yview[0]+174+144)} else {draw_sprite(s_spinyshell,global.shell_type-10,view_xview[0]+206+13+16,view_yview[0]+174+144+16)}
+            // 37/43 的图标已由 ed_enemy_draw 用游戏内精灵绘制（mf刺/龟壳），不再使用 mask 覆盖层
         }
     }
 

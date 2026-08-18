@@ -479,11 +479,8 @@ s_waterlittle
 s_waterbegin
 s_waterend
 s_waterchangemasks
-s_ledgemasks
 
 s_waterchanger2
-
-s_shellmask
 
 s_sceneriesbankplay
 s_enemiesblock4
@@ -546,9 +543,6 @@ s_spike2
 s_spike3
 s_spike4
 s_groundpiranharight
-s_spikemask
-s_groundpiranhamask
-s_mfcmask
 s_thunder
 s_inleapbar
 sprite554
@@ -556,7 +550,6 @@ sprite554
 s_setlight
 s_thwompdetector
 s_lightlava
-s_rotomask
 s_autoscrollmask
 s_pmeterbar
 s_pmeter_active

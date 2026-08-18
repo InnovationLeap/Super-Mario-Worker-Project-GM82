@@ -73,18 +73,14 @@
 	|s_help7
 	|s_help8
 	|s_kickeffect
-	|s_spikemask
 	|s_ledge
-	|s_ledgemasks
 	|s_left
 	|s_markersbank
 	|s_markersbank2
 	|s_markersbank3
 	|s_markersbank4
 	|s_maskselector
-	|s_mfcmask
 	|s_onlyyou
-	|s_groundpiranhamask
 	|s_platformlabels
 	|s_platformmasks
 	|s_platforms
@@ -94,7 +90,6 @@
 	|s_sceneriesbankplay
 	|s_scrollcenter
 	|s_sealroof
-	|s_shellmask
 	|s_smooth
 	|s_swimfishbegin
 	|s_swimfishend
@@ -105,7 +100,6 @@
 	|sprite176
 	|sprite179
 	|s_setlight
-	|s_rotomask
 	|s_autoscrollmask
 +s_fonts
 	|s_edfonts
