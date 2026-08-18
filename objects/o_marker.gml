@@ -615,18 +615,6 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
                 raccoon_fall_timer = 0
             }
         }
-        if global.rodzajmaria <> 6 {
-            raccoon_fall = 0
-            raccoon_fly_allowed = 0
-            raccoon_flew = 0
-            raccoon_fly_timer = 0
-            p_meter = 0
-            if p_meter_sfx_playing=1 {
-                p_meter_sfx_playing=0
-                if global.sample=1 {sound_stop(snd_pmeter)}
-            }
-        }
-
         // Bugort - tlumaczenie w Create Actions
         // who can tell me wtf is this
 
@@ -825,6 +813,21 @@ while teststep2=1 && steploop2<3+szybkosc*-1 {steploop2+=1; if !place_meeting(x,
         y = round(y);
 
     }}
+
+    // Raccoon 状态清理：不受 shell_lock/pauza 守卫限制，每帧执行
+    // （死亡/受伤会置 shell_lock=1 或 pauza=2，守卫块被跳过，
+    //  若不在此处停掉 snd_pmeter，摔死/受伤后飞行音效会一直残留）
+    if global.rodzajmaria <> 6 {
+        raccoon_fall = 0
+        raccoon_fly_allowed = 0
+        raccoon_flew = 0
+        raccoon_fly_timer = 0
+        p_meter = 0
+        if p_meter_sfx_playing=1 {
+            p_meter_sfx_playing=0
+            if global.sample=1 {sound_stop(snd_pmeter)}
+        }
+    }
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
