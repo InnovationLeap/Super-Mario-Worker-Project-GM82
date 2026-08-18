@@ -1,0 +1,47 @@
+// ed_scenery_label(coto) — 返回景物选择面板格子下方的说明文字（全大写，空格分隔）
+var _coto; _coto = argument0;
+switch (_coto) {
+    case 1: return "CLOUD";
+    case 2: return "BUSH";
+    case 3: return "SMALL TREE";
+    case 4: return "BIG TREE";
+    case 5: return "FENCE";
+    case 6: return "NIGHT TREE";
+    case 7: return "DARK CLOUD";
+    case 8: return "DARK BUSH";
+    case 9: return "DARK TREE";
+    case 10: return "BIG DARK TREE";
+    case 11: return "DARK FENCE";
+    case 12: return "BIG NIGHT TREE";
+    case 13: return "DUSK CLOUD";
+    case 14: return "BRIGHT LIGHT";
+    case 15: return "DISABLED LIGHT";
+    case 16: return "FORT";
+    case 17: return "CASTLE";
+    case 18: return "POTRAIT";
+    case 19: return "CANNON BASE";
+    case 20: return "BASE BOTTOM";
+    case 21: return "REVERSE BASE";
+    case 22: return "DUSK BUSH";
+    case 23: return "DUSK TREE";
+    case 24: return "BIG DUSK TREE";
+    case 25: return "SNOW BUSH";
+    case 26: return "SNOW TREE";
+    case 27: return "BIG SNOW TREE";
+    case 28: return "SNOW FENCE";
+    case 29: return "SNOW FORT";
+    case 30: return "SNOW CASTLE";
+    case 31: return "DESERT BUSH";
+    case 32: return "DESERT TREE";
+    case 33: return "BIG DESERT TREE";
+    case 34: return "DESERT CLOUD";
+    case 35: return "LAVA FALL";
+    case 36: return "BRIDGE FENCE";
+    case 37: return "GREY CLOUD";
+    case 38: return "ROTO-DISC CORE";
+    case 39: return "LIGHT CORAL";
+    case 40: return "MEDIUM CORAL";
+    case 41: return "DARK CORAL";
+    case 42: return "IMITATER";
+}
+return "";

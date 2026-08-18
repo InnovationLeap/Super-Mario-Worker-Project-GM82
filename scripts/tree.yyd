@@ -180,3 +180,5 @@
 	|UserPause_Quit
 +appearance
 	|ed_enemy_draw
+	|ed_scenery_draw
+	|ed_scenery_label

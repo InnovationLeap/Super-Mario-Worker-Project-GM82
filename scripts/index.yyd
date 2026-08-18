@@ -167,3 +167,5 @@ UserPause_End
 UserPause_Quit
 scr_hold_confirm
 ed_enemy_draw
+ed_scenery_draw
+ed_scenery_label
