@@ -908,8 +908,8 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-// 敌人选择面板循环用的临时变量（GM8: var 必须在事件顶部声明，不能放进 if/while 块）
-var _er, _ec, _eid, _ex, _ey, _sc_list, _sc_idx, _sc_coto;
+// 选择面板循环用的临时变量（GM8: var 必须在事件顶部声明，不能放进 if/while 块）
+var _er, _ec, _eid, _ex, _ey, _sc_list, _sc_idx, _sc_coto, _bn_list, _bn_idx, _bn_coto;
 if variable_global_exists('testmode') {
     if global.testmode = 1 {
         exit
@@ -1262,7 +1262,23 @@ if scrolla<=1 && scrollb<=1 {
         draw_set_blend_mode(bm_subtract)
         draw_sprite_ext(s_edenemiesmask,0,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)
         draw_set_blend_mode(bm_normal)
-        draw_sprite_ext(s_edbonuses,o_edmain.bonus_page,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)
+        draw_sprite_ext(s_edenemies_blank,0,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)
+        _bn_list = ""
+        if bonus_page=0 {_bn_list = "01 02 03 04 05 06 07 08 09 10 11 12 19 20 21 22 23 24 13 14 15 16 17 18"}
+        if bonus_page=1 {_bn_list = "25 26 27"}
+        _er = 0
+        while (_er < 4) {
+            _ec = 0
+            while (_ec < 6) {
+                _bn_idx = _er * 6 + _ec
+                if _bn_idx < string_length(_bn_list) / 3 {
+                    _bn_coto = real(string_copy(_bn_list, _bn_idx * 3 + 1, 2))
+                    ed_bonus_draw(_bn_coto, view_xview[0]+206+_ec*64, view_yview[0]+110+_er*64, "")
+                }
+                _ec = _ec + 1
+            }
+            _er = _er + 1
+        }
         // Bonus page arrows (like scenery does)
         if abs(view_xview[0]+256-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 {draw_sprite_ext(s_left,0,view_xview[0]+256,view_yview[0]+384,1,1,0,c_yellow,1)} else {draw_sprite_ext(s_left,0,view_xview[0]+256,view_yview[0]+384,1,1,0,c_white,1)}
         if abs(view_xview[0]+512-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 {draw_sprite_ext(s_right,0,view_xview[0]+512,view_yview[0]+384,1,1,0,c_yellow,1)} else {draw_sprite_ext(s_right,0,view_xview[0]+512,view_yview[0]+384,1,1,0,c_white,1)}
