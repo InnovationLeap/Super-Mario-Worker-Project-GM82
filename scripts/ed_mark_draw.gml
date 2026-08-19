@@ -1,17 +1,18 @@
 // ed_mark_draw(pc4, cx, cy, label)
 // 在 64x64 的格子（左上角 cx,cy）内绘制 marks 图标 + 下方说明文字。
 // 图标源按原 s_edmarkers 面板逐格还原，并居中于格子。
-// 滚轮类（7/15/19-24）只写文字、不画图标，由现有覆盖层提供预览。
+// 滚轮类（7/15）只写文字、不画图标，由现有覆盖层提供预览。
+// 运输桥（19-24）：桥条用 s_platformmasks（滚轮换样式），方向箭头代码绘制（原 s_edmarkersmask 烘焙遮罩已废弃）。
 // LEDGE(14) 用游戏内 s_ledge 绘制（滚轮变种由 global.ledge_type 驱动）。
 // TYPE A(11)/TYPE B(12) 用游戏内 s_yinyang 贴图绘制，滚轮改色由 global.yinyangcolor 驱动。
 // 文字使用 fnt_label（Arial Narrow Bold Italic，白字无描边，全大写），与 enemies/scenery/bonus 一致。
-var _pc4, _cx, _cy, _label, _wheel, _spr, _sub, _sw, _sh, _s, _dx, _dy, _tw, _th, _ty, _l1, _l2, _i;
+var _pc4, _cx, _cy, _label, _wheel, _spr, _sub, _sw, _sh, _s, _dx, _dy, _tw, _th, _ty, _l1, _l2, _i, _as, _ax, _ay, _at, _aa, _bx, _by;
 _pc4 = argument0
 _cx = argument1
 _cy = argument2
 _label = argument3
 _wheel = 0
-if _pc4 = 7 || _pc4 = 15 || (_pc4 >= 19 && _pc4 <= 24) {_wheel = 1}
+if _pc4 = 7 || _pc4 = 15 {_wheel = 1}
 if _wheel = 0 {
     _spr = -1
     _sub = 0
@@ -29,14 +30,31 @@ if _wheel = 0 {
             draw_sprite_ext(s_blocks, 6, _dx + 32 * _s, _dy, _s, _s, 0, c_white, 1)
             draw_sprite_ext(s_blocks, 7, _dx, _dy + 32 * _s, _s, _s, 0, c_white, 1)
             draw_sprite_ext(s_blocks, 8, _dx + 32 * _s, _dy + 32 * _s, _s, _s, 0, c_white, 1)
+            // 顶部箭头：白色下指、尾矩形自下而上淡出（VIEW CONTROL 同款），缩放 0.6 居中于格子顶部
+            _as = 0.6
+            _ax = _cx + 32 - 15 * _as
+            _ay = _cy - 4
+            draw_set_color(c_white)
+            draw_set_alpha(1)
+            draw_triangle(_ax + 4 * _as, _ay + 22 * _as, _ax + 25 * _as, _ay + 22 * _as, _ax + 15 * _as, _ay + 40 * _as, 0)
+            _i = 12
+            while (_i <= 21)
+            {
+                _at = (_i - 12) / 9
+                _aa = 0.15 + _at * 0.65
+                draw_set_alpha(_aa)
+                draw_rectangle(_ax + 8 * _as, _ay + _i * _as, _ax + 22 * _as, _ay + _i * _as + _as, 0)
+                _i = _i + 1
+            }
+            draw_set_alpha(1)
             _spr = -2;
         } break;
         // LEVEL END：通关杠，整体向下移 48px
         case 2: {_spr = s_markersbank2; _sub = 0; _sw = 94; _sh = 286; _s = 0.15;} break;
         // SOLID
         case 3: {_spr = s_markersbank3; _sub = 0;} break;
-        // PLAYER START
-        case 4: {_spr = s_markersbank4; _sub = 0;} break;
+        // PLAYER START：用 s_bigmariorun 第 1 帧（40x80 缩到 20x40 居中，靠上半部避开 cy+50 标签）
+        case 4: {_spr = s_bigmariorun; _sub = 1; _sw = 40; _sh = 80; _s = 0.5;} break;
         // CHECK POINT：使用激活帧 s_checkpoint2（与 o_checkpoint 激活后一致）
         case 5: {_spr = s_checkpoint2; _sub = 0; _sw = 106; _sh = 111; _s = 0.4;} break;
         // SEALER
@@ -59,14 +77,97 @@ if _wheel = 0 {
         case 16: {_spr = s_bgmchange; _sub = 2;} break;
         // VIEW CONTROL
         case 17: {_spr = s_camerabegin; _sub = 0;} break;
+        // 运输桥系列：桥条 s_platformmasks（滚轮换样式 global.platformanime），居中于格子
+        case 19: {_spr = s_platformmasks; _sub = global.platformanime; _sw = 66; _sh = 16;} break;
+        case 20: {_spr = s_platformmasks; _sub = global.platformanime; _sw = 66; _sh = 16;} break;
+        case 21: {_spr = s_platformmasks; _sub = global.platformanime; _sw = 66; _sh = 16;} break;
+        case 22: {_spr = s_platformmasks; _sub = global.platformanime; _sw = 66; _sh = 16;} break;
+        case 23: {_spr = s_platformmasks; _sub = global.platformanime; _sw = 66; _sh = 16;} break;
+        case 24: {_spr = s_platformmasks; _sub = global.platformanime; _sw = 66; _sh = 16;} break;
     }
     if _spr > 0 {
         _dx = floor(_cx + 32 - _sw * _s / 2)
         _dy = floor(_cy + 32 - _sh * _s / 2)
         // 特殊偏移
         if _pc4 = 2 {_dy = _dy + 48}
+        if _pc4 = 4 {_dx = _dx + 8; _dy = _dy + 32}
         if _pc4 = 5 {_dx = _dx + 12; _dy = _dy + 26}
+        // 运输桥：实测校正——整体位移 +212,+122（origin 偏置 207,154 再微调 5,-32）；scale 0.8
+        if _pc4 >= 19 && _pc4 <= 24 {_dx = _dx + 212; _dy = _dy + 122; _s = 0.8}
+        // SPEED 1/2/3（20-22）的桥再下移 7px，又上移 3px → 净 +4px
+        if _pc4 = 20 || _pc4 = 21 || _pc4 = 22 {_dy = _dy + 4}
         draw_sprite_ext(_spr, _sub, _dx, _dy, _s, _s, 0, c_white, 1)
+    }
+    // 运输桥方向箭头：passage 同款“三角头+尾矩形淡出”，全整数像素；四个方向由 ▼ 基准绕几何中心精确旋转（90/180°）保证形状一致
+    if _pc4 >= 19 && _pc4 <= 24 {
+        if _pc4 = 20 || _pc4 = 21 || _pc4 = 22 {
+            // SPEED：左 ◀（14x12）+ 右 ▶（14x12），垂直居中于桥（中心 y=33）
+            _ay = _cy + 27
+            // ◀：三角底边 x8 (y2-13) 尖 (0,7)，尾矩形 x9-13 y4-11，向左淡出（0.80→0.15）
+            _ax = _cx + 2
+            draw_set_color(c_white)
+            draw_set_alpha(1)
+            draw_triangle(_ax + 8, _ay + 2, _ax + 8, _ay + 13, _ax + 0, _ay + 7, 0)
+            _i = 0
+            while (_i <= 5) {
+                _at = _i / 5
+                _aa = 0.80 - _at * 0.65
+                draw_set_alpha(_aa)
+                draw_rectangle(_ax + 8 + _i, _ay + 4, _ax + 9 + _i, _ay + 12, 0)
+                _i = _i + 1
+            }
+            // ▶：三角底边 x5 (y2-13) 尖 (13,7)，尾矩形 x0-4 y4-11，向右淡出（0.15→0.80）
+            _ax = _cx + 48
+            draw_set_alpha(1)
+            draw_triangle(_ax + 5, _ay + 2, _ax + 5, _ay + 13, _ax + 13, _ay + 7, 0)
+            _i = 0
+            while (_i <= 5) {
+                _at = _i / 5
+                _aa = 0.15 + _at * 0.65
+                draw_set_alpha(_aa)
+                draw_rectangle(_ax + 0 + _i, _ay + 4, _ax + 1 + _i, _ay + 12, 0)
+                _i = _i + 1
+            }
+        } else if _pc4 = 24 {
+            // CONTINUOUS 上：桥下方 ▲▲▲（12x14，▼ 旋转180°：三角底边 y9 (x1-12) 尖 (6,1)，尾 x3-10 y10-14）
+            _i = 0
+            while (_i < 3) {
+                _ax = _cx + 11 + _i * 15
+                _ay = _cy + 32
+                draw_set_color(c_white)
+                draw_set_alpha(1)
+                draw_triangle(_ax + 1, _ay + 9, _ax + 12, _ay + 9, _ax + 6, _ay + 1, 0)
+                _bx = 0
+                while (_bx <= 5) {
+                    _at = _bx / 5
+                    _aa = 0.80 - _at * 0.65
+                    draw_set_alpha(_aa)
+                    draw_rectangle(_ax + 3, _ay + 9 + _bx, _ax + 11, _ay + 10 + _bx, 0)
+                    _bx = _bx + 1
+                }
+                _i = _i + 1
+            }
+        } else {
+            // FALLING ON STEP / CONTINUOUS 下：桥上方 ▼▼▼（12x14，基准：三角底边 y5 (x0-11) 尖 (6,13)，尾 x2-9 y0-4）
+            _i = 0
+            while (_i < 3) {
+                _ax = _cx + 11 + _i * 15
+                _ay = _cy + 4
+                draw_set_color(c_white)
+                draw_set_alpha(1)
+                draw_triangle(_ax + 0, _ay + 5, _ax + 11, _ay + 5, _ax + 6, _ay + 13, 0)
+                _bx = 0
+                while (_bx <= 4) {
+                    _at = _bx / 4
+                    _aa = 0.15 + _at * 0.65
+                    draw_set_alpha(_aa)
+                    draw_rectangle(_ax + 2, _ay + _bx, _ax + 10, _ay + _bx + 1, 0)
+                    _bx = _bx + 1
+                }
+                _i = _i + 1
+            }
+        }
+        draw_set_alpha(1)
     }
 }
 // 下方说明文字：大号字体渲染后再整体缩放，避免小号位图发虚。白字无描边，全大写，至多两行

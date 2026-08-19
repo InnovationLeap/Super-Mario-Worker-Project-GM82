@@ -1658,20 +1658,12 @@ if costawia3<>0 && costawia3<>20 && costawia3!=35 && costawia3<42 && kliknieto=0
             }
         }
         //if costawia4b=1{draw_sprite_ext(s_edmarkers,1,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)}
-        //桥预览
-        draw_sprite(s_platformmasks,global.platformanime,view_xview[0]+400+61,view_yview[0]+240+239)
-        draw_sprite(s_platformmasks,global.platformanime,view_xview[0]+400+126,view_yview[0]+240+236)
-        draw_sprite(s_platformmasks,global.platformanime,view_xview[0]+400+190,view_yview[0]+240+236)
-        draw_sprite(s_platformmasks,global.platformanime,view_xview[0]+400+253,view_yview[0]+240+236)
-        draw_sprite(s_platformmasks,global.platformanime,view_xview[0]+400+316,view_yview[0]+240+233)
-        draw_sprite(s_platformmasks,global.platformanime,view_xview[0]+400+381,view_yview[0]+240+231)
+        //桥预览（已改由 ed_mark_draw case 19-24 按格子绘制桥条+代码箭头，删除原 s_platformmasks 覆盖层）
         //半实心预览（LEDGE 已改为 ed_mark_draw 用游戏内 s_ledge 绘制，不再使用 s_ledgemasks 覆盖层）
         //水位砖预览
         if(global.water_change_type<2) {draw_sprite(s_waterchangemasks,global.water_change_type+2*global.lava,view_xview[0]+224+128,view_yview[0]+128+128)} else {draw_sprite(s_waterchangemasks,4,view_xview[0]+224+128,view_yview[0]+128+128)}
         //强滚预览
         draw_sprite(s_autoscrollmask,global.scrollorange,view_xview[0]+206,view_yview[0]+110+64)
-        //遮罩绘制
-        draw_sprite_ext(s_edmarkersmask,0,view_xview[0]+400+31,view_yview[0]+240+207,1,1,0,c_white,1)
         //滚轮切换样式设计
         if mouse_wheel_up() && global.platformanime>0 && mouse_y>view_yview[0]+128+64*3-16 && mouse_y<view_yview[0]+128+64*3+48 {//鼠标滚轮向上
             global.platformanime-=1

@@ -19,11 +19,11 @@ switch (_pc4) {
     case 15: return "FLUID CONTROL";
     case 16: return "SCENE CONTROL";
     case 17: return "VIEW CONTROL";
-    case 19: return "PLATFORM";
-    case 20: return "RAINY";
-    case 21: return "STARRY";
-    case 22: return "SNOWY";
-    case 23: return "THUNDER";
-    case 24: return "WINDY";
+    case 19: return "FALLING ON STEP";
+    case 20: return "SPEED 1";
+    case 21: return "SPEED 2";
+    case 22: return "SPEED 3";
+    case 23: return "CONTINUOUS";
+    case 24: return "CONTINUOUS";
 }
 return "";
