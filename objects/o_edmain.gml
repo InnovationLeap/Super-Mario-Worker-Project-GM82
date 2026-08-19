@@ -216,86 +216,7 @@ if keyboard_check_pressed(global.key_musictoggle) && global.musicon=0 {global.mu
 if global.musicon=2 && !keyboard_check_pressed(global.key_musictoggle) {global.musicon=0;mm_stop_all_ext()}
 if global.musicon=3 && !keyboard_check_pressed(global.key_musictoggle) {
     global.musicon=1
-    if global.local_muzyka=1 {mm_play_ext('.\Data\MW\ktkm1.dll',0); }
-    if global.local_muzyka=2 {mm_play_ext('.\Data\MW\ktkm5.dll',0); }
-    if global.local_muzyka=3 {mm_play_ext('.\Data\MW\ktkm6.dll',0); }
-    if global.local_muzyka=4 {mm_play_ext('.\Data\MW\ktkm7.dll',0); }
-    if global.local_muzyka=5 {mm_play_ext('.\Data\MW\ktkm9.dll',0); }
-    if global.local_muzyka=6 {mm_play_ext('.\Data\MW\ktkm10.dll',0); }
-    if global.local_muzyka=7 {mm_play_ext('.\Data\MW\ktkm12.dll',0); }
-    if global.local_muzyka=8 {mm_play_ext('.\Data\MW\ktkm13.dll',0); }
-    if global.local_muzyka=9 {mm_play_ext('.\Data\MW\ktkm14.dll',0); }
-    if global.local_muzyka=10 {mm_play_ext('.\Data\MW\ktkm15.mp3',0); }
-    if global.local_muzyka=11 {mm_play_ext('.\Data\MW\ktkm16.dll',0); }
-    if global.local_muzyka=12 {mm_play_ext('.\Data\MW\ktkm17.dll',0); }
-    if global.local_muzyka=13 {mm_play_ext('.\Data\MW\ktkm18.mp3',0); }
-    if global.local_muzyka=14 {mm_play_ext('.\Data\MW\ktkm21.dll',0); }
-    if global.local_muzyka=15 {mm_play_ext('.\Data\MW\ktkm22.dll',0); }
-    if global.local_muzyka=16 {mm_play_ext('.\Data\MW\ktkm23.dll',0); }
-    if global.local_muzyka=17 {mm_play_ext('.\Data\MW\ktkm24.dll',0); }
-    if global.local_muzyka=18 {mm_play_ext('.\Data\MW\ktkm25.dll',0); }
-    if global.local_muzyka=19 {mm_play_ext('.\Data\MW\ktkm26.dll',0); }
-    if global.local_muzyka=20 {mm_play_ext('.\Data\MW\ktkm28.dll',0); }
-    if global.local_muzyka=21 {mm_play_ext('.\Data\MW\ktkm36.dll',0); }
-    if global.local_muzyka=22 {mm_play_ext('.\Data\MW\ktkm38.dll',0); }
-    if global.local_muzyka=23 {mm_play_ext('.\Data\MW\ktkm20.dll',0); }
-    if global.local_muzyka=24 {mm_play_ext('.\Data\MW\ktkm27.dll',0); }
-    if global.local_muzyka=25 {mm_play_ext('.\Data\MW\ktkm37.dll',0); }
-    if global.local_muzyka=26 {mm_play_ext('.\Data\MW\ktkm29.dll',0); }
-    if global.local_muzyka=27 {mm_play_ext('.\Data\MW\ktkm35.dll',0); }
-    if global.local_muzyka=28 {mm_play_ext('.\Data\MW\ktkm120.dll',0); }
-    if global.local_muzyka=29 {mm_play_ext('.\Data\MW\ktkm19.dll',0); }
-    if global.local_muzyka=41 {mm_play_ext('.\Data\MFR\ktkm0.dll',0); }
-    if global.local_muzyka=42 {mm_play_ext('.\Data\MFR\ktkm50.mp3',0); }
-    if global.local_muzyka=43 {mm_play_ext('.\Data\MFR\ktkm51.mp3',0); }
-    if global.local_muzyka=44 {mm_play_ext('.\Data\MFR\ktkm52.mp3',0); }
-    if global.local_muzyka=45 {mm_play_ext('.\Data\MFR\ktkm53.mp3',0); }
-    if global.local_muzyka=46 {mm_play_ext('.\Data\MFR\ktkm55.mp3',0); }
-    if global.local_muzyka=47 {mm_play_ext('.\Data\MFR\ktkm56.mp3',0); }
-    if global.local_muzyka=48 {mm_play_ext('.\Data\MFR\ktkm41.dll',0); }
-    if global.local_muzyka=49 {mm_play_ext('.\Data\MFR\ktkm93.mp3',0); }
-    if global.local_muzyka=50 {mm_play_ext('.\Data\MFR\ktkm94.mp3',0); }
-    if global.local_muzyka=51 {mm_play_ext('.\Data\MFR\ktkm100.mp3',0); }
-    if global.local_muzyka=52 {mm_play_ext('.\Data\MFR\ktkm101.mp3',0); }
-    if global.local_muzyka=53 {mm_play_ext('.\Data\MFR\ktkm103.mp3',0); }
-    if global.local_muzyka=54 {mm_play_ext('.\Data\MFR\ktkm121.mp3',0); }
-    if global.local_muzyka=55 {mm_play_ext('.\Data\MFR\ktkm122.mp3',0); }
-    if global.local_muzyka=56 {mm_play_ext('.\Data\MFR\ktkm123.mp3',0); }
-    if global.local_muzyka=57 {mm_play_ext('.\Data\MFR\ktkm124.mp3',0); }
-    if global.local_muzyka=58 {mm_play_ext('.\Data\MFR\ktkm129.mp3',0); }
-    if global.local_muzyka=59 {mm_play_ext('.\Data\MFR\ktkm130.mp3',0); }
-    if global.local_muzyka=60 {mm_play_ext('.\Data\MFR\ktkm131.mp3',0); }
-    if global.local_muzyka=61 {mm_play_ext('.\Data\MFR\ktkm132.mp3',0); }
-    if global.local_muzyka=62 {mm_play_ext('.\Data\MFR\ktkm133.mp3',0); }
-    if global.local_muzyka=63 {mm_play_ext('.\Data\MFR\ktkm134.mp3',0); }
-    if global.local_muzyka=64 {mm_play_ext('.\Data\MFR\ktkm135.mp3',0); }
-    if global.local_muzyka=65 {mm_play_ext('.\Data\MFR\ktkm210.mp3',0); }
-    if global.local_muzyka=66 {mm_play_ext('.\Data\MFR\ktkm211.mp3',0); }
-    if global.local_muzyka=67 {mm_play_ext('.\Data\MFR\ktkm212.mp3',0); }
-    if global.local_muzyka=68 {mm_play_ext('.\Data\MFR\ktkm213.mp3',0); }
-    if global.local_muzyka=69 {mm_play_ext('.\Data\MFR\ktkm214.mp3',0); }
-    if global.local_muzyka=70 {mm_play_ext('.\Data\MFR\ktkm215.mp3',0); }
-    if global.local_muzyka=71 {mm_play_ext('.\Data\MFR\ktkm2121.mp3',0); }
-    if global.local_muzyka=72 {mm_play_ext('.\Data\MFR\ktkm88.dll',0); }
-    if global.local_muzyka=73 {mm_play_ext('.\Data\MFR\ktkm39.dll',0); }
-    if global.local_muzyka=74 {mm_play_ext('.\Data\MFR\ktkm40.dll',0); }
-    if global.local_muzyka=75 {mm_play_ext('.\Data\MFR\ktkm42.mp3',0); }
-    if global.local_muzyka=76 {mm_play_ext('.\Data\MFR\ktkm125.mp3',0); }
-    if global.local_muzyka=77 {mm_play_ext('.\Data\MFR\ktkm90.mp3',0); }
-    if global.local_muzyka=78 {mm_play_ext('.\Data\MFR\ktkm666.mp3',0); }
-    if global.local_muzyka>=101&&global.local_muzyka<=144 {mm_play_ext('.\Data\SMS\sms'+string(global.local_muzyka-100)+'.ogg',0); }
-    if global.local_muzyka>=145&&global.local_muzyka<=172 {mm_play_ext('.\Data\SMS2\sms'+string(global.local_muzyka-100)+'.ogg',0); }
-    if global.local_muzyka>=173&&global.local_muzyka<=200 {mm_play_ext('.\Data\Softendo\std'+string(global.local_muzyka-172)+'.ogg',0); }
-    if global.local_muzyka>=201&&global.local_muzyka<=204 {mm_play_ext('.\Data\Boss\boss'+string(global.local_muzyka-200)+'.dll',0); }
-    if global.local_muzyka>=205&&global.local_muzyka<=230 {mm_play_ext('.\Data\Boss\boss'+string(global.local_muzyka-200)+'.ogg',0); }
-    if global.local_muzyka>=301&&global.local_muzyka<=400 {mm_play_ext('.\Data\OM\om'+string(global.local_muzyka-300)+'.ogg',0);}
-    if global.local_muzyka>=627 {
-        if variable_global_exists("customMusicTotal") && variable_global_exists("customMusicFile") {
-            if global.local_muzyka-626>=1 && global.local_muzyka-626<=global.customMusicTotal {
-                mm_play_ext(global.customMusicDirectory+global.customMusic+'\'+global.customMusicFile[global.local_muzyka-626],0)
-            } else {debug_log('o_edmain: BGM '+string(global.local_muzyka)+' 越界（共 '+string(global.customMusicTotal)+' 首），跳过')}
-        } else {debug_log('o_edmain: 自定义音乐列表未加载，跳过 BGM '+string(global.local_muzyka))}
-    }
+    ed_play_bgm(global.local_muzyka)
 }
 
 global.autopair=real(global.autopair)
@@ -3708,89 +3629,9 @@ if bg_selecting=100 {
 
     if bgm_play<>bgm_prev && bgm_prev>0 {
         bgm_play=bgm_prev//爽
-        if bgm_play=1 {mm_play_ext('.\Data\MW\ktkm1.dll',0); }
-        if bgm_play=2 {mm_play_ext('.\Data\MW\ktkm5.dll',0); }
-        if bgm_play=3 {mm_play_ext('.\Data\MW\ktkm6.dll',0); }
-        if bgm_play=4 {mm_play_ext('.\Data\MW\ktkm7.dll',0); }
-        if bgm_play=5 {mm_play_ext('.\Data\MW\ktkm9.dll',0); }
-        if bgm_play=6 {mm_play_ext('.\Data\MW\ktkm10.dll',0); }
-        if bgm_play=7 {mm_play_ext('.\Data\MW\ktkm12.dll',0); }
-        if bgm_play=8 {mm_play_ext('.\Data\MW\ktkm13.dll',0); }
-        if bgm_play=9 {mm_play_ext('.\Data\MW\ktkm14.dll',0); }
-        if bgm_play=10 {mm_play_ext('.\Data\MW\ktkm15.mp3',0); }
-        if bgm_play=11 {mm_play_ext('.\Data\MW\ktkm16.dll',0); }
-        if bgm_play=12 {mm_play_ext('.\Data\MW\ktkm17.dll',0); }
-        if bgm_play=13 {mm_play_ext('.\Data\MW\ktkm18.mp3',0); }
-        if bgm_play=14 {mm_play_ext('.\Data\MW\ktkm21.dll',0); }
-        if bgm_play=15 {mm_play_ext('.\Data\MW\ktkm22.dll',0); }
-        if bgm_play=16 {mm_play_ext('.\Data\MW\ktkm23.dll',0); }
-        if bgm_play=17 {mm_play_ext('.\Data\MW\ktkm24.dll',0); }
-        if bgm_play=18 {mm_play_ext('.\Data\MW\ktkm25.dll',0); }
-        if bgm_play=19 {mm_play_ext('.\Data\MW\ktkm26.dll',0); }
-        if bgm_play=20 {mm_play_ext('.\Data\MW\ktkm28.dll',0); }
-        if bgm_play=21 {mm_play_ext('.\Data\MW\ktkm36.dll',0); }
-        if bgm_play=22 {mm_play_ext('.\Data\MW\ktkm38.dll',0); }
-        if bgm_play=23 {mm_play_ext('.\Data\MW\ktkm20.dll',0); }
-        if bgm_play=24 {mm_play_ext('.\Data\MW\ktkm27.dll',0); }
-        if bgm_play=25 {mm_play_ext('.\Data\MW\ktkm37.dll',0); }
-        if bgm_play=26 {mm_play_ext('.\Data\MW\ktkm29.dll',0); }
-        if bgm_play=27 {mm_play_ext('.\Data\MW\ktkm35.dll',0); }
-        if bgm_play=28 {mm_play_ext('.\Data\MW\ktkm120.dll',0); }
-        if bgm_play=29 {mm_play_ext('.\Data\MW\ktkm19.dll',0); }
-        if bgm_play=41 {mm_play_ext('.\Data\MFR\ktkm0.dll',0); }
-        if bgm_play=42 {mm_play_ext('.\Data\MFR\ktkm50.mp3',0); }
-        if bgm_play=43 {mm_play_ext('.\Data\MFR\ktkm51.mp3',0); }
-        if bgm_play=44 {mm_play_ext('.\Data\MFR\ktkm52.mp3',0); }
-        if bgm_play=45 {mm_play_ext('.\Data\MFR\ktkm53.mp3',0); }
-        if bgm_play=46 {mm_play_ext('.\Data\MFR\ktkm55.mp3',0); }
-        if bgm_play=47 {mm_play_ext('.\Data\MFR\ktkm56.mp3',0); }
-        if bgm_play=48 {mm_play_ext('.\Data\MFR\ktkm41.dll',0); }
-        if bgm_play=49 {mm_play_ext('.\Data\MFR\ktkm93.mp3',0); }
-        if bgm_play=50 {mm_play_ext('.\Data\MFR\ktkm94.mp3',0); }
-        if bgm_play=51 {mm_play_ext('.\Data\MFR\ktkm100.mp3',0); }
-        if bgm_play=52 {mm_play_ext('.\Data\MFR\ktkm101.mp3',0); }
-        if bgm_play=53 {mm_play_ext('.\Data\MFR\ktkm103.mp3',0); }
-        if bgm_play=54 {mm_play_ext('.\Data\MFR\ktkm121.mp3',0); }
-        if bgm_play=55 {mm_play_ext('.\Data\MFR\ktkm122.mp3',0); }
-        if bgm_play=56 {mm_play_ext('.\Data\MFR\ktkm123.mp3',0); }
-        if bgm_play=57 {mm_play_ext('.\Data\MFR\ktkm124.mp3',0); }
-        if bgm_play=58 {mm_play_ext('.\Data\MFR\ktkm129.mp3',0); }
-        if bgm_play=59 {mm_play_ext('.\Data\MFR\ktkm130.mp3',0); }
-        if bgm_play=60 {mm_play_ext('.\Data\MFR\ktkm131.mp3',0); }
-        if bgm_play=61 {mm_play_ext('.\Data\MFR\ktkm132.mp3',0); }
-        if bgm_play=62 {mm_play_ext('.\Data\MFR\ktkm133.mp3',0); }
-        if bgm_play=63 {mm_play_ext('.\Data\MFR\ktkm134.mp3',0); }
-        if bgm_play=64 {mm_play_ext('.\Data\MFR\ktkm135.mp3',0); }
-        if bgm_play=65 {mm_play_ext('.\Data\MFR\ktkm210.mp3',0); }
-        if bgm_play=66 {mm_play_ext('.\Data\MFR\ktkm211.mp3',0); }
-        if bgm_play=67 {mm_play_ext('.\Data\MFR\ktkm212.mp3',0); }
-        if bgm_play=68 {mm_play_ext('.\Data\MFR\ktkm213.mp3',0); }
-        if bgm_play=69 {mm_play_ext('.\Data\MFR\ktkm214.mp3',0); }
-        if bgm_play=70 {mm_play_ext('.\Data\MFR\ktkm215.mp3',0); }
-        if bgm_play=71 {mm_play_ext('.\Data\MFR\ktkm2121.mp3',0); }
-        if bgm_play=72 {mm_play_ext('.\Data\MFR\ktkm88.dll',0); }
-        if bgm_play=73 {mm_play_ext('.\Data\MFR\ktkm39.dll',0); }
-        if bgm_play=74 {mm_play_ext('.\Data\MFR\ktkm40.dll',0); }
-        if bgm_play=75 {mm_play_ext('.\Data\MFR\ktkm42.mp3',0); }
-        if bgm_play=76 {mm_play_ext('.\Data\MFR\ktkm125.mp3',0); }
-        if bgm_play=77 {mm_play_ext('.\Data\MFR\ktkm90.mp3',0); }
-        if bgm_play=78 {mm_play_ext('.\Data\MFR\ktkm666.mp3',0); }
-
-        if bgm_play>=101&&bgm_play<=144 {mm_play_ext('.\Data\SMS\sms'+string(bgm_play-100)+'.ogg',0); }
-            /*new music*/
-        if bgm_play>=145&&bgm_play<=172 {mm_play_ext('.\Data\SMS2\sms'+string(bgm_play-100)+'.ogg',0); }
-        if bgm_play>=173&&bgm_play<=200 {mm_play_ext('.\Data\Softendo\std'+string(bgm_play-172)+'.ogg',0); }
-        if bgm_play>=201&&bgm_play<=204 {mm_play_ext('.\Data\Boss\boss'+string(bgm_play-200)+'.dll',0); }
-        if bgm_play>=205&&bgm_play<=230 {mm_play_ext('.\Data\Boss\boss'+string(bgm_play-200)+'.ogg',0); }
-        if bgm_play>=301&&bgm_play<=400 {mm_play_ext('.\Data\OM\om'+string(bgm_play-300)+'.ogg',0);}
-        if bgm_play>626 {
-            if variable_global_exists("customMusicTotal") && variable_global_exists("customMusicFile") && bgm_play-626>=1 && bgm_play-626<=global.customMusicTotal {
-                usePackage = global.customMusic;
-                useName = global.customMusicFile[bgm_play-626]
-                mm_play_ext(global.customMusicDirectory+usePackage+'\'+useName,0)
-            } else {debug_log('o_edmain: BGM 预览 '+string(bgm_play)+' 越界，跳过')}
-        }
+        ed_play_bgm(bgm_play)
     }
+
     if mouse_check_button(mb_left) && quitbgmselect=1
     {if(setting_mode>0) {setting_mode-=1}
         bg_selecting=0;mm_stop_all_ext()}

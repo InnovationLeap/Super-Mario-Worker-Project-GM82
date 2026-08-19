@@ -185,6 +185,7 @@
 	|ed_autopair_ui
 	|ed_autopair_row
 	|ed_autopair_single
+	|ed_play_bgm
 +UserPause
 	|UserPause_Start
 	|UserPause_End
