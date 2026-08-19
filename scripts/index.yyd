@@ -173,3 +173,14 @@ ed_bonus_draw
 ed_bonus_label
 ed_mark_draw
 ed_mark_label
+ed_prefs_bool
+ed_prefs_int
+ed_prefs_lightbit
+ed_light_hit
+ed_light_flip
+ed_light_draw
+ed_light_click
+ed_prefs_page
+ed_autopair_ui
+ed_autopair_row
+ed_autopair_single
