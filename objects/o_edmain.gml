@@ -12,11 +12,6 @@ bgm_palette_data();
 ed_autopair_data();
 
 
-/*test = transB(12005)
-test2 = transB(23010)
-test3 = transB(32000)
-test4 = transB(15324)
-test5 = transB(2324)*/
 sizechange=0
 x_trans=0
 y_trans=0
@@ -142,16 +137,7 @@ ed_cp_index=-1 //PageUp/PageDown定位起点/CP的索引
 
 listscroll = 0 //自定义音乐翻页变量
 
-/*
-// 天气（场景控制元件参数保留）
-foforainy = global.rainy;
-fofofallingstars = global.fallingstars;
-fofosnowy = global.snowy;
-fofothunder = global.thunder;
-fofowindy = global.windy;
-fofodarkness = global.darkness;
-fofobrightness = global.brightness;
-*/
+
 globalvar marker_rainy;
 globalvar marker_fallingstars;
 globalvar marker_snowy;
@@ -853,61 +839,6 @@ if net_water_dirty=1 && get_timer() - net_water_throttle > 300 {
     ed_net_ops_send_settings()
 }
 net_water_dirty = 0
-/*
-// initializacja
-
-if initializuj=0 {initializuj=1;
-
-for (i=0; i<room_width/32; i+=1)
-    {
-    for (a=0; a<room_height/32; a+=1)
-        {
-        arrayetapu[i,a]=0
-
-
-        }
-
-    }
-arrayetapu[0,0]=1
-arrayetapu[1,0]=1
-arrayetapu[2,0]=1
-arrayetapu[3,0]=1
-arrayetapu[4,0]=1
-arrayetapu[5,0]=1
-arrayetapu[6,0]=1
-arrayetapu[7,0]=1
-arrayetapu[8,0]=1
-arrayetapu[9,0]=1
-arrayetapu[10,0]=1
-arrayetapu[11,0]=1
-arrayetapu[12,0]=1
-arrayetapu[13,0]=1
-arrayetapu[14,0]=1
-arrayetapu[15,0]=1
-arrayetapu[16,0]=1
-arrayetapu[17,0]=1
-arrayetapu[18,0]=1
-arrayetapu[19,0]=1
-arrayetapu[20,0]=1
-arrayetapu[21,0]=1
-arrayetapu[22,0]=1
-arrayetapu[23,0]=1
-arrayetapu[24,0]=1
-arrayetapu[25,0]=1
-
-}
-// rysowanie
-var i,a, _ed_drag_on;
-_ed_drag_on = (global.ed_region_active && global.ed_region_state == 3)
-for (i=0; i<20; i+=1)
-    {
-    for (a=0; a<15; a+=1)
-        {
-        if !(_ed_drag_on && global.ed_region_orig_mask[i+floor(view_xview[0]/32),a+floor(view_yview[0]/32)] == 1) {
-        draw_sprite_ext(s_blocks,arrayetapu[i+floor(view_xview[0]/32),a+floor(view_yview[0]/32)],view_xview[0]+i*32,view_yview[0]+a*32,1,1,0,c_white,1)
-        }
-        }
-    }
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
@@ -1467,23 +1398,6 @@ if scrolla<=1 && scrollb<=1 {
 
 
 
-
-/*
-if costawia3<>0 && costawia3<>20 && costawia3!=35 && costawia3<42 && kliknieto=0 && mouse_x>0 &&  mouse_y>0 &&  wiatrak=0
-    && menujesie=0 && wlaczonaopcja=0
-    {draw_sprite_ext(s_sceneriesbank,costawia3-1,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,1,1,0,c_white,0.5)}
-
-if costawia3<>0 && costawia3<>20 && costawia3!=35 && costawia3<42 && kliknieto=0 && mouse_check_button(mb_left) && mouse_x>0 &&  mouse_y>0 && wiatrak=0
-    && menujesie=0 && wlaczonaopcja=0
-    {
-    if self_coto_check(3,costawia3){
-        kliknieto=1
-        my_scenery=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edsceneriesblock)
-        my_scenery.coto=costawia3
-        set_scenery=1
-    }
-    }
-*/
     //景物可以连放
     if place_code3<>0 && place_code3<42 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edsceneriesblock) &&  tool_mode=0
     && menu_open=0 && option_open=0 && delay_tick>15
@@ -1619,16 +1533,6 @@ if costawia3<>0 && costawia3<>20 && costawia3!=35 && costawia3<42 && kliknieto=0
         if mouse_wheel_down() && mouse_y>view_yview[0]+128+64-16 && mouse_y<view_yview[0]+128+64+48 {
             if(mouse_x>view_xview[0]+206 && mouse_x<view_xview[0]+206+64) {global.scrollorange=1}
         }
-    /*if abs(view_xview[0]+256-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 {draw_sprite_ext(s_left,0,view_xview[0]+256,view_yview[0]+384,1,1,0,c_yellow,1)}else{draw_sprite_ext(s_left,0,view_xview[0]+256,view_yview[0]+384,1,1,0,c_white,1)}
-    if abs(view_xview[0]+512-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 {draw_sprite_ext(s_right,0,view_xview[0]+512,view_yview[0]+384,1,1,0,c_yellow,1)} else {draw_sprite_ext(s_right,0,view_xview[0]+512,view_yview[0]+384,1,1,0,c_white,1)}
-    */
-    /*if abs(view_xview[0]+256-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 && mouse_check_button(mb_left) {
-   if o_edmain.costawia4b=1{o_edmain.costawia4b=0}
-   }
-   if abs(view_xview[0]+512-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 && mouse_check_button(mb_left) {
-   if o_edmain.costawia4b=0{o_edmain.costawia4b=1}
-   }*/
-        // wybor markera
     }
 
     //注意下面costawia记录的是该物品从左往右数的序号而不是物品号码，我刚才弄错了……比如终点是在2号位，不是17号）这段是第一行
@@ -1809,19 +1713,7 @@ if costawia3<>0 && costawia3<>20 && costawia3!=35 && costawia3<42 && kliknieto=0
             autopair=0 //怨念残留喝了
         }
     }
-    /*这里是旧版运输桥，现在已经木有了
-    if costawia4=24 && costawia4b=0 && kliknieto=0 && mouse_x>0 &&  mouse_y>0 && !instance_position(mouse_x,mouse_y,o_edmarkerblock) && wiatrak=0
-    && menujesie=0 && wlaczonaopcja=0
-    {draw_sprite_ext(s_markersbank,17,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,1,1,0,c_white,0.5)}
-   if costawia4=24 && costawia4b=0 && kliknieto=0 && mouse_check_button(mb_left) && mouse_x>0 &&  mouse_y>0 && !instance_position(mouse_x,mouse_y,o_edmarkerblock) && wiatrak=0
-    && menujesie=0 && wlaczonaopcja=0
-        {
-        kliknieto=1
-        fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edmarkerblock)
-        fofo.coto=21
-        autopair=0 //怨念残留喝了
-        }
-    */
+
     if place_code4=9 && costawia4b=0 && clicked=0 /*&& mouse_x>0 &&  mouse_y>0*/ && /*!instance_position(mouse_x,mouse_y,o_edmarkerblock) &&*/ tool_mode=0
     && menu_open=0 && option_open=0
     {draw_sprite_ext(s_pointblock5,0,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,1,1,0,c_white,0.5)}
@@ -2134,114 +2026,7 @@ if costawia3<>0 && costawia3<>20 && costawia3!=35 && costawia3<42 && kliknieto=0
             clicked=1
         }}
 
-    //第一页
-    /*if blockpage=-1{
-if wlaczonaopcja=1 && ed_hit(206, 128, 384, 32)&& kliknieto=0
-    {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && ed_hit(206, 128, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
-    {
-    kliknieto=1
-    sampelwyboru1=1//smp
-    wlaczonaopcja=0;
-    ustawiony=0
-    costawia=1+floor((mouse_x-(view_xview[0]+206))/32);autopair=0
-    costawia2=0
-    costawia3=0
-    costawia4=0
-    costawia5=0
-            costawia6=0
-    }
-if wlaczonaopcja=1 && ed_hit(206, 128+32, 384, 32)&& kliknieto=0
-    {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32,1,1,0,c_white,1)}
 
-if wlaczonaopcja=1 && ed_hit(206, 128+32, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
-    {
-    kliknieto=1
-    sampelwyboru1=1//smp
-    wlaczonaopcja=0;
-    ustawiony=0
-    costawia=1+floor((mouse_x-(view_xview[0]+206))/32)+12;autopair=0
-    costawia2=0
-    costawia3=0
-    costawia4=0
-    costawia5=0
-    costawia6=0
-    }
-if wlaczonaopcja=1 && ed_hit(206, 128+32*2, 384, 32)&& kliknieto=0
-    {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*2,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && ed_hit(206, 128+32*2, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
-    {
-    kliknieto=1
-    sampelwyboru1=1//smp
-    wlaczonaopcja=0;
-    ustawiony=0
-    costawia=1+floor((mouse_x-(view_xview[0]+206))/32)+12*2;autopair=0
-    costawia2=0
-    costawia3=0
-    costawia4=0
-    costawia5=0
-            costawia6=0
-    }
-if wlaczonaopcja=1 && ed_hit(206, 128+32*3, 384, 32)&& kliknieto=0
-    {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*3,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && ed_hit(206, 128+32*3, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
-    {
-    kliknieto=1
-    sampelwyboru1=1//smp
-    wlaczonaopcja=0;
-    ustawiony=0
-    costawia=1+floor((mouse_x-(view_xview[0]+206))/32)+12*3;autopair=0
-    costawia2=0
-    costawia3=0
-    costawia4=0
-    costawia5=0
-            costawia6=0
-    }
-    if wlaczonaopcja=1 && ed_hit(206, 128+32*4, 384, 32)&& kliknieto=0
-    {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*4,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && ed_hit(206, 128+32*4, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
-    {
-    kliknieto=1
-    sampelwyboru1=1//smp
-    wlaczonaopcja=0;
-    ustawiony=0
-    costawia=1+floor((mouse_x-(view_xview[0]+206))/32)+12*4;autopair=0
-    costawia2=0
-    costawia3=0
-    costawia4=0
-    costawia5=0
-            costawia6=0
-    }
-if wlaczonaopcja=1 && ed_hit(206, 128+32*5, 384, 32)&& kliknieto=0
-    {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*5,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && ed_hit(206, 128+32*5, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
-    {
-    kliknieto=1
-    sampelwyboru1=1//smp
-    wlaczonaopcja=0;
-    ustawiony=0
-    costawia=1+floor((mouse_x-(view_xview[0]+206))/32)+12*5;autopair=0
-    costawia2=0
-    costawia3=0
-    costawia4=0
-    costawia5=0
-            costawia6=0
-    }
-if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& kliknieto=0
-    {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*6,1,1,0,c_white,1)}
-if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& mouse_check_button(mb_left) && kliknieto=0
-    {
-    kliknieto=1
-    sampelwyboru1=1//smp
-    wlaczonaopcja=0;
-    ustawiony=0
-    costawia=1+floor((mouse_x-(view_xview[0]+206))/32)+12*6;autopair=0
-    costawia2=0
-    costawia3=0
-    costawia4=0
-    costawia5=0
-            costawia6=0
-    }}*/
     //第二页
     if blockpage=-1 {
         if option_open=1 && ed_hit(206, 128, 384, 32)&& clicked=0 {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128,1,1,0,c_white,1)}
@@ -2958,18 +2743,6 @@ if wlaczonaopcja=1 && ed_hit(206, 128+32*6, 384, 32)&& mouse_check_button(mb_lef
     }
 
 
-/*if costawia2=20 && kliknieto=0 && mouse_check_button(mb_left) && mouse_x>0 &&  mouse_y>0 && wiatrak=0
-    && menujesie=0 && wlaczonaopcja=0
-    {
-    kliknieto=1
-    fofo=instance_create(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,o_edenemyblock)
-    autopair=0 //怨念残留喝了
-    global.fotel=fofo.x
-    global.fotel2=fofo.y
-    fofo.coto=costawia2
-    wiatrak=1
-    }*/
-
     //鱼的摆放
     if (place_code2=40||place_code2=41) && clicked=0 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edbonusesblock) && tool_mode=0
     && menu_open=0 && option_open=0
@@ -3128,16 +2901,6 @@ if place_code2<>0 && clicked=0 && mouse_check_button(mb_right) /*&& mouse_x>0 &&
 && menu_open=0 && option_open=0 {
     ed_delete_at(2,mouse_x,mouse_y,place_code2)
 }
-
-/*if costawia2 = 20 && kliknieto=0 && mouse_check_button_pressed(mb_right) &&  instance_position(mouse_x,mouse_y,o_edenemyblock) && wiatrak=0 && global.picking = false
-    && menujesie=0 && wlaczonaopcja=0
-    {
-    fofo=instance_position(mouse_x,mouse_y,o_edenemyblock)
-    if fofo.coto=20
-        {
-        with(fofo){instance_destroy()}
-        }
-    }*/
 
 
 
@@ -3535,12 +3298,7 @@ if bg_selecting=100 {
             if mouse_check_button(mb_left) {bgmpage=ii;}
         }
     }
-    /*for(ii=4;ii<8;ii+=1){
-        if ed_hit(460, 116+35*ii+, 150, (116+35*ii+12)-(116+35*ii+)){
-            draw_prefs_highlight(view_xview[0]+460, view_yview[0]+116+34*ii, 1.3, 0.8, 0.2);
-            if mouse_check_button(mb_left){bgmpage=ii;}
-        }
-    }*/
+
 
 
     bgm_prev=0
@@ -3641,40 +3399,6 @@ if bg_selecting=100 {
         bg_selecting=0;clicked=1;mm_stop_all_ext();
     }
 
-            /*
-            ktkm1.dll - Mario World 1
-ktkm3.dll - Star
-ktkm4.dll - End level
-ktkm5.dll - Cave
-ktkm6.dll - Rockland
-ktkm7.dll - Castle
-ktkm8.dll - Kuppa
-ktkm9.dll - Map 1
-ktkm10.dll - Ghost house
-ktkm11.dll - End level
-ktkm12.dll - map 2
-ktkm13.dll - Starland
-ktkm14.dll - Starland Rockland
-ktkm15.dll - Underground
-ktkm16.dll - Map 3
-ktkm17.dll - Yoshi Island level 1
-ktkm18.dll - Waterlevel
-ktkm21.dll - MF5-1
-ktkm22.dll - Sirens
-ktkm23.dll - In the kitchen
-ktkm24.dll - YKY
-ktkm25.dll - Yet Bonus
-ktkm26.dll - Youshi 2
-ktkm28.dll - Apoplexy
-ktkm36.dll - Savegame - select level
-ktkm38.ogg - Castle
-ktkm20.dll - Trancoi(Map 4)
-ktkm27.dll - TheGoldenAges
-ktkm37.dll - Federation(Map 8)
-ktkm29.dll - BigBowser
-ktkm35.dll - Overworld - SuperMarioBros2U
-ktkm120.dll - GameSelect
-ktkm19.dll - Rockland Yoshi*/
     if bgm_select=0 {mm_stop_all_ext(); bgm_prev=0; bgm_play=0}
 
 
