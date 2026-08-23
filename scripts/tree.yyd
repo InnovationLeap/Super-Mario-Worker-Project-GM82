@@ -24,6 +24,8 @@
 	|real_string_length
 +background_show
 	|background_show
+	|background_table_init
+	|bg_addrow
 +encrypt
 	|get_crypt_key1
 	|get_crypt_key2
