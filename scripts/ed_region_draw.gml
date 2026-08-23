@@ -26,12 +26,32 @@ if _state == 2 || _state == 3 {
         while _i < ds_list_size(global.ed_region_list) {
             _id = ds_list_find_value(global.ed_region_list, _i)
             if instance_exists(_id) {
-                draw_set_color(c_lime)
-                draw_set_alpha(0.4)
-                draw_rectangle(_id.bbox_left, _id.bbox_top, _id.bbox_right, _id.bbox_bottom, false)
-                draw_set_alpha(1)
-                draw_set_color(c_lime)
-                draw_rectangle(_id.bbox_left, _id.bbox_top, _id.bbox_right, _id.bbox_bottom, true)
+                if _id.object_index == o_edpassage {
+                    // 水管：分别框住被选中的端点（入口/出口可各自独立高亮）
+                    if _id.ed_sel_entr {
+                        draw_set_color(c_lime)
+                        draw_set_alpha(0.4)
+                        draw_rectangle(_id.bbox_left, _id.bbox_top, _id.bbox_right, _id.bbox_bottom, false)
+                        draw_set_alpha(1)
+                        draw_set_color(c_lime)
+                        draw_rectangle(_id.bbox_left, _id.bbox_top, _id.bbox_right, _id.bbox_bottom, true)
+                    }
+                    if _id.ed_sel_exit {
+                        draw_set_color(c_lime)
+                        draw_set_alpha(0.4)
+                        draw_rectangle(_id.bbox_left + _id.exitx - _id.x, _id.bbox_top + _id.exity - _id.y, _id.bbox_right + _id.exitx - _id.x, _id.bbox_bottom + _id.exity - _id.y, false)
+                        draw_set_alpha(1)
+                        draw_set_color(c_lime)
+                        draw_rectangle(_id.bbox_left + _id.exitx - _id.x, _id.bbox_top + _id.exity - _id.y, _id.bbox_right + _id.exitx - _id.x, _id.bbox_bottom + _id.exity - _id.y, true)
+                    }
+                } else {
+                    draw_set_color(c_lime)
+                    draw_set_alpha(0.4)
+                    draw_rectangle(_id.bbox_left, _id.bbox_top, _id.bbox_right, _id.bbox_bottom, false)
+                    draw_set_alpha(1)
+                    draw_set_color(c_lime)
+                    draw_rectangle(_id.bbox_left, _id.bbox_top, _id.bbox_right, _id.bbox_bottom, true)
+                }
             }
             _i += 1
         }

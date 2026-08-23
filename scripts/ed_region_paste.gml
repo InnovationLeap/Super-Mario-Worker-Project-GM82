@@ -104,6 +104,9 @@ if global.ed_region_list != -1 {
                     _new_id.tak2 = _id.tak2
                     _new_id.tak3 = _id.tak3
                     _new_id.warpnum = _id.warpnum
+                    // 副本继承端点选中标志，保证粘贴后仍可分端拖动
+                    _new_id.ed_sel_entr = _id.ed_sel_entr
+                    _new_id.ed_sel_exit = _id.ed_sel_exit
                 }
                 if _id.object_index == o_edenemyblock {
                     _new_id.fishendX = _id.fishendX + _iox

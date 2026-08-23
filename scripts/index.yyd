@@ -16,6 +16,7 @@ level_read_next
 level_read_eof
 Create_Scenario
 Next_level_Load
+loader_common_init
 Version_Info
 GZ_CompressFile
 GZ_DeCompressFile
@@ -107,6 +108,7 @@ ed_region_select
 ed_region_draw
 ed_region_recalc
 place_meeting_region
+ed_region_rect_hit
 ed_region_commit
 ed_region_paste
 corpse_anim

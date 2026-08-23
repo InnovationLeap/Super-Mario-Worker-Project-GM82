@@ -8,6 +8,7 @@ var _old_val, _new_val;
 var _blk_temp;
 var _dx, _dy;
 var _ox, _oy;
+var _sel_entr, _sel_exit;
 
 _state = global.ed_region_state
 
@@ -51,19 +52,18 @@ if _state == 1 {
         _inst_list = global.ed_region_list
         _blk_list = global.ed_region_blk
         if global.ed_region_type == 0 || global.ed_region_type == 1 {
-            _col1 = floor(_sx / 32)
-            _row1 = floor(_sy / 32)
-            _col2 = floor((_ex - 1) / 32)
-            _row2 = floor((_ey - 1) / 32)
-            _col1 = max(_col1, 0)
-            _row1 = max(_row1, 0)
-            _col2 = min(_col2, room_width / 32 - 1)
-            _row2 = min(_row2, room_height / 32 - 1)
+            // 方块格按判定模式过滤（与实例判定一致）：ANY=相交即中，FULL=整格被选区包含，HALF=相交面积过半
+            _col1 = max(floor(_sx / 32), 0)
+            _row1 = max(floor(_sy / 32), 0)
+            _col2 = min(floor((_ex - 1) / 32), room_width / 32 - 1)
+            _row2 = min(floor((_ey - 1) / 32), room_height / 32 - 1)
             for (_c = _col1; _c <= _col2; _c += 1) {
                 for (_r = _row1; _r <= _row2; _r += 1) {
-                    _val = o_edmain.arrayetapu[_c, _r]
-                    if _val != 0 {
-                        ds_list_add(_blk_list, string(_c) + "," + string(_r) + "," + string(_val))
+                    if ed_region_rect_hit(_c * 32, _r * 32, _c * 32 + 32, _r * 32 + 32, _sx, _sy, _ex, _ey) {
+                        _val = o_edmain.arrayetapu[_c, _r]
+                        if _val != 0 {
+                            ds_list_add(_blk_list, string(_c) + "," + string(_r) + "," + string(_val))
+                        }
                     }
                 }
             }
@@ -91,9 +91,18 @@ if _state == 1 {
                     ds_list_add(_inst_list, _id)
                 }
             }
+            // 水管出入口分端判定：入口=实例 bbox；出口=bbox 平移到 (exitx,exity) 的等尺寸矩形
+            // 出口仅在其已放置（tak3=1）时参与判定，避免向导中途抓到 (0,0) 幽灵出口
             for (_i = 0; _i < instance_number(o_edpassage); _i += 1) {
                 _id = instance_find(o_edpassage, _i)
-                if place_meeting_region(_id, _sx, _sy, _ex, _ey) {
+                _sel_entr = place_meeting_region(_id, _sx, _sy, _ex, _ey)
+                _sel_exit = false
+                if _id.tak3 == 1 {
+                    _sel_exit = ed_region_rect_hit(_id.bbox_left + _id.exitx - _id.x, _id.bbox_top + _id.exity - _id.y, _id.bbox_right + _id.exitx - _id.x, _id.bbox_bottom + _id.exity - _id.y, _sx, _sy, _ex, _ey)
+                }
+                if _sel_entr || _sel_exit {
+                    _id.ed_sel_entr = _sel_entr
+                    _id.ed_sel_exit = _sel_exit
                     ds_list_add(_inst_list, _id)
                 }
             }
@@ -130,9 +139,28 @@ if _state == 2 {
                     while _i < ds_list_size(_inst_list) {
                         _id = ds_list_find_value(_inst_list, _i)
                         if instance_exists(_id) {
-                            if mouse_x >= _id.bbox_left && mouse_x <= _id.bbox_right && mouse_y >= _id.bbox_top && mouse_y <= _id.bbox_bottom {
-                                _hit = true
-                                break
+                            if _id.object_index == o_edpassage {
+                                // 水管：仅当点中被选中的端点才命中（入口=bbox，出口=平移 bbox）
+                                if _id.ed_sel_entr {
+                                    if mouse_x >= _id.bbox_left && mouse_x <= _id.bbox_right && mouse_y >= _id.bbox_top && mouse_y <= _id.bbox_bottom {
+                                        _hit = true
+                                    }
+                                }
+                                if !_hit {
+                                    if _id.ed_sel_exit {
+                                        if mouse_x >= _id.bbox_left + _id.exitx - _id.x && mouse_x <= _id.bbox_right + _id.exitx - _id.x && mouse_y >= _id.bbox_top + _id.exity - _id.y && mouse_y <= _id.bbox_bottom + _id.exity - _id.y {
+                                            _hit = true
+                                        }
+                                    }
+                                }
+                                if _hit {
+                                    break
+                                }
+                            } else {
+                                if mouse_x >= _id.bbox_left && mouse_x <= _id.bbox_right && mouse_y >= _id.bbox_top && mouse_y <= _id.bbox_bottom {
+                                    _hit = true
+                                    break
+                                }
                             }
                         }
                         _i += 1
@@ -299,11 +327,19 @@ if _state == 3 {
                                     }
                                 }
                                 if _id.object_index == o_edpassage {
-                                    _id.exitx = _id.ed_drag_ex + _ox
-                                    _id.exity = _id.ed_drag_ey + _oy
+                                    // 出口与入口解耦：只移动各自被选中的端点（选了谁动谁）
+                                    if _id.ed_sel_exit {
+                                        _id.exitx = _id.ed_drag_ex + _ox
+                                        _id.exity = _id.ed_drag_ey + _oy
+                                    }
+                                    if _id.ed_sel_entr {
+                                        _id.x = _id.ed_drag_sx + _ox
+                                        _id.y = _id.ed_drag_sy + _oy
+                                    }
+                                } else {
+                                    _id.x = _id.ed_drag_sx + _ox
+                                    _id.y = _id.ed_drag_sy + _oy
                                 }
-                                _id.x = _id.ed_drag_sx + _ox
-                                _id.y = _id.ed_drag_sy + _oy
                             }
                             _i += 1
                         }

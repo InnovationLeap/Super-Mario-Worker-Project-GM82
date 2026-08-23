@@ -22,6 +22,7 @@
 	|level_read_next
 	|level_read_eof
 	|Next_level_Load
+	|loader_common_init
 	|Next_level_Load2
 	|transB
 	|transA
@@ -66,6 +67,7 @@
 	|ed_region_commit
 	|ed_region_paste
 	|place_meeting_region
+	|ed_region_rect_hit
 	|delete_coto_check
 	|transC
 	|Version_Info

@@ -74,7 +74,17 @@ if global.ed_region_list != -1 {
     for (_i = 0; _i < ds_list_size(global.ed_region_list); _i += 1) {
         _id = ds_list_find_value(global.ed_region_list, _i)
         if instance_exists(_id) {
-            ed_net_ops_send_update(_id, 10)
+            if _id.object_index == o_edpassage {
+                // 水管分端广播：入口移动走 subop10(x/y)，出口移动走 subop12(exitx/exity)
+                if _id.ed_sel_entr {
+                    ed_net_ops_send_update(_id, 10)
+                }
+                if _id.ed_sel_exit {
+                    ed_net_ops_send_update(_id, 12)
+                }
+            } else {
+                ed_net_ops_send_update(_id, 10)
+            }
         }
     }
 }
