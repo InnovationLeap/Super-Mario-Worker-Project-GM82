@@ -8,6 +8,12 @@ Save_Script_Passage
 Save_Script_Rest
 Load_Script_Masta
 Load_Script_Play
+Load_Script_Play2
+level_load_play_core
+level_next_load_core
+level_read_peek
+level_read_next
+level_read_eof
 Create_Scenario
 Next_level_Load
 Version_Info
@@ -16,7 +22,6 @@ GZ_DeCompressFile
 Correct_Time
 Directory_Get
 debug_log
-Load_Script_Play2
 Save_Script_Prog
 Load_Script_Prog
 transA
