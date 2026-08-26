@@ -21,7 +21,7 @@ for (_p = 0; _p < 8; _p += 1) {
     global.bgm_e_dy[_p] = -1
 }
 global.bgm_e_center[7] = 0
-global.bgm_e_dy[7] = 9
+global.bgm_e_dy[7] = -1
 
 global.bgm_tab_n = 0
 for (_i = 0; _i < 20; _i += 1) {

@@ -8,7 +8,8 @@ var _i;
 _i = 1
 while _i <= 10 {
     if _i + listscroll <= global.customMusicTotal {
-        bgm_entry(7, 20, 50 + 30 * _i, 340, 20, 626 + _i + listscroll, string(_i + listscroll) + '  ' + global.customMusicFile[_i + listscroll])
+        // 判定框规格与普通页面一致：h=12，首行 y=77，行距 30（文字顶部对齐判定框，见 bgm_e_dy[7]=-1）
+        bgm_entry(7, 20, 77 + 30 * (_i - 1), 340, 12, 626 + _i + listscroll, string(_i + listscroll) + '  ' + global.customMusicFile[_i + listscroll])
     }
     _i += 1
 }

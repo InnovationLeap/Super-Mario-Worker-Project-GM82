@@ -6,14 +6,14 @@
 /// 与 ed_mark_draw / ed_scenery_draw 等分类标签同款，见 ed_text_shadow），
 /// 替代原 s_edscenario2 烤入图像文字。
 /// 须在 o_edmain 上下文中调用（使用 bgmpage/bgm_select/bgm_play/listscroll 等实例变量）。
-var _i, _x, _y, _w, _h, _txt, _ls, _lt, _lb, _lo;
+var _i, _x, _y, _w, _h, _txt, _ls, _lt, _lb, _lo, _pg, _pt;
 global.musicon = 0
 
 draw_sprite(s_edscenario2, 0, view_xview[0], view_yview[0])
 
 draw_set_font(fnt_label)
-_ls = 9 / font_get_size(fnt_label)   // 曲目条目：与分类标签同字号
-_lt = 9 / font_get_size(fnt_label)     // 系列页签
+_ls = 10 / font_get_size(fnt_label)   // 曲目条目：与分类标签同字号
+_lt = 10 / font_get_size(fnt_label)     // 系列页签
 _lb = 10 / font_get_size(fnt_label)    // 按钮
 _lo = 1                                // 描边半径像素（8 方向偏移描边，2 = 2px 粗描边）
 
@@ -66,25 +66,35 @@ while _i < global.bgm_e_n[bgmpage] {
     _i += 1
 }
 
-// ---------- 自定义音乐页：翻页 / 刷新 ----------
+// ---------- 自定义音乐页：页码 / 翻页 / 刷新（纵向排列） ----------
 if bgmpage = 7 {
-    ed_text_shadow(view_xview[0] + 80, view_yview[0] + 400, 'PREV', _ls, c_white, _lo)
-    ed_text_shadow(view_xview[0] + 160, view_yview[0] + 400, 'NEXT', _ls, c_white, _lo)
-    ed_text_shadow(view_xview[0] + 240, view_yview[0] + 400, 'REFRESH', _ls, c_white, _lo)
-    if ed_hit(70, 390, 60, 30) {
-        draw_prefs_highlight(view_xview[0] + 70, view_yview[0] + 390, 0.4, 0.8, 0.2)
-        if mouse_check_button_pressed(mb_left) && listscroll > 0 {
-            listscroll -= 10
-        }
+    _pg = listscroll / 10 + 1
+    _pt = (global.customMusicTotal + 9) div 10
+    if _pt < 1 {
+        _pt = 1
     }
-    if ed_hit(150, 390, 50, 30) {
-        draw_prefs_highlight(view_xview[0] + 150, view_yview[0] + 390, 0.4, 0.8, 0.2)
+    _txt = 'PAGE ' + string(_pg) + ' / ' + string(_pt)
+    ed_text_shadow(view_xview[0] + 20, view_yview[0] + 378, _txt, _ls, c_white, _lo)
+    // NEXT
+    ed_text_shadow(view_xview[0] + 20, view_yview[0] + 398, 'NEXT', _ls, c_white, _lo)
+    if ed_hit(20, 398, 90, 16) {
+        draw_prefs_highlight(view_xview[0] + 20, view_yview[0] + 398, 1.3 * 90 / 150, 0.8, 0.2)
         if mouse_check_button_pressed(mb_left) && listscroll < global.customMusicTotal - 10 {
             listscroll += 10
         }
     }
-    if ed_hit(230, 390, 70, 30) {
-        draw_prefs_highlight(view_xview[0] + 230, view_yview[0] + 390, 0.6, 0.8, 0.2)
+    // PREV
+    ed_text_shadow(view_xview[0] + 20, view_yview[0] + 418, 'PREV', _ls, c_white, _lo)
+    if ed_hit(20, 418, 90, 16) {
+        draw_prefs_highlight(view_xview[0] + 20, view_yview[0] + 418, 1.3 * 90 / 150, 0.8, 0.2)
+        if mouse_check_button_pressed(mb_left) && listscroll > 0 {
+            listscroll -= 10
+        }
+    }
+    // REFRESH
+    ed_text_shadow(view_xview[0] + 20, view_yview[0] + 438, 'REFRESH', _ls, c_white, _lo)
+    if ed_hit(20, 438, 90, 16) {
+        draw_prefs_highlight(view_xview[0] + 20, view_yview[0] + 438, 1.3 * 90 / 150, 0.8, 0.2)
         // 点击后刷新音乐列表
         if mouse_check_button_pressed(mb_left) {
             music_list_update()
