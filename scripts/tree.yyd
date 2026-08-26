@@ -46,6 +46,13 @@
 	|SXMS_C_Stop
 	|SXMS_I_Close
 	|music_list_update
++BGMPanel
+	|bgm_palette_data
+	|bgm_entry
+	|bgm_tab
+	|bgm_custom_rebuild
+	|ed_bgm_page
+	|ed_text_shadow
 +GZ
 	|GZ_CompressFile
 	|GZ_DeCompressFile
@@ -82,7 +89,6 @@
 	|raccoon_tail_hit_check
 	|blocks_palette_data
 	|background_palette_data
-	|bgm_palette_data
 	|draw_light_icon
 	|toggle_light_icon
 +EncodingConv
