@@ -52,31 +52,31 @@ if _wheel = 0 {
         // LEVEL END：通关杠，整体向下移 48px
         case 2: {_spr = s_markersbank2; _sub = 0; _sw = 94; _sh = 286; _s = 0.15;} break;
         // SOLID
-        case 3: {_spr = s_markersbank3; _sub = 0;} break;
+        case 3: {_spr = s_markersbank3; _sub = 0; _s = 0.8;} break;
         // PLAYER START：用 s_bigmariorun 第 1 帧（40x80 缩到 20x40 居中，靠上半部避开 cy+50 标签）
         case 4: {_spr = s_bigmariorun; _sub = 1; _sw = 40; _sh = 80; _s = 0.5;} break;
         // CHECK POINT：使用激活帧 s_checkpoint2（与 o_checkpoint 激活后一致）
         case 5: {_spr = s_checkpoint2; _sub = 0; _sw = 106; _sh = 111; _s = 0.4;} break;
         // SEALER
-        case 6: {_spr = s_sealroof; _sub = 0;} break;
+        case 6: {_spr = s_sealroof; _sub = 0; _s = 0.8;} break;
         // PLATFORM COLLISION
-        case 8: {_spr = s_onlyyou; _sub = 0;} break;
+        case 8: {_spr = s_onlyyou; _sub = 0; _s = 0.8;} break;
         // MESSAGE
-        case 9: {_spr = s_pointblock5; _sub = 0;} break;
+        case 9: {_spr = s_pointblock5; _sub = 0; _s = 0.8;} break;
         // SWITCH：使用游戏中贴图 s_pointblock6，帧 = color + 8*assist（与放置预览 o_edmain.gml:1939 一致）
-        case 10: {_spr = s_pointblock6; _sub = global.yinyangcolor + 8 * global.assist;} break;
+        case 10: {_spr = s_pointblock6; _sub = global.yinyangcolor + 8 * global.assist; _s = 0.8;} break;
         // TYPE A：游戏内 s_yinyang，帧 = 2*color+1 + 16*assist（滚轮改色 + 辅助模式由 global 驱动）
-        case 11: {_spr = s_yinyang; _sub = 2 * global.yinyangcolor + 1 + 16 * global.assist;} break;
+        case 11: {_spr = s_yinyang; _sub = 2 * global.yinyangcolor + 1 + 16 * global.assist; _s = 0.8;} break;
         // TYPE B：游戏内 s_yinyang，帧 = 2*color + 16*assist
-        case 12: {_spr = s_yinyang; _sub = 2 * global.yinyangcolor + 16 * global.assist;} break;
+        case 12: {_spr = s_yinyang; _sub = 2 * global.yinyangcolor + 16 * global.assist; _s = 0.8;} break;
         // ICE
-        case 13: {_spr = s_ice; _sub = 0;} break;
+        case 13: {_spr = s_ice; _sub = 0; _s = 0.8;} break;
         // LEDGE：使用游戏内 s_ledge，帧 = global.ledge_type（滚轮变种由 global.ledge_type 驱动）
-        case 14: {_spr = s_ledge; _sub = global.ledge_type;} break;
+        case 14: {_spr = s_ledge; _sub = global.ledge_type; _s = 0.8;} break;
         // SCENE CONTROL：使用游戏内 s_bgmchange 第 2 帧（用户提供的素材）
-        case 16: {_spr = s_bgmchange; _sub = 2;} break;
+        case 16: {_spr = s_bgmchange; _sub = 2; _s = 0.8;} break;
         // VIEW CONTROL
-        case 17: {_spr = s_camerabegin; _sub = 0;} break;
+        case 17: {_spr = s_camerabegin; _sub = 0; _s = 0.8;} break;
         // 运输桥系列：桥条 s_platformmasks（滚轮换样式 global.platformanime），居中于格子
         case 19: {_spr = s_platformmasks; _sub = global.platformanime; _sw = 66; _sh = 16;} break;
         case 20: {_spr = s_platformmasks; _sub = global.platformanime; _sw = 66; _sh = 16;} break;
