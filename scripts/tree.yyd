@@ -213,3 +213,19 @@
 	|ed_bonus_label
 	|ed_mark_draw
 	|ed_mark_label
++player
+	|player_pipe
+	|player_move
+	|player_jump
+	|player_raccoon
+	|player_bump
+	|player_skin
+	|player_anim
+	|player_effects
+	|player_combat
+	|player_shoot
+	|player_volume
+	|player_pickup
+	|player_fish
+	|player_camera
+	|player_level_flow
