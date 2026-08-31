@@ -205,6 +205,7 @@ player_jump
 player_raccoon
 player_bump
 player_skin
+player_god_slide
 player_anim
 player_anim_body
 player_anim_raccoon
