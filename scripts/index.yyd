@@ -211,6 +211,10 @@ player_combat
 player_shoot
 player_volume
 player_pickup
+player_grow_big
+player_transform
+player_bonus_score
+player_kill
 player_fish
 player_camera
 player_level_flow
