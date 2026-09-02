@@ -1,7 +1,7 @@
 // player_jump.gml —— 跳跃输入/跳出水/浣熊起飞与飞行计时/落地检测/轻量重力（原 o_marker Step_0 第 464-511 行）
 // 依赖实例变量：state, grav, hspd, water_jump_lock, swim_anim, jump_buffer, raccoon_fly_allowed,
 //               raccoon_flew, raccoon_fly_timer, p_meter_run_timer, p_meter
-if global.pauza=0 && shell_lock=0 && global.level_complete=0 {
+if global.pauza=0 && shell_lock=0 && global.level_complete=0 && pipe_state=0 {
 
     // spadanie i skakanie
 
@@ -50,7 +50,7 @@ if global.pauza=0 && shell_lock=0 && global.level_complete=0 {
         }
     }
 
-    if state=0 &&  global.rodzajmaria<>5 && !place_meeting(x,y+1,obj_wall) && !place_meeting(x,y+1,o_pointblock) && !place_meeting(x,y+2,o_windas) {state=1}
+    if state=0 && global.rodzajmaria<>5 && !place_meeting(x,y+1,obj_wall) && !place_meeting(x,y+1,o_pointblock) && !place_meeting(x,y+2,o_windas) {state=1}
     if global.modifiedmov=0 && state=1 && grav<0 && global.rodzajmaria<>5 {y+=grav+global.level_gravity/5; testujstepa=0}
 
 }

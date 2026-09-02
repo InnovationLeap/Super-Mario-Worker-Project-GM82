@@ -1,7 +1,7 @@
 // player_skin.gml —— 皮肤精灵表定义 + god 模式形态切换（原 o_marker Step_0 第 836-989 行）
 // 依赖：global.skin, global.godmode, global.rodzajmaria, form_backup, star_timer, shield
 // 子脚本：player_god_slide（godmode 切形态前的滑蹲判定）
-if global.pauza=0 && shell_lock=0 && global.level_complete=0 {
+if global.pauza=0 && shell_lock=0 && global.level_complete=0 && pipe_state=0 {
 
     // 强制使用默认皮肤（马里奥）；skin=1 分支为预留的 Luigi 皮肤
     global.skin = 0

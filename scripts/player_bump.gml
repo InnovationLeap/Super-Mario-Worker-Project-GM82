@@ -9,7 +9,7 @@ nexty2 = 0;
 nexty3 = 0;
 bump = 0;
 height = 0;
-if global.pauza=0 && shell_lock=0 && global.level_complete=0 {
+if global.pauza=0 && shell_lock=0 && global.level_complete=0 && pipe_state=0 {
 
     if bump_block=0 && place_meeting(x,y-8,o_pointblock2) && state=0 && global.rodzajmaria<>5 {bump_block=1}
     if bump_block=0 && place_meeting(x,y-8,o_pointblock2) && state=0 && global.rodzajmaria<>5 {bump_block=1}

@@ -2,7 +2,7 @@
 // 依赖：animator, animator2, dir, hspd, grav, state, image_index, swim_anim, schylanie,
 //       shoot_anim, raccoon_fall, raccoon_fly_allowed
 // 子脚本：player_anim_body（小/大/火/绿果/甜菜 水上/水下通用段）/ player_anim_raccoon（浣熊）
-if global.pauza=0 && shell_lock=0 && global.level_complete=0 {
+if global.pauza=0 && shell_lock=0 && global.level_complete=0 && pipe_state=0 {
 
     // 浣熊动画集特殊（idle/walk/run/jump/fall/fly），单独处理
     if global.rodzajmaria=6 {

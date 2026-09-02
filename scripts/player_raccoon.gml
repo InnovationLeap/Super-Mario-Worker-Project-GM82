@@ -6,7 +6,7 @@ _on_ground = 0;
 _at_edge = 0;
 _against_wall = 0;
 _nextx = 0;
-if global.pauza=0 && shell_lock=0 && global.level_complete=0 {
+if global.pauza=0 && shell_lock=0 && global.level_complete=0 && pipe_state=0 {
 
     // Raccoon Mario sync flag
     rodzajmaria_is_raccoon = (global.rodzajmaria = 6)
