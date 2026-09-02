@@ -5,6 +5,13 @@ action_id=603
 applies_to=self
 */
 // Init
+// 镜头瞬移信号基准（计算见 Step_0 顶部）：所有天气粒子共用一次全局位移计算，
+// 取代旧版 o_rain/o_snow/o_fallingstar 各自 with(o_rain) 互相广播的 O(n²) 逻辑
+global.rain_view_x = view_xview[0] + 320;
+global.rain_view_y = view_yview[0] + 240;
+global.rain_shift_x = 0;
+global.rain_shift_y = 0;
+
 // Rainy
 rainy_timer = 0;
 
@@ -191,6 +198,15 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+// 镜头瞬移信号：视口单帧位移超过 128（水管传送等）时记录本帧位移量到全局。
+// o_weather 先于它创建的所有粒子执行 Step（GM8 实例按 id 升序），粒子在各自 Step 中应用该信号。
+global.rain_shift_x = 0;
+global.rain_shift_y = 0;
+if abs((view_xview[0] + 320) - global.rain_view_x) > 128 { global.rain_shift_x = (view_xview[0] + 320) - global.rain_view_x; }
+if abs((view_yview[0] + 240) - global.rain_view_y) > 128 { global.rain_shift_y = (view_yview[0] + 240) - global.rain_view_y; }
+global.rain_view_x = view_xview[0] + 320;
+global.rain_view_y = view_yview[0] + 240;
+
 // 下雨
 if global.rainy > 0 {
     rainy_position_x = view_xview[0] - 32 + random(640 + 160 *2);
@@ -363,7 +379,9 @@ if (global.darkness > 0) {
 
         //draw_set_color(c_black);
         draw_set_blend_mode(bm_subtract);
-        for (i = 0; i < ds_list_size(global.light_obj_list); i += 1) {
+        // ds_list_size 提出循环条件，避免每圈重复查询列表长度
+        light_count = ds_list_size(global.light_obj_list);
+        for (i = 0; i < light_count; i += 1) {
             light_instance = ds_list_find_value(global.light_obj_list, i);
             if instance_exists(light_instance) {
                 if (light_instance <> o_lightlava) {

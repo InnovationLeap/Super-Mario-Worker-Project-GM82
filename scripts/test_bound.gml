@@ -1,5 +1,7 @@
 i=0;region_count=0;
-while(i<instance_number(o_region) && region_count=0) {
+// instance_number 提出循环条件：本脚本被镜头每帧调用，原写法每圈都全量扫描一次实例
+region_total=instance_number(o_region)
+while(i<region_total && region_count=0) {
     tmp2=instance_find(o_region,i);
     if argument0>=tmp2.x && argument0<tmp2.endx && argument1>tmp2.y && argument1<=tmp2.endy {
         left_bound=tmp2.x;

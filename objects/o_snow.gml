@@ -10,13 +10,12 @@ v = 4 + random(3);
 if global.fallingstars = 3 { v *= 1.2; }
 w = 2 + irandom(3);
 
+// angle/v 出生后不变，预计算速度分量，避免每帧重复三角函数调用
+vx = cos(degtorad(angle)) * v;
+vy = -sin(degtorad(angle)) * v;
+
 //dir = irandom(2) * 2 - 1; // -1 or 1
 
-// Screen Position
-scr_pos_x_end = view_xview[0] + 320;
-scr_pos_y_end = view_yview[0] + 240;
-scr_pos_x_start = view_xview[0] + 320;
-scr_pos_y_start = view_yview[0] + 240;
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -24,8 +23,8 @@ action_id=603
 applies_to=self
 */
 
-x += cos(degtorad(angle)) * v;
-y -= sin(degtorad(angle)) * v;
+x += vx;
+y += vy;
 
 // 风等级影响
 x -= global.windy * 2.6;
@@ -39,9 +38,14 @@ if y > view_yview[0] + 480 + 128 {
     instance_destroy();
 }
 
-// 碰撞
-if (place_meeting(x, y, obj_wall) || place_meeting(x, y, obj_halfground) ||
-place_meeting(x, y, obj_wall) || place_meeting(x, y, o_pointblock) ) {
+// 碰撞（GM8 无短路求值，改用 else if 链，命中即停）
+if place_meeting(x, y, obj_wall) {
+    instance_create(x, y - 2, o_snowdrop);
+    instance_destroy();
+} else if place_meeting(x, y, obj_halfground) {
+    instance_create(x, y - 2, o_snowdrop);
+    instance_destroy();
+} else if place_meeting(x, y, o_pointblock) {
     instance_create(x, y - 2, o_snowdrop);
     instance_destroy();
 }
@@ -56,13 +60,3 @@ if y > global.water_level - 48 {
 if y > global.water_level + 64 {
     instance_destroy();
 }
-
-scr_pos_x_end = view_xview[0] + 320;
-scr_pos_y_end = view_yview[0] + 240;
-
-// 水管传送与马里奥引力过大时，雨滴直接瞬移马里奥1帧的运动变化位置
-if abs(scr_pos_x_end - scr_pos_x_start) > 128 { with (o_rain) x += (scr_pos_x_end - scr_pos_x_start); }
-if abs(scr_pos_y_end - scr_pos_y_start) > 128 { with (o_rain) y += (scr_pos_y_end - scr_pos_y_start); }
-
-scr_pos_x_start = scr_pos_x_end;
-scr_pos_y_start = scr_pos_y_end;
