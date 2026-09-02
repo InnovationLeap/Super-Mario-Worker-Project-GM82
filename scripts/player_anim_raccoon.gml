@@ -20,8 +20,8 @@ if y<global.water_level || global.lava {
     if dir=1 && grav<>0 && raccoon_fall=0 && raccoon_fly_allowed=0 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_jump; animator.image_xscale=-1;animkind=1}
 
     // Fall / parachute animation
-    if dir=0 && raccoon_fall=1 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_fall; animator.image_index+=0.2; animator.image_xscale=1;animkind=1}
-    if dir=1 && raccoon_fall=1 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_fall; animator.image_index+=0.2; animator.image_xscale=-1;animkind=1}
+    if dir=0 && raccoon_fall=1 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_fall; animator.image_index+=0.4; animator.image_xscale=1;animkind=1}
+    if dir=1 && raccoon_fall=1 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_fall; animator.image_index+=0.4; animator.image_xscale=-1;animkind=1}
 
     // Fly animation (ascending or descending, matches SMWP2 behavior)
     if dir=0 && raccoon_fly_allowed=1 && grav<>0 && shoot_anim=0 {animator.sprite_index=global.raccoon_character_fly; animator.image_index+=0.25; animator.image_xscale=1;animkind=1}
