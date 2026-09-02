@@ -12,6 +12,7 @@
 - Fixed the issue where Region Mode selection could not directly select pipe exits.
 - Fixed the performance issue where the text drawing extension caused game slowdown in scenes with many texts.
 - Fixed the letter spacing issue of the text drawing extension in compatibility mode.
+- Increased the Raccoon Suit glide animation speed so the full animation can play out.
 
 ## v1.8.0-beta.1 (2026-08-16)
 ### Editor
