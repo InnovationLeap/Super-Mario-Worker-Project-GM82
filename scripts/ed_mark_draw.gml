@@ -2,11 +2,11 @@
 // 在 64x64 的格子（左上角 cx,cy）内绘制 marks 图标 + 下方说明文字。
 // 图标源按原 s_edmarkers 面板逐格还原，并居中于格子。
 // 滚轮类（7/15）只写文字、不画图标，由现有覆盖层提供预览。
-// 运输桥（19-24）：桥条用 s_platformmasks（滚轮换样式），方向箭头代码绘制（原 s_edmarkersmask 烘焙遮罩已废弃）。
+// 运输桥（19-24）：桥条用游戏内 s_platforms（滚轮换样式），方向箭头代码绘制（原 s_edmarkersmask 烘焙遮罩已废弃）。
 // LEDGE(14) 用游戏内 s_ledge 绘制（滚轮变种由 global.ledge_type 驱动）。
 // TYPE A(11)/TYPE B(12) 用游戏内 s_yinyang 贴图绘制，滚轮改色由 global.yinyangcolor 驱动。
 // 文字使用 fnt_label（Arial Narrow Bold Italic，白字无描边，全大写），与 enemies/scenery/bonus 一致。
-var _pc4, _cx, _cy, _label, _wheel, _spr, _sub, _sw, _sh, _s, _dx, _dy, _tw, _th, _ty, _l1, _l2, _i, _as, _ax, _ay, _at, _aa, _bx, _by;
+var _pc4, _cx, _cy, _label, _wheel, _spr, _sub, _sw, _sh, _s, _sx, _sy, _dx, _dy, _tw, _th, _ty, _l1, _l2, _i, _as, _ax, _ay, _at, _aa, _bx, _by;
 _pc4 = argument0
 _cx = argument1
 _cy = argument2
@@ -77,13 +77,13 @@ if _wheel = 0 {
         case 16: {_spr = s_bgmchange; _sub = 2; _s = 0.8;} break;
         // VIEW CONTROL
         case 17: {_spr = s_camerabegin; _sub = 0; _s = 0.8;} break;
-        // 运输桥系列：桥条 s_platformmasks（滚轮换样式 global.platformanime），居中于格子
-        case 19: {_spr = s_platformmasks; _sub = global.platformanime; _sw = 66; _sh = 16;} break;
-        case 20: {_spr = s_platformmasks; _sub = global.platformanime; _sw = 66; _sh = 16;} break;
-        case 21: {_spr = s_platformmasks; _sub = global.platformanime; _sw = 66; _sh = 16;} break;
-        case 22: {_spr = s_platformmasks; _sub = global.platformanime; _sw = 66; _sh = 16;} break;
-        case 23: {_spr = s_platformmasks; _sub = global.platformanime; _sw = 66; _sh = 16;} break;
-        case 24: {_spr = s_platformmasks; _sub = global.platformanime; _sw = 66; _sh = 16;} break;
+        // 运输桥系列：桥条直接用游戏内 s_platforms（滚轮换样式 global.platformanime），居中于格子
+        case 19: {_spr = s_platforms; _sub = global.platformanime;} break;
+        case 20: {_spr = s_platforms; _sub = global.platformanime;} break;
+        case 21: {_spr = s_platforms; _sub = global.platformanime;} break;
+        case 22: {_spr = s_platforms; _sub = global.platformanime;} break;
+        case 23: {_spr = s_platforms; _sub = global.platformanime;} break;
+        case 24: {_spr = s_platforms; _sub = global.platformanime;} break;
     }
     if _spr > 0 {
         _dx = floor(_cx + 32 - _sw * _s / 2)
@@ -92,11 +92,32 @@ if _wheel = 0 {
         if _pc4 = 2 {_dy = _dy + 48}
         if _pc4 = 4 {_dx = _dx + 8; _dy = _dy + 32}
         if _pc4 = 5 {_dx = _dx + 12; _dy = _dy + 26}
-        // 运输桥：实测校正——整体位移 +212,+122（origin 偏置 207,154 再微调 5,-32）；scale 0.8
-        if _pc4 >= 19 && _pc4 <= 24 {_dx = _dx + 212; _dy = _dy + 122; _s = 0.8}
-        // SPEED 1/2/3（20-22）的桥再下移 7px，又上移 3px → 净 +4px
-        if _pc4 = 20 || _pc4 = 21 || _pc4 = 22 {_dy = _dy + 4}
-        draw_sprite_ext(_spr, _sub, _dx, _dy, _s, _s, 0, c_white, 1)
+        // 运输桥：s_platforms（origin 0,0）各帧内容尺寸不一（长桥95x16/短桥30x16/高桥120-126x32等），
+        // 按帧给等效缩放与位置，复原原 66x16 逐帧手工缩小贴图 ×0.8 的视觉（不透明区域落点、尺寸一致）
+        if _pc4 >= 19 && _pc4 <= 24 {
+            _sx = 0.556; _sy = 0.6; _dx = _cx + 4.6; _dy = _cy + 21.2
+            switch (_sub) {
+                case 1:  _sx = 0.56; _sy = 0.6; _dx = _cx + 23; _dy = _cy + 21.2; break; // 短桥
+                case 4:  _sx = 0.56; _sy = 0.6; _dx = _cx + 23; _dy = _cy + 21.2; break;
+                case 6:  _sx = 0.56; _sy = 0.6; _dx = _cx + 23; _dy = _cy + 21.2; break;
+                case 8:  _sx = 0.56; _sy = 0.6; _dx = _cx + 23; _dy = _cy + 21.2; break;
+                case 10: _sx = 0.56; _sy = 0.6; _dx = _cx + 23; _dy = _cy + 21.2; break;
+                case 12: _sx = 0.56; _sy = 0.6; _dx = _cx + 23; _dy = _cy + 21.2; break;
+                case 14: _sx = 0.56; _sy = 0.6; _dx = _cx + 23; _dy = _cy + 21.2; break;
+                case 2:  _sx = 0.387; _sy = 0.4; _dx = _cx + 7; _dy = _cy + 24.4; break; // 高桥
+                case 15: _sx = 0.387; _sy = 0.4; _dx = _cx + 7.8; _dy = _cy + 24.4; break;
+                case 16: _sx = 0.389; _sy = 0.4; _dx = _cx + 16.6; _dy = _cy + 24.4; break;
+                case 17: _sx = 0.353; _sy = 0.4; _dx = _cx + 10.2; _dy = _cy + 24.4; break;
+                case 18: _sx = 0.358; _sy = 0.4; _dx = _cx + 17.4; _dy = _cy + 24.4; break;
+            }
+            // SPEED 1/2/3（20-22）的桥再下移 4px
+            if _pc4 = 20 || _pc4 = 21 || _pc4 = 22 {_dy = _dy + 4}
+            draw_sprite_ext(_spr, _sub, _dx, _dy, _sx, _sy, 0, c_white, 1)
+            _spr = -2   // 已绘制，跳过下方统一绘制
+        }
+        if _spr > 0 {
+            draw_sprite_ext(_spr, _sub, _dx, _dy, _s, _s, 0, c_white, 1)
+        }
     }
     // 运输桥方向箭头：passage 同款“三角头+尾矩形淡出”，全整数像素；四个方向由 ▼ 基准绕几何中心精确旋转（90/180°）保证形状一致
     if _pc4 >= 19 && _pc4 <= 24 {
