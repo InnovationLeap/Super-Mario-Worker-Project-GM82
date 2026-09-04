@@ -1,11 +1,12 @@
 # Super Mario Worker Project - Changelog
 
-## v1.8.0-beta.2
+## v1.8.0-beta.2 (2026-09-05)
 ### Editor
 - Refactored parts of the editor interface.
 ### Level Features
 - Built-in game pause during gameplay. BGM will pause when the game is paused.
 - When pausing in Play Level or Play Scenario, hold Yes for 1 second to exit the level, preventing accidental touches.
+- Improved the performance of the Weather System.
 ### Bug Fixes
 - Fixed the issue where the Raccoon Suit could not play walking animations underwater.
 - Fixed the issue where the flight sound effect lingered after death while in flight state with the Raccoon Suit.
