@@ -5,7 +5,7 @@
 var _dcol, _drow, _i, _j, _blk_str, _newcol, _newrow, _val;
 var _tcol, _trow;
 var _minc, _maxc, _minr, _maxr, _id, _new_id, _cato;
-var _new_list, _new_blk;
+var _new_list, _new_blk, _new_passage_cnt;
 var _bx1, _by1, _bx2, _by2;
 var _iox, _ioy;
 
@@ -56,6 +56,7 @@ if global.ed_region_blk_orig != -1 {
 
 // 3. 实例副本：创建于 16px 网格偏移位置，复制属性，收集新 id
 _new_list = -1
+_new_passage_cnt = 0
 _iox = floor((mouse_x - global.ed_region_orig_x) / 16) * 16
 _ioy = floor((mouse_y - global.ed_region_orig_y) / 16) * 16
 if global.ed_region_list != -1 {
@@ -64,6 +65,14 @@ if global.ed_region_list != -1 {
         for (_i = 0; _i < ds_list_size(global.ed_region_list); _i += 1) {
             _id = ds_list_find_value(global.ed_region_list, _i)
             if instance_exists(_id) {
+                // case 1: 选区只包含出口（入口不在选区内）→ 整条水管不复制
+                if _id.object_index == o_edpassage {
+                    if _id.ed_sel_exit {
+                        if !_id.ed_sel_entr {
+                            continue
+                        }
+                    }
+                }
                 _new_id = instance_create(_id.x + _iox, _id.y + _ioy, _id.object_index)
                 _new_id.coto = _id.coto
                 if _id.object_index == o_edmarkerblock {
@@ -96,10 +105,18 @@ if global.ed_region_list != -1 {
                     _new_id.water_endY = _id.water_endY + _ioy
                 }
                 if _id.object_index == o_edpassage {
+                    _new_passage_cnt += 1
                     _new_id.wejscie = _id.wejscie
                     _new_id.wyjscie = _id.wyjscie
-                    _new_id.exitx = _id.exitx + _iox
-                    _new_id.exity = _id.exity + _ioy
+                    if _id.ed_sel_entr && !_id.ed_sel_exit {
+                        // case 2: 只选中入口 → 出口坐标保持原值（新出口落在原 B 处，不随粘贴偏移）
+                        _new_id.exitx = _id.exitx
+                        _new_id.exity = _id.exity
+                    } else {
+                        // case 3: 两端都选中 → 保持相对位置
+                        _new_id.exitx = _id.exitx + _iox
+                        _new_id.exity = _id.exity + _ioy
+                    }
                     _new_id.tak = _id.tak
                     _new_id.tak2 = _id.tak2
                     _new_id.tak3 = _id.tak3
@@ -171,11 +188,23 @@ if global.ed_region_list != -1 {
                 } else if _id.object_index == o_edpassage {
                     _cato = 4
                 }
-                ed_net_ops_send_create(_new_id, _cato)
+                // 未完成水管（向导中途，tak3=0）不广播：对端 op16 cat4 会强制建成完成态幽灵管
+                if _id.object_index == o_edpassage {
+                    if _new_id.tak3 = 1 {
+                        ed_net_ops_send_create(_new_id, _cato)
+                    }
+                } else {
+                    ed_net_ops_send_create(_new_id, _cato)
+                }
                 ds_list_add(_new_list, _new_id)
             }
         }
     }
+}
+
+// 水管副本创建后重算 warpnum（内部含联机广播，无连接时仅本地重编号）
+if _new_passage_cnt > 0 {
+    ed_passage_reindex()
 }
 
 // 4. 切换选区为副本 + 同步选区框（T 键 recalc 一致性）
@@ -214,6 +243,15 @@ if _new_blk != -1 || _new_list != -1 {
                 _by1 = min(_by1, _id.bbox_top)
                 _bx2 = max(_bx2, _id.bbox_right)
                 _by2 = max(_by2, _id.bbox_bottom)
+                if _id.object_index == o_edpassage {
+                    if _id.tak3 == 1 {
+                        // 选区框并入出口矩形（出口可能远离入口，尤其 case 2 粘贴后出口在原 B 处）
+                        _bx1 = min(_bx1, _id.bbox_left + _id.exitx - _id.x)
+                        _by1 = min(_by1, _id.bbox_top + _id.exity - _id.y)
+                        _bx2 = max(_bx2, _id.bbox_right + _id.exitx - _id.x)
+                        _by2 = max(_by2, _id.bbox_bottom + _id.exity - _id.y)
+                    }
+                }
             }
         }
     }

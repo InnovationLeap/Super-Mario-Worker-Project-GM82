@@ -2,7 +2,7 @@ var _state, _sx, _sy, _ex, _ey, _i, _id, _blk_str, _j;
 var _col, _row, _val, _mode;
 var _type_str, _mode_str, _info;
 var _dcol, _drow;
-var _dox, _doy;
+var _dox, _doy, _px, _py;
 var _minc, _maxc, _minr, _maxr;
 
 _state = global.ed_region_state
@@ -132,10 +132,45 @@ if _state == 2 || _state == 3 {
             while _i < ds_list_size(global.ed_region_list) {
                 _id = ds_list_find_value(global.ed_region_list, _i)
                 if instance_exists(_id) {
-                    if _id.sprite_index != -1 {
-                        draw_set_alpha(0.5)
-                        draw_sprite_ext(_id.sprite_index, _id.image_index, _id.x + _dox, _id.y + _doy, 1, 1, 0, c_white, 0.5)
-                        draw_set_alpha(1)
+                    if _id.object_index == o_edpassage {
+                        // 预览与 ed_region_paste 逻辑严格一致：
+                        // case 1: 只选出口 → 粘贴时整条跳过，预览不画任何副本
+                        if !(_id.ed_sel_exit && !_id.ed_sel_entr) {
+                            // 入口副本（贴图与 o_edpassage Draw 一致用第 0 帧）
+                            if _id.sprite_index != -1 {
+                                draw_set_alpha(0.5)
+                                draw_sprite_ext(_id.sprite_index, 0, _id.x + _dox, _id.y + _doy, 1, 1, 0, c_white, 0.5)
+                                draw_set_alpha(1)
+                            }
+                            if _id.tak = 1 {
+                                draw_set_alpha(0.5)
+                                draw_sprite_ext(s_entrancedir, 0, _id.x + _dox + 32, _id.y + _doy + 32, 1, 1, _id.wejscie, c_white, 0.5)
+                                draw_set_alpha(1)
+                            }
+                            // 出口副本：case 2（只选入口）时新出口落在原 B 坐标，其余随粘贴偏移
+                            _px = _id.exitx + _dox
+                            _py = _id.exity + _doy
+                            if _id.ed_sel_entr && !_id.ed_sel_exit {
+                                _px = _id.exitx
+                                _py = _id.exity
+                            }
+                            if _id.tak2 = 1 {
+                                draw_set_alpha(0.5)
+                                draw_sprite_ext(s_enemiesblock3, 0, _px, _py, 1, 1, 0, c_white, 0.5)
+                                draw_set_alpha(1)
+                            }
+                            if _id.tak3 = 1 {
+                                draw_set_alpha(0.5)
+                                draw_sprite_ext(s_entrancedir, 0, _px + 32, _py + 32, 1, 1, _id.wyjscie, c_white, 0.5)
+                                draw_set_alpha(1)
+                            }
+                        }
+                    } else {
+                        if _id.sprite_index != -1 {
+                            draw_set_alpha(0.5)
+                            draw_sprite_ext(_id.sprite_index, _id.image_index, _id.x + _dox, _id.y + _doy, 1, 1, 0, c_white, 0.5)
+                            draw_set_alpha(1)
+                        }
                     }
                 }
                 _i += 1
