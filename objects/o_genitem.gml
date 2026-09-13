@@ -81,17 +81,15 @@ applies_to=self
 var _spr, _sub, _ddx, _ddy;
 _spr = gen_payload_sprite(payload_cat, payload_code, payload_param, 0)
 _sub = gen_payload_sprite(payload_cat, payload_code, payload_param, 1)
-// v4.0：挤出阶段（"抬起中"）的贴图偏移（用户拍板）——仅绘制偏移，不影响实体/挤出/转正位置：
-//   向上挤出的板栗仔在抬起过程中贴图 +16,+16；转正后由真实对象绘制，位置保持不变
-_ddx = 0;
-_ddy = 0;
-if dir = 1 {
-    if payload_cat = 0 {
-        if payload_code = 1 {
-            _ddx = 16;
-            _ddy = 16;
-        }
-    }
+// v4.1：挤出阶段（"抬起中"）的贴图偏移泛化（用户定规律）——贴图显示在"物品标准锚点"处：
+//   绘制偏移 = 该物品的 gen_spawn_offset 补正量（板栗仔 +16,+16；乌龟 +14,+14；云 +15,+8；鱼 +16,+17 等）
+//   仅绘制偏移，不影响实体/挤出/转正位置（"抬起后开始运动位置保持不变"）
+_ddx = gen_spawn_offset(payload_cat, payload_code, 0);
+_ddy = gen_spawn_offset(payload_cat, payload_code, 1);
+// v4.2：个别物品的抬起贴图额外修正（用户实测逐项补充）
+//   蓝跳龟 035、火球龟 027：y 再 +16
+if payload_cat = 0 {
+    if payload_code = 27 || payload_code = 35 { _ddy += 16 }
 }
 // 按精灵 origin 对齐绘制：生成物坐标语义与真实敌人一致（实例坐标=锚点，非左上角）
 if _spr != -1 { draw_sprite_ext(_spr, _sub, x - sprite_get_xoffset(_spr) + _ddx, y - sprite_get_yoffset(_spr) + _ddy, 1, 1, 0, c_white, 1) }
