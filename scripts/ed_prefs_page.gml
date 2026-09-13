@@ -39,11 +39,13 @@
             draw_prefs_highlight(view_xview[0]+40, view_yview[0]+120, 1.4, 0.8, 0.2);
             if mouse_check_button(mb_left) {global.layerord=(global.layerord+1) mod 3;clicked=1;ed_net_ops_send_settings('Layer Order')}
         }
-                ed_prefs_bool(2, 'Roto-disc Layer', 160, 'Rotodisc Layer', 0)
+                //v1=Above the Blocks / v0=Below the Blocks（重构前原文，白色）
+        ed_prefs_bool(2, 'Roto-disc Layer', 160, 'Rotodisc Layer', 0, 'Above the Blocks', 'Below the Blocks', c_white, c_white)
 
         ed_prefs_int(1, 'Water Level', 190, 405, 40, 190, 'Set the height of the water level.', 0, 999999, 'Water Level')
 
-        ed_prefs_bool(3, 'Fluid Type', 220, 'Lava/Water', 0)
+        //invert=1 借用颜色语义：v1=lava（红）/ v0=water（紫），恢复重构前原文
+        ed_prefs_bool(3, 'Fluid Type', 220, 'Lava/Water', 1, 'lava', 'water')
 
         ed_prefs_bool(4, 'Auto Fluid', 250, 'Auto Scroll', 0)
 
