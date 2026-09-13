@@ -286,6 +286,29 @@ while !file_text_eof(script_file) {
         ae.tak2=1
         ae.tak3=1
     }
+    if string_char_at(aa,1)='5' {
+        //生成器（ObjGenerator.md）：编辑器重建实例 + 还原被收编的物品（编辑器可视）
+        ae=instance_create(transA(string_copy(aa,5,4)),transA(string_copy(aa,9,4)),o_edgeneratorblock)
+        ae.payload_cat=real(string_copy(aa,2,1))
+        ae.payload_code=real(string_copy(aa,3,2))
+        ae.dir=real(string_copy(aa,13,1))
+        ae.tier=real(string_copy(aa,14,1))
+        ae.payload_param=0
+        ae.wizard=0
+        if ae.payload_cat=0 && ae.payload_code=35 && string_length(aa)>=17 {ae.payload_param=real(string_copy(aa,15,3))}
+        if ae.payload_cat=0 && ae.payload_code=43 && string_length(aa)>=15 {ae.payload_param=real(string_copy(aa,15,1))}
+        if ae.payload_code>0 {
+            if ae.payload_cat=0 {
+                ae_item=instance_create(ae.x,ae.y,o_edenemyblock)
+                ae_item.coto=ae.payload_code
+                if ae.payload_code=35 {ae_item.jumph=ae.payload_param;ae_item.test2=2}
+                if ae.payload_code=43 {ae_item.shell_type=ae.payload_param}
+            } else {
+                ae_item=instance_create(ae.x,ae.y,o_edbonusesblock)
+                ae_item.coto=ae.payload_code
+            }
+        }
+    }
     haveversion=0
     if string_copy(aa,0,7)='version' {
         haveversion=1

@@ -1,4 +1,5 @@
 var aa,ab;
+if gen_is_captured(id) { exit }  //已被生成器收编的物品不再作为独立物品写出（ObjGenerator.md）
 aa=string(argument0)//aa为物件编号(scenery是1,marks是2等,Enemy的保存单独在另一个函数里)
 ab=string(coto)//ab为物品编号（就是那个,101中的1,218中的18）
 repeat(2-string_length(ab)) {ab=string_insert('0',ab,-1)}//为物品编号补0

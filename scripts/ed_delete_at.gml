@@ -79,4 +79,11 @@ if argument0 = 5 {
     ed_passage_reindex()
     return -1
 }
+if argument0 = 6 {
+    //生成器删除（被收编的物品实例保留，恢复为普通物品）
+    _t = instance_position(argument1, argument2, o_edgeneratorblock)
+    ed_net_ops_send_delete(_t)
+    with(_t) {instance_destroy()}
+    return -1
+}
 return -1

@@ -204,3 +204,7 @@
 	|o_mariodead
 +o_pausemenu
 	|o_pausemenu
++o_generator
+	|o_generator
+	|o_genitem
+	|o_edgeneratorblock

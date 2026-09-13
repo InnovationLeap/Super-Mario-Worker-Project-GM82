@@ -1,4 +1,5 @@
 var aa,ab,i;  //定义两个变量，aa负责记录整串敌人代码，ab负责记录每节代码
+if gen_is_captured(id) { exit }  //已被生成器收编的物品不再作为独立物品写出（ObjGenerator.md）
 aa='0'  //初始化aa为字符串0
 ab='0'
 i=0

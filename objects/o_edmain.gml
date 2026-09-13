@@ -53,6 +53,7 @@ place_code3=0
 place_code4=0
 costawia4b=0
 costawia4c=0
+costawia4d=0
 place_code5=0
 place_code6=0
 autopair=0
@@ -1491,6 +1492,8 @@ if scrolla<=1 && scrollb<=1 {
                 ed_mark_draw(_mk_coto, view_xview[0]+206+_mk_c*64, view_yview[0]+110+64*3, ed_mark_label(_mk_coto))
                 _mk_c = _mk_c + 1
             }
+            // 第 18 格（第二行第 6 格）：生成器（ObjGenerator.md）
+            ed_mark_draw(18, view_xview[0]+206+64*5, view_yview[0]+110+64*2, ed_mark_label(18))
         }
         //if costawia4b=1{draw_sprite_ext(s_edmarkers,1,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)}
         //桥预览（已改由 ed_mark_draw case 19-24 按格子绘制桥条+代码箭头，删除原 s_platformmasks 覆盖层）
@@ -1600,6 +1603,23 @@ if scrolla<=1 && scrollb<=1 {
         place_code3=0
         place_code4=floor(1+(mouse_x-(view_xview[0]+206))/64)+6+6+6
         autopair=0 //怨念残留喝了
+        place_code5=0
+        place_code6=0
+    }
+
+    // 第 18 格（第二行第 6 格）：生成器
+    if option_open=4 && o_edmain.costawia4b=0 && ed_hit(206+320, 110+64*2, 64, 64) && clicked=0 {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*5,view_yview[0]+110+64*2,1,1,0,c_white,1)}
+    if option_open=4 && o_edmain.costawia4b=0 && ed_hit(206+320, 110+64*2, 64, 64) && mouse_check_button(mb_left) && clicked=0 {
+        delay_tick=0
+        clicked=1
+        sampelwyboru1=1
+        option_open=0;
+        placed=0
+        place_code=0
+        place_code2=0
+        place_code3=0
+        place_code4=18
+        autopair=0
         place_code5=0
         place_code6=0
     }
@@ -1964,6 +1984,50 @@ if scrolla<=1 && scrollb<=1 {
         clicked=1
         costawia4b=0
         ed_place_passage(4,mouse_x,mouse_y)
+    }
+
+    // ===== 生成器放置向导（marks 第 18 格，ObjGenerator.md）=====
+    // step1 落位 → step2 方向（鼠标指向 45° 取整，参照水管出口）→ step3 档位菜单
+    if place_code4=18 && costawia4d=0 && tool_mode=0 && menu_open=0 && option_open=0 {
+        if !instance_position(mouse_x, mouse_y, o_edgeneratorblock) {
+            gen_draw_pipe(floor(mouse_x/32)*32, floor(mouse_y/32)*32, 0, 1, 0.5, 1)
+        }
+        if self_coto_check(6, 0) {
+            if mouse_check_button(mb_left) && clicked=0 {
+                if !instance_position(mouse_x, mouse_y, o_edgeneratorblock) {
+                    clicked=1
+                    tmp2=ed_place_generator(1, floor(mouse_x/32)*32, floor(mouse_y/32)*32)
+                    costawia4d=1
+                    autopair=0
+                }
+            }
+        }
+    }
+    if place_code4=18 && costawia4d=1 {
+        if !instance_exists(tmp2) {
+            costawia4d=0
+        } else {
+            genw_ang=floor((point_direction(tmp2.x+16, tmp2.y+16, mouse_x, mouse_y)+45)/90)*90
+            draw_sprite_ext(s_entrancedir, 0, tmp2.x+16, tmp2.y+16, 1, 1, genw_ang, c_white, 1)
+            if mouse_check_button(mb_left) && clicked=0 {
+                clicked=1
+                ed_place_generator(2, mouse_x, mouse_y)
+                genw_t=show_menu('Slow|Medium|Fast|Very Fast', -1)
+                if genw_t<0 {genw_t=0}
+                ed_place_generator(3, genw_t+1, 0)
+                costawia4d=0
+            }
+            if mouse_check_button(mb_right) && clicked=0 {
+                clicked=1
+                with (tmp2) {instance_destroy()}
+                costawia4d=0
+            }
+        }
+    }
+    // 生成器删除（选中生成器工具时右键；被收编的物品保留为普通物品）
+    if place_code4=18 && costawia4d=0 && clicked=0 && mouse_check_button(mb_right) && instance_position(mouse_x,mouse_y,o_edgeneratorblock) && tool_mode=0
+    && menu_open=0 && option_open=0 && global.picking = false {
+        ed_delete_at(6,mouse_x,mouse_y,0)
     }
 
 

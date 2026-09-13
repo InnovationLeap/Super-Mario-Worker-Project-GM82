@@ -17,6 +17,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+var _gpx, _gpy, _gdx, _gdy;
 if keyboard_check_pressed(global.key_select) {lockon=1;}
 
 if lockon=1 {
@@ -32,6 +33,9 @@ if lockon=1 {
     case 3:target = instance_position(mouse_x,mouse_y,o_edsceneriesblock);break;
     case 4:if(o_edmain.place_code4=1) {
             target = instance_position(mouse_x,mouse_y,o_edpassage);
+    } else if(o_edmain.place_code4=18) {
+            // 生成器（marks 第 18 格）：收编物品跟随见下方 lockon=2
+            target = instance_position(mouse_x,mouse_y,o_edgeneratorblock);
     } else {
             target = instance_position(mouse_x,mouse_y,o_edmarkerblock);
             if !target {
@@ -62,6 +66,8 @@ if lockon=2 {
     visible=1;
     x = target.x
     y = target.y
+    _gpx = target.x
+    _gpy = target.y
     if keyboard_check(global.key_acc_up) || keyboard_check(global.key_acc_down) || keyboard_check(global.key_acc_left) || keyboard_check(global.key_acc_right) {drink+=1}
 
 
@@ -83,6 +89,19 @@ if lockon=2 {
     }
 
     if !keyboard_check(global.key_acc_up) && !keyboard_check(global.key_acc_down) && !keyboard_check(global.key_acc_left) && !keyboard_check(global.key_acc_right) {drink=0}
+    // 生成器微调：被收编的物品随生成器同步位移并刷新锚点（保持收编 + 相对位置）
+    if target.object_index = o_edgeneratorblock {
+        _gdx = target.x - _gpx
+        _gdy = target.y - _gpy
+        if _gdx != 0 || _gdy != 0 {
+            if instance_exists(target.gen_item) {
+                target.gen_item.x += _gdx
+                target.gen_item.y += _gdy
+                target.gen_item_x += _gdx
+                target.gen_item_y += _gdy
+            }
+        }
+    }
     // 联机同步：方向键按住/大键按下时（与上方 nudge 同条件）广播实例位置，apply 端按 coto 级联 end 变量
     if keyboard_check(global.key_acc_up) || keyboard_check(global.key_acc_down) || keyboard_check(global.key_acc_left) || keyboard_check(global.key_acc_right) || keyboard_check_pressed(global.key_acc_bigup) || keyboard_check_pressed(global.key_acc_bigdown) || keyboard_check_pressed(global.key_acc_bigleft) || keyboard_check_pressed(global.key_acc_bigright) {ed_net_ops_send_update(target, 11)}
 }

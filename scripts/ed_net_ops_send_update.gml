@@ -6,6 +6,7 @@
 //        7=跳乌龟(jumph) 8=金飞龟多轨道(rotoord+rotor/rota/rotoc/rotod 逐轨)
 //        10=实例位置(x/y, 绝对, pick 落定用不级联) 11=实例位置(x/y, 绝对, acc 用按 coto 级联 end 变量)
 //        12=通道出口(exitx/exity, 绝对)
+//        13=生成器(payload_cat/payload_code/payload_param/dir/tier)
 var _netid, _i;
 _netid = 0
 if instance_exists(argument0) {
@@ -81,6 +82,14 @@ if _netid <> 0 && instance_exists(o_ednet) && o_ednet.net_state = 3 {
     if argument1 = 12 {
         buffer_write_u32(o_ednet.net_sendbuf, argument0.exitx)
         buffer_write_u32(o_ednet.net_sendbuf, argument0.exity)
+    }
+    if argument1 = 13 {
+        // 生成器参数（ObjGenerator.md）
+        buffer_write_u16(o_ednet.net_sendbuf, argument0.payload_cat)
+        buffer_write_u16(o_ednet.net_sendbuf, argument0.payload_code)
+        buffer_write_u16(o_ednet.net_sendbuf, argument0.payload_param)
+        buffer_write_u16(o_ednet.net_sendbuf, argument0.dir)
+        buffer_write_u16(o_ednet.net_sendbuf, argument0.tier)
     }
     with(o_ednet) {
         if net_role = 1 {

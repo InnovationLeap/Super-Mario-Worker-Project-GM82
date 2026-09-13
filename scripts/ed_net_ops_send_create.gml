@@ -1,6 +1,6 @@
 // ed_net_ops_send_create(inst, category)
 // 在创建完成点广播 op16 创建消息（o_edmain 上下文调用）
-// category: 0=奖励 1=敌人 2=景物 3=标记 4=水管(完成态) 5=实心联动标记(coto=18)
+// category: 0=奖励 1=敌人 2=景物 3=标记 4=水管(完成态) 5=实心联动标记(coto=18) 6=生成器
 // 负载字段全部从实例变量读取（各对象 Create 均含默认值，未读风险已逐一核对）
 var _id, _cato, _t;
 if instance_exists(argument0) && instance_exists(o_ednet) && o_ednet.net_state = 3 {
@@ -69,6 +69,14 @@ if instance_exists(argument0) && instance_exists(o_ednet) && o_ednet.net_state =
             buffer_write_u32(o_ednet.net_sendbuf, argument0.camera_endX)
             buffer_write_u32(o_ednet.net_sendbuf, argument0.camera_endY)
         }
+    }
+    if _cato = 6 {
+        // 生成器（ObjGenerator.md）
+        buffer_write_u16(o_ednet.net_sendbuf, argument0.payload_cat)
+        buffer_write_u16(o_ednet.net_sendbuf, argument0.payload_code)
+        buffer_write_u16(o_ednet.net_sendbuf, argument0.payload_param)
+        buffer_write_u16(o_ednet.net_sendbuf, argument0.dir)
+        buffer_write_u16(o_ednet.net_sendbuf, argument0.tier)
     }
     if _cato = 4 {
         buffer_write_u16(o_ednet.net_sendbuf, argument0.warpnum)

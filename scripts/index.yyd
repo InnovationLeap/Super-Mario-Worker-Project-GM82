@@ -221,3 +221,15 @@ player_kill
 player_fish
 player_camera
 player_level_flow
+gen_payload_info
+gen_tier_info
+gen_draw_pipe
+gen_payload_sprite
+gen_payload_draw
+gen_param_snapshot
+gen_apply_param
+gen_spawn
+gen_spawn_offset
+gen_is_captured
+ed_place_generator
+Save_Script_Generator

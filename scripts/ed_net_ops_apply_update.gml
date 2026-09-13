@@ -126,12 +126,30 @@ if instance_exists(_f) {
             _f.fishendX += _dx
             _f.fishendY += _dy
         }
+        // 生成器微调：被收编物品跟随并刷新锚点（与 acc 端一致）
+        if _f.object_index = o_edgeneratorblock {
+            if instance_exists(_f.gen_item) {
+                _f.gen_item.x += _dx
+                _f.gen_item.y += _dy
+                _f.gen_item_x += _dx
+                _f.gen_item_y += _dy
+            }
+        }
     }
     if _subop = 12 {
         _f.exitx = buffer_read_u32(argument0)
         _f.exity = buffer_read_u32(argument0)
         if _f.exitx > 2147483647 { _f.exitx -= 4294967296 }
         if _f.exity > 2147483647 { _f.exity -= 4294967296 }
+    }
+    if _subop = 13 {
+        // 生成器参数（ObjGenerator.md）
+        _f.payload_cat = buffer_read_u16(argument0)
+        _f.payload_code = buffer_read_u16(argument0)
+        _f.payload_param = buffer_read_u16(argument0)
+        _f.dir = buffer_read_u16(argument0)
+        _f.tier = buffer_read_u16(argument0)
+        _f.wizard = 0
     }
     ed_net_trace('R19 netid=' + string(_netid) + ' subop=' + string(_subop) + ' applied inst=' + string(_f))
 } else {

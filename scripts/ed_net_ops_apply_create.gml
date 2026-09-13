@@ -117,6 +117,16 @@ if _cato = 5 {
     _f = instance_create(_x, _y, o_edmarkerblock)
     _f.coto = 18
 }
+if _cato = 6 {
+    _f = instance_create(_x, _y, o_edgeneratorblock)
+    _f.payload_cat = buffer_read_u16(argument0)
+    _f.payload_code = buffer_read_u16(argument0)
+    _f.payload_param = buffer_read_u16(argument0)
+    _f.dir = buffer_read_u16(argument0)
+    _f.tier = buffer_read_u16(argument0)
+    _f.gen_item = noone
+    _f.wizard = 0
+}
 if instance_exists(_f) {
     // NET-SYNC: 测关中远端编辑照常应用（数据进入存盘），但不绘制且不跑 Step（防游戏画面误删/误改）；
     // deactivate 实例仍可被 instance_exists/ed_net_inst_lookup 找到，存盘时 Save_Script_Main 自带 activate_all

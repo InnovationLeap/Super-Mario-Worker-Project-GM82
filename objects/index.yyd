@@ -396,3 +396,6 @@ o_raccoon_tail
 o_debugmsg
 o_ednet
 o_pausemenu
+o_generator
+o_genitem
+o_edgeneratorblock

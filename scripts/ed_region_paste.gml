@@ -174,6 +174,15 @@ if global.ed_region_list != -1 {
                         }
                     }
                 }
+                if _id.object_index == o_edgeneratorblock {
+                    _new_id.payload_cat = _id.payload_cat
+                    _new_id.payload_code = _id.payload_code
+                    _new_id.payload_param = _id.payload_param
+                    _new_id.dir = _id.dir
+                    _new_id.tier = _id.tier
+                    _new_id.gen_item = noone
+                    _new_id.wizard = 0
+                }
                 _cato = 0
                 if _id.object_index == o_edenemyblock {
                     _cato = 1
@@ -187,6 +196,8 @@ if global.ed_region_list != -1 {
                     }
                 } else if _id.object_index == o_edpassage {
                     _cato = 4
+                } else if _id.object_index == o_edgeneratorblock {
+                    _cato = 6
                 }
                 // 未完成水管（向导中途，tak3=0）不广播：对端 op16 cat4 会强制建成完成态幽灵管
                 if _id.object_index == o_edpassage {

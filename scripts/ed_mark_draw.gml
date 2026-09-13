@@ -77,6 +77,11 @@ if _wheel = 0 {
         case 16: {_spr = s_bgmchange; _sub = 2; _s = 0.8;} break;
         // VIEW CONTROL
         case 17: {_spr = s_camerabegin; _sub = 0; _s = 0.8;} break;
+        // GENERATOR（生成器）：程序化水管 + 方向箭头（无外部素材）
+        case 18: {
+            gen_draw_pipe(_cx + 16, _cy + 14, 0, 1, 1, 1);
+            _spr = -2;
+        } break;
         // 运输桥系列：桥条直接用游戏内 s_platforms（滚轮换样式 global.platformanime），居中于格子
         case 19: {_spr = s_platforms; _sub = global.platformanime;} break;
         case 20: {_spr = s_platforms; _sub = global.platformanime;} break;

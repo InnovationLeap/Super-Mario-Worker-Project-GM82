@@ -41,4 +41,8 @@ case 5: {
             return true;
         }
 }break;
+case 6: { //生成器：同格不允许叠放第二个生成器
+        if instance_position(mouse_x,mouse_y,o_edgeneratorblock) {return false;}
+        return true;
+}break;
 }

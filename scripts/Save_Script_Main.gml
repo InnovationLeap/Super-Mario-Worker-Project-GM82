@@ -67,6 +67,7 @@ with (o_edenemyblock) {Save_Script_Enemy()} //写入敌人数据
 with (o_edsceneriesblock) {Save_Script_Rest('1')} //写入装饰物类数据
 with (o_edmarkerblock) {Save_Script_Rest('2')} //写入mark类数据
 with (o_edbonusesblock) {Save_Script_Rest('3')} //写入奖励类数据
+with (o_edgeneratorblock) {Save_Script_Generator()} //写入生成器数据（5xx 行，ObjGenerator.md）
 with (o_edpassage) {Save_Script_Passage()} //写入管道出入口数据
 if global.modifiedmov=1 {file_text_write_string(global.script_file,"modifiedmov=1")}
 if global.modifiedmov=0 {file_text_write_string(global.script_file,"modifiedmov=0")}

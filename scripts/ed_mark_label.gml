@@ -19,6 +19,7 @@ switch (_pc4) {
     case 15: return "FLUID CTRL";
     case 16: return "SCENE CTRL";
     case 17: return "VIEW CTRL";
+    case 18: return "GENERATOR";
     case 19: return "FALLING";
     case 20: return "SPEED 1";
     case 21: return "SPEED 2";
