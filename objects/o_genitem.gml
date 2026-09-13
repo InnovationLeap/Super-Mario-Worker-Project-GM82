@@ -52,6 +52,13 @@ if obj_index = -1 {
         }
     }
 }
+// v4.4：抬起阶段"面向玩家"（每帧，Step 内）——玩家在左 → 朝左（image_xscale=-1）；在右 → 朝右（=1）
+//   放在转正检测之前：转正那一帧能把该朝向传给真实对象（见下方 instance_create 后的继承），
+//   避免"抬起朝左、转正瞬间弹回默认朝右"的闪变
+image_xscale = 1;
+if instance_exists(o_marker) {
+    if o_marker.x < x { image_xscale = -1 }
+}
 // 与实心不重叠 → "生成完毕"：在当前位置创建真实对象并继承 gen_tag
 // 实心集合与 basic_movement（敌人通用运动）一致：obj_wall（含子对象）/ o_pointblock / obj_halfground
 // 漏检 halfground 会让生成物"嵌在半实心里"直接转正，随后被卡住
@@ -60,6 +67,7 @@ if !place_meeting(x, y, obj_wall) {
         if !place_meeting(x, y, obj_halfground) {
             _obj = instance_create(x, y, obj_index)
             _obj.gen_tag = gen_tag
+            _obj.image_xscale = image_xscale  // v4.4：转正帧继承"面向玩家"的朝向（避免转正瞬间反向）
             gen_apply_param(_obj, payload_cat, payload_code, payload_param)
             instance_destroy()
             exit
@@ -91,5 +99,12 @@ _ddy = gen_spawn_offset(payload_cat, payload_code, 1);
 if payload_cat = 0 {
     if payload_code = 27 || payload_code = 35 { _ddy += 16 }
 }
+// v4.3：抬起阶段"面向玩家"（用户拍板）——玩家在左 → 贴图朝左（image_xscale=-1）；在右 → 朝右（=1）
+//   避免"抬起过程中朝右、开始运动后朝左"的跳变；仅影响绘制，实体/挤出/转正位置不变
+//   （镜像以绘制点为轴：xs=-1 时覆盖范围相对 xs=1 做水平镜像，中心不变）
+image_xscale = 1;
+if instance_exists(o_marker) {
+    if o_marker.x < x { image_xscale = -1 } else { image_xscale = 1 }
+}
 // 按精灵 origin 对齐绘制：生成物坐标语义与真实敌人一致（实例坐标=锚点，非左上角）
-if _spr != -1 { draw_sprite_ext(_spr, _sub, x - sprite_get_xoffset(_spr) + _ddx, y - sprite_get_yoffset(_spr) + _ddy, 1, 1, 0, c_white, 1) }
+if _spr != -1 { draw_sprite_ext(_spr, _sub, x - sprite_get_xoffset(_spr) + _ddx, y - sprite_get_yoffset(_spr) + _ddy, image_xscale, 1, 0, c_white, 1) }
