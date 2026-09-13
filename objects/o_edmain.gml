@@ -1255,7 +1255,7 @@ if scrolla<=1 && scrollb<=1 {
         // 逐格绘制景物图标 + 说明文字（Impact 斜体白字黑描边）
         _sc_list = "";
         if costawia3b=0 {_sc_list = "01 02 03 04 05 06 07 08 09 10 11 12 13 22 23 24 14 15 19 20 21 16 17 18"}
-        if costawia3b=1 {_sc_list = "25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42"}
+        if costawia3b=1 {_sc_list = "25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43"}
         _er = 0
         while (_er < 4) {
             _ec = 0
@@ -1396,15 +1396,30 @@ if scrolla<=1 && scrollb<=1 {
         place_code5=0
         place_code6=0
     }
+    if option_open=3 && costawia3b=1 && ed_hit(206, 110+64+64+64, 384, 64)&& clicked=0 {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206+64*floor((mouse_x-(view_xview[0]+206))/64),view_yview[0]+110+64+64+64,1,1,0,c_white,1)}
+    if option_open=3 && costawia3b=1 && ed_hit(206, 110+64+64+64, 384, 64)&& mouse_check_button(mb_left) && clicked=0 {
+        delay_tick=0
+        clicked=1
+        sampelwyboru1=1//smp
+        option_open=0;
+        placed=0
+        place_code=0
+        place_code2=0
+        place_code3=floor(1+(mouse_x-(view_xview[0]+206))/64)+24+6+6+6
+        autopair=0 //怨念残留喝了
+        place_code4=0
+        place_code5=0
+        place_code6=0
+    }
 
 
 
     //景物可以连放
-    if place_code3<>0 && place_code3<42 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edsceneriesblock) &&  tool_mode=0
+    if place_code3<>0 && place_code3<=43 && place_code3<>42 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edsceneriesblock) &&  tool_mode=0
     && menu_open=0 && option_open=0 && delay_tick>15
     {draw_sprite_ext(s_sceneriesbank,place_code3-1,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,1,1,0,c_white,0.5)}
 
-    if place_code3<>0 && place_code3<42 && mouse_check_button(mb_left) /*&& mouse_x>0 &&  mouse_y>0*/ && tool_mode=0
+    if place_code3<>0 && place_code3<=43 && place_code3<>42 && mouse_check_button(mb_left) /*&& mouse_x>0 &&  mouse_y>0*/ && tool_mode=0
     && menu_open=0 && option_open=0 && delay_tick>15 {
         if self_coto_check(3,place_code3) {
             clicked=1

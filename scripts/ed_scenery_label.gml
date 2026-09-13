@@ -43,5 +43,6 @@ switch (_coto) {
     case 40: return "MEDIUM CORAL";
     case 41: return "DARK CORAL";
     case 42: return "IMITATER";
+    case 43: return "TOMB";
 }
 return "";

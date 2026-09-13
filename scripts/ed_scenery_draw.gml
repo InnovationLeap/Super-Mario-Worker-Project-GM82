@@ -72,6 +72,7 @@ switch (_coto) {
     case 39: {_spr=s_sceneriesbank; _sub=38; _ox=142; _oy=208; _ccx=157.0; _ccy=159.5; _s=0.325;} break;
     case 40: {_spr=s_sceneriesbank; _sub=39; _ox=142; _oy=208; _ccx=156.5; _ccy=159.5; _s=0.325;} break;
     case 41: {_spr=s_sceneriesbank; _sub=40; _ox=142; _oy=208; _ccx=156.5; _ccy=159.5; _s=0.325;} break;
+    case 43: {_spr=s_sceneriesbank; _sub=42; _ox=142; _oy=208; _ccx=158.0; _ccy=193.0; _s=0.565;} break;
 }
 // 居中绘制图标：使内容中心对齐格子中心（imitater 跳过图标绘制）
 _dx = _cx + 32 + (_ox - _ccx) * _s
