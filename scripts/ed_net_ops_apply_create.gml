@@ -118,12 +118,16 @@ if _cato = 5 {
     _f.coto = 18
 }
 if _cato = 6 {
+    // 生成器（ObjGenerator.md v5.0）：payload + 作者参数（数量/间隔/距离/屏内）
     _f = instance_create(_x, _y, o_edgeneratorblock)
     _f.payload_cat = buffer_read_u16(argument0)
     _f.payload_code = buffer_read_u16(argument0)
     _f.payload_param = buffer_read_u16(argument0)
     _f.dir = buffer_read_u16(argument0)
-    _f.tier = buffer_read_u16(argument0)
+    _f.gen_max_user = buffer_read_u16(argument0)
+    _f.gen_interval = buffer_read_u16(argument0)
+    _f.gen_range = buffer_read_u16(argument0)
+    _f.gen_screen_only = buffer_read_u16(argument0)
     _f.gen_item = noone
     _f.wizard = 0
 }

@@ -143,12 +143,15 @@ if instance_exists(_f) {
         if _f.exity > 2147483647 { _f.exity -= 4294967296 }
     }
     if _subop = 13 {
-        // 生成器参数（ObjGenerator.md）
+        // 生成器参数（ObjGenerator.md v5.0）：payload + 方向 + 作者参数（数量/间隔/距离/屏内）
         _f.payload_cat = buffer_read_u16(argument0)
         _f.payload_code = buffer_read_u16(argument0)
         _f.payload_param = buffer_read_u16(argument0)
         _f.dir = buffer_read_u16(argument0)
-        _f.tier = buffer_read_u16(argument0)
+        _f.gen_max_user = buffer_read_u16(argument0)
+        _f.gen_interval = buffer_read_u16(argument0)
+        _f.gen_range = buffer_read_u16(argument0)
+        _f.gen_screen_only = buffer_read_u16(argument0)
         _f.wizard = 0
     }
     ed_net_trace('R19 netid=' + string(_netid) + ' subop=' + string(_subop) + ' applied inst=' + string(_f))

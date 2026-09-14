@@ -9,9 +9,10 @@ _mode = gen_payload_info(payload_cat, payload_code, 3);
 // 位置补正：生成器坐标=格左上角，生成物按存档同款补正对齐"正常放置"的实例坐标（见 gen_spawn_offset）
 _dx = gen_spawn_offset(payload_cat, payload_code, 0);
 _dy = gen_spawn_offset(payload_cat, payload_code, 1);
+// 名额分配：槽位数 = gen_max_eff（v5.0：强制上限优先，否则 = 作者参数"数量"）
 _slot = 0;
 _k = 0;
-while (_k < gen_max) {
+while (_k < gen_max_eff) {
     _k += 1;
     if _slot = 0 {
         if gen_slots[_k] = 0 { _slot = _k }

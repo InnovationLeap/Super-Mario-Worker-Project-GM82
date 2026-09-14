@@ -287,24 +287,31 @@ while !file_text_eof(script_file) {
         ae.tak3=1
     }
     if string_char_at(aa,1)='5' {
-        //生成器（ObjGenerator.md）：编辑器重建实例 + 还原被收编的物品（编辑器可视）
+        //生成器（ObjGenerator.md v5.0）：编辑器重建实例 + 还原被收编的物品（编辑器可视）
+        //解析走 gen_line_parse（与两处 play 载入器共用，避免逻辑分叉；旧格式行按 §12.1#9 取默认参数并置 gen_legacy）
+        gen_line_parse(aa)
         ae=instance_create(transA(string_copy(aa,5,4)),transA(string_copy(aa,9,4)),o_edgeneratorblock)
-        ae.payload_cat=real(string_copy(aa,2,1))
-        ae.payload_code=real(string_copy(aa,3,2))
-        ae.dir=real(string_copy(aa,13,1))
-        ae.tier=real(string_copy(aa,14,1))
-        ae.payload_param=0
+        ae.payload_cat=global.genp_cat
+        ae.payload_code=global.genp_code
+        ae.payload_param=global.genp_param
+        ae.dir=global.genp_dir
+        ae.gen_max_user=global.genp_max
+        ae.gen_interval=global.genp_int
+        ae.gen_range=global.genp_rng
+        ae.gen_screen_only=global.genp_scr
+        ae.gen_legacy=global.genp_legacy
         ae.wizard=0
-        if ae.payload_cat=0 && ae.payload_code=35 && string_length(aa)>=17 {ae.payload_param=real(string_copy(aa,15,3))}
-        if ae.payload_cat=0 && ae.payload_code=43 && string_length(aa)>=15 {ae.payload_param=real(string_copy(aa,15,1))}
+        if global.genp_legacy=1 {debug_log("Generator: legacy 5xx line (v3/v4 tier format) at "+string(ae.x)+","+string(ae.y)+" — parameters reset to defaults")}
         if ae.payload_code>0 {
+            // v5.0.3：被收编物品必须重建在"该物品的标准放置位置"（生成器坐标 + 编辑器放置偏移）上，
+            // 否则在"位置严格匹配"判定下它不会被重新收编（食人花族偏移 +16px，见 gen_editor_offset）
             if ae.payload_cat=0 {
-                ae_item=instance_create(ae.x,ae.y,o_edenemyblock)
+                ae_item=instance_create(ae.x+gen_editor_offset(ae.payload_cat,ae.payload_code,0),ae.y+gen_editor_offset(ae.payload_cat,ae.payload_code,1),o_edenemyblock)
                 ae_item.coto=ae.payload_code
                 if ae.payload_code=35 {ae_item.jumph=ae.payload_param;ae_item.test2=2}
                 if ae.payload_code=43 {ae_item.shell_type=ae.payload_param}
             } else {
-                ae_item=instance_create(ae.x,ae.y,o_edbonusesblock)
+                ae_item=instance_create(ae.x+gen_editor_offset(ae.payload_cat,ae.payload_code,0),ae.y+gen_editor_offset(ae.payload_cat,ae.payload_code,1),o_edbonusesblock)
                 ae_item.coto=ae.payload_code
             }
         }

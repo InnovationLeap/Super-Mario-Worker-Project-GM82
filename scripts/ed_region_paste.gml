@@ -179,7 +179,11 @@ if global.ed_region_list != -1 {
                     _new_id.payload_code = _id.payload_code
                     _new_id.payload_param = _id.payload_param
                     _new_id.dir = _id.dir
-                    _new_id.tier = _id.tier
+                    // v5.0（§12）：档位退役——复制作者参数（数量/间隔/距离阈值/屏内限制）
+                    _new_id.gen_max_user = _id.gen_max_user
+                    _new_id.gen_interval = _id.gen_interval
+                    _new_id.gen_range = _id.gen_range
+                    _new_id.gen_screen_only = _id.gen_screen_only
                     _new_id.gen_item = noone
                     _new_id.wizard = 0
                 }

@@ -1,6 +1,8 @@
-// gen_draw_pipe(px, py, dir, tier, alpha, show_tier)
+// gen_draw_pipe(px, py, dir, alpha, arg4, arg5)
 // 程序化绘制"水管生成器"外观（无外部素材）：外框 + 管体 + 内壁 + 方向侧管口 + 方向箭头
-// px,py = 32x32 格的左上角；dir: 0右 1上 2左 3下；alpha: 透明度；show_tier: 1=右下角绘制档位点
+// px,py = 32x32 格的左上角；dir: 0右 1上 2左 3下；alpha: 透明度
+// 注：v5.0 起档位（tier）退役——原 argument3/argument5 的"档位点"点阵保留但不再使用，调用处传 0,0
+//     （参数数量保持不变，避免旧调用点因参数错位误用；后续若换正式贴图可整体替换本脚本）
 var _t, _i;
 draw_set_alpha(argument4);
 // 外框

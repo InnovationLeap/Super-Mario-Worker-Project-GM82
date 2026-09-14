@@ -287,13 +287,11 @@ while !file_text_eof(global.toload) {
         //ae.coto=real(string_copy(aa,2,2))
     }
     if string_char_at(aa,1)='5' {
-        //生成器（ObjGenerator.md）：5 <cat1> <code2> <x4> <y4> <dir1> <tier1> [参数尾串]
+        //生成器（ObjGenerator.md v5.0）：5 <cat1><code2><x4><y4><dir1><max3><interval4><range3><screen1> [参数尾串]
+        //解析走 gen_line_parse（与另一处 play 载入器 + 编辑器读档共用，避免逻辑分叉）
+        gen_line_parse(aa)
         ae=room_instance_add(argument0,transA(string_copy(aa,5,4)),transA(string_copy(aa,9,4)),o_generator)
-        skript=string_insert('('+string(ae)+').payload_cat='+string_copy(aa,2,1)+';('+string(ae)+').payload_code='+string_copy(aa,3,2)+';('+string(ae)+').dir='+string_copy(aa,13,1)+';('+string(ae)+').tier='+string_copy(aa,14,1)+';',skript,string_length(skript)+1)
-        if string_copy(aa,2,1)='0' {
-            if real(string_copy(aa,3,2))=35 && string_length(aa)>=17 {skript=string_insert('('+string(ae)+').payload_param='+string_copy(aa,15,3)+';',skript,string_length(skript)+1)}
-            if real(string_copy(aa,3,2))=43 && string_length(aa)>=15 {skript=string_insert('('+string(ae)+').payload_param='+string_copy(aa,15,1)+';',skript,string_length(skript)+1)}
-        }
+        skript=string_insert('('+string(ae)+').payload_cat='+string(global.genp_cat)+';('+string(ae)+').payload_code='+string(global.genp_code)+';('+string(ae)+').payload_param='+string(global.genp_param)+';('+string(ae)+').dir='+string(global.genp_dir)+';('+string(ae)+').gen_max_user='+string(global.genp_max)+';('+string(ae)+').gen_interval='+string(global.genp_int)+';('+string(ae)+').gen_range='+string(global.genp_rng)+';('+string(ae)+').gen_screen_only='+string(global.genp_scr)+';',skript,string_length(skript)+1)
     }
 
     //敌人优化默认关，版本检测到大于等于1710则开

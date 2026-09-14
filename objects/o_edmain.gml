@@ -2002,10 +2002,11 @@ if scrolla<=1 && scrollb<=1 {
     }
 
     // ===== 生成器放置向导（marks 第 18 格，ObjGenerator.md）=====
-    // step1 落位 → step2 方向（鼠标指向 45° 取整，参照水管出口）→ step3 档位菜单
+    // step1 落位 → step2 方向（鼠标指向 45° 取整，参照水管出口）→ 完成
+    // v5.0（§12）：档位步骤取消——落位即采用默认参数（数量10/间隔100帧/距离160px/屏内开），随后用 submenu 调参
     if place_code4=18 && costawia4d=0 && tool_mode=0 && menu_open=0 && option_open=0 {
         if !instance_position(mouse_x, mouse_y, o_edgeneratorblock) {
-            gen_draw_pipe(floor(mouse_x/32)*32, floor(mouse_y/32)*32, 0, 1, 0.5, 1)
+            gen_draw_pipe(floor(mouse_x/32)*32, floor(mouse_y/32)*32, 0, 0, 0.5, 0)
         }
         if self_coto_check(6, 0) {
             if mouse_check_button(mb_left) && clicked=0 {
@@ -2027,9 +2028,7 @@ if scrolla<=1 && scrollb<=1 {
             if mouse_check_button(mb_left) && clicked=0 {
                 clicked=1
                 ed_place_generator(2, mouse_x, mouse_y)
-                genw_t=show_menu('Slow|Medium|Fast|Very Fast', -1)
-                if genw_t<0 {genw_t=0}
-                ed_place_generator(3, genw_t+1, 0)
+                ed_place_generator(3, 0, 0)
                 costawia4d=0
             }
             if mouse_check_button(mb_right) && clicked=0 {
