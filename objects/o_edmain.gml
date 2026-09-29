@@ -116,6 +116,7 @@ drinkd=0
 global.yinyangcolor=0
 global.imitater=1
 global.ledge_type = 0
+global.gen_tier_sel = 3   // 生成器：下一个新建实例的档位（工具选中后用鼠标滚轮改，v6.1）
 setting_mode=0
 resetting = 0
 net_water_dirty = 0
@@ -1508,7 +1509,7 @@ if scrolla<=1 && scrollb<=1 {
                 _mk_c = _mk_c + 1
             }
             // 第 18 格（第二行第 6 格）：生成器（ObjGenerator.md）
-            ed_mark_draw(18, view_xview[0]+206+64*5, view_yview[0]+110+64*2, ed_mark_label(18))
+            ed_mark_draw(18, view_xview[0]+206+64*5, view_yview[0]+110+64*2, ed_mark_label(18) + ' T' + string(global.gen_tier_sel))
         }
         //if costawia4b=1{draw_sprite_ext(s_edmarkers,1,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1)}
         //桥预览（已改由 ed_mark_draw case 19-24 按格子绘制桥条+代码箭头，删除原 s_platformmasks 覆盖层）
@@ -1525,10 +1526,20 @@ if scrolla<=1 && scrollb<=1 {
             global.platformanime+=1
         }
 
-        if mouse_wheel_up() && global.yinyangcolor>0 && mouse_y>view_yview[0]+128+64-16 && mouse_y<view_yview[0]+128+64+48 && mouse_x>view_xview[0]+224+64*2 && mouse_x<view_xview[0]+224+64*5+64 {//鼠标滚轮向上（覆盖 switch/type a/type b 列）
+        // 生成器档位滚轮（v6.1）：第 18 格 = 第二行第 6 格——在【物品选择面板】上直接换档（图标/预览随动）
+        // gent_pan=1 时本排右侧的水位 / 阴阳滚轮让位（三者热区在该排右侧重叠）
+        gent_pan = 0
+        if mouse_y>view_yview[0]+110+64*2 && mouse_y<view_yview[0]+110+64*2+64 {
+            if mouse_x>view_xview[0]+206+64*5 && mouse_x<view_xview[0]+206+64*5+64 { gent_pan = 1 }
+        }
+        if gent_pan = 1 {
+            if mouse_wheel_up() && global.gen_tier_sel>1 { global.gen_tier_sel-=1 }
+            if mouse_wheel_down() && global.gen_tier_sel<5 { global.gen_tier_sel+=1 }
+        }
+        if mouse_wheel_up() && global.yinyangcolor>0 && gent_pan=0 && mouse_y>view_yview[0]+128+64-16 && mouse_y<view_yview[0]+128+64+48 && mouse_x>view_xview[0]+224+64*2 && mouse_x<view_xview[0]+224+64*5+64 {//鼠标滚轮向上（覆盖 switch/type a/type b 列）
             global.yinyangcolor-=1
         }
-        if mouse_wheel_down() && global.yinyangcolor<7 && mouse_y>view_yview[0]+128+64-16 && mouse_y<view_yview[0]+128+64+48 && mouse_x>view_xview[0]+224+64*2 && mouse_x<view_xview[0]+224+64*5+64 {//鼠标滚轮向下
+        if mouse_wheel_down() && global.yinyangcolor<7 && gent_pan=0 && mouse_y>view_yview[0]+128+64-16 && mouse_y<view_yview[0]+128+64+48 && mouse_x>view_xview[0]+224+64*2 && mouse_x<view_xview[0]+224+64*5+64 {//鼠标滚轮向下
             global.yinyangcolor+=1
         }
 
@@ -1538,10 +1549,10 @@ if scrolla<=1 && scrollb<=1 {
         if mouse_wheel_down() && global.ledge_type<sprite_get_number(s_ledge)-1 && mouse_y>view_yview[0]+128+128-16 && mouse_y<view_yview[0]+128+128+48 {//鼠标滚轮向下
             if(mouse_x<view_xview[0]+334)global.ledge_type+=1
         }
-        if mouse_wheel_up() && global.water_change_type>0 && mouse_y>view_yview[0]+128+128-16 && mouse_y<view_yview[0]+128+128+48 {//鼠标滚轮向上
+        if mouse_wheel_up() && global.water_change_type>0 && gent_pan=0 && mouse_y>view_yview[0]+128+128-16 && mouse_y<view_yview[0]+128+128+48 {//鼠标滚轮向上
             if(mouse_x>view_xview[0]+334)global.water_change_type-=1
         }
-        if mouse_wheel_down() && global.water_change_type<2 && mouse_y>view_yview[0]+128+128-16 && mouse_y<view_yview[0]+128+128+48 {//鼠标滚轮向下
+        if mouse_wheel_down() && global.water_change_type<2 && gent_pan=0 && mouse_y>view_yview[0]+128+128-16 && mouse_y<view_yview[0]+128+128+48 {//鼠标滚轮向下
             if(mouse_x>view_xview[0]+334)global.water_change_type+=1
         }
         // 强滚滚轮切换
@@ -2001,12 +2012,40 @@ if scrolla<=1 && scrollb<=1 {
         ed_place_passage(4,mouse_x,mouse_y)
     }
 
+    // ===== 生成器档位（鼠标滚轮选择，v6.1）=====
+    // 第 18 格工具选中时：① 悬停在已放置的生成器上 → 滚轮改【该实例】档位（联机同步 op19 subop13）；
+    // ② 在空白处/面板上 → 滚轮改【下一个新建生成器】的档位 global.gen_tier_sel（面板图标与预览随动）；
+    // ③ 放置向导中途 → 改向导预览实例（tmp2）并同步该默认值。档位 1-5 = 紫/红/黄/绿/蓝（gen_tier_info）。
+    if place_code4=18 && tool_mode=0 && menu_open=0 && option_open=0 && global.picking = false {
+        gent_hit = noone
+        if costawia4d=1 {
+            if instance_exists(tmp2) { gent_hit = tmp2 }
+        } else {
+            gent_hit = instance_position(mouse_x, mouse_y, o_edgeneratorblock)
+        }
+        if gent_hit != noone {
+            if mouse_wheel_up() && gent_hit.gen_tier > 1 {
+                gent_hit.gen_tier = gen_param_clamp(1, gent_hit.gen_tier - 1)
+                global.gen_tier_sel = gent_hit.gen_tier
+                ed_net_ops_send_update(gent_hit, 13)
+            }
+            if mouse_wheel_down() && gent_hit.gen_tier < 5 {
+                gent_hit.gen_tier = gen_param_clamp(1, gent_hit.gen_tier + 1)
+                global.gen_tier_sel = gent_hit.gen_tier
+                ed_net_ops_send_update(gent_hit, 13)
+            }
+        } else {
+            if mouse_wheel_up() && global.gen_tier_sel > 1 { global.gen_tier_sel -= 1 }
+            if mouse_wheel_down() && global.gen_tier_sel < 5 { global.gen_tier_sel += 1 }
+        }
+    }
+
     // ===== 生成器放置向导（marks 第 18 格，ObjGenerator.md）=====
     // step1 落位 → step2 方向（鼠标指向 45° 取整，参照水管出口）→ 完成
-    // v5.0（§12）：档位步骤取消——落位即采用默认参数（数量10/间隔100帧/距离160px/屏内开），随后用 submenu 调参
+    // v6.0（§12）：档位/参数无向导步骤——落位即采用当前选中档位（global.gen_tier_sel，滚轮可改）+ 默认数量10/屏内开，随后用 submenu 调参
     if place_code4=18 && costawia4d=0 && tool_mode=0 && menu_open=0 && option_open=0 {
         if !instance_position(mouse_x, mouse_y, o_edgeneratorblock) {
-            gen_draw_pipe(floor(mouse_x/32)*32, floor(mouse_y/32)*32, 0, 0, 0.5, 0)
+            gen_draw_pipe(floor(mouse_x/32)*32, floor(mouse_y/32)*32, 0, 0.5, global.gen_tier_sel)
         }
         if self_coto_check(6, 0) {
             if mouse_check_button(mb_left) && clicked=0 {

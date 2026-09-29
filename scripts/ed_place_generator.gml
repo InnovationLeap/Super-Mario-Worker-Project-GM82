@@ -2,7 +2,7 @@
 // 生成器放置向导（o_edmain 上下文调用，向导实例存于 tmp2；参照 ed_place_passage 的写法）
 // step=1: 在 (arg1,arg2) 落位并返回实例
 // step=2: 鼠标点 (arg1,arg2) 决定方向（45° 取整四向，与水管出入口方向拾取一致）
-// step=3: 完成并广播（op16 cat6）——v5.0 起档位步骤取消，落位即采用默认参数（数量10/间隔100帧/距离160px/屏内开）
+// step=3: 完成并广播（op16 cat6）——档位/参数无向导步骤，落位即采用默认参数（数量10/屏内开 + 当前选中档位）
 // 向导中途右键取消由 o_edmain 负责销毁预览实例
 var _f, _ang, _t;
 if argument0 = 1 {
@@ -12,9 +12,10 @@ if argument0 = 1 {
     _f.payload_param = 0;
     _f.dir = 0;
     _f.gen_max_user = gen_param_default(0);
-    _f.gen_interval = gen_param_default(1);
-    _f.gen_range = gen_param_default(2);
-    _f.gen_screen_only = gen_param_default(3);
+    _f.gen_tier = gen_param_default(1);
+    // 档位取"当前选中档位"（第 18 格工具选中后用鼠标滚轮改，v6.1）；全局缺失时退回默认档
+    if variable_global_exists('gen_tier_sel') { _f.gen_tier = gen_param_clamp(1, global.gen_tier_sel) }
+    _f.gen_screen_only = gen_param_default(2);
     _f.gen_item = noone;
     _f.wizard = 1;
     _f.gen_menu_armed = 1;
@@ -31,11 +32,11 @@ if argument0 = 2 {
 }
 if argument0 = 3 {
     if !instance_exists(tmp2) { return -1 }
-    // v5.0（§12）：档位步骤取消——向导结束即采用默认参数，随后用 submenu 调参（数值项弹 get_integer）
+    // 向导结束即采用默认参数（档位 = 当前选中档位），随后用 submenu / 滚轮改方向 / 数量 / 档位 / 屏内
     tmp2.gen_max_user = gen_param_default(0);
-    tmp2.gen_interval = gen_param_default(1);
-    tmp2.gen_range = gen_param_default(2);
-    tmp2.gen_screen_only = gen_param_default(3);
+    tmp2.gen_tier = gen_param_default(1);
+    if variable_global_exists('gen_tier_sel') { tmp2.gen_tier = gen_param_clamp(1, global.gen_tier_sel) }
+    tmp2.gen_screen_only = gen_param_default(2);
     tmp2.wizard = 0;
     ed_net_ops_send_create(tmp2, 6);
     return tmp2;

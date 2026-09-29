@@ -6,7 +6,7 @@
 // LEDGE(14) 用游戏内 s_ledge 绘制（滚轮变种由 global.ledge_type 驱动）。
 // TYPE A(11)/TYPE B(12) 用游戏内 s_yinyang 贴图绘制，滚轮改色由 global.yinyangcolor 驱动。
 // 文字使用 fnt_label（Arial Narrow Bold Italic，白字无描边，全大写），与 enemies/scenery/bonus 一致。
-var _pc4, _cx, _cy, _label, _wheel, _spr, _sub, _sw, _sh, _s, _sx, _sy, _dx, _dy, _tw, _th, _ty, _l1, _l2, _i, _as, _ax, _ay, _at, _aa, _bx, _by;
+var _pc4, _cx, _cy, _label, _wheel, _spr, _sub, _sw, _sh, _s, _sx, _sy, _dx, _dy, _tw, _th, _ty, _l1, _l2, _i, _as, _ax, _ay, _at, _aa, _bx, _by, _gtier;
 _pc4 = argument0
 _cx = argument1
 _cy = argument2
@@ -77,9 +77,12 @@ if _wheel = 0 {
         case 16: {_spr = s_bgmchange; _sub = 2; _s = 0.8;} break;
         // VIEW CONTROL
         case 17: {_spr = s_camerabegin; _sub = 0; _s = 0.8;} break;
-        // GENERATOR（生成器）：程序化水管 + 方向箭头（无外部素材）
+        // GENERATOR（生成器）：程序化水管 + 方向箭头（无外部素材）；颜色 = 当前选中档位（滚轮切换，v6.1）
         case 18: {
-            gen_draw_pipe(_cx + 16, _cy + 14, 0, 0, 1, 0);
+            _gtier = global.gen_tier_sel
+            if _gtier < 1 { _gtier = 3 }
+            if _gtier > 5 { _gtier = 3 }
+            gen_draw_pipe(_cx + 16, _cy + 14, 0, 1, _gtier);
             _spr = -2;
         } break;
         // 运输桥系列：桥条直接用游戏内 s_platforms（滚轮换样式 global.platformanime），居中于格子

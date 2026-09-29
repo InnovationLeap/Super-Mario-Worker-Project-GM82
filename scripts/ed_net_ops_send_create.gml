@@ -71,14 +71,13 @@ if instance_exists(argument0) && instance_exists(o_ednet) && o_ednet.net_state =
         }
     }
     if _cato = 6 {
-        // 生成器（ObjGenerator.md v5.0）：payload + 作者参数（数量/间隔/距离/屏内）
+        // 生成器（ObjGenerator.md v6.0）：payload + 作者参数（数量/档位/屏内）
         buffer_write_u16(o_ednet.net_sendbuf, argument0.payload_cat)
         buffer_write_u16(o_ednet.net_sendbuf, argument0.payload_code)
         buffer_write_u16(o_ednet.net_sendbuf, argument0.payload_param)
         buffer_write_u16(o_ednet.net_sendbuf, argument0.dir)
         buffer_write_u16(o_ednet.net_sendbuf, argument0.gen_max_user)
-        buffer_write_u16(o_ednet.net_sendbuf, argument0.gen_interval)
-        buffer_write_u16(o_ednet.net_sendbuf, argument0.gen_range)
+        buffer_write_u16(o_ednet.net_sendbuf, argument0.gen_tier)
         buffer_write_u16(o_ednet.net_sendbuf, argument0.gen_screen_only)
     }
     if _cato = 4 {

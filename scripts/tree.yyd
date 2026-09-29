@@ -239,6 +239,7 @@
 +generator
 	|gen_payload_info
 	|gen_param_default
+	|gen_tier_info
 	|gen_param_clamp
 	|gen_line_parse
 	|gen_draw_pipe
@@ -249,6 +250,7 @@
 	|gen_spawn
 	|gen_spawn_offset
 	|gen_editor_offset
+	|gen_capture_hit
 	|gen_is_captured
 	|ed_place_generator
 	|Save_Script_Generator
