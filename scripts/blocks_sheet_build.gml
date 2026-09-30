@@ -51,7 +51,8 @@ global.block_sheet_y[82] = global.block_sheet_y[80]
 global.block_sheet_x[210] = global.block_sheet_x[21]
 global.block_sheet_y[210] = global.block_sheet_y[21]
 
-global.block_count = 423
+// 可绘制编号上限+1（模仿者滚轮用到）；当前最大编号 425 = 静止坦克轮子（右）
+global.block_count = 426
 // 编辑器网格单元：复用 85 号「EDIT界面网格」的格子（原 s_blocks 帧0 与它逐像素相同）
 // 不能占用编号 0 的映射位——"未映射"判据用的是 y=0
 global.block_grid_x = global.block_sheet_x[85]

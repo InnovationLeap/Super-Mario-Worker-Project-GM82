@@ -2,7 +2,7 @@
 /// 初始化方块选择面板的全局数据数组
 /// 调用后将数据存入 global.blocks_palette[page, index]
 /// page: 0=第一页(blockpage=-1) 1=第二页(blockpage=0) 2=第三页(blockpage=1) 3=第四页(blockpage=2)
-///       4=第五页(blockpage=3) 新增素材页（350~422，取自 s_edblocks 帧4，蓝底已抠为透明）
+///       4=第五页(blockpage=3) 新增素材页（350~425；423~425 = 静止坦克轮子 左/中/右）
 /// index: row * 12 + col (row=0~6, col=0~11)
 
 var _p, _r, _c, _i;
@@ -446,11 +446,14 @@ global.blocks_palette[_p, _r * 12 + 3]  = 284; // 白云平台右
 
 
 // ================================================================
-// 第五页 (page=4, blockpage=3): 新增素材（金属灰 / 木纹 / 冷灰）
-// 素材来源：s_edblocks 帧4，按 32px 网格切出，蓝底(#4242FF)已抠为透明
+// 第五页 (page=4, blockpage=3): 新增素材（金属灰 / 木纹 / 冷灰 / 静止坦克轮子）
+// 素材：整页图按 32px 网格切出，底色已抠为透明
+// 423~425 = 静止坦克轮子 左/中/右（取自 s_tankwheel 帧 0/3/6，与 44/45/46 号景物同素材，
+//           但作为方块不参与动画；行4 c0~c2）
+// 空格子集中在行1~行3 右端：行1 c10~c11、行2 c9~c11、行3 c9~c11
 // ================================================================
 
-// --- 行0: 金属灰 | 木纹 | 冷灰圆件 ---
+// --- 行0: 金属灰 5 格 + 木纹 4 格 + 冷灰圆件 3 格 ---
 _p = 4; _r = 0;
 global.blocks_palette[_p, _r * 12 + 0]  = 350; // 金属灰（深）
 global.blocks_palette[_p, _r * 12 + 1]  = 351; // 金属灰（浅）
@@ -465,7 +468,7 @@ global.blocks_palette[_p, _r * 12 + 9]  = 359; // 冷灰（圆件）
 global.blocks_palette[_p, _r * 12 + 10] = 360; // 冷灰（圆件）
 global.blocks_palette[_p, _r * 12 + 11] = 361; // 冷灰（圆件）
 
-// --- 行1: 金属灰 | 深色 | 木纹（深） | 冷灰圆件 ---
+// --- 行1: 金属灰 5 格 + 木纹（深） 4 格 + 冷灰圆件 1 格（c10~c11 空） ---
 _r = 1;
 global.blocks_palette[_p, _r * 12 + 0]  = 362; // 金属灰（浅）
 global.blocks_palette[_p, _r * 12 + 1]  = 363; // 金属灰（亮）
@@ -478,7 +481,7 @@ global.blocks_palette[_p, _r * 12 + 7]  = 369; // 木纹（深）
 global.blocks_palette[_p, _r * 12 + 8]  = 370; // 木纹（深）
 global.blocks_palette[_p, _r * 12 + 9]  = 371; // 冷灰（圆件）
 
-// --- 行2: 金属灰 | 灰褐 | 木纹 ---
+// --- 行2: 金属灰 4 格 + 灰褐 + 木纹 3 格 + 灰褐（c9~c11 空） ---
 _r = 2;
 global.blocks_palette[_p, _r * 12 + 0]  = 372; // 金属灰（深）
 global.blocks_palette[_p, _r * 12 + 1]  = 373; // 金属灰（中）
@@ -490,7 +493,7 @@ global.blocks_palette[_p, _r * 12 + 6]  = 378; // 木纹（亮）
 global.blocks_palette[_p, _r * 12 + 7]  = 379; // 木纹（最深）
 global.blocks_palette[_p, _r * 12 + 8]  = 380; // 灰褐
 
-// --- 行3: 金属灰 | 灰褐 | 木纹 | 冷灰 ---
+// --- 行3: 金属灰 4 格 + 灰褐 + 木纹 3 格 + 金属灰（c9~c11 空） ---
 _r = 3;
 global.blocks_palette[_p, _r * 12 + 0]  = 381; // 金属灰
 global.blocks_palette[_p, _r * 12 + 1]  = 382; // 金属灰（亮）
@@ -500,46 +503,49 @@ global.blocks_palette[_p, _r * 12 + 4]  = 385; // 灰褐
 global.blocks_palette[_p, _r * 12 + 5]  = 386; // 木纹（中）
 global.blocks_palette[_p, _r * 12 + 6]  = 387; // 木纹（亮）
 global.blocks_palette[_p, _r * 12 + 7]  = 388; // 木纹（最深）
-global.blocks_palette[_p, _r * 12 + 8]  = 389; // 冷灰
+global.blocks_palette[_p, _r * 12 + 8]  = 398; // 金属灰
 
-// --- 行4: 木纹 | 金属灰 ---
+// --- 行4: 静止坦克轮子 左/中/右 3 格 + 冷灰 + 木纹/灰褐 8 格 ---
 _r = 4;
-global.blocks_palette[_p, _r * 12 + 0]  = 390; // 木纹（中）
-global.blocks_palette[_p, _r * 12 + 1]  = 391; // 木纹（中）
-global.blocks_palette[_p, _r * 12 + 2]  = 392; // 木纹（深）
-global.blocks_palette[_p, _r * 12 + 3]  = 393; // 木纹（深）
+global.blocks_palette[_p, _r * 12 + 0]  = 423; // 坦克轮子（静止·左）
+global.blocks_palette[_p, _r * 12 + 1]  = 424; // 坦克轮子（静止·中）
+global.blocks_palette[_p, _r * 12 + 2]  = 425; // 坦克轮子（静止·右）
+global.blocks_palette[_p, _r * 12 + 3]  = 389; // 冷灰
 global.blocks_palette[_p, _r * 12 + 4]  = 394; // 灰褐
 global.blocks_palette[_p, _r * 12 + 5]  = 395; // 木纹（中）
 global.blocks_palette[_p, _r * 12 + 6]  = 396; // 木纹（亮）
 global.blocks_palette[_p, _r * 12 + 7]  = 397; // 木纹（最深）
-global.blocks_palette[_p, _r * 12 + 8]  = 398; // 金属灰
-
-// --- 行5: 木纹（带铆钉） ---
-_r = 5;
-global.blocks_palette[_p, _r * 12 + 0]  = 399; // 木纹（中）
-global.blocks_palette[_p, _r * 12 + 1]  = 400; // 木纹（中）
-global.blocks_palette[_p, _r * 12 + 2]  = 401; // 木纹（深）
-global.blocks_palette[_p, _r * 12 + 3]  = 402; // 木纹（深）
-global.blocks_palette[_p, _r * 12 + 4]  = 403; // 灰褐
-global.blocks_palette[_p, _r * 12 + 5]  = 404; // 木纹（中）
-global.blocks_palette[_p, _r * 12 + 6]  = 405; // 木纹（亮）
-global.blocks_palette[_p, _r * 12 + 7]  = 406; // 木纹（最深）
 global.blocks_palette[_p, _r * 12 + 8]  = 407; // 木纹（中）
 global.blocks_palette[_p, _r * 12 + 9]  = 408; // 灰褐
 global.blocks_palette[_p, _r * 12 + 10] = 409; // 木纹（深）
 global.blocks_palette[_p, _r * 12 + 11] = 410; // 灰褐
 
-// --- 行6: 木纹地板 | 冷灰 ---
-_r = 6;
-global.blocks_palette[_p, _r * 12 + 0]  = 411; // 灰褐
-global.blocks_palette[_p, _r * 12 + 1]  = 412; // 灰褐
-global.blocks_palette[_p, _r * 12 + 2]  = 413; // 木纹（浅）
-global.blocks_palette[_p, _r * 12 + 3]  = 414; // 木纹（浅）
-global.blocks_palette[_p, _r * 12 + 4]  = 415; // 冷灰
-global.blocks_palette[_p, _r * 12 + 5]  = 416; // 木纹（中）
-global.blocks_palette[_p, _r * 12 + 6]  = 417; // 木纹（中）
-global.blocks_palette[_p, _r * 12 + 7]  = 418; // 木纹（中）
-global.blocks_palette[_p, _r * 12 + 8]  = 419; // 木纹（中）
-global.blocks_palette[_p, _r * 12 + 9]  = 420; // 木纹（中）
+// --- 行5: 木纹 12 格 ---
+_r = 5;
+global.blocks_palette[_p, _r * 12 + 0]  = 390; // 木纹（中）
+global.blocks_palette[_p, _r * 12 + 1]  = 391; // 木纹（中）
+global.blocks_palette[_p, _r * 12 + 2]  = 392; // 木纹（深）
+global.blocks_palette[_p, _r * 12 + 3]  = 393; // 木纹（深）
+global.blocks_palette[_p, _r * 12 + 4]  = 403; // 灰褐
+global.blocks_palette[_p, _r * 12 + 5]  = 404; // 木纹（中）
+global.blocks_palette[_p, _r * 12 + 6]  = 405; // 木纹（亮）
+global.blocks_palette[_p, _r * 12 + 7]  = 406; // 木纹（最深）
+global.blocks_palette[_p, _r * 12 + 8]  = 417; // 木纹（中）
+global.blocks_palette[_p, _r * 12 + 9]  = 418; // 木纹（中）
 global.blocks_palette[_p, _r * 12 + 10] = 421; // 木纹（中）
 global.blocks_palette[_p, _r * 12 + 11] = 422; // 木纹（中）
+
+// --- 行6: 木纹地板 + 冷灰 12 格 ---
+_r = 6;
+global.blocks_palette[_p, _r * 12 + 0]  = 399; // 木纹（中）
+global.blocks_palette[_p, _r * 12 + 1]  = 400; // 木纹（中）
+global.blocks_palette[_p, _r * 12 + 2]  = 401; // 木纹（深）
+global.blocks_palette[_p, _r * 12 + 3]  = 402; // 木纹（深）
+global.blocks_palette[_p, _r * 12 + 4]  = 411; // 灰褐
+global.blocks_palette[_p, _r * 12 + 5]  = 412; // 灰褐
+global.blocks_palette[_p, _r * 12 + 6]  = 413; // 木纹（浅）
+global.blocks_palette[_p, _r * 12 + 7]  = 414; // 木纹（浅）
+global.blocks_palette[_p, _r * 12 + 8]  = 415; // 冷灰
+global.blocks_palette[_p, _r * 12 + 9]  = 416; // 木纹（中）
+global.blocks_palette[_p, _r * 12 + 10] = 419; // 木纹（中）
+global.blocks_palette[_p, _r * 12 + 11] = 420; // 木纹（中）

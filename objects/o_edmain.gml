@@ -2551,11 +2551,11 @@ if scrolla<=1 && scrollb<=1 {
             }}
     }
 
-    //第五页（blockpage=3，新增素材页 350~422）
+    //第五页（blockpage=3，新增素材页 350~425）
     if blockpage=3 {
 
         //限制鼠标位置，不能点击空白区
-        if (ed_hit(206, 128, 384, 32))|| (ed_hit(206, 128+32, 320, 32))|| (ed_hit(206, 128+32*2, 288, 32*3))|| (ed_hit(206, 128+32*5, 384, 32*2)) {
+        if (ed_hit(206, 128, 384, 32))|| (ed_hit(206, 128+32, 320, 32))|| (ed_hit(206, 128+32*2, 288, 32*2))|| (ed_hit(206, 128+32*4, 384, 32))|| (ed_hit(206, 128+32*5, 384, 32*2)) {
 
             if option_open=1 && ed_hit(206, 128, 384, 32)&& clicked=0 {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128,1,1,0,c_white,1)}
             if option_open=1 && ed_hit(206, 128, 384, 32)&& mouse_check_button(mb_left) && clicked=0 {
