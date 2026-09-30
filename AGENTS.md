@@ -102,6 +102,21 @@
   print(img.mode)  # 应输出 'RGBA'
   ```
 
+### 素材来图与抠底（整页素材表 / 交接素材）
+
+- **抠底要落到真透明（alpha = 0），不要用「单色键控」**。有的 PNG 是 RGB + `tRNS` 单色（`im.info['transparency']` 有值），PIL 转 RGBA 时会把**素材内部所有同色像素一起吃掉**；纯黑/纯白往往是描边、阴影或板缝，被抠掉在关卡里就是 1px 空洞。
+  ```python
+  from PIL import Image
+  im = Image.open('in.png')
+  print(im.mode, im.info.get('transparency'))  # RGB + (0, 0, 0) 即单色键控，先别直接用
+  ```
+- 处理办法：要么让来图直接给**带 alpha 通道的 RGBA PNG**；要么转完后与旧素材逐格比对，把被误抠的像素按旧图补回。判定标准：差异像素是否**全部**落在键控色上。
+  （实例：2026-09-30 第五页整页图是 RGB + `tRNS(0,0,0)`，401/402 两格因此少了 14 个板缝暗像素，已按旧图补回。）
+- **整页素材表按 32px 网格切/贴**：先确认尺寸是 32 的整数倍（如 384×224 = 12×7 格）；切完/贴完都要逐格与来源比对，确认「只换位置、没换图」。
+- **同源副本必须同步**：例如 `sprites/s_blocks_sheet/0.png` 与 `backgrounds/b_blocks.png` 要求逐字节相同（`tile_add` 只能吃背景），改一个就同步另一个，并跑一次一致性校验。
+- **不要把二进制素材过 PowerShell 的 `>` 重定向**（会被转成 UTF-16/文本，PNG 直接报废）；导出/备份用 `cmd /c git show ... > file`、`git cat-file`，或直接在 Python 里读写字节。
+- 素材换过尺寸/像素后，GM8.2 IDE 里要走一次「重新读取项目」。
+
 ## 项目规则
 
 - 调试输出**必须使用项目自带的 `debug_log("message")` 脚本**，禁止直接调用 `show_message`。`debug_log` 仅在全局变量 `debug_mode=1` 时弹出消息框并追加日志到 `debug_log.txt`。
