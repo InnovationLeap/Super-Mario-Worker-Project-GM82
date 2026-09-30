@@ -44,5 +44,8 @@ switch (_coto) {
     case 41: return "DARK CORAL";
     case 42: return "IMITATER";
     case 43: return "TOMB";
+    case 44: return "TANK WHEEL LEFT";
+    case 45: return "TANK WHEEL CENTER";
+    case 46: return "TANK WHEEL RIGHT";
 }
 return "";

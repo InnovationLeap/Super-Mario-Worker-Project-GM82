@@ -184,6 +184,10 @@ while !file_text_eof(global.toload) {
 
     if string_char_at(aa,1)='1' {
         s_coto = real(string_copy(aa,2,2));
+        //坦克轮子：旧档 coto=44 + 第 12 位类型 → 独立景物 44(左)/45(中)/46(右)
+        if s_coto=44 && string_length(aa) >= 9 {
+            s_coto = s_coto + real(string_copy(aa,12,1))
+        }
         if s_coto<>42 {
             ae=room_instance_add(argument3,transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_scenery)
             skript=string_insert('('+string(ae)+').image_single='+string(s_coto)+'-1;'+'('+string(ae)+').depth='+string(s_depth)+';',skript,string_length(skript)+1)

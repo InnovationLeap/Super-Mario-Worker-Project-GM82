@@ -205,6 +205,10 @@ while !file_text_eof(script_file) {
         if real(string_copy(aa,2,2))=42 {
             ae.block_index=real(string_copy(aa,12,3))
         }
+        //tank wheel：旧档格式为 coto=44 + 第 12 位类型(0=左/1=中/2=右)，转为独立景物 44/45/46
+        if real(string_copy(aa,2,2))=44 && string_length(aa) >= 9 {
+            ae.coto = ae.coto + real(string_copy(aa,12,1))
+        }
     }
     if string_char_at(aa,1)='2' {
         ae=instance_create(transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_edmarkerblock)

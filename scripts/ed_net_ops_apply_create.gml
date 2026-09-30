@@ -28,6 +28,9 @@ if _cato = 2 {
     if _coto = 42 {
         // 模仿者由 o_edsceneriesblock 的 Draw 用大表绘制，这里只需维持透明度
         _f.image_alpha = 1
+    } else if _coto >= 44 && _coto <= 46 {
+        // 坦克轮子由 o_edsceneriesblock 的 Draw 用 s_tankwheel 绘制，这里只需维持透明度
+        _f.image_alpha = 1
     } else {
         if _coto != 38 {
             _f.sprite_index = s_sceneriesbank

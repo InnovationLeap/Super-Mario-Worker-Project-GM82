@@ -163,6 +163,9 @@ if global.ed_region_list != -1 {
                         // 模仿者由 o_edsceneriesblock 的 Draw 用大表绘制，这里只需维持透明度
                         // 透明度与当前编辑态保持一致（模仿者编辑态=1，其余态=0.3）
                         if o_edmain.place_code3 = 42 { _new_id.image_alpha = 1 } else { _new_id.image_alpha = 0.3 }
+                    } else if _new_id.coto >= 44 && _new_id.coto <= 46 {
+                        // 坦克轮子由 o_edsceneriesblock 的 Draw 用 s_tankwheel 绘制，只需维持透明度
+                        if o_edmain.place_code3 >= 44 && o_edmain.place_code3 <= 46 { _new_id.image_alpha = 1 } else { _new_id.image_alpha = 0.3 }
                     } else {
                         if _new_id.coto != 38 {
                             _new_id.sprite_index = s_sceneriesbank

@@ -73,6 +73,10 @@ switch (_coto) {
     case 40: {_spr=s_sceneriesbank; _sub=39; _ox=142; _oy=208; _ccx=156.5; _ccy=159.5; _s=0.325;} break;
     case 41: {_spr=s_sceneriesbank; _sub=40; _ox=142; _oy=208; _ccx=156.5; _ccy=159.5; _s=0.325;} break;
     case 43: {_spr=s_sceneriesbank; _sub=42; _ox=142; _oy=208; _ccx=158.0; _ccy=193.0; _s=0.565;} break;
+    // 坦克轮子：独立精灵 s_tankwheel（44=左 0-2 / 45=中 3-5 / 46=右 6-8）
+    case 44: {_spr=s_tankwheel; _sub=0; _ox=16; _oy=32; _ccx=16.0; _ccy=16.0; _s=0.9;} break;
+    case 45: {_spr=s_tankwheel; _sub=3; _ox=16; _oy=32; _ccx=16.0; _ccy=16.0; _s=0.9;} break;
+    case 46: {_spr=s_tankwheel; _sub=6; _ox=16; _oy=32; _ccx=16.0; _ccy=16.0; _s=0.9;} break;
 }
 // 居中绘制图标：使内容中心对齐格子中心（imitater 跳过图标绘制）
 _dx = _cx + 32 + (_ox - _ccx) * _s

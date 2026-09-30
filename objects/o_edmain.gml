@@ -277,6 +277,9 @@ if set_scenery {
         if coto=42 {
             // 模仿者（coto=42）由 o_edsceneriesblock 的 Draw 用大表绘制，只需维持 image_alpha
             image_alpha = 1
+        } else if coto>=44 && coto<=46 {
+            // 坦克轮子（44=左 / 45=中 / 46=右）由 o_edsceneriesblock 的 Draw 用 s_tankwheel 绘制，只需维持 image_alpha
+            image_alpha = 1
         } else {
             if coto!=38 {
                 sprite_index = s_sceneriesbank
@@ -576,6 +579,9 @@ if !first_set_scenery {
         if coto=42 {
             // 模仿者（coto=42）由 o_edsceneriesblock 的 Draw 用大表绘制，只需维持 image_alpha
             image_alpha = 0.4
+        } else if coto>=44 && coto<=46 {
+            // 坦克轮子（44=左 / 45=中 / 46=右）由 o_edsceneriesblock 的 Draw 用 s_tankwheel 绘制，只需维持 image_alpha
+            image_alpha = 0.4
         } else {
             if coto!=38 {
                 sprite_index = s_sceneriesbank
@@ -591,8 +597,14 @@ if place_code3 = 42 && change_alpha = 0 {
     change_alpha = 1
 }
 
-if place_code3 <> 42 && change_alpha = 1 {
-    with(o_edsceneriesblock) {if(coto=42)image_alpha = 0.3}
+//坦克轮子（44=左 / 45=中 / 46=右）：选中对应工具时画布上的轮子恢复全亮
+if (place_code3 = 44 || place_code3 = 45 || place_code3 = 46) && change_alpha = 0 {
+    with(o_edsceneriesblock) {if(coto>=44 && coto<=46)image_alpha = 1}
+    change_alpha = 1
+}
+
+if place_code3 <> 42 && place_code3 <> 44 && place_code3 <> 45 && place_code3 <> 46 && change_alpha = 1 {
+    with(o_edsceneriesblock) {if(coto=42)image_alpha = 0.3; if(coto>=44 && coto<=46)image_alpha = 0.3}
     change_alpha = 0
 }
 
@@ -1255,7 +1267,7 @@ if scrolla<=1 && scrollb<=1 {
         // 逐格绘制景物图标 + 说明文字（Impact 斜体白字黑描边）
         _sc_list = "";
         if costawia3b=0 {_sc_list = "01 02 03 04 05 06 07 08 09 10 11 12 13 22 23 24 14 15 19 20 21 16 17 18"}
-        if costawia3b=1 {_sc_list = "25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43"}
+        if costawia3b=1 {_sc_list = "25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46"}
         _er = 0
         while (_er < 4) {
             _ec = 0
@@ -1414,12 +1426,18 @@ if scrolla<=1 && scrollb<=1 {
 
 
 
-    //景物可以连放
-    if place_code3<>0 && place_code3<=43 && place_code3<>42 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edsceneriesblock) &&  tool_mode=0
+    //景物可以连放（44=左 / 45=中 / 46=右 坦克轮子走独立精灵）
+    if place_code3<>0 && place_code3<=46 && place_code3<>42 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edsceneriesblock) &&  tool_mode=0
     && menu_open=0 && option_open=0 && delay_tick>15
-    {draw_sprite_ext(s_sceneriesbank,place_code3-1,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,1,1,0,c_white,0.5)}
+    {
+        if place_code3>=44 && place_code3<=46 {
+            draw_sprite_ext(s_tankwheel,(place_code3-44)*3,floor((mouse_x)/32)*32+16,floor((mouse_y)/32)*32+32,1,1,0,c_white,0.5)
+        } else {
+            draw_sprite_ext(s_sceneriesbank,place_code3-1,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,1,1,0,c_white,0.5)
+        }
+    }
 
-    if place_code3<>0 && place_code3<=43 && place_code3<>42 && mouse_check_button(mb_left) /*&& mouse_x>0 &&  mouse_y>0*/ && tool_mode=0
+    if place_code3<>0 && place_code3<=46 && place_code3<>42 && mouse_check_button(mb_left) /*&& mouse_x>0 &&  mouse_y>0*/ && tool_mode=0
     && menu_open=0 && option_open=0 && delay_tick>15 {
         if self_coto_check(3,place_code3) {
             clicked=1

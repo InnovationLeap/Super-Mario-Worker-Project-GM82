@@ -38,6 +38,10 @@ applies_to=self
 // 其余景物沿用默认精灵绘制（精灵由 o_edmain 在放置/读档时赋值）
 if coto = 42 {
     blocks_draw(block_index, x, y, 1, image_alpha)
+} else if coto >= 44 && coto <= 46 {
+    // 坦克轮子（44=左 / 45=中 / 46=右）：独立精灵 s_tankwheel，基础帧 (coto-44)*3
+    // 编辑器实例坐标 = 格左上角，精灵 origin=(16,32) → 绘制点补 (+16,+32) 让图形正好落在格内
+    draw_sprite_ext(s_tankwheel, (coto - 44) * 3, x + 16, y + 32, 1, 1, 0, c_white, image_alpha)
 } else {
     draw_self()
 }

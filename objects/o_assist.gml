@@ -131,11 +131,44 @@ if !setonce {
                 sprite_index=s_coralc //景物动画
                 break;
             }
+
+        case 43: { sprite_index=s_tankwheel; tk_base=0; image_index=tk_base; image_speed=0; break; } // 坦克轮子-左（景物 44）：帧 0-2
+        case 44: { sprite_index=s_tankwheel; tk_base=3; image_index=tk_base; image_speed=0; break; } // 坦克轮子-中（景物 45）：帧 3-5
+        case 45: { sprite_index=s_tankwheel; tk_base=6; image_index=tk_base; image_speed=0; break; } // 坦克轮子-右（景物 46）：帧 6-8
         }
 
     }
 
     setonce=1
+}
+
+// ===== 坦克轮子（景物 44）：默认静止；镜头被 autoscroll 控制时随滚屏速度转动 =====
+if !variable_global_exists('tk_prev_vx') {
+    global.tk_prev_vx = view_xview[0]
+    global.tk_prev_vy = view_yview[0]
+    global.tk_phase = 0
+    global.tk_cam_spd = 0
+}
+if !variable_global_exists('bowser_phase') { global.bowser_phase = 0 }
+// 本帧镜头位移量
+global.tk_cam_spd = point_distance(0, 0, view_xview[0] - global.tk_prev_vx, view_yview[0] - global.tk_prev_vy)
+global.tk_prev_vx = view_xview[0]
+global.tk_prev_vy = view_yview[0]
+// 只有强滚（autoscroll）期间才转动
+if global.bowser_phase < 2 { global.tk_cam_spd = 0 }
+with (o_scenery) {
+    if sprite_index = s_tankwheel {
+        image_speed = 0
+        // 帧 = 自身固定基底 tk_base(0/3/6) + 全局相位帧。绝不从 image_index 反推窗口基底：
+        // 相位一旦跳变，floor(image_index/3)*3 会把轮子永久锁死到别类型的窗口（串帧且不可自愈）。
+        image_index = tk_base + floor(global.tk_phase)
+    }
+}
+// 相位累加（3 帧一循环），系数 0.12 ≈ 每 8px 镜头位移走 1 帧
+if global.bowser_phase >= 2 {
+    global.tk_phase += global.tk_cam_spd * 0.12
+    // 规整到 [0,3)：用倍数减，单帧大位移也不会让 floor(tk_phase) 冲出 0/1/2
+    global.tk_phase = global.tk_phase - 3 * floor(global.tk_phase / 3)
 }
 #define Draw_0
 /*"/*'/**//* YYD ACTION

@@ -9,6 +9,8 @@ y+=32
 
 block_index=0
 
+tk_base = 0
+
 flag_light = false;
 
 // 景物绘制代码请移步 o_assist 的 step 事件
