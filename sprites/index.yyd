@@ -568,3 +568,7 @@ s_spinyshell
 s_spinyshelldead
 s_edcursormaskmulti
 s_edenemies_blank
+s_edbg_top
+s_edbg_mid
+s_edbg_bot
+s_edbg_paralax

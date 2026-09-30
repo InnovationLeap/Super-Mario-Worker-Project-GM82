@@ -52,6 +52,10 @@
 	|s_edrotocenter
 	|s_edscenario
 	|s_edscenario2
+	|s_edbg_top
+	|s_edbg_mid
+	|s_edbg_bot
+	|s_edbg_paralax
 	|s_edscenery
 	|s_enemiesbank
 	|s_enemiesblock

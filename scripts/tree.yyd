@@ -32,6 +32,8 @@
 	|background_show
 	|background_table_init
 	|bg_addrow
+	|bg_preview_init
+	|bg_preview_draw
 +encrypt
 	|get_crypt_key1
 	|get_crypt_key2
@@ -53,6 +55,9 @@
 	|bgm_custom_rebuild
 	|ed_bgm_page
 	|ed_text_shadow
+	|ed_bg_page
+	|ed_bg_chrome_part
+	|ed_text_fit
 +GZ
 	|GZ_CompressFile
 	|GZ_DeCompressFile

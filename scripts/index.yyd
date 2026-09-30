@@ -243,3 +243,8 @@ gen_capture_hit
 gen_is_captured
 ed_place_generator
 Save_Script_Generator
+bg_preview_init
+bg_preview_draw
+ed_bg_page
+ed_text_fit
+ed_bg_chrome_part

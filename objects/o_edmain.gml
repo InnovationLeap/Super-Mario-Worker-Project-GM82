@@ -3272,62 +3272,15 @@ if !mouse_check_button(mb_left) && !mouse_check_button(mb_right) {clicked=0}
 // 进入背景选择界面
 if bg_selecting=1 && bg_selecting<100 {
 
-    if o_edmain.backgroundpage=0 {draw_sprite(s_edscenario,0,view_xview[0],view_yview[0])}
-    if o_edmain.backgroundpage=1 {draw_sprite(s_edscenario,1,view_xview[0],view_yview[0])}
-    if o_edmain.backgroundpage=2 {draw_sprite(s_edscenario,2,view_xview[0],view_yview[0])}
-    //天气
+    // 背景选择主页面：底图三段 + 12 格实时预览 + 角标 + 文字（见 ed_bg_page / bg_preview_draw）
+    if o_edmain.backgroundpage<>100 {ed_bg_page()}
+    //天气页底图
     if o_edmain.backgroundpage=100 {draw_sprite(s_edscenario,3,view_xview[0],view_yview[0])}
-
-    if o_edmain.backgroundpage<>100 {
-        //背景第一页、第二页、第三页按钮
-        if abs(view_xview[0]+83-mouse_x)<16 && abs(view_yview[0]+438-mouse_y)<16 {draw_sprite_ext(s_left,0,view_xview[0]+83,view_yview[0]+438,1,1,0,c_yellow,1)} else {draw_sprite_ext(s_left,0,view_xview[0]+83,view_yview[0]+438,1,1,0,c_white,1)}
-        if abs(view_xview[0]+147-mouse_x)<16 && abs(view_yview[0]+438-mouse_y)<16 {draw_sprite_ext(s_right,0,view_xview[0]+147,view_yview[0]+438,1,1,0,c_yellow,1)} else {draw_sprite_ext(s_right,0,view_xview[0]+147,view_yview[0]+438,1,1,0,c_white,1)}
-
-        if abs(view_xview[0]+83-mouse_x)<16 && abs(view_yview[0]+438-mouse_y)<16 && mouse_check_button(mb_left) && wahaha=0 {
-            if o_edmain.backgroundpage=1 {o_edmain.backgroundpage=0;wahaha = 1}
-        }
-        if abs(view_xview[0]+83-mouse_x)<16 && abs(view_yview[0]+438-mouse_y)<16 && mouse_check_button(mb_left) && wahaha=0 {
-            if o_edmain.backgroundpage=2 {o_edmain.backgroundpage=1;wahaha = 1}
-        }
-        if abs(view_xview[0]+147-mouse_x)<16 && abs(view_yview[0]+438-mouse_y)<16 && mouse_check_button(mb_left) && wahaha=0 {
-            if o_edmain.backgroundpage=0 {o_edmain.backgroundpage=1;wahaha = 1}
-        }
-        if abs(view_xview[0]+147-mouse_x)<16 && abs(view_yview[0]+438-mouse_y)<16 && mouse_check_button(mb_left) && wahaha=0 {
-            if o_edmain.backgroundpage=1 {o_edmain.backgroundpage=2;wahaha = 1}
-        }
-    }
-    //天气按钮
-    if ed_hit(462, 420, 60, 30)&& o_edmain.backgroundpage<>100 && setting_mode <> 4 {
-        draw_prefs_highlight(view_xview[0]+462, view_yview[0]+420, 0.6, 1.3, 0.2);
-        if mouse_check_button(mb_left) && wahaha=0 {o_edmain.backgroundpage=100; wahaha = 1}
-    }
-
-
-    //变量wahaha用于检测鼠标是否已经点击，松开后恢复
-    if wahaha = 1 && !mouse_check_button(mb_left) {wahaha=0}
-
-    //背景选择（数据驱动，数据定义见 background_palette_data）
-    var _bgp, _bgr, _bgc, _bgx, _bgy, _bgidx, _bgval;
-    _bgp = o_edmain.backgroundpage;
-    if _bgp = 0 || _bgp = 1 || _bgp = 2 {
-        for (_bgr = 0; _bgr < 3; _bgr += 1) {
-            for (_bgc = 0; _bgc < 4; _bgc += 1) {
-                _bgidx = _bgr * 4 + _bgc;
-                _bgval = global.background_palette[_bgp, _bgidx];
-                if _bgval > 0 {
-                    _bgx = 27 + _bgc * 142;  // 139 + 3 列间距
-                    _bgy = 32 + _bgr * 118;  // 102 + 16 行间距
-                    if ed_hit(_bgx, _bgy, 139, 103) {
-                        draw_prefs_highlight(view_xview[0] + _bgx, view_yview[0] + _bgy + 32, 1.2, 4, 0.2);
-                        backselect = _bgval;
-                    }
-                }
-            }
-        }
-    }
 
     //天气设置界面
     if o_edmain.backgroundpage=100 {
+        //变量wahaha用于检测鼠标是否已经点击，松开后恢复（背景主页面的那份在 ed_bg_page 里）
+        if wahaha = 1 && !mouse_check_button(mb_left) {wahaha=0}
         draw_set_color(c_white)
         draw_set_font(cyferkimario)
 
@@ -3368,26 +3321,6 @@ if bg_selecting=1 && bg_selecting<100 {
         }
     }
 
-    //按选择背景主页面BACK按钮退出
-    if ed_hit(530, 420, 60, 30) && o_edmain.backgroundpage<>100 && wahaha = 0 {
-        draw_prefs_highlight(view_xview[0]+530, view_yview[0]+420, 0.5, 1.3, 0.2);
-        quitbgpselect=1
-    } else { quitbgpselect=0 }
-
-    if mouse_check_button(mb_left) && o_edmain.backgroundpage<>100 && wahaha = 0 &&
-    ed_hit(530, 420, 60, 30)&&
-    quitbgpselect=1
-    {if(setting_mode>0) {setting_mode-=1}
-        bg_selecting=0;backselect=0;quitbgpselect=0}
-
-    //选择好背景退出
-    if mouse_check_button(mb_left) && o_edmain.backgroundpage<>100 &&
-    ((mouse_x>view_xview[0]+27 && mouse_x<view_xview[0]+166)||(mouse_x>view_xview[0]+27+139+3 && mouse_x<view_xview[0]+166+139+3)||(mouse_x>view_xview[0]+27+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3)||(mouse_x>view_xview[0]+27+139+3+139+3+139+3 && mouse_x<view_xview[0]+166+139+3+139+3+139+3))
-    &&((mouse_y>view_yview[0]+32 && mouse_y<view_yview[0]+135)||(mouse_y>view_yview[0]+32+102+16 && mouse_y<view_yview[0]+135+102+16)||(mouse_y>view_yview[0]+32+102+16+102+16 && mouse_y<view_yview[0]+135+102+16+102+16))
-    && quitbgpselect=0 && clicked=0 && backselect>0 {
-        if(setting_mode=4) {marker_inst.bgp=backselect;ed_net_ops_send_update(marker_inst, 6);setting_mode=5-5*resetting;resetting=0;marker_inst.setonce2=0;costaiwa4=16} else {global.background=backselect;if(global.preview=-1)global.local_background=backselect;ed_net_ops_send_settings('BGP = ' + string(backselect))}
-        bg_selecting=0;clicked=1
-    }
 
 }
 
