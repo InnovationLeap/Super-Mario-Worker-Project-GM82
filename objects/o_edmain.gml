@@ -119,6 +119,9 @@ global.imitater=1
 global.ledge_type = 0
 global.gen_tier_sel = 3   // 生成器：下一个新建实例的档位（工具选中后用鼠标滚轮改，v6.1）
 setting_mode=0
+// 天气档位滑条拖拽状态（见 scripts/ed_weather_slider.gml）：-1=空闲，否则是正在拖拽的滑条 id
+weather_slider_drag = -1
+weather_slider_changed = 0
 resetting = 0
 net_water_dirty = 0
 net_water_throttle = -1000000
@@ -1928,7 +1931,7 @@ if scrolla<=1 && scrollb<=1 {
     }
     if(setting_mode=5) {
         marker_inst.weather_change = show_question('Do you want to change Weather when Mario hit me?');
-        if (marker_inst.weather_change) {bg_selecting=1;o_edmain.backgroundpage=100;setting_mode=6;} else {setting_mode=7-7*resetting;resetting=0;marker_inst.setonce2=0}
+        if (marker_inst.weather_change) {bg_selecting=1;o_edmain.backgroundpage=100;setting_mode=6;weather_slider_drag=-1;weather_slider_changed=0;} else {setting_mode=7-7*resetting;resetting=0;marker_inst.setonce2=0}
     }
     if(setting_mode=7) {
         marker_inst.height = min(999999,get_integer('Do you want to change water height INSTANTLY when Mario hit me? If yes, enter the height. If no, leave the number to be NO MORE THAN -64.',marker_inst.height))
@@ -3328,152 +3331,16 @@ if bg_selecting=1 && bg_selecting<100 {
         draw_set_color(c_white)
         draw_set_font(cyferkimario)
 
-        //Rainy
-        draw_text(view_xview[0]+40,view_yview[0]+100,string_upper('Rainy Level'))
-        draw_set_halign(fa_right)
-        if(setting_mode=6) {
-            draw_text(view_xview[0]+405,view_yview[0]+100,string(marker_rainy))
-        } else {
-            draw_text(view_xview[0]+405,view_yview[0]+100,string(global.rainy))
-        }
-        draw_set_halign(fa_left)
-        draw_set_color(c_white)
-        if ed_hit(40, 90, 190, 20)&& clicked=0 {
-            draw_prefs_highlight(view_xview[0]+40, view_yview[0]+90, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left) {
-                if(setting_mode=6) { marker_rainy = max(0,min(5,get_integer("Set Rainy Level. Minimum is 0. Maximum is 5.", global.rainy)))
-                } else {
-                    global.rainy = max(0,min(5,get_integer("Set Rainy Level. Minimum is 0. Maximum is 5.", global.rainy)))
-                    ed_net_ops_send_settings('Rainy')
-                }
-            }
-        }
-
-        //Falling Stars
-        draw_text(view_xview[0]+40,view_yview[0]+130,string_upper('Falling Stars Level'))
-        draw_set_halign(fa_right)
-        if(setting_mode=6) {
-            draw_text(view_xview[0]+405,view_yview[0]+130,string(marker_fallingstars))
-        } else {
-            draw_text(view_xview[0]+405,view_yview[0]+130,string(global.fallingstars))
-        }
-        draw_set_halign(fa_left)
-        draw_set_color(c_white)
-        if ed_hit(40, 120, 190, 20)&& clicked=0 {
-            draw_prefs_highlight(view_xview[0]+40, view_yview[0]+120, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left) {
-                if(setting_mode=6) { marker_fallingstars = max(0,min(3,get_integer("Set Falling Stars Level. Minimum is 0. Maximum is 3.", global.fallingstars)))
-                } else {
-                    global.fallingstars = max(0,min(5,get_integer("Set Falling Stars Level. Minimum is 0. Maximum is 3.", global.fallingstars)))
-                    ed_net_ops_send_settings('Falling Stars')
-                }
-            }
-        }
-
-        //Snowy
-        draw_text(view_xview[0]+40,view_yview[0]+160,string_upper('Snowy Level'))
-        draw_set_halign(fa_right)
-        if(setting_mode=6) {
-            draw_text(view_xview[0]+405,view_yview[0]+160,string(marker_snowy))
-        } else {
-            draw_text(view_xview[0]+405,view_yview[0]+160,string(global.snowy))
-        }
-        draw_set_halign(fa_left)
-        draw_set_color(c_white)
-        if ed_hit(40, 150, 190, 20)&& clicked=0 {
-            draw_prefs_highlight(view_xview[0]+40, view_yview[0]+150, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left) {
-                if(setting_mode=6) { marker_snowy = max(0,min(5,get_integer("Set Snowy Level. Minimum is 0. Maximum is 5.", global.snowy)))
-                } else {
-                    global.snowy = max(0,min(5,get_integer("Set Snowy Level. Minimum is 0. Maximum is 5.", global.snowy)))
-                    ed_net_ops_send_settings('Snowy')
-                }
-            }
-        }
-
-        //Thunder
-        draw_text(view_xview[0]+40,view_yview[0]+190,string_upper('Thunder Level'))
-        draw_set_halign(fa_right)
-        if(setting_mode=6) {
-            draw_text(view_xview[0]+405,view_yview[0]+190,string(marker_thunder))
-        } else {
-            draw_text(view_xview[0]+405,view_yview[0]+190,string(global.thunder))
-        }
-        draw_set_halign(fa_left)
-        draw_set_color(c_white)
-        if ed_hit(40, 180, 190, 20)&& clicked=0 {
-            draw_prefs_highlight(view_xview[0]+40, view_yview[0]+180, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left) {
-                if(setting_mode=6) { marker_thunder = max(0,min(1,get_integer("Set Thunder Level. Minimum is 0. Maximum is 1.", global.thunder)))
-                } else {
-                    global.thunder = max(0,min(1,get_integer("Set Thunder Level. Minimum is 0. Maximum is 1.", global.thunder)))
-                    ed_net_ops_send_settings('Thunder')
-                }
-            }
-        }
-
-        //Windy
-        draw_text(view_xview[0]+40,view_yview[0]+220,string_upper('Windy Level'))
-        draw_set_halign(fa_right)
-        if(setting_mode=6) {
-            draw_text(view_xview[0]+405,view_yview[0]+220,string(marker_windy))
-        } else {
-            draw_text(view_xview[0]+405,view_yview[0]+220,string(global.windy))
-        }
-        draw_set_halign(fa_left)
-        draw_set_color(c_white)
-        if ed_hit(40, 210, 190, 20)&& clicked=0 {
-            draw_prefs_highlight(view_xview[0]+40, view_yview[0]+210, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left) {
-                if(setting_mode=6) { marker_windy = max(0,min(3,get_integer("Set Windy Level. Minimum is 0. Maximum is 3.", global.windy)))
-                } else {
-                    global.windy = max(0,min(3,get_integer("Set Windy Level. Minimum is 0. Maximum is 3.", global.windy)))
-                    ed_net_ops_send_settings('Windy')
-                }
-            }
-        }
-
-        //Darkness
-        draw_text(view_xview[0]+40,view_yview[0]+430,string_upper('Dark Level'))
-        draw_set_halign(fa_right)
-        if(setting_mode=6) {
-            draw_text(view_xview[0]+405,view_yview[0]+430,string(marker_darkness))
-        } else {
-            draw_text(view_xview[0]+405,view_yview[0]+430,string(global.darkness))
-        }
-        draw_set_halign(fa_left)
-        draw_set_color(c_white)
-        if ed_hit(40, 420, 190, 20)&& clicked=0 {
-            draw_prefs_highlight(view_xview[0]+40, view_yview[0]+420, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left) {
-                if(setting_mode=6) { marker_darkness = max(0,min(9,get_integer("Set Dark Level. Minimum is 0. Maximum is 9.", global.darkness)))
-                } else {
-                    global.darkness = max(0,min(9,get_integer("Set Dark Level. Minimum is 0. Maximum is 9.", global.darkness)))
-                    ed_net_ops_send_settings('Dark')
-                }
-            }
-        }
-
-        //Brightness
-        draw_text(view_xview[0]+40,view_yview[0]+460,string_upper('Bright Level'))
-        draw_set_halign(fa_right)
-        if(setting_mode=6) {
-            draw_text(view_xview[0]+405,view_yview[0]+460,string(marker_brightness))
-        } else {
-            draw_text(view_xview[0]+405,view_yview[0]+460,string(global.brightness))
-        }
-        draw_set_halign(fa_left)
-        draw_set_color(c_white)
-        if ed_hit(40, 450, 190, 20)&& clicked=0 {
-            draw_prefs_highlight(view_xview[0]+40, view_yview[0]+450, 1.4, 0.8, 0.2);
-            if mouse_check_button(mb_left) {
-                if(setting_mode=6) { marker_brightness = max(0,min(5,get_integer("Set Bright Level. Minimum is 0. Maximum is 5.", global.brightness)))
-                } else {
-                    global.brightness = max(0,min(5,get_integer("Set Bright Level. Minimum is 0. Maximum is 5.", global.brightness)))
-                    ed_net_ops_send_settings('Bright')
-                }
-            }
-        }
+        // 7 个天气档位滑条：鼠标左键按住轨道左右拖动即可改档位（绘制与交互都在 ed_weather_slider 里）
+        // 参数 = 滑条 id, 标签, 行 y, 最大档位, setting_mode, 联机广播描述
+        // setting_mode=6（场景控制元件入口）读写 marker_*，其余情况读写 global.* —— 两个入口共用这段
+        ed_weather_slider(1, 'Rainy Level', 100, 5, setting_mode, 'Rainy')
+        ed_weather_slider(2, 'Falling Stars Level', 130, 3, setting_mode, 'Falling Stars')
+        ed_weather_slider(3, 'Snowy Level', 160, 5, setting_mode, 'Snowy')
+        ed_weather_slider(4, 'Thunder Level', 190, 1, setting_mode, 'Thunder')
+        ed_weather_slider(5, 'Windy Level', 220, 3, setting_mode, 'Windy')
+        ed_weather_slider(6, 'Dark Level', 430, 9, setting_mode, 'Dark')
+        ed_weather_slider(7, 'Bright Level', 460, 5, setting_mode, 'Bright')
 
         //天气设置界面结束
     }
@@ -3581,14 +3448,17 @@ if wlaczonaopcja = 2 || wlaczonaopcja = 3 || wlaczonaopcja = 4 {
 set_light_mode = true;
 
 if set_light_mode {
-
-    // ===绘制灯泡图标（ed_light_draw 脚本内按面板/分页条件绘制）===
-    if (scrolla < 2) {
-        ed_light_draw()
-    } // 滚动条预览时候不显示
-    // ===设置点击判定（ed_light_click 脚本内按面板/分页条件处理）===
-    if mouse_check_button_released(mb_right) {
-        ed_light_click()
+    // 全屏选择页（背景/天气/音乐/设置/联机等，bg_selecting<>0）盖住了工具栏时，灯泡图标与右键判定一并停用：
+    // 否则图标会画在天气页的滑条上，右键还会误改光照位。
+    if bg_selecting = 0 {
+        // ===绘制灯泡图标（ed_light_draw 脚本内按面板/分页条件绘制）===
+        if (scrolla < 2) {
+            ed_light_draw()
+        } // 滚动条预览时候不显示
+        // ===设置点击判定（ed_light_click 脚本内按面板/分页条件处理）===
+        if mouse_check_button_released(mb_right) {
+            ed_light_click()
+        }
     }
 }
 /*"/*'/**//* YYD ACTION

@@ -199,6 +199,7 @@ ed_light_flip
 ed_light_draw
 ed_light_click
 ed_prefs_page
+ed_weather_slider
 ed_autopair_ui
 ed_autopair_row
 ed_autopair_single
