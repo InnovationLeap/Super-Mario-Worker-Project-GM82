@@ -2120,26 +2120,29 @@ if scrolla<=1 && scrollb<=1 {
         if blockpage=0 {draw_sprite_ext(s_edblocks,1,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1);}
         if blockpage=1 {draw_sprite_ext(s_edblocks,2,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1);}
         if blockpage=2 {draw_sprite_ext(s_edblocks,3,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1);}
-        if blockpage=-1 {draw_set_color(make_color_rgb(255,255,127))} else {if(abs(view_xview[0]+256+51-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10) {draw_set_color(c_yellow)}}draw_text(view_xview[0]+256+51,view_yview[0]+368,'1');draw_set_color(c_white)
-        if blockpage<>-1 && abs(view_xview[0]+256+51-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10 && clicked=0 && mouse_check_button(mb_left) {blockpage=-1}
-        if blockpage=0 {draw_set_color(make_color_rgb(255,255,127))} else {if(abs(view_xview[0]+256+51*2-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10) {draw_set_color(c_yellow)}}draw_text(view_xview[0]+256+51*2,view_yview[0]+368,'2');draw_set_color(c_white)
-        if blockpage<>0 && abs(view_xview[0]+256+51*2-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10 && clicked=0 && mouse_check_button(mb_left) {blockpage=0}
-        if blockpage=1 {draw_set_color(make_color_rgb(255,255,127))} else {if(abs(view_xview[0]+256+51*3-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10) {draw_set_color(c_yellow)}}draw_text(view_xview[0]+256+51*3,view_yview[0]+368,'3');draw_set_color(c_white)
-        if blockpage<>1 && abs(view_xview[0]+256+51*3-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10 && clicked=0 && mouse_check_button(mb_left) {blockpage=1}
-        if blockpage=2 {draw_set_color(make_color_rgb(255,255,127))} else {if(abs(view_xview[0]+256+51*4-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10) {draw_set_color(c_yellow)}}draw_text(view_xview[0]+256+51*4,view_yview[0]+368,'4');draw_set_color(c_white)
-        if blockpage<>2 && abs(view_xview[0]+256+51*4-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10 && clicked=0 && mouse_check_button(mb_left) {blockpage=2}
+        if blockpage=3 {draw_sprite_ext(s_edblocks,4,view_xview[0]+400,view_yview[0]+240,1,1,0,c_white,1);}
+        //格子区统一用 s_blocks 逐格重绘（与游玩渲染同源，且与整页图里烘焙的重复素材解耦）
+        ed_blocks_page_draw()
+        //页签 1~5：总宽度与旧版 1~4 一致（首 307 ~ 末 460，跨度 153 不变），5 个均分 → 间隔约 38.25
+        //坐标：307 / 345 / 384 / 422 / 460（判定仍为 ±10，相邻不重叠；左右箭头 256 / 512 不变）
+        if blockpage=-1 {draw_set_color(make_color_rgb(255,255,127))} else {if(abs(view_xview[0]+307-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10) {draw_set_color(c_yellow)}}draw_text(view_xview[0]+307,view_yview[0]+368,'1');draw_set_color(c_white)
+        if blockpage<>-1 && abs(view_xview[0]+307-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10 && clicked=0 && mouse_check_button(mb_left) {blockpage=-1}
+        if blockpage=0 {draw_set_color(make_color_rgb(255,255,127))} else {if(abs(view_xview[0]+345-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10) {draw_set_color(c_yellow)}}draw_text(view_xview[0]+345,view_yview[0]+368,'2');draw_set_color(c_white)
+        if blockpage<>0 && abs(view_xview[0]+345-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10 && clicked=0 && mouse_check_button(mb_left) {blockpage=0}
+        if blockpage=1 {draw_set_color(make_color_rgb(255,255,127))} else {if(abs(view_xview[0]+384-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10) {draw_set_color(c_yellow)}}draw_text(view_xview[0]+384,view_yview[0]+368,'3');draw_set_color(c_white)
+        if blockpage<>1 && abs(view_xview[0]+384-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10 && clicked=0 && mouse_check_button(mb_left) {blockpage=1}
+        if blockpage=2 {draw_set_color(make_color_rgb(255,255,127))} else {if(abs(view_xview[0]+422-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10) {draw_set_color(c_yellow)}}draw_text(view_xview[0]+422,view_yview[0]+368,'4');draw_set_color(c_white)
+        if blockpage<>2 && abs(view_xview[0]+422-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10 && clicked=0 && mouse_check_button(mb_left) {blockpage=2}
+        if blockpage=3 {draw_set_color(make_color_rgb(255,255,127))} else {if(abs(view_xview[0]+460-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10) {draw_set_color(c_yellow)}}draw_text(view_xview[0]+460,view_yview[0]+368,'5');draw_set_color(c_white)
+        if blockpage<>3 && abs(view_xview[0]+460-mouse_x)<10 && abs(view_yview[0]+368-mouse_y)<10 && clicked=0 && mouse_check_button(mb_left) {blockpage=3}
         if abs(view_xview[0]+256-mouse_x)<16 && abs(view_yview[0]+368-mouse_y)<16 {draw_sprite_ext(s_left,0,view_xview[0]+256,view_yview[0]+364,1,1,0,c_yellow,1)} else {draw_sprite_ext(s_left,0,view_xview[0]+256,view_yview[0]+364,1,1,0,c_white,1)}
         if abs(view_xview[0]+512-mouse_x)<16 && abs(view_yview[0]+368-mouse_y)<16 {draw_sprite_ext(s_right,0,view_xview[0]+512,view_yview[0]+364,1,1,0,c_yellow,1)} else {draw_sprite_ext(s_right,0,view_xview[0]+512,view_yview[0]+364,1,1,0,c_white,1)}
         if abs(view_xview[0]+256-mouse_x)<16 && abs(view_yview[0]+368-mouse_y)<16 && clicked=0 && mouse_check_button(mb_left) {
-            if o_edmain.blockpage=0 {o_edmain.blockpage=-1}
-            if o_edmain.blockpage=1 {o_edmain.blockpage=0}
-            if o_edmain.blockpage=2 {o_edmain.blockpage=1}
+            if o_edmain.blockpage=0 {o_edmain.blockpage=-1} else if o_edmain.blockpage=1 {o_edmain.blockpage=0} else if o_edmain.blockpage=2 {o_edmain.blockpage=1} else if o_edmain.blockpage=3 {o_edmain.blockpage=2}
             clicked=1
         }
         if abs(view_xview[0]+512-mouse_x)<16 && abs(view_yview[0]+368-mouse_y)<16 && clicked=0 && mouse_check_button(mb_left) {
-            if o_edmain.blockpage=1 {o_edmain.blockpage=2}
-            if o_edmain.blockpage=0 {o_edmain.blockpage=1}
-            if o_edmain.blockpage=-1 {o_edmain.blockpage=0}
+            if o_edmain.blockpage=2 {o_edmain.blockpage=3} else if o_edmain.blockpage=1 {o_edmain.blockpage=2} else if o_edmain.blockpage=0 {o_edmain.blockpage=1} else if o_edmain.blockpage=-1 {o_edmain.blockpage=0}
             clicked=1
         }}
 
@@ -2512,6 +2515,106 @@ if scrolla<=1 && scrollb<=1 {
                 place_code4=0
                 place_code5=0;autopair=0
                 place_code6=0
+            }
+            if option_open=1 && ed_hit(206, 128+32*6, 384, 32)&& clicked=0 {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*6,1,1,0,c_white,1)}
+            if option_open=1 && ed_hit(206, 128+32*6, 384, 32)&& mouse_check_button(mb_left) && clicked=0 {
+                clicked=1
+                sampelwyboru1=1//smp
+                option_open=0;
+                placed=0
+                place_code=global.blocks_palette[blockpage+1,6*12+floor((mouse_x-(view_xview[0]+206))/32)]
+                place_code2=0
+                place_code3=0
+                place_code4=0
+                place_code5=0
+                place_code6=0;autopair=0
+            }}
+    }
+
+    //第五页（blockpage=3，新增素材页 350~422）
+    if blockpage=3 {
+
+        //限制鼠标位置，不能点击空白区
+        if (ed_hit(206, 128, 384, 32))|| (ed_hit(206, 128+32, 320, 32))|| (ed_hit(206, 128+32*2, 288, 32*3))|| (ed_hit(206, 128+32*5, 384, 32*2)) {
+
+            if option_open=1 && ed_hit(206, 128, 384, 32)&& clicked=0 {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128,1,1,0,c_white,1)}
+            if option_open=1 && ed_hit(206, 128, 384, 32)&& mouse_check_button(mb_left) && clicked=0 {
+                clicked=1
+                sampelwyboru1=1//smp
+                option_open=0;
+                placed=0
+                place_code=global.blocks_palette[blockpage+1,0*12+floor((mouse_x-(view_xview[0]+206))/32)]
+                place_code2=0
+                place_code3=0
+                place_code4=0
+                place_code5=0
+                place_code6=0;autopair=0
+            }
+            if option_open=1 && ed_hit(206, 128+32, 384, 32)&& clicked=0 {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32,1,1,0,c_white,1)}
+
+            if option_open=1 && ed_hit(206, 128+32, 384, 32)&& mouse_check_button(mb_left) && clicked=0 {
+                clicked=1
+                sampelwyboru1=1//smp
+                option_open=0;
+                placed=0
+                place_code=global.blocks_palette[blockpage+1,1*12+floor((mouse_x-(view_xview[0]+206))/32)]
+                place_code2=0
+                place_code3=0
+                place_code4=0
+                place_code5=0
+                place_code6=0;autopair=0
+            }
+            if option_open=1 && ed_hit(206, 128+32*2, 384, 32)&& clicked=0 {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*2,1,1,0,c_white,1)}
+            if option_open=1 && ed_hit(206, 128+32*2, 384, 32)&& mouse_check_button(mb_left) && clicked=0 {
+                clicked=1
+                sampelwyboru1=1//smp
+                option_open=0;
+                placed=0
+                place_code=global.blocks_palette[blockpage+1,2*12+floor((mouse_x-(view_xview[0]+206))/32)]
+                place_code2=0
+                place_code3=0
+                place_code4=0
+                place_code5=0
+                place_code6=0;autopair=0
+            }
+            if option_open=1 && ed_hit(206, 128+32*3, 384, 32)&& clicked=0 {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*3,1,1,0,c_white,1)}
+            if option_open=1 && ed_hit(206, 128+32*3, 384, 32)&& mouse_check_button(mb_left) && clicked=0 {
+                clicked=1
+                sampelwyboru1=1//smp
+                option_open=0;
+                placed=0
+                place_code=global.blocks_palette[blockpage+1,3*12+floor((mouse_x-(view_xview[0]+206))/32)]
+                place_code2=0
+                place_code3=0
+                place_code4=0
+                place_code5=0
+                place_code6=0;autopair=0
+            }
+            if option_open=1 && ed_hit(206, 128+32*4, 384, 32)&& clicked=0 {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*4,1,1,0,c_white,1)}
+            if option_open=1 && ed_hit(206, 128+32*4, 384, 32)&& mouse_check_button(mb_left) && clicked=0 {
+                clicked=1
+                sampelwyboru1=1//smp
+                option_open=0;
+                placed=0
+                place_code=global.blocks_palette[blockpage+1,4*12+floor((mouse_x-(view_xview[0]+206))/32)]
+                place_code2=0
+                place_code3=0
+                place_code4=0
+                place_code5=0
+                place_code6=0;autopair=0
+            }
+            if option_open=1 && ed_hit(206, 128+32*5, 384, 32)&& clicked=0 {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*5,1,1,0,c_white,1)}
+            if option_open=1 && ed_hit(206, 128+32*5, 384, 32)&& mouse_check_button(mb_left) && clicked=0 {
+                clicked=1
+                sampelwyboru1=1//smp
+                option_open=0;
+                placed=0
+                place_code=global.blocks_palette[blockpage+1,5*12+floor((mouse_x-(view_xview[0]+206))/32)]
+                place_code2=0
+                place_code3=0
+                place_code4=0
+                place_code5=0
+                place_code6=0;autopair=0
             }
             if option_open=1 && ed_hit(206, 128+32*6, 384, 32)&& clicked=0 {draw_sprite_ext(s_choosingblocks,0,view_xview[0]+206+32*floor((mouse_x-(view_xview[0]+206))/32),view_yview[0]+128+32*6,1,1,0,c_white,1)}
             if option_open=1 && ed_hit(206, 128+32*6, 384, 32)&& mouse_check_button(mb_left) && clicked=0 {
