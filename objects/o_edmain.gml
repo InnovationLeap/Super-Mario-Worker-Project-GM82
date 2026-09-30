@@ -580,8 +580,9 @@ if !first_set_scenery {
             // 模仿者（coto=42）由 o_edsceneriesblock 的 Draw 用大表绘制，只需维持 image_alpha
             image_alpha = 0.4
         } else if coto>=44 && coto<=46 {
-            // 坦克轮子（44=左 / 45=中 / 46=右）由 o_edsceneriesblock 的 Draw 用 s_tankwheel 绘制，只需维持 image_alpha
-            image_alpha = 0.4
+            // 坦克轮子（44=左 / 45=中 / 46=右）由 o_edsceneriesblock 的 Draw 用 s_tankwheel 绘制并恒定全亮，
+            // 这里只是把实例上的值也置 1 以保持一致
+            image_alpha = 1
         } else {
             if coto!=38 {
                 sprite_index = s_sceneriesbank
@@ -597,14 +598,16 @@ if place_code3 = 42 && change_alpha = 0 {
     change_alpha = 1
 }
 
-//坦克轮子（44=左 / 45=中 / 46=右）：选中对应工具时画布上的轮子恢复全亮
+//坦克轮子（44=左 / 45=中 / 46=右）：画布上一律全亮。原先「选中别的景物就把轮子压暗到 0.3」
+//的特性已移除（o_edsceneriesblock 的 Draw 现在固定按 alpha=1 画轮子），这里仅维持实例上的值一致。
 if (place_code3 = 44 || place_code3 = 45 || place_code3 = 46) && change_alpha = 0 {
     with(o_edsceneriesblock) {if(coto>=44 && coto<=46)image_alpha = 1}
     change_alpha = 1
 }
 
+//模仿者（42）：未选中对应工具时压暗；坦克轮子已不参与（恒为 1）
 if place_code3 <> 42 && place_code3 <> 44 && place_code3 <> 45 && place_code3 <> 46 && change_alpha = 1 {
-    with(o_edsceneriesblock) {if(coto=42)image_alpha = 0.3; if(coto>=44 && coto<=46)image_alpha = 0.3}
+    with(o_edsceneriesblock) {if(coto=42)image_alpha = 0.3}
     change_alpha = 0
 }
 

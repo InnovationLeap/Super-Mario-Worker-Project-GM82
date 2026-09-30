@@ -41,7 +41,9 @@ if coto = 42 {
 } else if coto >= 44 && coto <= 46 {
     // 坦克轮子（44=左 / 45=中 / 46=右）：独立精灵 s_tankwheel，基础帧 (coto-44)*3
     // 编辑器实例坐标 = 格左上角，精灵 origin=(16,32) → 绘制点补 (+16,+32) 让图形正好落在格内
-    draw_sprite_ext(s_tankwheel, (coto - 44) * 3, x + 16, y + 32, 1, 1, 0, c_white, image_alpha)
+    // 画布上的轮子恒定全亮：不随「当前选中的景物工具」变透明，image_alpha 对它不生效。
+    // 跟随鼠标的半透明轮子是放置预览，走 o_edmain 里单独的 draw_sprite_ext(...,0.5)，不受这里影响。
+    draw_sprite_ext(s_tankwheel, (coto - 44) * 3, x + 16, y + 32, 1, 1, 0, c_white, 1)
 } else {
     draw_self()
 }
