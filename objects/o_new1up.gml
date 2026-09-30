@@ -32,6 +32,14 @@ applies_to=self
 */
 if global.pauza=0 {
 
+    // v6.13/v6.16：生成器生成的单位在**自身**也做一次出界回收，口径与 o_generator 完全一致——
+    //   ① 相对房间左/下/右出界 256px；② 锚点离开可视区域（左/右/下）。都不判上方。
+    //   生成器那边的槽位追踪一旦有边角情况，这里仍能兜住。非生成物（gen_tag = 0）不受影响。
+    if gen_tag != 0 {
+        if x < -256 || x > room_width[0]+256 || y > room_height[0]+256 { instance_destroy() }
+        if x < view_xview[0] || x > view_xview[0]+view_wview[0] || y > view_yview[0]+view_hview[0] { instance_destroy() }
+    }
+
     if hele = 1 {
 
         if state=0 {

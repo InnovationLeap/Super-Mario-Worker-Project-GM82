@@ -203,6 +203,22 @@ draw_set_color(c_white)
 draw_text(x + 16, y + 34, 'T' + string(gen_tier))
 if gen_screen_only = 1 { _s = 'ON' } else { _s = 'OFF' }
 draw_text(x + 16, y + 50, _s)
+// v6.18（用户反馈"生成器静默失效"）：**不产出**的两种摆放错误直接标红字 `!`——
+//   ① payload 非法（抓到了规则表不支持的码，例如奖励面板第 1 行的经典码，现已补齐但其它码仍可能非法）；
+//   ② 方向不符（该物品要求朝上/朝下，见 gen_payload_info 字段 2）。这两种情况下生成器什么都不会做、也不报错。
+if gen_payload_info(payload_cat, payload_code, 0) = -1 {
+    draw_set_color(c_red)
+    draw_text(x + 16, y + 66, '!')
+    draw_set_color(c_white)
+} else {
+    if gen_payload_info(payload_cat, payload_code, 2) >= 0 {
+        if dir != gen_payload_info(payload_cat, payload_code, 2) {
+            draw_set_color(c_red)
+            draw_text(x + 16, y + 66, '!')
+            draw_set_color(c_white)
+        }
+    }
+}
 draw_set_halign(fa_left)
 // 收编成功标记：物品右下角小勾（描边效果由半透明管体提供）
 if instance_exists(gen_item) {

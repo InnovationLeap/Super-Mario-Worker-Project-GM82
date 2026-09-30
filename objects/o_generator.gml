@@ -51,6 +51,18 @@ if gen_ready = 0 {
     }
     gen_ready = 1
 }
+// v6.15（用户反馈"绿蘑菇掉出界很久后生成器依然不产出"）：`global.levelsmooth=1` 时 o_preview 会按玩家位置
+//   **整体停用**远处实例 —— 生成物一旦被停用：① 它自己的回收判定不再运行；② 生成器用 `with` 也进不去它
+//   （进不去就销毁不了、名额永不释放）；③ 占位物被停用会**卡在挤出中途**永不转正，同样死占名额。
+//   生成器本身已在 o_preview 白名单（v6.12），这里再把它"产出的东西"每帧激活回来——必须放在回收**之前**，
+//   否则 o_preview 每帧先停用、回收随后检查时实例仍是停用状态，`with` 永远进不去。
+if global.levelsmooth = 1 {
+    instance_activate_object(o_genitem)
+    if payload_cat = 0 || payload_cat = 3 {
+        genx_act = gen_payload_info(payload_cat, payload_code, 0)
+        if genx_act != -1 { instance_activate_object(genx_act) }
+    }
+}
 // ── 记账与清理（v6.12：必须放在四道门**之前**）────────────────────────────────
 //   这两段与"能不能生成"无关，只负责名额回收与出界回收；放在门后会被门1（离屏）/门2（被玩家压制）
 //   /门3（暂停）挡住 —— 表现就是"掉出房间的生成物一直不销毁、名额也不释放"。
@@ -81,10 +93,21 @@ while (_i <= gen_max_eff) {
     if gen_slots[_i] != 0 {
         _gi = gen_slot_id[_i]
         if instance_exists(_gi) {
+            // 坐标用 with 切上下文读取（v6.13）：不依赖"var 里存的实例 id 直接点属性"这种写法
             genx_ob = 0
-            if _gi.x < -256 { genx_ob = 1 }
-            if _gi.x > room_width[0] + 256 { genx_ob = 1 }
-            if _gi.y > room_height[0] + 256 { genx_ob = 1 }
+            with (_gi) {
+                // ① 相对房间出界 256px（用户裁定口径）
+                if x < -256 { other.genx_ob = 1 }
+                if x > room_width[0] + 256 { other.genx_ob = 1 }
+                if y > room_height[0] + 256 { other.genx_ob = 1 }
+                // ② "数量"在文档里的定义是**同屏存活上限**：锚点一旦离开可视区域（左 / 右 / 下）就回收。
+                //    v6.14 这里原本也留 256px 余量，但生成物常常落/卡在画面外一点点（下方有地形），
+                //    256px 就成了死区 —— 回收不触发、名额占满、生成器停产（用户反馈的现象）。故收紧到 0。
+                //    不判上方：飞得比画面高的生成物不回收。
+                if x < view_xview[0] { other.genx_ob = 1 }
+                if x > view_xview[0] + view_wview[0] { other.genx_ob = 1 }
+                if y > view_yview[0] + view_hview[0] { other.genx_ob = 1 }
+            }
             if genx_ob = 1 {
                 // 注意：本工程（GM8.2）的 instance_destroy 不接受参数、只能销毁 self → 用 with 切上下文
                 with (_gi) { instance_destroy() }

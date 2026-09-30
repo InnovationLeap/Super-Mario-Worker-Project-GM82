@@ -53,6 +53,17 @@ if argument0 = 0 {
 }
 if argument0 = 3 {
     switch (argument1) {
+        // v6.18（用户反馈"生成器一直在记录红蘑菇/不产出"）：补齐**经典码**（编辑器奖励面板第 1 行 1~6、以及 7/8）。
+        //   面板上第 1 行是经典图元（1 蘑菇/2 甜菜/3 绿果/4 星/5 绿蘑菇/6 毒蘑菇）、第 3 行是现代图元（19 蘑菇/20 花/…/24 绿蘑菇），
+        //   两套都有绿蘑菇；生成器原先只认现代码 → 抓到经典码时本函数返回 -1 → 生成器静默失效（不产出也不报错）。
+        //   经典码 1/2/3/7/8 在问号砖里是"大形态给花/甜菜/绿果/叶子、小形态给蘑菇"（状态相关），生成器取**物品形态**。
+        case 1:  _obj = o_bonusflower;    _max = 1; _dir = 1; break;
+        case 2:  _obj = o_bonusbeetroot;  _max = 1; _dir = 1; break;
+        case 3:  _obj = o_bonuslui;       _max = 1; _dir = 1; break;
+        case 4:  _obj = o_bonusstar;      break;
+        case 5:  _obj = o_bonus1up;       _dir = 1; break;
+        case 7:  _obj = o_bonusraccoon;   break;
+        case 8:  _obj = o_bonusraccoon;   break;
         // 306 与敌人 016 同对象（o_bonusdead）：方向=上（强制），数量由作者参数决定
         case 6:  _obj = o_bonusdead;      _dir = 1; break;
         case 19: _obj = o_newmush;        break;
