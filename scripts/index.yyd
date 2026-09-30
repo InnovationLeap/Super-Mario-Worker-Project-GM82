@@ -98,6 +98,9 @@ ed_hit
 input_sync_step
 raccoon_tail_hit_check
 blocks_palette_data
+blocks_sheet_build
+blocks_draw
+blocks_draw_grid
 ed_blocks_page_draw
 background_palette_data
 bgm_palette_data

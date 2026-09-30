@@ -113,7 +113,7 @@ if _state == 2 || _state == 3 {
                 _row = _row + _drow
                 if _col >= 0 && _col < room_width / 32 && _row >= 0 && _row < room_height / 32 {
                     draw_set_alpha(0.5)
-                    draw_sprite_ext(s_blocks, _val, _col * 32, _row * 32, 1, 1, 0, c_white, 0.5)
+                    blocks_draw(_val, _col * 32, _row * 32, 1, 0.5)
                     draw_set_alpha(1)
                     draw_set_color(c_lime)
                     draw_set_alpha(0.4)

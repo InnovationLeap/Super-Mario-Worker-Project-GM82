@@ -13,7 +13,7 @@ if place_code<>0 && clicked=0 && autopair3=0 && menu_open=0 && option_open=0 && 
         _dx = global.autopair_layout[_ap, _i*3];
         _dy = global.autopair_layout[_ap, _i*3+1];
         _id = global.autopair_layout[_ap, _i*3+2];
-        draw_sprite_ext(s_blocks, _id, _fx*32+_dx*32, _fy*32+_dy*32, 1, 1, 0, c_white, 0.5);
+        blocks_draw(_id, _fx*32+_dx*32, _fy*32+_dy*32, 1, 0.5);
     }
 }
 // 放置

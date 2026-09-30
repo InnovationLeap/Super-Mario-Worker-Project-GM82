@@ -4,6 +4,9 @@
 // 初始游标推进、lastlev 守卫、checkpoint 重置策略、loadingsav 收尾保留在两个薄壳中。
 global.ll_array = argument0
 //global.toload=global.scenariofile
+// 方块大表坐标（游玩侧也要用：模仿者 tile_add 从 b_blocks 取图）
+blocks_palette_data();
+blocks_sheet_build();
 var v_ens, skript;
 var checka;
 
@@ -164,7 +167,7 @@ aa=level_read_next()
             skript=string_insert('('+string(ae)+').image_single='+string(s_coto)+'-1;'+'('+string(ae)+').depth='+string(s_depth)+';',skript,string_length(skript)+1)
             //skript=string_insert('',skript,string_length(skript)+1)
         } else {
-            skript = string_insert('tile_add(b_blocks,'+string(32*(real(string_copy(aa,12,3)) mod 20))+','+string(string(32*(real(string_copy(aa,12,3)) div 20)))+',32,32,'+string(transA(string_copy(aa,4,4)))+','+string(transA(string_copy(aa,8,4)))+','+string(s_depth)+');',skript,string_length(skript)+1);
+            skript = string_insert('tile_add(b_blocks,'+string(global.block_sheet_x[real(string_copy(aa,12,3))])+','+string(global.block_sheet_y[real(string_copy(aa,12,3))])+',32,32,'+string(transA(string_copy(aa,4,4)))+','+string(transA(string_copy(aa,8,4)))+','+string(s_depth)+');',skript,string_length(skript)+1);
             //skript=string_insert('('+string(ae)+').block_index='+string(string_copy(aa,12,3))+';('+string(ae)+').x-=16;('+string(ae)+').y-=32;',skript,string_length(skript)+1)
         }
         s_depth-=1; //根据景物摆放顺序手动管理图层关系

@@ -26,10 +26,10 @@ if _wheel = 0 {
             _sw = 32; _sh = 32
             _dx = floor(_cx + 32 - 16 * _s - 16 * _s)
             _dy = floor(_cy + 32 - 16 * _s - 16 * _s)
-            draw_sprite_ext(s_blocks, 5, _dx, _dy, _s, _s, 0, c_white, 1)
-            draw_sprite_ext(s_blocks, 6, _dx + 32 * _s, _dy, _s, _s, 0, c_white, 1)
-            draw_sprite_ext(s_blocks, 7, _dx, _dy + 32 * _s, _s, _s, 0, c_white, 1)
-            draw_sprite_ext(s_blocks, 8, _dx + 32 * _s, _dy + 32 * _s, _s, _s, 0, c_white, 1)
+            blocks_draw(5, _dx, _dy, _s, 1)
+            blocks_draw(6, _dx + 32 * _s, _dy, _s, 1)
+            blocks_draw(7, _dx, _dy + 32 * _s, _s, 1)
+            blocks_draw(8, _dx + 32 * _s, _dy + 32 * _s, _s, 1)
             // 顶部箭头：白色下指、尾矩形自下而上淡出（VIEW CONTROL 同款），缩放 0.6 居中于格子顶部
             _as = 0.6
             _ax = _cx + 32 - 15 * _as

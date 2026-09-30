@@ -177,6 +177,9 @@
 	|ed_place_bonus
 	|ed_place_scenery
 	|ed_place_block
+	|blocks_sheet_build
+	|blocks_draw
+	|blocks_draw_grid
 	|ed_blocks_page_draw
 	|ed_place_marker
 	|ed_place_enemy

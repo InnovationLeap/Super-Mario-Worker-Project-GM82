@@ -26,8 +26,7 @@ if _cato = 2 {
     _f.coto = _coto
     _f.block_index = buffer_read_u16(argument0)
     if _coto = 42 {
-        _f.sprite_index = s_blocks
-        _f.image_index = _f.block_index
+        // 模仿者由 o_edsceneriesblock 的 Draw 用大表绘制，这里只需维持透明度
         _f.image_alpha = 1
     } else {
         if _coto != 38 {

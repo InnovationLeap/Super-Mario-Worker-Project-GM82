@@ -7,6 +7,7 @@ applies_to=self
 
 fw_release_cache(); //信息转字体缓存清理
 blocks_palette_data();
+blocks_sheet_build();
 background_palette_data();
 bgm_palette_data();
 ed_autopair_data();
@@ -274,8 +275,7 @@ applies_to=self
 if set_scenery {
     with(my_scenery) {
         if coto=42 {
-            sprite_index = s_blocks
-            image_index = block_index
+            // 模仿者（coto=42）由 o_edsceneriesblock 的 Draw 用大表绘制，只需维持 image_alpha
             image_alpha = 1
         } else {
             if coto!=38 {
@@ -574,8 +574,7 @@ if variable_global_exists('script_kile') {
 if !first_set_scenery {
     with(o_edsceneriesblock) {
         if coto=42 {
-            sprite_index = s_blocks
-            image_index = block_index
+            // 模仿者（coto=42）由 o_edsceneriesblock 的 Draw 用大表绘制，只需维持 image_alpha
             image_alpha = 0.4
         } else {
             if coto!=38 {
@@ -1279,11 +1278,11 @@ if scrolla<=1 && scrollb<=1 {
             if o_edmain.costawia3b=0 {o_edmain.costawia3b=1}
         }
         //模仿者预览
-        if costawia3b=1 {draw_sprite(s_blocks,global.imitater,view_xview[0]+224+64*5-2,view_yview[0]+128+128-2)}
+        if costawia3b=1 {blocks_draw(global.imitater,view_xview[0]+224+64*5-2,view_yview[0]+128+128-2,1,1)}
         if mouse_wheel_up() && global.imitater>1 && costawia3b=1 && mouse_y>view_yview[0]+128+64*2-16 && mouse_y<view_yview[0]+128+64*2+48 {//鼠标滚轮向上
             if(global.imitater=274) {global.imitater-=22} else {global.imitater-=1}
         }
-        if mouse_wheel_down() && global.imitater<sprite_get_number(s_blocks) && costawia3b=1 && mouse_y>view_yview[0]+128+64*2-16 && mouse_y<view_yview[0]+128+64*2+48 {//鼠标滚轮向下
+        if mouse_wheel_down() && global.imitater<global.block_count && costawia3b=1 && mouse_y>view_yview[0]+128+64*2-16 && mouse_y<view_yview[0]+128+64*2+48 {//鼠标滚轮向下
             if(global.imitater=252) {global.imitater+=22} else {global.imitater+=1}
         }
 
@@ -1430,11 +1429,11 @@ if scrolla<=1 && scrollb<=1 {
 
     if place_code3=42 && clicked=0 /*&& mouse_x>0 &&  mouse_y>0*/ && tool_mode=0
     && menu_open=0 && option_open=0 {
-        draw_sprite_ext(s_blocks,global.imitater,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,1,1,0,c_white,0.5)
+        blocks_draw(global.imitater,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,1,0.5)
         if mouse_wheel_up() && global.imitater>1 {//鼠标滚轮向上
             if(global.imitater=274) {global.imitater-=22} else {global.imitater-=1}
         }
-        if mouse_wheel_down() && global.imitater<sprite_get_number(s_blocks) {//鼠标滚轮向下
+        if mouse_wheel_down() && global.imitater<global.block_count {//鼠标滚轮向下
             if(global.imitater=252) {global.imitater+=22} else {global.imitater+=1}
         }
         if  keyboard_check_pressed(global.key_pick) && autopair3=0 {
@@ -2638,7 +2637,7 @@ if scrolla<=1 && scrollb<=1 {
         if autopair=0 {
             if place_code<>0 && clicked=0 && autopair3=0
             && menu_open=0 && option_open=0
-            {draw_sprite_ext(s_blocks,place_code,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,1,1,0,c_white,0.5)
+            {blocks_draw(place_code,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,1,0.5)
                 if !keyboard_check(global.key_submenu) {
                     key_submenu_pressed_down = false;
                 }

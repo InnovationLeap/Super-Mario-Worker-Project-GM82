@@ -174,7 +174,7 @@ for (i=0; i<21; i+=1) {
         draw_x = i+floor(view_xview[0]/32)
         draw_y = a+floor(view_yview[0]/32)
         if global.zxy[draw_x,draw_y]>0 {
-            draw_sprite_ext(s_blocks,global.zxy[draw_x,draw_y],draw_x*32,draw_y*32,1,1,0,c_white,1)
+            blocks_draw(global.zxy[draw_x,draw_y],draw_x*32,draw_y*32,1,1)
         }
     }
 }

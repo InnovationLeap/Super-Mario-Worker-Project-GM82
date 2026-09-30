@@ -160,8 +160,7 @@ if global.ed_region_list != -1 {
                     // 景物精灵在放置/读档时才赋值（默认精灵 s_enemiesblock4 为全透明占位图），
                     // 粘贴副本不经 ed_place_scenery，需与 ed_net_ops_apply_create 一致地手动设置精灵
                     if _new_id.coto = 42 {
-                        _new_id.sprite_index = s_blocks
-                        _new_id.image_index = _new_id.block_index
+                        // 模仿者由 o_edsceneriesblock 的 Draw 用大表绘制，这里只需维持透明度
                         // 透明度与当前编辑态保持一致（模仿者编辑态=1，其余态=0.3）
                         if o_edmain.place_code3 = 42 { _new_id.image_alpha = 1 } else { _new_id.image_alpha = 0.3 }
                     } else {

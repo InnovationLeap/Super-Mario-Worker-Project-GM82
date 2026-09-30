@@ -269,7 +269,7 @@
 		|s_thunder
 		|sprite554
 +s_level＆edit
-	|s_blocks
+	|s_blocks_sheet
 +s_mario
 	|s_bigmariocrouch
 	|s_bigmariojump

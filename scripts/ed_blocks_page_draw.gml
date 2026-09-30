@@ -20,7 +20,7 @@ for (_r = 0; _r < 7; _r += 1) {
         draw_rectangle(_gx, _gy, _gx + 31, _gy + 31, false)
         _id = global.blocks_palette[_p, _r * 12 + _c]
         if _id > 0 {
-            draw_sprite(s_blocks, _id, _gx, _gy)
+            blocks_draw(_id, _gx, _gy, 1, 1)
             if _id = 85 {draw_sprite(s_block85, 0, _gx, _gy)}
         }
     }
