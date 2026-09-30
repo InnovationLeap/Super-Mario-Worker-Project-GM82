@@ -96,6 +96,12 @@ if animacja>=1008 {animacja=0; animacja2=0}*/
 
         if place_meeting(x,y,o_uppercut) && grav_lock=0 && state=1 {grav_lock=1; grav=-8}
         // niszcz po za ekranem
+        // v6.11（用户反馈"奖命蘑菇似乎没有应用出界销毁"）：本对象是 o_bonus1up 的副本，这一行原来漏抄了
+        //   （同族 o_bonus1up / o_bonusdead / o_bonusmush / o_bonusraccoon 都有）。
+        //   非生成物沿用原有口径（相对视口）；生成器生成的单位由生成器按"左/下/右出界 256px"统一回收。
+        if gen_tag = 0 {
+            if x>view_xview[0]+650 || x<view_xview[0]-10 || y>view_yview[0]+490 {instance_destroy()}
+        }
         hele=0
     }
 }

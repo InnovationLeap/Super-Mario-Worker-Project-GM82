@@ -29,11 +29,15 @@ if variable_global_exists('userpause') {
 }
 if global.level_complete != 0 { exit }
 // 探测"生成器本格是否被实心占据"——它决定是否需要挤出（生成器埋在地形里 = 需要；悬空/立在方块上 = 不需要）
+//   用 collision_point 探测生成器格中心：本工程的实心都是 32x32 对齐格，中心点落在格内即等于该格被占据。
+//   （collision_point 已在 o_pointblock 里用过；collision_rectangle 本工程没有先例，避免未知函数风险。）
 genx_block = 0
 if instance_exists(owner_gen) {
-    if collision_rectangle(owner_gen.x, owner_gen.y, owner_gen.x + 31, owner_gen.y + 31, obj_wall, 0, 0) { genx_block = 1 }
-    if collision_rectangle(owner_gen.x, owner_gen.y, owner_gen.x + 31, owner_gen.y + 31, o_pointblock, 0, 0) { genx_block = 1 }
-    if collision_rectangle(owner_gen.x, owner_gen.y, owner_gen.x + 31, owner_gen.y + 31, obj_halfground, 0, 0) { genx_block = 1 }
+    genx_px = owner_gen.x + 16
+    genx_py = owner_gen.y + 16
+    if collision_point(genx_px, genx_py, obj_wall, 0, 0) { genx_block = 1 }
+    if collision_point(genx_px, genx_py, o_pointblock, 0, 0) { genx_block = 1 }
+    if collision_point(genx_px, genx_py, obj_halfground, 0, 0) { genx_block = 1 }
 }
 // 首次执行：按 payload 设置外观与判定框（与实际对象一致，转正后无缝衔接）
 if obj_index = -1 {
@@ -64,9 +68,14 @@ if obj_index = -1 {
 // v4.4：抬起阶段"面向玩家"（每帧，Step 内）——玩家在左 → 朝左（image_xscale=-1）；在右 → 朝右（=1）
 //   放在转正检测之前：转正那一帧能把该朝向传给真实对象（见下方 instance_create 后的继承），
 //   避免"抬起朝左、转正瞬间弹回默认朝右"的闪变
+// v6.11（用户反馈"火力花/甜菜/绿果/星左偏 32px、甜菜绿果动画方向不对"）：**只对敌人（cat=0）做"面向玩家"的镜像**。
+//   奖励道具的精灵 origin 是 (0,0)，image_xscale=-1 会以 origin 为轴把贴图翻到左边（正好偏 32px），
+//   而且它们本来就该固定朝左（不能改 xscale）；转正时真身还会继承这个 xscale，所以这里必须门住。
 image_xscale = 1;
-if instance_exists(o_marker) {
-    if o_marker.x < x { image_xscale = -1 }
+if payload_cat = 0 {
+    if instance_exists(o_marker) {
+        if o_marker.x < x { image_xscale = -1 }
+    }
 }
 // 与实心不重叠 → "生成完毕"：在当前位置创建真实对象并继承 gen_tag
 // 实心集合与 basic_movement（敌人通用运动）一致：obj_wall（含子对象）/ o_pointblock / obj_halfground
@@ -121,8 +130,10 @@ if _ef > 0 { _sub = _ef }
 //   避免"抬起过程中朝右、开始运动后朝左"的跳变；仅影响绘制，实体/挤出/转正位置不变
 //   （镜像以绘制点为轴：xs=-1 时覆盖范围相对 xs=1 做水平镜像，中心不变）
 image_xscale = 1;
-if instance_exists(o_marker) {
-    if o_marker.x < x { image_xscale = -1 } else { image_xscale = 1 }
+if payload_cat = 0 { // v6.11：奖励道具不镜像（origin (0,0) 会被翻到左边 32px）
+    if instance_exists(o_marker) {
+        if o_marker.x < x { image_xscale = -1 } else { image_xscale = 1 }
+    }
 }
 // 与真身同基准绘制（origin 落在 (x, y)，等价于直接 draw 在 (x, y)）
 if _spr != -1 { draw_sprite_ext(_spr, _sub, x, y, image_xscale, 1, 0, c_white, 1) }

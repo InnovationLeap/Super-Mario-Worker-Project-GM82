@@ -62,12 +62,11 @@ if global.pauza=0 && global.level_complete=0 {
     if kill_type=2 {instance_destroy(); instance_create(x,y,o_goombadead2);}
     if kill_type=5 || kill_type=4 || kill_type=3 {instance_destroy(); instance_create(x,y,o_goombadead2); tmp=instance_create(x,y,o_scorepop); tmp.image_index=0;if global.sample=1 {tmp2=sound_play(snd_kick);sound_volume(snd_kick,global.game_volume)} }
 
-    // v6.8：原第 65 行是一句没有语句体的悬空 `if place_meeting(x+1,y,o_goomba)`——GM8 会把它**下一句**
-    //   （也就是出屏销毁）当成它的语句体，于是只有"右边还有另一只板栗仔"时才会销毁，掉出世界的板栗仔
-    //   会永远留着（生成器名额也因此不释放）。此处删除该悬空 if，恢复与其它敌人一致的出屏销毁。
+    if place_meeting(x+1,y,o_goomba)
 
     // niszcz po za ekranem
-    if y>room_height[0]+64 {instance_destroy()}
+    // v6.9：非生成物沿用原代码（含上面那句悬空 if 造成的原有行为）；生成器生成的单位由生成器回收
+    if gen_tag = 0 { if y>room_height[0]+64 {instance_destroy()} }
 }
 
 // light

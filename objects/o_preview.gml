@@ -47,6 +47,9 @@ if global.levelsmooth =1 {
     instance_activate_object(o_fishyellow)
     instance_activate_object(o_lavaball)
     instance_activate_object(o_lakitu)
+    // v6.12：生成器常激活——它还要负责"名额血缘回收 + 生成物出界回收"，被整体停用时会漏掉这两件事；
+    //   生成条件本身仍由 o_generator 的门1（屏内）拦住，离屏不会产出。
+    instance_activate_object(o_generator)
 
 
     with(o_exiter) {

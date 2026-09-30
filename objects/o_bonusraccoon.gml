@@ -68,6 +68,9 @@ if global.pauza=0 {
         leaf_prev_x=x
     }
 
-    if x>view_xview[0]+650 || x<view_xview[0]-10 || y>view_yview[0]+490 {instance_destroy()}
+    // v6.11：生成器生成的单位改由生成器按 256px 回收（ObjGenerator.md §5.6），这里只管非生成物
+    if gen_tag = 0 {
+        if x>view_xview[0]+650 || x<view_xview[0]-10 || y>view_yview[0]+490 {instance_destroy()}
+    }
 
 }

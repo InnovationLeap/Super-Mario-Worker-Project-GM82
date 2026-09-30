@@ -30,7 +30,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-var _i, _slot, _obj;
+var _i, _slot, _obj, _gi;
 // 懒初始化（载入时 payload 字段可能在实例创建后才赋值）
 // v6.0（§12）：档位钳制 1-5，生成间隔与害羞半径由档位推导；实际上限 = 强制上限（花族/320/321/322=1）否则作者填的"数量"
 if gen_ready = 0 {
@@ -50,6 +50,49 @@ if gen_ready = 0 {
         _i += 1
     }
     gen_ready = 1
+}
+// ── 记账与清理（v6.12：必须放在四道门**之前**）────────────────────────────────
+//   这两段与"能不能生成"无关，只负责名额回收与出界回收；放在门后会被门1（离屏）/门2（被玩家压制）
+//   /门3（暂停）挡住 —— 表现就是"掉出房间的生成物一直不销毁、名额也不释放"。
+// 名额血缘回收：主实例消失时按 gen_tag 全表扫描，血缘全灭则释放名额（槽位数 = gen_max_eff）
+_i = 1
+while (_i <= gen_max_eff) {
+    if gen_slots[_i] != 0 {
+        if !instance_exists(gen_slot_id[_i]) {
+            genx_alive = 0
+            genx_tag = gen_slots[_i]
+            genx_slot = _i
+            with (all) {
+                if gen_tag = other.genx_tag {
+                    other.genx_alive = 1
+                    other.gen_slot_id[other.genx_slot] = id
+                }
+            }
+            if genx_alive = 0 { gen_slots[_i] = 0 }
+        }
+    }
+    _i += 1
+}
+// v6.9（用户要求）：**生成器负责回收自己生成的单位**——左 / 下 / 右**出界（相对房间）256px** 即销毁
+//   （不判上方，允许飞出房间顶部）。用槽位里记录的"当前实例"（血缘后继会被上一段扫描刷新）；
+//   非生成物（gen_tag = 0）仍走各自对象里的旧规则。
+_i = 1
+while (_i <= gen_max_eff) {
+    if gen_slots[_i] != 0 {
+        _gi = gen_slot_id[_i]
+        if instance_exists(_gi) {
+            genx_ob = 0
+            if _gi.x < -256 { genx_ob = 1 }
+            if _gi.x > room_width[0] + 256 { genx_ob = 1 }
+            if _gi.y > room_height[0] + 256 { genx_ob = 1 }
+            if genx_ob = 1 {
+                // 注意：本工程（GM8.2）的 instance_destroy 不接受参数、只能销毁 self → 用 with 切上下文
+                with (_gi) { instance_destroy() }
+                if !instance_exists(_gi) { gen_slots[_i] = 0 } // 确实销毁了才释放名额
+            }
+        }
+    }
+    _i += 1
 }
 // 门0：payload 合法性 + 方向约束
 _obj = gen_payload_info(payload_cat, payload_code, 0)
@@ -83,25 +126,8 @@ if variable_global_exists('userpause') {
     if global.userpause != 0 { exit }
 }
 if global.level_complete != 0 { gen_timer = 0; exit }
-// 名额血缘回收：主实例消失时按 gen_tag 全表扫描，血缘全灭则释放名额（槽位数 = gen_max_eff）
-_i = 1
-while (_i <= gen_max_eff) {
-    if gen_slots[_i] != 0 {
-        if !instance_exists(gen_slot_id[_i]) {
-            genx_alive = 0
-            genx_tag = gen_slots[_i]
-            genx_slot = _i
-            with (all) {
-                if gen_tag = other.genx_tag {
-                    other.genx_alive = 1
-                    other.gen_slot_id[other.genx_slot] = id
-                }
-            }
-            if genx_alive = 0 { gen_slots[_i] = 0 }
-        }
-    }
-    _i += 1
-}
+// 注：名额血缘回收与出界回收已上移到本事件开头（v6.12）——它们**不能被四道门挡住**，
+//   否则生成器离屏（门1）或被玩家压制（门2）时就停止回收，掉出世界的生成物会一直留着。
 // v6.4（用户反馈"食人花被打死瞬间就生成下一个"）：名额满时倒计时**冻结**（停在当前进度），
 //   名额一释放就从当前进度继续计时，所以打死 / 转化掉一个不会立刻补一个。
 // v6.6（用户反馈"紫档间隔调到很小还是感觉很大"）：**只有"名额已满"冻结倒计时**——

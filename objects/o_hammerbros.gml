@@ -87,5 +87,5 @@ if global.pauza=0 && global.level_complete=0 {
 
 
     // niszcz po za ekranem
-    if y>room_height[0]+64 {instance_destroy()}
+    if gen_tag = 0 { if y>room_height[0]+64 {instance_destroy()} } // v6.9：生成器生成的单位改由生成器回收（左/下/右出界256px）
 }

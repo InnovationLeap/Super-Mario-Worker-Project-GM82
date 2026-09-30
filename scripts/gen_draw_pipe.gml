@@ -24,12 +24,12 @@ if argument2 = 1 { draw_rectangle(argument0 + 3, argument1 + 3, argument0 + 28, 
 if argument2 = 3 { draw_rectangle(argument0 + 3, argument1 + 22, argument0 + 28, argument1 + 28, 0) }
 if argument2 = 2 { draw_rectangle(argument0 + 3, argument1 + 3, argument0 + 9, argument1 + 28, 0) }
 if argument2 = 0 { draw_rectangle(argument0 + 22, argument1 + 3, argument0 + 28, argument1 + 28, 0) }
-// 方向箭头（档位浅色）
+// 方向箭头（档位浅色）——尖端必须指向生成方向（v6.10：左右两个原来画反了）
 draw_set_color(_c_arrow);
-if argument2 = 0 { draw_triangle(argument0 + 11, argument1 + 16, argument0 + 21, argument1 + 10, argument0 + 21, argument1 + 22, 0) }
-if argument2 = 1 { draw_triangle(argument0 + 16, argument1 + 11, argument0 + 10, argument1 + 21, argument0 + 22, argument1 + 21, 0) }
-if argument2 = 2 { draw_triangle(argument0 + 21, argument1 + 16, argument0 + 11, argument1 + 10, argument0 + 11, argument1 + 22, 0) }
-if argument2 = 3 { draw_triangle(argument0 + 16, argument1 + 21, argument0 + 10, argument1 + 11, argument0 + 22, argument1 + 11, 0) }
+if argument2 = 0 { draw_triangle(argument0 + 21, argument1 + 16, argument0 + 11, argument1 + 10, argument0 + 11, argument1 + 22, 0) } // 右：尖端在右
+if argument2 = 1 { draw_triangle(argument0 + 16, argument1 + 11, argument0 + 10, argument1 + 21, argument0 + 22, argument1 + 21, 0) } // 上：尖端在上
+if argument2 = 2 { draw_triangle(argument0 + 11, argument1 + 16, argument0 + 21, argument1 + 10, argument0 + 21, argument1 + 22, 0) } // 左：尖端在左
+if argument2 = 3 { draw_triangle(argument0 + 16, argument1 + 21, argument0 + 10, argument1 + 11, argument0 + 22, argument1 + 11, 0) } // 下：尖端在下
 draw_set_alpha(1);
 draw_set_color(c_white);
 return 0;
