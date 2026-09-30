@@ -84,6 +84,9 @@ global.water_height_record=global.water_level
 level_read_next()
 global.background=real(level_read_peek())
 global.background_record = global.background
+//背景刚被设置过一次（坟地三合一据 bg_set_token 重抽变体；下一关仍然载入同一个 Play_Room，
+//只靠"房间变化"判断会漏掉，所以这里显式打点）
+if variable_global_exists('bg_set_token') {global.bg_set_token += 1} else {global.bg_set_token = 1}
 muzykaa=level_read_next()
 global.music_record = muzykaa
 level_read_next()

@@ -84,4 +84,9 @@ global.background_palette[_p, _r * 4 + 1] = 30;
 global.background_palette[_p, _r * 4 + 2] = 31;
 global.background_palette[_p, _r * 4 + 3] = 32;
 
-// --- 行2 未启用（原代码注释，保留为 0）---
+// --- 行2 ---
+_r = 2;
+global.background_palette[_p, _r * 4 + 0] = 33;  // graveyard（坟地：三合一，运行时随机取一个变体）
+global.background_palette[_p, _r * 4 + 1] = 0;
+global.background_palette[_p, _r * 4 + 2] = 0;
+global.background_palette[_p, _r * 4 + 3] = 0;
