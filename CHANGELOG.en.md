@@ -1,5 +1,19 @@
 # Super Mario Worker Project - Changelog
 
+## v1.8.0-beta.3 (2026-10-01)
+### Editor
+- Refined the handling of pipe entrances and exits being selected in Region Mode.
+- Weather parameters are now adjusted by dragging a slider.
+### Level Features
+- Added new blocks: tank and airship.
+- Added a new mark item: Item Generator.
+- Added the Flamethrower.
+- Added scenery: tombstone and tank wheel.
+- Added a graveyard background.
+### Bug Fixes
+- Fixed incorrect text display of the roto-disc and fluid buttons in Additional Settings.
+- Fixed the uneven spacing of entries on the first two BGM selection pages.
+
 ## v1.8.0-beta.2 (2026-09-05)
 ### Editor
 - Refactored parts of the editor interface.
