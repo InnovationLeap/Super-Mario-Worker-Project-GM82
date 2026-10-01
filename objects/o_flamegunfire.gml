@@ -80,15 +80,10 @@ if global.pauza=0 && global.level_complete=0 {
         }
     }
 
-    // 接触伤害：只在常态生效（等价于 killer=1 的不可踩敌人；无敌星/护盾由 player_pickup 自行豁免）。
-    // appearing / disappearing 播放期间不判伤害 —— 火苗还没长成 / 正在熄灭时玩家可以安全穿过。
-    if fgun_anim=1 {
-        if place_meeting(x,y,o_marker) {
-            with (o_marker) {
-                if hit_timer=0 && shield=0 {hit_timer=1}
-            }
-        }
-    }
+    // 接触伤害不在这里判 —— 与地刺等"不可踩的固定危险物"一致，判定写在玩家侧
+    // （player_combat.gml「撞到喷火枪火柱」分支），共用外层 rodzajmaria<>5 / star_timer<=0
+    // 两道无敌闸 + hit_timer / shield 豁免，以及同一个判定时机。
+    // 本物体只提供状态：fgun_anim=1 表示处于常态（可以打人），appearing/disappearing 期间不打人。
 }
 
 // 「最近可见时刻」刷新：本火柱存在且在视口附近（±96px 边距，同 CTF）时打时间戳。

@@ -2,7 +2,7 @@
 // 依赖脚本：raccoon_tail_hit_check()
 // 依赖实例变量：global.combo1, global.combo1reset, star_timer, hit_timer, shield, shell_lock
 // var 声明按 GM8 约束集中在脚本顶部
-var _tdir, _tsweepX, _ttimer, _ttailX, _ttailY, _tcheckY, _canKick, _stopAbove, _hurtSide;
+var _tdir, _tsweepX, _ttimer, _ttailX, _ttailY, _tcheckY, _canKick, _stopAbove, _hurtSide, _flame;
 _tdir = 1;
 _tsweepX = 0;
 _ttimer = 0;
@@ -114,6 +114,19 @@ if global.pauza=0 && shell_lock=0 && global.level_complete=0 && pipe_state=0 {
             {
                 tmp=instance_place(x,y,o_goomba)
                 if tmp.killer=1 && hit_timer=0 && shield=0 {hit_timer=1}//killer=1就是不能踩（刺猬）
+            }
+
+            //撞到喷火枪火柱：与地刺同档——都是"不可踩的固定危险物 → 受伤(hit_timer=1)而非即死"。
+            //写在玩家侧（而不是火柱的 Step 里反向 place_meeting 玩家）是为了和上面这些危险物共用
+            //同一套豁免和同一个判定时机：rodzajmaria<>5 / star_timer<=0 两道闸由外层统一把关，
+            //hit_timer / shield 在这里把关。写在火柱侧会引入实例执行顺序问题——
+            //"无敌结束的那一帧"谁后置 hit_timer 不确定，会出现无敌刚结束就莫名死亡。
+            if place_meeting(x,y,o_flamegunfire) {
+                _flame = instance_place(x,y,o_flamegunfire)
+                // appearing/disappearing 播放期间不打人（火苗还没长成 / 正在熄灭，可直接穿过）
+                if _flame.fgun_anim=1 {
+                    if hit_timer=0 && shield=0 {hit_timer=1}
+                }
             }
 
             //踢静止龟壳
