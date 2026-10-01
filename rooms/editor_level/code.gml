@@ -45,6 +45,12 @@ global.efekty=10
 global.sample=1
 global.game_volume=1
 
+// 进编辑器强制掐掉喷火枪的循环音（覆盖 测关结束/ESC 退出/自杀 等所有回编辑器路径）。
+// 放在 global.sample 赋值之后，避免读到尚未定义的全局变量。
+global.fgun_snd_on=0
+global.fgun_last_seen=0
+if global.sample=1 {sound_stop(snd_firezhu)}
+
 
 global.rodzajmaria=0
 global.zycia=global.initiallives

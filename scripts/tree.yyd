@@ -188,6 +188,7 @@
 	|ed_blocks_page_draw
 	|ed_place_marker
 	|ed_place_enemy
+	|ed_place_flamegun
 	|ed_place_passage
 	|ed_delete_at
 	|ed_tool_spotlight

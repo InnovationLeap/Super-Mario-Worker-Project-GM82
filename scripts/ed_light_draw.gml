@@ -113,3 +113,8 @@ if option_open = 2 && o_edmain.costawia2b = 1 {
     draw_light_icon(4, 3, 57);
     draw_light_icon(5, 3, 58);     // 灰刺猬云
 }
+
+// === 敌人类第三页 ===
+if option_open = 2 && o_edmain.costawia2b = 2 {
+    draw_light_icon(0, 0, 70);     // 喷火枪
+}

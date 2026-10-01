@@ -273,6 +273,19 @@ if coto=37 {
     file_text_writeln(global.script_file)
 }
 
+if coto=49 {
+    //喷火枪：代号(2) + x(4) + y(4) + 方向(1) + 相位(1)
+    ab=string(coto)  //ab记录敌人代号
+    repeat(2-string_length(ab)) {ab=string_insert('0',ab,0)}  //写0
+    aa=string_insert(ab,aa,string_length(aa)+1)
+    aa=string_insert(transC(x),aa,string_length(aa)+1)
+    aa=string_insert(transC(y),aa,string_length(aa)+1)
+    aa=string_insert(string(fgun_dir),aa,string_length(aa)+1)    //0=上 1=下 2=左 3=右
+    aa=string_insert(string(fgun_cycle),aa,string_length(aa)+1)  //0/1 两个相位
+    file_text_write_string(global.script_file,aa)
+    file_text_writeln(global.script_file)
+}
+
 if global.objectoffset=0 {//位置补正相关II
     if coto=1||coto=31||coto=32 {x-=16;y-=16}//板栗仔、布布鬼、硬壳龟
     if coto=2||coto=3||coto=34||coto=38 {x-=14;y-=14}//乌龟

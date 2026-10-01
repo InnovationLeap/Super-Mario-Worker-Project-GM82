@@ -60,7 +60,7 @@ while !file_text_eof(script_file) {
     file_text_readln(script_file)
     aa=file_text_read_string(script_file)
     if string_char_at(aa,1)='0' {
-        if real(string_copy(aa,2,2))!=20 && real(string_copy(aa,2,2))!=39 && real(string_copy(aa,2,2))!=35 && real(string_copy(aa,2,2))!=40 && real(string_copy(aa,2,2))!=41 && real(string_copy(aa,2,2))!=43 && real(string_copy(aa,2,2))!=17 && real(string_copy(aa,2,2))!=22 && real(string_copy(aa,2,2))!=37 {
+        if real(string_copy(aa,2,2))!=20 && real(string_copy(aa,2,2))!=39 && real(string_copy(aa,2,2))!=35 && real(string_copy(aa,2,2))!=40 && real(string_copy(aa,2,2))!=41 && real(string_copy(aa,2,2))!=43 && real(string_copy(aa,2,2))!=17 && real(string_copy(aa,2,2))!=22 && real(string_copy(aa,2,2))!=37 && real(string_copy(aa,2,2))!=49 {
             ae=instance_create(transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_edenemyblock)
             ae.coto=real(string_copy(aa,2,2))
         }
@@ -162,6 +162,13 @@ while !file_text_eof(script_file) {
             ae=instance_create(transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_edenemyblock)
             ae.coto=real(string_copy(aa,2,2))
             ae.spike_type=real(string_copy(aa,12,1))
+        }
+        if real(string_copy(aa,2,2))=49 {
+            ae=instance_create(transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_edenemyblock)
+            ae.coto=real(string_copy(aa,2,2))
+            ae.fgun_dir=real(string_copy(aa,12,1))
+            ae.fgun_cycle=0
+            if string_length(aa)>12 {ae.fgun_cycle=real(string_copy(aa,13,1))}
         }
 /*
     ae=instance_create(transA(string_copy(aa,4,4)),transA(string_copy(aa,8,4)),o_edenemyblock)

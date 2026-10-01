@@ -20,6 +20,8 @@ if _cato = 1 {
     _f.coto = _coto
     _f.shell_type = buffer_read_u16(argument0)
     _f.spike_type = buffer_read_u16(argument0)
+    _f.fgun_dir = buffer_read_u16(argument0)
+    _f.fgun_cycle = buffer_read_u16(argument0)
 }
 if _cato = 2 {
     _f = instance_create(_x, _y, o_edsceneriesblock)

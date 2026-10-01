@@ -348,7 +348,8 @@ if warning2=1{
     if global.testmode=1{
         global.godmode=0;
         global.testout=1;
-        if global.sample=1 {sound_stop(snd_pmeter); sound_stop(snd_spin)}
+        global.fgun_snd_on=0
+        if global.sample=1 {sound_stop(snd_pmeter); sound_stop(snd_spin); sound_stop(snd_firezhu)}
         p_meter_sfx_playing=0
         file_text_close(global.toload);
         file_delete(global.toloader)
@@ -362,7 +363,8 @@ if warning2=1{
         global.escowanie=1;
         file_text_close(global.toload);
         file_delete(global.toloader);
-        if global.sample=1 {sound_stop(snd_pmeter); sound_stop(snd_spin)}
+        global.fgun_snd_on=0
+        if global.sample=1 {sound_stop(snd_pmeter); sound_stop(snd_spin); sound_stop(snd_firezhu)}
         p_meter_sfx_playing=0
         room_goto(title);
         mm_stop_all_ext()

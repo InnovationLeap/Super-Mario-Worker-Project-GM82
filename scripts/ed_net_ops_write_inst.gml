@@ -12,6 +12,8 @@ buffer_write_u16(argument0, argument1.coto)
 if argument2 = 1 {
     buffer_write_u16(argument0, argument1.shell_type)
     buffer_write_u16(argument0, argument1.spike_type)
+    buffer_write_u16(argument0, argument1.fgun_dir)     // 喷火枪方向
+    buffer_write_u16(argument0, argument1.fgun_cycle)   // 喷火枪相位
 }
 if argument2 = 2 {
     buffer_write_u16(argument0, argument1.block_index)

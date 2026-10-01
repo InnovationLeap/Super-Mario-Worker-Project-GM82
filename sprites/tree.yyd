@@ -123,6 +123,12 @@
 		|s_enemymarker5
 		|s_fahlee
 		|s_firebalrico
+		|s_flamegun
+		|s_flamegunfireup
+		|s_flamegunfiredown
+		|s_flamegunfireleft
+		|s_flamegunfireright
+		|s_flameguncycleb
 		|s_fish1
 		|s_fish2
 		|s_fish3

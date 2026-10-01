@@ -170,6 +170,7 @@ ed_place_scenery
 ed_place_block
 ed_place_marker
 ed_place_enemy
+ed_place_flamegun
 ed_place_passage
 ed_delete_at
 ed_tool_spotlight

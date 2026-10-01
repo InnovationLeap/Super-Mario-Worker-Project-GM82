@@ -192,6 +192,11 @@ instance_create(0, 0, o_lightlava);
 if (string_length(global.lightobject) >= 69) {
     if (string_copy(global.lightobject, 69, 1) = '1') {ds_list_add(global.light_obj_list, o_yinyang);}
 }
+
+// 第 70 位 = 喷火枪本体（o_flamegun）；火柱 o_flamegunfire 是本体生成的临时危险区，不入白名单
+if (string_length(global.lightobject) >= 70) {
+    if (string_copy(global.lightobject, 70, 1) = '1') {ds_list_add(global.light_obj_list, o_flamegun);}
+}
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

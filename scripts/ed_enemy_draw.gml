@@ -11,6 +11,9 @@ var _id, _cx, _cy, _spr, _bank, _subimg, _tint, _w, _h, _ox, _oy, _s, _dx, _dy, 
 _id = argument0;
 _cx = argument1;
 _cy = argument2;
+
+// 第 3 页只有第 1 格有东西，其余格子留空（旧 enemiesbank 只有 48 帧，越界会画出乱七八糟的图）
+if (_id > 49) { return 0 }
 _spr = -1;
 _bank = false;
 _subimg = 0;
@@ -183,6 +186,12 @@ case 45: _spr = s_piraniablue2;   _subimg = 1; break; // 倒食人花 用另一�
 case 46: _spr = s_piraniagrey;    _subimg = 1; break; // 倒食人花-灰 用另一帧
 case 47: _spr = s_piraniagrey2;   _subimg = 1; break; // 倒食人花 用另一帧
 case 48: _spr = s_fakitu;          break;
+// 49 喷火枪：两种相位两张图标（本体 / 虚线框），滚轮切换 cycle 时随之变化。
+// 刻意不走特例——和其余 48 个敌人共用下面的 _panel_scale 缩放 + 居中逻辑，尺寸天然一致。
+// 方向不在面板上体现：方向是摆放向导第二步（鼠标指向）逐台确定的。
+case 49:
+    if global.flamegun_cycle = 1 { _spr = s_flameguncycleb; } else { _spr = s_flamegun; }
+    break;
 default: _spr = s_enemiesbank; _bank = true; break; // 兜底用旧 bank 帧
 }
 
@@ -247,6 +256,7 @@ case 45: _panel_scale = 0.8; break;
 case 46: _panel_scale = 0.8; break;
 case 47: _panel_scale = 0.8; break;
 case 48: _panel_scale = 0.8; break;
+case 49: _panel_scale = 0.8; break;
 }
 _w = sprite_get_width(_spr);
 _h = sprite_get_height(_spr);

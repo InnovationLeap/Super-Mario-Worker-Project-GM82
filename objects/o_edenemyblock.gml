@@ -11,6 +11,9 @@ if !variable_local_exists('coto') {
     additional2=0
     additional3=1
     additional4=0}
+//喷火枪（coto=49）的方向与相位：创建后由 ed_place_flamegun / 读档 / 网络回填
+fgun_dir=0
+fgun_cycle=0
 cyferkimario=font_add_sprite(txt_mariofonts,ord('!'),1,0) // 定义字体
 deltax=0
 deltay=0
@@ -47,8 +50,18 @@ applies_to=self
 */
 //用coto确定显示什么敌人
 
+//喷火枪（coto=49）：两种相位各用一张图标，尺寸一致（都占满一格，32x32），
+//而且都是 4 帧四方向（帧号 = fgun_dir，0上 1下 2左 3右），所以切换方向时两张图都会跟着转。
+//相位 0 = 本体；相位 1 = 虚线框图标（对应编辑器面板上的第二种图标）。
+//精灵 origin=(0,0)，x/y 就是格左上角，不需要额外偏移。
+if coto=49 {
+    if fgun_cycle=1 {draw_sprite(s_flameguncycleb,fgun_dir,x,y)} else {draw_sprite(s_flamegun,fgun_dir,x,y)}
+    draw_set_color(c_white)
+    draw_set_font(cyferkimario)
+}
+
 //常规显示
-if coto !=20 &&coto !=40 &&coto !=41 && coto !=43 && coto !=17 && coto !=22 && coto !=37 && (global.objectoffset=1||(coto!=7 && coto!=9 && coto!=45 && coto!=47)) {
+if coto !=20 &&coto !=40 &&coto !=41 && coto !=43 && coto !=17 && coto !=22 && coto !=37 && coto !=49 && (global.objectoffset=1||(coto!=7 && coto!=9 && coto!=45 && coto!=47)) {
     draw_sprite(s_enemiesbank,coto-1,x+16,y+32)
     draw_set_color(c_white)
     draw_set_font(cyferkimario)}

@@ -15,7 +15,10 @@ keyboard_clear(vk_space)
 global.pausesprite = sprite_create_from_screen(0,0,640,480,false,false,0,0)
 if global.musicplay<>0 { mm_pause(global.musicplay) }
 if global.musicplay2<>0 { mm_pause(global.musicplay2) }
-if global.sample=1 { sound_stop(snd_pmeter); sound_stop(snd_spin) }
+// 暂停会 instance_deactivate_all，喷火枪本体的 Step 不再跑，循环音必须在这里显式掐掉；
+// 同时把 fgun_snd_on 归零，恢复后由本体重新起播。
+global.fgun_snd_on = 0
+if global.sample=1 { sound_stop(snd_pmeter); sound_stop(snd_spin); sound_stop(snd_firezhu) }
 instance_deactivate_all(true)
 instance_deactivate_object(o_marker)
 instance_create(0,0,o_pausemenu)

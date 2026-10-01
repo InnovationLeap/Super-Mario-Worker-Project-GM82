@@ -130,6 +130,8 @@ if global.ed_region_list != -1 {
                     _new_id.fishendY = _id.fishendY + _ioy
                     _new_id.shell_type = _id.shell_type
                     _new_id.spike_type = _id.spike_type
+                    _new_id.fgun_dir = _id.fgun_dir
+                    _new_id.fgun_cycle = _id.fgun_cycle
                     _new_id.jumph = _id.jumph
                     _new_id.type = _id.type
                     if _id.coto == 20 {

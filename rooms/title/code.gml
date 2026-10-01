@@ -11,6 +11,13 @@ global.lastlev=0
 global.godmode=0
 global.checkpoint=0
 global.testmode=0
+// 回到标题画面强制掐掉喷火枪的循环音（覆盖 ESC 退出/通关/自杀等所有回标题路径）。
+// 首次启动时 global.sample 还没被赋值，所以用 variable_global_exists 套一层（不要用 && 合并判断）。
+global.fgun_snd_on=0
+global.fgun_last_seen=0
+if variable_global_exists('sample') {
+    if global.sample=1 {sound_stop(snd_firezhu)}
+}
 global.autosavename=''
 global.oldlevel_detected=0
 global.oldlevel_backup_done=0

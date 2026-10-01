@@ -79,6 +79,11 @@ v_ens[45]=o_piranhablueflip;
 v_ens[46]=o_piranhagrey;
 v_ens[47]=o_piranhagreyflip;
 v_ens[48]=o_fakitu;
+v_ens[49]=o_flamegun;
+// 喷火枪循环音效的全局状态：进关归零（顺手掐掉上一关可能残留的循环音）
+global.fgun_snd_on=0;
+global.fgun_last_seen=0;
+if global.sample=1 {sound_stop(snd_firezhu)}
 
 tmp3=0;
 
@@ -182,6 +187,15 @@ while !file_text_eof(global.toload) {
         if real(string_copy(aa,2,2))=37 && string_length(aa) > 11 {
             skript=string_insert('('+string(ae)+').spike_type='+ string_copy(aa,12,1) +';',
             skript,string_length(skript)+1)
+        }
+        if real(string_copy(aa,2,2))=49 && string_length(aa) > 11 {
+            //喷火枪：第 12 位方向(0=上 1=下 2=左 3=右)，第 13 位相位(0/1)
+            skript=string_insert('('+string(ae)+').fgun_dir='+ string_copy(aa,12,1) +';',
+            skript,string_length(skript)+1)
+            if string_length(aa) > 12 {
+                skript=string_insert('('+string(ae)+').fgun_cycle='+ string_copy(aa,13,1) +';',
+                skript,string_length(skript)+1)
+            }
         }
     }
 

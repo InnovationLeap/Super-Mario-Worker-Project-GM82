@@ -55,6 +55,10 @@ place_code4=0
 costawia4b=0
 costawia4c=0
 costawia4d=0
+//喷火枪放置向导（第一步定位置，第二步鼠标指向定方向；参照生成器向导）
+fgun_wizard=0
+fgunw_ang=0
+fgunw_dir=0
 place_code5=0
 place_code6=0
 autopair=0
@@ -134,6 +138,7 @@ global.preview=-1
 show_solid=1
 global.shell_type=0
 global.spike_type=0
+global.flamegun_cycle=0 //喷火枪相位（0/1），面板上滚轮切换，决定新放置的那一台用哪种图标/相位
 
 cyferkimario=font_add_sprite(txt_mariofonts,ord('!'),1,0)
 
@@ -2800,11 +2805,28 @@ if scrolla<=1 && scrollb<=1 {
         }
         if abs(view_xview[0]+256-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 {draw_sprite_ext(s_left,0,view_xview[0]+256,view_yview[0]+384,1,1,0,c_yellow,1)} else {draw_sprite_ext(s_left,0,view_xview[0]+256,view_yview[0]+384,1,1,0,c_white,1)}
         if abs(view_xview[0]+512-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 {draw_sprite_ext(s_right,0,view_xview[0]+512,view_yview[0]+384,1,1,0,c_yellow,1)} else {draw_sprite_ext(s_right,0,view_xview[0]+512,view_yview[0]+384,1,1,0,c_white,1)}
-        if abs(view_xview[0]+256-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 && mouse_check_button(mb_left) {
-            if o_edmain.costawia2b=1 {o_edmain.costawia2b=0}
+        // 页数大于 2，效仿 Blocks：左右箭头中间加可直接点击的页码（1 2 3）
+        // 字体必须显式设置：否则会沿用上一处绘制残留的字体，和 Blocks 的页码不一致
+        draw_set_color(c_white)
+        draw_set_font(cyferkimario)
+        if costawia2b=0 {draw_set_color(make_color_rgb(255,255,127))} else {if abs(view_xview[0]+336-mouse_x)<10 && abs(view_yview[0]+384-mouse_y)<10 {draw_set_color(c_yellow)}}
+        draw_text(view_xview[0]+336,view_yview[0]+384,'1');draw_set_color(c_white)
+        if costawia2b=1 {draw_set_color(make_color_rgb(255,255,127))} else {if abs(view_xview[0]+384-mouse_x)<10 && abs(view_yview[0]+384-mouse_y)<10 {draw_set_color(c_yellow)}}
+        draw_text(view_xview[0]+384,view_yview[0]+384,'2');draw_set_color(c_white)
+        if costawia2b=2 {draw_set_color(make_color_rgb(255,255,127))} else {if abs(view_xview[0]+432-mouse_x)<10 && abs(view_yview[0]+384-mouse_y)<10 {draw_set_color(c_yellow)}}
+        draw_text(view_xview[0]+432,view_yview[0]+384,'3');draw_set_color(c_white)
+        // 页码与箭头都用「按下那一帧」判定：不依赖 clicked 闩锁的复位时机，
+        // 也避免按住不放时一次点击连翻两页（3 页后 0→1→2 会一步跳过去）。
+        if costawia2b<>0 && abs(view_xview[0]+336-mouse_x)<10 && abs(view_yview[0]+384-mouse_y)<10 && mouse_check_button_pressed(mb_left) {o_edmain.costawia2b=0;clicked=1}
+        if costawia2b<>1 && abs(view_xview[0]+384-mouse_x)<10 && abs(view_yview[0]+384-mouse_y)<10 && mouse_check_button_pressed(mb_left) {o_edmain.costawia2b=1;clicked=1}
+        if costawia2b<>2 && abs(view_xview[0]+432-mouse_x)<10 && abs(view_yview[0]+384-mouse_y)<10 && mouse_check_button_pressed(mb_left) {o_edmain.costawia2b=2;clicked=1}
+        if abs(view_xview[0]+256-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 && mouse_check_button_pressed(mb_left) {
+            if o_edmain.costawia2b>0 {o_edmain.costawia2b-=1}
+            clicked=1
         }
-        if abs(view_xview[0]+512-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 && mouse_check_button(mb_left) {
-            if o_edmain.costawia2b=0 {o_edmain.costawia2b=1}
+        if abs(view_xview[0]+512-mouse_x)<16 && abs(view_yview[0]+384-mouse_y)<16 && mouse_check_button_pressed(mb_left) {
+            if o_edmain.costawia2b<2 {o_edmain.costawia2b+=1}
+            clicked=1
         }
 
         if costawia2b=0 {
@@ -2827,6 +2849,14 @@ if scrolla<=1 && scrollb<=1 {
                 global.shell_type+=1
             }
             // 37/43 的图标已由 ed_enemy_draw 用游戏内精灵绘制（mf刺/龟壳），不再使用 mask 覆盖层
+        }
+
+        if costawia2b=2 {
+            //鼠标在喷火枪格子上时滚轮切换 cycle（相位），图标随 cycle 在 s_flamegun / s_flameguncycleb 之间切换
+            if mouse_x>=view_xview[0]+206 && mouse_x<view_xview[0]+270 && mouse_y>=view_yview[0]+110 && mouse_y<view_yview[0]+174 {
+                if mouse_wheel_up() {global.flamegun_cycle=0}
+                if mouse_wheel_down() {global.flamegun_cycle=1}
+            }
         }
     }
 
@@ -2954,6 +2984,23 @@ if scrolla<=1 && scrollb<=1 {
         place_code6=0
     }
 
+    // 第 3 页（costawia2b=2）：新增页，目前只有喷火枪，占第 1 格
+    if option_open=2 && costawia2b=2 && ed_hit(206, 110, 64, 64) && clicked=0 {draw_sprite_ext(s_choosingobj,0,view_xview[0]+206,view_yview[0]+110,1,1,0,c_white,1)}
+    if option_open=2 && costawia2b=2 && ed_hit(206, 110, 64, 64) && mouse_check_button(mb_left) && clicked=0 {
+        delay_tick=0
+        clicked=1
+        sampelwyboru1=1//smp
+        option_open=0;
+        placed=0
+        place_code=0
+        place_code2=49
+        autopair=0
+        place_code3=0
+        place_code4=0
+        place_code5=0
+        place_code6=0
+    }
+
     //探照灯、金飞龟、跳乌龟
     if place_code2<>0 && (place_code2=20||place_code2=35||place_code2=39) && clicked=0 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edbonusesblock) && tool_mode=0
     && menu_open=0 && option_open=0
@@ -2972,11 +3019,11 @@ if scrolla<=1 && scrollb<=1 {
     }
 
     //除去鱼和食人花石盾(所见即所得模式)外的摆放
-    if place_code2<>0 && (place_code2<>20 && place_code2<>35 && place_code2<>39 && place_code2<>40 && place_code2<>41 && place_code2<>43 && place_code2<>17 && place_code2<>22 && place_code2<>37) && !((place_code2>=6 && place_code2<=9 || place_code2=23 || place_code2>=44 && place_code2<=47) && global.objectoffset=0)  /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edbonusesblock) &&     tool_mode=0
+    if place_code2<>0 && (place_code2<>20 && place_code2<>35 && place_code2<>39 && place_code2<>40 && place_code2<>41 && place_code2<>43 && place_code2<>17 && place_code2<>22 && place_code2<>37 && place_code2<>49) && !((place_code2>=6 && place_code2<=9 || place_code2=23 || place_code2>=44 && place_code2<=47) && global.objectoffset=0)  /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edbonusesblock) &&     tool_mode=0
     && menu_open=0 && option_open=0 && delay_tick>15
     {draw_sprite_ext(s_enemiesbank,place_code2-1,floor((mouse_x)/32)*32+16,floor((mouse_y)/32)*32+32,1,1,0,c_white,0.5)}
 
-    if place_code2<>0 && (place_code2<>20 && place_code2<>35 && place_code2<>39 && place_code2<>40 && place_code2<>41 && place_code2<>43 && place_code2<>17 && place_code2<>22 && place_code2<>37) && !((place_code2>=6 && place_code2<=9 || place_code2=23 || place_code2>=44 && place_code2<=47) && global.objectoffset=0) && mouse_check_button(mb_left)  /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edenemyblock) && tool_mode=0
+    if place_code2<>0 && (place_code2<>20 && place_code2<>35 && place_code2<>39 && place_code2<>40 && place_code2<>41 && place_code2<>43 && place_code2<>17 && place_code2<>22 && place_code2<>37 && place_code2<>49) && !((place_code2>=6 && place_code2<=9 || place_code2=23 || place_code2>=44 && place_code2<=47) && global.objectoffset=0) && mouse_check_button(mb_left)  /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edenemyblock) && tool_mode=0
     && menu_open=0 && option_open=0 && delay_tick>15 && setting_mode == 0 {
         if self_coto_check(2,place_code2) {
             clicked=1
@@ -2985,6 +3032,58 @@ if scrolla<=1 && scrollb<=1 {
         }
     }
 
+
+    //喷火枪摆放向导（敌人第 3 页第 1 格）：第一步定位置，第二步用鼠标指向定方向（45° 取整四向）
+    // 选中喷火枪工具后，滚轮随时可切 cycle（不必回到面板；向导中途切的是正在摆的那一台）
+    if place_code2=49 && tool_mode=0 && menu_open=0 && option_open=0 && global.picking = false {
+        if mouse_wheel_up() {global.flamegun_cycle=0}
+        if mouse_wheel_down() {global.flamegun_cycle=1}
+        if fgun_wizard=1 && instance_exists(tmp2) {tmp2.fgun_cycle=global.flamegun_cycle}
+    }
+    if place_code2=49 && fgun_wizard=0 && clicked=0 && tool_mode=0
+    && menu_open=0 && option_open=0 && delay_tick>15
+    && !instance_position(mouse_x,mouse_y,o_edenemyblock) && !instance_position(mouse_x,mouse_y,o_edbonusesblock) {
+        if global.flamegun_cycle=1 {draw_sprite_ext(s_flameguncycleb,0,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,1,1,0,c_white,0.5)}
+        else {draw_sprite_ext(s_flamegun,0,floor((mouse_x)/32)*32,floor((mouse_y)/32)*32,1,1,0,c_white,0.5)}
+    }
+
+    if place_code2=49 && fgun_wizard=0 && mouse_check_button(mb_left) && clicked=0 && tool_mode=0
+    && menu_open=0 && option_open=0 && delay_tick>15 && setting_mode = 0
+    && !instance_position(mouse_x,mouse_y,o_edenemyblock) {
+        clicked=1
+        tmp2=ed_place_flamegun(floor((mouse_x)/32)*32,floor((mouse_y)/32)*32)
+        fgun_wizard=1
+        autopair=0
+    }
+    if place_code2=49 && fgun_wizard=1 {
+        if !instance_exists(tmp2) {
+            fgun_wizard=0
+        } else {
+            // 鼠标指向哪一侧，火柱就朝哪一侧（0=上 1=下 2=左 3=右，沿用扎地食人花的规范）
+            fgunw_ang=floor((point_direction(tmp2.x+16,tmp2.y+16,mouse_x,mouse_y)+45)/90)*90
+            fgunw_dir=1
+            if fgunw_ang=0 {fgunw_dir=3}
+            if fgunw_ang=90 {fgunw_dir=0}
+            if fgunw_ang=180 {fgunw_dir=2}
+            if fgunw_ang=270 {fgunw_dir=1}
+            tmp2.fgun_dir=fgunw_dir
+            // 预览：本体 + 火柱占位
+            if fgunw_dir=0 {draw_sprite_ext(s_flamegunfireup,3,tmp2.x,tmp2.y-96,1,1,0,c_white,0.5)}
+            if fgunw_dir=1 {draw_sprite_ext(s_flamegunfiredown,3,tmp2.x,tmp2.y+32,1,1,0,c_white,0.5)}
+            if fgunw_dir=2 {draw_sprite_ext(s_flamegunfireleft,3,tmp2.x-96,tmp2.y,1,1,0,c_white,0.5)}
+            if fgunw_dir=3 {draw_sprite_ext(s_flamegunfireright,3,tmp2.x+32,tmp2.y,1,1,0,c_white,0.5)}
+            if mouse_check_button(mb_left) && clicked=0 {
+                clicked=1
+                fgun_wizard=0
+                ed_net_ops_send_create(tmp2, 1)
+            }
+            if mouse_check_button(mb_right) && clicked=0 {
+                clicked=1
+                with (tmp2) {instance_destroy()}
+                fgun_wizard=0
+            }
+        }
+    }
 
     //鱼的摆放
     if (place_code2=40||place_code2=41) && clicked=0 /*&& mouse_x>0 &&  mouse_y>0*/ && !instance_position(mouse_x,mouse_y,o_edbonusesblock) && tool_mode=0
