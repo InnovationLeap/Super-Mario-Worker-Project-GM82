@@ -27,10 +27,14 @@ image_index = 0
 if !variable_global_exists('fgun_snd_on') {global.fgun_snd_on = 0}
 if !variable_global_exists('fgun_last_seen') {global.fgun_last_seen = 0}
 
-// 发光位置微调（本对象不进光源白名单，仅占位避免读未定义变量）
-light_x = 48;
+// 发光位置微调（光源白名单第 70 位登记的是本对象，不是本体 o_flamegun）
+// 精灵 origin=(0,0)，x/y 就是火柱占位区的左上角；上/下是 32×96、左右是 96×32，
+// 所以光心要按方向取：竖柱 (16,48)、横柱 (48,16)。
+// light_radius 由 Step 按动画阶段推（appearing 由小到大、常态 1、disappearing 缩回 0），
+// 光圈跟着火苗长灭；此处先给 0，避免生成那一帧先闪一下满光。
+light_x = 16;
 light_y = 48;
-light_radius = 1;
+light_radius = 0;
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -45,6 +49,9 @@ if fgun_dir=0 {sprite_index = s_flamegunfireup}
 if fgun_dir=1 {sprite_index = s_flamegunfiredown}
 if fgun_dir=2 {sprite_index = s_flamegunfireleft}
 if fgun_dir=3 {sprite_index = s_flamegunfireright}
+
+// 光心跟着方向走：上/下 = 32×96 竖柱 → (16,48)；左/右 = 96×32 横柱 → (48,16)
+if fgun_dir<2 {light_x = 16; light_y = 48} else {light_x = 48; light_y = 16}
 
 if global.pauza=0 && global.level_complete=0 {
     // CTF 动画速度 33/100：100/100 是 1 个物理帧切一次动画帧
@@ -79,6 +86,12 @@ if global.pauza=0 && global.level_complete=0 {
             image_index = 2
         }
     }
+
+    // 光圈半径跟随动画阶段（o_weather 画光时读 light_radius）：
+    //   appearing（帧 0/1/2）→ 0/0.33/0.67，常态（帧 3、4）→ 1，
+    //   disappearing 是 appearing 的倒放（帧 2/1/0）→ 0.67/0.33/0。
+    // 即火苗长多大、光圈就多大，火灭光也灭（销毁后自然不出光）。
+    if fgun_anim=1 {light_radius = 1} else {light_radius = image_index/3}
 
     // 接触伤害不在这里判 —— 与地刺等"不可踩的固定危险物"一致，判定写在玩家侧
     // （player_combat.gml「撞到喷火枪火柱」分支），共用外层 rodzajmaria<>5 / star_timer<=0

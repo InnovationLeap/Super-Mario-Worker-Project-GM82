@@ -193,9 +193,11 @@ if (string_length(global.lightobject) >= 69) {
     if (string_copy(global.lightobject, 69, 1) = '1') {ds_list_add(global.light_obj_list, o_yinyang);}
 }
 
-// 第 70 位 = 喷火枪本体（o_flamegun）；火柱 o_flamegunfire 是本体生成的临时危险区，不入白名单
+// 第 70 位 = 喷火枪的火柱（o_flamegunfire）
+// 本体 o_flamegun 是实心机关、自身不发光（用户拍板），发光交给它喷出的火柱，
+// 所以这里登记的是火柱对象：编辑器里右键点亮喷火枪那格 → 亮的是喷火时的火。
 if (string_length(global.lightobject) >= 70) {
-    if (string_copy(global.lightobject, 70, 1) = '1') {ds_list_add(global.light_obj_list, o_flamegun);}
+    if (string_copy(global.lightobject, 70, 1) = '1') {ds_list_add(global.light_obj_list, o_flamegunfire);}
 }
 #define Step_0
 /*"/*'/**//* YYD ACTION

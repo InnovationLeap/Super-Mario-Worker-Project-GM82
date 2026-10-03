@@ -36,10 +36,13 @@ image_index = 0
 if !variable_global_exists('fgun_snd_on') {global.fgun_snd_on = 0}
 if !variable_global_exists('fgun_last_seen') {global.fgun_last_seen = 0}
 
-// 发光位置微调
+// 发光位置微调（占位，本体不可发光）
+// 光源白名单第 70 位登记的是火柱 o_flamegunfire，不是本体：机关本体是实心铁块，不该发光；
+// 编辑器里右键点亮喷火枪那格，亮起来的是它喷出的火（见 o_weather Create 末尾）。
+// 这三个变量仅占位，避免任何地方读到未定义变量。
 light_x = 16;
 light_y = 16;
-light_radius = 1;
+light_radius = 0;
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

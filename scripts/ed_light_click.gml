@@ -101,5 +101,5 @@ if option_open = 2 && o_edmain.costawia2b = 1 {
 
 // === 敌人类第三页 ===
 if option_open = 2 && o_edmain.costawia2b = 2 {
-    toggle_light_icon(0, 0, 70);    // 喷火枪
+    toggle_light_icon(0, 0, 70);    // 喷火枪（实际发光的是它喷出的火柱 o_flamegunfire）
 }
