@@ -1,6 +1,6 @@
 # Super Mario Worker Project - Changelog
 
-## v1.8.0-beta.3 (2026-10-01)
+## v1.8.0-beta.3
 ### Editor
 - Refined the handling of pipe entrances and exits being selected in Region Mode.
 - Weather parameters are now adjusted by dragging a slider.
