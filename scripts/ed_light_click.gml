@@ -42,7 +42,7 @@ if option_open = 5 && o_edmain.bonus_page = 0 {
 // === Bonus 第二页（叶子道具）===
 if option_open = 5 && o_edmain.bonus_page = 1 {
     if ed_light_hit(0, 0, 64) {ed_light_flip(10)}           // 问号砖叶子（共用 bit 10）
-    if ed_light_hit(2, 0, 64) {ed_light_flip(70)}           // 叶子
+    if ed_light_hit(2, 0, 64) {ed_light_flip(71)}           // 叶子（独占 bit 71，不与喷火枪火柱共用）
 }
 
 // === 敌人类第一页 ===

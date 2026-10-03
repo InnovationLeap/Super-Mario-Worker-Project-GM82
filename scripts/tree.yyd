@@ -96,6 +96,8 @@
 	|background_palette_data
 	|draw_light_icon
 	|toggle_light_icon
+	|light_bit_add
+	|light_bits_build
 +EncodingConv
 	|ec_init
 	|ec_convert

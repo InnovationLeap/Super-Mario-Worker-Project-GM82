@@ -249,3 +249,5 @@ bg_preview_draw
 ed_bg_page
 ed_text_fit
 ed_bg_chrome_part
+light_bit_add
+light_bits_build

@@ -369,8 +369,8 @@ Some of the features of the level may be lost.')}
     if string_copy(aa,0,5)='windy' {global.windy=real(string_copy(aa,7,1)); global.windy_record=global.windy}
     if string_copy(aa,0,8)='darkness' {global.darkness=real(string_copy(aa,10,1)); global.darkness_record=global.darkness}
     if string_copy(aa,0,10)='brightness' {global.brightness=real(string_copy(aa,12,1)); global.brightness_record=global.brightness}
-    if string_copy(aa,0,11)='lightobject' {global.lightobject=string_copy(aa,13,70)}
-    while (string_length(global.lightobject)<70) {global.lightobject=global.lightobject+'0'}
+    if string_copy(aa,0,11)='lightobject' {global.lightobject=string_copy(aa,13,71)}
+    while (string_length(global.lightobject)<71) {global.lightobject=global.lightobject+'0'}
 
     if string_copy(aa,0,10)='topdeath=1' {global.topdeath=1}
     if string_copy(aa,0,10)='topdeath=0' {global.topdeath=0}

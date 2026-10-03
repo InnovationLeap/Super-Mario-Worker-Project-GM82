@@ -41,7 +41,8 @@ global.darkness=0
 global.darkness_record=0
 global.brightness=0
 global.brightness_record=0
-global.lightobject='0000000000000000000000000000000000000000000000000000000000000000000000'
+// 71 位：第 71 位 = 浣熊叶 o_bonusraccoon（新增），旧存档只有 70 位，读档侧靠补 0 兼容
+global.lightobject='00000000000000000000000000000000000000000000000000000000000000000000000'
 global.stunblock=0
 
 for(i=0;i<8;i+=1) {

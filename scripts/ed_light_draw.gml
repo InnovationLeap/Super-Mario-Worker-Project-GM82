@@ -57,7 +57,7 @@ if option_open = 5 && o_edmain.bonus_page = 0 {
 // === Bonus 第二页（叶子道具）===
 if option_open = 5 && o_edmain.bonus_page = 1 {
     draw_light_icon(0, 0, 10);     // 问号砖叶子（共用 bit 10）
-    draw_light_icon(2, 0, 70);     // 叶子
+    draw_light_icon(2, 0, 71);     // 叶子（浣熊叶 o_bonusraccoon，独占 bit 71）
 }
 
 // === 敌人类第一页 ===
